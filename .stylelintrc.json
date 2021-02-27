@@ -1,0 +1,8 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": ["src/**/*.tsx"],
+  "rules": {
+    "declaration-colon-newline-after": null,
+    "at-rule-no-unknown": null
+  }
+}
