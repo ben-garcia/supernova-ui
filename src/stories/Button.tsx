@@ -6,19 +6,19 @@ interface ButtonProps {
   /**
    * primary brand color
    */
-  primary: boolean;
+  primary?: boolean;
   /**
    * set the background
    */
-  backgroundColor: string;
+  backgroundColor?: string;
   /**
    * set the size of the button
    */
-  size: string;
+  size?: string;
   /**
    * add a label
    */
-  label: string;
+  label?: string;
 }
 
 /**
