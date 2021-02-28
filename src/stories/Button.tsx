@@ -2,7 +2,7 @@ import React from 'react';
 
 import './button.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
   /**
    * primary brand color
    */
