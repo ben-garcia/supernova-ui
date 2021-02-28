@@ -5,7 +5,7 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/preset-scss',
   ],
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.stories.mdx', '../src/**/stories.@(js|jsx|ts|tsx)'],
   typescript: {
     check: false,
     checkOptions: {},
