@@ -6,7 +6,6 @@ import shadows from './shadows';
 import sizes from './sizes';
 import spacing from './spacing';
 import typography from './typography';
-import zIndex from './z-index';
 
 export const theme = {
   borders,
@@ -17,7 +16,6 @@ export const theme = {
   sizes,
   spacing,
   typography,
-  zIndex,
 };
 
 export type Theme = typeof theme;
