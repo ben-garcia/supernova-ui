@@ -1,0 +1,69 @@
+:root {
+  --font-letter-spacing-tighter: -0.05rem;
+  --font-letter-spacing-tight: -0.025rem;
+  --font-letter-spacing-normal: 0;
+  --font-letter-spacing-wide: 0.025rem;
+  --font-letter-spacing-wider: 0.05rem;
+  --font-letter-spacing-widest: 0.1rem;
+  --font-line-height-normal: normal;
+  --font-line-height-none: 1rem;
+  --font-line-height-shorter: 1.25rem;
+  --font-line-height-short: 1.375rem;
+  --font-line-height-base: 1.5rem;
+  --font-line-height-tall: 1.625rem;
+  --font-line-height-taller: 2rem;
+  --font-line-height-3: 0.75rem;
+  --font-line-height-4: 1rem;
+  --font-line-height-5: 1.25rem;
+  --font-line-height-6: 1.5rem;
+  --font-line-height-7: 1.75rem;
+  --font-line-height-8: 2rem;
+  --font-line-height-9: 2.25rem;
+  --font-line-height-10: 2.5rem;
+  --font-weights-hairline: 100;
+  --font-weights-thin: 200;
+  --font-weights-light: 300;
+  --font-weights-normal: 400;
+  --font-weights-medium: 500;
+  --font-weights-semibold: 600;
+  --font-weights-bold: 700;
+  --font-weights-extrabold: 800;
+  --font-weights-black: 900;
+  --fonts-heading: -apple-system,
+    blinkmacsystemfont,
+    'Segoe UI',
+    helvetica,
+    arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  --fonts-body: -apple-system,
+    blinkmacsystemfont,
+    'Segoe UI',
+    helvetica,
+    arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  --fonts-mono: sfmono-regular,
+    menlo,
+    monaco,
+    consolas,
+    'Liberation Mono',
+    'Courier New',
+    monospace;
+  --font-sizes-xxxm: 0.75rem;
+  --font-sizes-xxm: 0.875rem;
+  --font-sizes-xm: 1rem;
+  --font-sizes-xxsm: 1.125rem;
+  --font-sizes-xsm: 1.25rem;
+  --font-sizes-sm: 1.5rem;
+  --font-sizes-xxmd: 1.875rem;
+  --font-sizes-xmd: 2.25rem;
+  --font-sizes-md: 3rem;
+  --font-sizes-xxlg: 3.75rem;
+  --font-sizes-xlg: 4.5rem;
+  --font-sizes-lg: 6rem;
+}
