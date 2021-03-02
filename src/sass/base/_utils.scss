@@ -1,0 +1,950 @@
+// --------------------------------
+// Utility classes
+//
+// These classes will be used through out the UI
+//
+// using '_snui' @namespace to help prevent collisions
+//
+// credit: https://github.com/CodyHouse/codyhouse-framework/blob/master/main/assets/css/base/_util.scss
+// --------------------------------
+
+// --------------------------------
+// Flexbox
+// --------------------------------
+._snui-flex {
+  display: flex;
+}
+
+._snui-inline-flex {
+  display: inline-flex;
+}
+
+._snui-flex-wrap {
+  flex-wrap: wrap;
+}
+
+._snui-flex-column {
+  flex-direction: column;
+}
+
+._snui-flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+._snui-flex-row {
+  flex-direction: row;
+}
+
+._snui-flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+._snui-flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+// css property: justify-content
+// how flex items should be aligned using the main axis
+._snui-justify-between {
+  justify-content: space-between;
+}
+
+._snui-justify-center {
+  justify-content: center;
+}
+
+._snui-justify-end {
+  justify-content: flex-end;
+}
+
+._snui-justify-start {
+  justify-content: flex-start;
+}
+
+// css property: align-items
+// how flex items should be aligned using the cross axis
+._snui-items-baseline {
+  align-items: baseline;
+}
+
+._snui-items-center {
+  align-items: center;
+}
+
+._snui-items-end {
+  align-items: flex-end;
+}
+
+._snui-items-start {
+  align-items: flex-start;
+}
+
+// css property: align-self
+// how flex items can align themselves along the cross axis
+._snui-self-center {
+  align-self: center;
+}
+
+._snui-self-end {
+  align-self: flex-end;
+}
+
+._snui-self-start {
+  align-self: flex-start;
+}
+
+// --------------------------------
+// Font Size
+// --------------------------------
+._snui-text-xs {
+  font-size: var(--text-xs, 0.694rem);
+}
+
+._snui-text-sm {
+  font-size: var(--text-sm, 0.833rem);
+}
+
+._snui-text-base {
+  font-size: var(--text-unit, 1rem);
+}
+
+._snui-text-md {
+  font-size: var(--text-md, 1.2rem);
+}
+
+._snui-text-lg {
+  font-size: var(--text-lg, 1.44rem);
+}
+
+._snui-text-xl {
+  font-size: var(--text-xl, 1.728rem);
+}
+
+._snui-text-xxl {
+  font-size: var(--text-xxl, 2.074rem);
+}
+
+._snui-text-xxxl {
+  font-size: var(--text-xxxl, 2.488rem);
+}
+
+._snui-text-xxxxl {
+  font-size: var(--text-xxxxl, 2.985rem);
+}
+
+// --------------------------------
+// Margin
+// --------------------------------
+._snui-margin-xxxxs {
+  margin: var(--space-xxxxs);
+}
+
+._snui-margin-xxxs {
+  margin: var(--space-xxxs);
+}
+
+._snui-margin-xxs {
+  margin: var(--space-xxs);
+}
+
+._snui-margin-xs {
+  margin: var(--space-xs);
+}
+
+._snui-margin-sm {
+  margin: var(--space-sm);
+}
+
+._snui-margin-md {
+  margin: var(--space-md);
+}
+
+._snui-margin-lg {
+  margin: var(--space-lg);
+}
+
+._snui-margin-xl {
+  margin: var(--space-xl);
+}
+
+._snui-margin-xxl {
+  margin: var(--space-xxl);
+}
+
+._snui-margin-xxxl {
+  margin: var(--space-xxxl);
+}
+
+._snui-margin-xxxxl {
+  margin: var(--space-xxxxl);
+}
+
+._snui-margin-auto {
+  margin: auto;
+}
+
+._snui-margin-0 {
+  margin: 0;
+}
+
+// css property: margin-top
+._snui-margin-top-xxxxs {
+  margin-top: var(--space-xxxxs);
+}
+
+._snui-margin-top-xxxs {
+  margin-top: var(--space-xxxs);
+}
+
+._snui-margin-top-xxs {
+  margin-top: var(--space-xxs);
+}
+
+._snui-margin-top-xs {
+  margin-top: var(--space-xs);
+}
+
+._snui-margin-top-sm {
+  margin-top: var(--space-sm);
+}
+
+._snui-margin-top-md {
+  margin-top: var(--space-md);
+}
+
+._snui-margin-top-lg {
+  margin-top: var(--space-lg);
+}
+
+._snui-margin-top-xl {
+  margin-top: var(--space-xl);
+}
+
+._snui-margin-top-xxl {
+  margin-top: var(--space-xxl);
+}
+
+._snui-margin-top-xxxl {
+  margin-top: var(--space-xxxl);
+}
+
+._snui-margin-top-xxxxl {
+  margin-top: var(--space-xxxxl);
+}
+
+._snui-margin-top-auto {
+  margin-top: auto;
+}
+
+._snui-margin-top-0 {
+  margin-top: 0;
+}
+
+// css property: margin-bottom
+._snui-margin-bottom-xxxxs {
+  margin-bottom: var(--space-xxxxs);
+}
+
+._snui-margin-bottom-xxxs {
+  margin-bottom: var(--space-xxxs);
+}
+
+._snui-margin-bottom-xxs {
+  margin-bottom: var(--space-xxs);
+}
+
+._snui-margin-bottom-xs {
+  margin-bottom: var(--space-xs);
+}
+
+._snui-margin-bottom-sm {
+  margin-bottom: var(--space-sm);
+}
+
+._snui-margin-bottom-md {
+  margin-bottom: var(--space-md);
+}
+
+._snui-margin-bottom-lg {
+  margin-bottom: var(--space-lg);
+}
+
+._snui-margin-bottom-xl {
+  margin-bottom: var(--space-xl);
+}
+
+._snui-margin-bottom-xxl {
+  margin-bottom: var(--space-xxl);
+}
+
+._snui-margin-bottom-xxxl {
+  margin-bottom: var(--space-xxxl);
+}
+
+._snui-margin-bottom-xxxxl {
+  margin-bottom: var(--space-xxxxl);
+}
+
+._snui-margin-bottom-auto {
+  margin-bottom: auto;
+}
+
+._snui-margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+// css property: margin-right
+._snui-margin-right-xxxxs {
+  margin-right: var(--space-xxxxs);
+}
+
+._snui-margin-right-xxxs {
+  margin-right: var(--space-xxxs);
+}
+
+._snui-margin-right-xxs {
+  margin-right: var(--space-xxs);
+}
+
+._snui-margin-right-xs {
+  margin-right: var(--space-xs);
+}
+
+._snui-margin-right-sm {
+  margin-right: var(--space-sm);
+}
+
+._snui-margin-right-md {
+  margin-right: var(--space-md);
+}
+
+._snui-margin-right-lg {
+  margin-right: var(--space-lg);
+}
+
+._snui-margin-right-xl {
+  margin-right: var(--space-xl);
+}
+
+._snui-margin-right-xxl {
+  margin-right: var(--space-xxl);
+}
+
+._snui-margin-right-xxxl {
+  margin-right: var(--space-xxxl);
+}
+
+._snui-margin-right-xxxxl {
+  margin-right: var(--space-xxxxl);
+}
+
+._snui-margin-right-auto {
+  margin-right: auto;
+}
+
+._snui-margin-right-0 {
+  margin-right: 0;
+}
+
+// css property: margin-left
+._snui-margin-left-xxxxs {
+  margin-left: var(--space-xxxxs);
+}
+
+._snui-margin-left-xxxs {
+  margin-left: var(--space-xxxs);
+}
+
+._snui-margin-left-xxs {
+  margin-left: var(--space-xxs);
+}
+
+._snui-margin-left-xs {
+  margin-left: var(--space-xs);
+}
+
+._snui-margin-left-sm {
+  margin-left: var(--space-sm);
+}
+
+._snui-margin-left-md {
+  margin-left: var(--space-md);
+}
+
+._snui-margin-left-lg {
+  margin-left: var(--space-lg);
+}
+
+._snui-margin-left-xl {
+  margin-left: var(--space-xl);
+}
+
+._snui-margin-left-xxl {
+  margin-left: var(--space-xxl);
+}
+
+._snui-margin-left-xxxl {
+  margin-left: var(--space-xxxl);
+}
+
+._snui-margin-left-xxxxl {
+  margin-left: var(--space-xxxxl);
+}
+
+._snui-margin-left-auto {
+  margin-left: auto;
+}
+
+._snui-margin-left-0 {
+  margin-left: 0;
+}
+
+//  horizontal margin
+._snui-margin-x-xxxxs {
+  margin-left: var(--space-xxxxs);
+  margin-right: var(--space-xxxxs);
+}
+
+._snui-margin-x-xxxs {
+  margin-left: var(--space-xxxs);
+  margin-right: var(--space-xxxs);
+}
+
+._snui-margin-x-xxs {
+  margin-left: var(--space-xxs);
+  margin-right: var(--space-xxs);
+}
+
+._snui-margin-x-xs {
+  margin-left: var(--space-xs);
+  margin-right: var(--space-xs);
+}
+
+._snui-margin-x-sm {
+  margin-left: var(--space-sm);
+  margin-right: var(--space-sm);
+}
+
+._snui-margin-x-md {
+  margin-left: var(--space-md);
+  margin-right: var(--space-md);
+}
+
+._snui-margin-x-lg {
+  margin-left: var(--space-lg);
+  margin-right: var(--space-lg);
+}
+
+._snui-margin-x-xl {
+  margin-left: var(--space-xl);
+  margin-right: var(--space-xl);
+}
+
+._snui-margin-x-xxl {
+  margin-left: var(--space-xxl);
+  margin-right: var(--space-xxl);
+}
+
+._snui-margin-x-xxxl {
+  margin-left: var(--space-xxxl);
+  margin-right: var(--space-xxxl);
+}
+
+._snui-margin-x-xxxxl {
+  margin-left: var(--space-xxxxl);
+  margin-right: var(--space-xxxxl);
+}
+
+._snui-margin-x-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+._snui-margin-x-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// vertical margin
+._snui-margin-y-xxxxs {
+  margin-top: var(--space-xxxxs);
+  margin-bottom: var(--space-xxxxs);
+}
+
+._snui-margin-y-xxxs {
+  margin-top: var(--space-xxxs);
+  margin-bottom: var(--space-xxxs);
+}
+
+._snui-margin-y-xxs {
+  margin-top: var(--space-xxs);
+  margin-bottom: var(--space-xxs);
+}
+
+._snui-margin-y-xs {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+._snui-margin-y-sm {
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+._snui-margin-y-md {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+._snui-margin-y-lg {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+._snui-margin-y-xl {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+._snui-margin-y-xxl {
+  margin-top: var(--space-xxl);
+  margin-bottom: var(--space-xxl);
+}
+
+._snui-margin-y-xxxl {
+  margin-top: var(--space-xxxl);
+  margin-bottom: var(--space-xxxl);
+}
+
+._snui-margin-y-xxxxl {
+  margin-top: var(--space-xxxxl);
+  margin-bottom: var(--space-xxxxl);
+}
+
+._snui-margin-y-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+._snui-margin-y-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+// --------------------------------
+// Padding
+// --------------------------------
+._snui-padding-xxxxs {
+  padding: var(--space-xxxxs);
+}
+
+._snui-padding-xxxs {
+  padding: var(--space-xxxs);
+}
+
+._snui-padding-xxs {
+  padding: var(--space-xxs);
+}
+
+._snui-padding-xs {
+  padding: var(--space-xs);
+}
+
+._snui-padding-sm {
+  padding: var(--space-sm);
+}
+
+._snui-padding-md {
+  padding: var(--space-md);
+}
+
+._snui-padding-lg {
+  padding: var(--space-lg);
+}
+
+._snui-padding-xl {
+  padding: var(--space-xl);
+}
+
+._snui-padding-xxl {
+  padding: var(--space-xxl);
+}
+
+._snui-padding-xxxl {
+  padding: var(--space-xxxl);
+}
+
+._snui-padding-xxxxl {
+  padding: var(--space-xxxxl);
+}
+
+._snui-padding-0 {
+  padding: 0;
+}
+
+// padding-top
+._snui-padding-top-xxxxs {
+  padding-top: var(--space-xxxxs);
+}
+
+._snui-padding-top-xxxs {
+  padding-top: var(--space-xxxs);
+}
+
+._snui-padding-top-xxs {
+  padding-top: var(--space-xxs);
+}
+
+._snui-padding-top-xs {
+  padding-top: var(--space-xs);
+}
+
+._snui-padding-top-sm {
+  padding-top: var(--space-sm);
+}
+
+._snui-padding-top-md {
+  padding-top: var(--space-md);
+}
+
+._snui-padding-top-lg {
+  padding-top: var(--space-lg);
+}
+
+._snui-padding-top-xl {
+  padding-top: var(--space-xl);
+}
+
+._snui-padding-top-xxl {
+  padding-top: var(--space-xxl);
+}
+
+._snui-padding-top-xxxl {
+  padding-top: var(--space-xxxl);
+}
+
+._snui-padding-top-xxxxl {
+  padding-top: var(--space-xxxxl);
+}
+
+._snui-padding-top-0 {
+  padding-top: 0;
+}
+
+// padding-bottom
+._snui-padding-bottom-xxxxs {
+  padding-bottom: var(--space-xxxxs);
+}
+
+._snui-padding-bottom-xxxs {
+  padding-bottom: var(--space-xxxs);
+}
+
+._snui-padding-bottom-xxs {
+  padding-bottom: var(--space-xxs);
+}
+
+._snui-padding-bottom-xs {
+  padding-bottom: var(--space-xs);
+}
+
+._snui-padding-bottom-sm {
+  padding-bottom: var(--space-sm);
+}
+
+._snui-padding-bottom-md {
+  padding-bottom: var(--space-md);
+}
+
+._snui-padding-bottom-lg {
+  padding-bottom: var(--space-lg);
+}
+
+._snui-padding-bottom-xl {
+  padding-bottom: var(--space-xl);
+}
+
+._snui-padding-bottom-xxl {
+  padding-bottom: var(--space-xxl);
+}
+
+._snui-padding-bottom-xxxl {
+  padding-bottom: var(--space-xxxl);
+}
+
+._snui-padding-bottom-xxxxl {
+  padding-bottom: var(--space-xxxxl);
+}
+
+._snui-padding-bottom-0 {
+  padding-bottom: 0;
+}
+
+// padding-right
+._snui-padding-right-xxxxs {
+  padding-right: var(--space-xxxxs);
+}
+
+._snui-padding-right-xxxs {
+  padding-right: var(--space-xxxs);
+}
+
+._snui-padding-right-xxs {
+  padding-right: var(--space-xxs);
+}
+
+._snui-padding-right-xs {
+  padding-right: var(--space-xs);
+}
+
+._snui-padding-right-sm {
+  padding-right: var(--space-sm);
+}
+
+._snui-padding-right-md {
+  padding-right: var(--space-md);
+}
+
+._snui-padding-right-lg {
+  padding-right: var(--space-lg);
+}
+
+._snui-padding-right-xl {
+  padding-right: var(--space-xl);
+}
+
+._snui-padding-right-xxl {
+  padding-right: var(--space-xxl);
+}
+
+._snui-padding-right-xxxl {
+  padding-right: var(--space-xxxl);
+}
+
+._snui-padding-right-xxxxl {
+  padding-right: var(--space-xxxxl);
+}
+
+._snui-padding-right-0 {
+  padding-right: 0;
+}
+
+// padding-left
+._snui-padding-left-xxxxs {
+  padding-left: var(--space-xxxxs);
+}
+
+._snui-padding-left-xxxs {
+  padding-left: var(--space-xxxs);
+}
+
+._snui-padding-left-xxs {
+  padding-left: var(--space-xxs);
+}
+
+._snui-padding-left-xs {
+  padding-left: var(--space-xs);
+}
+
+._snui-padding-left-sm {
+  padding-left: var(--space-sm);
+}
+
+._snui-padding-left-md {
+  padding-left: var(--space-md);
+}
+
+._snui-padding-left-lg {
+  padding-left: var(--space-lg);
+}
+
+._snui-padding-left-xl {
+  padding-left: var(--space-xl);
+}
+
+._snui-padding-left-xxl {
+  padding-left: var(--space-xxl);
+}
+
+._snui-padding-left-xxxl {
+  padding-left: var(--space-xxxl);
+}
+
+._snui-padding-left-xxxxl {
+  padding-left: var(--space-xxxxl);
+}
+
+._snui-padding-left-0 {
+  padding-left: 0;
+}
+
+// horizontal padding
+._snui-padding-x-xxxxs {
+  padding-left: var(--space-xxxxs);
+  padding-right: var(--space-xxxxs);
+}
+
+._snui-padding-x-xxxs {
+  padding-left: var(--space-xxxs);
+  padding-right: var(--space-xxxs);
+}
+
+._snui-padding-x-xxs {
+  padding-left: var(--space-xxs);
+  padding-right: var(--space-xxs);
+}
+
+._snui-padding-x-xs {
+  padding-left: var(--space-xs);
+  padding-right: var(--space-xs);
+}
+
+._snui-padding-x-sm {
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+._snui-padding-x-md {
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+._snui-padding-x-lg {
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+._snui-padding-x-xl {
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
+}
+
+._snui-padding-x-xxl {
+  padding-left: var(--space-xxl);
+  padding-right: var(--space-xxl);
+}
+
+._snui-padding-x-xxxl {
+  padding-left: var(--space-xxxl);
+  padding-right: var(--space-xxxl);
+}
+
+._snui-padding-x-xxxxl {
+  padding-left: var(--space-xxxxl);
+  padding-right: var(--space-xxxxl);
+}
+
+._snui-padding-x-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// vertical padding
+._snui-padding-y-xxxxs {
+  padding-top: var(--space-xxxxs);
+  padding-bottom: var(--space-xxxxs);
+}
+
+._snui-padding-y-xxxs {
+  padding-top: var(--space-xxxs);
+  padding-bottom: var(--space-xxxs);
+}
+
+._snui-padding-y-xxs {
+  padding-top: var(--space-xxs);
+  padding-bottom: var(--space-xxs);
+}
+
+._snui-padding-y-xs {
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
+}
+
+._snui-padding-y-sm {
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+}
+
+._snui-padding-y-md {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
+}
+
+._snui-padding-y-lg {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+._snui-padding-y-xl {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+._snui-padding-y-xxl {
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
+}
+
+._snui-padding-y-xxxl {
+  padding-top: var(--space-xxxl);
+  padding-bottom: var(--space-xxxl);
+}
+
+._snui-padding-y-xxxxl {
+  padding-top: var(--space-xxxxl);
+  padding-bottom: var(--space-xxxxl);
+}
+
+._snui-padding-y-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// --------------------------------
+// Typography
+// --------------------------------
+._snui-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// font family
+._snui-text-heading {
+  font-family: var(--fonts-heading);
+}
+
+._snui-text-body {
+  font-family: var(--fonts-body);
+}
+
+._snui-text-mono {
+  font-family: var(--fonts-mono);
+}
+
+// text transform
+._snui-text-capitalize {
+  text-transform: capitalize;
+}
+
+._snui-text-lowercase {
+  text-transform: lowercase;
+}
+
+._snui-text-uppercase {
+  text-transform: uppercase;
+}
+
+// letter spacing
+._snui-letter-spacing-sm {
+  letter-spacing: -0.05rem;
+}
+
+._snui-letter-spacing-md {
+  letter-spacing: 0.05rem;
+}
+
+._snui-letter-spacing-lg {
+  letter-spacing: 0.1rem;
+}
