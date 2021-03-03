@@ -1,6 +1,7 @@
 #### Notes
 
 - Accessibility [best-practices-1.1](https://www.w3.org/TR/wai-aria-practices-1.1/)
+
   - Tabs
     - have an aria-label(description), role="tablist"
     - children should have role="tablist"
@@ -24,3 +25,6 @@
     - aria-checked to let the user know about state
     - RadioGroup
       - role="radiogroup"
+
+- Storybook
+  - [controls](https://storybook.js.org/docs/react/essentials/controls)
