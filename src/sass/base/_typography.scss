@@ -5,23 +5,23 @@
   --font-letter-spacing-lg: 0.025rem;
   --font-letter-spacing-xl: 0.05rem;
   --font-letter-spacing-xxl: 0.1rem;
-  --font-line-height-xxs: 0.25rem;
-  --font-line-height-xs: 0.375rem;
-  --font-line-height-sm: 0.5rem;
-  --font-line-height-md: 1rem;
-  --font-line-height-lg: 1.7rem;
-  --font-line-height-xl: 2.25rem;
-  --font-line-height-xxl: 3rem;
-  --font-weights-xxxs: 100;
-  --font-weights-xxs: 200;
-  --font-weights-xs: 300;
-  --font-weights-md: 400;
-  --font-weights-lg: 500;
-  --font-weights-xlg: 600;
-  --font-weights-xxl: 700;
-  --font-weights-xxxl: 800;
-  --font-weights-xxxxl: 900;
-  --fonts-heading: -apple-system,
+  --font-line-height-xxs: 0.25;
+  --font-line-height-xs: 0.375;
+  --font-line-height-sm: 0.5;
+  --font-line-height-md: 0.85;
+  --font-line-height-lg: 1.2;
+  --font-line-height-xl: 2.25;
+  --font-line-height-xxl: 3;
+  --font-weight-xxs: 100;
+  --font-weight-xs: 200;
+  --font-weight-sm: 300;
+  --font-weight-md: 400;
+  --font-weight-lg: 500;
+  --font-weight-xl: 600;
+  --font-weight-xxl: 700;
+  --font-weight-xxxl: 800;
+  --font-weight-xxxxl: 900;
+  --font-heading: -apple-system,
     blinkmacsystemfont,
     'Segoe UI',
     helvetica,
@@ -30,7 +30,7 @@
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol';
-  --fonts-body: -apple-system,
+  --font-body: -apple-system,
     blinkmacsystemfont,
     'Segoe UI',
     helvetica,
@@ -39,7 +39,7 @@
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol';
-  --fonts-mono: sfmono-regular,
+  --font-mono: sfmono-regular,
     menlo,
     monaco,
     consolas,
