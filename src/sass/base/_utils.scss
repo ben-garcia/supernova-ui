@@ -97,40 +97,52 @@
 // --------------------------------
 // Font Size
 // --------------------------------
+._snui-text-xxxxs {
+  font-size: var(--text-xs, 0.75rem);
+}
+
+._snui-text-xxxs {
+  font-size: var(--text-xs, 0.875rem);
+}
+
+._snui-text-xxs {
+  font-size: var(--text-sm, 1rem);
+}
+
 ._snui-text-xs {
-  font-size: var(--text-xs, 0.694rem);
+  font-size: var(--text-sm, 1.125rem);
 }
 
 ._snui-text-sm {
-  font-size: var(--text-sm, 0.833rem);
-}
-
-._snui-text-base {
-  font-size: var(--text-unit, 1rem);
+  font-size: var(--text-unit, 1.25rem);
 }
 
 ._snui-text-md {
-  font-size: var(--text-md, 1.2rem);
+  font-size: var(--text-md, 1.5rem);
 }
 
 ._snui-text-lg {
-  font-size: var(--text-lg, 1.44rem);
+  font-size: var(--text-lg, 1.875rem);
 }
 
 ._snui-text-xl {
-  font-size: var(--text-xl, 1.728rem);
+  font-size: var(--text-lg, 2.25rem);
 }
 
 ._snui-text-xxl {
-  font-size: var(--text-xxl, 2.074rem);
+  font-size: var(--text-xl, 3rem);
 }
 
 ._snui-text-xxxl {
-  font-size: var(--text-xxxl, 2.488rem);
+  font-size: var(--text-xxl, 3.75rem);
 }
 
 ._snui-text-xxxxl {
-  font-size: var(--text-xxxxl, 2.985rem);
+  font-size: var(--text-xxxl, 4.5rem);
+}
+
+._snui-text-xxxxxl {
+  font-size: var(--text-xxxxl, 6rem);
 }
 
 // --------------------------------
@@ -901,26 +913,166 @@
   padding-bottom: 0;
 }
 
+// Height
+._snui-height-xxxxs {
+  width: var(--size-xxxxs);
+}
+
+._snui-height-xxxs {
+  width: var(--size-xxxs);
+}
+
+._snui-height-xxs {
+  width: var(--size-xxs);
+}
+
+._snui-height-xs {
+  width: var(--size-xs);
+}
+
+._snui-height-sm {
+  width: var(--size-sm);
+}
+
+._snui-height-md {
+  width: var(--size-md);
+}
+
+._snui-height-lg {
+  width: var(--size-lg);
+}
+
+._snui-height-xl {
+  width: var(--size-xl);
+}
+
+._snui-height-xxl {
+  width: var(--size-xxl);
+}
+
+._snui-height-xxxl {
+  width: var(--size-xxxl);
+}
+
+._snui-height-xxxxl {
+  width: var(--size-xxxxl);
+}
+
+// Width
+._snui-width-xxxxs {
+  width: var(--size-xxxxs);
+}
+
+._snui-width-xxxs {
+  width: var(--size-xxxs);
+}
+
+._snui-width-xxs {
+  width: var(--size-xxs);
+}
+
+._snui-width-xs {
+  width: var(--size-xs);
+}
+
+._snui-width-sm {
+  width: var(--size-sm);
+}
+
+._snui-width-md {
+  width: var(--size-md);
+}
+
+._snui-width-lg {
+  width: var(--size-lg);
+}
+
+._snui-width-xl {
+  width: var(--size-xl);
+}
+
+._snui-width-xxl {
+  width: var(--size-xxl);
+}
+
+._snui-width-xxxl {
+  width: var(--size-xxxl);
+}
+
+._snui-width-xxxxl {
+  width: var(--size-xxxxl);
+}
+
 // --------------------------------
 // Typography
 // --------------------------------
-._snui-text-truncate {
+._snui-text-truncated {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 // font family
-._snui-text-heading {
-  font-family: var(--fonts-heading);
+._snui-font-heading {
+  font-family: var(--font-heading);
 }
 
-._snui-text-body {
-  font-family: var(--fonts-body);
+._snui-font-body {
+  font-family: var(--font-body);
 }
 
-._snui-text-mono {
-  font-family: var(--fonts-mono);
+._snui-font-mono {
+  font-family: var(--font-mono);
+}
+
+// font weight
+._snui-font-weight-xxs {
+  font-weight: var(--font-weight-xxs, 100);
+}
+
+._snui-font-weight-xs {
+  font-weight: var(--font-weight-xs, 200);
+}
+
+._snui-font-weight-sm {
+  font-weight: var(--font-weight-sm, 300);
+}
+
+._snui-font-weight-md {
+  font-weight: var(--font-weight-md, 400);
+}
+
+._snui-font-weight-lg {
+  font-weight: var(--font-weight-lg, 500);
+}
+
+._snui-font-weight-xl {
+  font-weight: var(--font-weight-xl, 600);
+}
+
+._snui-font-weight-xxl {
+  font-weight: var(--font-weight-xxl, 700);
+}
+
+._snui-font-weight-xxxl {
+  font-weight: var(--font-weight-xxxl, 800);
+}
+
+._snui-font-weight-xxxxl {
+  font-weight: var(--font-weight-xxxxl, 900);
+}
+
+// text align
+._snui-text-center {
+  text-align: center;
+}
+
+._snui-text-left {
+  text-align: left;
+}
+
+._snui-text-right {
+  text-align: right;
 }
 
 // text transform
@@ -937,14 +1089,78 @@
 }
 
 // letter spacing
+._snui-letter-spacing-xs {
+  letter-spacing: var(--font-letter-spacing-xs, -0.05rem);
+}
+
 ._snui-letter-spacing-sm {
-  letter-spacing: -0.05rem;
+  letter-spacing: var(--font-letter-spacing-sm, -0.025rem);
 }
 
 ._snui-letter-spacing-md {
-  letter-spacing: 0.05rem;
+  letter-spacing: var(--font-letter-spacing-md, 0);
 }
 
 ._snui-letter-spacing-lg {
-  letter-spacing: 0.1rem;
+  letter-spacing: var(--font-letter-spacing-lg, 0.025rem);
+}
+
+._snui-letter-spacing-xl {
+  letter-spacing: var(--font-letter-spacing-xl, 0.05rem);
+}
+
+._snui-letter-spacing-xxl {
+  letter-spacing: var(--font-letter-spacing-xxl, 0.1rem);
+}
+
+// line height
+._snui-line-height-xxs {
+  line-height: var(--font-line-height-xxs, 0.25);
+}
+
+._snui-line-height-xs {
+  line-height: var(--font-line-height-xxs, 0.375);
+}
+
+._snui-line-height-sm {
+  line-height: var(--font-line-height-xxs, 0.5);
+}
+
+._snui-line-height-md {
+  line-height: var(--font-line-height-xxs, 0.85);
+}
+
+._snui-line-height-lg {
+  line-height: var(--font-line-height-xxs, 1.2);
+}
+
+._snui-line-height-xl {
+  line-height: var(--font-line-height-xxs, 2.25);
+}
+
+._snui-line-height-xxl {
+  line-height: var(--font-line-height-xxs, 3);
+}
+
+// --------------------------------
+// Colors
+// --------------------------------
+._snui-color-primary {
+  background-color: var(--color-primary, #0a6ab6);
+}
+
+._snui-color-info {
+  background-color: var(--color-info, #026da7);
+}
+
+._snui-color-warning {
+  background-color: var(--color-warning, #b07f03);
+}
+
+._snui-color-success {
+  background-color: var(--color-success, #537f2d);
+}
+
+._snui-color-error {
+  background-color: var(--color-error, #a72323);
 }
