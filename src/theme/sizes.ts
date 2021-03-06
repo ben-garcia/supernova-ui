@@ -1,8 +1,8 @@
 const sizes = {
-  xxxxm: '0.125rem',
-  xxxm: '0.25rem',
-  xxm: '0.375rem',
-  xm: '0.5rem',
+  xxxxs: '0.125rem',
+  xxxs: '0.25rem',
+  xxs: '0.375rem',
+  xs: '0.5rem',
   sm: '0.625rem',
   md: '0.75rem',
   lg: '0.875rem',
