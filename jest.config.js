@@ -25,7 +25,7 @@ module.exports = {
     '\\.svg': '<rootDir>/src/__mocks__/svg.ts',
   },
   roots: ['<rootDir>/src'],
-  testMatch: ['<rootDir>/src/**/*.test.(ts|tsx)'],
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
   },
