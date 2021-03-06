@@ -47,7 +47,7 @@ const createStyles = (props: Props) => {
   const styles: CSSProperties = {};
 
   // eslint-disable-next-line
-  for (const [property, value ] of Object.entries(props)) {
+  for (const [property, value] of Object.entries(props)) {
     if (property === 'align') {
       if (
         align &&
