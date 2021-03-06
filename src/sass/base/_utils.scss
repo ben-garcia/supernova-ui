@@ -98,51 +98,47 @@
 // Font Size
 // --------------------------------
 ._snui-text-xxxxs {
-  font-size: var(--text-xs, 0.75rem);
+  font-size: var(--font-size-xxxxs, 0.75rem);
 }
 
 ._snui-text-xxxs {
-  font-size: var(--text-xs, 0.875rem);
+  font-size: var(--font-size-xxxs, 0.875rem);
 }
 
 ._snui-text-xxs {
-  font-size: var(--text-sm, 1rem);
+  font-size: var(--font-size-xxs, 1rem);
 }
 
 ._snui-text-xs {
-  font-size: var(--text-sm, 1.125rem);
+  font-size: var(--font-size-xs, 1.125rem);
 }
 
 ._snui-text-sm {
-  font-size: var(--text-unit, 1.25rem);
+  font-size: var(--font-size-sm, 1.25rem);
 }
 
 ._snui-text-md {
-  font-size: var(--text-md, 1.5rem);
+  font-size: var(--font-size-md, 1.5rem);
 }
 
 ._snui-text-lg {
-  font-size: var(--text-lg, 1.875rem);
+  font-size: var(--font-size-lg, 1.875rem);
 }
 
 ._snui-text-xl {
-  font-size: var(--text-lg, 2.25rem);
+  font-size: var(--font-size-xl, 2.25rem);
 }
 
 ._snui-text-xxl {
-  font-size: var(--text-xl, 3rem);
+  font-size: var(--font-size-xxl, 3rem);
 }
 
 ._snui-text-xxxl {
-  font-size: var(--text-xxl, 3.75rem);
+  font-size: var(--font-size-xxxl, 3.75rem);
 }
 
 ._snui-text-xxxxl {
-  font-size: var(--text-xxxl, 4.5rem);
-}
-
-._snui-text-xxxxxl {
-  font-size: var(--text-xxxxl, 6rem);
+  font-size: var(--font-size-xxxl, 4.5rem);
 }
 
 // --------------------------------
@@ -1114,32 +1110,48 @@
 }
 
 // line height
+._snui-line-height-xxxxs {
+  line-height: var(--font-line-height-xxs, 0.09rem);
+}
+
+._snui-line-height-xxxs {
+  line-height: var(--font-line-height-xs, 0.15rem);
+}
+
 ._snui-line-height-xxs {
-  line-height: var(--font-line-height-xxs, 0.25);
+  line-height: var(--font-line-height-xxs, 0.25rem);
 }
 
 ._snui-line-height-xs {
-  line-height: var(--font-line-height-xxs, 0.375);
+  line-height: var(--font-line-height-xs, 0.375rem);
 }
 
 ._snui-line-height-sm {
-  line-height: var(--font-line-height-xxs, 0.5);
+  line-height: var(--font-line-height-sm, 0.5rem);
 }
 
 ._snui-line-height-md {
-  line-height: var(--font-line-height-xxs, 0.85);
+  line-height: var(--font-line-height-md, 0.85rem);
 }
 
 ._snui-line-height-lg {
-  line-height: var(--font-line-height-xxs, 1.2);
+  line-height: var(--font-line-height-lg, 1.1rem);
 }
 
 ._snui-line-height-xl {
-  line-height: var(--font-line-height-xxs, 2.25);
+  line-height: var(--font-line-height-xl, 2.25rem);
 }
 
 ._snui-line-height-xxl {
-  line-height: var(--font-line-height-xxs, 3);
+  line-height: var(--font-line-height-xxl, 3rem);
+}
+
+._snui-line-height-xxxl {
+  line-height: var(--font-line-height-xxxl, 3.7rem);
+}
+
+._snui-line-height-xxxxl {
+  line-height: var(--font-line-height-xxxxl, 4.5rem);
 }
 
 // --------------------------------
