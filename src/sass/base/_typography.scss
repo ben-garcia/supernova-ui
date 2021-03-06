@@ -32,21 +32,40 @@
   --font-weight-xxl: 800;
   --font-weight-xxxl: 900;
   --font-weight-xxxxl: 1000;
-  --font-heading: -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica,
-    arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --font-body: -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica, arial,
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --font-mono: sfmono-regular, menlo, monaco, consolas, 'Liberation Mono',
-    'Courier New', monospace;
-  --font-size-xxxxs: 0.75rem;
-  --font-size-xxxs: 0.875rem;
+  --font-heading: -apple-system,
+    blinkmacsystemfont,
+    'Segoe UI',
+    helvetica,
+    arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  --font-body: -apple-system,
+    blinkmacsystemfont,
+    'Segoe UI',
+    helvetica,
+    arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  --font-mono: sfmono-regular,
+    menlo,
+    monaco,
+    consolas,
+    'Liberation Mono',
+    'Courier New',
+    monospace;
+  --font-size-xxxxs: 0.7rem;
+  --font-size-xxxs: 0.85rem;
   --font-size-xxs: 1rem;
   --font-size-xs: 1.125rem;
   --font-size-sm: 1.25rem;
-  --font-size-md: 1.5rem;
+  --font-size-md: 1.4rem;
   --font-size-lg: 1.875rem;
   --font-size-xl: 2.25rem;
   --font-size-xxl: 3rem;
-  --font-size-xxxl: 3.75rem;
-  --font-size-xxxxl: 4.5rem;
+  --font-size-xxxl: 3.5rem;
+  --font-size-xxxxl: 4rem;
 }
