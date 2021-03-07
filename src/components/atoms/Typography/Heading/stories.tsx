@@ -19,26 +19,51 @@ Primary.args = {
   children: 'Supernova UI',
 };
 
-const sizes = [
-  'xxxxl',
-  'xxxl',
-  'xxl',
-  'xl',
-  'lg',
-  'md',
-  'sm',
-  'xs',
-  'xxs',
-  'xxxs',
-  'xxxxs',
-];
+const sizes = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
 export const All = () => (
   <div>
-    {sizes.map(size => (
-      <Heading fontSize={size} key={size} lineHeight={size} tag="h1">
-        {`Supernova UI (${size})`}
-      </Heading>
-    ))}
+    <div style={{ margin: '10px 0' }}>
+      {sizes.map((size, index) => (
+        <Heading fontSize="xxl" key={size} level={(index + 1) as any}>
+          {`Heading ${index + 1} (xxl)`}
+        </Heading>
+      ))}
+    </div>
+    <div style={{ margin: '10px 0' }}>
+      {sizes.map((size, index) => (
+        <Heading fontSize="xl" key={size} level={(index + 1) as any}>
+          {`Heading ${index + 1} (xl)`}
+        </Heading>
+      ))}
+    </div>
+    <div style={{ margin: '10px 0' }}>
+      {sizes.map((size, index) => (
+        <Heading fontSize="lg" key={size} level={(index + 1) as any}>
+          {`Heading ${index + 1} (lg)`}
+        </Heading>
+      ))}
+    </div>
+    <div style={{ margin: '10px 0' }}>
+      {sizes.map((size, index) => (
+        <Heading key={size} level={(index + 1) as any}>
+          {`Heading ${index + 1} (md)`}
+        </Heading>
+      ))}
+    </div>
+    <div style={{ margin: '10px 0' }}>
+      {sizes.map((size, index) => (
+        <Heading fontSize="sm" key={size} level={(index + 1) as any}>
+          {`Heading ${index + 1} (sm)`}
+        </Heading>
+      ))}
+    </div>
+    <div style={{ margin: '10px 0' }}>
+      {sizes.map((size, index) => (
+        <Heading fontSize="xs" key={size} level={(index + 1) as any}>
+          {`Heading ${index + 1} (xs)`}
+        </Heading>
+      ))}
+    </div>
   </div>
 );

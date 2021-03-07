@@ -5,15 +5,15 @@ import { TypographyProps } from '../../../../types';
 /**
  * The props used by the Heading component
  */
-export interface HeadingProps extends Omit<TypographyProps, 'textTransform'> {
+export interface HeadingProps extends TypographyProps {
   /**
    * The content for the element
    */
   children: ReactNode;
   /**
-   * The html heading element
+   * The html heading level(1, 2, 3, 4, 5, 6)
    *
-   * default is h1
+   * default is 1
    */
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
