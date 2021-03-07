@@ -1,37 +1,22 @@
 :root {
-  --font-letter-spacing-xxxxs: -0.2rem;
-  --font-letter-spacing-xxxs: -0.15rem;
-  --font-letter-spacing-xxs: -0.1rem;
   --font-letter-spacing-xs: -0.05rem;
   --font-letter-spacing-sm: -0.025rem;
   --font-letter-spacing-md: 0;
   --font-letter-spacing-lg: 0.025rem;
-  --font-letter-spacing-xl: 0.05rem;
-  --font-letter-spacing-xxl: 0.1rem;
-  --font-letter-spacing-xxxl: 0.15rem;
-  --font-letter-spacing-xxxxl: 0.2rem;
-  --font-line-height-xxxxs: 0.5rem;
-  --font-line-height-xxxs: 0.65rem;
-  --font-line-height-xxs: 0.84rem;
-  --font-line-height-xs: 1.145rem;
-  --font-line-height-sm: 1.5rem;
-  --font-line-height-md: 1.75rem;
-  --font-line-height-lg: 2.3rem;
-  --font-line-height-xl: 2.85rem;
-  --font-line-height-xxl: 3.9rem;
-  --font-line-height-xxxl: 4.7rem;
-  --font-line-height-xxxxl: 5.5rem;
-  --font-weight-xxxxs: 50;
-  --font-weight-xxxs: 100;
-  --font-weight-xxs: 200;
-  --font-weight-xs: 300;
-  --font-weight-sm: 400;
-  --font-weight-md: 500;
+  --font-letter-spacing-xl: 0.15rem;
+  --font-letter-spacing-xxl: 0.2rem;
+  --font-line-height-xs: 1.25rem;
+  --font-line-height-sm: 1.375rem;
+  --font-line-height-md: 1.5rem;
+  --font-line-height-lg: 2rem;
+  --font-line-height-xl: 2.5rem;
+  --font-line-height-xxl: 3.5rem;
+  --font-weight-xs: 100;
+  --font-weight-sm: 200;
+  --font-weight-md: 400;
   --font-weight-lg: 600;
   --font-weight-xl: 700;
-  --font-weight-xxl: 800;
-  --font-weight-xxxl: 900;
-  --font-weight-xxxxl: 1000;
+  --font-weight-xxl: 900;
   --font-heading: -apple-system,
     blinkmacsystemfont,
     'Segoe UI',
@@ -57,15 +42,10 @@
     'Liberation Mono',
     'Courier New',
     monospace;
-  --font-size-xxxxs: 0.7rem;
-  --font-size-xxxs: 0.85rem;
-  --font-size-xxs: 1rem;
-  --font-size-xs: 1.125rem;
-  --font-size-sm: 1.25rem;
-  --font-size-md: 1.4rem;
-  --font-size-lg: 1.875rem;
+  --font-size-xs: 0.85rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.625rem;
   --font-size-xl: 2.25rem;
-  --font-size-xxl: 3rem;
-  --font-size-xxxl: 3.5rem;
-  --font-size-xxxxl: 4rem;
+  --font-size-xxl: 3.15rem;
 }
