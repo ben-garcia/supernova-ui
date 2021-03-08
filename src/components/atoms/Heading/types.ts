@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { TypographyProps } from '../../../../types';
+import { TypographyProps } from '../../../types';
 
 /**
  * The props used by the Heading component

@@ -1,5 +1,5 @@
 /**
- * Storybook argtypes
+ * Storybook argtypes for Heading
  */
 const argTypes = {
   align: {
@@ -10,7 +10,7 @@ const argTypes = {
     description: 'Configure the placement of the text',
     table: {
       category: 'Typography',
-      defaultValue: { summary: 'center' },
+      defaultValue: { summary: 'left' },
       type: { summary: 'string' },
     },
   },
@@ -126,7 +126,7 @@ const argTypes = {
   },
   margin: {
     control: {
-      type: 'string',
+      type: 'text',
     },
     description: `Configure the margin (using rem, em, px, and/or %)<br />
 				e.g.<br />
@@ -141,7 +141,7 @@ const argTypes = {
   },
   padding: {
     control: {
-      type: 'object',
+      type: 'text',
     },
     description: `Configure the padding (using rem, em, px, and/or %)<br />
 				e.g.<br />

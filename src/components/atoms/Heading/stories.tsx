@@ -8,7 +8,7 @@ import argTypes from './argTypes';
 export default {
   argTypes,
   component: Heading,
-  title: 'Supernova UI/Atoms/Typography/Heading',
+  title: 'Supernova UI/Atoms/Heading',
 } as Meta;
 
 const Template: Story<HeadingProps> = args => <Heading {...args} />;

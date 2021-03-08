@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createClasses, createElement, createStyles } from '../../../../utils';
+import { createClasses, createElement, createStyles } from '../../../utils';
 import { HeadingProps } from './types';
 
 /**

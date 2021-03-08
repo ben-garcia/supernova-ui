@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Heading from '.';
-import { a11yTest, render } from '../../../../test-utils';
+import { a11yTest, render } from '../../../test-utils';
 
 describe('<Heading />', () => {
   it('should pass a11y tests', async () => {
