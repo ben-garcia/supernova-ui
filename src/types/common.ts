@@ -4,22 +4,11 @@
 export type Colors = 'primary' | 'info' | 'warning' | 'success' | 'error';
 
 /**
- * Available sizes to choose from
+ * Available fonts to choose from
  */
 export type Fonts = 'heading' | 'body' | 'mono';
 
 /**
  * Available sizes to choose from
  */
-export type Sizes =
-  | 'xxxxs'
-  | 'xxxs'
-  | 'xxs'
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl'
-  | 'xxxxl';
+export type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';

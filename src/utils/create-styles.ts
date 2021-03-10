@@ -31,19 +31,7 @@ const createStyles = (props: Props) => {
     width,
   } = props;
   const colors = ['error', 'info', 'primary', 'success', 'warning'];
-  const sizes = [
-    'xxxxs',
-    'xxxs',
-    'xxs',
-    'xs',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-    'xxl',
-    'xxxl',
-    'xxxxl',
-  ];
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
   const styles: CSSProperties = {};
 
   // eslint-disable-next-line
