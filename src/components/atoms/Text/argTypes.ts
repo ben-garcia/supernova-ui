@@ -114,7 +114,7 @@ const argTypes = {
   },
   margin: {
     control: {
-      type: 'text',
+      type: 'object',
     },
     description: `Configure the margin (using rem, em, px, and/or %)<br />
 				e.g.<br />
@@ -129,7 +129,7 @@ const argTypes = {
   },
   padding: {
     control: {
-      type: 'text',
+      type: 'object',
     },
     description: `Configure the padding (using rem, em, px, and/or %)<br />
 				e.g.<br />
