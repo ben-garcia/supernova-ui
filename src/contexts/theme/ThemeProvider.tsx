@@ -1,14 +1,13 @@
 import React, { createContext } from 'react';
 
 import ThemeProviderProps from './types';
+import { theme, Theme } from '../../theme';
 
-const ThemeContext = createContext({});
+export const ThemeContext = createContext<Theme>(theme);
 
-const ThemeProvider = (props: ThemeProviderProps) => {
+export const ThemeProvider = (props: ThemeProviderProps) => {
   const { value, children } = props;
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
-
-export default ThemeProvider;
