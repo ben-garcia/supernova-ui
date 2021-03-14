@@ -3,6 +3,7 @@ import React from 'react';
 import { createClasses, createElement, createStyles } from '../../../utils';
 import { TextProps } from './types';
 import { MarginPaddingProps } from '../../../types';
+import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
  * Ui component to display individual pieces of text
@@ -27,6 +28,8 @@ const Text: React.FC<TextProps> = props => {
   } = props;
   const colors = ['error', 'info', 'primary', 'success', 'warning'];
   const sizes = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
+  const theme = useTheme();
+  const breakpoint = useBreakpoint();
   const classes = createClasses('_snui-text', {
     [`_snui-color-${backgroundColor}`]:
       backgroundColor &&
@@ -125,20 +128,25 @@ const Text: React.FC<TextProps> = props => {
       textTransform === 'uppercase',
     [`_snui-width-${width}`]: width !== '' && sizes.includes(width),
   });
-  const styles = createStyles({
-    backgroundColor,
-    color,
-    font,
-    fontSize,
-    fontWeight,
-    height,
-    letterSpacing,
-    lineHeight,
-    margin,
-    padding,
-    textTransform,
-    width,
-  });
+  const styles = createStyles(
+    {
+      backgroundColor,
+      color,
+      font,
+      fontSize,
+      fontWeight,
+      height,
+      letterSpacing,
+      lineHeight,
+      margin,
+      padding,
+      textTransform,
+      theme,
+      width,
+    },
+    theme,
+    breakpoint
+  );
   const text = createElement(
     `${tag}`,
     {
