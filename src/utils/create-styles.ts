@@ -35,7 +35,6 @@ const createCssJsProperty = (innerProp: string, outerProp: string) => {
  * @param value the variable to check against
  *
  * @return result whether value is of type object
- *
  */
 const isObject = (value: any): boolean =>
   Object.prototype.toString.call(value) === '[object Object]';
@@ -46,7 +45,6 @@ const isObject = (value: any): boolean =>
  * @param value the variable to check against
  *
  * @returns result whether value is of type string
- *
  */
 const isString = (value: any): boolean =>
   Object.prototype.toString.call(value) === '[object String]';
@@ -69,6 +67,7 @@ const objectToPropertiesArray = (object: { [k: string]: any }): string[] =>
  * @param styles the styles object to add the styles to
  * @param spacingTheme the spacing property from the theme object
  * @param breakpoint the active breakpoint that matches the current viewport
+ * @param sizes the valid sizes defined in the theme
  */
 const createMarginPaddingStyles = (
   propertyName: string,
@@ -80,126 +79,135 @@ const createMarginPaddingStyles = (
 ) => {
   // when property is an object
   if (isObject(property)) {
-    const directionOptions = ['bottom', 'left', 'right', 'top'];
     // loop through the properties of the property object
-    Object.entries(property).forEach(([prop, value2]) => {
-      // when value2 is a string
-      if (isString(value2)) {
-        const cssJsProperty = createCssJsProperty(prop, propertyName);
+    Object.entries(property).forEach(([outerProp, outerPropValue]) => {
+      // when outerPropValue is a string
+      if (isString(outerPropValue)) {
+        const cssJsProperty = createCssJsProperty(outerProp, propertyName);
 
-        // check for valid directions
-        if (directionOptions.includes(prop)) {
-          styles[cssJsProperty] = value2;
+        // check for a valid size
+        if (sizes.includes(outerPropValue as string)) {
+          styles[cssJsProperty] = spacingTheme[outerPropValue as Sizes];
+        } else if (!sizes.includes(outerPropValue as string)) {
+          // when not a valid size
+          styles[cssJsProperty] = outerPropValue;
         }
-        // make sure the value2 is a valid size
+        // make sure the outerPropValue is a valid size
         // horizontal check
-        if (prop === 'x') {
+        else if (outerProp === 'x') {
           // direction properties take presedence
           // make sure that direction properties are not defined
           if (
             !styles[`${propertyName}Left`] &&
             !styles[`${propertyName}Right`] &&
-            sizes.includes(value2 as string)
+            sizes.includes(outerPropValue as string)
           ) {
-            styles[`${propertyName}Left`] = `var(--space-${value2})`;
-            styles[`${propertyName}Right`] = `var(--space-${value2})`;
+            styles[`${propertyName}Left`] = `var(--space-${outerPropValue})`;
+            styles[`${propertyName}Right`] = `var(--space-${outerPropValue})`;
             // using theme
-            // styles[`${property}Left`] = `${theme.spacing[value2]}`;
-            // styles[`${property}Right`] = `${theme.spacing[value2]}`;
+            // styles[`${property}Left`] = `${spacingTheme[outerPropValue]}`;
+            // styles[`${property}Right`] = `${spacingTheme[outerPropValue]}`;
           } else if (
             !styles[`${propertyName}Left`] &&
             !styles[`${propertyName}Right`] &&
-            !sizes.includes(value2 as string)
+            !sizes.includes(outerPropValue as string)
           ) {
-            styles[`${propertyName}Left`] = value2;
-            styles[`${propertyName}Right`] = value2;
+            styles[`${propertyName}Left`] = outerPropValue;
+            styles[`${propertyName}Right`] = outerPropValue;
           }
         }
         // vertical check
-        if (prop === 'y') {
+        else if (outerProp === 'y') {
           // direction properties take presedence
           // make sure that direction properties are not defined
           if (
             !styles[`${propertyName}Bottom`] &&
             !styles[`${propertyName}Top`] &&
-            sizes.includes(value2 as string)
+            sizes.includes(outerPropValue as string)
           ) {
-            styles[`${propertyName}Bottom`] = `var(--space-${value2})`;
-            styles[`${propertyName}Top`] = `var(--space-${value2})`;
+            styles[`${propertyName}Bottom`] = `var(--space-${outerPropValue})`;
+            styles[`${propertyName}Top`] = `var(--space-${outerPropValue})`;
             // using theme
-            // styles[`${property}Bottom`] = `${theme.spacing[value2]}`;
-            // styles[`${property}Top`] = `${theme.spacing[value2]}`;
+            // styles[`${property}Bottom`] = `${theme.spacing[outerPropValue]}`;
+            // styles[`${property}Top`] = `${theme.spacing[outerPropValue]}`;
           } else if (
             !styles[`${propertyName}Bottom`] &&
             !styles[`${propertyName}Top`] &&
-            !sizes.includes(value2 as string)
+            !sizes.includes(outerPropValue as string)
           ) {
-            styles[`${propertyName}Bottom`] = value2;
-            styles[`${propertyName}Top`] = value2;
+            styles[`${propertyName}Bottom`] = outerPropValue;
+            styles[`${propertyName}Top`] = outerPropValue;
           }
         }
         // value is a object defining breakpoints
-      } else if (isObject(value2)) {
-        Object.entries(value2 as any).forEach(([p, v]) => {
-          // check that p and v are valid breakpoints
-          if (sizes.includes(p)) {
-            const cssJsProperty = createCssJsProperty(prop, propertyName);
-            if (sizes.includes(v as string)) {
-              // make sure that the breakpoint is equal to the breakpoint value(p)
-              if (breakpoint === p) {
-                styles[cssJsProperty] = spacingTheme[breakpoint];
+      } else if (isObject(outerPropValue)) {
+        Object.entries(outerPropValue as any).forEach(
+          ([innerProp, innerPropValue]) => {
+            // check that innerProp and innerPropValue are valid breakpoints
+            if (sizes.includes(innerProp)) {
+              const cssJsProperty = createCssJsProperty(
+                outerProp,
+                propertyName
+              );
+              if (sizes.includes(innerPropValue as string)) {
+                // make sure that the breakpoint is equal to the breakpoint value(p)
+                if (breakpoint === innerProp) {
+                  styles[cssJsProperty] = spacingTheme[breakpoint];
+                }
+              } else if (!sizes.includes(outerPropValue as string)) {
+                if (breakpoint === innerProp) {
+                  styles[cssJsProperty] = outerPropValue;
+                }
               }
-            } else if (!sizes.includes(v as string)) {
-              if (breakpoint === p) {
-                styles[cssJsProperty] = v;
+            }
+            // horizontal check
+            if (outerProp === 'x') {
+              // direction properties take presedence
+              // make sure that direction properties are not defined
+              if (
+                !styles[`${propertyName}Left`] &&
+                !styles[`${propertyName}Right`] &&
+                breakpoint === innerProp
+              ) {
+                // if v(value) is a valid size
+                if (sizes.includes(outerPropValue as string)) {
+                  styles[`${propertyName}Left`] = `${
+                    spacingTheme[outerPropValue as Sizes]
+                  }`;
+                  styles[`${propertyName}Right`] = `${
+                    spacingTheme[outerPropValue as Sizes]
+                  }`;
+                } else {
+                  styles[`${propertyName}Left`] = `${outerPropValue}`;
+                  styles[`${propertyName}Right`] = `${outerPropValue}`;
+                }
+              }
+            }
+            // vertical check
+            if (outerProp === 'y') {
+              // direction properties take presedence
+              // make sure that direction properties are not defined
+              if (
+                !styles[`${propertyName}Bottom`] &&
+                !styles[`${propertyName}Top`] &&
+                breakpoint === innerProp
+              ) {
+                // if v(value) is a valid size
+                if (sizes.includes(innerPropValue as string)) {
+                  styles[`${property}Bottom`] = `${
+                    spacingTheme[innerPropValue as Sizes]
+                  }`;
+                  styles[`${property}Top`] = `${
+                    spacingTheme[innerPropValue as Sizes]
+                  }`;
+                } else {
+                  styles[`${propertyName}Bottom`] = `${innerPropValue}`;
+                  styles[`${propertyName}Top`] = `${innerPropValue}`;
+                }
               }
             }
           }
-          // horizontal check
-          if (prop === 'x') {
-            // direction properties take presedence
-            // make sure that direction properties are not defined
-            if (
-              !styles[`${propertyName}Left`] &&
-              !styles[`${propertyName}Right`] &&
-              breakpoint === p
-            ) {
-              // if v(value) is a valid size
-              if (sizes.includes(v as string)) {
-                styles[`${propertyName}Left`] = `var(--space-${v})`;
-                styles[`${propertyName}Right`] = `var(--space-${v})`;
-                // using theme
-                // styles[`${propertyName}Left`] = `${theme.spacing[v]}`;
-                // styles[`${propertyName}Right`] = `${theme.spacing[v]}`;
-              } else {
-                styles[`${propertyName}Left`] = `${v}`;
-                styles[`${propertyName}Right`] = `${v}`;
-              }
-            }
-          }
-          // vertical check
-          if (prop === 'y') {
-            // direction properties take presedence
-            // make sure that direction properties are not defined
-            if (
-              !styles[`${propertyName}Bottom`] &&
-              !styles[`${propertyName}Top`] &&
-              breakpoint === p
-            ) {
-              // if v(value) is a valid size
-              if (sizes.includes(v as string)) {
-                styles[`${propertyName}Bottom`] = `var(--space-${v})`;
-                styles[`${propertyName}Top`] = `var(--space-${v})`;
-                // using theme
-                // styles[`${property}Bottom`] = `${theme.spacing[v]}`;
-                // styles[`${property}Top`] = `${theme.spacing[v]}`;
-              } else {
-                styles[`${propertyName}Bottom`] = `${v}`;
-                styles[`${propertyName}Top`] = `${v}`;
-              }
-            }
-          }
-        });
+        );
       }
     });
     // margin property value is a string and has mulitple values
