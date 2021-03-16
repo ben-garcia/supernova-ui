@@ -214,7 +214,7 @@ export interface SupernovaUIBaseProps {
    * e.g.
    *	height="5rem", height="6em", height="100px", height="10%"
    */
-  height?: string;
+  height?: Breakpoints | string;
   /**
    * margin to apply
    *
@@ -276,8 +276,15 @@ export interface SupernovaUIBaseProps {
    *
    * when the default or custom values don't cut it
    *
-   * e.g.
+   * accepts
+   * breakpoint object
+   *
+   * or
+   *
+   * string
+   *
+   * @example
    *	width="5rem", width="6em", width="100px", width="10%"
    */
-  width?: string;
+  width?: Breakpoints | string;
 }

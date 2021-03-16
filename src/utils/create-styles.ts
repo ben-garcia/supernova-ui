@@ -174,14 +174,16 @@ const createMarginPaddingStyles = (
                 outerProp,
                 propertyName
               );
-              if (sizes.includes(innerPropValue as string)) {
-                // make sure that the breakpoint is equal to the breakpoint value(p)
-                if (breakpoint === innerProp) {
-                  styles[cssJsProperty] = spacingTheme[breakpoint];
-                }
-              } else if (!sizes.includes(outerPropValue as string)) {
-                if (breakpoint === innerProp) {
-                  styles[cssJsProperty] = outerPropValue;
+              if (outerProp !== 'x' && outerProp !== 'y') {
+                if (sizes.includes(innerPropValue as string)) {
+                  // make sure that the breakpoint is equal to the breakpoint value
+                  if (breakpoint === innerProp) {
+                    styles[cssJsProperty] = spacingTheme[breakpoint];
+                  }
+                } else if (!sizes.includes(innerPropValue as string)) {
+                  if (breakpoint === innerProp) {
+                    styles[cssJsProperty] = innerPropValue;
+                  }
                 }
               }
             }
@@ -195,16 +197,14 @@ const createMarginPaddingStyles = (
                 breakpoint === innerProp
               ) {
                 // if v(value) is a valid size
-                if (sizes.includes(outerPropValue as string)) {
-                  styles[`${propertyName}Left`] = `${
-                    spacingTheme[outerPropValue as Sizes]
-                  }`;
-                  styles[`${propertyName}Right`] = `${
-                    spacingTheme[outerPropValue as Sizes]
-                  }`;
+                if (sizes.includes(innerPropValue as string)) {
+                  styles[`${propertyName}Left`] =
+                    spacingTheme[innerPropValue as Sizes];
+                  styles[`${propertyName}Right`] =
+                    spacingTheme[innerPropValue as Sizes];
                 } else {
-                  styles[`${propertyName}Left`] = `${outerPropValue}`;
-                  styles[`${propertyName}Right`] = `${outerPropValue}`;
+                  styles[`${propertyName}Left`] = innerPropValue;
+                  styles[`${propertyName}Right`] = innerPropValue;
                 }
               }
             }
@@ -219,15 +219,13 @@ const createMarginPaddingStyles = (
               ) {
                 // if v(value) is a valid size
                 if (sizes.includes(innerPropValue as string)) {
-                  styles[`${property}Bottom`] = `${
-                    spacingTheme[innerPropValue as Sizes]
-                  }`;
-                  styles[`${property}Top`] = `${
-                    spacingTheme[innerPropValue as Sizes]
-                  }`;
+                  styles[`${propertyName}Bottom`] =
+                    spacingTheme[innerPropValue as Sizes];
+                  styles[`${propertyName}Top`] =
+                    spacingTheme[innerPropValue as Sizes];
                 } else {
-                  styles[`${propertyName}Bottom`] = `${innerPropValue}`;
-                  styles[`${propertyName}Top`] = `${innerPropValue}`;
+                  styles[`${propertyName}Bottom`] = innerPropValue;
+                  styles[`${propertyName}Top`] = innerPropValue;
                 }
               }
             }
@@ -341,6 +339,7 @@ const createMarginPaddingStyles = (
       }
     }
   }
+  console.log(styles);
 };
 
 /**
@@ -422,8 +421,10 @@ const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
         styles.fontWeight = value as CSSProperties['fontWeight'];
       }
     } else if (property === 'height') {
-      if (height && !sizes.includes(height as string)) {
-        styles.height = value as string;
+      if (isString(height) && !sizes.includes(height)) {
+        styles.height = value;
+      } else if (isObject(height)) {
+        responsify('height', height, styles, theme.spacing, breakpoint, sizes);
       }
     } else if (property === 'letterSpacing') {
       if (letterSpacing && !sizes.includes(letterSpacing as string)) {
@@ -443,9 +444,14 @@ const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
         sizes
       );
     } else if (property === 'padding') {
-      if (padding && !sizes.includes(padding as string)) {
-        styles.padding = value as string;
-      }
+      createMarginPaddingStyles(
+        'padding',
+        padding,
+        styles,
+        theme.spacing,
+        breakpoint,
+        sizes
+      );
     } else if (property === 'textTransform') {
       if (
         textTransform &&
@@ -456,8 +462,10 @@ const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
         styles.textTransform = value as CSSProperties['textTransform'];
       }
     } else if (property === 'width') {
-      if (width && !sizes.includes(width as string)) {
-        styles.width = value as string;
+      if (isString(width) && !sizes.includes(width)) {
+        styles.width = value;
+      } else if (isObject(width)) {
+        responsify('width', width, styles, theme.spacing, breakpoint, sizes);
       }
     }
   }

@@ -42,7 +42,7 @@ const Text: React.FC<TextProps> = props => {
     [`_snui-text-${fontSize}`]: sizes.includes(fontSize),
     [`_snui-font-weight-${fontWeight}`]:
       fontWeight !== '' && sizes.includes(fontWeight),
-    [`_snui-font-${height}`]: height !== '' && sizes.includes(height),
+    [`_snui-height-${height}`]: height !== '' && sizes.includes(height),
     '_snui-text-truncated': isTruncated,
     [`_snui-letter-spacing-${letterSpacing}`]: sizes.includes(letterSpacing),
     [`_snui-line-height-${lineHeight}`]:
