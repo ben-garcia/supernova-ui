@@ -60,6 +60,31 @@ const objectToPropertiesArray = (object: { [k: string]: any }): string[] =>
   Object.keys(object).map(k => `${k}`);
 
 /**
+ * adds css property based on the current breakpoint
+ *
+ * @param propertyName name of the css property
+ * @param responsiveObject contains all the user defined breakpoint values
+ * @param styles object to add the styles to
+ * @param fontSizeTheme theme object that defines the font sizes
+ * @param breakpoint current breakpoint
+ * @param sizes array of valid sizes
+ */
+const responsify = (
+  propertyName: string,
+  responsiveObject: any,
+  styles: any,
+  fontSizeTheme: any,
+  breakpoint: keyof Breakpoints,
+  sizes: string[]
+) => {
+  if (sizes.includes(responsiveObject[breakpoint])) {
+    styles[propertyName] = fontSizeTheme[responsiveObject[breakpoint]];
+  } else {
+    styles[propertyName] = responsiveObject[breakpoint];
+  }
+};
+
+/**
  * generates all margin or padding responsive styles
  *
  * @param propertyName the prop name
@@ -380,8 +405,17 @@ const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
         styles.fontFamily = value as string;
       }
     } else if (property === 'fontSize') {
-      if (fontSize && !sizes.includes(fontSize as string)) {
-        styles.fontSize = value as string;
+      if (isString(fontSize) && !sizes.includes(fontSize)) {
+        styles.fontSize = value;
+      } else if (isObject(fontSize)) {
+        responsify(
+          'fontSize',
+          fontSize,
+          styles,
+          theme.typography.fontSizes,
+          breakpoint,
+          sizes
+        );
       }
     } else if (property === 'fontWeight') {
       if (fontWeight && !sizes.includes(fontWeight as string)) {

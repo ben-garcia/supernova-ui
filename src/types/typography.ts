@@ -1,5 +1,5 @@
 import { SupernovaUIBaseProps } from './supernova-ui-base';
-import { Fonts, Sizes } from './common';
+import { Breakpoints, Fonts, Sizes } from './common';
 
 /**
  * Props for components that can change typography related props.
@@ -24,7 +24,7 @@ export interface TypographyProps extends SupernovaUIBaseProps {
    *
    * css property: font-size
    */
-  fontSize?: Sizes | string;
+  fontSize?: Breakpoints | string;
   /**
    * configure the width of letters of text
    *
