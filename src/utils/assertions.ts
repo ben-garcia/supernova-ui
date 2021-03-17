@@ -1,0 +1,21 @@
+/**
+ * check whether a value is of type object
+ *
+ * @param value the variable to check against
+ *
+ * @return result whether value is of type object
+ */
+export const isObject = (value: any): boolean =>
+  Object.prototype.toString.call(value) === '[object Object]' &&
+  Object.keys(value).length > 0;
+
+/**
+ * check whether a value is of type string
+ 
+ * @param value the variable to check against
+ *
+ * @returns result whether value is of type string
+ */
+export const isString = (value: any): boolean =>
+  Object.prototype.toString.call(value) === '[object String]' &&
+  value.trim() !== '';
