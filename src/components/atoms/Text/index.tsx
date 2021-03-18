@@ -13,7 +13,7 @@ import { MarginPaddingProps } from '../../../types';
 import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
- * Ui component to display individual pieces of text
+ * UI component to display individual pieces of text
  */
 const Text: React.FC<TextProps> = props => {
   const {
@@ -40,23 +40,22 @@ const Text: React.FC<TextProps> = props => {
       backgroundColor &&
       backgroundColor !== '' &&
       colors.includes(backgroundColor),
-    [`_snui-color-$color}`]: color !== '' && colors.includes(color),
+    [`_snui-color-$color}`]: isString(color) && colors.includes(color),
     [`_snui-font-${font}`]:
       (font && font === 'heading') || font === 'body' || font === 'mono',
     '_snui-font-mono': tag === 'kbd' || tag === 'samp',
     [`_snui-text-${fontSize}`]:
-      isString(fontSize) &&
-      fontSize !== '' &&
-      sizes.includes(fontSize as string),
+      isString(fontSize) && sizes.includes(fontSize as string),
     [`_snui-font-weight-${fontWeight}`]:
-      fontWeight !== '' && sizes.includes(fontWeight),
+      isString(fontWeight) && sizes.includes(fontWeight),
     [`_snui-height-${height}`]:
       isString(height) && sizes.includes(height as string),
     '_snui-text-truncated': isTruncated,
-    [`_snui-letter-spacing-${letterSpacing}`]: sizes.includes(letterSpacing),
+    [`_snui-letter-spacing-${letterSpacing}`]:
+      isString(letterSpacing) && sizes.includes(letterSpacing),
     [`_snui-line-height-${lineHeight}`]:
-      // margin
       lineHeight !== '' && sizes.includes(lineHeight),
+    // margin
     [`_snui-margin-${margin}`]:
       typeof margin === 'string' && margin !== '' && sizes.includes(margin),
     [`_snui-margin-bottom-${(margin as MarginPaddingProps).bottom}`]:

@@ -4,6 +4,7 @@ import React from 'react';
 import Paragraph from '.';
 import { ParagraphProps } from './types';
 import argTypes from './argTypes';
+import { sizes } from '../../../utils';
 
 export default {
   argTypes,
@@ -19,8 +20,6 @@ Primary.args = {
   children:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lobortis nulla a velit suscipit faucibus. Sed mattis ac turpis vel efficitur. Aliquam eget ligula ut diam tincidunt porta.',
 };
-
-const sizes = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
 export const All = () => (
   <div>
