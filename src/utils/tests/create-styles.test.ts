@@ -5,7 +5,7 @@ import {
 } from '../create-styles';
 
 describe('createStyles', () => {
-  const styles = {};
+  let styles = {};
   const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
   const spacingTheme = {
     xs: 4,
@@ -69,7 +69,7 @@ describe('createStyles', () => {
   });
 
   describe('createMarginPaddingStyles', () => {
-    let styles: any;
+    styles = {};
     const properties = {
       bottom: {
         xs: '3px',
