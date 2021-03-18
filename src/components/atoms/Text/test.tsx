@@ -1,9 +1,11 @@
 import React from 'react';
 
 import Text from '.';
-import { a11yTest, render } from '../../../test-utils';
+import { a11yTest, mockMatchMedia, render } from '../../../test-utils';
 
 describe('<Text />', () => {
+  beforeAll(() => mockMatchMedia());
+
   it('should pass a11y tests', async () => {
     await a11yTest(<Text>text</Text>);
   });

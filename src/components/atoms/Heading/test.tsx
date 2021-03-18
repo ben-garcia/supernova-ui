@@ -1,9 +1,11 @@
 import React from 'react';
 
 import Heading from '.';
-import { a11yTest, render } from '../../../test-utils';
+import { a11yTest, mockMatchMedia, render } from '../../../test-utils';
 
 describe('<Heading />', () => {
+  beforeAll(() => mockMatchMedia());
+
   it('should pass a11y tests', async () => {
     await a11yTest(<Heading>Heading</Heading>);
   });
@@ -14,7 +16,7 @@ describe('<Heading />', () => {
     expect(container).toBeInTheDocument();
   });
 
-  describe('tag prop', () => {
+  describe('level prop', () => {
     it('should render an h1 by default with correct text', () => {
       const text = 'h1 tag';
       const { getByText } = render(<Heading>{text}</Heading>);

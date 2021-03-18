@@ -3,7 +3,8 @@ module.exports = {
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
     '!**/node_modules/**',
-    '!**/*.stories.tsx',
+    '!**/*/stories.tsx',
+    '!**/*/argTypes.ts',
     '!src/theme/**/*',
   ],
   // the minimun threadhold for jest to pass
