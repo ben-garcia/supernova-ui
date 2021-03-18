@@ -135,7 +135,6 @@ describe('createStyles', () => {
         const expected = {
           marginRight: '2rem',
         };
-
         createMarginPaddingStyles(
           'margin',
           { right: properties.left, x: properties.x },
