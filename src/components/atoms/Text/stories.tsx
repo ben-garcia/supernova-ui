@@ -4,6 +4,7 @@ import React from 'react';
 import Text from '.';
 import { TextProps } from './types';
 import argTypes from './argTypes';
+import { sizes } from '../../../utils';
 
 export default {
   argTypes,
@@ -18,8 +19,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   children: 'text',
 };
-
-const sizes = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
 export const All = () => (
   <div>

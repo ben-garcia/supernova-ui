@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { createClasses, createElement, createStyles } from '../../../utils';
+import {
+  colors,
+  createClasses,
+  createElement,
+  createStyles,
+  isString,
+  sizes,
+} from '../../../utils';
 import { TextProps } from './types';
 import { MarginPaddingProps } from '../../../types';
 import { useBreakpoint, useTheme } from '../../../hooks';
@@ -26,8 +33,6 @@ const Text: React.FC<TextProps> = props => {
     textTransform = '',
     width = '',
   } = props;
-  const colors = ['error', 'info', 'primary', 'success', 'warning'];
-  const sizes = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const classes = createClasses('_snui-text', {
@@ -39,10 +44,14 @@ const Text: React.FC<TextProps> = props => {
     [`_snui-font-${font}`]:
       (font && font === 'heading') || font === 'body' || font === 'mono',
     '_snui-font-mono': tag === 'kbd' || tag === 'samp',
-    [`_snui-text-${fontSize}`]: sizes.includes(fontSize),
+    [`_snui-text-${fontSize}`]:
+      isString(fontSize) &&
+      fontSize !== '' &&
+      sizes.includes(fontSize as string),
     [`_snui-font-weight-${fontWeight}`]:
       fontWeight !== '' && sizes.includes(fontWeight),
-    [`_snui-height-${height}`]: height !== '' && sizes.includes(height),
+    [`_snui-height-${height}`]:
+      isString(height) && sizes.includes(height as string),
     '_snui-text-truncated': isTruncated,
     [`_snui-letter-spacing-${letterSpacing}`]: sizes.includes(letterSpacing),
     [`_snui-line-height-${lineHeight}`]:
@@ -126,7 +135,10 @@ const Text: React.FC<TextProps> = props => {
       textTransform === 'capitalize' ||
       textTransform === 'lowercase' ||
       textTransform === 'uppercase',
-    [`_snui-width-${width}`]: width !== '' && sizes.includes(width),
+    [`_snui-width-${width}`]:
+      isString(width) && sizes.includes(width as string),
+    // text should be inline block if prop include width, padding, margin, and/or height
+    '_snui-display-inline-block': width || padding || margin || height,
   });
   const styles = createStyles(
     {
