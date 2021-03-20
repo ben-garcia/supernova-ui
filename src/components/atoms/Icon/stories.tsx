@@ -1,5 +1,8 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
+
+import argTypes from './argTypes';
+import { IconProps } from './types';
 
 import {
   AddIcon,
@@ -27,13 +30,22 @@ import {
   TriangleDownIcon,
   TriangleUpIcon,
   UserIcon,
-} from '.';
+} from './Icons';
 
 export default {
+  argTypes,
   title: 'Supernova UI/Atoms/Icons',
 } as Meta;
 
-export const Icons = () => (
+const Template: Story<IconProps> = args => <UserIcon {...args} />;
+
+export const Single = Template.bind({});
+
+Single.args = {
+  width: '3rem',
+};
+
+export const All = () => (
   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
     <AddIcon width="3rem" />
     <AttachmentIcon width="3rem" />

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { IconProps } from './types';
-import Icon from './Icon';
+import { IconProps } from '../types';
+import Icon from '../Icon';
 
 /**
  * Add svg
