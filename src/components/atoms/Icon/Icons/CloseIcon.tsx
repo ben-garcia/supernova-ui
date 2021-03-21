@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Close svg
  */
 const CloseIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11.649 9.882l6.613-6.615L16.495 1.5 9.881 8.114 3.267 1.5 1.5 3.267l6.614 6.616L1.5 16.497l1.767 1.767 6.614-6.614 6.614 6.614 1.767-1.767z" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m2.5478 2.104 1.6602-1.6605-0.44359-0.44354-1.6604 1.6602-1.6604-1.6602-0.44359 0.44354 1.6604 1.6607-1.6604 1.6602 0.44359 0.44354 1.6604-1.6602 1.6604 1.6602 0.44359-0.44354z" />
     </Icon>
   );
 };

@@ -7,19 +7,11 @@ import Icon from '../Icon';
  * Envelop svg
  */
 const EnvelopIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.79 9.16L2.48 3.85a2.49 2.49 0 011.27-.35h12.5a2.49 2.49 0 011.27.35l-5.31 5.31a3.13 3.13 0 01-4.42 0z" />
-        <path d="M13.09 10.31L18.4 5a2.47 2.47 0 01.35 1.27v7.5a2.5 2.5 0 01-2.5 2.5H3.75a2.5 2.5 0 01-2.5-2.5v-7.5A2.47 2.47 0 011.6 5l5.31 5.31a4.37 4.37 0 006.18 0z" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m1.5726 1.8651-1.2768-1.7498a0.59874 0.82051 0 0 1 0.30538-0.11533h3.0057a0.59874 0.82051 0 0 1 0.30538 0.11533l-1.2768 1.7498a0.75263 1.0314 0 0 1-1.0628 0z" />
+      <path d="m2.847 2.244 1.2768-1.7498a0.59393 0.81392 0 0 1 0.08416 0.41849v2.4714a0.60114 0.82381 0 0 1-0.60114 0.82381h-3.0057a0.60114 0.82381 0 0 1-0.60114-0.82381v-2.4714a0.59393 0.81392 0 0 1 0.08416-0.41849l1.2768 1.7498a1.0508 1.44 0 0 0 1.486 0z" />
     </Icon>
   );
 };

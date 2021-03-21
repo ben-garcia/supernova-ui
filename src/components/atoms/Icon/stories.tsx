@@ -22,8 +22,6 @@ import {
   InfoIcon,
   LinkIcon,
   LogoutIcon,
-  NextIcon,
-  PreviousIcon,
   SearchIcon,
   SettingsIcon,
   TrashIcon,
@@ -42,35 +40,33 @@ const Template: Story<IconProps> = args => <UserIcon {...args} />;
 export const Single = Template.bind({});
 
 Single.args = {
-  width: '3rem',
+  size: '10rem',
 };
 
 export const All = () => (
-  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-    <AddIcon width="3rem" />
-    <AttachmentIcon width="3rem" />
-    <ArrowDownIcon width="3rem" />
-    <ArrowLeftIcon width="3rem" />
-    <ArrowRightIcon width="3rem" />
-    <ArrowUpIcon width="3rem" />
-    <CheckmarkIcon width="3rem" />
-    <CloseIcon width="3rem" />
-    <ConnectivityIcon width="3rem" />
-    <DownloadIcon width="3rem" />
-    <EditIcon width="3rem" />
-    <EnvelopIcon width="3rem" />
-    <HalfMoonIcon width="3rem" />
-    <HelpIcon width="3rem" />
-    <InfoIcon width="3rem" />
-    <LinkIcon width="3rem" />
-    <LogoutIcon width="3rem" />
-    <NextIcon width="3rem" />
-    <PreviousIcon width="3rem" />
-    <SearchIcon width="3rem" />
-    <SettingsIcon width="3rem" />
-    <TrashIcon width="3rem" />
-    <TriangleDownIcon width="3rem" />
-    <TriangleUpIcon width="3rem" />
-    <UserIcon width="3rem" />
+  <div>
+    <AddIcon size="3rem" />
+    <AttachmentIcon size="3rem" />
+    <ArrowDownIcon size="3rem" />
+    <ArrowLeftIcon size="3rem" />
+    <ArrowRightIcon size="3rem" />
+    <ArrowUpIcon size="3rem" />
+    <CheckmarkIcon size="3rem" />
+    <CloseIcon size="3rem" />
+    <ConnectivityIcon size="3rem" />
+    <DownloadIcon size="3rem" />
+    <EditIcon size="3rem" />
+    <EnvelopIcon size="3rem" />
+    <HalfMoonIcon size="3rem" />
+    <HelpIcon size="3rem" />
+    <InfoIcon size="3rem" />
+    <LinkIcon size="3rem" />
+    <LogoutIcon size="3rem" />
+    <SearchIcon size="3rem" />
+    <SettingsIcon size="3rem" />
+    <TrashIcon size="3rem" />
+    <TriangleDownIcon size="3rem" />
+    <TriangleUpIcon size="3rem" />
+    <UserIcon size="3rem" />
   </div>
 );

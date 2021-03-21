@@ -1,14 +1,21 @@
 import { ReactNode } from 'react';
 
-import { SupernovaUIBaseProps } from '../../../types';
+import { Sizes } from '../../../types/common';
 
-export interface IconBaseProps
-  extends Omit<SupernovaUIBaseProps, 'backgroundColor' | 'color'> {
+export interface IconBaseProps {
   children: ReactNode;
   /**
    * fill for the svg
    */
   fill?: string;
+  /**
+   * The size of the icon
+   */
+  size?: Sizes | string;
+  /**
+   * The svg viewbox
+   */
+  viewBox?: string;
 }
 
-export interface IconProps extends Omit<IconBaseProps, 'children'> {}
+export interface IconProps extends Pick<IconBaseProps, 'size' | 'fill'> {}

@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Half moon svg
  */
 const HalfMoonIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15.992 14.898A5.014 5.014 0 0112 10a5.014 5.014 0 013.992-4.899.998.998 0 00.343-1.819A7.965 7.965 0 0012 2c-4.41 0-8 3.588-8 8 0 4.411 3.59 8 8 8a7.966 7.966 0 004.335-1.283 1 1 0 00-.343-1.819" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m3.944 3.3922a1.649 1.3187 0 0 1-1.3129-1.2882 1.649 1.3187 0 0 1 1.3129-1.2884 0.32823 0.26247 0 0 0 0.11281-0.4784 2.6196 2.0948 0 0 0-1.4257-0.33717c-1.4504 0-2.6311 0.94364-2.6311 2.104 0 1.1601 1.1807 2.104 2.6311 2.104a2.6199 2.0951 0 0 0 1.4257-0.33743 0.32889 0.263 0 0 0-0.11281-0.4784" />
     </Icon>
   );
 };

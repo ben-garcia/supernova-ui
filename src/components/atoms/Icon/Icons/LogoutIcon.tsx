@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Logout svg
  */
 const LogoutIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 2H5a1 1 0 00-1 1v6h5.586L8.293 7.707a.999.999 0 111.414-1.414l3 3a.999.999 0 010 1.414l-3 3a.997.997 0 01-1.414 0 .999.999 0 010-1.414L9.586 11H4v6a1 1 0 001 1h10a1 1 0 001-1V3a1 1 0 00-1-1" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m3.8573 0h-3.5067a0.35067 0.263 0 0 0-0.35067 0.263v1.578h1.9588l-0.45341-0.34006a0.35061 0.26296 0 1 1 0.49584-0.37188l1.052 0.789a0.35032 0.26274 0 0 1 0 0.37188l-1.052 0.789a0.34961 0.26221 0 0 1-0.49584 0 0.35032 0.26274 0 0 1 0-0.37188l0.45341-0.34006h-1.9588v1.578a0.35067 0.263 0 0 0 0.35067 0.263h3.5067a0.35067 0.263 0 0 0 0.35067-0.263v-3.682a0.35067 0.263 0 0 0-0.35067-0.263" />
     </Icon>
   );
 };

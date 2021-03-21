@@ -54,6 +54,17 @@ const argTypes = {
       type: { summary: 'string' },
     },
   },
+  size: {
+    control: {
+      type: 'text',
+    },
+    description: 'Configure the size of the icon',
+    table: {
+      category: 'Icon',
+      defaultValue: { summary: 'empty' },
+      type: { summary: 'string' },
+    },
+  },
   width: {
     control: {
       type: 'text',

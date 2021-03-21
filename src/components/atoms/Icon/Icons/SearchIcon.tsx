@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Search svg
  */
 const SearchIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15.59 13.91l2.78 2.69a1.25 1.25 0 11-1.74 1.8l-2.82-2.73a8 8 0 111.78-1.76zm-.95-4.71a5.45 5.45 0 10-5.44 5.44 5.45 5.45 0 005.44-5.44z" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="M 3.452339,3.0490909 4.116731,3.6929614 A 0.29915777,0.29961729 0 1 1 3.7008885,4.1238041 L 3.0269369,3.4703593 A 1.9119196,1.9148564 0 1 1 3.452339,3.0490909 Z M 3.2252986,1.9217192 A 1.3024952,1.3044959 0 1 0 1.9251933,3.2238216 1.3024952,1.3044959 0 0 0 3.2252986,1.9217192 Z" />
     </Icon>
   );
 };

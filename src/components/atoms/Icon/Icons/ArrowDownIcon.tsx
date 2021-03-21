@@ -7,18 +7,11 @@ import Icon from '../Icon';
  * Arrow down svg
  */
 const ArrowDownIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
+
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 11.4 11.4" xmlns="http://www.w3.org/2000/svg">
-        <path d="m5.334 11.228a0.8 0.8 0 0 0 0.872-0.174l4.8-4.8a0.80009 0.80009 0 1 0-1.132-1.131l-3.434 3.434v-7.669a0.8 0.8 0 1 0-1.6 0v7.67l-3.435-3.436a0.79938 0.79938 0 1 0-1.13 1.131l4.798 4.8a0.8 0.8 0 0 0 0.261 0.173" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m1.9325 4.2234a0.30058 0.30054 0 0 0 0.32763-0.065368l1.8035-1.8033a0.30061 0.30058 0 1 0-0.42532-0.42489l-1.2902 1.2901v-2.8811a0.30058 0.30054 0 1 0-0.60116 0v2.8815l-1.2906-1.2908a0.30035 0.30031 0 1 0-0.42457 0.42489l1.8027 1.8033a0.30058 0.30054 0 0 0 0.098064 0.064993" />
     </Icon>
   );
 };

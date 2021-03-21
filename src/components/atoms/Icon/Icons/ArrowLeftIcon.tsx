@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Arrow left svg
  */
 const ArrowLeftIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 11.4 11.4" xmlns="http://www.w3.org/2000/svg">
-        <path d="m0.10086 5.3822a0.8 0.8 0 0 0 0.174 0.872l4.8 4.8a0.80009 0.80009 0 1 0 1.131-1.132l-3.434-3.434h7.669a0.8 0.8 0 1 0 0-1.6h-7.67l3.436-3.435a0.79938 0.79938 0 1 0-1.131-1.13l-4.8 4.798a0.8 0.8 0 0 0-0.173 0.261" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m-0.03357 2.0271a0.30054 0.30058 0 0 0 0.065368 0.32763l1.8033 1.8035a0.30058 0.30061 0 1 0 0.42489-0.42532l-1.2901-1.2902h2.8811a0.30054 0.30058 0 1 0 0-0.60116h-2.8815l1.2908-1.2906a0.30031 0.30035 0 1 0-0.42489-0.42457l-1.8033 1.8027a0.30054 0.30058 0 0 0-0.064993 0.098064" />
     </Icon>
   );
 };

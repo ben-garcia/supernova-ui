@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Triangle up svg
  */
 const TriangleUpIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="m3.0007 19h18c0.379 0 0.725-0.214 0.895-0.553 0.168-0.339 0.132-0.744-0.095-1.047l-9-12c-0.188-0.252-0.485-0.4-0.8-0.4s-0.611 0.148-0.8 0.4l-9 12c-0.228 0.303-0.264 0.708-0.095 1.047 0.17 0.339 0.516 0.553 0.895 0.553z" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m0.21049 4.208h3.7872c0.079741 0 0.15254-0.064322 0.18831-0.16622 0.035347-0.10189 0.027773-0.22363-0.019988-0.3147l-1.8936-3.6069c-0.039555-0.075744-0.10204-0.12023-0.16832-0.12023-0.066276 0-0.12855 0.044485-0.16832 0.12023l-1.8936 3.6069c-0.047971 0.091073-0.055545 0.2128-0.019988 0.3147 0.035768 0.10189 0.10857 0.16622 0.18831 0.16622z" />
     </Icon>
   );
 };

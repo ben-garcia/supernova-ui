@@ -7,18 +7,10 @@ import Icon from '../Icon';
  * Triangle down svg
  */
 const TriangleDownIcon: React.FC<IconProps> = props => {
-  const { fill, height, margin, padding, width } = props;
+  const { fill, size } = props;
   return (
-    <Icon
-      fill={fill}
-      height={height}
-      margin={margin}
-      padding={padding}
-      width={width}
-    >
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M21,5H3C2.621,5,2.275,5.214,2.105,5.553C1.937,5.892,1.973,6.297,2.2,6.6l9,12 c0.188,0.252,0.485,0.4,0.8,0.4s0.611-0.148,0.8-0.4l9-12c0.228-0.303,0.264-0.708,0.095-1.047C21.725,5.214,21.379,5,21,5z" />
-      </svg>
+    <Icon fill={fill} size={size}>
+      <path d="m3.9975 0h-3.7872c-0.079741 0-0.15254 0.064322-0.18831 0.16622-0.035347 0.10189-0.027773 0.22363 0.019988 0.3147l1.8936 3.6069c0.039555 0.075744 0.10204 0.12023 0.16832 0.12023 0.066276 0 0.12855-0.044485 0.16832-0.12023l1.8936-3.6069c0.047971-0.091073 0.055545-0.2128 0.019988-0.3147-0.035768-0.10189-0.10857-0.16622-0.18831-0.16622z" />
     </Icon>
   );
 };

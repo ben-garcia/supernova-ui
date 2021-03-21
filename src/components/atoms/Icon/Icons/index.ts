@@ -15,8 +15,6 @@ export { default as HelpIcon } from './HelpIcon';
 export { default as InfoIcon } from './InfoIcon';
 export { default as LinkIcon } from './LinkIcon';
 export { default as LogoutIcon } from './LogoutIcon';
-export { default as NextIcon } from './NextIcon';
-export { default as PreviousIcon } from './PreviousIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as SettingsIcon } from './SettingsIcon';
 export { default as TrashIcon } from './TrashIcon';
