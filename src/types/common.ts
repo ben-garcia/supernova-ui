@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 /**
  * Available breakpoints defined in the theme
  */
@@ -57,6 +59,33 @@ export interface Breakpoints {
  * Available colors to choose from
  */
 export type Colors = 'primary' | 'info' | 'warning' | 'success' | 'error';
+
+/**
+ * Props that are common to more than 1 component
+ */
+export interface CommonProps {
+  children: ReactNode;
+  /**
+   * The size of the icon
+   *
+   * accepts
+   *
+   * 1. Breakpoints object to configure the size based on viewport width
+   * e.g.
+   *	size: {xs: ''<value>', ... ,  xxl: '<value>'}
+   *
+   * 2. string with value of a valid size
+   * e.g.
+   *	size="lg"
+   *
+   * or
+   *
+   * css height and width valid value
+   * e.g.
+   *	size="3rem"
+   */
+  size?: Breakpoints | string;
+}
 
 /**
  * Available fonts to choose from

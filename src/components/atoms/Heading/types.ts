@@ -1,15 +1,11 @@
-import { ReactNode } from 'react';
-
-import { TypographyProps } from '../../../types';
+import { CommonProps, TypographyProps } from '../../../types';
 
 /**
  * The props used by the Heading component
  */
-export interface HeadingProps extends TypographyProps {
-  /**
-   * The content for the element
-   */
-  children: ReactNode;
+export interface HeadingProps
+  extends TypographyProps,
+    Pick<CommonProps, 'children'> {
   /**
    * The html heading level(1, 2, 3, 4, 5, 6)
    *

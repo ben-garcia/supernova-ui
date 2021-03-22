@@ -1,6 +1,4 @@
-import { ReactNode } from 'react';
-
-import { TypographyProps } from '../../../types';
+import { CommonProps, TypographyProps } from '../../../types';
 
 type Tag =
   | 'abbr'
@@ -19,13 +17,11 @@ type Tag =
   | 'u';
 
 /**
- * The props used by the Text component
+ * Props for the Text component
  */
-export interface TextProps extends Omit<TypographyProps, 'align'> {
-  /**
-   * The content for the element
-   */
-  children: ReactNode;
+export interface TextProps
+  extends Omit<TypographyProps, 'align'>,
+    Pick<CommonProps, 'children'> {
   /**
    * The html tag to render text that is
    *
