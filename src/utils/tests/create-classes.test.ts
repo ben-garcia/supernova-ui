@@ -5,6 +5,16 @@ describe('createClasses', () => {
   const classTwo = 'second-class';
   const classThree = 'third-class';
 
+  it('should ignore when initalClass is empty', () => {
+    const className = '';
+    expect(
+      createClasses(className, {
+        [classOne]: true,
+        [classTwo]: false,
+      })
+    ).toBe(classOne);
+  });
+
   it('should return initialClass when passing empty obj', () => {
     const className = 'test-class';
     expect(createClasses(className, {})).toBe(className);

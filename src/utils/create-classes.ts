@@ -14,7 +14,7 @@ const createClasses = (
     return initialClass;
   }
   // array to store all classes
-  const classes: string[] = [initialClass];
+  const classes: string[] = initialClass.trim() !== '' ? [initialClass] : [];
 
   // loop through the obj and included all the properties
   // whose value is true
