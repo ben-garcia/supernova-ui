@@ -40,7 +40,7 @@ const Template: Story<IconProps> = args => <UserIcon {...args} />;
 export const Single = Template.bind({});
 
 Single.args = {
-  size: '10rem',
+  size: '5rem',
 };
 
 export const All = () => (
