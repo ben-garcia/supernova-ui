@@ -35,7 +35,7 @@ const Text: React.FC<TextProps> = props => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
-  const classes = createClasses('_snui-text', {
+  const classes = createClasses('', {
     [`_snui-color-${backgroundColor}`]:
       backgroundColor &&
       backgroundColor !== '' &&

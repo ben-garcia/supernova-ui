@@ -34,7 +34,7 @@ const Paragraph: React.FC<ParagraphProps> = props => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
-  const classes = createClasses('_snui-text-heading', {
+  const classes = createClasses('', {
     [`_snui-text-${align}`]:
       align === 'center' || align === 'left' || align === 'right',
     [`_snui-color-${backgroundColor}`]: backgroundColor !== '',
