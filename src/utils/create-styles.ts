@@ -322,6 +322,7 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
     lineHeight,
     margin,
     padding,
+    size,
     textTransform,
     width,
   } = props;
@@ -402,6 +403,14 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
         breakpoint,
         sizes
       );
+    } else if (property === 'size') {
+      if (isString(size) && !sizes.includes(size)) {
+        styles.height = value;
+        styles.width = value;
+      } else if (isObject(size)) {
+        responsify('height', size, styles, theme.spacing, breakpoint, sizes);
+        responsify('width', size, styles, theme.spacing, breakpoint, sizes);
+      }
     } else if (property === 'textTransform') {
       if (
         textTransform &&
