@@ -1,5 +1,11 @@
 import { isObject, isString } from './assertions';
-import { colors, objectToPropertiesArray, sizes } from './conversions';
+import {
+  colors,
+  objectToPropertiesArray,
+  radii,
+  shadows,
+  sizes,
+} from './conversions';
 import createClasses from './create-classes';
 import createElement from './create-element';
 import { createStyles } from './create-styles';
@@ -14,5 +20,7 @@ export {
   isObject,
   isString,
   objectToPropertiesArray,
+  radii,
+  shadows,
   sizes,
 };

@@ -313,6 +313,8 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
   const {
     align,
     backgroundColor,
+    borderRadius,
+    boxShadow,
     color,
     font,
     fontSize,
@@ -345,6 +347,14 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
         !colors.includes(backgroundColor as string)
       ) {
         styles.backgroundColor = value as string;
+      }
+    } else if (property === 'borderRadius') {
+      if (isString(borderRadius) && !sizes.includes(borderRadius)) {
+        styles.borderRadius = value;
+      }
+    } else if (property === 'boxShadow') {
+      if (isString(boxShadow) && !sizes.includes(boxShadow)) {
+        styles.boxShadow = value;
       }
     } else if (property === 'color') {
       if (color && !colors.includes(color as string)) {
@@ -428,5 +438,6 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
       }
     }
   }
+
   return styles as CSSProperties;
 };

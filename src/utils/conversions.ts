@@ -1,5 +1,7 @@
-import sizesObject from '../theme/sizes';
 import colorsObject from '../theme/colors';
+import radiiObject from '../theme/radii';
+import shadowsObject from '../theme/shadows';
+import sizesObject from '../theme/sizes';
 
 interface AnyObject {
   [k: string]: any;
@@ -40,6 +42,16 @@ export const createCssJsProperty = (innerProp: string, outerProp: string) => {
  * The available colors provided by the theme
  */
 export const colors = objectToPropertiesArray(colorsObject);
+
+/**
+ * The available radii provided by the theme
+ */
+export const radii = objectToPropertiesArray(radiiObject);
+
+/**
+ * The available shadows provided by the theme
+ */
+export const shadows = objectToPropertiesArray(shadowsObject);
 
 /**
  * The available sizes provided by the theme
