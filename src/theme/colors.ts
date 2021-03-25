@@ -11,6 +11,8 @@ const colors = {
   error800: '#691616',
   error900: '#3f0d0d',
 
+  focusRing: '#4299e1',
+
   gray100: '#f1f2f4',
   gray200: '#d4d7de',
   gray300: '#b7bdc8',
