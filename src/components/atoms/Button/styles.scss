@@ -1,0 +1,35 @@
+._snui-button {
+  appearance: none;
+  border: none;
+  border-radius: var(--radii-sm);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-white);
+  cursor: pointer;
+  font-weight: var(--font-weight-lg);
+  height: calc(var(--size-md) * 5);
+  padding-inline: calc(var(--size-md) * 3);
+  outline: currentColor none medium;
+  width: auto;
+}
+
+._snui-button-filled {
+  background: var(--color-info-700);
+
+  &:not(:disabled):hover {
+    background: var(--color-info-800);
+  }
+}
+
+._snui-button-outline {
+  background: var(--color-transparent);
+  border: 1px solid var(--color-info-700);
+  color: var(--color-info-700);
+
+  &:not(:disabled):hover {
+    background: var(--color-info-100);
+  }
+}
+
+._snui-button-disabled {
+  background: var(--color-disabled);
+}
