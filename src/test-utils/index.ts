@@ -12,6 +12,8 @@ import {
 import { RunOptions } from 'axe-core';
 import { axe } from 'jest-axe';
 
+export { fireEvent } from '@testing-library/react';
+
 export {
   act as invoke,
   renderHook,

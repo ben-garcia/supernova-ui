@@ -64,6 +64,41 @@ export type Colors = 'primary' | 'info' | 'warning' | 'success' | 'error';
  * Props that are common to more than 1 component
  */
 export interface CommonProps {
+  /**
+   * The border radius
+   *
+   * accepts
+   *
+   * string with value of a valid size
+   * e.g.
+   *	borderRadius="lg"
+   *
+   * or
+   *
+   * valid css border-radius value
+   * e.g.
+   *	borderRadius="1px solid green"
+   */
+  borderRadius?: Sizes | string;
+  /**
+   * The box shadow
+   *
+   * accepts
+   *
+   * string with value of a valid size
+   * e.g.
+   *	boxShadow="lg"
+   *
+   * or
+   *
+   * valid css box-shadow value
+   * e.g.
+   *	boxShadow="0 0 1px black"
+   */
+  boxShadow?: Sizes | string;
+  /**
+   * React children
+   */
   children: ReactNode;
   /**
    * The size of the icon
