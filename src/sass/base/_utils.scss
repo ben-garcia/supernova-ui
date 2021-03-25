@@ -461,6 +461,7 @@
   padding-left: var(--space-xl);
   padding-right: var(--space-xl);
 }
+
 ._snui-padding-x-xxl {
   padding-left: var(--space-xxl);
   padding-right: var(--space-xxl);
@@ -737,48 +738,48 @@
 ._snui-box-shadow-xs {
   box-shadow: var(
     --shadow-xs,
-    rgba(8, 11, 14, 0.06) 0px 0px 1px 0px,
-    rgba(8, 11, 14, 0.1) 0px 1px 1px 0px
+    rgba(8, 11, 14, 0.06) 0 0 1px 0,
+    rgba(8, 11, 14, 0.1) 0 1px 1px 0px
   ) !important;
 }
 
 ._snui-box-shadow-sm {
   box-shadow: var(
     --shadow-sm,
-    rgba(8, 11, 14, 0.06) 0px 0px 1px 0px,
-    rgba(8, 11, 14, 0.1) 0px 3px 3px -1px
+    rgba(8, 11, 14, 0.06) 0 0 1px 0,
+    rgba(8, 11, 14, 0.1) 0 3px 3px -1px
   ) !important;
 }
 
 ._snui-box-shadow-md {
   box-shadow: var(
     --shadow-md,
-    rgba(8, 11, 14, 0.06) 0px 0px 1px 0px,
-    rgba(8, 11, 14, 0.1) 0px 6px 6px -1px
+    rgba(8, 11, 14, 0.06) 0 0 1px 0,
+    rgba(8, 11, 14, 0.1) 0 6px 6px -1px
   ) !important;
 }
 
 ._snui-box-shadow-lg {
   box-shadow: var(
     --shadow-lg,
-    rgba(8, 11, 14, 0.06) 0px 0px 1px 0px,
-    rgba(8, 11, 14, 0.1) 0px 16px 16px -1px
+    rgba(8, 11, 14, 0.06) 0 0 1px 0,
+    rgba(8, 11, 14, 0.1) 0 16px 16px -1px
   ) !important;
 }
 
 ._snui-box-shadow-xl {
   box-shadow: var(
     --shadow-xl,
-    rgba(8, 11, 14, 0.06) 0px 0px 1px 0px,
-    rgba(8, 11, 14, 0.1) 0px 32px 40px -1px
+    rgba(8, 11, 14, 0.06) 0 0 1px 0,
+    rgba(8, 11, 14, 0.1) 0 32px 40px -1px
   ) !important;
 }
 
 ._snui-box-shadow-xxl {
   box-shadow: var(
     --shadow-xxl,
-    rgba(8, 11, 14, 0.06) 0px 0px 1px 0px,
-    rgba(8, 11, 14, 0.1) 0px 45px 50px -1px
+    rgba(8, 11, 14, 0.06) 0 0 1px 0,
+    rgba(8, 11, 14, 0.1) 0 45px 50px -1px
   ) !important;
 }
 
