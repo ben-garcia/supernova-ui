@@ -18,7 +18,7 @@ interface Props {
  * @param propertyName name of the css property
  * @param responsiveObject contains all the user defined breakpoint values
  * @param styles object to add the styles to
- * @param fontSizeTheme theme object that defines the font sizes
+ * @param theme the object that defines everything
  * @param breakpoint current breakpoint
  * @param validSizes array of valid sizes
  */
@@ -26,12 +26,12 @@ export const responsify = (
   propertyName: string,
   responsiveObject: any,
   styles: any,
-  fontSizeTheme: any,
+  theme: any,
   breakpoint: keyof Breakpoints,
   validSizes: string[]
 ) => {
   if (validSizes.includes(responsiveObject[breakpoint])) {
-    styles[propertyName] = fontSizeTheme[responsiveObject[breakpoint]];
+    styles[propertyName] = theme[responsiveObject[breakpoint]];
   } else {
     styles[propertyName] = responsiveObject[breakpoint];
   }

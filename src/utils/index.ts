@@ -8,7 +8,7 @@ import {
 } from './conversions';
 import createClasses from './create-classes';
 import createElement from './create-element';
-import { createStyles } from './create-styles';
+import { createStyles, responsify } from './create-styles';
 import deepMergify from './deep-mergify';
 
 export {
@@ -21,6 +21,7 @@ export {
   isString,
   objectToPropertiesArray,
   radii,
+  responsify,
   shadows,
   sizes,
 };

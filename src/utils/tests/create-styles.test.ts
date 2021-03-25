@@ -122,7 +122,7 @@ describe('createStyles', () => {
           'margin',
           { left: properties.left, x: properties.x },
           styles,
-          spacingTheme,
+          spacingTheme as any,
           breakpoint,
           sizes
         );
@@ -139,7 +139,7 @@ describe('createStyles', () => {
           'margin',
           { right: properties.left, x: properties.x },
           styles,
-          spacingTheme,
+          spacingTheme as any,
           breakpoint,
           sizes
         );
@@ -157,7 +157,7 @@ describe('createStyles', () => {
           'margin',
           { bottom: properties.bottom, y: properties.y },
           styles,
-          spacingTheme,
+          spacingTheme as any,
           breakpoint,
           sizes
         );
@@ -175,7 +175,7 @@ describe('createStyles', () => {
           'margin',
           { top: properties.top, y: properties.y },
           styles,
-          spacingTheme,
+          spacingTheme as any,
           breakpoint,
           sizes
         );
@@ -196,7 +196,7 @@ describe('createStyles', () => {
             'margin',
             { bottom: properties.bottom },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -214,7 +214,7 @@ describe('createStyles', () => {
             'margin',
             { bottom: properties.bottom },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -232,7 +232,7 @@ describe('createStyles', () => {
             'margin',
             { bottom: properties.bottom },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -250,7 +250,7 @@ describe('createStyles', () => {
             'margin',
             { bottom: properties.bottom },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -268,7 +268,7 @@ describe('createStyles', () => {
             'margin',
             { bottom: properties.bottom },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -286,7 +286,7 @@ describe('createStyles', () => {
             'margin',
             { bottom: properties.bottom },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -306,7 +306,7 @@ describe('createStyles', () => {
             'margin',
             { left: properties.left },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -324,7 +324,7 @@ describe('createStyles', () => {
             'margin',
             { left: properties.left },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -342,7 +342,7 @@ describe('createStyles', () => {
             'margin',
             { left: properties.left },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -360,7 +360,7 @@ describe('createStyles', () => {
             'margin',
             { left: properties.left },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -378,7 +378,7 @@ describe('createStyles', () => {
             'margin',
             { left: properties.left },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -396,7 +396,7 @@ describe('createStyles', () => {
             'margin',
             { left: properties.left },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -416,7 +416,7 @@ describe('createStyles', () => {
             'margin',
             { right: properties.right },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -434,7 +434,7 @@ describe('createStyles', () => {
             'margin',
             { right: properties.right },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -452,7 +452,7 @@ describe('createStyles', () => {
             'margin',
             { right: properties.right },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -470,7 +470,7 @@ describe('createStyles', () => {
             'margin',
             { right: properties.right },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -488,7 +488,7 @@ describe('createStyles', () => {
             'margin',
             { right: properties.right },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -506,7 +506,7 @@ describe('createStyles', () => {
             'margin',
             { right: properties.right },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -526,7 +526,7 @@ describe('createStyles', () => {
             'margin',
             { top: properties.top },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -544,7 +544,7 @@ describe('createStyles', () => {
             'margin',
             { top: properties.top },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -562,7 +562,7 @@ describe('createStyles', () => {
             'margin',
             { top: properties.top },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -580,7 +580,7 @@ describe('createStyles', () => {
             'margin',
             { top: properties.top },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -598,7 +598,7 @@ describe('createStyles', () => {
             'margin',
             { top: properties.top },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -616,7 +616,7 @@ describe('createStyles', () => {
             'margin',
             { top: properties.top },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -637,7 +637,7 @@ describe('createStyles', () => {
             'margin',
             { x: properties.x },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -656,7 +656,7 @@ describe('createStyles', () => {
             'margin',
             { x: properties.x },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -675,7 +675,7 @@ describe('createStyles', () => {
             'margin',
             { x: properties.x },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -694,7 +694,7 @@ describe('createStyles', () => {
             'margin',
             { x: properties.x },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -713,7 +713,7 @@ describe('createStyles', () => {
             'margin',
             { x: properties.x },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -732,7 +732,7 @@ describe('createStyles', () => {
             'margin',
             { x: properties.x },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -753,7 +753,7 @@ describe('createStyles', () => {
             'margin',
             { y: properties.y },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -772,7 +772,7 @@ describe('createStyles', () => {
             'margin',
             { y: properties.y },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -791,7 +791,7 @@ describe('createStyles', () => {
             'margin',
             { y: properties.y },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -810,7 +810,7 @@ describe('createStyles', () => {
             'margin',
             { y: properties.y },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -829,7 +829,7 @@ describe('createStyles', () => {
             'margin',
             { y: properties.y },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
@@ -848,7 +848,7 @@ describe('createStyles', () => {
             'margin',
             { y: properties.y },
             styles,
-            spacingTheme,
+            spacingTheme as any,
             breakpoint,
             sizes
           );
