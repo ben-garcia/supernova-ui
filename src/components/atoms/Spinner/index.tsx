@@ -124,8 +124,8 @@ const Spinner: React.FC<SpinnerProps> = props => {
   if (isString(size) && !width && !height) {
     // check for a valid size
     if (sizes.includes(size as string)) {
-      styles.height = `calc(${theme.sizes[size as Sizes]} * 5)`;
-      styles.width = `calc(${theme.sizes[size as Sizes]} * 5)`;
+      styles.height = `calc(${theme.sizes[size as Sizes]} * 2)`;
+      styles.width = `calc(${theme.sizes[size as Sizes]} * 2)`;
     } else {
       // when size isn't found in the theme
       styles.height = size as string;

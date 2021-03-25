@@ -14,7 +14,7 @@ const Icon: React.FC<IconBaseProps> = props => {
   const {
     children,
     fill = '',
-    size = '',
+    size = 'md',
     viewBox = '0 0 4.208 4.208',
     width = '',
     height = '',
@@ -121,8 +121,8 @@ const Icon: React.FC<IconBaseProps> = props => {
   if (isString(size) && !width && !height) {
     // check for a valid size
     if (sizes.includes(size as string)) {
-      styles.height = theme.spacing[size as Sizes] * 3;
-      styles.width = theme.spacing[size as Sizes] * 3;
+      styles.height = `calc(${theme.sizes[size as Sizes]} * 2)`;
+      styles.width = `calc(${theme.sizes[size as Sizes]} * 2)`;
     } else {
       // when size isn't found in the theme
       styles.height = size as string;
@@ -134,7 +134,12 @@ const Icon: React.FC<IconBaseProps> = props => {
   }
 
   return (
-    <svg className={classes} style={styles} viewBox={viewBox}>
+    <svg
+      aria-hidden="true"
+      className={classes}
+      style={styles}
+      viewBox={viewBox}
+    >
       {children}
     </svg>
   );
