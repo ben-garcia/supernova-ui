@@ -788,3 +788,24 @@
   cursor: not-allowed !important;
   opacity: 0.4 !important;
 }
+
+// --------------------------------
+// Position
+// --------------------------------
+._snui-position-absolute {
+  position: absolute;
+}
+
+._snui-position-relative {
+  position: relative;
+}
+
+._snui-position-top-left {
+  top: 0;
+  left: 0;
+}
+
+._snui-position-top-right {
+  top: 0;
+  right: 0;
+}
