@@ -19,7 +19,7 @@ const argTypes = {
     },
     description: 'Configure the border radius',
     table: {
-      category: 'Button',
+      category: 'Common',
       defaultValue: { summary: '' },
       type: { summary: 'string' },
     },
@@ -30,7 +30,7 @@ const argTypes = {
     },
     description: 'Configure the box shadow',
     table: {
-      category: 'Button',
+      category: 'Common',
       defaultValue: { summary: '' },
       type: { summary: 'object' },
     },
@@ -107,7 +107,7 @@ const argTypes = {
     },
     description: 'Configure the background color when hovering',
     table: {
-      category: 'Button',
+      category: 'Common',
       defaultValue: { summary: '' },
       type: { summary: 'string' },
     },
@@ -118,7 +118,7 @@ const argTypes = {
     },
     description: 'Configure the color when hovering',
     table: {
-      category: 'Button',
+      category: 'Common',
       defaultValue: { summary: '' },
       type: { summary: 'string' },
     },
@@ -129,7 +129,7 @@ const argTypes = {
     },
     description: 'Configure the disabled state',
     table: {
-      category: 'Button',
+      category: 'Common',
       defaultValue: { summary: false },
       type: { summary: 'boolean' },
     },
@@ -140,7 +140,7 @@ const argTypes = {
     },
     description: 'Configure the loading state',
     table: {
-      category: 'Button',
+      category: 'Common',
       defaultValue: { summary: false },
       type: { summary: 'boolean' },
     },

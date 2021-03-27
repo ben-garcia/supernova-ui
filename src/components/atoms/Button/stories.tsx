@@ -24,31 +24,43 @@ export const WithLeftIcon = Template.bind({});
 
 WithLeftIcon.args = {
   children: 'Back',
-  leftIcon: <ArrowLeftIcon fill="#fff" />,
+  leftIcon: <ArrowLeftIcon fill="#fff" size="xs" />,
 };
 
 export const WithIcons = Template.bind({});
 
 WithIcons.args = {
   children: 'Submit',
-  leftIcon: <ArrowLeftIcon fill="#fff" />,
-  rightIcon: <ArrowRightIcon fill="#fff" />,
+  leftIcon: <ArrowLeftIcon fill="#fff" size="xs" />,
+  rightIcon: <ArrowRightIcon fill="#fff" size="xs" />,
 };
 
 export const WithRightIcon = Template.bind({});
 
 WithRightIcon.args = {
   children: 'SignIn',
-  rightIcon: <ArrowRightIcon fill="#fff" />,
+  rightIcon: <ArrowRightIcon fill="#fff" size="xs" />,
 };
 
 export const AsIcon = Template.bind({});
 
 AsIcon.args = {
   borderRadius: 'xxl',
+  children: <UserIcon fill="#000" size="1.5rem" />,
   fontSize: 'sm',
-  children: <UserIcon fill="#fff" />,
+  variant: 'outline',
 };
+
+export const Sizes = () => (
+  <div>
+    <UserIcon size="xs" />
+    <UserIcon size="sm" />
+    <UserIcon size="md" />
+    <UserIcon size="lg" />
+    <UserIcon size="xl" />
+    <UserIcon size="xxl" />
+  </div>
+);
 
 export const WithHoverBackgroundAndColor = Template.bind({});
 
