@@ -37,9 +37,9 @@ export default {
 
 const Template: Story<IconProps> = args => <UserIcon {...args} />;
 
-export const Single = Template.bind({});
+export const Default = Template.bind({});
 
-Single.args = {
+Default.args = {
   size: '5rem',
 };
 

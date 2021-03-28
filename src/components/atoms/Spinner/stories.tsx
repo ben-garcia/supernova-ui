@@ -13,7 +13,9 @@ export default {
 
 const Template: Story<SpinnerProps> = args => <Spinner {...args} />;
 
-export const Basic = Template.bind({});
+export const Default = Template.bind({});
+
+Default.args = {};
 
 export const Sizes = () => (
   <div className="_snui-flex">
@@ -25,5 +27,3 @@ export const Sizes = () => (
     <Spinner size="xs" />
   </div>
 );
-
-Basic.args = {};

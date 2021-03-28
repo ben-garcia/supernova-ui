@@ -14,9 +14,9 @@ export default {
 
 const Template: Story<HeadingProps> = args => <Heading {...args} />;
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});
 
-Primary.args = {
+Default.args = {
   children: 'Supernova UI',
 };
 
