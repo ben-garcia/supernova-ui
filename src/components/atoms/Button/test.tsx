@@ -26,7 +26,7 @@ describe('<Button />', () => {
     const { getByText } = render(<Button>{buttonText}</Button>);
     const result = getByText(buttonText);
 
-    expect(result.nodeName).toBe('BUTTON');
+    expect(result.parentNode!.nodeName).toBe('BUTTON');
     expect(result.textContent).toBe(buttonText);
   });
 
