@@ -14,6 +14,14 @@ export interface TextInputProps
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
   /**
+   * Configure the label transform position after transition ends
+   */
+  finalLabelTransform?: string;
+  /**
+   * Configure the initial transform position before the transition begins
+   */
+  initialLabelTransform?: string;
+  /**
    * The label for the interactive component
    *
    * used to set the value of 'aria-label' when 'floatLabel' is false

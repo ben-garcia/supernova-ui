@@ -21,10 +21,20 @@ export const Outline = () => <TextInput label={label} variant="outline" />;
 
 export const FloatingLabel = () => (
   <div>
-    <TextInput margin="sm 0" floatLabel label="Username" variant="filled" />
-    <TextInput margin="sm 0" floatLabel label="Username" variant="flushed" />
-    <TextInput margin="sm 0" floatLabel label="Username" variant="outline" />
+    <TextInput margin="sm 0" floatLabel label="Filled" variant="filled" />
+    <TextInput margin="sm 0" floatLabel label="Flushed" variant="flushed" />
+    <TextInput margin="sm 0" floatLabel label="Outline" variant="outline" />
   </div>
+);
+
+export const InitialAndFinalLabelTransform = () => (
+  <TextInput
+    finalLabelTransform="translate(1rem) scale(1)"
+    floatLabel
+    initialLabelTransform="translate(5rem) scale(2)"
+    label="Custom"
+    margin="sm 0"
+  />
 );
 
 export const Sizes = () => (

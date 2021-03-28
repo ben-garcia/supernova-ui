@@ -28,6 +28,7 @@ const TextInput: React.FC<TextInputProps> = props => {
     borderRadius = '',
     boxShadow = '',
     color = '',
+    finalLabelTransform = null,
     font = 'body',
     fontSize = '',
     fontWeight = '',
@@ -35,6 +36,7 @@ const TextInput: React.FC<TextInputProps> = props => {
     height = '',
     hoverBackgroundColor = '',
     hoverColor = '',
+    initialLabelTransform = null,
     isDisabled = false,
     label = null,
     leftIcon = null,
@@ -206,6 +208,10 @@ const TextInput: React.FC<TextInputProps> = props => {
     breakpoint
   );
 
+  const [labelTransition, setLabelTransition] = useState(
+    initialLabelTransform ?? 'translate(2.5rem, 50%) scale(1.4)'
+  );
+
   if (isString(size)) {
     if (sizes.includes(size as string)) {
       if (size === 'lg' || size === 'xl' || size === 'xxl') {
@@ -248,7 +254,13 @@ const TextInput: React.FC<TextInputProps> = props => {
         </div>
       )}
       {floatLabel && isString(label) && (
-        <label className={labelClasses} htmlFor={inputId}>
+        <label
+          className={labelClasses}
+          htmlFor={inputId}
+          style={{
+            transform: isString(finalLabelTransform) ? labelTransition : '',
+          }}
+        >
           {label}
         </label>
       )}
@@ -264,6 +276,16 @@ const TextInput: React.FC<TextInputProps> = props => {
               '_snui-text-label _snui-position-absolute _snui-position-top-left'
             );
           }
+          if (
+            labelTransition &&
+            !isString(inputValue) &&
+            !initialLabelTransform
+          ) {
+            setLabelTransition('translate(2.5rem, 50%) scale(1.4)');
+          }
+          if (!isString(inputValue) && initialLabelTransform) {
+            setLabelTransition(initialLabelTransform);
+          }
         }}
         onChange={e => {
           if (typeof onChange === 'function') {
@@ -274,8 +296,13 @@ const TextInput: React.FC<TextInputProps> = props => {
         }}
         onFocus={() => {
           setFocusRingColor(theme.colors.focusRing);
+
           if (!isString(inputValue)) {
             setLabelClasses(`${labelClasses} _snui-text-label-floating`);
+          }
+
+          if (isString(finalLabelTransform)) {
+            setLabelTransition(finalLabelTransform as string);
           }
         }}
         style={{
