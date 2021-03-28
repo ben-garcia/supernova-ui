@@ -53,12 +53,24 @@ AsIcon.args = {
 
 export const Sizes = () => (
   <div>
-    <UserIcon size="xs" />
-    <UserIcon size="sm" />
-    <UserIcon size="md" />
-    <UserIcon size="lg" />
-    <UserIcon size="xl" />
-    <UserIcon size="xxl" />
+    <Button fontSize="xxl" margin="0 sm">
+      Button
+    </Button>
+    <Button fontSize="xl" margin="0 sm">
+      Button
+    </Button>
+    <Button fontSize="lg" margin="0 sm">
+      Button
+    </Button>
+    <Button fontSize="md" margin="0 sm">
+      Button
+    </Button>
+    <Button fontSize="sm" margin="0 sm">
+      Button
+    </Button>
+    <Button fontSize="xs" margin="0 sm">
+      Button
+    </Button>
   </div>
 );
 

@@ -6,8 +6,8 @@
   color: var(--color-white);
   cursor: pointer;
   font-weight: var(--font-weight-lg);
-  height: calc(var(--size-md) * 5);
-  padding-inline: calc(var(--size-md) * 3);
+  height: var(--size-md);
+  padding-inline: var(--size-md);
   outline: currentColor none medium;
   width: auto;
 }
