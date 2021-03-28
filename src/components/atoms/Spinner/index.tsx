@@ -20,7 +20,7 @@ const Spinner: React.FC<SpinnerProps> = props => {
     padding = '',
     primaryColor = 'info700',
     margin = '',
-    size = '',
+    size = 'md',
     secondaryColor = 'transparent',
     width = '',
   } = props;
@@ -124,8 +124,8 @@ const Spinner: React.FC<SpinnerProps> = props => {
   if (isString(size) && !width && !height) {
     // check for a valid size
     if (sizes.includes(size as string)) {
-      styles.height = `${theme.sizes[size as Sizes]}`;
-      styles.width = `${theme.sizes[size as Sizes]}`;
+      styles.height = `calc(${theme.sizes[size as Sizes]} * 1.5)`;
+      styles.width = `calc(${theme.sizes[size as Sizes]} * 1.5)`;
     } else {
       // when size isn't found in the theme
       styles.height = size as string;
