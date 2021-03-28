@@ -1,0 +1,53 @@
+._snui-text-input {
+  appearance: none;
+  border: none;
+  border-radius: var(--radii-sm);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-black);
+  font-weight: var(--font-weight-sm);
+  padding-inline: var(--size-md);
+  outline: currentColor none medium;
+  width: 100%;
+}
+
+._snui-text-label {
+  cursor: text;
+  transform: translate(2.5rem, 50%) scale(1.4);
+  transition: transform 200ms linear;
+}
+
+._snui-text-label-floating {
+  background-color: var(--color-white);
+  transform: translate(1.3rem, -0.85rem) scale(1);
+  z-index: 100;
+}
+
+._snui-text-input-filled {
+  background: var(--color-gray-100);
+
+  &:not(:disabled):hover {
+    border: 1px solid var(--color-info-500);
+  }
+}
+
+._snui-text-input-flushed {
+  background: var(--color-transparent);
+  border-bottom: 1px solid var(--color-info-500);
+
+  &:not(:disabled):hover {
+    border-width: 2px;
+  }
+}
+
+._snui-text-input-outline {
+  background: var(--color-transparent);
+  border: 1px solid var(--color-info-500);
+
+  &:not(:disabled):hover {
+    border-width: 2px;
+  }
+}
+
+._snui-text-input-disabled {
+  background: var(--color-disabled);
+}
