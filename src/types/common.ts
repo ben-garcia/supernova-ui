@@ -101,6 +101,34 @@ export interface CommonProps {
    */
   children: ReactNode;
   /**
+   * The label should float to the top when in focus
+   */
+  floatLabel?: boolean;
+  /**
+   * Custom background color when a hover event is triggered
+   */
+  hoverBackgroundColor?: string;
+  /**
+   * Custom color when a hover event is triggered
+   */
+  hoverColor?: string;
+  /**
+   * Disable interactivity
+   */
+  isDisabled?: boolean;
+  /**
+   * Indicates to the user that something is happening
+   */
+  isLoading?: boolean;
+  /**
+   * Icon to the left of the text
+   */
+  leftIcon?: CommonProps['children'];
+  /**
+   * Icon to the right of the text
+   */
+  rightIcon?: CommonProps['children'];
+  /**
    * The size of the icon
    *
    * accepts

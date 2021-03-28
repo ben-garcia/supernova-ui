@@ -1,10 +1,10 @@
 const sizes = {
-  xs: '0.3rem',
-  sm: '0.525rem',
-  md: '0.75rem',
-  lg: '0.875rem',
-  xl: '1.5rem',
-  xxl: '2rem',
+  xs: '1rem',
+  sm: '1.5rem',
+  md: '2rem',
+  lg: '2.5rem',
+  xl: '3rem',
+  xxl: '3.5rem',
 };
 
 export default sizes;
