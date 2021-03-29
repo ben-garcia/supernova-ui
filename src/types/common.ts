@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { AriaAttributes, ReactNode } from 'react';
 
 /**
  * Available breakpoints defined in the theme
@@ -59,6 +59,11 @@ export interface Breakpoints {
  * Available colors to choose from
  */
 export type Colors = 'primary' | 'info' | 'warning' | 'success' | 'error';
+
+/**
+ * The WAI ARIA supported attributes
+ */
+export type AriaProps = AriaAttributes;
 
 /**
  * Props that are common to more than 1 component
