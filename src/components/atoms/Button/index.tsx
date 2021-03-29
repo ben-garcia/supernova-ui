@@ -237,7 +237,6 @@ const Button: React.FC<ButtonProps> = props => {
   return (
     <button
       {...rest}
-      aria-disabled={isDisabled}
       className={classes}
       disabled={isDisabled || isLoading}
       onBlur={() => setFocusRingColor('')}
