@@ -50,6 +50,7 @@ const Button: React.FC<ButtonProps> = props => {
     textTransform = '',
     variant = 'filled',
     width = '',
+    ...rest // aria-* props
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -235,6 +236,8 @@ const Button: React.FC<ButtonProps> = props => {
 
   return (
     <button
+      {...rest}
+      aria-disabled={isDisabled}
       className={classes}
       disabled={isDisabled || isLoading}
       onBlur={() => setFocusRingColor('')}
@@ -272,7 +275,7 @@ const Button: React.FC<ButtonProps> = props => {
       type="button"
     >
       {leftIcon && !isLoading && leftIcon}
-      {!spinner && !isLoading && (
+      {!spinner && !isLoading && (leftIcon || rightIcon) && (
         <span
           style={{
             margin: leftIcon || rightIcon ? '0.2rem 0.5rem 0 0.5rem' : '',
@@ -281,6 +284,7 @@ const Button: React.FC<ButtonProps> = props => {
           {children}
         </span>
       )}
+      {!spinner && !isLoading && !leftIcon && !rightIcon && <>{children}</>}
       {!spinner && isLoading && (
         <Spinner
           size={fontSize || 'sm'}
