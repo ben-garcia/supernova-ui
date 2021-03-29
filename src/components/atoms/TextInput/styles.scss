@@ -5,7 +5,8 @@
   box-shadow: var(--shadow-sm);
   color: var(--color-black);
   font-weight: var(--font-weight-sm);
-  padding-inline: var(--size-md);
+  padding-inline-start: var(--size-md);
+  padding-inline-end: var(--size-md);
   outline: currentColor none medium;
   width: 100%;
 }

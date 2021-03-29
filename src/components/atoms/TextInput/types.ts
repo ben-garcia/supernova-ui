@@ -10,7 +10,7 @@ import {
  * Props for the TextInput component
  */
 export interface TextInputProps
-  extends Omit<CommonProps, 'children'>,
+  extends Omit<CommonProps, 'children' | 'isLoading'>,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
   /**

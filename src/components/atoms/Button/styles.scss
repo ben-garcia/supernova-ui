@@ -7,7 +7,8 @@
   cursor: pointer;
   font-weight: var(--font-weight-lg);
   height: var(--size-md);
-  padding-inline: var(--size-md);
+  padding-inline-start: var(--size-md);
+  padding-inline-end: var(--size-md);
   outline: currentColor none medium;
   width: auto;
 }

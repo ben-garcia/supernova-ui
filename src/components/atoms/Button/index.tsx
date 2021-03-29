@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = props => {
     hoverColor = '',
     isDisabled = false,
     isLoading = false,
-    leftIcon = undefined,
+    leftIcon = null,
     letterSpacing = '',
     lineHeight = '',
     loadingText = '',
@@ -45,8 +45,8 @@ const Button: React.FC<ButtonProps> = props => {
     margin = '',
     onClick = () => {},
     padding = '',
-    rightIcon = undefined,
-    spinner = undefined,
+    rightIcon = null,
+    spinner = null,
     textTransform = '',
     variant = 'filled',
     width = '',
@@ -219,14 +219,17 @@ const Button: React.FC<ButtonProps> = props => {
 
   if (isString(fontSize) && sizes.includes(fontSize as string)) {
     if (fontSize === 'xs' || fontSize === 'sm') {
-      styles.paddingInline = `${theme.spacing[fontSize as Sizes]}`;
+      styles.paddingInlineStart = `${theme.spacing[fontSize as Sizes]}`;
+      styles.paddingInlineEnd = `${theme.spacing[fontSize as Sizes]}`;
       styles.height = `calc(${theme.spacing[fontSize as Sizes]} * 5)`;
     } else {
-      styles.paddingInline = `${theme.spacing[fontSize as Sizes]}`;
+      styles.paddingInlineStart = `${theme.spacing[fontSize as Sizes]}`;
+      styles.paddingInlineEnd = `${theme.spacing[fontSize as Sizes]}`;
       styles.height = `calc(${theme.spacing[fontSize as Sizes]} * 2)`;
     }
   } else if (isString(fontSize) && !sizes.includes(fontSize as string)) {
-    styles.paddingInline = fontSize as string;
+    styles.paddingInlineStart = fontSize as string;
+    styles.paddingInlineEnd = fontSize as string;
     styles.height = `calc(${fontSize} * 2)`;
   }
 
@@ -280,7 +283,7 @@ const Button: React.FC<ButtonProps> = props => {
       )}
       {!spinner && isLoading && (
         <Spinner
-          size={fontSize}
+          size={fontSize || 'sm'}
           primaryColor={variant === 'filled' ? '#fff' : '#000'}
         />
       )}

@@ -227,11 +227,13 @@ const TextInput: React.FC<TextInputProps> = props => {
         styles.fontSize = `${theme.typography.fontSizes[size as Sizes]}`;
         styles.height = `calc(${theme.sizes[size as Sizes]} * 1.12)`;
       }
-      styles.paddingInline = theme.spacing.md;
+      styles.paddingInlineStart = theme.spacing.md;
+      styles.paddingInlineEnd = theme.spacing.md;
     } else {
       styles.fontSize = `calc(${size} * 0.5)`;
       styles.height = size as string;
-      styles.paddingInline = theme.spacing.md;
+      styles.paddingInlineStart = theme.spacing.md;
+      styles.paddingInlineEnd = theme.spacing.md;
     }
   } else if (isObject(size)) {
     responsify('height', size, styles, theme.sizes, breakpoint, sizes);
