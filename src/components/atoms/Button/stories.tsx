@@ -20,6 +20,20 @@ Default.args = {
   children: 'Submit',
 };
 
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  children: 'Disabled',
+  isDisabled: true,
+};
+
+export const Loading = Template.bind({});
+
+Loading.args = {
+  children: 'Loading',
+  isLoading: true,
+};
+
 export const WithLeftIcon = Template.bind({});
 
 WithLeftIcon.args = {

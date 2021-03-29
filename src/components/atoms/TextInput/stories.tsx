@@ -13,6 +13,10 @@ export default {
 
 const label = 'Reveil your secrets here';
 
+export const Disabled = () => (
+  <TextInput isDisabled label={label} variant="filled" />
+);
+
 export const Filled = () => <TextInput label={label} variant="filled" />;
 
 export const Flushed = () => <TextInput label={label} variant="flushed" />;
