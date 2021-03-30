@@ -241,10 +241,7 @@ const Button: React.FC<ButtonProps> = props => {
       disabled={isDisabled || isLoading}
       onBlur={() => setFocusRingColor('')}
       onClick={onClick}
-      onFocus={() => {
-        console.log('is focus');
-        setFocusRingColor(theme.colors.focusRing);
-      }}
+      onFocus={() => setFocusRingColor(theme.colors.focusRing)}
       style={{
         ...styles,
         backgroundColor: hoverBackgroundColorToUse,
