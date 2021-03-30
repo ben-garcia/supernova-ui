@@ -201,6 +201,10 @@ export interface SupernovaUIBaseProps {
    */
   backgroundColor?: Colors | string;
   /**
+   * custom class
+   */
+  className?: string;
+  /**
    * set the color
    *
    * can be a custom color provided to the ThemeProvider
