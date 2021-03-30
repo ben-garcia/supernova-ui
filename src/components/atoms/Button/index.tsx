@@ -28,6 +28,7 @@ const Button: React.FC<ButtonProps> = props => {
     borderRadius = '',
     boxShadow = '',
     children,
+    className = '',
     color = '',
     font = 'body',
     fontSize = '',
@@ -54,9 +55,7 @@ const Button: React.FC<ButtonProps> = props => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
-  const [focusRingColor, setFocusRingColor] = useState(
-    theme.colors.focusRing || '#4299e1'
-  );
+  const [focusRingColor, setFocusRingColor] = useState('');
   const [hoverBackgroundColorToUse, setHoverBackgroundColorToUse] = useState(
     ''
   );
@@ -73,6 +72,7 @@ const Button: React.FC<ButtonProps> = props => {
       [`_snui-box-shadow-${boxShadow}`]:
         isString(boxShadow) && shadows.includes(boxShadow),
       [`_snui-color-$color}`]: isString(color) && colors.includes(color),
+      [className]: isString(className),
       [`_snui-font-${font}`]:
         (font && font === 'heading') || font === 'body' || font === 'mono',
       [`_snui-text-${fontSize}`]:
@@ -241,7 +241,10 @@ const Button: React.FC<ButtonProps> = props => {
       disabled={isDisabled || isLoading}
       onBlur={() => setFocusRingColor('')}
       onClick={onClick}
-      onFocus={() => setFocusRingColor(theme.colors.focusRing)}
+      onFocus={() => {
+        console.log('is focus');
+        setFocusRingColor(theme.colors.focusRing);
+      }}
       style={{
         ...styles,
         backgroundColor: hoverBackgroundColorToUse,
