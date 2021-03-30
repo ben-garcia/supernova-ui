@@ -56,9 +56,7 @@ const TextInput: React.FC<TextInputProps> = props => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const [inputValue, setInputValue] = useState(value || '');
-  const [focusRingColor, setFocusRingColor] = useState(
-    theme.colors.focusRing || '#4299e1'
-  );
+  const [focusRingColor, setFocusRingColor] = useState('');
   // box shadow is different when variant is 'flushed'
   // the effect needs to be below the border
   const [boxShadowValues] = useState(
