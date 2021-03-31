@@ -1,0 +1,50 @@
+._snui-overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
+}
+
+._snui-modal {
+  align-items: center;
+  background: var(--color-white);
+  border-radius: var(--radii-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-lg) var(--space-sm) var(--space-lg);
+  position: relative;
+  transform: translateY(-50%);
+  width: calc(var(--size-md) * 14);
+
+  &__header {
+    align-self: flex-start;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-lg);
+  }
+
+  &__close-button {
+    border: none;
+    box-shadow: none;
+    padding: 1rem;
+    position: absolute;
+    right: var(--space-sm);
+    top: var(--space-sm);
+  }
+
+  &__body {
+    align-self: flex-start;
+    padding-top: var(--size-sm);
+  }
+
+  &__footer {
+    align-self: flex-end;
+    padding-top: var(--size-sm);
+  }
+}
