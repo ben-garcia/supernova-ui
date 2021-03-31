@@ -1,14 +1,8 @@
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
+/* eslint jsx-a11y/click-events-have-key-events: 0 */
 import React, { useEffect, useRef } from 'react';
 
-interface FocusLockProps {
-  children: React.ReactNode;
-  /**
-   * Should the focus be allowed outside the component
-   *
-   * default is false
-   */
-  isLocked?: boolean;
-}
+import { FocusLockProps } from './types';
 
 /**
  * Component that locks the focus to its children
@@ -19,7 +13,14 @@ interface FocusLockProps {
  * @see https://medium.com/tamman-inc/create-a-reusable-focus-lock-in-react-to-improve-user-experience-and-accessibility-90829426fae2
  */
 const FocusLock: React.FC<FocusLockProps> = props => {
-  const { children, isLocked = true } = props;
+  const {
+    children,
+    closeOnEsc,
+    closeOnOverlayClick,
+    initialFocusRef,
+    onClose,
+    trapFocus = true,
+  } = props;
   const rootNode = useRef<HTMLDivElement | null>(null);
   const focusableItems = useRef<HTMLElement[]>([]);
 
@@ -43,6 +44,26 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   }, [rootNode]);
 
   useEffect(() => {
+    // when there is at least one focusable item inside the modal and
+    // initialFocusRef is not defined,
+    // focus the first item
+    if (focusableItems.current.length > 0 && !initialFocusRef) {
+      focusableItems.current[0].focus();
+    }
+
+    // set the focus to the user defined element
+    if (initialFocusRef && initialFocusRef.current) {
+      focusableItems.current.forEach(item => {
+        // make sure the initialFocusRef is focusable
+        // and inside the Modal
+        if (item === initialFocusRef.current) {
+          initialFocusRef!.current!.focus();
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     // key press handler
     const handleKeyPress = (e: KeyboardEvent) => {
       // do nothing when there are no focusable items
@@ -57,7 +78,13 @@ const FocusLock: React.FC<FocusLockProps> = props => {
         [length - 1]: lastItem,
       } = focusableItems.current;
 
-      if (isLocked && key === 'Tab') {
+      // when the Esc key is press and closeOnEsc is true
+      // close the Modal
+      if (closeOnEsc && key === 'Escape') {
+        onClose();
+      }
+
+      if (trapFocus && key === 'Tab') {
         // when there is only one item, prevent tabbing when locked
         if (length === 1) {
           e.preventDefault();
@@ -85,9 +112,20 @@ const FocusLock: React.FC<FocusLockProps> = props => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [isLocked, focusableItems]);
+  }, [trapFocus, focusableItems]);
+  const handleClick = (e: React.SyntheticEvent) => {
+    // when the overlay is clicked closeOnOverlayClick prop is true
+    // close the Modal
+    if (closeOnOverlayClick && e.target === rootNode.current?.firstChild) {
+      onClose();
+    }
+  };
 
-  return <div ref={rootNode}>{children}</div>;
+  return (
+    <div onClick={handleClick} ref={rootNode}>
+      {children}
+    </div>
+  );
 };
 
 export default FocusLock;
