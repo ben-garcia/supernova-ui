@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { RefObject, SyntheticEvent } from 'react';
 import { AriaProps } from 'types/common';
 
 import {
@@ -30,6 +30,10 @@ export interface ButtonProps
    * Function to be executed for onClick event
    */
   onClick?: (e: SyntheticEvent) => void;
+  /**
+   * Reference used primarily to set focus after Modal closes
+   */
+  ref?: RefObject<HTMLButtonElement>;
   /**
    * Spinner to use for the loading state
    */

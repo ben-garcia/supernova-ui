@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import Spinner from '../Spinner';
 import { ButtonProps } from './types';
@@ -22,7 +22,8 @@ import { useBreakpoint, useTheme } from '../../../hooks';
 /**
  * UI interactive component used to trigger an action
  */
-const Button: React.FC<ButtonProps> = props => {
+// const Button: React.FC<ButtonProps> = props => {
+const Button = forwardRef((props: ButtonProps, ref: any) => {
   const {
     backgroundColor = '',
     borderRadius = '',
@@ -271,6 +272,7 @@ const Button: React.FC<ButtonProps> = props => {
         setHoverBackgroundColorToUse('');
         setHoverColorToUse('');
       }}
+      ref={ref}
       type="button"
     >
       {leftIcon && !isLoading && leftIcon}
@@ -299,6 +301,6 @@ const Button: React.FC<ButtonProps> = props => {
       {rightIcon && !isLoading && rightIcon}
     </button>
   );
-};
+});
 
 export default Button;
