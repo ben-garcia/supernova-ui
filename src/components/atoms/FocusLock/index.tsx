@@ -53,13 +53,23 @@ const FocusLock: React.FC<FocusLockProps> = props => {
 
     // set the focus to the user defined element
     if (initialFocusRef && initialFocusRef.current) {
-      focusableItems.current.forEach(item => {
-        // make sure the initialFocusRef is focusable
-        // and inside the Modal
-        if (item === initialFocusRef.current) {
-          initialFocusRef!.current!.focus();
-        }
-      });
+      // make sure the initialFocusRef is not disabled
+      if (
+        !initialFocusRef.current.hasAttribute('disabled') &&
+        !initialFocusRef.current.hasAttribute('aria-disabled')
+      ) {
+        focusableItems.current.forEach(item => {
+          // make sure the initialFocusRef is focusable
+          // and inside the Modal
+          if (item === initialFocusRef.current) {
+            initialFocusRef!.current!.focus();
+          }
+        });
+      } else {
+        // when the initialFocusRef prop is set to a disabled element
+        // the the focus should go to the first focusable element
+        focusableItems.current[0].focus();
+      }
     }
   }, []);
 
