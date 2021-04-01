@@ -22,7 +22,6 @@ import { useBreakpoint, useTheme } from '../../../hooks';
 /**
  * UI interactive component used to trigger an action
  */
-// const Button: React.FC<ButtonProps> = props => {
 const Button = forwardRef((props: ButtonProps, ref: any) => {
   const {
     backgroundColor = '',
