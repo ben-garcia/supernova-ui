@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { forwardRef, useState, useMemo } from 'react';
 
 import { TextInputProps } from './types';
 import './styles.scss';
@@ -22,7 +22,7 @@ import { useBreakpoint, useTheme } from '../../../hooks';
 /**
  * UI interactive component used to enter information
  */
-const TextInput: React.FC<TextInputProps> = props => {
+const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   const {
     backgroundColor = '',
     borderRadius = '',
@@ -334,6 +334,7 @@ const TextInput: React.FC<TextInputProps> = props => {
           setHoverBackgroundColorToUse('');
           setHoverColorToUse('');
         }}
+        ref={ref}
         type="text"
         value={inputValue}
       />
@@ -344,6 +345,6 @@ const TextInput: React.FC<TextInputProps> = props => {
       )}
     </div>
   );
-};
+});
 
 export default TextInput;

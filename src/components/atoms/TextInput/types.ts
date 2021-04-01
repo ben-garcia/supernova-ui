@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { RefObject, SyntheticEvent } from 'react';
 
 import {
   CommonProps,
@@ -31,6 +31,11 @@ export interface TextInputProps
    * Function to be executed for onChange event
    */
   onChange?: (e: SyntheticEvent) => void;
+  /**
+   * Reference used primarily to set focus after Modal closes
+   */
+  ref?: RefObject<HTMLInputElement>;
+
   /**
    * Value of the input
    */
