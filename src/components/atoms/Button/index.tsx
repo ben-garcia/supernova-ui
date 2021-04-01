@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
 import Spinner from '../Spinner';
 import { ButtonProps } from './types';
@@ -57,10 +57,26 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const [focusRingColor, setFocusRingColor] = useState('');
-  const [hoverBackgroundColorToUse, setHoverBackgroundColorToUse] = useState(
-    ''
-  );
-  const [hoverColorToUse, setHoverColorToUse] = useState('');
+  const [backgroundColorToUse, setBackgroundColorToUse] = useState('');
+  const [colorToUse, setColorToUse] = useState('');
+
+  useEffect(() => {
+    if (isString(backgroundColor)) {
+      if (colors.includes(backgroundColor)) {
+        setBackgroundColorToUse((theme as any).colors[backgroundColor]);
+      } else {
+        setBackgroundColorToUse(backgroundColor);
+      }
+    }
+    if (isString(color)) {
+      if (colors.includes(color)) {
+        setColorToUse((theme as any).colors[color]);
+      } else {
+        setColorToUse(color);
+      }
+    }
+  }, []);
+
   const classes = createClasses(
     '_snui-button _snui-inline-flex _snui-flex-center',
     {
@@ -245,32 +261,46 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
       onFocus={() => setFocusRingColor(theme.colors.focusRing)}
       style={{
         ...styles,
-        backgroundColor: hoverBackgroundColorToUse,
+        backgroundColor: backgroundColorToUse,
         boxShadow: (isString(focusRingColor)
           ? `0 0 0 4px ${focusRingColor}`
           : null) as any,
-        color: hoverColorToUse,
+        color: colorToUse,
       }}
       onMouseEnter={() => {
         if (colors.includes(hoverBackgroundColor)) {
-          setHoverBackgroundColorToUse(
-            (theme as any).colors[hoverBackgroundColor]
-          );
+          setBackgroundColorToUse((theme as any).colors[hoverBackgroundColor]);
         } else {
-          setHoverBackgroundColorToUse(
+          setBackgroundColorToUse(
             isString(hoverBackgroundColor) ? hoverBackgroundColor : ''
           );
         }
 
         if (colors.includes(hoverColor)) {
-          setHoverColorToUse((theme as any).colors[hoverColor]);
+          setColorToUse((theme as any).colors[hoverColor]);
         } else {
-          setHoverColorToUse(isString(hoverColor) ? hoverColor : '');
+          setColorToUse(isString(hoverColor) ? hoverColor : '');
         }
       }}
       onMouseLeave={() => {
-        setHoverBackgroundColorToUse('');
-        setHoverColorToUse('');
+        if (isString(backgroundColor)) {
+          if (colors.includes(backgroundColor)) {
+            setBackgroundColorToUse((theme as any).colors[backgroundColor]);
+          } else {
+            setBackgroundColorToUse(backgroundColor);
+          }
+        } else {
+          setBackgroundColorToUse('');
+        }
+        if (isString(color)) {
+          if (colors.includes(color)) {
+            setColorToUse((theme as any).colors[color]);
+          } else {
+            setColorToUse(color);
+          }
+        } else {
+          setColorToUse('');
+        }
       }}
       ref={ref}
       type="button"
