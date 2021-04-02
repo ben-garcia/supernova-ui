@@ -1,4 +1,11 @@
-import { Breakpoints, Colors, Sizes } from './common';
+import { AriaProps, Breakpoints, Colors, Sizes } from './common';
+
+/**
+ * Used to allow 'data-*' props
+ */
+interface AnyProps {
+  [k: string]: string;
+}
 
 export interface MarginPaddingProps {
   /**
@@ -190,10 +197,11 @@ export interface MarginPaddingProps {
 }
 
 /**
- * The base props that will be shared by most(if not all)
- * of the components.
+ * The base props that will be shared by all components.
+ *
+ * includes 'aria-*' props
  */
-export interface SupernovaUIBaseProps {
+export interface SupernovaUIBaseProps extends AriaProps {
   /**
    * set the background color
    *
