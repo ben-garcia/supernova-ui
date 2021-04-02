@@ -56,7 +56,7 @@ const Modal: React.FC<ModalProps> = props => {
   const [modalId] = useState(`_snui-modal-${Math.random()}`);
   const previousActiveElement = useRef<Element | null>(null);
 
-  // get a refernce to the focused element that triggerd the Modal
+  // get a reference to the focused element that triggerd the Modal
   useEffect(() => {
     previousActiveElement.current = document.activeElement;
     return () => {
@@ -68,18 +68,24 @@ const Modal: React.FC<ModalProps> = props => {
         finalFocusRef.current.focus();
       }
     };
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
-    const div = document.createElement('div');
-    div.id = modalId;
-    document.body.appendChild(div);
-    setMounted(true);
+    let div: HTMLDivElement;
+    if (isOpen) {
+      div = document.createElement('div');
+      div.id = modalId;
+      document.body.appendChild(div);
+      setMounted(true);
+    }
 
     return () => {
-      document.body.removeChild(div);
+      if (div) {
+        setMounted(false);
+        document.body.removeChild(div);
+      }
     };
-  }, []);
+  }, [isOpen]);
 
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -229,15 +235,16 @@ const Modal: React.FC<ModalProps> = props => {
       onClose={onClose}
       trapFocus={trapFocus}
     >
-      <div
-        {...rest}
-        aria-labelledby={`${modalId}-header`}
-        aria-describedby={`${modalId}-body`}
-        aria-modal="true"
-        className="_snui-overlay"
-        role="dialog"
-      >
-        <section className={classes} style={styles}>
+      <div className="_snui-overlay">
+        <section
+          {...rest}
+          aria-labelledby={`${modalId}-header`}
+          aria-describedby={`${modalId}-body`}
+          aria-modal="true"
+          className={classes}
+          role="dialog"
+          style={styles}
+        >
           <header className="_snui-modal__header" id={`${modalId}-header`}>
             {header}
           </header>
@@ -261,7 +268,7 @@ const Modal: React.FC<ModalProps> = props => {
     </FocusLock>
   );
 
-  return mounted && isOpen
+  return isOpen && mounted
     ? createPortal(jsx, document.getElementById(modalId) as Element)
     : null;
 };
