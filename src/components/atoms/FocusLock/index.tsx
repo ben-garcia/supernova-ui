@@ -132,7 +132,7 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   };
 
   return (
-    <div onClick={handleClick} ref={rootNode}>
+    <div data-trap-focus={`${trapFocus}`} onClick={handleClick} ref={rootNode}>
       {children}
     </div>
   );
