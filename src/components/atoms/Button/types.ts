@@ -1,5 +1,4 @@
 import { RefObject, SyntheticEvent } from 'react';
-import { AriaProps } from 'types/common';
 
 import {
   CommonProps,
@@ -11,11 +10,7 @@ import {
  * Props for the Button component
  */
 export interface ButtonProps
-  extends Pick<
-      AriaProps,
-      'aria-describedby' | 'aria-label' | 'aria-labelledby'
-    >,
-    Omit<CommonProps, 'size'>,
+  extends Omit<CommonProps, 'size'>,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
   /**

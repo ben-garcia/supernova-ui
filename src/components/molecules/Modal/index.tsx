@@ -50,6 +50,7 @@ const Modal: React.FC<ModalProps> = props => {
     textTransform = '',
     trapFocus = true,
     width = '',
+    ...rest
   } = props;
   const [mounted, setMounted] = useState(false);
   const [modalId] = useState(`_snui-modal-${Math.random()}`);
@@ -229,6 +230,7 @@ const Modal: React.FC<ModalProps> = props => {
       trapFocus={trapFocus}
     >
       <div
+        {...rest}
         aria-labelledby={`${modalId}-header`}
         aria-describedby={`${modalId}-body`}
         aria-modal="true"

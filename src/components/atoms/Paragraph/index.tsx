@@ -31,6 +31,7 @@ const Paragraph: React.FC<ParagraphProps> = props => {
     padding = '',
     textTransform = '',
     width = '',
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -158,7 +159,7 @@ const Paragraph: React.FC<ParagraphProps> = props => {
   );
 
   return (
-    <p className={classes} style={styles}>
+    <p {...rest} className={classes} style={styles}>
       {children}
     </p>
   );

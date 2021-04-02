@@ -23,6 +23,7 @@ const Spinner: React.FC<SpinnerProps> = props => {
     size = 'md',
     secondaryColor = 'transparent',
     width = '',
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -155,7 +156,9 @@ const Spinner: React.FC<SpinnerProps> = props => {
     styles.borderWidth = borderWidth;
   }
 
-  return <div aria-label={ariaLabel} className={classes} style={styles} />;
+  return (
+    <div {...rest} aria-label={ariaLabel} className={classes} style={styles} />
+  );
 };
 
 export default Spinner;

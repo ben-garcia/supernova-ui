@@ -32,6 +32,7 @@ const Text: React.FC<TextProps> = props => {
     tag = 'span',
     textTransform = '',
     width = '',
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -161,6 +162,7 @@ const Text: React.FC<TextProps> = props => {
   const text = createElement(
     `${tag}`,
     {
+      ...rest,
       className: classes,
       style: styles,
     },

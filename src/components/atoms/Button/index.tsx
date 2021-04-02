@@ -51,7 +51,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     textTransform = '',
     variant = 'filled',
     width = '',
-    ...rest // aria-* props
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();

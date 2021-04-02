@@ -33,6 +33,7 @@ const Heading: React.FC<HeadingProps> = props => {
     padding = '',
     textTransform = '',
     width = '',
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -234,6 +235,7 @@ const Heading: React.FC<HeadingProps> = props => {
   const heading = createElement(
     `h${level}`,
     {
+      ...rest,
       className: classes,
       style: styles,
     },

@@ -52,6 +52,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     value = null,
     variant = 'outline',
     width = '',
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -266,6 +267,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
       )}
       <input
         aria-label={!floatLabel && isString(label) ? `${label}` : undefined}
+        {...rest}
         className={classes}
         disabled={isDisabled}
         id={inputId}

@@ -20,6 +20,7 @@ const Icon: React.FC<IconBaseProps> = props => {
     height = '',
     padding = '',
     margin = '',
+    ...rest
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
@@ -135,6 +136,7 @@ const Icon: React.FC<IconBaseProps> = props => {
 
   return (
     <svg
+      {...rest}
       aria-hidden="true"
       className={classes}
       style={styles}
