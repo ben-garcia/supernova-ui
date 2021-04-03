@@ -258,7 +258,7 @@ const Modal: React.FC<ModalProps> = props => {
             <CloseIcon fill="#000" size="1rem" />
           </Button>
           <div className="_snui-modal__body" id={`${modalId}-body`}>
-            {body}
+            <div>{body}</div>
           </div>
           <footer className="_snui-modal__footer" id={`${modalId}-footer`}>
             {footer}

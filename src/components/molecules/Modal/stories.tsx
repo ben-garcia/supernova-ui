@@ -66,7 +66,7 @@ export const InitialAndFinalRefs = () => {
               margin="sm 0"
               ref={initialFocusRef}
             />
-            <TextInput floatLabel label="Password" />
+            <TextInput floatLabel label="Password" margin="sm 0" />
           </form>
         }
         footer={
@@ -80,6 +80,103 @@ export const InitialAndFinalRefs = () => {
         finalFocusRef={finalFocusRef}
         header="Create an account"
         initialFocusRef={initialFocusRef}
+        onClose={handleClose}
+        isOpen={isOpen}
+      />
+    </>
+  );
+};
+
+export const Overflow = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => setIsOpen(false);
+
+  return (
+    <>
+      <div>
+        <Button onClick={() => setIsOpen(true)} margin="0 sm">
+          Open
+        </Button>
+      </div>
+      <Modal
+        body={
+          <>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              vulputate porttitor orci, quis vulputate felis suscipit tempus.
+              Morbi sollicitudin aliquet eleifend. Aenean eget enim ut arcu
+              lacinia auctor et elementum lectus.
+            </p>
+            <p>
+              Cras at ante eu diam cursus pellentesque et a quam. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Sed in consequat risus. Class aptent taciti
+              sociosqu ad litora torquent per conubia nostra, per inceptos
+              himenaeos.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              vulputate porttitor orci, quis vulputate felis suscipit tempus.
+              Morbi sollicitudin aliquet eleifend. Aenean eget enim ut arcu
+              lacinia auctor et elementum lectus.
+            </p>
+            <p>
+              Cras at ante eu diam cursus pellentesque et a quam. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Sed in consequat risus. Class aptent taciti
+              sociosqu ad litora torquent per conubia nostra, per inceptos
+              himenaeos.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              vulputate porttitor orci, quis vulputate felis suscipit tempus.
+              Morbi sollicitudin aliquet eleifend. Aenean eget enim ut arcu
+              lacinia auctor et elementum lectus.
+            </p>
+            <p>
+              Cras at ante eu diam cursus pellentesque et a quam. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Sed in consequat risus. Class aptent taciti
+              sociosqu ad litora torquent per conubia nostra, per inceptos
+              himenaeos.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              vulputate porttitor orci, quis vulputate felis suscipit tempus.
+              Morbi sollicitudin aliquet eleifend. Aenean eget enim ut arcu
+              lacinia auctor et elementum lectus.
+            </p>
+            <p>
+              Cras at ante eu diam cursus pellentesque et a quam. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Sed in consequat risus. Class aptent taciti
+              sociosqu ad litora torquent per conubia nostra, per inceptos
+              himenaeos.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              vulputate porttitor orci, quis vulputate felis suscipit tempus.
+              Morbi sollicitudin aliquet eleifend. Aenean eget enim ut arcu
+              lacinia auctor et elementum lectus.
+            </p>
+            <p>
+              Cras at ante eu diam cursus pellentesque et a quam. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Sed in consequat risus. Class aptent taciti
+              sociosqu ad litora torquent per conubia nostra, per inceptos
+              himenaeos.
+            </p>
+          </>
+        }
+        footer={
+          <>
+            <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
+              Cancel
+            </Button>
+            <Button onClick={handleClose}>Save</Button>
+          </>
+        }
+        header="Modal with overflow"
         onClose={handleClose}
         isOpen={isOpen}
       />
