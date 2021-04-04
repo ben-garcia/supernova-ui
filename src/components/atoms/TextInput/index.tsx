@@ -38,7 +38,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     hoverColor = '',
     initialLabelTransform = null,
     isDisabled = false,
-    label = null,
+    label = undefined,
     leftIcon = null,
     letterSpacing = '',
     lineHeight = '',
@@ -266,8 +266,18 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           {label}
         </label>
       )}
+      {!floatLabel && isString(label) && (
+        <label
+          className={`_snui-visually-hidden ${
+            isDisabled ? '_snui-disabled' : ''
+          }`}
+          htmlFor={inputId}
+        >
+          {label}
+        </label>
+      )}
+
       <input
-        aria-label={!floatLabel && isString(label) ? `${label}` : undefined}
         {...rest}
         className={classes}
         disabled={isDisabled}
@@ -341,6 +351,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           setHoverBackgroundColorToUse('');
           setHoverColorToUse('');
         }}
+        placeholder={!floatLabel ? label : undefined}
         ref={ref}
         type="text"
         value={inputValue}
