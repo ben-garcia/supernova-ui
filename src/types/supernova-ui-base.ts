@@ -1,4 +1,4 @@
-import { AriaProps, Breakpoints, Colors, Sizes } from './common';
+import { AriaProps, Breakpoints, Sizes } from './common';
 
 /**
  * Used to allow 'data-*' props
@@ -207,7 +207,7 @@ export interface SupernovaUIBaseProps extends AriaProps {
    *
    * can be a custom color provided to the ThemeProvider
    */
-  backgroundColor?: Colors | string;
+  backgroundColor?: string;
   /**
    * custom class
    */
@@ -217,7 +217,7 @@ export interface SupernovaUIBaseProps extends AriaProps {
    *
    * can be a custom color provided to the ThemeProvider
    */
-  color?: Colors | string;
+  color?: string;
   /**
    * sets the height(using rem, em, px, %)
    *

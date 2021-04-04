@@ -139,6 +139,7 @@ const Icon: React.FC<IconBaseProps> = props => {
       {...rest}
       aria-hidden="true"
       className={classes}
+      focusable="false"
       style={styles}
       viewBox={viewBox}
     >

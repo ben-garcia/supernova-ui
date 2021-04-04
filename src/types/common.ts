@@ -1,4 +1,9 @@
-import { AriaAttributes, ReactNode } from 'react';
+import { AriaAttributes, ReactNode, SyntheticEvent } from 'react';
+
+/**
+ * The WAI ARIA supported attributes
+ */
+export type AriaProps = AriaAttributes;
 
 /**
  * Available breakpoints defined in the theme
@@ -54,17 +59,6 @@ export interface Breakpoints {
    */
   xxl?: Sizes | string;
 }
-
-/**
- * Available colors to choose from
- */
-export type Colors = 'primary' | 'info' | 'warning' | 'success' | 'error';
-
-/**
- * The WAI ARIA supported attributes
- */
-export type AriaProps = AriaAttributes;
-
 /**
  * Props that are common to more than 1 component
  */
@@ -153,6 +147,41 @@ export interface CommonProps {
    *	size="3rem"
    */
   size?: Breakpoints | string;
+}
+
+/**
+ * Props used in form control components
+ */
+export interface FormControlProps {
+  /**
+   * Configure the label transform position after transition ends
+   */
+  finalLabelTransform?: string;
+  /**
+   * Configure the initial transform position before the transition begins
+   */
+  initialLabelTransform?: string;
+  /**
+   * The label for the interactive component
+   *
+   * used to set the value of 'aria-label' and 'placeholder' props
+   * when 'floatLabel' is 'false'
+   */
+  label: string;
+  /**
+   * Function to be executed for onChange event
+   */
+  onChange?: (e: SyntheticEvent) => void;
+  /**
+   * Value of the form control component
+   */
+  value?: string;
+  /**
+   * The look of the button
+   *
+   * @default 'outline'
+   */
+  variant?: 'filled' | 'flushed' | 'outline';
 }
 
 /**

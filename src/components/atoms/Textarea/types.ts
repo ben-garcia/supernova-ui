@@ -1,7 +1,8 @@
-import { RefObject, SyntheticEvent } from 'react';
+import { RefObject } from 'react';
 
 import {
   CommonProps,
+  FormControlProps,
   SupernovaUIBaseProps,
   TypographyProps,
 } from '../../../types';
@@ -14,26 +15,9 @@ export interface TextareaProps
       CommonProps,
       'children' | 'isLoading' | 'lefticon' | 'rightIcon'
     >,
+    FormControlProps,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
-  /**
-   * Configure the label transform position after transition ends
-   */
-  finalLabelTransform?: string;
-  /**
-   * Configure the initial transform position before the transition begins
-   */
-  initialLabelTransform?: string;
-  /**
-   * The label for the interactive component
-   *
-   * used to set the value of 'aria-label' when 'floatLabel' is false
-   */
-  label: string;
-  /**
-   * Function to be executed for onChange event
-   */
-  onChange?: (e: SyntheticEvent) => void;
   /**
    * Reference used primarily to set focus after Modal closes
    */
@@ -45,15 +29,5 @@ export interface TextareaProps
    *
    * @default 'none'
    */
-  resize?: 'horizontal' | 'vertical' | 'both';
-  /**
-   * Value of the input
-   */
-  value?: string;
-  /**
-   * The look of the button
-   *
-   * default is 'outline'
-   */
-  variant?: 'filled' | 'flushed' | 'outline';
+  resize?: 'horizontal' | 'vertical' | 'both' | 'none';
 }
