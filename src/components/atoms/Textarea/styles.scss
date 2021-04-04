@@ -1,0 +1,57 @@
+._snui-textarea {
+  appearance: none;
+  border: none;
+  border-radius: var(--radii-sm);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-black);
+  font-weight: var(--font-weight-sm);
+  min-height: 80px;
+  outline: currentColor none medium;
+  padding-bottom: calc(var(--size-xs) * 0.9);
+  padding-inline-start: var(--size-md);
+  padding-inline-end: var(--size-md);
+  padding-top: calc(var(--size-xs) * 0.9);
+  width: 100%;
+}
+
+._snui-textarea-label {
+  cursor: text;
+  transform: translate(2.5rem, 50%) scale(1.5);
+  transition: transform 200ms linear;
+}
+
+._snui-textarea-label-floating {
+  background-color: var(--color-white);
+  transform: translate(1.55rem, -1.15rem) scale(1.2);
+  z-index: 100;
+}
+
+._snui-textarea-input-filled {
+  background: var(--color-gray-100);
+
+  &:not(:disabled):hover {
+    border: 1px solid var(--color-info-500);
+  }
+}
+
+._snui-textarea-flushed {
+  background: var(--color-transparent);
+  border-bottom: 1px solid var(--color-info-500);
+
+  &:not(:disabled):hover {
+    border-width: 2px;
+  }
+}
+
+._snui-textarea-outline {
+  background: var(--color-transparent);
+  border: 1px solid var(--color-info-500);
+
+  &:not(:disabled):hover {
+    border-width: 2px;
+  }
+}
+
+._snui-textarea-disabled {
+  background: var(--color-disabled);
+}
