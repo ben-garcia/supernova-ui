@@ -42,7 +42,7 @@ describe('<Modal />', () => {
     expect(modal).toHaveAttribute('role', 'dialog');
 
     // the id of `body` should equal the `aria-describedby` of the modal
-    expect(getByText('body').id).toEqual(
+    expect(getByText('body').parentElement!.id).toEqual(
       modal.getAttribute('aria-describedby')
     );
 
