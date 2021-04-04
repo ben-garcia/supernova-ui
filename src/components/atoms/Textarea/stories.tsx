@@ -10,7 +10,7 @@ export default {
   title: 'Supernova UI/Atoms/Textarea',
 } as Meta;
 
-const label = 'Reveil your secrets here';
+const label = 'Reveal your secrets here';
 
 export const Disabled = () => <Textarea isDisabled label={label} />;
 

@@ -11,7 +11,7 @@ export default {
   title: 'Supernova UI/Atoms/TextInput',
 } as Meta;
 
-const label = 'Reveil your secrets here';
+const label = 'Reveal your secrets here';
 
 export const Disabled = () => (
   <TextInput isDisabled label={label} variant="filled" />
