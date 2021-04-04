@@ -68,9 +68,13 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   );
   const [hoverColorToUse, setHoverColorToUse] = useState('');
   const inputId = useMemo(
-    () => `_snui-text-input-id-${Math.random().toFixed(10)}`,
+    () => `_snui-text-input-${Math.random().toFixed(10)}`,
     []
   );
+  const [labelTransition, setLabelTransition] = useState(
+    initialLabelTransform ?? 'translate(2.5rem, 50%) scale(1.4)'
+  );
+  const [labelColor, setLabelColor] = useState('');
   const [labelClasses, setLabelClasses] = useState(
     '_snui-text-label _snui-position-absolute _snui-position-top-left'
   );
@@ -207,10 +211,6 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     breakpoint
   );
 
-  const [labelTransition, setLabelTransition] = useState(
-    initialLabelTransform ?? 'translate(2.5rem, 50%) scale(1.4)'
-  );
-
   if (isString(size)) {
     if (sizes.includes(size as string)) {
       if (size === 'lg' || size === 'xl' || size === 'xxl') {
@@ -260,6 +260,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           htmlFor={inputId}
           style={{
             transform: isString(finalLabelTransform) ? labelTransition : '',
+            color: labelColor,
           }}
         >
           {label}
@@ -284,6 +285,8 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
             !initialLabelTransform
           ) {
             setLabelTransition('translate(2.5rem, 50%) scale(1.4)');
+            // remove color from the label
+            setLabelColor('');
           }
           if (!isString(inputValue) && initialLabelTransform) {
             setLabelTransition(initialLabelTransform);
@@ -298,6 +301,8 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
         }}
         onFocus={() => {
           setFocusRingColor(theme.colors.focusRing);
+          // add focus ring color to the label
+          setLabelColor(theme.colors.focusRing);
 
           if (!isString(inputValue)) {
             setLabelClasses(`${labelClasses} _snui-text-label-floating`);
