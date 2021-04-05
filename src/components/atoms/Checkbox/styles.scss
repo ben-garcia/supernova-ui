@@ -1,0 +1,26 @@
+._snui-checkbox {
+  appearance: none;
+  border: none;
+  border-radius: var(--radii-sm);
+  color: var(--color-black);
+  cursor: pointer;
+  outline: currentColor none medium;
+
+  ._snui-hidden-checkbox:focus ~ ._snui-checkbox__control {
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+  }
+
+  &__control {
+    border-color: var(--color-gray-200);
+    border-radius: var(--radii-xs);
+    border-style: solid;
+    border-width: var(--radii-xs);
+    height: var(--size-sm);
+    margin-right: var(--space-sm);
+    width: var(--size-sm);
+  }
+
+  &__label {
+    user-select: none;
+  }
+}
