@@ -548,6 +548,12 @@
   width: var(--size-xxl);
 }
 
+// match the width and height of the parent
+._snui-fill-parent {
+  height: 100%;
+  width: 100%;
+}
+
 // --------------------------------
 // Typography
 // --------------------------------
@@ -785,6 +791,7 @@
 
 // disabled
 ._snui-disabled {
+  background: var(--color-disabled);
   cursor: not-allowed !important;
   opacity: 0.4 !important;
 }
@@ -815,10 +822,11 @@
 ._snui-visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
+  height: 1px !important;
+  left: 0;
+  margin: -1px !important;
   overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
 }

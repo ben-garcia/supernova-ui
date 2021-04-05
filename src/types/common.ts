@@ -100,10 +100,6 @@ export interface CommonProps {
    */
   children: ReactNode;
   /**
-   * The label should float to the top when in focus
-   */
-  floatLabel?: boolean;
-  /**
    * Custom background color when a hover event is triggered
    */
   hoverBackgroundColor?: string;
@@ -158,6 +154,10 @@ export interface FormControlProps {
    */
   finalLabelTransform?: string;
   /**
+   * The label should float to the top when in focus
+   */
+  floatLabel?: boolean;
+  /**
    * Configure the initial transform position before the transition begins
    */
   initialLabelTransform?: string;
@@ -168,6 +168,10 @@ export interface FormControlProps {
    * when 'floatLabel' is 'false'
    */
   label: string;
+  /**
+   * Name for the form control component
+   */
+  name?: string;
   /**
    * Function to be executed for onChange event
    */
