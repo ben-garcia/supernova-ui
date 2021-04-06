@@ -1,4 +1,16 @@
 /**
+ * check whether a value is a function
+ *
+ * @param value the variable to check against
+ *
+ * @return result whether value is of type function
+ */
+export const isFunction = (value: any): boolean =>
+  Object.prototype.toString.call(value) === '[object Function]' &&
+  value !== undefined &&
+  value !== null;
+
+/**
  * check whether a value is of type object
  *
  * @param value the variable to check against

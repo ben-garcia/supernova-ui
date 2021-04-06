@@ -1,4 +1,4 @@
-import { isObject, isString } from './assertions';
+import { isFunction, isObject, isString } from './assertions';
 import {
   colors,
   objectToPropertiesArray,
@@ -17,6 +17,7 @@ export {
   createElement,
   createStyles,
   deepMergify,
+  isFunction,
   isObject,
   isString,
   objectToPropertiesArray,

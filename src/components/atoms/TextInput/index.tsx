@@ -7,6 +7,7 @@ import {
   colors,
   createClasses,
   createStyles,
+  isFunction,
   isObject,
   isString,
   radii,
@@ -303,9 +304,10 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           }
         }}
         onChange={e => {
-          if (typeof onChange === 'function') {
-            onChange(e);
-          } else {
+          if (!isDisabled) {
+            if (isFunction(onChange)) {
+              onChange!(e);
+            }
             setInputValue(e.target.value);
           }
         }}

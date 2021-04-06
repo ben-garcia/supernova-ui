@@ -9,6 +9,7 @@ import {
   colors,
   createClasses,
   createStyles,
+  isFunction,
   isObject,
   isString,
   radii,
@@ -217,8 +218,8 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         disabled={isDisabled}
         onChange={e => {
           if (!isDisabled) {
-            if (typeof onChange === 'function') {
-              onChange(e);
+            if (isFunction(onChange)) {
+              onChange!(e);
             }
             setCheckboxIsChecked(e.target.checked);
           }

@@ -8,6 +8,7 @@ import {
   createClasses,
   createStyles,
   isObject,
+  isFunction,
   isString,
   radii,
   responsify,
@@ -280,9 +281,10 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
           }
         }}
         onChange={e => {
-          if (typeof onChange === 'function') {
-            onChange(e);
-          } else {
+          if (!isDisabled) {
+            if (isFunction(onChange)) {
+              onChange!(e);
+            }
             setTextareaValue(e.target.value);
           }
         }}
