@@ -12,9 +12,9 @@ export default {
 
 const label = 'Reveal your secrets?';
 
-export const Disabled = () => <Checkbox isChecked isDisabled label={label} />;
+export const Disabled = () => <Checkbox isDisabled label={label} />;
 
-export const Default = () => <Checkbox isChecked label={label} />;
+export const Default = () => <Checkbox label={label} />;
 
 export const Sizes = () => (
   <div className="_snui-flex _sniu-flex-center">

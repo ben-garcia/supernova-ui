@@ -28,7 +28,7 @@ export interface CheckboxProps
   /**
    * Configure the checked state of the checkbox
    */
-  isChecked: boolean;
+  isChecked?: boolean;
   /**
    * React reference
    */

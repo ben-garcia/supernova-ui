@@ -34,14 +34,14 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     fontSize = '',
     fontWeight = '',
     height = '',
-    isChecked,
+    isChecked = false,
     isDisabled = false,
     label = undefined,
     letterSpacing = '',
     lineHeight = '',
     isTruncated = false,
     margin = '',
-    onChange = null,
+    onChange = undefined,
     padding = '',
     size = 'md',
     textTransform = '',
@@ -216,9 +216,10 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         className="_snui-hidden-checkbox _snui-visually-hidden"
         disabled={isDisabled}
         onChange={e => {
-          if (typeof onChange === 'function') {
-            onChange(e);
-          } else {
+          if (!isDisabled) {
+            if (typeof onChange === 'function') {
+              onChange(e);
+            }
             setCheckboxIsChecked(e.target.checked);
           }
         }}
