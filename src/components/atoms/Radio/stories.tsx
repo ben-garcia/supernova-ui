@@ -11,10 +11,6 @@ export default {
   title: 'Supernova UI/Atoms/Radio',
 } as Meta;
 
-const label = 'Reveal your secrets?';
-
-export const Default = () => <Radio label={label} />;
-
 export const Direction = () => {
   const [framework, setFramework] = React.useState('react');
   const [language, setLanguage] = React.useState('typescript');
@@ -48,12 +44,16 @@ export const Direction = () => {
   );
 };
 
-export const Disabled = () => (
-  <>
-    <Radio isDisabled label="disabled" margin="0 sm" />
-    <Radio label={label} />
-  </>
-);
+export const Disabled = () => {
+  const [value, setValue] = React.useState('one');
+  return (
+    <RadioGroup defaultValue={value} name="disabled-story" onChange={setValue}>
+      <Radio label="one" margin="0 sm" value="one" />
+      <Radio label="two" margin="0 sm" value="two" />
+      <Radio isDisabled label="disabled" margin="0 sm" value="three" />
+    </RadioGroup>
+  );
+};
 
 export const Sizes = () => {
   const [size, setSize] = React.useState('md');

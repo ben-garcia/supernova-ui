@@ -231,7 +231,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     >
       <input
         {...rest}
-        defaultChecked={!isDisabled ? radioIsChecked : false}
+        checked={isChecked}
         className="_snui-hidden-radio _snui-visually-hidden"
         disabled={isDisabled}
         onChange={e => {

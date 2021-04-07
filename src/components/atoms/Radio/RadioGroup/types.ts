@@ -26,5 +26,5 @@ export interface RadioGroupProps {
   /**
    * Function to be executed for onChange event
    */
-  onChange?: Dispatch<SetStateAction<string>>;
+  onChange: Dispatch<SetStateAction<string>>;
 }
