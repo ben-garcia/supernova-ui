@@ -1,0 +1,39 @@
+._snui-radio {
+  appearance: none;
+  border: none;
+  color: var(--color-black);
+  cursor: pointer;
+  outline: currentColor none medium;
+
+  &__control {
+    align-items: center;
+    background-color: var(--color-gray-200);
+    border-radius: var(--radii-xxl);
+    display: inline-flex;
+    height: var(--size-sm);
+    justify-content: center;
+    margin-right: var(--space-sm);
+    transition: background-color 0.4s ease;
+    width: var(--size-md);
+  }
+
+  ._snui-hidden-radio:focus ~ ._snui-radio__control {
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+  }
+
+  &__circle {
+    background-color: var(--color-white);
+    border-radius: var(--radii-xxl);
+    height: calc(100% - 6px);
+    transition: transform 0.4s ease;
+    width: calc(100% - 6px);
+  }
+
+  ._snui-hidden-radio:checked ~ ._snui-radio__control {
+    background-color: var(--color-info-700);
+  }
+
+  &__label {
+    user-select: none;
+  }
+}
