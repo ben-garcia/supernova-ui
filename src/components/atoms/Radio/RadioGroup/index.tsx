@@ -9,7 +9,13 @@ import { createClasses, isString } from '../../../../utils';
  * injects 'name', 'onChange' handler, and 'isChecked' props to its children
  */
 const RadioGroup: React.FC<RadioGroupProps> = props => {
-  const { children, defaultValue, direction = 'row', name, onChange } = props;
+  const {
+    children,
+    defaultValue,
+    direction = 'row',
+    name,
+    onChange = () => {},
+  } = props;
   // children with the added props to be rendered
   const enhancedChildren: React.ReactNode[] = [];
   Children.toArray(children).forEach((child: any) => {
