@@ -35,7 +35,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     fontSize = '',
     fontWeight = '',
     height = '',
-    isChecked = false,
+    isChecked = undefined,
     isDisabled = false,
     label = undefined,
     letterSpacing = '',
@@ -199,18 +199,18 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
   if (isString(size)) {
     if (sizes.includes(size as string)) {
       if (size === 'xs') {
-        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
-        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.4)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.4)`;
         styles.height = `calc(${theme.sizes[size as Sizes]} * 0.7)`;
         styles.width = `calc(${theme.sizes[size as Sizes]} * 0.7)`;
       } else if (size === 'sm') {
-        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.25)`;
-        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.25)`;
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
         styles.height = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
         styles.width = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
       } else {
-        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.25)`;
-        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.25)`;
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.32)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.32)`;
         styles.height = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
         styles.width = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
       }
@@ -231,7 +231,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     >
       <input
         {...rest}
-        checked={isChecked}
+        checked={isChecked && radioIsChecked}
         className="_snui-hidden-radio _snui-visually-hidden"
         disabled={isDisabled}
         onChange={e => {

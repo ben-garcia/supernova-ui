@@ -11,6 +11,10 @@ export default {
   title: 'Supernova UI/Atoms/Radio',
 } as Meta;
 
+export const Default = () => {
+  return <Radio label="default" />;
+};
+
 export const Direction = () => {
   const [framework, setFramework] = React.useState('react');
   const [language, setLanguage] = React.useState('typescript');
