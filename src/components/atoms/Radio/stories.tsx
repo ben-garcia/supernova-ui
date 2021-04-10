@@ -11,6 +11,18 @@ export default {
   title: 'Supernova UI/Atoms/Radio',
 } as Meta;
 
+export const CustomBackgroundColors = () => {
+  return (
+    <>
+      <Radio backgroundColor="cyan600" label="cyan600" margin="0 sm" />
+      <Radio backgroundColor="error600" label="error600" margin="0 sm" />
+      <Radio backgroundColor="info300" label="info300" margin="0 sm" />
+      <Radio backgroundColor="success600" label="success600" margin="0 sm" />
+      <Radio backgroundColor="warning600" label="warning600" margin="0 sm" />
+    </>
+  );
+};
+
 export const Default = () => {
   return <Radio label="default" />;
 };
@@ -29,7 +41,12 @@ export const Direction = () => {
         >
           <Radio label="angular" margin="0 sm" value="angular" />
           <Radio label="react" margin="0 sm" value="react" />
-          <Radio label="vue" margin="0 sm" value="vue" />
+          <Radio
+            backgroundColor="success600"
+            label="vue"
+            margin="0 sm"
+            value="vue"
+          />
         </RadioGroup>
       </div>
       <div>

@@ -1,7 +1,9 @@
 /* eslint jsx-a11y/label-has-associated-control: 0 */
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 
+import { useInputChecked, useBreakpoint, useTheme } from '../../../hooks';
 import { RadioProps } from './types';
+
 import './styles.scss';
 
 import {
@@ -19,7 +21,6 @@ import {
 
 import { MarginPaddingProps } from '../../../types';
 import { Sizes } from '../../../types/common';
-import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
  * UI interactive component used to indicate that only one choice must
@@ -27,7 +28,7 @@ import { useBreakpoint, useTheme } from '../../../hooks';
  */
 const Radio = forwardRef((props: RadioProps, ref: any) => {
   const {
-    backgroundColor = undefined,
+    backgroundColor = '',
     borderRadius = '',
     boxShadow = '',
     color = '',
@@ -52,7 +53,14 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
-  const [radioIsChecked, setRadioIsChecked] = useState(isChecked);
+  const [radioIsChecked, setRadioIsChecked] = useState(isChecked || false);
+  const radioInputId = useMemo(() => `_snui-radio-${Math.random()}`, []);
+  const backgroundColorToUse = useInputChecked(
+    radioInputId,
+    backgroundColor,
+    radioIsChecked,
+    isChecked
+  );
   const classes = createClasses(
     '_snui-radio _snui-inline-flex _snui-flex-center',
     {
@@ -186,16 +194,6 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
   );
   const circleStyles: any = {};
 
-  if (isString(backgroundColor) && radioIsChecked) {
-    if (colors.includes(backgroundColor as string)) {
-      styles.backgroundColor = isString(backgroundColor)
-        ? `${(theme as any).colors[backgroundColor!]}`
-        : undefined;
-    } else {
-      styles.backgroundColor = backgroundColor;
-    }
-  }
-
   if (isString(size)) {
     if (sizes.includes(size as string)) {
       if (size === 'xs') {
@@ -209,10 +207,10 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
         styles.height = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
         styles.width = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
       } else {
-        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.32)`;
-        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.32)`;
-        styles.height = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
-        styles.width = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        styles.height = `calc(${theme.sizes[size as Sizes]} * 0.65)`;
+        styles.width = `calc(${theme.sizes[size as Sizes]} * 0.65)`;
       }
     } else {
       styles.height = size as string;
@@ -234,6 +232,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
         checked={isChecked && radioIsChecked}
         className="_snui-hidden-radio _snui-visually-hidden"
         disabled={isDisabled}
+        id={radioInputId}
         onChange={e => {
           if (!isDisabled) {
             if (isFunction(onChange)) {
@@ -251,6 +250,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
         className="_snui-radio__control"
         style={{
           ...styles,
+          backgroundColor: backgroundColorToUse,
         }}
       >
         <span className="_snui-radio__circle" style={{ ...circleStyles }} />

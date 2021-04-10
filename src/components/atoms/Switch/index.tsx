@@ -1,7 +1,9 @@
 /* eslint jsx-a11y/label-has-associated-control: 0 */
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 
+import { useBreakpoint, useInputChecked, useTheme } from '../../../hooks';
 import { SwitchProps } from './types';
+
 import './styles.scss';
 
 import {
@@ -19,7 +21,6 @@ import {
 
 import { MarginPaddingProps } from '../../../types';
 import { Sizes } from '../../../types/common';
-import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
  * UI interactive component used to indicate a boolean value
@@ -51,6 +52,12 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(isChecked);
+  const switchId = useMemo(() => `_snui-switch-${Math.random()}`, []);
+  const backgroundColorToUse = useInputChecked(
+    switchId,
+    backgroundColor,
+    checkboxIsChecked
+  );
   const classes = createClasses(
     '_snui-switch _snui-inline-flex _snui-flex-center',
     {
@@ -231,6 +238,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
         checked={checkboxIsChecked}
         className="_snui-hidden-switch _snui-visually-hidden"
         disabled={isDisabled}
+        id={switchId}
         onChange={e => {
           if (!isDisabled) {
             if (isFunction(onChange)) {
@@ -247,6 +255,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
         className="_snui-switch__control"
         style={{
           ...styles,
+          backgroundColor: backgroundColorToUse,
         }}
       >
         <span className="_snui-switch__circle" style={{ ...circleStyles }} />

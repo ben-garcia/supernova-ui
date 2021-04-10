@@ -29,10 +29,6 @@
     width: calc(100% - 6px);
   }
 
-  ._snui-hidden-radio:checked ~ ._snui-radio__control {
-    background-color: var(--color-info-700);
-  }
-
   &__label {
     user-select: none;
   }

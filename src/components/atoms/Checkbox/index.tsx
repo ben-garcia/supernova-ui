@@ -1,5 +1,5 @@
 /* eslint jsx-a11y/label-has-associated-control: 0 */
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 
 import { CheckmarkIcon } from '../Icon/Icons';
 import { CheckboxProps } from './types';
@@ -20,7 +20,7 @@ import {
 
 import { MarginPaddingProps } from '../../../types';
 import { Sizes } from '../../../types/common';
-import { useBreakpoint, useTheme } from '../../../hooks';
+import { useBreakpoint, useInputChecked, useTheme } from '../../../hooks';
 
 /**
  * UI interactive component used to enter information
@@ -52,6 +52,12 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(isChecked);
+  const checkboxId = useMemo(() => `_snui-checkbox-${Math.random()}`, []);
+  const backgroundColorToUse = useInputChecked(
+    checkboxId,
+    backgroundColor,
+    checkboxIsChecked
+  );
   const classes = createClasses(
     '_snui-checkbox _snui-inline-flex _snui-flex-center',
     {
@@ -216,6 +222,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         checked={checkboxIsChecked}
         className="_snui-hidden-checkbox _snui-visually-hidden"
         disabled={isDisabled}
+        id={checkboxId}
         onChange={e => {
           if (!isDisabled) {
             if (isFunction(onChange)) {
@@ -231,6 +238,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         className="_snui-checkbox__control"
         style={{
           ...styles,
+          backgroundColor: backgroundColorToUse,
         }}
       >
         <div className="_snui-flex _snui-flex-center _snui-fill-parent">
