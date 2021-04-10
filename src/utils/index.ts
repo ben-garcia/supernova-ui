@@ -10,6 +10,7 @@ import createClasses from './create-classes';
 import createElement from './create-element';
 import { createStyles, responsify } from './create-styles';
 import deepMergify from './deep-mergify';
+import { inputIsChecked } from './dom-assertions';
 
 export {
   colors,
@@ -17,6 +18,7 @@ export {
   createElement,
   createStyles,
   deepMergify,
+  inputIsChecked,
   isFunction,
   isObject,
   isString,
