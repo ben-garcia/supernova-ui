@@ -1,6 +1,16 @@
 const colors = {
   black: '#000',
 
+  cyan100: '#e5ffff',
+  cyan200: '#b3ffff`',
+  cyan300: '#80ffff',
+  cyan400: '#4dffff',
+  cyan500: '#1affff',
+  cyan600: '#00e5e6',
+  cyan700: '#007f80',
+  cyan800: '#007f80',
+  cyan900: '#004c4d',
+
   error100: '#fbeaea',
   error200: '#f2c0c0',
   error300: '#e99696',
