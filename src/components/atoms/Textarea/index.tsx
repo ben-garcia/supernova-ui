@@ -185,7 +185,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
         textTransform === 'capitalize' ||
         textTransform === 'lowercase' ||
         textTransform === 'uppercase',
-      [`_snui-text-input-${variant}`]: isString(variant),
+      [`_snui-textarea-${variant}`]: isString(variant),
       [`_snui-width-${width}`]:
         isString(width) && sizes.includes(width as string),
     }
