@@ -19,4 +19,10 @@ export interface TextInputProps
    * React reference
    */
   ref?: RefObject<HTMLInputElement>;
+  /**
+   * Indiacate the type of input
+   *
+   * @default 'text'
+   */
+  typeOf?: 'email' | 'text' | 'password';
 }

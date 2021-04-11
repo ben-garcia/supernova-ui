@@ -41,12 +41,7 @@ export const Direction = () => {
         >
           <Radio label="angular" margin="0 sm" value="angular" />
           <Radio label="react" margin="0 sm" value="react" />
-          <Radio
-            backgroundColor="success600"
-            label="vue"
-            margin="0 sm"
-            value="vue"
-          />
+          <Radio label="vue" margin="0 sm" value="vue" />
         </RadioGroup>
       </div>
       <div>

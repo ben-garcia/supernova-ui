@@ -65,8 +65,14 @@ export const InitialAndFinalRefs = () => {
               label="Email"
               margin="sm 0"
               ref={initialFocusRef}
+              typeOf="email"
             />
-            <TextInput floatLabel label="Password" margin="sm 0" />
+            <TextInput
+              floatLabel
+              label="Password"
+              margin="sm 0"
+              typeOf="password"
+            />
           </form>
         }
         footer={

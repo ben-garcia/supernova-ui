@@ -50,6 +50,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     rightIcon = null,
     size = 'md',
     textTransform = '',
+    typeOf = 'text',
     value = null,
     variant = 'outline',
     width = '',
@@ -355,7 +356,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
         }}
         placeholder={!floatLabel ? label : undefined}
         ref={ref}
-        type="text"
+        type={typeOf}
         value={inputValue}
       />
       {rightIcon && (
