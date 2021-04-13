@@ -1,7 +1,12 @@
 /* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { forwardRef, useMemo, useState } from 'react';
 
-import { useBreakpoint, useInputChecked, useTheme } from '../../../hooks';
+import {
+  useBreakpoint,
+  useInputChecked,
+  useFormControl,
+  useTheme,
+} from '../../../hooks';
 import { SwitchProps } from './types';
 
 import './styles.scss';
@@ -51,8 +56,19 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
+  const {
+    hasHelpText,
+    hasFeedbackText,
+    id: fieldId,
+    isDisabled: formControlIsDisabled,
+    isInvalid,
+    isRequired,
+  } = useFormControl();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(isChecked);
-  const switchId = useMemo(() => `_snui-switch-${Math.random()}`, []);
+  const switchId = useMemo(
+    () => fieldId ?? `_snui-switch-${Math.random()}`,
+    []
+  );
   const backgroundColorToUse = useInputChecked(
     switchId,
     backgroundColor,
@@ -226,16 +242,34 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
     responsify('width', size, styles, theme.sizes, breakpoint, sizes);
   }
 
+  const labelIds: string[] = [];
+
+  if (hasFeedbackText && isInvalid) {
+    labelIds.push(`${fieldId}-feedback`);
+  }
+
+  if (hasHelpText) {
+    labelIds.push(`${fieldId}-helper-text`);
+  }
+
+  if (isInvalid) {
+    styles.border = `2px solid ${theme.colors.error500}`;
+  }
+
   return (
     <label
       className={`_snui-position-relative ${classes} ${
         isDisabled ? '_snui-disabled' : ''
       }`}
     >
-      <span className="_snui-switch__label">{label}</span>
+      <span className="_snui-switch__label">
+        {label}
+        {isRequired && <span className="_snui-error">*</span>}
+      </span>
       <input
         {...rest}
-        checked={checkboxIsChecked}
+        aria-describedby={labelIds.join(' ') ?? undefined}
+        checked={checkboxIsChecked || formControlIsDisabled}
         className="_snui-hidden-switch _snui-visually-hidden"
         disabled={isDisabled}
         id={switchId}

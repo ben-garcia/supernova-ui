@@ -18,7 +18,7 @@ import {
 
 import { MarginPaddingProps } from '../../../types';
 import { Sizes } from '../../../types/common';
-import { useBreakpoint, useTheme } from '../../../hooks';
+import { useBreakpoint, useFormControl, useTheme } from '../../../hooks';
 
 /**
  * UI interactive component used to enter information
@@ -58,6 +58,14 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
+  const {
+    hasHelpText,
+    hasFeedbackText,
+    id: fieldId,
+    isDisabled: formControlIsDisabled,
+    isInvalid,
+    isRequired,
+  } = useFormControl();
   const [inputValue, setInputValue] = useState(value || '');
   const [focusRingColor, setFocusRingColor] = useState('');
   // box shadow is different when variant is 'flushed'
@@ -70,7 +78,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   );
   const [hoverColorToUse, setHoverColorToUse] = useState('');
   const inputId = useMemo(
-    () => `_snui-text-input-${Math.random().toFixed(10)}`,
+    () => fieldId ?? `_snui-text-input-${Math.random().toFixed(10)}`,
     []
   );
   const [labelTransition, setLabelTransition] = useState(
@@ -249,6 +257,20 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     styles.paddingRight = `calc(${theme.spacing[size as Sizes]} * 2)`;
   }
 
+  const labelIds: string[] = [];
+
+  if (hasFeedbackText && isInvalid) {
+    labelIds.push(`${fieldId}-feedback`);
+  }
+
+  if (hasHelpText) {
+    labelIds.push(`${fieldId}-helper-text`);
+  }
+
+  if (isInvalid) {
+    styles.border = `2px solid ${theme.colors.error500}`;
+  }
+
   return (
     <div className="_snui-position-relative">
       {leftIcon && (
@@ -266,6 +288,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           }}
         >
           {label}
+          {isRequired && <span className="_snui-error">*</span>}
         </label>
       )}
       {!floatLabel && isString(label) && (
@@ -276,13 +299,15 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           htmlFor={inputId}
         >
           {label}
+          {isRequired && <span className="_snui-error">*</span>}
         </label>
       )}
 
       <input
         {...rest}
+        aria-describedby={labelIds.join(' ') ?? undefined}
         className={classes}
-        disabled={isDisabled}
+        disabled={isDisabled || formControlIsDisabled}
         id={inputId}
         onBlur={() => {
           setFocusRingColor('');

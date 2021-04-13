@@ -37,19 +37,11 @@
 ._snui-textarea-flushed {
   background: var(--color-transparent);
   border-bottom: 1px solid var(--color-info-500);
-
-  &:not(:disabled):hover {
-    border-width: 2px;
-  }
 }
 
 ._snui-textarea-outline {
   background: var(--color-transparent);
   border: 1px solid var(--color-info-500);
-
-  &:not(:disabled):hover {
-    border-width: 2px;
-  }
 }
 
 ._snui-textarea-disabled {

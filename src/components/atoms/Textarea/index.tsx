@@ -18,7 +18,7 @@ import {
 
 import { MarginPaddingProps } from '../../../types';
 import { Sizes } from '../../../types/common';
-import { useBreakpoint, useTheme } from '../../../hooks';
+import { useBreakpoint, useFormControl, useTheme } from '../../../hooks';
 
 /**
  * UI textarea component used to enter multiple lines of text
@@ -56,6 +56,15 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
   } = props;
   const theme = useTheme();
   const breakpoint = useBreakpoint();
+  const {
+    hasHelpText,
+    hasFeedbackText,
+    id: fieldId,
+    isDisabled: formControlIsDisabled,
+    isInvalid,
+    isRequired,
+  } = useFormControl();
+
   const [textareaValue, setTextareaValue] = useState(value || '');
   const [focusRingColor, setFocusRingColor] = useState('');
   // box shadow is different when variant is 'flushed'
@@ -68,7 +77,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
   );
   const [hoverColorToUse, setHoverColorToUse] = useState('');
   const textareaId = useMemo(
-    () => `_snui-textarea-${Math.random().toFixed(10)}`,
+    () => fieldId ?? `_snui-textarea-${Math.random().toFixed(10)}`,
     []
   );
   const [labelClasses, setLabelClasses] = useState(
@@ -231,6 +240,20 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
     responsify('fontSize', size, styles, theme.sizes, breakpoint, sizes);
   }
 
+  const labelIds: string[] = [];
+
+  if (hasFeedbackText && isInvalid) {
+    labelIds.push(`${fieldId}-feedback`);
+  }
+
+  if (hasHelpText) {
+    labelIds.push(`${fieldId}-helper-text`);
+  }
+
+  if (isInvalid) {
+    styles.border = `2px solid ${theme.colors.error500}`;
+  }
+
   return (
     <div className="_snui-position-relative">
       {floatLabel && isString(label) && (
@@ -243,22 +266,25 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
           }}
         >
           {label}
+          {isRequired && <span className="_snui-error">*</span>}
         </label>
       )}
       {!floatLabel && isString(label) && (
         <label
           className={`_snui-visually-hidden ${
-            isDisabled ? '_snui-disabled' : ''
+            isDisabled || formControlIsDisabled ? '_snui-disabled' : ''
           }`}
           htmlFor={textareaId}
         >
           {label}
+          {isRequired && <span className="_snui-error">*</span>}
         </label>
       )}
       <textarea
         {...rest}
+        aria-describedby={labelIds.join(' ') ?? undefined}
         className={classes}
-        disabled={isDisabled}
+        disabled={isDisabled || formControlIsDisabled}
         id={textareaId}
         onBlur={() => {
           setFocusRingColor('');

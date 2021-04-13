@@ -2,10 +2,10 @@ import { Meta } from '@storybook/react';
 import React from 'react';
 
 import FormControl from '.';
-import TextInput from '../../atoms/TextInput';
-import Textarea from '../../atoms/Textarea';
 import FormHelperText from './FormHelperText';
 import FormErrorMessage from './FormErrorMessage';
+import TextInput from '../../atoms/TextInput';
+import Textarea from '../../atoms/Textarea';
 
 export default {
   component: FormControl,
@@ -43,6 +43,7 @@ export const WithHelperText = () => (
     </FormErrorMessage>
   </FormControl>
 );
+
 export const WithErrorMessage = () => (
   <FormControl isInvalid isRequired>
     <TextInput floatLabel label="Username" />
