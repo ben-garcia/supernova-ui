@@ -77,7 +77,10 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
   );
   const [hoverColorToUse, setHoverColorToUse] = useState('');
   const textareaId = useMemo(
-    () => fieldId ?? `_snui-textarea-${Math.random().toFixed(10)}`,
+    () =>
+      isString(fieldId)
+        ? fieldId
+        : `_snui-textarea-${Math.random().toFixed(10)}`,
     []
   );
   const [labelClasses, setLabelClasses] = useState(

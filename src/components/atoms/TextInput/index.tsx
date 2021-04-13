@@ -78,7 +78,10 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   );
   const [hoverColorToUse, setHoverColorToUse] = useState('');
   const inputId = useMemo(
-    () => fieldId ?? `_snui-text-input-${Math.random().toFixed(10)}`,
+    () =>
+      isString(fieldId)
+        ? fieldId
+        : `_snui-text-input-${Math.random().toFixed(10)}`,
     []
   );
   const [labelTransition, setLabelTransition] = useState(
