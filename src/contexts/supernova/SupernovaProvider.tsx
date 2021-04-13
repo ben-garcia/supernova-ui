@@ -13,7 +13,7 @@ const SupernovaProvider = (props: SupernovaProviderProps) => {
   const { theme, children } = props;
   let themeToUse;
 
-  // use default theme as is when the user doesn't include custom theme
+  // use default theme when a custom theme is not provided
   if (!theme) {
     themeToUse = defaultTheme;
   } else {
