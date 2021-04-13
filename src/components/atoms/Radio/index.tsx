@@ -68,7 +68,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
   } = useFormControl();
   const [radioIsChecked, setRadioIsChecked] = useState(isChecked || false);
   const radioInputId = useMemo(
-    () => fieldId ?? `_snui-radio-${Math.random()}`,
+    () => (isString(fieldId) ? fieldId : `_snui-radio-${Math.random()}`),
     []
   );
   const backgroundColorToUse = useInputChecked(

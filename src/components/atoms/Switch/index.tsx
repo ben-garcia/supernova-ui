@@ -66,7 +66,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
   } = useFormControl();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(isChecked);
   const switchId = useMemo(
-    () => fieldId ?? `_snui-switch-${Math.random()}`,
+    () => (isString(fieldId) ? fieldId : `_snui-switch-${Math.random()}`),
     []
   );
   const backgroundColorToUse = useInputChecked(

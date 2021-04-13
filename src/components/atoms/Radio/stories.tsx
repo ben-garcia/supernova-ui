@@ -14,11 +14,36 @@ export default {
 export const CustomBackgroundColors = () => {
   return (
     <>
-      <Radio backgroundColor="cyan600" label="cyan600" margin="0 sm" />
-      <Radio backgroundColor="error600" label="error600" margin="0 sm" />
-      <Radio backgroundColor="info300" label="info300" margin="0 sm" />
-      <Radio backgroundColor="success600" label="success600" margin="0 sm" />
-      <Radio backgroundColor="warning600" label="warning600" margin="0 sm" />
+      <Radio
+        isChecked
+        backgroundColor="cyan600"
+        label="cyan600"
+        margin="0 sm"
+      />
+      <Radio
+        isChecked
+        backgroundColor="error600"
+        label="error600"
+        margin="0 sm"
+      />
+      <Radio
+        isChecked
+        backgroundColor="info300"
+        label="info300"
+        margin="0 sm"
+      />
+      <Radio
+        isChecked
+        backgroundColor="success600"
+        label="success600"
+        margin="0 sm"
+      />
+      <Radio
+        isChecked
+        backgroundColor="warning600"
+        label="warning600"
+        margin="0 sm"
+      />
     </>
   );
 };

@@ -2,7 +2,7 @@ const colors = {
   black: '#000',
 
   cyan100: '#e5ffff',
-  cyan200: '#b3ffff`',
+  cyan200: '#b3ffff',
   cyan300: '#80ffff',
   cyan400: '#4dffff',
   cyan500: '#1affff',
