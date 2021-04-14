@@ -291,7 +291,15 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           }}
         >
           {label}
-          {isRequired && <span className="_snui-error">*</span>}
+          {isRequired && (
+            <span
+              aria-hidden="true"
+              className="_snui-error"
+              role="presentation"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       {!floatLabel && isString(label) && (
@@ -302,13 +310,22 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           htmlFor={inputId}
         >
           {label}
-          {isRequired && <span className="_snui-error">*</span>}
+          {isRequired && (
+            <span
+              aria-hidden="true"
+              className="_snui-error"
+              role="presentation"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
 
       <input
         {...rest}
         aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-invalid={isInvalid ?? undefined}
         className={classes}
         disabled={isDisabled || formControlIsDisabled}
         id={inputId}

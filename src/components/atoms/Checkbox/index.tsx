@@ -250,6 +250,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
       <input
         {...rest}
         aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-invalid={isInvalid ?? undefined}
         checked={checkboxIsChecked || formControlIsDisabled}
         className="_snui-hidden-checkbox _snui-visually-hidden"
         disabled={isDisabled}
@@ -280,7 +281,11 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
       </span>
       <span className="_snui-checkbox__label">
         {label}
-        {isRequired && <span className="_snui-error">*</span>}
+        {isRequired && (
+          <span aria-hidden="true" className="_snui-error" role="presentation">
+            *
+          </span>
+        )}
       </span>
     </label>
   );

@@ -291,7 +291,11 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
         style={{ fontSize: `${theme.typography.fontSizes[size as Sizes]}` }}
       >
         {label}
-        {isRequired && <span className="_snui-error">*</span>}
+        {isRequired && (
+          <span aria-hidden="true" className="_snui-error" role="presentation">
+            *
+          </span>
+        )}
       </span>
     </label>
   );

@@ -269,7 +269,15 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
           }}
         >
           {label}
-          {isRequired && <span className="_snui-error">*</span>}
+          {isRequired && (
+            <span
+              aria-hidden="true"
+              className="_snui-error"
+              role="presentation"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       {!floatLabel && isString(label) && (
@@ -280,12 +288,21 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
           htmlFor={textareaId}
         >
           {label}
-          {isRequired && <span className="_snui-error">*</span>}
+          {isRequired && (
+            <span
+              aria-hidden="true"
+              className="_snui-error"
+              role="presentation"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       <textarea
         {...rest}
         aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-invalid={isInvalid ?? undefined}
         className={classes}
         disabled={isDisabled || formControlIsDisabled}
         id={textareaId}

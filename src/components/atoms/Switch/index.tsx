@@ -264,11 +264,16 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
     >
       <span className="_snui-switch__label">
         {label}
-        {isRequired && <span className="_snui-error">*</span>}
+        {isRequired && (
+          <span aria-hidden="true" className="_snui-error" role="presentation">
+            *
+          </span>
+        )}
       </span>
       <input
         {...rest}
         aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-invalid={isInvalid ?? undefined}
         checked={checkboxIsChecked || formControlIsDisabled}
         className="_snui-hidden-switch _snui-visually-hidden"
         disabled={isDisabled}
