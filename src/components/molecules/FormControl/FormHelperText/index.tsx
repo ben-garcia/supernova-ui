@@ -9,11 +9,12 @@ interface FormHelperTextProps {
 const FormHelperText = forwardRef(
   (props: FormHelperTextProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const { children } = props;
-    const { getHelpTextProps } = useFormControl();
+    const { id, getHelpTextProps } = useFormControl();
 
     return (
       <div
         {...getHelpTextProps(props, ref)}
+        id={`${id}-helper-text`}
         className="_snui-form-helper-text _snui-margin-top-sm _snui-font-body"
       >
         {children}
