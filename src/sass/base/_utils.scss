@@ -46,19 +46,27 @@
 
 // css property: justify-content
 // how flex items should be aligned using the main axis
-._snui-justify-between {
+._snui-justify-space-between {
   justify-content: space-between;
+}
+
+._snui-justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+._snui-justify-space-around {
+  justify-content: space-around;
 }
 
 ._snui-justify-center {
   justify-content: center;
 }
 
-._snui-justify-end {
+._snui-justify-flex-end {
   justify-content: flex-end;
 }
 
-._snui-justify-start {
+._snui-justify-flex-start {
   justify-content: flex-start;
 }
 
@@ -72,12 +80,29 @@
   align-items: center;
 }
 
-._snui-items-end {
+._snui-items-flex-end {
   align-items: flex-end;
 }
 
-._snui-items-start {
+._snui-items-flex-start {
   align-items: flex-start;
+}
+
+._snui-items-stretch {
+  align-items: stretch;
+}
+
+// css property: flex-wrap
+._snui-wrap {
+  flex-wrap: wrap;
+}
+
+._snui-nowrap {
+  flex-wrap: nowrap;
+}
+
+._snui-wrap-reverse {
+  flex-wrap: wrap-reverse;
 }
 
 // css property: align-self
