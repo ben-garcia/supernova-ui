@@ -27,4 +27,11 @@
       - role="radiogroup"
 
 - Storybook
+
   - [controls](https://storybook.js.org/docs/react/essentials/controls)
+
+- Rollup
+  - not sure where do 'react' and 'react-dom' dependencies go
+    - if I put them in 'dependencies', then I get
+      'Error: Invalid hook call. Hooks can only be called inside of the body of a function component.'
+    - if I put them in 'peerDependencies', then 'yarn test' and 'yarn storybook' fail

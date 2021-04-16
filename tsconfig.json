@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
@@ -26,8 +27,18 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "react",
-    "isolatedModules": false
+    "isolatedModules": false,
+    "sourceMap": true,
+    "typeRoots": ["typings"],
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "dist"
   },
   "include": ["src", "setup-tests.ts"],
-  "exclude": ["node_modules", "<rootDir>/**/*.test.(ts|tsx)"]
+  "exclude": [
+    "node_modules",
+    "<rootDir>/**/*.test.(ts|tsx)",
+    "dist",
+    "rollup.config.js"
+  ]
 }
