@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "rootDir": "src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -25,19 +25,19 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react",
     "isolatedModules": false,
     "sourceMap": true,
-    "typeRoots": ["typings"],
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "dist"
   },
-  "include": ["src", "setup-tests.ts"],
+  "include": ["src/**/*", "./setup-tests.ts"],
   "exclude": [
     "node_modules",
-    "<rootDir>/**/*.test.(ts|tsx)",
+    "src/**/*.test.(ts|tsx)",
+    "src/**/*.stories.tsx",
     "dist",
     "rollup.config.js"
   ]
