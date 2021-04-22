@@ -15,7 +15,7 @@ theme options from [chakra-ui](https://chakra-ui.com/) to start.
 ### Components
 
     - atoms
-    		- Button
+    	- Button
     		- renders tags button(default), a
     		- render with icon
     	- Checkbox
@@ -29,19 +29,21 @@ theme options from [chakra-ui](https://chakra-ui.com/) to start.
     	- Radio
     		- renders input of type radio
     			- used to select one options of the multiple that are available
-    		- Spinner
+    	- Spinner
     			- renders simple loader
     			- used to indicate a loading state
-    		- Switch
+    	- Switch
     			- renders input of type checkbox
     			- different variant of the checkbox
-    		- Text
+    	- Text
     		- renders tags span(default)
-    		- Textarea
+    	- Textarea
     			- renders textarea
-    		- TextInput
+    	- TextInput
     			- renders input tag
 
     - molecules
     		- Modal
     			- with a11y in mind
+    			- FormControl
+    				- organize form fields with a helper hint, error message
