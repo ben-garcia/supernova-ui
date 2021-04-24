@@ -2,19 +2,18 @@ import { createContext } from 'react';
 
 import { FormControl } from './types';
 
-const initialTheme: FormControl = {
+const initialState: FormControl = {
   id: '',
   isDisabled: false,
   isInvalid: false,
   isRequired: false,
   hasHelpText: false,
-  setHasHelpText: null,
+  setHasHelpText: () => {},
   hasFeedbackText: false,
-  getHelpTextProps: null,
-  setHasFeedbackText: null,
-  getErrorMessageProps: null,
+  getHelpTextProps: () => {},
+  setHasFeedbackText: () => {},
+  getErrorMessageProps: () => {},
 };
 
-export const FormControlContext = createContext<FormControl>(initialTheme);
-
+export const FormControlContext = createContext<FormControl>(initialState);
 export const FormControlProvider = FormControlContext.Provider;

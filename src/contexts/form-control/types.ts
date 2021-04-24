@@ -4,16 +4,16 @@ import { FormControlProps } from '../../components/molecules/FormControl/types';
 
 export interface FormControl
   extends Omit<FormControlProps, 'children' | 'id' | 'tag'> {
+  getErrorMessageProps: () => void;
+  getHelpTextProps: () => void;
+  hasFeedbackText: boolean;
+  hasHelpText: boolean;
   /**
    * the base id for the FormControl component
    */
   id: string;
-  hasFeedbackText: any;
-  setHasFeedbackText: any;
-  hasHelpText: any;
-  setHasHelpText: any;
-  getHelpTextProps: any;
-  getErrorMessageProps: any;
+  setHasFeedbackText: () => void;
+  setHasHelpText: () => void;
 }
 
 export interface FormControlProviderProps {
