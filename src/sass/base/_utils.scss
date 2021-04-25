@@ -739,11 +739,11 @@
 // --------------------------------
 // Border Radius
 // --------------------------------
-._snui-border-radius-xm {
+._snui-border-radius-xs {
   border-radius: var(--radii-sm, 0.125rem) !important;
 }
 
-._snui-border-radius-xs {
+._snui-border-radius-sm {
   border-radius: var(--radii-xs, 0.25rem) !important;
 }
 
@@ -859,4 +859,11 @@
 // error messages
 ._snui-error {
   color: var(--color-error-500);
+}
+
+// inline padding left
+._snui-padding-inline-left {
+  justify-content: flex-start !important;
+  padding-inline-end: var(--size-xs) !important;
+  padding-inline-start: var(--size-xs) !important;
 }
