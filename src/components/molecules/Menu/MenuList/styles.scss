@@ -1,0 +1,16 @@
+._snui-menu {
+  transition: all 250ms ease;
+  transform-origin: top left;
+
+  &--invisible {
+    opacity: 0;
+    transform: scale(0.5);
+    visibility: hidden;
+  }
+
+  &--visible {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
+}
