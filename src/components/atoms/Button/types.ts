@@ -13,6 +13,7 @@ export interface ButtonProps
   extends Omit<CommonProps, 'size'>,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
+  id?: string;
   /**
    * Icon to the left of the Button text
    */
