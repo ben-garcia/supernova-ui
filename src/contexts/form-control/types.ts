@@ -1,11 +1,18 @@
-import { ReactNode } from 'react';
+import { ReactNode, ForwardedRef } from 'react';
 
 import { FormControlProps } from '../../components/molecules/FormControl/types';
+import { FormHelperTextProps } from '../../components/molecules/FormControl/FormHelperText';
 
 export interface FormControl
   extends Omit<FormControlProps, 'children' | 'id' | 'tag'> {
-  getErrorMessageProps: () => void;
-  getHelpTextProps: () => void;
+  getErrorMessageProps: (
+    props: FormHelperTextProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => void;
+  getHelpTextProps: (
+    props: FormHelperTextProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => void;
   hasFeedbackText: boolean;
   hasHelpText: boolean;
   /**

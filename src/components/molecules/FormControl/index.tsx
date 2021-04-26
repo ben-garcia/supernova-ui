@@ -31,7 +31,7 @@ const FormControl: React.FC<FormControlProps> = props => {
   ]);
 
   return (
-    <FormControlProvider value={contextValue}>
+    <FormControlProvider value={contextValue as any}>
       {elementToRender}
     </FormControlProvider>
   );
