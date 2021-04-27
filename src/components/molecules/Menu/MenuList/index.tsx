@@ -17,6 +17,12 @@ import './styles.scss';
 
 export interface MenuListProps {
   children: ReactNode;
+  /**
+   * configure the position for the menu
+   *
+   * transform css property
+   */
+  customTransform?: string;
   maxWidth?: string;
   minWidth?: string;
   width?: string;
@@ -24,7 +30,14 @@ export interface MenuListProps {
 
 // @ts-ignore
 const MenuList = forwardRef((props: MenuListProps, ref: any) => {
-  const { children, maxWidth = '', minWidth = '', width = '', ...rest } = props;
+  const {
+    children,
+    customTransform = null,
+    maxWidth = '',
+    minWidth = '',
+    width = '',
+    ...rest
+  } = props;
   const {
     changeActiveMenuItem,
     closeOnEsc,
@@ -48,22 +61,18 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
       .map(el => el.textContent)
       .indexOf(element.textContent);
     if (index === 0) {
-      // @ts-ignore
-      previousEl.current =
-        menuButtonItems.current[menuButtonItems.current.length - 1];
-      // @ts-ignore
-      nextEl.current = menuButtonItems.current[1];
+      (previousEl.current as any) = menuButtonItems.current[
+        menuButtonItems.current.length - 1
+      ];
+      (nextEl.current as any) = menuButtonItems.current[1];
     } else if (index === menuButtonItems.current.length - 1) {
-      // @ts-ignore
-      previousEl.current =
-        menuButtonItems.current[menuButtonItems.current.length - 2];
-      // @ts-ignore
-      nextEl.current = menuButtonItems.current[0];
+      (previousEl.current as any) = menuButtonItems.current[
+        menuButtonItems.current.length - 2
+      ];
+      (nextEl.current as any) = menuButtonItems.current[0];
     } else {
-      // @ts-ignore
-      previousEl.current = menuButtonItems.current[index - 1];
-      // @ts-ignore
-      nextEl.current = menuButtonItems.current[index + 1];
+      (previousEl.current as any) = menuButtonItems.current[index - 1];
+      (nextEl.current as any) = menuButtonItems.current[index + 1];
     }
 
     previousEl!.current!.setAttribute('tabIndex', '-1');
@@ -75,13 +84,12 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     nextEl!.current!.style.color = theme.colors.black;
 
     changeActiveMenuItem!(menuButtonItems.current[index] as any);
-    // @ts-ignore
-    activeEl.current = menuButtonItems.current[index];
+    (activeEl.current as any) = menuButtonItems.current[index];
     activeEl.current!.focus();
 
-    activeEl.current.setAttribute('tabIndex', '0');
-    activeEl.current.style.backgroundColor = theme.colors.info600;
-    activeEl.current.style.color = theme.colors.white;
+    (activeEl.current as any).setAttribute('tabIndex', '0');
+    (activeEl.current as any).style.backgroundColor = theme.colors.info600;
+    (activeEl.current as any).style.color = theme.colors.white;
   }, []);
   const resetMenuItems = React.useCallback(() => {
     menuButtonItems.current.forEach(el => {
@@ -101,11 +109,10 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
       if (menuButtonItems?.current?.length) {
         // needed to correctly set focus
         setTimeout(() => {
-          // @ts-ignore
-          previousEl.current =
-            menuButtonItems.current[menuButtonItems.current.length - 1];
-          // @ts-ignore
-          nextEl.current = menuButtonItems.current[1];
+          (previousEl.current as any) = menuButtonItems.current[
+            menuButtonItems.current.length - 1
+          ];
+          (nextEl.current as any) = menuButtonItems.current[1];
           handleActive(menuButtonItems.current[0]);
         }, 20);
       }
@@ -199,12 +206,29 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     }
   );
 
+  const [xPos, setX] = useState('');
+  const [yPos, setY] = useState('');
+
+  useEffect(() => {
+    if (menuButtonRef?.current) {
+      const { x, y } = menuButtonRef.current.getBoundingClientRect();
+      setX(`${x - 15}px`);
+      setY(`${y - 15}px`);
+    }
+  }, [menuButtonRef]);
+
   const jsx = (
     <div
       {...getMenuListProps(rest, ref)}
       className={classes}
       id={`${id}-list`}
       role="menu"
+      style={{
+        minWidth,
+        maxWidth,
+        width,
+        transform: customTransform ?? `translate(${xPos}, ${yPos})`,
+      }}
       tabIndex={-1}
     >
       {children}
