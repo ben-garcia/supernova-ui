@@ -79,7 +79,7 @@ const useMenuProvider = (props: MenuProps) => {
     (menuItemProps = {}, forwardedRef = null) => {
       return {
         ...menuItemProps,
-        id: `${id}-button-${Math.random()}`,
+        id: `${id}-menuitem-${Math.random()}`,
         ref: mergeRefs(forwardedRef, () => {}),
       };
     },
@@ -89,6 +89,7 @@ const useMenuProvider = (props: MenuProps) => {
     (menuListProps = {}, forwardedRef = null) => {
       return {
         ...menuListProps,
+        'aria-orientation': 'vertical',
         ref: mergeRefs(forwardedRef, menuListRef, () => {}),
       };
     },
