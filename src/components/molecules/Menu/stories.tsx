@@ -34,26 +34,6 @@ export const Basic = () => {
   );
 };
 
-export const WithCustomTranform = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  return (
-    <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <MenuButton onClick={() => setIsOpen(true)}>customPosition</MenuButton>
-      <MenuList customTransform="translate(80%, -20%)" width="250px">
-        <MenuGroup title="My Stuff">
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>Settings</MenuItem>
-        </MenuGroup>
-        <MenuGroup title="Other">
-          <MenuItem>Night Mode</MenuItem>
-          <MenuItem>Sign Out</MenuItem>
-        </MenuGroup>
-      </MenuList>
-    </Menu>
-  );
-};
-
 export const WithGroup = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 

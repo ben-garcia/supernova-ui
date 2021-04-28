@@ -17,12 +17,6 @@ import './styles.scss';
 
 export interface MenuListProps {
   children: ReactNode;
-  /**
-   * configure the position for the menu
-   *
-   * transform css property
-   */
-  customTransform?: string;
   maxWidth?: string;
   minWidth?: string;
   width?: string;
@@ -30,14 +24,7 @@ export interface MenuListProps {
 
 // @ts-ignore
 const MenuList = forwardRef((props: MenuListProps, ref: any) => {
-  const {
-    children,
-    customTransform = null,
-    maxWidth = '',
-    minWidth = '',
-    width = '',
-    ...rest
-  } = props;
+  const { children, maxWidth = '', minWidth = '', width = '', ...rest } = props;
   const {
     changeActiveMenuItem,
     closeOnEsc,
@@ -55,6 +42,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const previousEl = useRef<HTMLButtonElement>(null);
   const nextEl = useRef<HTMLButtonElement>(null);
   const activeEl = useRef<HTMLButtonElement>(null);
+  const [pos, setPos] = useState({ left: '', top: '' });
 
   const handleActive = useCallback((element: HTMLButtonElement) => {
     const index = Array.from(menuButtonItems.current)
@@ -92,7 +80,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     (activeEl.current as any).style.color = theme.colors.white;
   }, []);
   const resetMenuItems = React.useCallback(() => {
-    menuButtonItems.current.forEach(el => {
+    menuButtonItems?.current?.forEach(el => {
       el.setAttribute('tabIndex', '-1');
       el.style.backgroundColor = 'white';
       el.style.color = 'black';
@@ -127,16 +115,22 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   }, [isOpen]);
 
   useEffect(() => {
-    let handleKeyDown: any;
+    let handleKeyUp: any;
+
     if (isOpen) {
-      handleKeyDown = (e: KeyboardEvent) => {
+      handleKeyUp = (e: KeyboardEvent) => {
+        // prevent user from 'Tab' or 'Shift + Tab' to another element
+        e.preventDefault();
+
         const { key } = e;
 
-        const menuItemContent = Array.from(menuButtonItems.current).map(el =>
-          el.textContent![0].toLowerCase()
+        const menuItemContent = Array.from(menuButtonItems.current).map(
+          el => `${el.textContent![0].toLowerCase()}`
         );
 
         if (key === 'Escape' && closeOnEsc) {
+          onClose();
+        } else if (key === 'Enter' || key === ' ') {
           onClose();
         } else if (key === 'ArrowDown' || key === 'ArrowRight') {
           handleActive(nextEl.current!);
@@ -154,11 +148,11 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
         }
       };
 
-      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('keyup', handleKeyUp);
     }
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
     };
   }, [isOpen]);
 
@@ -206,14 +200,13 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     }
   );
 
-  const [xPos, setX] = useState('');
-  const [yPos, setY] = useState('');
-
   useEffect(() => {
     if (menuButtonRef?.current) {
-      const { x, y } = menuButtonRef.current.getBoundingClientRect();
-      setX(`${x - 15}px`);
-      setY(`${y - 15}px`);
+      const position = menuButtonRef.current.getBoundingClientRect();
+      setPos({
+        left: `${position.left + position.width / 2 + window.pageXOffset}px`,
+        top: `${position.bottom + window.pageYOffset}px`,
+      });
     }
   }, [menuButtonRef]);
 
@@ -227,7 +220,9 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
         minWidth,
         maxWidth,
         width,
-        transform: customTransform ?? `translate(${xPos}, ${yPos})`,
+        left: pos.left,
+        top: pos.top,
+        transform: `translateX(-20%)`,
       }}
       tabIndex={-1}
     >
