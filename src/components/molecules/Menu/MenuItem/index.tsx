@@ -1,15 +1,17 @@
 import React, { forwardRef, useState } from 'react';
 
 import { useMenu, useTheme } from '../../../../hooks';
+import { isFunction } from '../../../../utils';
 
 import './styles.scss';
 
 export interface MenuItemProps {
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
-  const { children } = props;
+  const { children, onClick = null } = props;
   const { activeMenuItem, onClose, getMenuItemProps } = useMenu();
   const theme = useTheme();
   const [backgroundColor, setBackgroundColor] = useState('');
@@ -29,11 +31,18 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
     setColor(theme.colors.black);
   };
 
+  const handleClick = () => {
+    if (isFunction(onClick)) {
+      onClick!();
+    }
+    onClose();
+  };
+
   return (
     <button
       {...getMenuItemProps(props, ref)}
       className="_snui-menu-item _snui-flex _snui-items-center _snui-padding-inline-left"
-      onClick={onClose}
+      onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       role="menuitem"
