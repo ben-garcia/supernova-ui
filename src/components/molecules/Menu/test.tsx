@@ -73,6 +73,24 @@ describe('<Menu />', () => {
     expect(portal?.getAttribute('id')).toBe(`${menuId}-portal`);
   });
 
+  it('should call the onClick function', () => {
+    const mockFunction = jest.fn();
+    const { getByText } = render(
+      <Menu isOpen onClose={() => {}}>
+        <MenuButton>open</MenuButton>
+        <MenuList>
+          <MenuItem onClick={mockFunction}>Profile</MenuItem>
+        </MenuList>
+      </Menu>
+    );
+
+    const item = getByText('Profile');
+
+    fireEvent.click(item);
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+  });
+
   it.skip('should focus the first menu item', () => {
     const Test = () => {
       const [isOpen, setIsOpen] = React.useState(false);
@@ -96,14 +114,14 @@ describe('<Menu />', () => {
       );
     };
 
-    const { getByTestId } = render(<Test />);
-    const button = getByTestId('test-menu-button');
+    const { getByText } = render(<Test />);
+    const profileItem = getByText('Profile');
+    const button = getByText('open');
+
+    expect(profileItem).not.toHaveFocus();
 
     fireEvent.click(button);
 
-    const profileItem = getByTestId('test-profile');
-
-    // modal input should be focused
     expect(profileItem).toHaveFocus();
   });
 });
