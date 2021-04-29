@@ -22,15 +22,6 @@
   position: relative;
   width: calc(var(--size-md) * 14);
 
-  &__header {
-    align-self: flex-start;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-lg);
-    padding-bottom: calc(var(--size-xs) * 0.5);
-    padding-left: var(--size-sm);
-    padding-top: var(--size-sm);
-  }
-
   &__close-button {
     border: none;
     box-shadow: none;
@@ -38,20 +29,5 @@
     position: absolute;
     right: var(--space-sm);
     top: var(--space-sm);
-  }
-
-  &__body {
-    align-self: flex-start;
-    overflow: auto;
-    padding-inline-end: var(--size-xs);
-    padding: var(--size-xs) var(--size-sm);
-    width: 100%;
-  }
-
-  &__footer {
-    align-self: flex-end;
-    padding-bottom: var(--size-sm);
-    padding-top: var(--size-xs);
-    padding-right: var(--size-sm);
   }
 }

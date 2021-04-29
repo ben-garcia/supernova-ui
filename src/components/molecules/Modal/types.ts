@@ -1,4 +1,4 @@
-import { ReactNode, RefObject } from 'react';
+import { RefObject } from 'react';
 
 import {
   CommonProps,
@@ -13,10 +13,6 @@ export interface ModalProps
   extends Pick<CommonProps, 'boxShadow' | 'size'>,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
-  /**
-   * The main content for the Modal
-   */
-  body: ReactNode;
   /**
    * Configure whether Modal should close when Esc key is pressed
    *
@@ -34,17 +30,10 @@ export interface ModalProps
    */
   finalFocusRef?: RefObject<HTMLElement>;
   /**
-   * The content in the footer of the Modal
-   */
-  footer: ReactNode;
-  /**
-   * The content in the header of the Modal
-   */
-  header: string;
-  /**
    * The reference of element to receive focus when the Modal first opens
    */
   initialFocusRef?: RefObject<HTMLElement>;
+  id?: string;
   /**
    * Flag that determines when to open the Modal
    */

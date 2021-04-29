@@ -2,6 +2,9 @@
 import React from 'react';
 
 import Modal from '.';
+import ModalBody from './ModalBody';
+import ModalFooter from './ModalFooter';
+import ModalHeader from './ModalHeader';
 import {
   a11yTest,
   fireEvent,
@@ -14,25 +17,20 @@ describe('<Modal />', () => {
 
   it('should pass a11y tests', async () => {
     await a11yTest(
-      <Modal
-        body={<>body</>}
-        footer={<>footer</>}
-        header="Testing"
-        isOpen
-        onClose={jest.fn()}
-      />
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalHeader>Testing</ModalHeader>
+        <ModalBody>body</ModalBody>
+        <ModalFooter>footer</ModalFooter>
+      </Modal>
     );
   });
   it('should contain the proper aria attributes', () => {
     const { getByTestId, getByText } = render(
-      <Modal
-        data-testid="modal"
-        body={<>body</>}
-        footer={<>footer</>}
-        header="header"
-        isOpen
-        onClose={jest.fn()}
-      />
+      <Modal data-testid="modal" isOpen onClose={jest.fn()}>
+        <ModalHeader>header</ModalHeader>
+        <ModalBody>body</ModalBody>
+        <ModalFooter>footer</ModalFooter>
+      </Modal>
     );
 
     const modal = getByTestId('modal');
@@ -55,14 +53,11 @@ describe('<Modal />', () => {
   it('should call the onClose function when the close button is clicked', () => {
     const mockOnClose = jest.fn();
     const { getByLabelText } = render(
-      <Modal
-        data-testid="modal"
-        body={<>body</>}
-        footer={<>footer</>}
-        header="header"
-        isOpen
-        onClose={mockOnClose}
-      />
+      <Modal data-testid="modal" isOpen onClose={mockOnClose}>
+        <ModalHeader>Testing</ModalHeader>
+        <ModalBody>body</ModalBody>
+        <ModalFooter>footer</ModalFooter>
+      </Modal>
     );
     const closeButton = getByLabelText('Close the modal');
 
@@ -75,14 +70,11 @@ describe('<Modal />', () => {
     it('should call the onClose function when the overlay window is clicked', () => {
       const mockOnClose = jest.fn();
       const { getByTestId } = render(
-        <Modal
-          data-testid="modal"
-          body={<>body</>}
-          footer={<>footer</>}
-          header="header"
-          isOpen
-          onClose={mockOnClose}
-        />
+        <Modal data-testid="modal" isOpen onClose={mockOnClose}>
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>footer</ModalFooter>
+        </Modal>
       );
       const modal = getByTestId('modal');
 
@@ -97,12 +89,13 @@ describe('<Modal />', () => {
         <Modal
           closeOnOverlayClick={false}
           data-testid="modal"
-          body={<>body</>}
-          footer={<>footer</>}
-          header="header"
           isOpen
           onClose={mockOnClose}
-        />
+        >
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>footer</ModalFooter>
+        </Modal>
       );
       const modal = getByTestId('modal');
 
@@ -116,13 +109,11 @@ describe('<Modal />', () => {
     it('should call the onClose function when the esc key is pressed', () => {
       const mockOnClose = jest.fn();
       render(
-        <Modal
-          body={<>body</>}
-          footer={<>footer</>}
-          header="header"
-          isOpen
-          onClose={mockOnClose}
-        />
+        <Modal isOpen onClose={mockOnClose}>
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>footer</ModalFooter>
+        </Modal>
       );
 
       fireEvent.keyDown(window, { key: 'Escape' });
@@ -133,14 +124,11 @@ describe('<Modal />', () => {
     it('should not call the onClose function when closeOnEsc is false', () => {
       const mockOnClose = jest.fn();
       render(
-        <Modal
-          closeOnEsc={false}
-          body={<>body</>}
-          footer={<>footer</>}
-          header="header"
-          isOpen
-          onClose={mockOnClose}
-        />
+        <Modal closeOnEsc={false} isOpen onClose={mockOnClose}>
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>footer</ModalFooter>
+        </Modal>
       );
 
       fireEvent.keyDown(window, { key: 'Escape' });
@@ -163,17 +151,16 @@ describe('<Modal />', () => {
             Open
           </button>
           <Modal
-            body={
-              <>
-                <input data-testid="modal-input" ref={initialFocusRef} />
-              </>
-            }
-            footer={<>footer</>}
-            header="header"
             initialFocusRef={initialFocusRef}
             isOpen={isOpen}
             onClose={jest.fn()}
-          />
+          >
+            <ModalHeader>header</ModalHeader>
+            <ModalBody>
+              <input data-testid="modal-input" ref={initialFocusRef} />
+            </ModalBody>
+            <ModalFooter>footer</ModalFooter>
+          </Modal>
         </>
       );
     };
@@ -206,13 +193,16 @@ describe('<Modal />', () => {
             Receive focus
           </button>
           <Modal
-            body={<input />}
-            footer={<>footer</>}
-            header="header"
             finalFocusRef={finalFocusRef}
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
-          />
+          >
+            <ModalHeader>header</ModalHeader>
+            <ModalBody>
+              <input />
+            </ModalBody>
+            <ModalFooter>footer</ModalFooter>
+          </Modal>
         </>
       );
     };

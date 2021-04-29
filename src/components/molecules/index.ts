@@ -7,6 +7,9 @@ import MenuGroup from './Menu/MenuGroup';
 import MenuItem from './Menu/MenuItem';
 import MenuList from './Menu/MenuList';
 import Modal from './Modal';
+import ModalBody from './Modal/ModalBody';
+import ModalHeader from './Modal/ModalHeader';
+import ModalFooter from './Modal/ModalFooter';
 
 export {
   FormControl,
@@ -18,4 +21,7 @@ export {
   MenuItem,
   MenuList,
   Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 };

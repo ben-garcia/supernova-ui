@@ -3,6 +3,9 @@ import { Meta } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
 import Modal from '.';
+import ModalFooter from './ModalFooter';
+import ModalHeader from './ModalHeader';
+import ModalBody from './ModalBody';
 import Button from '../../atoms/Button';
 import TextInput from '../../atoms/TextInput';
 
@@ -22,20 +25,18 @@ export const Basic = () => {
           Open
         </Button>
       </div>
-      <Modal
-        body={<>This is a modal</>}
-        footer={
+      <Modal onClose={handleClose} isOpen={isOpen}>
+        <ModalHeader>Modal Title</ModalHeader>
+        <ModalBody>This is a modal</ModalBody>
+        <ModalFooter>
           <>
             <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
               Cancel
             </Button>
             <Button onClick={handleClose}>Save</Button>
           </>
-        }
-        header="Modal Title"
-        onClose={handleClose}
-        isOpen={isOpen}
-      />
+        </ModalFooter>
+      </Modal>
     </>
   );
 };
@@ -58,7 +59,13 @@ export const InitialAndFinalRefs = () => {
         </Button>
       </div>
       <Modal
-        body={
+        finalFocusRef={finalFocusRef}
+        initialFocusRef={initialFocusRef}
+        onClose={handleClose}
+        isOpen={isOpen}
+      >
+        <ModalHeader>Create an account</ModalHeader>
+        <ModalBody>
           <form>
             <TextInput
               floatLabel
@@ -74,21 +81,16 @@ export const InitialAndFinalRefs = () => {
               typeOf="password"
             />
           </form>
-        }
-        footer={
+        </ModalBody>
+        <ModalFooter>
           <>
             <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
               Cancel
             </Button>
             <Button onClick={handleClose}>Signup</Button>
           </>
-        }
-        finalFocusRef={finalFocusRef}
-        header="Create an account"
-        initialFocusRef={initialFocusRef}
-        onClose={handleClose}
-        isOpen={isOpen}
-      />
+        </ModalFooter>
+      </Modal>
     </>
   );
 };
@@ -104,8 +106,9 @@ export const Overflow = () => {
           Open
         </Button>
       </div>
-      <Modal
-        body={
+      <Modal onClose={handleClose} isOpen={isOpen}>
+        <ModalHeader>Modal with overflow</ModalHeader>
+        <ModalBody>
           <>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -173,19 +176,16 @@ export const Overflow = () => {
               himenaeos.
             </p>
           </>
-        }
-        footer={
+        </ModalBody>
+        <ModalFooter>
           <>
             <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
               Cancel
             </Button>
             <Button onClick={handleClose}>Save</Button>
           </>
-        }
-        header="Modal with overflow"
-        onClose={handleClose}
-        isOpen={isOpen}
-      />
+        </ModalFooter>
+      </Modal>
     </>
   );
 };
@@ -205,7 +205,12 @@ export const Sizes = () => {
           Open xs
         </Button>
         <Modal
-          body={
+          isOpen={isXsModalOpen}
+          onClose={() => setIsXsModalOpen(false)}
+          size="xs"
+        >
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
             <>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -221,8 +226,8 @@ export const Sizes = () => {
                 himenaeos.
               </p>
             </>
-          }
-          footer={
+          </ModalBody>
+          <ModalFooter>
             <>
               <Button
                 onClick={() => setIsXsModalOpen(false)}
@@ -233,12 +238,8 @@ export const Sizes = () => {
               </Button>
               <Button onClick={() => setIsXsModalOpen(false)}>Save</Button>
             </>
-          }
-          header="Modal Title"
-          isOpen={isXsModalOpen}
-          onClose={() => setIsXsModalOpen(false)}
-          size="xs"
-        />
+          </ModalFooter>
+        </Modal>
       </div>
 
       <div>
@@ -246,7 +247,12 @@ export const Sizes = () => {
           Open sm
         </Button>
         <Modal
-          body={
+          isOpen={isSmModalOpen}
+          onClose={() => setIsSmModalOpen(false)}
+          size="sm"
+        >
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
             <>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -262,8 +268,8 @@ export const Sizes = () => {
                 himenaeos.
               </p>
             </>
-          }
-          footer={
+          </ModalBody>
+          <ModalFooter>
             <>
               <Button
                 onClick={() => setIsSmModalOpen(false)}
@@ -274,12 +280,8 @@ export const Sizes = () => {
               </Button>
               <Button onClick={() => setIsSmModalOpen(false)}>Save</Button>
             </>
-          }
-          header="Modal Title"
-          isOpen={isSmModalOpen}
-          onClose={() => setIsSmModalOpen(false)}
-          size="sm"
-        />
+          </ModalFooter>
+        </Modal>
       </div>
 
       <div>
@@ -287,7 +289,12 @@ export const Sizes = () => {
           Open md
         </Button>
         <Modal
-          body={
+          isOpen={isMdModalOpen}
+          onClose={() => setIsMdModalOpen(false)}
+          size="md"
+        >
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
             <>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -303,8 +310,8 @@ export const Sizes = () => {
                 himenaeos.
               </p>
             </>
-          }
-          footer={
+          </ModalBody>
+          <ModalFooter>
             <>
               <Button
                 onClick={() => setIsMdModalOpen(false)}
@@ -315,12 +322,8 @@ export const Sizes = () => {
               </Button>
               <Button onClick={() => setIsMdModalOpen(false)}>Save</Button>
             </>
-          }
-          header="Modal Title"
-          isOpen={isMdModalOpen}
-          onClose={() => setIsMdModalOpen(false)}
-          size="md"
-        />
+          </ModalFooter>
+        </Modal>
       </div>
 
       <div>
@@ -328,7 +331,12 @@ export const Sizes = () => {
           Open lg
         </Button>
         <Modal
-          body={
+          isOpen={isLgModalOpen}
+          onClose={() => setIsLgModalOpen(false)}
+          size="lg"
+        >
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
             <>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -344,8 +352,8 @@ export const Sizes = () => {
                 himenaeos.
               </p>
             </>
-          }
-          footer={
+          </ModalBody>
+          <ModalFooter>
             <>
               <Button
                 onClick={() => setIsLgModalOpen(false)}
@@ -356,12 +364,8 @@ export const Sizes = () => {
               </Button>
               <Button onClick={() => setIsLgModalOpen(false)}>Save</Button>
             </>
-          }
-          header="Modal Title"
-          isOpen={isLgModalOpen}
-          onClose={() => setIsLgModalOpen(false)}
-          size="lg"
-        />
+          </ModalFooter>
+        </Modal>
       </div>
 
       <div>
@@ -369,7 +373,12 @@ export const Sizes = () => {
           Open xl
         </Button>
         <Modal
-          body={
+          isOpen={isXlModalOpen}
+          onClose={() => setIsXlModalOpen(false)}
+          size="xl"
+        >
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
             <>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -385,8 +394,8 @@ export const Sizes = () => {
                 himenaeos.
               </p>
             </>
-          }
-          footer={
+          </ModalBody>
+          <ModalFooter>
             <>
               <Button
                 onClick={() => setIsXlModalOpen(false)}
@@ -397,12 +406,8 @@ export const Sizes = () => {
               </Button>
               <Button onClick={() => setIsXlModalOpen(false)}>Save</Button>
             </>
-          }
-          header="Modal Title"
-          isOpen={isXlModalOpen}
-          onClose={() => setIsXlModalOpen(false)}
-          size="xl"
-        />
+          </ModalFooter>
+        </Modal>
       </div>
 
       <div>
@@ -410,7 +415,12 @@ export const Sizes = () => {
           Open xxl
         </Button>
         <Modal
-          body={
+          isOpen={isXxlModalOpen}
+          onClose={() => setIsXxlModalOpen(false)}
+          size="xxl"
+        >
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
             <>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -426,8 +436,8 @@ export const Sizes = () => {
                 himenaeos.
               </p>
             </>
-          }
-          footer={
+          </ModalBody>
+          <ModalFooter>
             <>
               <Button
                 onClick={() => setIsXxlModalOpen(false)}
@@ -438,12 +448,8 @@ export const Sizes = () => {
               </Button>
               <Button onClick={() => setIsXxlModalOpen(false)}>Save</Button>
             </>
-          }
-          header="Modal Title"
-          isOpen={isXxlModalOpen}
-          onClose={() => setIsXxlModalOpen(false)}
-          size="xxl"
-        />
+          </ModalFooter>
+        </Modal>
       </div>
     </div>
   );

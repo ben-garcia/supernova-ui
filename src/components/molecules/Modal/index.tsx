@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import Button from '../../atoms/Button';
@@ -18,6 +18,8 @@ import {
 
 import { MarginPaddingProps } from '../../../types';
 import { useBreakpoint, useTheme } from '../../../hooks';
+import { useModalProvider } from '../../../hooks/use-modal';
+import { ModalProvider } from '../../../contexts';
 
 /**
  *  A window overlaid on either the primary window or another dialog window.
@@ -27,8 +29,8 @@ import { useBreakpoint, useTheme } from '../../../hooks';
 const Modal: React.FC<ModalProps> = props => {
   const {
     backgroundColor = '',
-    body,
     boxShadow = 'md',
+    children,
     color = '',
     closeOnEsc = true,
     closeOnOverlayClick = true,
@@ -36,8 +38,6 @@ const Modal: React.FC<ModalProps> = props => {
     font = 'body',
     fontSize = '',
     fontWeight = '',
-    footer,
-    header,
     height = '',
     initialFocusRef,
     isOpen = false,
@@ -53,7 +53,13 @@ const Modal: React.FC<ModalProps> = props => {
     ...rest
   } = props;
   const [mounted, setMounted] = useState(false);
-  const [modalId] = useState(`_snui-modal-${Math.random()}`);
+  const context = useModalProvider(props);
+  const contextValue = useMemo(
+    () => ({
+      ...context,
+    }),
+    [context]
+  );
   const previousActiveElement = useRef<Element | null>(null);
 
   // get a reference to the focused element that triggerd the Modal
@@ -74,7 +80,7 @@ const Modal: React.FC<ModalProps> = props => {
     let div: HTMLDivElement;
     if (isOpen) {
       div = document.createElement('div');
-      div.id = modalId;
+      div.id = context.id;
       document.body.appendChild(div);
       setMounted(true);
     }
@@ -228,48 +234,42 @@ const Modal: React.FC<ModalProps> = props => {
 
   // storing jsx in a variable to make eslint happy
   const jsx = (
-    <FocusLock
-      closeOnEsc={closeOnEsc}
-      closeOnOverlayClick={closeOnOverlayClick}
-      initialFocusRef={initialFocusRef}
-      onClose={onClose}
-      trapFocus={trapFocus}
-    >
-      <div className="_snui-overlay">
-        <section
-          {...rest}
-          aria-labelledby={`${modalId}-header`}
-          aria-describedby={`${modalId}-body`}
-          aria-modal="true"
-          className={classes}
-          role="dialog"
-          style={styles}
-        >
-          <header className="_snui-modal__header" id={`${modalId}-header`}>
-            {header}
-          </header>
-          <Button
-            aria-label="Close the modal"
-            className="_snui-modal__close-button"
-            hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
-            onClick={onClose}
-            variant="outline"
+    <ModalProvider value={contextValue}>
+      <FocusLock
+        closeOnEsc={closeOnEsc}
+        closeOnOverlayClick={closeOnOverlayClick}
+        initialFocusRef={initialFocusRef}
+        onClose={onClose}
+        trapFocus={trapFocus}
+      >
+        <div className="_snui-overlay">
+          <section
+            {...rest}
+            aria-labelledby={`${context.id}-header`}
+            aria-describedby={`${context.id}-body`}
+            aria-modal="true"
+            className={classes}
+            role="dialog"
+            style={styles}
           >
-            <CloseIcon fill="#000" size="1rem" />
-          </Button>
-          <div className="_snui-modal__body" id={`${modalId}-body`}>
-            <div>{body}</div>
-          </div>
-          <footer className="_snui-modal__footer" id={`${modalId}-footer`}>
-            {footer}
-          </footer>
-        </section>
-      </div>
-    </FocusLock>
+            <Button
+              aria-label="Close the modal"
+              className="_snui-modal__close-button"
+              hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
+              onClick={onClose}
+              variant="outline"
+            >
+              <CloseIcon fill="#000" size="1rem" />
+            </Button>
+            {children}
+          </section>
+        </div>
+      </FocusLock>
+    </ModalProvider>
   );
 
   return isOpen && mounted
-    ? createPortal(jsx, document.getElementById(modalId) as Element)
+    ? createPortal(jsx, document.getElementById(context.id) as Element)
     : null;
 };
 
