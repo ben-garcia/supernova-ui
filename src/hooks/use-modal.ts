@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
 import { ModalContext } from '../contexts';
 
@@ -18,9 +18,37 @@ const useModalProvider = (props: ModalProps) => {
 
   const [id] = useState(propId || `modal-${Math.random()}`);
 
+  const getModalBodyProps = useCallback(
+    (modalBodyProps = {}) => ({
+      ...modalBodyProps,
+      className: '_snui-modal__body',
+      id: `${id}-body`,
+    }),
+    [id]
+  );
+  const getModalHeaderProps = useCallback(
+    (modalHeaderProps = {}) => ({
+      ...modalHeaderProps,
+      className: '_snui-modal__header',
+      id: `${id}-header`,
+    }),
+    [id]
+  );
+  const getModalFooterProps = useCallback(
+    (modalFooterProps = {}) => ({
+      ...modalFooterProps,
+      className: '_snui-modal__footer',
+      id: `${id}-footer`,
+    }),
+    [id]
+  );
+
   return {
     closeOnEsc,
     finalFocusRef,
+    getModalBodyProps,
+    getModalHeaderProps,
+    getModalFooterProps,
     id,
     initialFocusRef,
     isOpen,
