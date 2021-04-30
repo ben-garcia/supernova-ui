@@ -4,19 +4,15 @@ import { useModal } from '../../../../hooks';
 
 import './styles.scss';
 
-interface ModalHeaderProps {
+export interface ModalHeaderProps {
   children: React.ReactNode;
 }
 
 const ModalHeader: React.FC<ModalHeaderProps> = props => {
   const { children } = props;
-  const { id } = useModal();
+  const { getModalHeaderProps } = useModal();
 
-  return (
-    <header className="_snui-modal__header" id={`${id}-header`}>
-      {children}
-    </header>
-  );
+  return <header {...getModalHeaderProps()}>{children}</header>;
 };
 
 export default ModalHeader;

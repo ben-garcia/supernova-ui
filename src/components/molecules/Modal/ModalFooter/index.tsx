@@ -8,15 +8,11 @@ interface ModalFooterProps {
   children: React.ReactNode;
 }
 
-const ModalHeader: React.FC<ModalFooterProps> = props => {
+const ModalFooter: React.FC<ModalFooterProps> = props => {
   const { children } = props;
-  const { id } = useModal();
+  const { getModalFooterProps } = useModal();
 
-  return (
-    <footer className="_snui-modal__footer" id={`${id}-footer`}>
-      {children}
-    </footer>
-  );
+  return <footer {...getModalFooterProps()}>{children}</footer>;
 };
 
-export default ModalHeader;
+export default ModalFooter;
