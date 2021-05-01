@@ -23,27 +23,29 @@ theme options from [chakra-ui](https://chakra-ui.com/) to start.
     	- Heading
     		- renders h1...h6
     	- Paragraph
-    			- renders p tag
-    		- Icon
-    			- wrapper for the individual icons
+    		- renders p tag
+    	- Icon
+    		- wrapper for the individual icons
     	- Radio
     		- renders input of type radio
     			- used to select one options of the multiple that are available
     	- Spinner
-    			- renders simple loader
-    			- used to indicate a loading state
+    		- renders simple loader
+    		- used to indicate a loading state
     	- Switch
-    			- renders input of type checkbox
-    			- different variant of the checkbox
+    		- renders input of type checkbox
+    		- different variant of the checkbox
     	- Text
     		- renders tags span(default)
     	- Textarea
-    			- renders textarea
+    		- renders textarea
     	- TextInput
-    			- renders input tag
+    		- renders input tag
 
     - molecules
-    		- Modal
-    			- with a11y in mind
-    			- FormControl
-    				- organize form fields with a helper hint, error message
+    		- FormControl
+    			- organize form fields with a helper hint, error message
+    	- Modal
+    		- with a11y in mind
+    		- Menu
+    			- dropdown like component for buttons design pattern

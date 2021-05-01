@@ -33,3 +33,4 @@
 - yarn link
   - inside 'supernova-ui' root folder run `yarn link ../path/to/new/project --force`
     to solve the 'React Hook' error
+  - remove 'setup-tests-ts' from tsconfig 'include' prop
