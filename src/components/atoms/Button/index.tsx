@@ -9,6 +9,7 @@ import {
   colors,
   createClasses,
   createStyles,
+  isFunction,
   isString,
   radii,
   responsify,
@@ -45,6 +46,8 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     isTruncated = false,
     margin = '',
     onClick = () => {},
+    onMouseEnter = null,
+    onMouseLeave = null,
     padding = '',
     rightIcon = null,
     spinner = null,
@@ -255,9 +258,21 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
       {...rest}
       className={classes}
       disabled={isDisabled || isLoading}
-      onBlur={() => setFocusRingColor('')}
+      onBlur={() => {
+        setFocusRingColor('');
+
+        if (isFunction(onMouseLeave)) {
+          onMouseLeave!();
+        }
+      }}
       onClick={onClick}
-      onFocus={() => setFocusRingColor(theme.colors.focusRing)}
+      onFocus={() => {
+        setFocusRingColor(theme.colors.focusRing);
+
+        if (isFunction(onMouseEnter)) {
+          onMouseEnter!();
+        }
+      }}
       style={{
         ...styles,
         backgroundColor: backgroundColorToUse,
@@ -280,6 +295,10 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
         } else {
           setColorToUse(isString(hoverColor) ? hoverColor : '');
         }
+
+        if (isFunction(onMouseEnter)) {
+          onMouseEnter!();
+        }
       }}
       onMouseLeave={() => {
         if (isString(backgroundColor)) {
@@ -299,6 +318,10 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           }
         } else {
           setColorToUse('');
+        }
+
+        if (isFunction(onMouseLeave)) {
+          onMouseLeave!();
         }
       }}
       ref={ref}

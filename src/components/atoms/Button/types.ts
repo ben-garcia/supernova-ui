@@ -26,6 +26,8 @@ export interface ButtonProps
    * Function to be executed for onClick event
    */
   onClick?: (e: SyntheticEvent) => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   /**
    * Reference used primarily to set focus after Modal closes
    */
