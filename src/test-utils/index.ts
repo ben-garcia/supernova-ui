@@ -11,11 +11,12 @@ import {
 } from '@testing-library/react';
 import { RunOptions } from 'axe-core';
 import { axe } from 'jest-axe';
+import { isValidElement } from 'react';
 
-export { fireEvent } from '@testing-library/react';
+export { fireEvent, screen } from '@testing-library/react';
 
 export {
-  act as invoke,
+  act,
   renderHook,
   RenderHookOptions,
   RenderHookResult,
@@ -36,10 +37,11 @@ type A11yTestOptions = RenderOptions & { axeOptions?: RunOptions };
  * Wrapper for jest-axe
  */
 export const a11yTest = async (
-  ui: UI,
+  ui: UI | Element,
   { axeOptions, ...options }: A11yTestOptions = {}
 ) => {
-  const { container } = render(ui, options);
+  const container = isValidElement(ui) ? render(ui, options).container : ui;
+
   const results = await axe(container, axeOptions);
 
   expect(results).toHaveNoViolations();
