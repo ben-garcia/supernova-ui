@@ -11,7 +11,7 @@ export default {
 
 export const Basic = () => (
   <div className="_snui-flex _snui-flex-center">
-    <Tooltip content="this is the label">basic</Tooltip>
+    <Tooltip content="this is the label">Hover Me</Tooltip>
   </div>
 );
 

@@ -9,6 +9,7 @@ import Spinner from './Spinner';
 import Text from './Text';
 import Textarea from './Textarea';
 import TextInput from './TextInput';
+import Tooltip from './Tooltip';
 
 export * from './Icon/Icons';
 
@@ -24,4 +25,5 @@ export {
   Text,
   Textarea,
   TextInput,
+  Tooltip,
 };

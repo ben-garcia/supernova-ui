@@ -38,6 +38,8 @@ const Tooltip: React.FC<TooltipProps> = props => {
     jsx = (
       <span
         aria-describedby={show ? tooltipId : undefined}
+        onBlur={onMouseLeave}
+        onFocus={onMouseEnter}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         ref={triggerRef}
