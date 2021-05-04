@@ -41,11 +41,13 @@ theme options from [chakra-ui](https://chakra-ui.com/) to start.
     		- renders textarea
     	- TextInput
     		- renders input tag
+			- Tooltip
+				- renders text that describes a trigger
 
     - molecules
     		- FormControl
     			- organize form fields with a helper hint, error message
-    	- Modal
-    		- with a11y in mind
-    		- Menu
+				- Modal
+					- with a11y in mind
+				- Menu
     			- dropdown like component for buttons design pattern
