@@ -1,0 +1,155 @@
+._snui-notification {
+  border-radius: var(--radii-md);
+  color: var(--color-black);
+  max-width: 560px;
+  margin: 0.5rem 0;
+  min-width: 300px;
+  padding: var(--size-xs);
+  position: relative;
+
+  &--bottom {
+    animation: slide-in-bottom 0.4s ease;
+
+    &--exiting {
+      animation: slide-out-bottom 0.4s ease;
+    }
+  }
+
+  &--bottom-left {
+    animation: slide-in-left 0.4s ease;
+
+    &--exiting {
+      animation: slide-out-left 0.4s ease;
+    }
+  }
+
+  &--bottom-right {
+    animation: slide-in-right 0.4s ease;
+
+    &--exiting {
+      animation: slide-out-right 0.4s ease;
+    }
+  }
+
+  &--top {
+    animation: slide-in-top 0.4s ease;
+
+    &--exiting {
+      animation: slide-out-top 0.4s ease;
+    }
+  }
+
+  &--top-left {
+    animation: slide-in-left 0.4s ease;
+
+    &--exiting {
+      animation: slide-out-left 0.4s ease;
+    }
+  }
+
+  &--top-right {
+    animation: slide-in-right 0.4s ease;
+
+    &--exiting {
+      animation: slide-out-right 0.4s ease;
+    }
+  }
+
+  &__close-button {
+    border: none;
+    box-shadow: none;
+    padding: 1rem;
+    position: absolute;
+    right: var(--space-sm);
+    top: var(--space-sm);
+  }
+
+  &__progressbar {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    height: 0.5rem;
+    left: 0;
+    position: absolute;
+  }
+}
+
+// animations
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(120%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-bottom {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-120%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-top {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-120%);
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-120%);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(120%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
