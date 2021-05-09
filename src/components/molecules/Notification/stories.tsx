@@ -66,6 +66,37 @@ export const Positions = () => {
   );
 };
 
+export const CustomTemplate = () => {
+  const notification = useNotification();
+
+  const handleTemplate = () => {
+    notification({
+      backgroundColor: 'orange',
+      message: 'warning message',
+      render: onClose => (
+        <div className="_snui-flex _snui-padding-sm">
+          <Button
+            backgroundColor="transparent"
+            boxShadow="0"
+            hoverBackgroundColor="transparent"
+            onClick={onClose}
+          >
+            X
+          </Button>
+          <div className="_snui-flex _snui-flex-column">
+            <p>custom title</p>
+            <p>custom message</p>
+          </div>
+        </div>
+      ),
+      status: 'warning',
+      title: 'Warning',
+    });
+  };
+
+  return <Button onClick={handleTemplate}>custom</Button>;
+};
+
 export const Status = () => {
   const notification = useNotification();
 

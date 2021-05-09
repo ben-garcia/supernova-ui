@@ -32,6 +32,12 @@ type NotificationStatus = 'error' | 'info' | 'success' | 'warning';
 
 export interface AddNotificationProps extends Notification {
   /**
+   * Configure the background color for a custom notification
+   *
+   * NOTE: 'render' prop must be supplied
+   */
+  backgroundColor?: string;
+  /**
    * configure the duration of when to close the notification
    *
    * @default 5000
@@ -59,13 +65,11 @@ export interface AddNotificationProps extends Notification {
    * configure your own Notification component
    *
    * @param onClose function to close the Notification
-   * @param progressBar component to render which represents
-   * the the amount of time before the notification closes
    *
    * @return ReactNode which represents the UI to be rendered
    *
    */
-  render?: (onClose?: () => void, progressBar?: ReactNode) => ReactNode;
+  render?: (onClose?: () => void) => ReactNode;
   /**
    * configure the type of notification
    *

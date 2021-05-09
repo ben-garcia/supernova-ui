@@ -8,6 +8,7 @@ import {
   HelpIcon,
 } from '../../atoms/Icon/Icons';
 import { useTheme } from '../../../hooks';
+import { isFunction, isString } from '../../../utils';
 import { NotificationContext } from '../../../contexts/notification/NotificationProvider';
 import { NotificationProps } from './types';
 
@@ -15,12 +16,14 @@ import './styles.scss';
 
 const Notification: React.FC<NotificationProps> = props => {
   const {
+    backgroundColor,
     duration = 5000,
     id,
     isCloseable = true,
-    isPauseable = true,
+    isPausable = true,
     message,
     position = 'top-right',
+    render,
     status = 'info',
     title,
   } = props;
@@ -31,26 +34,26 @@ const Notification: React.FC<NotificationProps> = props => {
   const [intervalId, setIntervalId] = useState(null);
   const [isExiting, setIsExiting] = useState(false);
 
-  let backgroundColor: string;
+  let backgroundColorToUse: string = '';
   let icon: React.ReactNode;
   let actionType: string;
 
   switch (status) {
     case 'error':
-      backgroundColor = theme.colors.error600;
+      backgroundColorToUse = theme.colors.error600;
       icon = <CloseIcon margin="0 sm 0 0" size="25px" />;
       break;
     case 'success':
-      backgroundColor = theme.colors.success600;
+      backgroundColorToUse = theme.colors.success600;
       icon = <CheckmarkIcon margin="0 sm 0 0" size="25px" />;
       break;
     case 'warning':
-      backgroundColor = theme.colors.warning600;
+      backgroundColorToUse = theme.colors.warning600;
       icon = <HelpIcon margin="0 sm 0 0" size="xs" />;
       break;
     default:
       icon = <InfoIcon margin="0 sm 0 0" size="xs" />;
-      backgroundColor = theme.colors.info600;
+      backgroundColorToUse = theme.colors.info600;
   }
 
   switch (position) {
@@ -71,6 +74,10 @@ const Notification: React.FC<NotificationProps> = props => {
       break;
     default:
       actionType = 'REMOVE_TOP_RIGHT_NOTIFICATION';
+  }
+
+  if (isFunction(render) && isString(backgroundColor)) {
+    backgroundColorToUse = backgroundColor as string;
   }
 
   const handleStartTimer = () => {
@@ -116,16 +123,38 @@ const Notification: React.FC<NotificationProps> = props => {
     handleStartTimer();
   }, []);
 
-  return (
+  return isFunction(render) ? (
     <div
       className={`_snui-flex _snui-notification _snui-notification--${position} ${
         isExiting ? `_snui-notification--${position}--exiting` : ''
       }`}
       id={id}
-      onMouseEnter={isPauseable ? handlePauseTimer : undefined}
-      onMouseLeave={isPauseable ? handleStartTimer : undefined}
+      onMouseEnter={isPausable ? handlePauseTimer : undefined}
+      onMouseLeave={isPausable ? handleStartTimer : undefined}
       role="alert"
-      style={{ backgroundColor }}
+      style={{ backgroundColor: backgroundColorToUse }}
+    >
+      {render!(isCloseable ? handleCloseNotification : () => {})}
+      {isPausable && (
+        <div
+          aria-valuemax={100}
+          aria-valuemin={0}
+          aria-valuenow={progressbarWidth}
+          className="_snui-notification__progressbar"
+          style={{ width: `${progressbarWidth}%` }}
+        />
+      )}
+    </div>
+  ) : (
+    <div
+      className={`_snui-flex _snui-notification _snui-notification--${position} ${
+        isExiting ? `_snui-notification--${position}--exiting` : ''
+      }`}
+      id={id}
+      onMouseEnter={isPausable ? handlePauseTimer : undefined}
+      onMouseLeave={isPausable ? handleStartTimer : undefined}
+      role="alert"
+      style={{ backgroundColor: backgroundColorToUse }}
     >
       <div className="_snui-self-center">{icon}</div>
       <div className="_snui-flex _snui-flex-column _snui-margin-right-md">
@@ -150,7 +179,7 @@ const Notification: React.FC<NotificationProps> = props => {
           <CloseIcon fill="#000" size="1rem" />
         </Button>
       )}
-      {isPauseable && (
+      {isPausable && (
         <div
           aria-valuemax={100}
           aria-valuemin={0}
