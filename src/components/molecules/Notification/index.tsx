@@ -168,12 +168,7 @@ const Notification: React.FC<NotificationProps> = props => {
           aria-label="Close the alert"
           className="_snui-notification__close-button"
           hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
-          onClick={() => {
-            dispatch({
-              type: actionType as any,
-              payload: id as string,
-            });
-          }}
+          onClick={() => setProgressbarWidth(0)}
           variant="outline"
         >
           <CloseIcon fill="#000" size="1rem" />

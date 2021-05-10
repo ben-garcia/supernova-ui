@@ -56,11 +56,12 @@
   }
 
   &__close-button {
-    border: none;
-    box-shadow: none;
-    padding: 1rem;
+    border: none !important;
+    box-shadow: none !important;
+    padding-inline-end: 0 !important;
+    padding-inline-start: 0 !important;
     position: absolute;
-    right: var(--space-sm);
+    right: var(--space-md);
     top: var(--space-sm);
   }
 
