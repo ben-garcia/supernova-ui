@@ -8,6 +8,13 @@ import {
 
 export const useNotification = () => {
   const { dispatch } = useContext(NotificationContext);
+
+  if (dispatch.name !== 'bound dispatchAction') {
+    throw new Error(
+      'useNotification: dispatch is undefined, did you remember to wrap your app in a <SupernovaProvider />'
+    );
+  }
+
   const addNotification = useCallback((options: AddNotificationProps) => {
     let actionType: string;
     const notificationPosition = options?.position || 'top-right';
