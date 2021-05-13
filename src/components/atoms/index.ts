@@ -4,6 +4,7 @@ import Flex from './Flex';
 import FlexItem from './Flex/FlexItem';
 import Heading from './Heading';
 import Paragraph from './Paragraph';
+import Portal from './Portal';
 import Radio from './Radio';
 import Spinner from './Spinner';
 import Text from './Text';
@@ -20,6 +21,7 @@ export {
   FlexItem,
   Heading,
   Paragraph,
+  Portal,
   Radio,
   Spinner,
   Text,

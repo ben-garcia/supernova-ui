@@ -15,8 +15,8 @@ const MenuGroup: React.FC<MenuGroupProps> = props => {
   useMenu();
 
   return (
-    <div className="_snui-flex _snui-flex-column" role="group">
-      <span className="_snui-padding-inline-left _snui-font-weight-xl _snui-margin-y-sm _snui-text-sm _snui-font-heading">
+    <div className="snui-flex snui-flex-column" role="group">
+      <span className="snui-padding-inline-left snui-font-weight-xl snui-margin-y-sm snui-text-sm snui-font-heading">
         {title}
       </span>
       {children}

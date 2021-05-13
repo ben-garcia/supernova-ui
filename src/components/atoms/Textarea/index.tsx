@@ -80,66 +80,66 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
     () =>
       isString(fieldId)
         ? fieldId
-        : `_snui-textarea-${Math.random().toFixed(10)}`,
+        : `snui-textarea-${Math.random().toFixed(10)}`,
     []
   );
   const [labelClasses, setLabelClasses] = useState(
-    '_snui-textarea-label _snui-position-absolute _snui-position-top-left'
+    'snui-textarea-label snui-position-absolute snui-position-top-left'
   );
   const [labelTransition, setLabelTransition] = useState(
     initialLabelTransform ?? 'translate(2.5rem, 50%) scale(1.4)'
   );
   const [labelColor, setLabelColor] = useState('');
   const classes = createClasses(
-    '_snui-textarea _snui-inline-flex _snui-flex-center',
+    'snui-textarea snui-inline-flex snui-flex-center',
     {
-      [`_snui-color-${backgroundColor}`]:
+      [`snui-color-${backgroundColor}`]:
         backgroundColor &&
         backgroundColor !== '' &&
         colors.includes(backgroundColor),
-      [`_snui-border-radius-${borderRadius}`]:
+      [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
-      [`_snui-box-shadow-${boxShadow}`]:
+      [`snui-box-shadow-${boxShadow}`]:
         isString(boxShadow) && shadows.includes(boxShadow),
-      [`_snui-color-$color}`]: isString(color) && colors.includes(color),
-      [`_snui-font-${font}`]:
+      [`snui-color-$color}`]: isString(color) && colors.includes(color),
+      [`snui-font-${font}`]:
         (font && font === 'heading') || font === 'body' || font === 'mono',
-      [`_snui-text-${fontSize}`]:
+      [`snui-text-${fontSize}`]:
         isString(fontSize) && sizes.includes(fontSize as string),
-      [`_snui-font-weight-${fontWeight}`]:
+      [`snui-font-weight-${fontWeight}`]:
         isString(fontWeight) && sizes.includes(fontWeight),
-      [`_snui-height-${height}`]:
+      [`snui-height-${height}`]:
         isString(height) && sizes.includes(height as string),
-      '_snui-disabled': isDisabled,
-      '_snui-text-truncated': isTruncated,
-      [`_snui-letter-spacing-${letterSpacing}`]:
+      'snui-disabled': isDisabled,
+      'snui-text-truncated': isTruncated,
+      [`snui-letter-spacing-${letterSpacing}`]:
         isString(letterSpacing) && sizes.includes(letterSpacing),
-      [`_snui-line-height-${lineHeight}`]:
+      [`snui-line-height-${lineHeight}`]:
         lineHeight !== '' && sizes.includes(lineHeight),
       // margin
-      [`_snui-margin-${margin}`]:
+      [`snui-margin-${margin}`]:
         typeof margin === 'string' && margin !== '' && sizes.includes(margin),
-      [`_snui-margin-bottom-${(margin as MarginPaddingProps).bottom}`]:
+      [`snui-margin-bottom-${(margin as MarginPaddingProps).bottom}`]:
         typeof margin === 'object' &&
         margin.bottom &&
         typeof margin.bottom === 'string' &&
         sizes.includes((margin as MarginPaddingProps).bottom as string),
-      [`_snui-margin-left-${(margin as MarginPaddingProps).left}`]:
+      [`snui-margin-left-${(margin as MarginPaddingProps).left}`]:
         typeof margin === 'object' &&
         margin.left &&
         typeof margin.left === 'string' &&
         sizes.includes((margin as MarginPaddingProps).left as string),
-      [`_snui-margin-right-${(margin as MarginPaddingProps).right}`]:
+      [`snui-margin-right-${(margin as MarginPaddingProps).right}`]:
         typeof margin === 'object' &&
         margin.right &&
         typeof margin.right === 'string' &&
         sizes.includes((margin as MarginPaddingProps).right as string),
-      [`_snui-margin-top-${(margin as MarginPaddingProps).top}`]:
+      [`snui-margin-top-${(margin as MarginPaddingProps).top}`]:
         typeof margin === 'object' &&
         margin.top &&
         typeof margin.top === 'string' &&
         sizes.includes((margin as MarginPaddingProps).top as string),
-      [`_snui-margin-x-${(margin as MarginPaddingProps).x}`]:
+      [`snui-margin-x-${(margin as MarginPaddingProps).x}`]:
         // make sure that left and right properties have not been defined
         !(margin as MarginPaddingProps).left &&
         !(margin as MarginPaddingProps).right &&
@@ -147,7 +147,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
         margin.x &&
         typeof margin.y === 'string' &&
         sizes.includes((margin as MarginPaddingProps).x as string),
-      [`_snui-margin-y-${(margin as MarginPaddingProps).y}`]:
+      [`snui-margin-y-${(margin as MarginPaddingProps).y}`]:
         // make sure that top and bottom properties have not been defined
         !(margin as MarginPaddingProps).bottom &&
         !(margin as MarginPaddingProps).top &&
@@ -156,49 +156,49 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
         typeof margin.y === 'string' &&
         sizes.includes((margin as MarginPaddingProps).y as string),
       // padding
-      [`_snui-padding-${padding}`]:
+      [`snui-padding-${padding}`]:
         typeof padding === 'string' &&
         padding !== '' &&
         sizes.includes(padding),
-      [`_snui-padding-bottom-${(padding as MarginPaddingProps).bottom}`]:
+      [`snui-padding-bottom-${(padding as MarginPaddingProps).bottom}`]:
         typeof padding === 'object' &&
         padding.bottom &&
         typeof padding.bottom === 'string' &&
         sizes.includes((padding as MarginPaddingProps).bottom as string),
-      [`_snui-padding-left-${(padding as any).left}`]:
+      [`snui-padding-left-${(padding as any).left}`]:
         typeof padding === 'object' &&
         padding.left &&
         sizes.includes((padding as MarginPaddingProps).left as string),
-      [`_snui-padding-right-${(padding as MarginPaddingProps).right}`]:
+      [`snui-padding-right-${(padding as MarginPaddingProps).right}`]:
         typeof padding === 'object' &&
         padding.right &&
         typeof padding.right === 'string' &&
         sizes.includes((padding as MarginPaddingProps).right as string),
-      [`_snui-padding-top-${(padding as any).top}`]:
+      [`snui-padding-top-${(padding as any).top}`]:
         typeof padding === 'object' &&
         padding.top &&
         typeof padding.top === 'string' &&
         sizes.includes((padding as MarginPaddingProps).top as string),
-      [`_snui-padding-x-${(padding as MarginPaddingProps).x}`]:
+      [`snui-padding-x-${(padding as MarginPaddingProps).x}`]:
         !(padding as MarginPaddingProps).left &&
         !(padding as MarginPaddingProps).right &&
         typeof padding === 'object' &&
         padding.x &&
         typeof padding.x === 'string' &&
         sizes.includes((padding as MarginPaddingProps).x as string),
-      [`_snui-padding-y-${(padding as MarginPaddingProps).y}`]:
+      [`snui-padding-y-${(padding as MarginPaddingProps).y}`]:
         !(padding as MarginPaddingProps).bottom &&
         !(padding as MarginPaddingProps).top &&
         typeof padding === 'object' &&
         padding.y &&
         typeof padding.y === 'string' &&
         sizes.includes((padding as MarginPaddingProps).y as string),
-      [`_snui-text-${textTransform}`]:
+      [`snui-text-${textTransform}`]:
         textTransform === 'capitalize' ||
         textTransform === 'lowercase' ||
         textTransform === 'uppercase',
-      [`_snui-textarea-${variant}`]: isString(variant),
-      [`_snui-width-${width}`]:
+      [`snui-textarea-${variant}`]: isString(variant),
+      [`snui-width-${width}`]:
         isString(width) && sizes.includes(width as string),
     }
   );
@@ -258,10 +258,10 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
   }
 
   return (
-    <div className="_snui-position-relative">
+    <div className="snui-position-relative">
       {floatLabel && isString(label) && (
         <label
-          className={`${labelClasses} ${isDisabled ? '_snui-disabled' : ''}`}
+          className={`${labelClasses} ${isDisabled ? 'snui-disabled' : ''}`}
           htmlFor={textareaId}
           style={{
             transform: isString(finalLabelTransform) ? labelTransition : '',
@@ -270,11 +270,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
         >
           {label}
           {isRequired && (
-            <span
-              aria-hidden="true"
-              className="_snui-error"
-              role="presentation"
-            >
+            <span aria-hidden="true" className="snui-error" role="presentation">
               *
             </span>
           )}
@@ -282,18 +278,14 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
       )}
       {!floatLabel && isString(label) && (
         <label
-          className={`_snui-visually-hidden ${
-            isDisabled || formControlIsDisabled ? '_snui-disabled' : ''
+          className={`snui-visually-hidden ${
+            isDisabled || formControlIsDisabled ? 'snui-disabled' : ''
           }`}
           htmlFor={textareaId}
         >
           {label}
           {isRequired && (
-            <span
-              aria-hidden="true"
-              className="_snui-error"
-              role="presentation"
-            >
+            <span aria-hidden="true" className="snui-error" role="presentation">
               *
             </span>
           )}
@@ -310,7 +302,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
           setFocusRingColor('');
           if (!isString(textareaValue)) {
             setLabelClasses(
-              '_snui-textarea-label _snui-position-absolute _snui-position-top-left'
+              'snui-textarea-label snui-position-absolute snui-position-top-left'
             );
           }
           if (
@@ -340,7 +332,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
           setLabelColor(theme.colors.focusRing);
 
           if (!isString(textareaValue)) {
-            setLabelClasses(`${labelClasses} _snui-textarea-label-floating`);
+            setLabelClasses(`${labelClasses} snui-textarea-label-floating`);
           }
 
           if (isString(finalLabelTransform)) {

@@ -33,50 +33,50 @@ const SupernovaProvider = (props: SupernovaProviderProps) => {
 
   return (
     <NotificationContext.Provider value={contextValue}>
-      <Portal id="_snui-notifications">
+      <Portal id="snui-notifications">
         <div
-          className="_snui-flex _snui-flex-column _snui-items-center _snui-position-fixed _snui-notification-bottom"
-          id="_snui-notification-bottom"
+          className="snui-flex snui-flex-column snui-items-center snui-position-fixed snui-notification-bottom"
+          id="snui-notification-bottom"
         >
           {(state.lists.bottom as any).map((n: NotificationType) => (
             <Notification {...n} key={n.id} />
           ))}
         </div>
         <div
-          className="_snui-flex _snui-flex-column _snui-position-fixed _snui-notification-bottom-left"
-          id="_snui-notification-bottom-left"
+          className="snui-flex snui-flex-column snui-position-fixed snui-notification-bottom-left"
+          id="snui-notification-bottom-left"
         >
           {(state.lists['bottom-left'] as any).map((n: NotificationType) => (
             <Notification {...n} key={n.id} />
           ))}
         </div>
         <div
-          className="_snui-flex _snui-flex-column _snui-position-fixed _snui-notification-bottom-right"
-          id="_snui-notification-bottom-right"
+          className="snui-flex snui-flex-column snui-position-fixed snui-notification-bottom-right"
+          id="snui-notification-bottom-right"
         >
           {(state.lists['bottom-right'] as any).map((n: NotificationType) => (
             <Notification {...n} key={n.id} />
           ))}
         </div>
         <div
-          className="_snui-flex _snui-flex-column _snui-items-center _snui-position-fixed _snui-notification-top"
-          id="_snui-notification-top"
+          className="snui-flex snui-flex-column snui-items-center snui-position-fixed snui-notification-top"
+          id="snui-notification-top"
         >
           {(state.lists.top as any).map((n: NotificationType) => (
             <Notification {...n} key={n.id} />
           ))}
         </div>
         <div
-          className="_snui-flex _snui-flex-column _snui-position-fixed _snui-notification-top-left"
-          id="_snui-notification-top-left"
+          className="snui-flex snui-flex-column snui-position-fixed snui-notification-top-left"
+          id="snui-notification-top-left"
         >
           {(state.lists['top-left'] as any).map((n: NotificationType) => (
             <Notification {...n} key={n.id} />
           ))}
         </div>
         <div
-          className="_snui-flex _snui-flex-column _snui-position-fixed _snui-notification-top-right"
-          id="_snui-notification-top-right"
+          className="snui-flex snui-flex-column snui-position-fixed snui-notification-top-right"
+          id="snui-notification-top-right"
         >
           {(state.lists['top-right'] as any).map((n: NotificationType) => (
             <Notification {...n} key={n.id} />

@@ -13,11 +13,11 @@ const Flex: React.FC<FlexProps> = props => {
     wrap = 'wrap',
   } = props;
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const classes = createClasses('_snui-flex _snui-flex-container', {
-    [`_snui-items-${alignItems}`]: true,
-    [`_snui-flex-${direction}`]: true,
-    [`_snui-justify-${justifyContent}`]: true,
-    [`_snui-${wrap}`]: true,
+  const classes = createClasses('snui-flex snui-flex-container', {
+    [`snui-items-${alignItems}`]: true,
+    [`snui-flex-${direction}`]: true,
+    [`snui-justify-${justifyContent}`]: true,
+    [`snui-${wrap}`]: true,
   });
   const childrenToRender: any[] = [];
 
@@ -27,7 +27,7 @@ const Flex: React.FC<FlexProps> = props => {
     React.Children.toArray(children).forEach((child: any) => {
       const enhancedChild = React.cloneElement(child, {
         internalUsePadding,
-        className: '_snui-flex-item',
+        className: 'snui-flex-item',
       });
 
       childrenToRender.push(enhancedChild);

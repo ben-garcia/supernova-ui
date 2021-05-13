@@ -1,14 +1,14 @@
-._snui-spinner {
+.snui-spinner {
   animation: rotate 1s infinite linear;
-  border-bottom-color: var(--color-info-700);
-  border-left-color: var(--color-transparent);
-  border-radius: var(--radii-xxl);
-  border-right-color: var(--color-info-700);
-  border-top-color: var(--color-transparent);
+  border-bottom-color: var(--snui-color-info-700);
+  border-left-color: var(--snui-color-transparent);
+  border-radius: var(--snui-radii-xxl);
+  border-right-color: var(--snui-color-info-700);
+  border-top-color: var(--snui-color-transparent);
   border-style: solid;
   border-width: 4px;
-  height: calc(var(--size-md) * 5);
-  width: calc(var(--size-md) * 5);
+  height: calc(var(--snui-size-md) * 5);
+  width: calc(var(--snui-size-md) * 5);
 }
 
 @keyframes rotate {

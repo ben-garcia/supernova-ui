@@ -14,7 +14,7 @@ const FormControl: React.FC<FormControlProps> = props => {
   const { children, id = '', tag = 'div' } = props;
   const elementToRender = createElement(
     tag,
-    { className: '_snui-form-control', role: 'group' },
+    { className: 'snui-form-control', role: 'group' },
     children
   );
   let idToUse: string;

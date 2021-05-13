@@ -1,29 +1,29 @@
-._snui-radio {
+.snui-radio {
   appearance: none;
   border: none;
-  color: var(--color-black);
+  color: var(--snui-color-black);
   cursor: pointer;
   outline: currentColor none medium;
 
   &__control {
     align-items: center;
-    background-color: var(--color-gray-200);
-    border-radius: var(--radii-xxl);
+    background-color: var(--snui-color-gray-200);
+    border-radius: var(--snui-radii-xxl);
     display: inline-flex;
-    height: var(--size-sm);
+    height: var(--snui-size-sm);
     justify-content: center;
-    margin-right: var(--space-sm);
+    margin-right: var(--snui-space-sm);
     transition: background-color 0.4s ease;
-    width: var(--size-md);
+    width: var(--snui-size-md);
   }
 
-  ._snui-hidden-radio:focus ~ ._snui-radio__control {
-    box-shadow: 0 0 0 3px var(--color-focus-ring);
+  .snui-hidden-radio:focus ~ .snui-radio__control {
+    box-shadow: 0 0 0 3px var(--snui-color-focus-ring);
   }
 
   &__circle {
-    background-color: var(--color-white);
-    border-radius: var(--radii-xxl);
+    background-color: var(--snui-color-white);
+    border-radius: var(--snui-radii-xxl);
     height: calc(100% - 6px);
     transition: transform 0.4s ease;
     width: calc(100% - 6px);

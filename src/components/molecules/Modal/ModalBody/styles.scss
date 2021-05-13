@@ -1,7 +1,7 @@
-._snui-modal__body {
+.snui-modal__body {
   align-self: flex-start;
   overflow: auto;
-  padding-inline-end: var(--size-xs);
-  padding: var(--size-xs) var(--size-sm);
+  padding-inline-end: var(--snui-size-xs);
+  padding: var(--snui-size-xs) var(--snui-size-sm);
   width: 100%;
 }

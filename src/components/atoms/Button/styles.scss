@@ -1,36 +1,36 @@
-._snui-button {
+.snui-button {
   appearance: none;
   border: none;
-  border-radius: var(--radii-sm);
-  box-shadow: var(--shadow-sm);
-  color: var(--color-white);
+  border-radius: var(--snui-radii-sm);
+  box-shadow: var(--snui-shadow-sm);
+  color: var(--snui-color-white);
   cursor: pointer;
-  font-weight: var(--font-weight-lg);
-  height: var(--size-md);
-  padding-inline-start: var(--size-md);
-  padding-inline-end: var(--size-md);
+  font-weight: var(--snui-font-weight-lg);
+  height: var(--snui-size-md);
+  padding-inline-start: var(--snui-size-md);
+  padding-inline-end: var(--snui-size-md);
   outline: currentColor none medium;
   width: auto;
 }
 
-._snui-button-filled {
-  background: var(--color-info-700);
+.snui-button-filled {
+  background: var(--snui-color-info-700);
 
   &:not(:disabled):hover {
-    background: var(--color-info-800);
+    background: var(--snui-color-info-800);
   }
 }
 
-._snui-button-outline {
-  background: var(--color-transparent);
-  border: 1px solid var(--color-info-700);
-  color: var(--color-info-700);
+.snui-button-outline {
+  background: var(--snui-color-transparent);
+  border: 1px solid var(--snui-color-info-700);
+  color: var(--snui-color-info-700);
 
   &:not(:disabled):hover {
-    background: var(--color-info-100);
+    background: var(--snui-color-info-100);
   }
 }
 
-._snui-button-disabled {
-  background: var(--color-disabled);
+.snui-button-disabled {
+  background: var(--snui-color-disabled);
 }

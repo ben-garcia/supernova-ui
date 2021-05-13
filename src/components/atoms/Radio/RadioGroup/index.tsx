@@ -28,10 +28,10 @@ const RadioGroup: React.FC<RadioGroupProps> = props => {
     });
     enhancedChildren.push(newChild);
   });
-  const classes = createClasses('_snui-radio-group _snui-inline-flex', {
-    [`_snui-flex-${direction}`]: isString(direction),
-    '_snui-flex-center': isString(direction) && direction === 'row',
-    '_snui-items-start': isString(direction) && direction === 'column',
+  const classes = createClasses('snui-radio-group snui-inline-flex', {
+    [`snui-flex-${direction}`]: isString(direction),
+    'snui-flex-center': isString(direction) && direction === 'row',
+    'snui-items-start': isString(direction) && direction === 'column',
   });
   return (
     <div className={classes} role="radiogroup">

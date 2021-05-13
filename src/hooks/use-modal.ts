@@ -21,7 +21,7 @@ const useModalProvider = (props: ModalProps) => {
   const getModalBodyProps = useCallback(
     (modalBodyProps = {}) => ({
       ...modalBodyProps,
-      className: '_snui-modal__body',
+      className: 'snui-modal__body',
       id: `${id}-body`,
     }),
     [id]
@@ -29,7 +29,7 @@ const useModalProvider = (props: ModalProps) => {
   const getModalHeaderProps = useCallback(
     (modalHeaderProps = {}) => ({
       ...modalHeaderProps,
-      className: '_snui-modal__header',
+      className: 'snui-modal__header',
       id: `${id}-header`,
     }),
     [id]
@@ -37,7 +37,7 @@ const useModalProvider = (props: ModalProps) => {
   const getModalFooterProps = useCallback(
     (modalFooterProps = {}) => ({
       ...modalFooterProps,
-      className: '_snui-modal__footer',
+      className: 'snui-modal__footer',
       id: `${id}-footer`,
     }),
     [id]

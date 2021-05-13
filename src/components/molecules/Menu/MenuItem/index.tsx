@@ -41,7 +41,7 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
   return (
     <button
       {...getMenuItemProps(props, ref)}
-      className="_snui-menu-item _snui-flex _snui-items-center _snui-padding-inline-left"
+      className="snui-menu-item snui-flex snui-items-center snui-padding-inline-left"
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

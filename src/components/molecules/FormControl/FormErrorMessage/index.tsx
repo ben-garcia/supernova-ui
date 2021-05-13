@@ -14,7 +14,7 @@ const FormErrorMessage = forwardRef(
     return isInvalid ? (
       <div
         {...getErrorMessageProps(props, ref)}
-        className="_snui-error _snui-margin-top-sm _snui-font-body"
+        className="snui-error snui-font-body snui-margin-y-sm"
         id={`${id}-feedback`}
       >
         {children}

@@ -66,7 +66,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   } = useFormControl();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(isChecked);
   const checkboxId = useMemo(
-    () => (isString(fieldId) ? fieldId : `_snui-checkbox-${Math.random()}`),
+    () => (isString(fieldId) ? fieldId : `snui-checkbox-${Math.random()}`),
     []
   );
   const backgroundColorToUse = useInputChecked(
@@ -75,55 +75,55 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     checkboxIsChecked
   );
   const classes = createClasses(
-    '_snui-checkbox _snui-inline-flex _snui-flex-center',
+    'snui-checkbox snui-inline-flex snui-flex-center',
     {
-      [`_snui-color-${backgroundColor}`]:
+      [`snui-color-${backgroundColor}`]:
         backgroundColor &&
         backgroundColor !== '' &&
         colors.includes(backgroundColor),
-      [`_snui-border-radius-${borderRadius}`]:
+      [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
-      [`_snui-box-shadow-${boxShadow}`]:
+      [`snui-box-shadow-${boxShadow}`]:
         isString(boxShadow) && shadows.includes(boxShadow),
-      [`_snui-color-$color}`]: isString(color) && colors.includes(color),
-      [`_snui-font-${font}`]:
+      [`snui-color-$color}`]: isString(color) && colors.includes(color),
+      [`snui-font-${font}`]:
         (font && font === 'heading') || font === 'body' || font === 'mono',
-      [`_snui-text-${fontSize}`]:
+      [`snui-text-${fontSize}`]:
         isString(fontSize) && sizes.includes(fontSize as string),
-      [`_snui-font-weight-${fontWeight}`]:
+      [`snui-font-weight-${fontWeight}`]:
         isString(fontWeight) && sizes.includes(fontWeight),
-      [`_snui-height-${height}`]:
+      [`snui-height-${height}`]:
         isString(height) && sizes.includes(height as string),
-      '_snui-disabled': isDisabled,
-      '_snui-text-truncated': isTruncated,
-      [`_snui-letter-spacing-${letterSpacing}`]:
+      'snui-disabled': isDisabled,
+      'snui-text-truncated': isTruncated,
+      [`snui-letter-spacing-${letterSpacing}`]:
         isString(letterSpacing) && sizes.includes(letterSpacing),
-      [`_snui-line-height-${lineHeight}`]:
+      [`snui-line-height-${lineHeight}`]:
         lineHeight !== '' && sizes.includes(lineHeight),
       // margin
-      [`_snui-margin-${margin}`]:
+      [`snui-margin-${margin}`]:
         typeof margin === 'string' && margin !== '' && sizes.includes(margin),
-      [`_snui-margin-bottom-${(margin as MarginPaddingProps).bottom}`]:
+      [`snui-margin-bottom-${(margin as MarginPaddingProps).bottom}`]:
         typeof margin === 'object' &&
         margin.bottom &&
         typeof margin.bottom === 'string' &&
         sizes.includes((margin as MarginPaddingProps).bottom as string),
-      [`_snui-margin-left-${(margin as MarginPaddingProps).left}`]:
+      [`snui-margin-left-${(margin as MarginPaddingProps).left}`]:
         typeof margin === 'object' &&
         margin.left &&
         typeof margin.left === 'string' &&
         sizes.includes((margin as MarginPaddingProps).left as string),
-      [`_snui-margin-right-${(margin as MarginPaddingProps).right}`]:
+      [`snui-margin-right-${(margin as MarginPaddingProps).right}`]:
         typeof margin === 'object' &&
         margin.right &&
         typeof margin.right === 'string' &&
         sizes.includes((margin as MarginPaddingProps).right as string),
-      [`_snui-margin-top-${(margin as MarginPaddingProps).top}`]:
+      [`snui-margin-top-${(margin as MarginPaddingProps).top}`]:
         typeof margin === 'object' &&
         margin.top &&
         typeof margin.top === 'string' &&
         sizes.includes((margin as MarginPaddingProps).top as string),
-      [`_snui-margin-x-${(margin as MarginPaddingProps).x}`]:
+      [`snui-margin-x-${(margin as MarginPaddingProps).x}`]:
         // make sure that left and right properties have not been defined
         !(margin as MarginPaddingProps).left &&
         !(margin as MarginPaddingProps).right &&
@@ -131,7 +131,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         margin.x &&
         typeof margin.y === 'string' &&
         sizes.includes((margin as MarginPaddingProps).x as string),
-      [`_snui-margin-y-${(margin as MarginPaddingProps).y}`]:
+      [`snui-margin-y-${(margin as MarginPaddingProps).y}`]:
         // make sure that top and bottom properties have not been defined
         !(margin as MarginPaddingProps).bottom &&
         !(margin as MarginPaddingProps).top &&
@@ -140,48 +140,48 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         typeof margin.y === 'string' &&
         sizes.includes((margin as MarginPaddingProps).y as string),
       // padding
-      [`_snui-padding-${padding}`]:
+      [`snui-padding-${padding}`]:
         typeof padding === 'string' &&
         padding !== '' &&
         sizes.includes(padding),
-      [`_snui-padding-bottom-${(padding as MarginPaddingProps).bottom}`]:
+      [`snui-padding-bottom-${(padding as MarginPaddingProps).bottom}`]:
         typeof padding === 'object' &&
         padding.bottom &&
         typeof padding.bottom === 'string' &&
         sizes.includes((padding as MarginPaddingProps).bottom as string),
-      [`_snui-padding-left-${(padding as any).left}`]:
+      [`snui-padding-left-${(padding as any).left}`]:
         typeof padding === 'object' &&
         padding.left &&
         sizes.includes((padding as MarginPaddingProps).left as string),
-      [`_snui-padding-right-${(padding as MarginPaddingProps).right}`]:
+      [`snui-padding-right-${(padding as MarginPaddingProps).right}`]:
         typeof padding === 'object' &&
         padding.right &&
         typeof padding.right === 'string' &&
         sizes.includes((padding as MarginPaddingProps).right as string),
-      [`_snui-padding-top-${(padding as any).top}`]:
+      [`snui-padding-top-${(padding as any).top}`]:
         typeof padding === 'object' &&
         padding.top &&
         typeof padding.top === 'string' &&
         sizes.includes((padding as MarginPaddingProps).top as string),
-      [`_snui-padding-x-${(padding as MarginPaddingProps).x}`]:
+      [`snui-padding-x-${(padding as MarginPaddingProps).x}`]:
         !(padding as MarginPaddingProps).left &&
         !(padding as MarginPaddingProps).right &&
         typeof padding === 'object' &&
         padding.x &&
         typeof padding.x === 'string' &&
         sizes.includes((padding as MarginPaddingProps).x as string),
-      [`_snui-padding-y-${(padding as MarginPaddingProps).y}`]:
+      [`snui-padding-y-${(padding as MarginPaddingProps).y}`]:
         !(padding as MarginPaddingProps).bottom &&
         !(padding as MarginPaddingProps).top &&
         typeof padding === 'object' &&
         padding.y &&
         typeof padding.y === 'string' &&
         sizes.includes((padding as MarginPaddingProps).y as string),
-      [`_snui-text-${textTransform}`]:
+      [`snui-text-${textTransform}`]:
         textTransform === 'capitalize' ||
         textTransform === 'lowercase' ||
         textTransform === 'uppercase',
-      [`_snui-width-${width}`]:
+      [`snui-width-${width}`]:
         isString(width) && sizes.includes(width as string),
     }
   );
@@ -243,8 +243,8 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
 
   return (
     <label
-      className={`_snui-position-relative ${classes} ${
-        isDisabled ? '_snui-disabled' : ''
+      className={`snui-position-relative ${classes} ${
+        isDisabled ? 'snui-disabled' : ''
       }`}
     >
       <input
@@ -252,7 +252,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         aria-describedby={labelIds.join(' ') ?? undefined}
         aria-invalid={isInvalid ?? undefined}
         checked={checkboxIsChecked || formControlIsDisabled}
-        className="_snui-hidden-checkbox _snui-visually-hidden"
+        className="snui-hidden-checkbox snui-visually-hidden"
         disabled={isDisabled}
         id={checkboxId}
         onChange={e => {
@@ -267,22 +267,22 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         type="checkbox"
       />
       <span
-        className="_snui-checkbox__control"
+        className="snui-checkbox__control"
         style={{
           ...styles,
           backgroundColor: backgroundColorToUse,
         }}
       >
-        <div className="_snui-flex _snui-flex-center _snui-fill-parent">
+        <div className="snui-flex snui-flex-center snui-fill-parent">
           {checkboxIsChecked && (
             <CheckmarkIcon fill="#fff" height="100%" width="100%" />
           )}
         </div>
       </span>
-      <span className="_snui-checkbox__label">
+      <span className="snui-checkbox__label">
         {label}
         {isRequired && (
-          <span aria-hidden="true" className="_snui-error" role="presentation">
+          <span aria-hidden="true" className="snui-error" role="presentation">
             *
           </span>
         )}

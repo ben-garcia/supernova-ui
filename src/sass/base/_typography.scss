@@ -1,23 +1,23 @@
 :root {
-  --font-letter-spacing-xs: -0.05rem;
-  --font-letter-spacing-sm: -0.025rem;
-  --font-letter-spacing-md: 0;
-  --font-letter-spacing-lg: 0.025rem;
-  --font-letter-spacing-xl: 0.15rem;
-  --font-letter-spacing-xxl: 0.2rem;
-  --font-line-height-xs: 1.25rem;
-  --font-line-height-sm: 1.375rem;
-  --font-line-height-md: 1.5rem;
-  --font-line-height-lg: 2rem;
-  --font-line-height-xl: 2.5rem;
-  --font-line-height-xxl: 3.5rem;
-  --font-weight-xs: 100;
-  --font-weight-sm: 200;
-  --font-weight-md: 400;
-  --font-weight-lg: 600;
-  --font-weight-xl: 700;
-  --font-weight-xxl: 900;
-  --font-heading: -apple-system,
+  --snui-font-letter-spacing-xs: -0.05rem;
+  --snui-font-letter-spacing-sm: -0.025rem;
+  --snui-font-letter-spacing-md: 0;
+  --snui-font-letter-spacing-lg: 0.025rem;
+  --snui-font-letter-spacing-xl: 0.15rem;
+  --snui-font-letter-spacing-xxl: 0.2rem;
+  --snui-font-line-height-xs: 1.25rem;
+  --snui-font-line-height-sm: 1.375rem;
+  --snui-font-line-height-md: 1.5rem;
+  --snui-font-line-height-lg: 2rem;
+  --snui-font-line-height-xl: 2.5rem;
+  --snui-font-line-height-xxl: 3.5rem;
+  --snui-font-weight-xs: 100;
+  --snui-font-weight-sm: 200;
+  --snui-font-weight-md: 400;
+  --snui-font-weight-lg: 600;
+  --snui-font-weight-xl: 700;
+  --snui-font-weight-xxl: 900;
+  --snui-font-heading: -apple-system,
     blinkmacsystemfont,
     'Segoe UI',
     helvetica,
@@ -26,7 +26,7 @@
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol';
-  --font-body: -apple-system,
+  --snui-font-body: -apple-system,
     blinkmacsystemfont,
     'Segoe UI',
     helvetica,
@@ -35,17 +35,17 @@
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol';
-  --font-mono: sfmono-regular,
+  --snui-font-mono: sfmono-regular,
     menlo,
     monaco,
     consolas,
     'Liberation Mono',
     'Courier New',
     monospace;
-  --font-size-xs: 0.85rem;
-  --font-size-sm: 1rem;
-  --font-size-md: 1.125rem;
-  --font-size-lg: 1.625rem;
-  --font-size-xl: 2.25rem;
-  --font-size-xxl: 3.15rem;
+  --snui-font-size-xs: 0.85rem;
+  --snui-font-size-sm: 1rem;
+  --snui-font-size-md: 1.125rem;
+  --snui-font-size-lg: 1.625rem;
+  --snui-font-size-xl: 2.25rem;
+  --snui-font-size-xxl: 3.15rem;
 }

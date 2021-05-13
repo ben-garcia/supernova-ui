@@ -13,7 +13,7 @@ export default {
 const label = 'Reveal your secrets?';
 
 export const CustomBackgroundColors = () => (
-  <div className="_snui-flex _sniu-flex-center">
+  <div className="snui-flex sniu-flex-center">
     <Checkbox
       backgroundColor="error600"
       isChecked
@@ -52,7 +52,7 @@ export const Disabled = () => <Checkbox isDisabled label={label} />;
 export const Default = () => <Checkbox label={label} />;
 
 export const Sizes = () => (
-  <div className="_snui-flex _sniu-flex-center">
+  <div className="snui-flex sniu-flex-center">
     <Checkbox isChecked label="xs" margin="0 sm" size="xs" />
     <Checkbox isChecked label="sm" margin="0 sm" size="sm" />
     <Checkbox isChecked label="md" margin="0 sm" size="md" />

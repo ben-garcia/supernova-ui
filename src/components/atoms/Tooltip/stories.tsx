@@ -23,7 +23,7 @@ export const WithButton = () => (
 
 export const WithPositions = () => (
   <div
-    className="_snui-flex _snui-flex-column _snui-flex-center"
+    className="snui-flex snui-flex-column snui-flex-center"
     style={{ gap: '50px' }}
   >
     <Tooltip content="this is the label" position="bottom">

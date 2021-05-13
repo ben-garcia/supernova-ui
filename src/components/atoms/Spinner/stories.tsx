@@ -18,7 +18,7 @@ export const Default = Template.bind({});
 Default.args = {};
 
 export const Sizes = () => (
-  <div className="_snui-flex">
+  <div className="snui-flex">
     <Spinner size="xxl" />
     <Spinner size="xl" />
     <Spinner size="lg" />

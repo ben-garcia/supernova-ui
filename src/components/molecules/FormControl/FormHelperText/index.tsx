@@ -15,7 +15,7 @@ const FormHelperText = forwardRef(
       <div
         {...getHelpTextProps(props, ref)}
         id={`${id}-helper-text`}
-        className="_snui-form-helper-text _snui-margin-top-sm _snui-font-body"
+        className="snui-form-helper-text snui-font-body snui-margin-y-sm"
       >
         {children}
       </div>

@@ -74,7 +74,7 @@ export const CustomTemplate = () => {
       backgroundColor: 'orange',
       message: 'warning message',
       render: onClose => (
-        <div className="_snui-flex _snui-padding-sm">
+        <div className="snui-flex snui-padding-sm">
           <Button
             backgroundColor="transparent"
             boxShadow="0"
@@ -83,7 +83,7 @@ export const CustomTemplate = () => {
           >
             X
           </Button>
-          <div className="_snui-flex _snui-flex-column">
+          <div className="snui-flex snui-flex-column">
             <p>custom title</p>
             <p>custom message</p>
           </div>

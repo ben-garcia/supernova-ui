@@ -1,4 +1,4 @@
-._snui-overlay {
+.snui-overlay {
   align-items: center;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
@@ -11,23 +11,23 @@
   z-index: 100;
 }
 
-._snui-modal {
+.snui-modal {
   align-items: center;
-  background: var(--color-white);
-  border-radius: var(--radii-sm);
+  background: var(--snui-color-white);
+  border-radius: var(--snui-radii-sm);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-height: calc(calc(var(--size-xs) * -7) + 100vh);
+  max-height: calc(calc(var(--snui-size-xs) * -7) + 100vh);
   position: relative;
-  width: calc(var(--size-md) * 14);
+  width: calc(var(--snui-size-md) * 14);
 
   &__close-button {
     border: none;
     box-shadow: none;
     padding: 1rem;
     position: absolute;
-    right: var(--space-sm);
-    top: var(--space-sm);
+    right: var(--snui-space-sm);
+    top: var(--snui-space-sm);
   }
 }

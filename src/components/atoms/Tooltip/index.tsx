@@ -138,12 +138,12 @@ const Tooltip: React.FC<TooltipProps> = props => {
   }, [triggerRef?.current]);
 
   return (
-    <div className="_snui-tooltip">
+    <div className="snui-tooltip">
       {jsx}
       {show && (
         <Portal>
           <div
-            className="_snui-tooltip-content _snui-font-body"
+            className="snui-tooltip-content snui-font-body"
             ref={contentRef}
             style={{ ...pos, ...styles }}
           >

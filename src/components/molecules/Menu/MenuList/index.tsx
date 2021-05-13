@@ -193,10 +193,10 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   }, [isOpen]);
 
   const classes = createClasses(
-    '_snui-menu _snui-flex _snui-flex-column _snui-margin-top-xs _snui-padding-y-sm _snui-border-radius-xs _snui-color-white',
+    'snui-menu snui-flex snui-flex-column snui-margin-top-xs snui-padding-y-sm snui-border-radius-xs snui-color-white',
     {
-      '_snui-menu--visible': isOpen,
-      '_snui-menu--invisible': !isOpen,
+      'snui-menu--visible': isOpen,
+      'snui-menu--invisible': !isOpen,
     }
   );
 

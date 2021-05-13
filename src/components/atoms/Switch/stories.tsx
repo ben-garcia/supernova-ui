@@ -13,7 +13,7 @@ export default {
 const label = 'Reveal your secrets?';
 
 export const CustomBackgroundColors = () => (
-  <div className="_snui-flex _sniu-flex-center">
+  <div className="snui-flex sniu-flex-center">
     <Switch
       backgroundColor="error600"
       isChecked
@@ -42,7 +42,7 @@ export const Disabled = () => <Switch isDisabled label={label} />;
 export const Default = () => <Switch label={label} />;
 
 export const Sizes = () => (
-  <div className="_snui-flex _sniu-flex-center">
+  <div className="snui-flex sniu-flex-center">
     <Switch isChecked label="xs" margin="0 sm" size="xs" />
     <Switch isChecked label="sm" margin="0 sm" size="sm" />
     <Switch isChecked label="md" margin="0 sm" size="md" />

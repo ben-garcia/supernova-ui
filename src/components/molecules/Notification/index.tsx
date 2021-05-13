@@ -125,8 +125,8 @@ const Notification: React.FC<NotificationProps> = props => {
 
   return isFunction(render) ? (
     <div
-      className={`_snui-flex _snui-notification _snui-notification--${position} ${
-        isExiting ? `_snui-notification--${position}--exiting` : ''
+      className={`snui-flex snui-notification snui-notification--${position} ${
+        isExiting ? `snui-notification--${position}--exiting` : ''
       }`}
       id={id}
       onMouseEnter={isPausable ? handlePauseTimer : undefined}
@@ -140,15 +140,15 @@ const Notification: React.FC<NotificationProps> = props => {
           aria-valuemax={100}
           aria-valuemin={0}
           aria-valuenow={progressbarWidth}
-          className="_snui-notification__progressbar"
+          className="snui-notification__progressbar"
           style={{ width: `${progressbarWidth}%` }}
         />
       )}
     </div>
   ) : (
     <div
-      className={`_snui-flex _snui-notification _snui-notification--${position} ${
-        isExiting ? `_snui-notification--${position}--exiting` : ''
+      className={`snui-flex snui-notification snui-notification--${position} ${
+        isExiting ? `snui-notification--${position}--exiting` : ''
       }`}
       id={id}
       onMouseEnter={isPausable ? handlePauseTimer : undefined}
@@ -156,17 +156,15 @@ const Notification: React.FC<NotificationProps> = props => {
       role="alert"
       style={{ backgroundColor: backgroundColorToUse }}
     >
-      <div className="_snui-self-center">{icon}</div>
-      <div className="_snui-flex _snui-flex-column _snui-margin-right-md">
-        <p className="_snui-notification__title _snui-font-weight-xxl">
-          {title}
-        </p>
-        <p className="_snui-notification__message">{message}</p>
+      <div className="snui-self-center">{icon}</div>
+      <div className="snui-flex snui-flex-column snui-margin-right-md">
+        <p className="snui-notification__title snui-font-weight-xxl">{title}</p>
+        <p className="snui-notification__message">{message}</p>
       </div>
       {isCloseable && (
         <Button
           aria-label="Close the alert"
-          className="_snui-notification__close-button"
+          className="snui-notification__close-button"
           hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
           onClick={() => setProgressbarWidth(0)}
           variant="outline"
@@ -179,7 +177,7 @@ const Notification: React.FC<NotificationProps> = props => {
           aria-valuemax={100}
           aria-valuemin={0}
           aria-valuenow={progressbarWidth}
-          className="_snui-notification__progressbar"
+          className="snui-notification__progressbar"
           style={{ width: `${progressbarWidth}%` }}
         />
       )}

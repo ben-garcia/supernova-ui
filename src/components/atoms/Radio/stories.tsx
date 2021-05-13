@@ -56,9 +56,9 @@ export const Direction = () => {
   const [framework, setFramework] = React.useState('react');
   const [language, setLanguage] = React.useState('typescript');
   return (
-    <div className="_snui-flex _snui-flex-column _snui-flex-center">
-      <div className="_snui-margin-y-md">
-        <p className="_snui-margin-y-sm">Favorite framework/library</p>
+    <div className="snui-flex snui-flex-column snui-flex-center">
+      <div className="snui-margin-y-md">
+        <p className="snui-margin-y-sm">Favorite framework/library</p>
         <RadioGroup
           defaultValue={framework}
           name="frameworks"
@@ -70,7 +70,7 @@ export const Direction = () => {
         </RadioGroup>
       </div>
       <div>
-        <p className="_snui-margin-y-sm">Favorite language</p>
+        <p className="snui-margin-y-sm">Favorite language</p>
         <RadioGroup
           defaultValue={language}
           direction="column"
