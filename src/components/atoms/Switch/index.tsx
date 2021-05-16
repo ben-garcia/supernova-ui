@@ -77,10 +77,6 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
   const classes = createClasses(
     'snui-switch snui-inline-flex snui-flex-center',
     {
-      [`snui-color-${backgroundColor}`]:
-        backgroundColor &&
-        backgroundColor !== '' &&
-        colors.includes(backgroundColor),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
@@ -272,7 +268,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
       </span>
       <input
         {...rest}
-        aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
         aria-invalid={isInvalid ?? undefined}
         checked={checkboxIsChecked || formControlIsDisabled}
         className="snui-hidden-switch snui-visually-hidden"
