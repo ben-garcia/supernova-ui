@@ -77,10 +77,6 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   const classes = createClasses(
     'snui-checkbox snui-inline-flex snui-flex-center',
     {
-      [`snui-color-${backgroundColor}`]:
-        backgroundColor &&
-        backgroundColor !== '' &&
-        colors.includes(backgroundColor),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
@@ -249,7 +245,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     >
       <input
         {...rest}
-        aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
         aria-invalid={isInvalid ?? undefined}
         checked={checkboxIsChecked || formControlIsDisabled}
         className="snui-hidden-checkbox snui-visually-hidden"

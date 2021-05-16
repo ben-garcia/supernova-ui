@@ -12,6 +12,21 @@ export default {
 
 const label = 'Reveal your secrets?';
 
+export const Controlled = () => {
+  const [checked, setChecked] = React.useState(true);
+
+  return (
+    <>
+      <Checkbox
+        isChecked={checked}
+        onChange={() => setChecked(!checked)}
+        label={label}
+      />
+      <p>{`checked: ${JSON.stringify(checked)}`}</p>
+    </>
+  );
+};
+
 export const CustomBackgroundColors = () => (
   <div className="snui-flex sniu-flex-center">
     <Checkbox
