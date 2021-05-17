@@ -3,6 +3,7 @@ import React from 'react';
 
 import Radio from '.';
 import RadioGroup from './RadioGroup';
+import { FormControl, FormErrorMessage, FormHelperText } from '../../molecules';
 import argTypes from './argTypes';
 
 export default {
@@ -107,5 +108,21 @@ export const Sizes = () => {
       <Radio label="xl" margin="0 sm" size="xl" value="xl" />
       <Radio label="xxl" margin="0 sm" size="xxl" value="xxl" />
     </RadioGroup>
+  );
+};
+
+export const WithFormControl = () => {
+  const [answer, setAnswer] = React.useState('3.14159');
+
+  return (
+    <FormControl isInvalid={answer !== '3.14159'}>
+      <RadioGroup defaultValue={answer} name="answer" onChange={setAnswer}>
+        <Radio label="3.14195" margin="0 sm" value="3.14195" />
+        <Radio label="3.15149" margin="0 sm" value="3.15249" />
+        <Radio label="3.14159" margin="0 sm" value="3.14159" />
+      </RadioGroup>
+      <FormHelperText>Choose the correct value of PI</FormHelperText>
+      <FormErrorMessage>error has been detected</FormErrorMessage>
+    </FormControl>
   );
 };

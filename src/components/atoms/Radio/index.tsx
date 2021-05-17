@@ -41,7 +41,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     fontSize = '',
     fontWeight = '',
     height = '',
-    isChecked = undefined,
+    isChecked = false,
     isDisabled = false,
     label = undefined,
     letterSpacing = '',
@@ -66,9 +66,12 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     isInvalid,
     isRequired,
   } = useFormControl();
-  const [radioIsChecked, setRadioIsChecked] = useState(isChecked || false);
+  const [radioIsChecked, setRadioIsChecked] = useState(isChecked);
   const radioInputId = useMemo(
-    () => (isString(fieldId) ? fieldId : `snui-radio-${Math.random()}`),
+    () =>
+      isString(fieldId)
+        ? `${fieldId}-${Math.random()}`
+        : `snui-radio-${Math.random()}`,
     []
   );
   const backgroundColorToUse = useInputChecked(
@@ -80,10 +83,6 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
   const classes = createClasses(
     'snui-radio snui-inline-flex snui-flex-center',
     {
-      [`snui-color-${backgroundColor}`]:
-        backgroundColor &&
-        backgroundColor !== '' &&
-        colors.includes(backgroundColor),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
@@ -259,7 +258,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     >
       <input
         {...rest}
-        aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
         checked={isChecked && radioIsChecked}
         className="snui-hidden-radio snui-visually-hidden"
         disabled={isDisabled || formControlIsDisabled}
