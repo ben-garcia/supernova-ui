@@ -1,21 +1,29 @@
 import React, { forwardRef, ReactNode } from 'react';
 
 import { useFormControl } from '../../../../hooks';
+import { createClasses, isString } from '../../../../utils';
 
 export interface FormHelperTextProps {
   children: ReactNode;
+  className?: string;
 }
 
 const FormHelperText = forwardRef(
   (props: FormHelperTextProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    const { children } = props;
+    const { children, className } = props;
+    const classes = createClasses(
+      'snui-form-helper-text snui-font-body snui-margin-y-sm',
+      {
+        [`${className}`]: isString(className),
+      }
+    );
     const { id, getHelpTextProps } = useFormControl();
 
     return (
       <div
         {...getHelpTextProps(props, ref)}
         id={`${id}-helper-text`}
-        className="snui-form-helper-text snui-font-body snui-margin-y-sm"
+        className={classes}
       >
         {children}
       </div>

@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
  */
 export interface FormControlProps {
   children: ReactNode;
+  className?: string;
   /**
    * id that will be shared across all the children
    */

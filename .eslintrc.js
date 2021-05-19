@@ -53,6 +53,7 @@ module.exports = {
     'react/prop-types': 0,
     // There is no need to import React when using Next.js
     'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 0,
   },
   settings: {
     'import/resolver': {
