@@ -2,7 +2,7 @@
 import React, {
   Children,
   useCallback,
-  useLayoutEffect,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -77,7 +77,7 @@ const Tooltip: React.FC<TooltipProps> = props => {
     }
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       if (triggerRef?.current) {
         const triggerPosition = triggerRef.current.getBoundingClientRect();
