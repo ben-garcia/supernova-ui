@@ -35,6 +35,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
     backgroundColor = 'info700',
     borderRadius = '',
     boxShadow = '',
+    className = '',
     color = '',
     font = 'body',
     fontSize = '',
@@ -75,8 +76,9 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
     checkboxIsChecked
   );
   const classes = createClasses(
-    'snui-switch snui-inline-flex snui-flex-center',
+    'snui-switch snui-inline-flex snui-items-center snui-justify-space-between',
     {
+      [`${className}`]: isString(className),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:

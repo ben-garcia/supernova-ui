@@ -5,6 +5,7 @@
   color: var(--snui-color-black);
   cursor: pointer;
   outline: currentColor none medium;
+  width: 100%;
 
   &__control {
     align-items: center;
@@ -13,7 +14,6 @@
     display: inline-flex;
     height: var(--snui-size-sm);
     padding: var(--snui-space-xs);
-    margin-right: var(--snui-space-sm);
     transition: background-color 0.4s ease;
     width: var(--snui-size-md);
   }
