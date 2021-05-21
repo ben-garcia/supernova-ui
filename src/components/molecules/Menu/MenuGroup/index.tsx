@@ -1,9 +1,11 @@
 import React from 'react';
 
 import { useMenu } from '../../../../hooks';
+import { createClasses, isString } from '../../../../utils';
 
 interface MenuGroupProps {
   children: React.ReactNode;
+  className?: string;
   /*
    * the header that describes how items are grouped
    */
@@ -11,11 +13,15 @@ interface MenuGroupProps {
 }
 
 const MenuGroup: React.FC<MenuGroupProps> = props => {
-  const { children, title } = props;
+  const { children, className, title } = props;
+  const classes = createClasses('snui-flex snui-flex-column', {
+    [`${className}`]: isString(className),
+  });
+
   useMenu();
 
   return (
-    <div className="snui-flex snui-flex-column" role="group">
+    <div className={classes} role="group">
       <span className="snui-padding-inline-left snui-font-weight-xl snui-margin-y-sm snui-text-sm snui-font-heading">
         {title}
       </span>

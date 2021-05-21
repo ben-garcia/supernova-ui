@@ -11,12 +11,13 @@ import React, {
 import { createPortal } from 'react-dom';
 
 import { useMenu, useTheme } from '../../../../hooks';
-import { createClasses } from '../../../../utils';
+import { createClasses, isString } from '../../../../utils';
 
 import './styles.scss';
 
 export interface MenuListProps {
   children: ReactNode;
+  className?: string;
   maxWidth?: string;
   minWidth?: string;
   width?: string;
@@ -24,7 +25,14 @@ export interface MenuListProps {
 
 // @ts-ignore
 const MenuList = forwardRef((props: MenuListProps, ref: any) => {
-  const { children, maxWidth = '', minWidth = '', width = '', ...rest } = props;
+  const {
+    children,
+    className,
+    maxWidth = '',
+    minWidth = '',
+    width = '',
+    ...rest
+  } = props;
   const {
     changeActiveMenuItem,
     closeOnEsc,
@@ -195,6 +203,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const classes = createClasses(
     'snui-menu snui-flex snui-flex-column snui-margin-top-xs snui-padding-y-sm snui-border-radius-xs snui-color-white',
     {
+      [`${className}`]: isString(className),
       'snui-menu--visible': isOpen,
       'snui-menu--invisible': !isOpen,
     }

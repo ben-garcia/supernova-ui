@@ -1,21 +1,28 @@
 import React, { forwardRef, useState } from 'react';
 
 import { useMenu, useTheme } from '../../../../hooks';
-import { isFunction } from '../../../../utils';
+import { createClasses, isFunction, isString } from '../../../../utils';
 
 import './styles.scss';
 
 export interface MenuItemProps {
   children: React.ReactNode;
+  className?: string;
   onClick?: () => void;
 }
 
 const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
-  const { children, onClick = null } = props;
+  const { children, className, onClick = null } = props;
   const { activeMenuItem, onClose, getMenuItemProps } = useMenu();
   const theme = useTheme();
   const [backgroundColor, setBackgroundColor] = useState('');
   const [color, setColor] = useState('');
+  const classes = createClasses(
+    'snui-menu-item snui-flex snui-items-center snui-padding-inline-left',
+    {
+      [`${className}`]: isString(className),
+    }
+  );
 
   const handleMouseEnter = () => {
     if (activeMenuItem?.current) {
@@ -41,7 +48,7 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
   return (
     <button
       {...getMenuItemProps(props, ref)}
-      className="snui-menu-item snui-flex snui-items-center snui-padding-inline-left"
+      className={classes}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
