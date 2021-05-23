@@ -364,6 +364,7 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
       if (font && font !== 'heading' && font !== 'body' && font !== 'mono') {
         styles.fontFamily = value as string;
       }
+      styles.fontFamily = (theme as any).typography.fonts[font];
     } else if (property === 'fontSize') {
       if (isString(fontSize) && !sizes.includes(fontSize)) {
         styles.fontSize = value;
