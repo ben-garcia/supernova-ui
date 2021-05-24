@@ -154,7 +154,10 @@ const Notification: React.FC<NotificationProps> = props => {
       onMouseEnter={isPausable ? handlePauseTimer : undefined}
       onMouseLeave={isPausable ? handleStartTimer : undefined}
       role="alert"
-      style={{ backgroundColor: backgroundColorToUse }}
+      style={{
+        backgroundColor: backgroundColorToUse,
+        padding: theme.sizes.xs,
+      }}
     >
       <div className="snui-self-center">{icon}</div>
       <div className="snui-flex snui-flex-column snui-margin-right-md">
