@@ -6,7 +6,6 @@ import { Sizes } from '../../../types/common';
 import './styles.scss';
 
 import {
-  colors,
   createClasses,
   createStyles,
   isFunction,
@@ -64,14 +63,14 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
 
   useEffect(() => {
     if (isString(backgroundColor)) {
-      if (colors.includes(backgroundColor)) {
+      if ((theme as any).colors[backgroundColor]) {
         setBackgroundColorToUse((theme as any).colors[backgroundColor]);
       } else {
         setBackgroundColorToUse(backgroundColor);
       }
     }
     if (isString(color)) {
-      if (colors.includes(color)) {
+      if ((theme as any).colors[color]) {
         setColorToUse((theme as any).colors[color]);
       } else {
         setColorToUse(color);
@@ -82,15 +81,10 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
   const classes = createClasses(
     'snui-button snui-inline-flex snui-flex-center',
     {
-      [`snui-color-${backgroundColor}`]:
-        backgroundColor &&
-        backgroundColor !== '' &&
-        colors.includes(backgroundColor),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
         isString(boxShadow) && shadows.includes(boxShadow),
-      [`snui-color-${color}`]: isString(color) && colors.includes(color),
       [className]: isString(className),
       [`snui-font-${font}`]:
         (font && font === 'heading') || font === 'body' || font === 'mono',
@@ -282,7 +276,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
         color: colorToUse,
       }}
       onMouseEnter={() => {
-        if (colors.includes(hoverBackgroundColor)) {
+        if ((theme as any).colors[hoverBackgroundColor]) {
           setBackgroundColorToUse((theme as any).colors[hoverBackgroundColor]);
         } else {
           setBackgroundColorToUse(
@@ -290,7 +284,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           );
         }
 
-        if (colors.includes(hoverColor)) {
+        if ((theme as any).colors[hoverColor]) {
           setColorToUse((theme as any).colors[hoverColor]);
         } else {
           setColorToUse(isString(hoverColor) ? hoverColor : '');
@@ -302,7 +296,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
       }}
       onMouseLeave={() => {
         if (isString(backgroundColor)) {
-          if (colors.includes(backgroundColor)) {
+          if ((theme as any).colors[backgroundColor]) {
             setBackgroundColorToUse((theme as any).colors[backgroundColor]);
           } else {
             setBackgroundColorToUse(backgroundColor);
@@ -311,7 +305,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           setBackgroundColorToUse('');
         }
         if (isString(color)) {
-          if (colors.includes(color)) {
+          if ((theme as any).colors[color]) {
             setColorToUse((theme as any).colors[color]);
           } else {
             setColorToUse(color);
@@ -354,5 +348,4 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     </button>
   );
 });
-
 export default Button;
