@@ -4,7 +4,8 @@
   border-radius: var(--snui-radii-sm);
   box-shadow: var(--snui-shadow-sm);
   color: var(--snui-color-black);
-  font-weight: var(--snui-font-weight-sm);
+  font-size: 1.2rem;
+  font-weight: var(--snui-font-weight-md);
   padding-inline-start: var(--snui-size-md);
   padding-inline-end: var(--snui-size-md);
   outline: currentColor none medium;
@@ -13,13 +14,15 @@
 
 .snui-text-label {
   cursor: text;
-  transform: translate(2.5rem, 50%) scale(1.4);
+  top: 0;
+  left: 0;
+  transform: translate(1rem, 1.2rem) scale(1.2);
   transition: transform 200ms linear;
+  transform-origin: top left;
 }
 
 .snui-text-label-floating {
-  background-color: var(--snui-color-white);
-  transform: translate(1.3rem, -0.85rem) scale(1);
+  transform: translate(1.2rem, 0.2rem) scale(1);
   z-index: 100;
 }
 

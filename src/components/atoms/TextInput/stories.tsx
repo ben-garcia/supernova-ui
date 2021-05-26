@@ -43,12 +43,38 @@ export const InitialAndFinalLabelTransform = () => (
 
 export const Sizes = () => (
   <div>
-    <TextInput label={label} margin="sm 0" size="xs" />
-    <TextInput label={label} margin="sm 0" size="sm" />
-    <TextInput label={label} margin="sm 0" size="md" />
-    <TextInput label={label} margin="sm 0" size="lg" />
-    <TextInput label={label} margin="sm 0" size="xl" />
-    <TextInput label={label} margin="sm 0" size="xxl" />
+    <TextInput floatLabel label="Username" margin="sm 0" size="sm" />
+    <TextInput floatLabel label="Password" margin="sm 0" size="md" />
+
+    <TextInput
+      floatLabel
+      label="Usernameusername"
+      margin="sm 0"
+      size="sm"
+      variant="flushed"
+    />
+    <TextInput
+      floatLabel
+      label="Passwordpassword"
+      margin="sm 0"
+      size="md"
+      variant="flushed"
+    />
+
+    <TextInput
+      floatLabel
+      label="Username username"
+      margin="sm 0"
+      size="sm"
+      variant="filled"
+    />
+    <TextInput
+      floatLabel
+      label="Password password"
+      margin="sm 0"
+      size="md"
+      variant="filled"
+    />
   </div>
 );
 

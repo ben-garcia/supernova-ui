@@ -89,7 +89,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   );
   const [labelColor, setLabelColor] = useState('');
   const [labelClasses, setLabelClasses] = useState(
-    'snui-text-label snui-position-absolute snui-position-top-left'
+    'snui-text-label snui-position-absolute'
   );
   const classes = createClasses(
     'snui-text-input snui-inline-flex snui-flex-center',
@@ -224,25 +224,44 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     breakpoint
   );
 
+  // copy margin and padding props to give to the wrapper div
+  const textInputWrapperStyles = {
+    marginBottom: styles.marginBottom,
+    marginLeft: styles.marginLeft,
+    marginRight: styles.marginRight,
+    marginTop: styles.marginTop,
+    paddingBottom: styles.paddingBottom,
+    paddingLeft: styles.paddingLeft,
+    paddingRight: styles.paddingRight,
+    paddingTop: styles.paddingTop,
+  };
+
+  // remove all margin and padding props from styles
+  delete styles.marginBottom;
+  delete styles.marginLeft;
+  delete styles.marginRight;
+  delete styles.marginTop;
+  delete styles.paddingBottom;
+  delete styles.paddingLeft;
+  delete styles.paddingRight;
+  delete styles.paddingTop;
+
   if (isString(size)) {
     if (sizes.includes(size as string)) {
-      if (size === 'lg' || size === 'xl' || size === 'xxl') {
-        styles.fontSize = `${theme.typography.fontSizes.lg}`;
-        styles.height = `calc(${theme.sizes[size as Sizes]} * 1.05)`;
-      } else if (size === 'xs') {
-        styles.fontSize = `calc(${theme.typography.fontSizes.xs} * 1.2)`;
-        styles.height = `calc(${theme.sizes[size as Sizes]} * 1.7)`;
-      } else if (size === 'sm') {
-        styles.fontSize = `calc(${theme.typography.fontSizes.xs} * 1.2)`;
-        styles.height = `calc(${theme.sizes[size as Sizes]} * 1.3)`;
-      } else if (size === 'md') {
-        styles.fontSize = `${theme.typography.fontSizes[size as Sizes]}`;
-        styles.height = `calc(${theme.sizes[size as Sizes]} * 1.12)`;
+      if (floatLabel && isString(label)) {
+        if (size === 'sm') {
+          styles.height = `calc(${theme.sizes[size as Sizes]} * 2)`;
+          styles.paddingTop = '1rem';
+        } else if (size === 'md') {
+          styles.height = `calc(${theme.sizes[size as Sizes]} * 1.85)`;
+          styles.paddingTop = '1.5rem';
+        }
+      } else {
+        styles.height = `calc(${theme.sizes[size as Sizes]} * 1.2)`;
       }
       styles.paddingInlineStart = theme.spacing.md;
       styles.paddingInlineEnd = theme.spacing.md;
     } else {
-      styles.fontSize = `calc(${size} * 0.5)`;
       styles.height = size as string;
       styles.paddingInlineStart = theme.spacing.md;
       styles.paddingInlineEnd = theme.spacing.md;
@@ -275,7 +294,10 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   }
 
   return (
-    <div className="snui-position-relative">
+    <div
+      className="snui-position-relative"
+      style={{ ...textInputWrapperStyles, height: styles.height }}
+    >
       {leftIcon && (
         <div className="snui-position-absolute snui-position-top-left snui-padding-left-sm">
           {leftIcon}
@@ -324,9 +346,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
         onBlur={() => {
           setFocusRingColor('');
           if (!isString(inputValue)) {
-            setLabelClasses(
-              'snui-text-label snui-position-absolute snui-position-top-left'
-            );
+            setLabelClasses('snui-text-label snui-position-absolute');
           }
           if (
             labelTransition &&

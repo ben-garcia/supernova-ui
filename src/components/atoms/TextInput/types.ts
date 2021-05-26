@@ -11,7 +11,7 @@ import {
  * Props for the TextInput component
  */
 export interface TextInputProps
-  extends Omit<CommonProps, 'children' | 'isLoading'>,
+  extends Omit<CommonProps, 'children' | 'isLoading' | 'size'>,
     FormControlProps,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
@@ -19,6 +19,12 @@ export interface TextInputProps
    * React reference
    */
   ref?: RefObject<HTMLInputElement>;
+  /**
+   * The size of the input
+   *
+   * @default 'md'
+   */
+  size?: 'sm' | 'md';
   /**
    * Indiacate the type of input
    *
