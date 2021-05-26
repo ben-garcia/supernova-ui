@@ -7,17 +7,14 @@ import {
   colors,
   createClasses,
   createStyles,
-  isObject,
   isFunction,
   isString,
   radii,
-  responsify,
   shadows,
   sizes,
 } from '../../../utils';
 
 import { MarginPaddingProps } from '../../../types';
-import { Sizes } from '../../../types/common';
 import { useBreakpoint, useFormControl, useTheme } from '../../../hooks';
 
 /**
@@ -47,7 +44,6 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
     onChange = null,
     padding = '',
     resize = 'none',
-    size = 'md',
     textTransform = '',
     value = null,
     variant = 'outline',
@@ -223,25 +219,27 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
     breakpoint
   );
 
-  if (isString(size)) {
-    if (sizes.includes(size as string)) {
-      if (size === 'xs' || size === 'sm' || size === 'md') {
-        styles.fontSize = `calc(${
-          theme.typography.fontSizes[size as Sizes]
-        } * 1.2)`;
-      } else {
-        styles.fontSize = theme.typography.fontSizes.lg;
-      }
-      styles.paddingInlineStart = theme.spacing.md;
-      styles.paddingInlineEnd = theme.spacing.md;
-    } else {
-      styles.fontSize = `calc(${size} * 0.5)`;
-      styles.paddingInlineStart = theme.spacing.md;
-      styles.paddingInlineEnd = theme.spacing.md;
-    }
-  } else if (isObject(size)) {
-    responsify('fontSize', size, styles, theme.sizes, breakpoint, sizes);
-  }
+  // copy margin and padding props to give to the wrapper div
+  const textareaWrapperStyles = {
+    marginBottom: styles.marginBottom,
+    marginLeft: styles.marginLeft,
+    marginRight: styles.marginRight,
+    marginTop: styles.marginTop,
+    paddingBottom: styles.paddingBottom,
+    paddingLeft: styles.paddingLeft,
+    paddingRight: styles.paddingRight,
+    paddingTop: styles.paddingTop,
+  };
+
+  // remove all margin and padding props from styles
+  delete styles.marginBottom;
+  delete styles.marginLeft;
+  delete styles.marginRight;
+  delete styles.marginTop;
+  delete styles.paddingBottom;
+  delete styles.paddingLeft;
+  delete styles.paddingRight;
+  delete styles.paddingTop;
 
   const labelIds: string[] = [];
 
@@ -258,7 +256,10 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
   }
 
   return (
-    <div className="snui-position-relative">
+    <div
+      className="snui-position-relative"
+      style={{ ...textareaWrapperStyles }}
+    >
       {floatLabel && isString(label) && (
         <label
           className={`${labelClasses} ${isDisabled ? 'snui-disabled' : ''}`}

@@ -22,9 +22,9 @@ export const Outline = () => <Textarea label={label} variant="outline" />;
 
 export const FloatingLabel = () => (
   <div>
-    <Textarea margin="sm 0" floatLabel label="Filled" variant="filled" />
-    <Textarea margin="sm 0" floatLabel label="Flushed" variant="flushed" />
-    <Textarea margin="sm 0" floatLabel label="Outline" variant="outline" />
+    <Textarea floatLabel label="Filled" margin="sm 0" variant="filled" />
+    <Textarea floatLabel label="Flushed" margin="sm 0" variant="flushed" />
+    <Textarea floatLabel label="Outline" margin="sm 0" variant="outline" />
   </div>
 );
 
@@ -54,17 +54,6 @@ export const Resizes = () => (
     />
     <Textarea label="Both" margin="sm 0" resize="both" variant="outline" />
   </>
-);
-
-export const Sizes = () => (
-  <div>
-    <Textarea label={label} margin="sm 0" size="xs" />
-    <Textarea label={label} margin="sm 0" size="sm" />
-    <Textarea label={label} margin="sm 0" size="md" />
-    <Textarea label={label} margin="sm 0" size="lg" />
-    <Textarea label={label} margin="sm 0" size="xl" />
-    <Textarea label={label} margin="sm 0" size="xxl" />
-  </div>
 );
 
 export const WithHoverBackgroundAndColor = () => (

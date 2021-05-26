@@ -4,6 +4,7 @@
   border-radius: var(--snui-radii-sm);
   box-shadow: var(--snui-shadow-sm);
   color: var(--snui-color-black);
+  font-size: 1.2rem;
   font-weight: var(--snui-font-weight-sm);
   min-height: 80px;
   outline: currentColor none medium;
@@ -16,13 +17,15 @@
 
 .snui-textarea-label {
   cursor: text;
-  transform: translate(2.5rem, 50%) scale(1.5);
+  left: 0;
+  top: 0;
+  transform: translate(1.8rem, 1.1rem) scale(1.2);
   transition: transform 200ms linear;
+  transform-origin: top left;
 }
 
 .snui-textarea-label-floating {
-  background-color: var(--snui-color-white);
-  transform: translate(1.55rem, -1.15rem) scale(1.2);
+  transform: translate(2rem, -1.1rem) scale(1);
   z-index: 100;
 }
 
