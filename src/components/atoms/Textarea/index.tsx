@@ -294,7 +294,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
       )}
       <textarea
         {...rest}
-        aria-describedby={labelIds.join(' ') ?? undefined}
+        aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
         aria-invalid={isInvalid ?? undefined}
         className={classes}
         disabled={isDisabled || formControlIsDisabled}
