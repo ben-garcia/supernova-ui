@@ -12,6 +12,10 @@ import {
   ArrowRightIcon,
   ArrowUpIcon,
   CheckmarkIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
   CloseIcon,
   ConnectivityIcon,
   DownloadIcon,
@@ -52,6 +56,10 @@ export const All = () => (
     <ArrowRightIcon size="3rem" />
     <ArrowUpIcon size="3rem" />
     <CheckmarkIcon size="3rem" />
+    <ChevronDownIcon size="3rem" />
+    <ChevronLeftIcon size="3rem" />
+    <ChevronRightIcon size="3rem" />
+    <ChevronUpIcon size="3rem" />
     <CloseIcon size="3rem" />
     <ConnectivityIcon size="3rem" />
     <DownloadIcon size="3rem" />
