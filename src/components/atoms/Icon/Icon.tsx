@@ -13,6 +13,7 @@ import { useBreakpoint, useTheme } from '../../../hooks';
 const Icon: React.FC<IconBaseProps> = props => {
   const {
     children,
+    className,
     fill = '',
     size = 'md',
     viewBox = '0 0 4.208 4.208',
@@ -25,6 +26,7 @@ const Icon: React.FC<IconBaseProps> = props => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const classes = createClasses('', {
+    [`${className}`]: isString(className),
     [`snui-height-${height}`]:
       isString(height) && sizes.includes(height as string),
     // margin
