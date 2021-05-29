@@ -18,15 +18,9 @@ import './styles.scss';
 export interface MenuListProps {
   children: ReactNode;
   className?: string;
-  /**
-   * How the menu list should positioned relative
-   * to the menu button
-   *
-   * @default 'left'
-   */
-  position?: 'left' | 'right';
   maxWidth?: string;
   minWidth?: string;
+  position?: 'left' | 'right';
   width?: string;
 }
 
@@ -58,7 +52,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const previousEl = useRef<HTMLButtonElement>(null);
   const nextEl = useRef<HTMLButtonElement>(null);
   const activeEl = useRef<HTMLButtonElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ left: '', top: '' });
 
   const handleActive = useCallback((element: HTMLButtonElement) => {
@@ -223,7 +216,8 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
       const menuButtonPosition = menuButtonRef.current.getBoundingClientRect();
 
       setTimeout(() => {
-        const menuListWidth = listRef.current?.getBoundingClientRect().width;
+        const menuListWidth = menuListRef!.current?.getBoundingClientRect()
+          .width;
 
         if (position === 'left') {
           setPos({
@@ -254,7 +248,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
       {...getMenuListProps(rest, ref)}
       className={classes}
       id={`${id}-list`}
-      ref={listRef}
       role="menu"
       style={{
         minWidth,
