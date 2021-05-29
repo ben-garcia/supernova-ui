@@ -18,6 +18,13 @@ import './styles.scss';
 export interface MenuListProps {
   children: ReactNode;
   className?: string;
+  /**
+   * How the menu list should positioned relative
+   * to the menu button
+   *
+   * @default 'left'
+   */
+  position?: 'left' | 'right';
   maxWidth?: string;
   minWidth?: string;
   width?: string;
@@ -30,6 +37,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     className,
     maxWidth = '',
     minWidth = '',
+    position = 'left',
     width = '',
     ...rest
   } = props;
@@ -50,6 +58,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const previousEl = useRef<HTMLButtonElement>(null);
   const nextEl = useRef<HTMLButtonElement>(null);
   const activeEl = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ left: '', top: '' });
 
   const handleActive = useCallback((element: HTMLButtonElement) => {
@@ -211,11 +220,32 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
 
   useEffect(() => {
     if (menuButtonRef?.current) {
-      const position = menuButtonRef.current.getBoundingClientRect();
-      setPos({
-        left: `${position.left + position.width / 2 + window.pageXOffset}px`,
-        top: `${position.bottom + window.pageYOffset}px`,
-      });
+      const menuButtonPosition = menuButtonRef.current.getBoundingClientRect();
+
+      setTimeout(() => {
+        const menuListWidth = listRef.current?.getBoundingClientRect().width;
+
+        if (position === 'left') {
+          setPos({
+            left: `${
+              menuButtonPosition.left +
+              menuButtonPosition.width / 2 +
+              window.pageXOffset
+            }px`,
+            top: `${menuButtonPosition.bottom + window.pageYOffset}px`,
+          });
+        } else if (position === 'right') {
+          setPos({
+            left: `${
+              menuButtonPosition.right +
+              menuButtonPosition.width / 2 -
+              menuListWidth! +
+              window.pageXOffset
+            }px`,
+            top: `${menuButtonPosition.bottom + window.pageYOffset}px`,
+          });
+        }
+      }, 10);
     }
   }, [menuButtonRef]);
 
@@ -224,6 +254,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
       {...getMenuListProps(rest, ref)}
       className={classes}
       id={`${id}-list`}
+      ref={listRef}
       role="menu"
       style={{
         minWidth,

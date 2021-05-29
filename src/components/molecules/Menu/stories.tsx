@@ -34,6 +34,24 @@ export const Basic = () => {
   );
 };
 
+export const PositionRight = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+      <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
+        <MenuList position="right" width="200px">
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>Settings</MenuItem>
+          <MenuItem>Night Mode</MenuItem>
+          <MenuItem>Sign Out</MenuItem>
+        </MenuList>
+      </Menu>
+    </div>
+  );
+};
+
 export const WithGroup = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
