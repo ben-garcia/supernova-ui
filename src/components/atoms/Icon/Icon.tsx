@@ -130,7 +130,11 @@ const Icon: React.FC<IconBaseProps> = props => {
     }
   }
   if (isString(fill)) {
-    styles.fill = fill;
+    if ((theme as any).colors[fill]) {
+      styles.fill = (theme as any).colors[fill];
+    } else {
+      styles.fill = fill;
+    }
   }
 
   return (
