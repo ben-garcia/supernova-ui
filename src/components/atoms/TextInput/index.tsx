@@ -29,6 +29,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     borderRadius = '',
     boxShadow = '',
     color = '',
+    className = '',
     finalLabelTransform = null,
     font = 'body',
     fontSize = '',
@@ -94,6 +95,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   const classes = createClasses(
     'snui-text-input snui-inline-flex snui-flex-center',
     {
+      [`${className}`]: isString(className),
       [`snui-color-${backgroundColor}`]:
         backgroundColor &&
         backgroundColor !== '' &&
