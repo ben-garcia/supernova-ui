@@ -13,11 +13,7 @@ const ModalBody: React.FC<ModalBodyProps> = props => {
   const { children, ...rest } = props;
   const { getModalBodyProps } = useModal();
 
-  return (
-    <div {...getModalBodyProps(rest)}>
-      <div>{children}</div>
-    </div>
-  );
+  return <div {...getModalBodyProps(rest)}>{children}</div>;
 };
 
 export default ModalBody;
