@@ -1,8 +1,8 @@
 import { useCallback, useContext, useState } from 'react';
 
 import { ModalContext } from '../contexts';
-
 import { ModalProps } from '../components/molecules/Modal/types';
+import { createClasses, isString } from '../utils';
 
 /** Hooks that returns the Modal props
  */
@@ -19,27 +19,46 @@ const useModalProvider = (props: ModalProps) => {
   const [id] = useState(propId || `modal-${Math.random()}`);
 
   const getModalBodyProps = useCallback(
-    (modalBodyProps = {}) => ({
-      ...modalBodyProps,
-      className: 'snui-modal__body',
-      id: `${id}-body`,
-    }),
+    (modalBodyProps = {}) => {
+      const { className } = modalBodyProps;
+      const classes = createClasses('snui-modal__body', {
+        [`${className}`]: isString(className),
+      });
+      return {
+        ...modalBodyProps,
+        className: classes,
+        id: `${id}-body`,
+      };
+    },
     [id]
   );
   const getModalHeaderProps = useCallback(
-    (modalHeaderProps = {}) => ({
-      ...modalHeaderProps,
-      className: 'snui-modal__header',
-      id: `${id}-header`,
-    }),
+    (modalHeaderProps = {}) => {
+      const { className } = modalHeaderProps;
+      const classes = createClasses('snui-modal__header', {
+        [`${className}`]: isString(className),
+      });
+      return {
+        ...modalHeaderProps,
+        className: classes,
+        id: `${id}-header`,
+      };
+    },
     [id]
   );
   const getModalFooterProps = useCallback(
-    (modalFooterProps = {}) => ({
-      ...modalFooterProps,
-      className: 'snui-modal__footer',
-      id: `${id}-footer`,
-    }),
+    (modalFooterProps = {}) => {
+      const { className } = modalFooterProps;
+      const classes = createClasses('snui-modal__footer', {
+        [`${className}`]: isString(className),
+      });
+
+      return {
+        ...modalFooterProps,
+        className: classes,
+        id: `${id}-footer`,
+      };
+    },
     [id]
   );
 

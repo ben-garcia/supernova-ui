@@ -4,16 +4,17 @@ import { useModal } from '../../../../hooks';
 
 import './styles.scss';
 
-interface ModalBodyProps {
+export interface ModalBodyProps {
   children: React.ReactNode;
+  className?: string;
 }
 
 const ModalBody: React.FC<ModalBodyProps> = props => {
-  const { children } = props;
+  const { children, ...rest } = props;
   const { getModalBodyProps } = useModal();
 
   return (
-    <div {...getModalBodyProps()}>
+    <div {...getModalBodyProps(rest)}>
       <div>{children}</div>
     </div>
   );

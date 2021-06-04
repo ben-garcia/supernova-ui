@@ -31,6 +31,7 @@ const Modal: React.FC<ModalProps> = props => {
     backgroundColor = '',
     boxShadow = 'md',
     children,
+    className,
     color = '',
     closeOnEsc = true,
     closeOnOverlayClick = true,
@@ -96,6 +97,7 @@ const Modal: React.FC<ModalProps> = props => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const classes = createClasses('snui-modal', {
+    [`${className}`]: isString(className),
     [`snui-color-${backgroundColor}`]:
       backgroundColor &&
       backgroundColor !== '' &&
