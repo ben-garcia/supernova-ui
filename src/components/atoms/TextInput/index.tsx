@@ -41,6 +41,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     initialLabelTransform = null,
     isDisabled = false,
     label = undefined,
+    labelClassName = '',
     leftIcon = null,
     letterSpacing = '',
     lineHeight = '',
@@ -307,7 +308,9 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
       )}
       {floatLabel && isString(label) && (
         <label
-          className={`${labelClasses} ${isDisabled ? 'snui-disabled' : ''}`}
+          className={`${labelClasses} ${
+            isString(labelClassName) ? labelClassName : ''
+          } ${isDisabled ? 'snui-disabled' : ''}`}
           htmlFor={inputId}
           style={{
             transform: isString(finalLabelTransform) ? labelTransition : '',

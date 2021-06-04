@@ -16,6 +16,10 @@ export interface TextInputProps
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
   /**
+   * The class to be set on the label
+   */
+  labelClassName?: string;
+  /**
    * React reference
    */
   ref?: RefObject<HTMLInputElement>;
