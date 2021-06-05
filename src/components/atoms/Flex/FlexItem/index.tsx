@@ -2,10 +2,12 @@ import React from 'react';
 
 import { FlexItemProps } from './types';
 import { useBreakpoint } from '../../../../hooks';
+import { createClasses, isString } from '../../../../utils';
 
 const FlexItem: React.FC<FlexItemProps> = props => {
   const {
     children,
+    className = '',
     lg = null,
     md = null,
     sm = null,
@@ -53,6 +55,9 @@ const FlexItem: React.FC<FlexItemProps> = props => {
     }),
     []
   );
+  const classes = createClasses('snui-flex-item', {
+    [`${className}`]: isString(className),
+  });
   const styles: any = {};
 
   styles.padding = internalUsePadding;
@@ -71,6 +76,11 @@ const FlexItem: React.FC<FlexItemProps> = props => {
     const widthPercent = `${(breakpointObj[breakpoint]! / 12) * 100}%`;
     styles.flexBasis = widthPercent;
     styles.maxWidth = widthPercent;
+  }
+
+  if (breakpointObj[breakpoint] === 0) {
+    styles.flexBasis = '0%';
+    styles.maxWidth = '0%';
   }
 
   /*
@@ -105,7 +115,7 @@ const FlexItem: React.FC<FlexItemProps> = props => {
 	 */
 
   return (
-    <div className="_snui-flex-item" style={styles}>
+    <div className={classes} style={styles}>
       {children}
     </div>
   );
