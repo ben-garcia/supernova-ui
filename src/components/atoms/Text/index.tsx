@@ -19,6 +19,7 @@ const Text: React.FC<TextProps> = props => {
   const {
     backgroundColor = '',
     children,
+    className = '',
     color = '',
     font = 'body',
     fontSize = '',
@@ -37,6 +38,7 @@ const Text: React.FC<TextProps> = props => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const classes = createClasses('', {
+    [`${className}`]: isString(className),
     [`snui-color-${backgroundColor}`]:
       backgroundColor &&
       backgroundColor !== '' &&
