@@ -20,6 +20,7 @@ const Heading: React.FC<HeadingProps> = props => {
     align = 'left',
     backgroundColor = '',
     children,
+    className = '',
     color = '',
     font = 'heading',
     fontSize = '',
@@ -38,6 +39,7 @@ const Heading: React.FC<HeadingProps> = props => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const classes = createClasses('', {
+    [`${className}`]: isString(className),
     [`snui-text-${align}`]:
       align === 'center' || align === 'left' || align === 'right',
     [`snui-color-${backgroundColor}`]: backgroundColor !== '',
