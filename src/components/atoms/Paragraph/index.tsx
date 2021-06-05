@@ -19,6 +19,7 @@ const Paragraph: React.FC<ParagraphProps> = props => {
     align = 'left',
     backgroundColor = '',
     children,
+    className = '',
     color = '',
     font = 'body',
     fontSize = 'md',
@@ -36,6 +37,7 @@ const Paragraph: React.FC<ParagraphProps> = props => {
   const theme = useTheme();
   const breakpoint = useBreakpoint();
   const classes = createClasses('', {
+    [`${className}`]: isString(className),
     [`snui-text-${align}`]:
       align === 'center' || align === 'left' || align === 'right',
     [`snui-color-${backgroundColor}`]: backgroundColor !== '',
