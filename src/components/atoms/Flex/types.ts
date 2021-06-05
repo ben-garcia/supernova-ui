@@ -20,6 +20,7 @@ export interface FlexProps {
    */
   alignItems?: AlignItems;
   children: ReactNode;
+  className?: string;
   /**
    * the direction flex items
    *
