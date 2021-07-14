@@ -47,6 +47,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
     lineHeight = '',
     isTruncated = false,
     margin = '',
+    onBlur = null,
     onChange = null,
     padding = '',
     rightIcon = null,
@@ -348,7 +349,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
         className={classes}
         disabled={isDisabled || formControlIsDisabled}
         id={inputId}
-        onBlur={() => {
+        onBlur={e => {
           setFocusRingColor('');
           if (!isString(inputValue)) {
             setLabelClasses('snui-text-label snui-position-absolute');
@@ -364,6 +365,9 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
           }
           if (!isString(inputValue) && initialLabelTransform) {
             setLabelTransition(initialLabelTransform);
+          }
+          if (isFunction(onBlur) && !isDisabled) {
+            onBlur!(e);
           }
         }}
         onChange={e => {
