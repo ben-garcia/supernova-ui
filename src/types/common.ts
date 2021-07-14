@@ -1,4 +1,4 @@
-import { AriaAttributes, ReactNode, SyntheticEvent } from 'react';
+import { AriaAttributes, ChangeEvent, FocusEvent, ReactNode } from 'react';
 
 /**
  * The WAI ARIA supported attributes
@@ -173,9 +173,13 @@ export interface FormControlProps {
    */
   name?: string;
   /**
+   * Function to be executed for onBlur event
+   */
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  /**
    * Function to be executed for onChange event
    */
-  onChange?: (e: SyntheticEvent) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   /**
    * Value of the form control component
    */

@@ -49,6 +49,7 @@ module.exports = {
     // Use spread syntax when passing props to components
     // e.g <Button {...props} />
     'react/jsx-props-no-spreading': 0,
+    'react/jsx-wrap-multilines': 0,
     // Type checking provided by Typescript
     'react/prop-types': 0,
     // There is no need to import React when using Next.js
