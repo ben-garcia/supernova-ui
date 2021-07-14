@@ -13,6 +13,10 @@ export interface ButtonProps
   extends Omit<CommonProps, 'size'>,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
+  /**
+   * Whether to set the type as 'submit'
+   */
+  asSubmitButton?: boolean;
   id?: string;
   /**
    * Icon to the left of the Button text

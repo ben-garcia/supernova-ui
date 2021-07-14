@@ -1,3 +1,4 @@
+/* eslint react/button-has-type: 0 */
 import React, { forwardRef, useEffect, useState } from 'react';
 
 import Spinner from '../Spinner';
@@ -24,6 +25,7 @@ import { useBreakpoint, useTheme } from '../../../hooks';
  */
 const Button = forwardRef((props: ButtonProps, ref: any) => {
   const {
+    asSubmitButton = false,
     backgroundColor = '',
     borderRadius = '',
     boxShadow = '',
@@ -319,7 +321,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
         }
       }}
       ref={ref}
-      type="button"
+      type={asSubmitButton ? 'submit' : undefined}
     >
       {leftIcon && !isLoading && leftIcon}
       {!spinner && !isLoading && (leftIcon || rightIcon) && (
@@ -348,4 +350,5 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     </button>
   );
 });
+
 export default Button;
