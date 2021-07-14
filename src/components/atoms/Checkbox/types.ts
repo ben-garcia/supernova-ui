@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { ReactNode, RefObject } from 'react';
 
 import {
   CommonProps,
@@ -18,6 +18,7 @@ export interface CheckboxProps
     Omit<
       FormControlProps,
       | 'finalLabelTransform'
+      | 'label'
       | 'floatLabel'
       | 'initialLabelTransform'
       | 'value'
@@ -25,6 +26,14 @@ export interface CheckboxProps
     >,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
+  /**
+   * The visible helper text that describes the radio input option
+   *
+   * can be a string
+   * or
+   * a component that is to be rendered.
+   */
+  label: string | ReactNode;
   /**
    * Configure the checked state of the checkbox
    */

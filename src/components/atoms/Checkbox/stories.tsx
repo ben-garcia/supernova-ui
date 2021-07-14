@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import React from 'react';
 
 import Checkbox from '.';
+import { UserIcon } from '../Icon/Icons';
 import argTypes from './argTypes';
 
 export default {
@@ -75,4 +76,17 @@ export const Sizes = () => (
     <Checkbox isChecked label="xl" margin="0 sm" size="xl" />
     <Checkbox isChecked label="xxl" margin="0 sm" size="xxl" />
   </div>
+);
+
+export const WithComponentAsLabel = () => (
+  <Checkbox
+    isChecked
+    label={
+      <>
+        <UserIcon margin="0 xs" size="1rem" />
+        component
+      </>
+    }
+    margin="0 sm"
+  />
 );

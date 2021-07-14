@@ -35,6 +35,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     backgroundColor = 'info700',
     borderRadius = '',
     boxShadow = '',
+    className,
     color = '',
     font = 'body',
     fontSize = '',
@@ -42,7 +43,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     height = '',
     isChecked = false,
     isDisabled = false,
-    label = undefined,
+    label,
     letterSpacing = '',
     lineHeight = '',
     isTruncated = false,
@@ -77,6 +78,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   const classes = createClasses(
     'snui-checkbox snui-inline-flex snui-flex-center',
     {
+      [`${className}`]: isString(className),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
@@ -275,9 +277,9 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
           )}
         </div>
       </span>
-      <span className="snui-checkbox__label">
+      <span className="snui-checkbox__label snui-flex snui-flex-center">
         {label}
-        {isRequired && (
+        {isRequired && isString(label) && (
           <span aria-hidden="true" className="snui-error" role="presentation">
             *
           </span>
