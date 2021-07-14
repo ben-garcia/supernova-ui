@@ -322,7 +322,7 @@ const Textarea = forwardRef((props: TextareaProps, ref: any) => {
         onChange={e => {
           if (!isDisabled) {
             if (isFunction(onChange)) {
-              onChange!(e);
+              onChange!(e as any);
             }
             setTextareaValue(e.target.value);
           }
