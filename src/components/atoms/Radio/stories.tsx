@@ -1,8 +1,10 @@
+/* eslint react/jsx-wrap-multilines: 0 */
 import { Meta } from '@storybook/react';
 import React from 'react';
 
 import Radio from '.';
 import RadioGroup from './RadioGroup';
+import { UserIcon } from '../Icon/Icons';
 import { FormControl, FormErrorMessage, FormHelperText } from '../../molecules';
 import argTypes from './argTypes';
 
@@ -107,6 +109,26 @@ export const Sizes = () => {
       <Radio label="lg" margin="0 sm" size="lg" value="lg" />
       <Radio label="xl" margin="0 sm" size="xl" value="xl" />
       <Radio label="xxl" margin="0 sm" size="xxl" value="xxl" />
+    </RadioGroup>
+  );
+};
+
+export const WithComponentAsLabel = () => {
+  const [value, setValue] = React.useState('public');
+  return (
+    <RadioGroup defaultValue={value} name="disabled-story" onChange={setValue}>
+      <Radio label="one" margin="0 sm" value="public" />
+      <Radio label="two" margin="0 sm" value="private" />
+      <Radio
+        label={
+          <>
+            <UserIcon margin="0 0.5rem 0 0" size="1rem" />
+            <div>this is a custom label</div>
+          </>
+        }
+        margin="0 sm"
+        value="restricted"
+      />
     </RadioGroup>
   );
 };

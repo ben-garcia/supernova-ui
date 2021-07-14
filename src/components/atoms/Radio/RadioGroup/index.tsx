@@ -11,6 +11,7 @@ import { createClasses, isString } from '../../../../utils';
 const RadioGroup: React.FC<RadioGroupProps> = props => {
   const {
     children,
+    className,
     defaultValue,
     direction = 'row',
     name,
@@ -29,6 +30,7 @@ const RadioGroup: React.FC<RadioGroupProps> = props => {
     enhancedChildren.push(newChild);
   });
   const classes = createClasses('snui-radio-group snui-inline-flex', {
+    [`${className}`]: isString(className),
     [`snui-flex-${direction}`]: isString(direction),
     'snui-flex-center': isString(direction) && direction === 'row',
     'snui-items-start': isString(direction) && direction === 'column',

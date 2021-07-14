@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { ReactNode, RefObject } from 'react';
 
 import {
   CommonProps,
@@ -17,12 +17,24 @@ export interface RadioProps
     >,
     Omit<
       FormControlProps,
-      'finalLabelTransform' | 'floatLabel' | 'initialLabelTransform' | 'variant'
+      | 'finalLabelTransform'
+      | 'label'
+      | 'floatLabel'
+      | 'initialLabelTransform'
+      | 'variant'
     >,
     SupernovaUIBaseProps,
     Omit<TypographyProps, 'align'> {
   /**
-   * Configure the checked state of the checkbox
+   * The visible helper text that describes the radio input option
+   *
+   * can be a string
+   * or
+   * a component that is to be rendered.
+   */
+  label: string | ReactNode;
+  /**
+   * Configure the checked state of the checkbox.
    */
   isChecked?: boolean;
   /**

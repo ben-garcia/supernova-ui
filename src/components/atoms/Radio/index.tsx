@@ -36,6 +36,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     backgroundColor = '',
     borderRadius = '',
     boxShadow = '',
+    className,
     color = '',
     font = 'body',
     fontSize = '',
@@ -43,7 +44,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     height = '',
     isChecked = false,
     isDisabled = false,
-    label = undefined,
+    label,
     letterSpacing = '',
     lineHeight = '',
     isTruncated = false,
@@ -81,8 +82,9 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
     isChecked
   );
   const classes = createClasses(
-    'snui-radio snui-inline-flex snui-flex-center',
+    'snui-radio snui-inline-flex snui-justify-center',
     {
+      [`${className}`]: isString(className),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
@@ -286,11 +288,11 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
         <span className="snui-radio__circle" style={{ ...circleStyles }} />
       </span>
       <span
-        className="snui-radio__label"
+        className="snui-radio__label snui-flex snui-flex-center"
         style={{ fontSize: `${theme.typography.fontSizes[size as Sizes]}` }}
       >
         {label}
-        {isRequired && (
+        {isRequired && isString(label) && (
           <span aria-hidden="true" className="snui-error" role="presentation">
             *
           </span>

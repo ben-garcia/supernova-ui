@@ -5,6 +5,7 @@ import { Dispatch, ReactNode, SetStateAction } from 'react';
  */
 export interface RadioGroupProps {
   children: ReactNode | ReactNode[];
+  className?: string;
   /**
    * Configure the default Radio component to be checked by matching
    * this value to the value prop of one of it's children
