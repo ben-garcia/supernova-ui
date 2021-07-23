@@ -25,7 +25,7 @@ describe('<Modal />', () => {
     );
   });
   it('should contain the proper aria attributes', () => {
-    const { getByTestId, getByText } = render(
+    const { debug, getByTestId, getByText } = render(
       <Modal data-testid="modal" isOpen onClose={jest.fn()}>
         <ModalHeader>header</ModalHeader>
         <ModalBody>body</ModalBody>
@@ -35,12 +35,14 @@ describe('<Modal />', () => {
 
     const modal = getByTestId('modal');
 
+    debug(modal);
+
     // should have 'aria-modal' set to 'true' and 'role' of 'dialog'
     expect(modal).toHaveAttribute('aria-modal', 'true');
     expect(modal).toHaveAttribute('role', 'dialog');
 
     // the id of `body` should equal the `aria-describedby` of the modal
-    expect(getByText('body').parentElement!.id).toEqual(
+    expect(getByText('body').id).toEqual(
       modal.getAttribute('aria-describedby')
     );
 
