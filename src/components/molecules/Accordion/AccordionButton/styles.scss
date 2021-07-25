@@ -1,0 +1,25 @@
+.snui-accordion__button {
+  border-top: 1px solid var(--snui-color-gray-100);
+  overflow-anchor: none;
+  box-shadow: unset;
+  justify-content: flex-start;
+  padding-inline-end: var(--snui-size-xs);
+  padding-inline-start: var(--snui-size-xs);
+}
+
+.snui-accordion__text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.snui-accordion__icon {
+  transition: all 0.2s ease;
+
+  &--expanded {
+    transform: rotate(-180deg);
+  }
+
+  &--collapsed {
+    transform: rotate(0);
+  }
+}

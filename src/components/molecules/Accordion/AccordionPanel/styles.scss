@@ -1,0 +1,22 @@
+.snui-accordion__panel {
+  padding-bottom: var(--snui-space-md);
+  padding-inline-end: var(--snui-size-xs);
+  padding-inline-start: var(--snui-size-xs);
+  padding-top: var(--snui-space-sm);
+}
+
+.snui-collapsed {
+  overflow: hidden;
+  display: none;
+  opacity: 0;
+  height: 0;
+  max-height: 0;
+}
+
+.snui-expanded {
+  overflow: initial;
+  display: block;
+  opacity: 1;
+  height: auto;
+  max-height: 99999px;
+}
