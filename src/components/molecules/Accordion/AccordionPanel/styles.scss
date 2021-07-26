@@ -1,22 +1,20 @@
 .snui-accordion__panel {
-  padding-bottom: var(--snui-space-md);
+  padding-bottom: var(--snui-space-sm);
   padding-inline-end: var(--snui-size-xs);
   padding-inline-start: var(--snui-size-xs);
   padding-top: var(--snui-space-sm);
 }
 
-.snui-collapsed {
-  overflow: hidden;
-  display: none;
-  opacity: 0;
-  height: 0;
+.snui-accordion__inner {
   max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0, 1, 0, 1), opacity 1s;
 }
 
-.snui-expanded {
-  overflow: initial;
-  display: block;
-  opacity: 1;
+.snui-accordion__inner.snui-accordion__inner--expanded {
   height: auto;
-  max-height: 99999px;
+  max-height: 9999px;
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(1, 0, 1, 0), opacity 0.1s;
 }

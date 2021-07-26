@@ -24,9 +24,9 @@ const Accordion: React.FC<AccordionProps> = props => {
   });
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const buttonsRef = useRef<HTMLButtonElement[]>(null);
-  const [activeIndex, setActiveIndexState] = useState(defaultIndex);
-  const setActiveIndex = useCallback((newIndex: number[]) => {
-    setActiveIndexState(newIndex);
+  const [activeIndices, setActiveIndicesState] = useState(defaultIndex);
+  const setActiveIndices = useCallback((newIndex: number[]) => {
+    setActiveIndicesState(newIndex);
   }, []);
   const accordionId = useMemo(() => `sniu-accordion-${Math.random()}`, []);
   const context = useAccordionProvider(props);
@@ -63,14 +63,28 @@ const Accordion: React.FC<AccordionProps> = props => {
     }
   }, [buttonsRef?.current]);
 
+  useEffect(() => {
+    if (buttonsRef?.current && !allowMultiple) {
+      buttonsRef.current.forEach(el => {
+        const isExpanded = el.getAttribute('aria-expanded') === 'true';
+        const buttonIndex = Number(
+          el.getAttribute('data-snui-accordion-button-index')
+        );
+        if (isExpanded && !activeIndices.includes(buttonIndex)) {
+          el.click();
+        }
+      });
+    }
+  }, [buttonsRef?.current, activeIndices]);
+
   const contextValue = useMemo(
     () => ({
       ...context,
-      activeIndex,
+      activeIndices,
       allowMultiple,
       allowToggle,
       buttonsRef: buttonsRef?.current,
-      setActiveIndex,
+      setActiveIndices,
     }),
     [context, updatedButtonsRef]
   );

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { Button, ChevronDownIcon, Heading } from '../../../atoms';
 import {
-  useAccordionProvider,
+  useAccordionItemProvider,
   useAccordion,
   useAccordionItem,
 } from '../../../../hooks/use-accordion';
@@ -24,12 +24,12 @@ type HeadingLevelType = 1 | 2 | 3 | 4 | 5 | 6;
 
 const AccordionButton: React.FC<AccordionButtonProps> = props => {
   const { children, className, headingLevel = 2, ...rest } = props;
-  const { getAccordionButtonProps } = useAccordionProvider(props);
+  const { getAccordionButtonProps } = useAccordionItemProvider(props);
   const {
-    activeIndex,
-    // allowMultiple,
-    // allowToggle,
-    // setActiveIndex,
+    activeIndices,
+    allowMultiple,
+    allowToggle,
+    setActiveIndices,
   } = useAccordion();
   const { isOpen, onOpen, onClose } = useAccordionItem();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -44,17 +44,50 @@ const AccordionButton: React.FC<AccordionButtonProps> = props => {
     [buttonRef?.current]
   );
 
-  const handleClick = useCallback(() => {
-    if (isOpen) {
-      onClose();
-    } else {
-      onOpen();
-    }
-  }, [isOpen, activeIndex, buttonIndex]);
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      // get the index of the button that was clicked,
+      // used to compare with the activeIndices array.
+      const accordionButtonIndex = Number(
+        e.currentTarget.attributes.getNamedItem(
+          'data-snui-accordion-button-index'
+        )?.nodeValue
+      );
+
+      if (!allowToggle && !allowMultiple) {
+        if (isOpen && !activeIndices.includes(accordionButtonIndex)) {
+          setActiveIndices(activeIndices.filter(n => n !== buttonIndex));
+          onClose();
+        } else {
+          setActiveIndices([buttonIndex]);
+          onOpen();
+        }
+      }
+      if (allowToggle) {
+        if (isOpen) {
+          setActiveIndices(activeIndices.filter(n => n !== buttonIndex));
+          onClose();
+        } else {
+          setActiveIndices([buttonIndex]);
+          onOpen();
+        }
+      }
+      if (allowMultiple) {
+        if (isOpen) {
+          setActiveIndices(activeIndices.filter(n => n !== buttonIndex));
+          onClose();
+        } else {
+          setActiveIndices([...activeIndices, buttonIndex]);
+          onOpen();
+        }
+      }
+    },
+    [isOpen, activeIndices, buttonIndex]
+  );
 
   useEffect(() => {
     if (buttonRef?.current) {
-      if (activeIndex.includes(buttonIndex)) {
+      if (activeIndices.includes(buttonIndex)) {
         buttonRef?.current?.click();
       }
     }
@@ -65,6 +98,7 @@ const AccordionButton: React.FC<AccordionButtonProps> = props => {
       <Button
         {...rest}
         {...getAccordionButtonProps(rest)}
+        aria-expanded={isOpen}
         className={classes}
         backgroundColor="transparent"
         hoverBackgroundColor="var(--snui-color-gray-100)"

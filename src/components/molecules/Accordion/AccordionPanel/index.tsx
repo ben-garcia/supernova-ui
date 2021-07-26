@@ -20,7 +20,11 @@ const AccordionPanel: React.FC<AccordionPanelProps> = props => {
   const { isOpen } = useAccordionItem();
 
   return (
-    <div className={isOpen ? 'snui-expanded' : 'snui-collapsed'}>
+    <div
+      className={`snui-accordion__inner${
+        isOpen ? ' snui-accordion__inner--expanded' : ''
+      }`}
+    >
       <div {...rest} className={classes} {...getAccordionPanelProps(rest)}>
         {children}
       </div>

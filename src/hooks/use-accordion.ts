@@ -16,13 +16,6 @@ const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
     defaultIndex
   );
 
-  const getAccordionButtonProps = useCallback(
-    (accordionButtonProps = {}) => ({
-      ...accordionButtonProps,
-      id: `${id}__button-${Math.random()}`,
-    }),
-    [id]
-  );
   const getAccordionPanelProps = useCallback(
     (accordionItemProps = {}) => ({
       ...accordionItemProps,
@@ -37,7 +30,6 @@ const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
 
   return {
     activeIndex,
-    getAccordionButtonProps,
     getAccordionPanelProps,
     setActiveIndex,
   };
@@ -60,6 +52,14 @@ const useAccordionItemProvider = (
     []
   );
 
+  const getAccordionButtonProps = useCallback(
+    (accordionButtonProps = {}) => ({
+      ...accordionButtonProps,
+      id: `${id}__button-${Math.random()}`,
+    }),
+    [id]
+  );
+
   const getAccordionItemProps = useCallback(
     (accordionItemProps = {}) => ({
       ...accordionItemProps,
@@ -71,6 +71,7 @@ const useAccordionItemProvider = (
   const onOpen = useCallback(() => setIsOpen(true), []);
 
   return {
+    getAccordionButtonProps,
     getAccordionItemProps,
     id,
     isOpen,

@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 
 export interface Accordion {
+  activeIndices: number[];
   allowMultiple?: boolean;
   allowToggle?: boolean;
-  activeIndex: number[];
-  getAccordionButtonProps: () => void;
   getAccordionPanelProps: () => void;
-  setActiveIndex: (newIndex: number[]) => void;
+  setActiveIndices: (newIndices: number[]) => void;
 }
 
 export interface AccordionItem {
+  getAccordionButtonProps: () => void;
   getAccordionItemProps: () => void;
   isOpen: boolean;
   onClose: () => void;

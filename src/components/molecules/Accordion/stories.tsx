@@ -30,8 +30,16 @@ export const Default = () => (
           Velit egestas dui id ornare. Vulputate mi sit amet mauris commodo quis
           imperdiet. In fermentum posuere urna nec. Proin nibh nisl condimentum
           id venenatis a condimentum vitae sapien. Gravida quis blandit turpis
-          cursus. Nunc mattis enim ut tellus elementum sagittis vitae et leo.
-          Tincidunt vitae semper quis lectus nulla at volutpat diam ut.
+          cursus.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>Section 3</AccordionButton>
+        <AccordionPanel>
+          met cursus sit amet dictum sit amet justo donec enim. Sapien eget mi
+          proin sed libero enim sed faucibus turpis. Feugiat sed lectus
+          vestibulum mattis.
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
@@ -57,8 +65,16 @@ export const AllowMultiple = () => (
           Velit egestas dui id ornare. Vulputate mi sit amet mauris commodo quis
           imperdiet. In fermentum posuere urna nec. Proin nibh nisl condimentum
           id venenatis a condimentum vitae sapien. Gravida quis blandit turpis
-          cursus. Nunc mattis enim ut tellus elementum sagittis vitae et leo.
-          Tincidunt vitae semper quis lectus nulla at volutpat diam ut.
+          cursus.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>Section 3</AccordionButton>
+        <AccordionPanel>
+          met cursus sit amet dictum sit amet justo donec enim. Sapien eget mi
+          proin sed libero enim sed faucibus turpis. Feugiat sed lectus
+          vestibulum mattis.
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
@@ -84,8 +100,16 @@ export const AllowToggle = () => (
           Velit egestas dui id ornare. Vulputate mi sit amet mauris commodo quis
           imperdiet. In fermentum posuere urna nec. Proin nibh nisl condimentum
           id venenatis a condimentum vitae sapien. Gravida quis blandit turpis
-          cursus. Nunc mattis enim ut tellus elementum sagittis vitae et leo.
-          Tincidunt vitae semper quis lectus nulla at volutpat diam ut.
+          cursus.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>Section 3</AccordionButton>
+        <AccordionPanel>
+          met cursus sit amet dictum sit amet justo donec enim. Sapien eget mi
+          proin sed libero enim sed faucibus turpis. Feugiat sed lectus
+          vestibulum mattis.
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
@@ -111,8 +135,16 @@ export const DefaultIndex = () => (
           Velit egestas dui id ornare. Vulputate mi sit amet mauris commodo quis
           imperdiet. In fermentum posuere urna nec. Proin nibh nisl condimentum
           id venenatis a condimentum vitae sapien. Gravida quis blandit turpis
-          cursus. Nunc mattis enim ut tellus elementum sagittis vitae et leo.
-          Tincidunt vitae semper quis lectus nulla at volutpat diam ut.
+          cursus.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>Section 3</AccordionButton>
+        <AccordionPanel>
+          met cursus sit amet dictum sit amet justo donec enim. Sapien eget mi
+          proin sed libero enim sed faucibus turpis. Feugiat sed lectus
+          vestibulum mattis.
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
