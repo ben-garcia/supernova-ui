@@ -31,7 +31,13 @@ const AccordionButton: React.FC<AccordionButtonProps> = props => {
     allowToggle,
     setActiveIndices,
   } = useAccordion();
-  const { isOpen, onOpen, onClose } = useAccordionItem();
+  const {
+    accordionButtonId,
+    accordionPanelId,
+    isOpen,
+    onOpen,
+    onClose,
+  } = useAccordionItem();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const classes = createClasses('snui-accordion__button', {
     [`${className}`]: isString(className),
@@ -98,10 +104,13 @@ const AccordionButton: React.FC<AccordionButtonProps> = props => {
       <Button
         {...rest}
         {...getAccordionButtonProps(rest)}
+        aria-controls={accordionPanelId}
+        aria-disabled={!allowToggle && isOpen ? true : undefined}
         aria-expanded={isOpen}
         className={classes}
         backgroundColor="transparent"
         hoverBackgroundColor="var(--snui-color-gray-100)"
+        id={accordionButtonId}
         onClick={handleClick}
         ref={buttonRef}
         width="100%"

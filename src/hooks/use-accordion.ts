@@ -19,7 +19,6 @@ const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
   const getAccordionPanelProps = useCallback(
     (accordionItemProps = {}) => ({
       ...accordionItemProps,
-      id: `${id}__panel-${Math.random()}`,
     }),
     [id]
   );
@@ -55,7 +54,6 @@ const useAccordionItemProvider = (
   const getAccordionButtonProps = useCallback(
     (accordionButtonProps = {}) => ({
       ...accordionButtonProps,
-      id: `${id}__button-${Math.random()}`,
     }),
     [id]
   );
@@ -63,7 +61,6 @@ const useAccordionItemProvider = (
   const getAccordionItemProps = useCallback(
     (accordionItemProps = {}) => ({
       ...accordionItemProps,
-      id: `${id}__item-${Math.random()}`,
     }),
     []
   );

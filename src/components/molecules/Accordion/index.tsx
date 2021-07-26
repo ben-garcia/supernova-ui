@@ -29,7 +29,7 @@ const Accordion: React.FC<AccordionProps> = props => {
   const setActiveIndices = useCallback((newIndex: number[]) => {
     setActiveIndicesState(newIndex);
   }, []);
-  const accordionId = useMemo(() => `sniu-accordion-${Math.random()}`, []);
+  const accordionId = useMemo(() => `snui-accordion-${Math.random()}`, []);
   const context = useAccordionProvider(props);
   const [updatedButtonsRef, setUpdatedButtonsRef] = useState(false);
 
@@ -81,6 +81,7 @@ const Accordion: React.FC<AccordionProps> = props => {
   const contextValue = useMemo(
     () => ({
       ...context,
+      accordionId,
       activeIndices,
       allowMultiple,
       allowToggle,

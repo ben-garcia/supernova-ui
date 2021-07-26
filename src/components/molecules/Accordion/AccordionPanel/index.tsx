@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {
-  useAccordionProvider,
   useAccordionItem,
+  useAccordionProvider,
 } from '../../../../hooks/use-accordion';
 import { createClasses, isString } from '../../../../utils';
 import './styles.scss';
@@ -17,7 +17,7 @@ const AccordionPanel: React.FC<AccordionPanelProps> = props => {
     [`${className}`]: isString(className),
   });
   const { getAccordionPanelProps } = useAccordionProvider(rest);
-  const { isOpen } = useAccordionItem();
+  const { accordionButtonId, accordionPanelId, isOpen } = useAccordionItem();
 
   return (
     <div
@@ -25,7 +25,14 @@ const AccordionPanel: React.FC<AccordionPanelProps> = props => {
         isOpen ? ' snui-accordion__inner--expanded' : ''
       }`}
     >
-      <div {...rest} className={classes} {...getAccordionPanelProps(rest)}>
+      <div
+        {...rest}
+        {...getAccordionPanelProps(rest)}
+        aria-labelledby={accordionButtonId}
+        className={classes}
+        id={accordionPanelId}
+        role="region"
+      >
         {children}
       </div>
     </div>

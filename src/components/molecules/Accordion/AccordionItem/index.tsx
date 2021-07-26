@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 
 import { AccordionItemProvider } from '../../../../contexts/accordion';
-import { useAccordionItemProvider } from '../../../../hooks/use-accordion';
+import {
+  useAccordionItemProvider,
+  useAccordion,
+} from '../../../../hooks/use-accordion';
 import { createClasses, isString } from '../../../../utils';
 
 export interface AccordionItemProps {
@@ -16,12 +19,24 @@ const AccordionItem: React.FC<AccordionItemProps> = props => {
   });
   const context = useAccordionItemProvider(props);
   const { getAccordionItemProps } = useAccordionItemProvider(rest);
+  const { accordionId } = useAccordion();
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = React.useCallback(() => setIsOpen(false), []);
   const onOpen = React.useCallback(() => setIsOpen(true), []);
+  const accordionButtonId = useMemo(
+    () => `${accordionId}__button-${Math.random()}`,
+    []
+  );
+  const accordionPanelId = useMemo(
+    () => `${accordionId}__panel-${Math.random()}`,
+    []
+  );
+
   const contextValue = useMemo(
     () => ({
       ...context,
+      accordionButtonId,
+      accordionPanelId,
       isOpen,
       onClose,
       onOpen,

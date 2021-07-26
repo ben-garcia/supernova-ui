@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface Accordion {
+  accordionId: string;
   activeIndices: number[];
   allowMultiple?: boolean;
   allowToggle?: boolean;
@@ -9,6 +10,8 @@ export interface Accordion {
 }
 
 export interface AccordionItem {
+  accordionButtonId: string;
+  accordionPanelId: string;
   getAccordionButtonProps: () => void;
   getAccordionItemProps: () => void;
   isOpen: boolean;
