@@ -1,3 +1,7 @@
+import Accordion from './Accordion';
+import AccordionHeaderButton from './Accordion/AccordionHeaderButton';
+import AccordionItem from './Accordion/AccordionItem';
+import AccordionPanel from './Accordion/AccordionPanel';
 import FormControl from './FormControl';
 import FormErrorMessage from './FormControl/FormErrorMessage';
 import FormHelperText from './FormControl/FormHelperText';
@@ -12,6 +16,10 @@ import ModalHeader from './Modal/ModalHeader';
 import ModalFooter from './Modal/ModalFooter';
 
 export {
+  Accordion,
+  AccordionHeaderButton,
+  AccordionItem,
+  AccordionPanel,
   FormControl,
   FormErrorMessage,
   FormHelperText,

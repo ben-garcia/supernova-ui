@@ -1,35 +1,17 @@
-import Button from './Button';
-import Checkbox from './Checkbox';
-import Flex from './Flex';
-import FlexItem from './Flex/FlexItem';
-import Heading from './Heading';
-import Paragraph from './Paragraph';
-import Portal from './Portal';
-import Radio from './Radio';
-import RadioGroup from './Radio/RadioGroup';
-import Spinner from './Spinner';
-import Switch from './Switch';
-import Text from './Text';
-import Textarea from './Textarea';
-import TextInput from './TextInput';
-import Tooltip from './Tooltip';
-
+export { default as Badge } from './Badge';
+export { default as Button } from './Button';
+export { default as Checkbox } from './Checkbox';
+export { default as Flex } from './Flex';
+export { default as FlexItem } from './Flex/FlexItem';
+export { default as Heading } from './Heading';
 export * from './Icon/Icons';
-
-export {
-  Button,
-  Checkbox,
-  Flex,
-  FlexItem,
-  Heading,
-  Paragraph,
-  Portal,
-  Radio,
-  RadioGroup,
-  Spinner,
-  Switch,
-  Text,
-  Textarea,
-  TextInput,
-  Tooltip,
-};
+export { default as Paragraph } from './Paragraph';
+export { default as Portal } from './Portal';
+export { default as Radio } from './Radio';
+export { default as RadioGroup } from './Radio/RadioGroup';
+export { default as Spinner } from './Spinner';
+export { default as Switch } from './Switch';
+export { default as Text } from './Text';
+export { default as Textarea } from './Textarea';
+export { default as TextInput } from './TextInput';
+export { default as Tooltip } from './Tooltip';
