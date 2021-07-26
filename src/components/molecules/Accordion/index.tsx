@@ -1,3 +1,4 @@
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React, {
   useCallback,
   useEffect,
@@ -89,9 +90,48 @@ const Accordion: React.FC<AccordionProps> = props => {
     [context, updatedButtonsRef]
   );
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const accordionButtonIndex = Number(
+      // @ts-ignore
+      e.target.attributes.getNamedItem('data-snui-accordion-button-index')
+        ?.nodeValue
+    );
+
+    if (e.key === 'ArrowUp') {
+      if (accordionButtonIndex === 0) {
+        buttonsRef.current![buttonsRef.current!.length - 1].focus();
+      } else {
+        buttonsRef.current![accordionButtonIndex - 1].focus();
+      }
+    } else if (e.key === 'ArrowDown') {
+      const lastButtonIndex = buttonsRef.current!.length - 1;
+
+      if (accordionButtonIndex === lastButtonIndex) {
+        buttonsRef.current![0].focus();
+      } else {
+        buttonsRef.current![accordionButtonIndex + 1].focus();
+      }
+    } else if (e.key === 'Home') {
+      if (accordionButtonIndex !== 0) {
+        buttonsRef.current![0].focus();
+      }
+    } else if (e.key === 'End') {
+      const lastButtonIndex = buttonsRef.current!.length - 1;
+
+      if (accordionButtonIndex !== lastButtonIndex) {
+        buttonsRef.current![lastButtonIndex].focus();
+      }
+    }
+  };
+
   return (
     <AccordionProvider value={contextValue}>
-      <div className={classes} id={accordionId} ref={accordionRef}>
+      <div
+        className={classes}
+        id={accordionId}
+        onKeyDown={handleKeyDown}
+        ref={accordionRef}
+      >
         {children}
       </div>
     </AccordionProvider>
