@@ -10,7 +10,7 @@ import { ButtonProps } from '../../../atoms/Button/types';
 import { createClasses, isString } from '../../../../utils';
 import './styles.scss';
 
-interface AccordionButtonProps extends ButtonProps {
+interface AccordionHeaderButtonProps extends ButtonProps {
   className?: string;
   /**
    * Configure the header level
@@ -22,7 +22,7 @@ interface AccordionButtonProps extends ButtonProps {
 
 type HeadingLevelType = 1 | 2 | 3 | 4 | 5 | 6;
 
-const AccordionButton: React.FC<AccordionButtonProps> = props => {
+const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
   const { children, className, headingLevel = 2, ...rest } = props;
   const { getAccordionButtonProps } = useAccordionItemProvider(props);
   const {
@@ -131,4 +131,4 @@ const AccordionButton: React.FC<AccordionButtonProps> = props => {
   );
 };
 
-export default AccordionButton;
+export default AccordionHeaderButton;
