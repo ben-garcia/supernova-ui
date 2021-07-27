@@ -25,7 +25,7 @@ describe('<Modal />', () => {
     );
   });
   it('should contain the proper aria attributes', () => {
-    const { debug, getByTestId, getByText } = render(
+    const { getByTestId, getByText } = render(
       <Modal data-testid="modal" isOpen onClose={jest.fn()}>
         <ModalHeader>header</ModalHeader>
         <ModalBody>body</ModalBody>
@@ -34,8 +34,6 @@ describe('<Modal />', () => {
     );
 
     const modal = getByTestId('modal');
-
-    debug(modal);
 
     // should have 'aria-modal' set to 'true' and 'role' of 'dialog'
     expect(modal).toHaveAttribute('aria-modal', 'true');
