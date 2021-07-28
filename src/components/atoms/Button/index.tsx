@@ -47,6 +47,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     isTruncated = false,
     margin = '',
     onClick = () => {},
+    onFocus,
     onMouseEnter = null,
     onMouseLeave = null,
     padding = '',
@@ -263,6 +264,9 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
       }}
       onClick={onClick}
       onFocus={() => {
+        if (isFunction(onFocus)) {
+          onFocus!();
+        }
         setFocusRingColor(theme.colors.focusRing);
 
         if (isFunction(onMouseEnter)) {

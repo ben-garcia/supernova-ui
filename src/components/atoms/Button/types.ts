@@ -30,6 +30,10 @@ export interface ButtonProps
    * Function to be executed for onClick event
    */
   onClick?: (e: SyntheticEvent) => void;
+  /**
+   * Function to be executed when button has focus
+   */
+  onFocus?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   /**
