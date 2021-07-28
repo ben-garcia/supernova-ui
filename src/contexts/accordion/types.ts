@@ -3,9 +3,10 @@ import { ReactNode } from 'react';
 export interface Accordion {
   accordionId: string;
   activeIndices: number[];
-  allowMultiple?: boolean;
-  allowToggle?: boolean;
+  allowMultiple: boolean;
+  allowToggle: boolean;
   getAccordionPanelProps: () => void;
+  defaultIndices: number[];
   setActiveIndices: (newIndices: number[]) => void;
 }
 

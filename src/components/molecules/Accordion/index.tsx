@@ -18,14 +18,14 @@ const Accordion: React.FC<AccordionProps> = props => {
     allowToggle = false,
     children,
     className,
-    defaultIndex = [],
+    defaultIndices = [],
   } = props;
   const classes = createClasses('snui-accordion', {
     [`${className}`]: isString(className),
   });
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const buttonsRef = useRef<HTMLButtonElement[]>(null);
-  const [activeIndices, setActiveIndicesState] = useState(defaultIndex);
+  const [activeIndices, setActiveIndicesState] = useState(defaultIndices);
   const setActiveIndices = useCallback((newIndex: number[]) => {
     setActiveIndicesState(newIndex);
   }, []);
@@ -55,22 +55,32 @@ const Accordion: React.FC<AccordionProps> = props => {
     };
   }, [accordionRef]);
 
+  // add data attribute to all the buttons
   useEffect(() => {
     if (buttonsRef?.current) {
       buttonsRef.current.forEach((el, index) => {
-        // add data attibute to all the buttons
         el.setAttribute('data-snui-accordion-button-index', `${index}`);
       });
     }
   }, [buttonsRef?.current]);
 
+  // open panels when defaultIndices prop is passed.
   useEffect(() => {
-    if (buttonsRef?.current && !allowMultiple) {
+    buttonsRef?.current?.forEach((el, index) => {
+      if (defaultIndices.includes(index)) {
+        el.click();
+      }
+    });
+  }, [defaultIndices]);
+
+  useEffect(() => {
+    if (buttonsRef?.current) {
       buttonsRef.current.forEach(el => {
         const isExpanded = el.getAttribute('aria-expanded') === 'true';
         const buttonIndex = Number(
           el.getAttribute('data-snui-accordion-button-index')
         );
+
         if (isExpanded && !activeIndices.includes(buttonIndex)) {
           el.click();
         }
@@ -86,6 +96,7 @@ const Accordion: React.FC<AccordionProps> = props => {
       allowMultiple,
       allowToggle,
       buttonsRef: buttonsRef?.current,
+      defaultIndices,
       setActiveIndices,
     }),
     [context, updatedButtonsRef]

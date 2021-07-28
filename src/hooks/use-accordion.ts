@@ -9,11 +9,11 @@ import { isString } from '../utils';
  * Hook that returns the Accordion props
  */
 const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
-  const { defaultIndex = [] } = props;
+  const { defaultIndices = [] } = props;
 
   const id = useMemo(() => `snui-accordion-${Math.random()}`, []);
-  const [activeIndex, setActiveIndexFunction] = useState<number[]>(
-    defaultIndex
+  const [activeIndices, setActiveIndicesFunction] = useState<number[]>(
+    defaultIndices
   );
 
   const getAccordionPanelProps = useCallback(
@@ -23,14 +23,14 @@ const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
     [id]
   );
 
-  const setActiveIndex = useCallback((newIndex: number[]) => {
-    setActiveIndexFunction(newIndex);
+  const setActiveIndices = useCallback((newIndex: number[]) => {
+    setActiveIndicesFunction(newIndex);
   }, []);
 
   return {
-    activeIndex,
+    activeIndices,
     getAccordionPanelProps,
-    setActiveIndex,
+    setActiveIndices,
   };
 };
 

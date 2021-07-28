@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback } from 'react';
 
 import { Button, ChevronDownIcon, Heading } from '../../../atoms';
 import {
@@ -29,6 +29,7 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     activeIndices,
     allowMultiple,
     allowToggle,
+    defaultIndices,
     setActiveIndices,
   } = useAccordion();
   const {
@@ -38,17 +39,9 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     onOpen,
     onClose,
   } = useAccordionItem();
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const classes = createClasses('snui-accordion__button', {
     [`${className}`]: isString(className),
   });
-  const buttonIndex = useMemo(
-    () =>
-      Number(
-        buttonRef?.current?.getAttribute('data-snui-accordion-button-index')
-      ),
-    [buttonRef?.current]
-  );
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -61,43 +54,66 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
       );
 
       if (!allowToggle && !allowMultiple) {
-        if (isOpen && !activeIndices.includes(accordionButtonIndex)) {
-          setActiveIndices(activeIndices.filter(n => n !== buttonIndex));
-          onClose();
+        if (isOpen) {
+          if (!activeIndices.includes(accordionButtonIndex) && defaultIndices) {
+            setActiveIndices(
+              activeIndices.filter(n => n !== accordionButtonIndex)
+            );
+            onClose();
+          }
         } else {
-          setActiveIndices([buttonIndex]);
+          if (
+            defaultIndices.includes(accordionButtonIndex) &&
+            activeIndices.includes(accordionButtonIndex)
+          ) {
+            // setActiveIndices([accordionButtonIndex]);
+          } else {
+            setActiveIndices([accordionButtonIndex]);
+          }
           onOpen();
         }
       }
+
       if (allowToggle) {
         if (isOpen) {
-          setActiveIndices(activeIndices.filter(n => n !== buttonIndex));
+          if (
+            defaultIndices.includes(accordionButtonIndex) &&
+            activeIndices.includes(accordionButtonIndex)
+          ) {
+            setActiveIndices([accordionButtonIndex]);
+          } else {
+            setActiveIndices(
+              activeIndices.filter(n => n !== accordionButtonIndex)
+            );
+          }
           onClose();
         } else {
-          setActiveIndices([buttonIndex]);
+          if (
+            defaultIndices.includes(accordionButtonIndex) &&
+            activeIndices.includes(accordionButtonIndex)
+          ) {
+            // setActiveIndices([accordionButtonIndex]);
+          } else {
+            setActiveIndices([accordionButtonIndex]);
+          }
           onOpen();
         }
       }
+
       if (allowMultiple) {
         if (isOpen) {
-          setActiveIndices(activeIndices.filter(n => n !== buttonIndex));
+          setActiveIndices(
+            activeIndices.filter(n => n !== accordionButtonIndex)
+          );
           onClose();
         } else {
-          setActiveIndices([...activeIndices, buttonIndex]);
+          setActiveIndices([...activeIndices, accordionButtonIndex]);
           onOpen();
         }
       }
     },
-    [isOpen, activeIndices, buttonIndex]
+    [isOpen, activeIndices]
   );
-
-  useEffect(() => {
-    if (buttonRef?.current) {
-      if (activeIndices.includes(buttonIndex)) {
-        buttonRef?.current?.click();
-      }
-    }
-  }, [buttonRef?.current]);
 
   return (
     <Heading level={headingLevel as HeadingLevelType}>
@@ -112,7 +128,6 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
         hoverBackgroundColor="var(--snui-color-gray-100)"
         id={accordionButtonId}
         onClick={handleClick}
-        ref={buttonRef}
         width="100%"
       >
         <div className="snui-accordion__text" style={{ color: 'black' }}>

@@ -15,7 +15,7 @@ export interface AccordionProps {
    */
   className?: string;
   /**
-   * Configure the accordion headers that should render in the open state.
+   * Configure the accordion panels that should render in the open state.
    */
-  defaultIndex?: number[];
+  defaultIndices?: number[];
 }
