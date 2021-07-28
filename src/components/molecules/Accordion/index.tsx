@@ -26,8 +26,12 @@ const Accordion: React.FC<AccordionProps> = props => {
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const buttonsRef = useRef<HTMLButtonElement[]>(null);
   const [activeIndices, setActiveIndicesState] = useState(defaultIndices);
+  const [focusedIndex, setFocusedIndexState] = useState(-1);
   const setActiveIndices = useCallback((newIndex: number[]) => {
     setActiveIndicesState(newIndex);
+  }, []);
+  const setFocusedIndex = useCallback((newIndex: number) => {
+    setFocusedIndexState(newIndex);
   }, []);
   const accordionId = useMemo(() => `snui-accordion-${Math.random()}`, []);
   const context = useAccordionProvider(props);
@@ -97,40 +101,36 @@ const Accordion: React.FC<AccordionProps> = props => {
       allowToggle,
       buttonsRef: buttonsRef?.current,
       defaultIndices,
+      focusedIndex,
       setActiveIndices,
+      setFocusedIndex,
     }),
     [context, updatedButtonsRef]
   );
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const accordionButtonIndex = Number(
-      // @ts-ignore
-      e.target.attributes.getNamedItem('data-snui-accordion-button-index')
-        ?.nodeValue
-    );
-
     if (e.key === 'ArrowUp') {
-      if (accordionButtonIndex === 0) {
+      if (focusedIndex === 0) {
         buttonsRef.current![buttonsRef.current!.length - 1].focus();
       } else {
-        buttonsRef.current![accordionButtonIndex - 1].focus();
+        buttonsRef.current![focusedIndex - 1].focus();
       }
     } else if (e.key === 'ArrowDown') {
       const lastButtonIndex = buttonsRef.current!.length - 1;
 
-      if (accordionButtonIndex === lastButtonIndex) {
+      if (focusedIndex === lastButtonIndex) {
         buttonsRef.current![0].focus();
       } else {
-        buttonsRef.current![accordionButtonIndex + 1].focus();
+        buttonsRef.current![focusedIndex + 1].focus();
       }
     } else if (e.key === 'Home') {
-      if (accordionButtonIndex !== 0) {
+      if (focusedIndex !== 0) {
         buttonsRef.current![0].focus();
       }
     } else if (e.key === 'End') {
       const lastButtonIndex = buttonsRef.current!.length - 1;
 
-      if (accordionButtonIndex !== lastButtonIndex) {
+      if (focusedIndex !== lastButtonIndex) {
         buttonsRef.current![lastButtonIndex].focus();
       }
     }

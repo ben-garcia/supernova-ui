@@ -7,7 +7,9 @@ export interface Accordion {
   allowToggle: boolean;
   getAccordionPanelProps: () => void;
   defaultIndices: number[];
+  focusedIndex: number;
   setActiveIndices: (newIndices: number[]) => void;
+  setFocusedIndex: (newIndex: number) => void;
 }
 
 export interface AccordionItem {

@@ -31,6 +31,7 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     allowToggle,
     defaultIndices,
     setActiveIndices,
+    setFocusedIndex,
   } = useAccordion();
   const {
     accordionButtonId,
@@ -42,6 +43,13 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
   const classes = createClasses('snui-accordion__button', {
     [`${className}`]: isString(className),
   });
+
+  const handleFocus = useCallback(() => {
+    const index = Number(
+      ref.current!.getAttribute('data-snui-accordion-button-index')
+    );
+    setFocusedIndex(index);
+  }, []);
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -115,6 +123,8 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     [isOpen, activeIndices]
   );
 
+  const ref = React.useRef<HTMLButtonElement | null>(null);
+
   return (
     <Heading level={headingLevel as HeadingLevelType}>
       <Button
@@ -128,6 +138,8 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
         hoverBackgroundColor="var(--snui-color-gray-100)"
         id={accordionButtonId}
         onClick={handleClick}
+        onFocus={handleFocus}
+        ref={ref}
         width="100%"
       >
         <div className="snui-accordion__text" style={{ color: 'black' }}>
