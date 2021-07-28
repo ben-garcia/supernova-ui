@@ -1,0 +1,308 @@
+/* eslint react/jsx-wrap-multilines: 0 */
+import React from 'react';
+
+import Accordion from '.';
+import AccordionHeaderButton from './AccordionHeaderButton';
+import AccordionItem from './AccordionItem';
+import AccordionPanel from './AccordionPanel';
+import { AccordionProps } from './types';
+import {
+  a11yTest,
+  fireEvent,
+  mockMatchMedia,
+  render,
+  screen,
+} from '../../../test-utils';
+
+describe('<Accordion />', () => {
+  beforeAll(() => mockMatchMedia());
+
+  const buttonOneContent = 'Section 1';
+  const panelOneContent = 'section 1 panel';
+  const buttonTwoContent = 'Section 2';
+  const panelTwoContent = 'section 2 panel';
+  const buttonThreeContent = 'Section 3';
+  const panelThreeContent = 'section 3 panel';
+
+  const AccordionTest = (props: Omit<AccordionProps, 'children'>) => {
+    return (
+      <div data-testid="accordion">
+        <Accordion {...props}>
+          <AccordionItem>
+            <AccordionHeaderButton>{buttonOneContent}</AccordionHeaderButton>
+            <AccordionPanel>{panelOneContent}</AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <AccordionHeaderButton>{buttonTwoContent}</AccordionHeaderButton>
+            <AccordionPanel>{panelTwoContent}</AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <AccordionHeaderButton>{buttonThreeContent}</AccordionHeaderButton>
+            <AccordionPanel>{panelThreeContent}</AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    );
+  };
+
+  it('should pass a11y tests', async () => {
+    await a11yTest(<AccordionTest />);
+  });
+
+  it('should wrap header button in an h2 by default', () => {
+    render(
+      <Accordion>
+        <AccordionItem>
+          <AccordionHeaderButton>button</AccordionHeaderButton>
+        </AccordionItem>
+      </Accordion>
+    );
+    const headerButton = screen.getByRole('button');
+
+    expect(headerButton.parentElement?.nodeName).toBe('H2');
+  });
+
+  it('should contain the proper aria attributes', () => {
+    render(
+      <Accordion>
+        <AccordionItem>
+          <AccordionHeaderButton>Section 1</AccordionHeaderButton>
+          <AccordionPanel>section 1 panel</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    );
+
+    const headerButton = screen.getByRole('button');
+    const accordionPanel = screen.getByRole('region');
+
+    expect(headerButton).toHaveAttribute('aria-expanded', 'false');
+    // 'aria-controls' must match the id of the button.
+    expect(headerButton).toHaveAttribute(
+      'aria-controls',
+      accordionPanel?.getAttribute('id')
+    );
+
+    fireEvent.click(headerButton as HTMLElement);
+
+    // 'aria-expanded' should indicate that the button was clicked.
+    expect(headerButton).toHaveAttribute('aria-expanded', 'true');
+    // indicates that the panel cannot be collapsed by default.
+    expect(headerButton).toHaveAttribute('aria-disabled', 'true');
+
+    expect(accordionPanel).toHaveAttribute('role', 'region');
+    // 'aria-labelledby' must match id of the panel.
+    expect(accordionPanel).toHaveAttribute(
+      'aria-labelledby',
+      headerButton?.getAttribute('id')
+    );
+  });
+
+  describe('props', () => {
+    describe('none', () => {
+      it('should only have a single panel collapsed at a time and unable to collapse the opened panel', () => {
+        render(<AccordionTest />);
+
+        const headerButtons = screen.getAllByRole('button');
+
+        /**
+         * 'aria-expanded' set to true indicates that panel associtaed with
+         * the button is open.
+         */
+
+        // panels are all closed by default
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the first header button
+        fireEvent.click(headerButtons[0]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[0]).toHaveAttribute('aria-disabled', 'true');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the second header button
+        fireEvent.click(headerButtons[1]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[1]).toHaveAttribute('aria-disabled', 'true');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the third header button
+        fireEvent.click(headerButtons[2]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[2]).toHaveAttribute('aria-disabled', 'true');
+      });
+    });
+
+    describe('allowToggle', () => {
+      it('should only have a single panel collapsed at a time and able to collapse the opened panel', () => {
+        render(<AccordionTest allowToggle />);
+
+        const headerButtons = screen.getAllByRole('button');
+
+        /**
+         * 'aria-expanded' set to true indicates that panel associtaed with
+         * the button is open.
+         */
+
+        // panels are all closed by default
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the first header button
+        fireEvent.click(headerButtons[0]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the second header button
+        fireEvent.click(headerButtons[1]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the third header button
+        fireEvent.click(headerButtons[1]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+      });
+    });
+
+    describe('allowMultiple', () => {
+      it('should be able to close and open all', () => {
+        render(<AccordionTest allowMultiple />);
+
+        const headerButtons = screen.getAllByRole('button');
+
+        /**
+         * 'aria-expanded' set to true indicates that panel associated with
+         * the button is open.
+         */
+
+        // panels are all closed by default
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the first header button, which opens the associated panel.
+        fireEvent.click(headerButtons[0]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the second header button, which opens the associated panel.
+        fireEvent.click(headerButtons[1]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+        // click the third header button, which opens the associated panel.
+        fireEvent.click(headerButtons[2]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+
+        // click the all butons, which closes the all their associated panel.
+        fireEvent.click(headerButtons[2]);
+        fireEvent.click(headerButtons[1]);
+        fireEvent.click(headerButtons[0]);
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+        expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+      });
+    });
+
+    describe('defaultIndices', () => {
+      it('should render with open panels matching prop', () => {
+        render(<AccordionTest defaultIndices={[0, 2]} />);
+
+        const headerButtons = screen.getAllByRole('button', {
+          expanded: true,
+        });
+
+        expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+      });
+
+      describe('with allowMultiple', () => {
+        it('should be able to close and open all', () => {
+          render(<AccordionTest defaultIndices={[0, 2]} allowMultiple />);
+
+          const headerButtons = screen.getAllByRole('button');
+
+          /**
+           * 'aria-expanded' set to true indicates that panel associated with
+           * the button is open.
+           */
+
+          // panels on and third and open
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+
+          // click the first header button, which opens the associated panel.
+          fireEvent.click(headerButtons[0]);
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+
+          // click the second header button, which opens the associated panel.
+          fireEvent.click(headerButtons[1]);
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+
+          // click the third header button, which opens the associated panel.
+          fireEvent.click(headerButtons[2]);
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+          // click the all butons, which closes the all their associated panel.
+          fireEvent.click(headerButtons[2]);
+          fireEvent.click(headerButtons[1]);
+          fireEvent.click(headerButtons[0]);
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+        });
+      });
+
+      describe('with allowToggle', () => {
+        it('should only have a single panel collapsed at a time and able to collapse the opened panel', () => {
+          render(<AccordionTest defaultIndices={[1, 2]} allowToggle />);
+
+          const headerButtons = screen.getAllByRole('button');
+
+          /**
+           * 'aria-expanded' set to true indicates that panel associtaed with
+           * the button is open.
+           */
+
+          // panels one and two are opened
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
+
+          // click the first header button
+          fireEvent.click(headerButtons[0]);
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+
+          // click the second header button
+          fireEvent.click(headerButtons[1]);
+          expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
+          expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
+          expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+  });
+});
