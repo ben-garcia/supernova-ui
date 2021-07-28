@@ -12,6 +12,7 @@ import {
   mockMatchMedia,
   render,
   screen,
+  userEvent,
 } from '../../../test-utils';
 
 describe('<Accordion />', () => {
@@ -97,6 +98,111 @@ describe('<Accordion />', () => {
       'aria-labelledby',
       headerButton?.getAttribute('id')
     );
+  });
+
+  describe('keyboard navigation', () => {
+    let accordion: Element;
+    let headerButtons: HTMLElement[];
+
+    beforeEach(() => {
+      render(<AccordionTest />);
+
+      accordion = screen.getByTestId('accordion').firstElementChild as Element;
+      headerButtons = screen.getAllByRole('button');
+    });
+
+    describe('tab and shift+tab', () => {
+      it('should traverse back and forth through the buttons', () => {
+        userEvent.tab();
+        expect(headerButtons[0]).toHaveFocus();
+
+        userEvent.tab();
+        expect(headerButtons[1]).toHaveFocus();
+
+        userEvent.tab();
+        expect(headerButtons[2]).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        expect(headerButtons[1]).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        expect(headerButtons[0]).toHaveFocus();
+      });
+    });
+
+    describe('function keys', () => {
+      describe('End', () => {
+        it('should set focus to the last header button', () => {
+          // focus set to the first button
+          fireEvent.focus(headerButtons[0]);
+
+          fireEvent.keyDown(accordion, { key: 'End' });
+
+          expect(headerButtons[2]).toHaveFocus();
+        });
+      });
+
+      describe('Home', () => {
+        it('should set focus to the first header button', () => {
+          // focus set to the last button
+          fireEvent.focus(headerButtons[2]);
+
+          fireEvent.keyDown(accordion, { key: 'Home' });
+
+          expect(headerButtons[0]).toHaveFocus();
+        });
+      });
+    });
+
+    describe('arrow keys', () => {
+      describe('ArrowDown', () => {
+        it('should set focus to the next header button', () => {
+          // focus set to the first button
+          fireEvent.focus(headerButtons[0]);
+
+          fireEvent.keyDown(accordion, { key: 'ArrowDown' });
+
+          expect(headerButtons[1]).toHaveFocus();
+
+          fireEvent.keyDown(accordion, { key: 'ArrowDown' });
+
+          expect(headerButtons[2]).toHaveFocus();
+        });
+
+        it('should set focus to the first button when current focus is on the last button,', () => {
+          // focus set to the first button
+          fireEvent.focus(headerButtons[2]);
+
+          fireEvent.keyDown(accordion, { key: 'ArrowDown' });
+
+          expect(headerButtons[0]).toHaveFocus();
+        });
+      });
+
+      describe('ArrowUp', () => {
+        it('should set focus to the previous header button', () => {
+          // focus set to the first button
+          fireEvent.focus(headerButtons[2]);
+
+          fireEvent.keyDown(accordion, { key: 'ArrowUp' });
+
+          expect(headerButtons[1]).toHaveFocus();
+
+          fireEvent.keyDown(accordion, { key: 'ArrowUp' });
+
+          expect(headerButtons[0]).toHaveFocus();
+        });
+
+        it('should set focus to the first button when current focus is on the last button, ', () => {
+          // focus set to the first button
+          fireEvent.focus(headerButtons[0]);
+
+          fireEvent.keyDown(accordion, { key: 'ArrowUp' });
+
+          expect(headerButtons[2]).toHaveFocus();
+        });
+      });
+    });
   });
 
   describe('props', () => {
