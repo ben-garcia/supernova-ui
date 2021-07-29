@@ -2,8 +2,6 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 
 import { AccordionContext, AccordionItemContext } from '../contexts/accordion';
 import { AccordionProps } from '../components/molecules/Accordion/types';
-import { AccordionItemProps } from '../components/molecules/Accordion/AccordionItem';
-import { isString } from '../utils';
 
 /**
  * Hook that returns the Accordion props
@@ -37,25 +35,14 @@ const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
 /**
  * Hook that returns the Accordion Item props
  */
-const useAccordionItemProvider = (
-  props: Omit<AccordionItemProps, 'children'>
-) => {
-  const { id: propId } = props;
+const useAccordionItemProvider = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const id = useMemo(
-    () =>
-      isString(propId)
-        ? (propId as string)
-        : `snui-accordion-item-${Math.random()}`,
-    []
-  );
 
   const getAccordionButtonProps = useCallback(
     (accordionButtonProps = {}) => ({
       ...accordionButtonProps,
     }),
-    [id]
+    []
   );
 
   const getAccordionItemProps = useCallback(
@@ -70,7 +57,6 @@ const useAccordionItemProvider = (
   return {
     getAccordionButtonProps,
     getAccordionItemProps,
-    id,
     isOpen,
     onClose,
     onOpen,
