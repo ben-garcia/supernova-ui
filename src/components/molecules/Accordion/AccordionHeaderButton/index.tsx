@@ -24,7 +24,7 @@ type HeadingLevelType = 1 | 2 | 3 | 4 | 5 | 6;
 
 const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
   const { children, className, headingLevel = 2, ...rest } = props;
-  const { getAccordionButtonProps } = useAccordionItemProvider(props);
+  const { getAccordionButtonProps } = useAccordionItemProvider();
   const {
     activeIndices,
     allowMultiple,
@@ -134,7 +134,6 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
         aria-disabled={!allowToggle && isOpen ? true : undefined}
         aria-expanded={isOpen}
         className={classes}
-        backgroundColor="transparent"
         hoverBackgroundColor="var(--snui-color-gray-100)"
         id={accordionButtonId}
         onClick={handleClick}
