@@ -13,7 +13,7 @@ import { IdContext } from '../contexts';
  * @example
  *
  * ```js
- * const buttonId = useId('button');
+ * const buttonId = useUniqueId('button');
  *
  * // buttonId will be `button-<unique-number>`
  * ```
@@ -37,7 +37,7 @@ export const useUniqueId = (prefix: string) => {
  * @example
  *
  * ```js
- * const [buttonId, panelId] = useIds('accordion-1', 'button', 'panel')
+ * const [buttonId, panelId] = useUniqueIds('accordion-1', 'button', 'panel')
  *
  * // buttonId will be in the form `accordion-1-button-<unique-number>`
  * // panelId will be in the form `accordion-1-panel-<unique-number>`
