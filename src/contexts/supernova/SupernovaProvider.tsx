@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { NotificationProvider } from '../notification/NotificationProvider';
+import { IdProvider } from '../unique-id';
 import { SupernovaProviderProps } from './types';
 import { ThemeProvider, ThemeProviderProps } from '../theme';
 import { theme as defaultTheme } from '../../theme';
@@ -12,19 +13,19 @@ import { deepMergify } from '../../utils';
  */
 const SupernovaProvider = (props: SupernovaProviderProps) => {
   const { theme, children } = props;
-  let themeToUse;
-
-  // use default theme when a custom theme is not provided
-  if (!theme) {
-    themeToUse = defaultTheme;
-  } else {
-    // extend the default theme to include custom theme values
-    themeToUse = deepMergify(defaultTheme, theme);
-  }
+  const themeToUse = React.useMemo(
+    () => (theme ? deepMergify(defaultTheme, theme) : defaultTheme),
+    [theme]
+  );
+  const countRef = React.useRef({
+    count: 0,
+  });
 
   return (
     <ThemeProvider value={themeToUse as ThemeProviderProps['value']}>
-      <NotificationProvider>{children}</NotificationProvider>
+      <IdProvider value={countRef.current}>
+        <NotificationProvider>{children}</NotificationProvider>
+      </IdProvider>
     </ThemeProvider>
   );
 };
