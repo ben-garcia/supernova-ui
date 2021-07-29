@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import Button from '../../atoms/Button';
+import { Button, CloseIcon } from '../../atoms';
 import FocusLock from '../../atoms/FocusLock';
-import { CloseIcon } from '../../atoms/Icon/Icons';
 import { ModalProps } from './types';
 import './styles.scss';
 
@@ -66,6 +65,7 @@ const Modal: React.FC<ModalProps> = props => {
   // get a reference to the focused element that triggerd the Modal
   useEffect(() => {
     previousActiveElement.current = document.activeElement;
+
     return () => {
       if (!finalFocusRef?.current) {
         // when Modal is closed, the focus should return to the element
@@ -246,8 +246,8 @@ const Modal: React.FC<ModalProps> = props => {
         <div className="snui-overlay">
           <section
             {...rest}
-            aria-labelledby={`${context.id}-header`}
-            aria-describedby={`${context.id}-body`}
+            aria-labelledby={`${context.id}__header`}
+            aria-describedby={`${context.id}__body`}
             aria-modal="true"
             className={classes}
             role="dialog"

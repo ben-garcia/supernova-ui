@@ -33,7 +33,6 @@ export interface ModalProps
    * The reference of element to receive focus when the Modal first opens
    */
   initialFocusRef?: RefObject<HTMLElement>;
-  id?: string;
   /**
    * Flag that determines when to open the Modal
    */

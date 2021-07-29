@@ -1,22 +1,16 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext } from 'react';
 
 import { ModalContext } from '../contexts';
-import { ModalProps } from '../components/molecules/Modal/types';
+import { useUniqueId } from '.';
 import { createClasses, isString } from '../utils';
+import { ModalProps } from '../components/molecules/Modal/types';
 
 /** Hooks that returns the Modal props
  */
 const useModalProvider = (props: ModalProps) => {
-  const {
-    id: propId,
-    isOpen,
-    onClose,
-    closeOnEsc,
-    finalFocusRef,
-    initialFocusRef,
-  } = props;
+  const { isOpen, onClose, closeOnEsc, finalFocusRef, initialFocusRef } = props;
 
-  const [id] = useState(propId || `modal-${Math.random()}`);
+  const id = useUniqueId('snui-modal');
 
   const getModalBodyProps = useCallback(
     (modalBodyProps = {}) => {
@@ -27,7 +21,7 @@ const useModalProvider = (props: ModalProps) => {
       return {
         ...modalBodyProps,
         className: classes,
-        id: `${id}-body`,
+        id: `${id}__body`,
       };
     },
     [id]
@@ -41,7 +35,7 @@ const useModalProvider = (props: ModalProps) => {
       return {
         ...modalHeaderProps,
         className: classes,
-        id: `${id}-header`,
+        id: `${id}__header`,
       };
     },
     [id]
@@ -56,7 +50,7 @@ const useModalProvider = (props: ModalProps) => {
       return {
         ...modalFooterProps,
         className: classes,
-        id: `${id}-footer`,
+        id: `${id}__footer`,
       };
     },
     [id]
