@@ -10,6 +10,7 @@ import React, {
 import { AccordionProvider } from '../../../contexts';
 import { AccordionProps } from './types';
 import { useAccordionProvider } from '../../../hooks/use-accordion';
+import { useUniqueId } from '../../../hooks';
 import { createClasses, isString } from '../../../utils';
 
 const Accordion: React.FC<AccordionProps> = props => {
@@ -33,7 +34,8 @@ const Accordion: React.FC<AccordionProps> = props => {
   const setFocusedIndex = useCallback((newIndex: number) => {
     setFocusedIndexState(newIndex);
   }, []);
-  const accordionId = useMemo(() => `snui-accordion-${Math.random()}`, []);
+  // const accordionId = useMemo(() => `snui-accordion-${Math.random()}`, []);
+  const accordionId = useUniqueId('snui-accordion');
   const context = useAccordionProvider(props);
   const [updatedButtonsRef, setUpdatedButtonsRef] = useState(false);
 

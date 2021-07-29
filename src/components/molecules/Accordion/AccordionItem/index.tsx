@@ -5,11 +5,11 @@ import {
   useAccordionItemProvider,
   useAccordion,
 } from '../../../../hooks/use-accordion';
+import { useUniqueIds } from '../../../../hooks';
 import { createClasses, isString } from '../../../../utils';
 
 export interface AccordionItemProps {
   className?: string;
-  id?: string;
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = props => {
@@ -17,19 +17,16 @@ const AccordionItem: React.FC<AccordionItemProps> = props => {
   const classes = createClasses('snui-accordion__item', {
     [`${className}`]: isString(className),
   });
-  const context = useAccordionItemProvider(props);
-  const { getAccordionItemProps } = useAccordionItemProvider(rest);
+  const context = useAccordionItemProvider();
+  const { getAccordionItemProps } = useAccordionItemProvider();
   const { accordionId } = useAccordion();
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = React.useCallback(() => setIsOpen(false), []);
   const onOpen = React.useCallback(() => setIsOpen(true), []);
-  const accordionButtonId = useMemo(
-    () => `${accordionId}__button-${Math.random()}`,
-    []
-  );
-  const accordionPanelId = useMemo(
-    () => `${accordionId}__panel-${Math.random()}`,
-    []
+  const [accordionButtonId, accordionPanelId] = useUniqueIds(
+    accordionId,
+    'button',
+    'panel'
   );
 
   const contextValue = useMemo(
