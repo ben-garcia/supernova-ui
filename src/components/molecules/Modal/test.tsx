@@ -10,6 +10,7 @@ import {
   fireEvent,
   mockMatchMedia,
   render,
+  userEvent,
 } from '../../../test-utils';
 
 describe('<Modal />', () => {
@@ -137,6 +138,22 @@ describe('<Modal />', () => {
     });
   });
 
+  it('should give focus to the close button by default', () => {
+    const ModalTest = () => (
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalHeader>header</ModalHeader>
+        <ModalBody>
+          <input />
+        </ModalBody>
+        <ModalFooter>footer</ModalFooter>
+      </Modal>
+    );
+    const { getByRole } = render(<ModalTest />);
+    const closeButton = getByRole('button');
+
+    expect(closeButton).toHaveFocus();
+  });
+
   it('should give focus to the initialFocusRef element', () => {
     const ModalTest = () => {
       const [isOpen, setIsOpen] = React.useState(false);
@@ -220,5 +237,151 @@ describe('<Modal />', () => {
     // final button should be focused when Modal has closed
     // await waitFor(() => expect(finalButton).toHaveFocus());
     expect(finalButton).toHaveFocus();
+  });
+
+  describe('keyboard navigation', () => {
+    describe('Tab', () => {
+      it('should focus the next tabbable element and wrap around to the first by default', () => {
+        const ModalTest = () => (
+          <Modal isOpen onClose={jest.fn()}>
+            <ModalHeader>header</ModalHeader>
+            <ModalBody>
+              <input data-testid="modal-input1" />
+              <input data-testid="modal-input2" />
+            </ModalBody>
+            <ModalFooter>footer</ModalFooter>
+          </Modal>
+        );
+
+        const { getByRole, getByTestId } = render(<ModalTest />);
+        const closeButton = getByRole('button');
+        const modalInput1 = getByTestId('modal-input1');
+        const modalInput2 = getByTestId('modal-input2');
+
+        expect(closeButton).toHaveFocus();
+
+        userEvent.tab();
+        expect(modalInput1).toHaveFocus();
+
+        userEvent.tab();
+        // focus the last tabbable element
+        expect(modalInput2).toHaveFocus();
+
+        userEvent.tab();
+        // return focus to the first element
+        expect(closeButton).toHaveFocus();
+      });
+
+      it('should focus the next tabbable element and NOT wrap around to the first when trapFocus is false', () => {
+        const ModalTest = () => (
+          <Modal isOpen onClose={jest.fn()} trapFocus={false}>
+            <ModalHeader>header</ModalHeader>
+            <ModalBody>
+              <input data-testid="modal-input1" />
+              <input data-testid="modal-input2" />
+            </ModalBody>
+            <ModalFooter>footer</ModalFooter>
+          </Modal>
+        );
+        const { getByRole, getByTestId } = render(<ModalTest />);
+        const closeButton = getByRole('button');
+        const modalInput1 = getByTestId('modal-input1');
+        const modalInput2 = getByTestId('modal-input2');
+
+        expect(closeButton).toHaveFocus();
+
+        userEvent.tab();
+        expect(modalInput1).toHaveFocus();
+
+        userEvent.tab();
+        // focus the last tabbable element
+        expect(modalInput2).toHaveFocus();
+
+        // tab outside the modal
+        userEvent.tab();
+        expect(closeButton).not.toHaveFocus();
+        expect(modalInput1).not.toHaveFocus();
+        expect(modalInput2).not.toHaveFocus();
+      });
+    });
+
+    describe('Shift+Tab', () => {
+      it('should focus the previous tabbable element and wrap around to the last by default', () => {
+        const ModalTest = () => {
+          const initialFocusRef = React.useRef(null);
+
+          return (
+            <Modal initialFocusRef={initialFocusRef} isOpen onClose={jest.fn()}>
+              <ModalHeader>header</ModalHeader>
+              <ModalBody>
+                <input data-testid="modal-input1" />
+                <input data-testid="modal-input2" ref={initialFocusRef} />
+              </ModalBody>
+              <ModalFooter>footer</ModalFooter>
+            </Modal>
+          );
+        };
+
+        const { getByRole, getByTestId } = render(<ModalTest />);
+        const closeButton = getByRole('button');
+        const modalInput1 = getByTestId('modal-input1');
+        const modalInput2 = getByTestId('modal-input2');
+
+        expect(modalInput2).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        // focus the last tabbable element
+        expect(modalInput1).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        // return focus to the first element
+        expect(closeButton).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        // return focus to the last element
+        expect(modalInput2).toHaveFocus();
+      });
+
+      it('should focus the previous tabbable element and NOT wrap around to the last when trapFocus is false', () => {
+        const ModalTest = () => {
+          const initialFocusRef = React.useRef(null);
+
+          return (
+            <Modal
+              initialFocusRef={initialFocusRef}
+              isOpen
+              onClose={jest.fn()}
+              trapFocus={false}
+            >
+              <ModalHeader>header</ModalHeader>
+              <ModalBody>
+                <input data-testid="modal-input1" />
+                <input data-testid="modal-input2" ref={initialFocusRef} />
+              </ModalBody>
+              <ModalFooter>footer</ModalFooter>
+            </Modal>
+          );
+        };
+
+        const { getByRole, getByTestId } = render(<ModalTest />);
+        const closeButton = getByRole('button');
+        const modalInput1 = getByTestId('modal-input1');
+        const modalInput2 = getByTestId('modal-input2');
+
+        expect(modalInput2).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        // focus the last tabbable element
+        expect(modalInput1).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        // return focus to the first element
+        expect(closeButton).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        // return focus to the last element
+        expect(modalInput2).not.toHaveFocus();
+      });
+    });
   });
 });
