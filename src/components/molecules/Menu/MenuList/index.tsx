@@ -99,10 +99,18 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
+    if (menuButtonRef?.current)
       (menuButtonItems.current as any) = menuListRef?.current?.querySelectorAll(
         'button[role="menuitem"]'
       );
+  }, [menuListRef?.current]);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (menuButtonItems?.current)
+        menuButtonItems.current.forEach((el, index) => {
+          el.setAttribute('data-snui-index', `${index}`);
+        });
 
       if (menuButtonItems?.current?.length) {
         // needed to correctly set focus
@@ -112,7 +120,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
           ];
           (nextEl.current as any) = menuButtonItems.current[1];
           handleActive(menuButtonItems.current[0]);
-        }, 20);
+        }, 15);
       }
     }
 
@@ -125,10 +133,10 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   }, [isOpen]);
 
   useEffect(() => {
-    let handleKeyUp: any;
+    let handleKeyDown: any;
 
     if (isOpen) {
-      handleKeyUp = (e: KeyboardEvent) => {
+      handleKeyDown = (e: KeyboardEvent) => {
         // prevent user from 'Tab' or 'Shift + Tab' to another element
         e.preventDefault();
 
@@ -158,11 +166,11 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
         }
       };
 
-      window.addEventListener('keyup', handleKeyUp);
+      window.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
-      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
 
