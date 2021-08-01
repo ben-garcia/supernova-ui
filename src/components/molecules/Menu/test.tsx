@@ -8,10 +8,13 @@ import MenuItem from './MenuItem';
 import MenuGroup from './MenuGroup';
 import MenuList from './MenuList';
 import {
+  // act,
   a11yTest,
   fireEvent,
   mockMatchMedia,
   render,
+  screen,
+  userEvent,
 } from '../../../test-utils';
 
 describe('<Menu />', () => {
@@ -91,37 +94,178 @@ describe('<Menu />', () => {
     expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 
-  it.skip('should focus the first menu item', () => {
-    const Test = () => {
-      const [isOpen, setIsOpen] = React.useState(false);
-      return (
-        <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <MenuButton data-testid="menu-button" onClick={() => setIsOpen(true)}>
-            Open
-          </MenuButton>
-          <MenuButton data-testid="test-menu-button">open</MenuButton>
-          <MenuList data-testid="test-list">
-            <MenuGroup title="main">
-              <MenuItem data-testid="test-profile">Profile</MenuItem>
-              <MenuItem data-testid="test-settings">Settings</MenuItem>
-            </MenuGroup>
-            <MenuGroup title="secondary">
-              <MenuItem data-testid="test-nightmode">Night Mode</MenuItem>
-              <MenuItem data-testid="test-signout">Signout</MenuItem>
-            </MenuGroup>
-          </MenuList>
-        </Menu>
-      );
-    };
+  describe('keyboard navigation', () => {
+    /**
+     * Warning: An update to ForwardRef inside a test was not wrapped in act(...).
+     * When testing, code that causes React state updates should be wrapped into act(...):
+     *
+     * act(() => {
+     *	 fireEvent.click(button);
+     *	 jest.advanceTimersByTime(20);
+     * });
+     *
+     * NOTE: passes when running this single test
+     *			 fails when running all tests.
+     */
 
-    const { getByText } = render(<Test />);
-    const profileItem = getByText('Profile');
-    const button = getByText('open');
+    // passes all tests
+    // fails single test
+    //
+    // All with the warning
 
-    expect(profileItem).not.toHaveFocus();
+    let Test: React.FC;
 
-    fireEvent.click(button);
+    beforeAll(() => {
+      jest.useFakeTimers();
 
-    expect(profileItem).toHaveFocus();
+      Test = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        return (
+          <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+            <MenuButton
+              data-testid="menu-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </MenuButton>
+            <MenuList data-testid="test-list">
+              <MenuGroup title="main">
+                <MenuItem data-testid="test-profile">Profile</MenuItem>
+                <MenuItem data-testid="test-settings">Settings</MenuItem>
+              </MenuGroup>
+              <MenuGroup title="secondary">
+                <MenuItem data-testid="test-nightmode">Night Mode</MenuItem>
+                <MenuItem data-testid="test-signout">Signout</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
+        );
+      };
+    });
+
+    describe('tab and shift+tab', () => {
+      it('should have no effect', () => {
+        render(<Test />);
+
+        const profileItem = screen.getByText('Profile');
+        const button = screen.getByText('Open');
+
+        expect(profileItem).not.toHaveFocus();
+
+        fireEvent.click(button);
+
+        jest.advanceTimersByTime(30);
+
+        expect(profileItem).toHaveFocus();
+
+        userEvent.tab();
+        expect(profileItem).toHaveFocus();
+
+        userEvent.tab({ shift: true });
+        expect(profileItem).toHaveFocus();
+      });
+    });
+
+    describe('function keys', () => {
+      describe('End and Home', () => {
+        it('should set focus to the first and last menu buttons', () => {
+          render(<Test />);
+
+          const profileItem = screen.getByText('Profile');
+          const button = screen.getByText('Open');
+          const signout = screen.getByText('Signout');
+
+          fireEvent.click(button);
+
+          jest.advanceTimersByTime(30);
+
+          expect(profileItem).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'End' });
+          expect(signout).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'Home' });
+          expect(profileItem).toHaveFocus();
+        });
+      });
+    });
+
+    describe('arrow keys', () => {
+      describe('ArrowDown and ArrowUp', () => {
+        it('should set focus to the next and previous menu buttons', () => {
+          render(<Test />);
+
+          const button = screen.getByText('Open');
+          const profileItem = screen.getByText('Profile');
+          const settings = screen.getByText('Settings');
+          const nightMode = screen.getByText(/Night Mode/);
+          const signout = screen.getByText('Signout');
+
+          fireEvent.click(button);
+
+          jest.advanceTimersByTime(30);
+
+          expect(profileItem).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowDown' });
+          expect(settings).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowDown' });
+          expect(nightMode).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowDown' });
+          expect(signout).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowUp' });
+          expect(nightMode).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowUp' });
+          expect(settings).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowUp' });
+          expect(profileItem).toHaveFocus();
+        });
+
+        describe('ArrowUp', () => {
+          it('should set focus to the last button when current focus is on the first button,', () => {
+            render(<Test />);
+
+            const button = screen.getByText('Open');
+            const profileItem = screen.getByText('Profile');
+            const signout = screen.getByText('Signout');
+
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(30);
+
+            expect(profileItem).toHaveFocus();
+
+            fireEvent.keyDown(window, { key: 'ArrowUp' });
+            expect(signout).toHaveFocus();
+          });
+        });
+
+        describe('ArrowDown', () => {
+          it('should set focus to the first button when current focus is on the last button,', () => {
+            render(<Test />);
+
+            const button = screen.getByText('Open');
+            const profileItem = screen.getByText('Profile');
+            const signout = screen.getByText('Signout');
+
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(30);
+
+            // set focus to the last menu button item
+            fireEvent.keyDown(window, { key: 'End' });
+            expect(signout).toHaveFocus();
+
+            fireEvent.keyDown(window, { key: 'ArrowDown' });
+            expect(profileItem).toHaveFocus();
+          });
+        });
+      });
+    });
   });
 });
