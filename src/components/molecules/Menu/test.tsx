@@ -113,15 +113,15 @@ describe('<Menu />', () => {
     //
     // All with the warning
 
-    let Test: React.FC;
+    let Test: React.FC<Partial<MenuProps>>;
 
     beforeAll(() => {
       jest.useFakeTimers();
 
-      Test = () => {
+      Test = props => {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
-          <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Menu {...props} isOpen={isOpen} onClose={() => setIsOpen(false)}>
             <MenuButton
               data-testid="menu-button"
               onClick={() => setIsOpen(true)}
@@ -141,6 +141,46 @@ describe('<Menu />', () => {
           </Menu>
         );
       };
+    });
+
+    beforeEach(() => jest.clearAllTimers());
+
+    describe('esc key', () => {
+      it('should return focus to the trigger when by default', () => {
+        render(<Test />);
+
+        const profileItem = screen.getByText('Profile');
+        const button = screen.getByText('Open');
+
+        fireEvent.click(button);
+
+        jest.advanceTimersByTime(30);
+
+        expect(profileItem).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 'Escape' });
+        jest.advanceTimersByTime(30);
+
+        expect(button).toHaveFocus();
+      });
+
+      it('should NOT return focus to the trigger when closeOnEsc is false', () => {
+        render(<Test closeOnEsc={false} />);
+
+        const profileItem = screen.getByText('Profile');
+        const button = screen.getByText('Open');
+
+        fireEvent.click(button);
+
+        jest.advanceTimersByTime(30);
+
+        expect(profileItem).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 'Escape' });
+        jest.advanceTimersByTime(30);
+
+        expect(profileItem).toHaveFocus();
+      });
     });
 
     describe('tab and shift+tab', () => {
@@ -265,6 +305,56 @@ describe('<Menu />', () => {
             expect(profileItem).toHaveFocus();
           });
         });
+      });
+    });
+
+    describe('letter keys', () => {
+      it('should focus the menu button with first letter matching the key', () => {
+        render(<Test />);
+
+        const button = screen.getByText('Open');
+        const profile = screen.getByText('Profile');
+        const settings = screen.getByText('Settings');
+        const nightMode = screen.getByText(/Night Mode/);
+
+        fireEvent.click(button);
+
+        jest.advanceTimersByTime(30);
+
+        // set focus to the last menu button item
+        fireEvent.keyDown(window, { key: 's' });
+        expect(settings).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 'p' });
+        expect(profile).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 'n' });
+        expect(nightMode).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 's' });
+        expect(settings).toHaveFocus();
+      });
+
+      it.skip('should cycle through all menu buttons with the same key', () => {
+        render(<Test />);
+
+        const button = screen.getByText('Open');
+        const settings = screen.getByText('Settings');
+        const signout = screen.getByText('Signout');
+
+        fireEvent.click(button);
+
+        jest.advanceTimersByTime(30);
+
+        // set focus to the last menu button item
+        fireEvent.keyDown(window, { key: 's' });
+        expect(settings).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 's' });
+        expect(signout).toHaveFocus();
+
+        fireEvent.keyDown(window, { key: 's' });
+        expect(settings).toHaveFocus();
       });
     });
   });
