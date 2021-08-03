@@ -384,7 +384,7 @@ describe('<Menu />', () => {
       });
     });
 
-    describe.skip('letter keys', () => {
+    describe('letter keys', () => {
       it('should focus the menu button with first letter matching the key', () => {
         render(<Test />);
 
