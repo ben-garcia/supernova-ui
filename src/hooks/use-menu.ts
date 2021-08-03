@@ -58,15 +58,6 @@ const useMenuProvider = (props: MenuProps) => {
   const [id] = useState(propId || `menu-${Math.random()}`);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuListRef = useRef<HTMLDivElement>(null);
-  const activeMenuItem = useRef<HTMLButtonElement>(null);
-
-  const changeActiveMenuItem = useCallback(
-    (newItem: React.RefObject<HTMLButtonElement>) => {
-      // @ts-ignore
-      activeMenuItem.current = newItem;
-    },
-    []
-  );
 
   const getMenuButtonProps = useCallback(
     (menuButtonProps = {}, forwardedRef = null) => ({
@@ -97,8 +88,6 @@ const useMenuProvider = (props: MenuProps) => {
   );
 
   return {
-    activeMenuItem,
-    changeActiveMenuItem,
     closeOnEsc,
     getMenuButtonProps,
     getMenuItemProps,

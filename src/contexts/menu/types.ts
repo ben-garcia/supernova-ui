@@ -5,11 +5,8 @@ import { MenuListProps } from '../../components/molecules/Menu/MenuList';
 import { MenuItemProps } from '../../components/molecules/Menu/MenuItem';
 
 export interface Menu {
-  activeMenuItem: RefObject<HTMLButtonElement> | null;
-  changeActiveMenuItem: (
-    newMenuItem: RefObject<HTMLButtonElement> | null
-  ) => void;
   closeOnEsc?: boolean;
+  focusedIndex: number;
   getMenuButtonProps: (
     props: ButtonProps,
     ref: RefObject<HTMLButtonElement>
@@ -27,6 +24,7 @@ export interface Menu {
   menuButtonRef: RefObject<HTMLButtonElement> | null;
   menuListRef: RefObject<HTMLDivElement> | null;
   onClose: () => void;
+  setFocusedIndex: (newIndex: number) => void;
 }
 
 export interface MenuProviderProps {

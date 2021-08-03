@@ -3,8 +3,7 @@ import { createContext } from 'react';
 import { Menu } from './types';
 
 const initialState: Menu = {
-  activeMenuItem: null,
-  changeActiveMenuItem: () => {},
+  focusedIndex: -1,
   id: '',
   closeOnEsc: false,
   isOpen: false,
@@ -14,6 +13,7 @@ const initialState: Menu = {
   getMenuButtonProps: () => {},
   menuListRef: null,
   menuButtonRef: null,
+  setFocusedIndex: () => {},
 };
 
 export const MenuContext = createContext<Menu>(initialState);
