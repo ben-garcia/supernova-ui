@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { MenuProvider } from '../../../contexts/menu';
 import { MenuProps } from './types';
@@ -10,15 +10,22 @@ const Menu: React.FC<MenuProps> = props => {
   const [idToUse] = useState(
     isString(id) ? `${id}-${Math.random()}` : `menu-${Math.random()}`
   );
+  const [focusedIndex, setFocusedIndexFunction] = useState(-1);
+
+  const setFocusedIndex = useCallback((newIndex: number) => {
+    setFocusedIndexFunction(newIndex);
+  }, []);
 
   const context = useMenuProvider(props);
   const contextValue = useMemo(
     () => ({
       ...context,
       closeOnEsc,
+      focusedIndex,
       id: idToUse,
       isOpen,
       onClose,
+      setFocusedIndex,
     }),
     [context]
   );

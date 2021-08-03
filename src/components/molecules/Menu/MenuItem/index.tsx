@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useMenu, useTheme } from '../../../../hooks';
 import { createClasses, isFunction, isString } from '../../../../utils';
@@ -13,8 +13,15 @@ export interface MenuItemProps {
 
 const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
   const { children, className, onClick = null } = props;
-  const { activeMenuItem, onClose, getMenuItemProps } = useMenu();
+  const {
+    focusedIndex,
+    isOpen,
+    onClose,
+    getMenuItemProps,
+    setFocusedIndex,
+  } = useMenu();
   const theme = useTheme();
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [backgroundColor, setBackgroundColor] = useState('');
   const [color, setColor] = useState('');
   const classes = createClasses(
@@ -24,18 +31,35 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
     }
   );
 
-  const handleMouseEnter = () => {
-    if (activeMenuItem?.current) {
-      activeMenuItem.current.style.backgroundColor = '';
-      activeMenuItem.current.style.color = 'black';
+  useEffect(() => {
+    if (isOpen && buttonRef?.current) {
+      const index = Number(
+        buttonRef.current.getAttribute('data-snui-menu-item-index')
+      );
+
+      if (focusedIndex === index) {
+        buttonRef.current.focus();
+        buttonRef.current.setAttribute('tabIndex', '0');
+        setBackgroundColor(theme.colors.info600);
+        setColor(theme.colors.white);
+      } else {
+        buttonRef.current.setAttribute('tabIndex', '-1');
+        setBackgroundColor(theme.colors.transparent);
+        setColor(theme.colors.black);
+      }
     }
-    setBackgroundColor(theme.colors.info600);
-    setColor(theme.colors.white);
+  }, [isOpen, focusedIndex, buttonRef?.current]);
+
+  const handleMouseEnter = () => {
+    const index = Number(
+      buttonRef?.current?.getAttribute('data-snui-menu-item-index')
+    );
+
+    setFocusedIndex(index);
   };
 
   const handleMouseLeave = () => {
-    setBackgroundColor('');
-    setColor(theme.colors.black);
+    setFocusedIndex(-1);
   };
 
   const handleClick = () => {
@@ -52,6 +76,7 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={buttonRef}
       role="menuitem"
       style={{
         backgroundColor,

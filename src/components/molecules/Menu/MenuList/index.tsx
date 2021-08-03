@@ -5,12 +5,13 @@ import React, {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useMenu, useTheme } from '../../../../hooks';
+import { useMenu } from '../../../../hooks';
 import { createClasses, isString } from '../../../../utils';
 
 import './styles.scss';
@@ -36,7 +37,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     ...rest
   } = props;
   const {
-    changeActiveMenuItem,
+    focusedIndex,
     closeOnEsc,
     id,
     isOpen,
@@ -44,139 +45,138 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     getMenuListProps,
     menuListRef,
     menuButtonRef,
+    setFocusedIndex,
   } = useMenu();
   const [mounted, setMounted] = useState(false);
-  const [menuPortalId] = useState(`${id}-portal`);
+  const menuPortalId = useMemo(() => `${id}-portal`, []);
   const menuButtonItems = useRef<HTMLButtonElement[]>([]);
-  const theme = useTheme();
-  const previousEl = useRef<HTMLButtonElement>(null);
-  const nextEl = useRef<HTMLButtonElement>(null);
-  const activeEl = useRef<HTMLButtonElement>(null);
   const [pos, setPos] = useState({ left: '', top: '' });
 
-  const handleActive = useCallback((element: HTMLButtonElement) => {
-    const index = Array.from(menuButtonItems.current)
-      .map(el => el.textContent)
-      .indexOf(element.textContent);
-    if (index === 0) {
-      (previousEl.current as any) = menuButtonItems.current[
-        menuButtonItems.current.length - 1
-      ];
-      (nextEl.current as any) = menuButtonItems.current[1];
-    } else if (index === menuButtonItems.current.length - 1) {
-      (previousEl.current as any) = menuButtonItems.current[
-        menuButtonItems.current.length - 2
-      ];
-      (nextEl.current as any) = menuButtonItems.current[0];
-    } else {
-      (previousEl.current as any) = menuButtonItems.current[index - 1];
-      (nextEl.current as any) = menuButtonItems.current[index + 1];
-    }
-
-    previousEl!.current!.setAttribute('tabIndex', '-1');
-    previousEl!.current!.style.backgroundColor = '';
-    previousEl!.current!.style.color = theme.colors.black;
-
-    nextEl!.current!.setAttribute('tabIndex', '-1');
-    nextEl!.current!.style.backgroundColor = '';
-    nextEl!.current!.style.color = theme.colors.black;
-
-    changeActiveMenuItem!(menuButtonItems.current[index] as any);
-    (activeEl.current as any) = menuButtonItems.current[index];
-    activeEl.current!.focus();
-
-    (activeEl.current as any).setAttribute('tabIndex', '0');
-    (activeEl.current as any).style.backgroundColor = theme.colors.info600;
-    (activeEl.current as any).style.color = theme.colors.white;
-  }, []);
-  const resetMenuItems = React.useCallback(() => {
+  /**
+   * set tabindex of each menu item to -1
+   * set focused index to -1
+   *
+   * run on unmount
+   */
+  const resetMenuItems = useCallback(() => {
     menuButtonItems?.current?.forEach(el => {
       el.setAttribute('tabIndex', '-1');
-      el.style.backgroundColor = 'white';
-      el.style.color = 'black';
-      changeActiveMenuItem!(null);
     });
+    setFocusedIndex(-1);
   }, []);
 
+  /**
+   * set a reference to the list of button menu items
+   */
   useEffect(() => {
-    if (menuButtonRef?.current)
+    if (menuButtonRef?.current) {
       (menuButtonItems.current as any) = menuListRef?.current?.querySelectorAll(
         'button[role="menuitem"]'
       );
+    }
   }, [menuListRef?.current]);
 
+  /**
+   * add an index custom data prop to each menu item
+   */
   useEffect(() => {
     if (isOpen) {
-      if (menuButtonItems?.current)
-        menuButtonItems.current.forEach((el, index) => {
-          el.setAttribute('data-snui-index', `${index}`);
+      if (menuButtonItems?.current) {
+        menuButtonItems.current.forEach((element, index) => {
+          element.setAttribute('data-snui-menu-item-index', `${index}`);
         });
+      }
 
       if (menuButtonItems?.current?.length) {
         // needed to correctly set focus
         setTimeout(() => {
-          (previousEl.current as any) = menuButtonItems.current[
-            menuButtonItems.current.length - 1
-          ];
-          (nextEl.current as any) = menuButtonItems.current[1];
-          handleActive(menuButtonItems.current[0]);
+          menuButtonItems.current[0].focus();
         }, 15);
       }
     }
-
-    return () => {
-      resetMenuItems();
-      // when the menu is closed
-      // focus should be returned to the menu button that triggered it
-      menuButtonRef?.current?.focus();
-    };
   }, [isOpen]);
 
+  /**
+   * set focused index to 0
+   */
   useEffect(() => {
-    let handleKeyDown: any;
+    // set the intial focus index ONLY if there is at least 1 menu item
+    if (isOpen) {
+      setFocusedIndex(0);
+    }
+  }, [isOpen]);
+
+  /**
+   * return focus to the menu button that tiggered the menu to open
+   */
+  useEffect(
+    () => () => {
+      if (menuButtonRef?.current) {
+        resetMenuItems();
+        menuButtonRef?.current?.focus();
+      }
+    },
+    [isOpen, menuButtonRef?.current]
+  );
+
+  /**
+   * add/remove the winodw key down listeners
+   */
+  useEffect(() => {
+    let handleKeyDown: (e: KeyboardEvent) => void;
 
     if (isOpen) {
-      handleKeyDown = (e: KeyboardEvent) => {
-        // prevent user from 'Tab' or 'Shift + Tab' to another element
-        e.preventDefault();
+      handleKeyDown = e => {
+        if (menuButtonItems?.current) {
+          const { key, shiftKey } = e;
+          const menuItemsLength = menuButtonItems.current.length;
 
-        const { key } = e;
-
-        const menuItemContent = Array.from(menuButtonItems.current).map(
-          el => `${el.textContent![0].toLowerCase()}`
-        );
-
-        if (key === 'Escape' && closeOnEsc) {
-          onClose();
-        } else if (key === 'Enter' || key === ' ') {
-          onClose();
-        } else if (key === 'ArrowDown' || key === 'ArrowRight') {
-          handleActive(nextEl.current!);
-        } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
-          handleActive(previousEl.current!);
-        } else if (key === 'End') {
-          handleActive(
-            menuButtonItems.current[menuButtonItems.current.length - 1]
-          );
-        } else if (key === 'Home') {
-          handleActive(menuButtonItems.current[0]);
-        } else if (menuItemContent.includes(key.toLowerCase())) {
-          const index = menuItemContent.indexOf(key.toLowerCase());
-          handleActive(menuButtonItems.current[index]);
+          if (key === 'Escape' && closeOnEsc) {
+            onClose();
+          } else if (key === 'Tab' || (shiftKey && key === 'Tab')) {
+            // prevent user from using 'Tab' or 'Shift + Tab' to set focus to another element
+            e.preventDefault();
+          } else if (key === 'ArrowDown' || key === 'ArrowRight') {
+            if (focusedIndex !== menuItemsLength - 1) {
+              setFocusedIndex(focusedIndex + 1);
+            } else {
+              setFocusedIndex(0);
+            }
+          } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+            if (focusedIndex !== 0) {
+              setFocusedIndex(focusedIndex - 1);
+            } else {
+              setFocusedIndex(menuItemsLength - 1);
+            }
+          } else if (key === 'End') {
+            if (focusedIndex !== menuItemsLength - 1) {
+              setFocusedIndex(menuItemsLength - 1);
+            }
+          } else if (key === 'Home') {
+            if (focusedIndex !== 0) {
+              setFocusedIndex(0);
+            }
+          }
         }
       };
-
       window.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, focusedIndex]);
 
+  /**
+   *
+   * close menu when user clicks outside the menu list element
+   *
+   * add/remove window click listeners
+   */
   useEffect(() => {
     const handleClick = (e: any) => {
       const { target } = e;
+
       if (target?.parentElement?.id !== `${id}-list`) {
         onClose();
       }
@@ -193,6 +193,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     };
   }, [isOpen]);
 
+  // add React portal
   useEffect(() => {
     const div: HTMLDivElement = document.createElement('div');
     const menuPortal = document.getElementById(menuPortalId);
