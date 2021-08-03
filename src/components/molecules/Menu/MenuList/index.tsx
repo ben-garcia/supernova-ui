@@ -77,6 +77,14 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   }, [menuListRef?.current]);
 
   /**
+   * obj that stores the first letters of menu items
+   * and the array index of those that match.
+   */
+  const [menuItemsContent, setMenuItemsCotent] = useState<{
+    [k: string]: number[];
+  }>({});
+
+  /**
    * add an index custom data prop to each menu item
    */
   useEffect(() => {
@@ -85,6 +93,20 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
         menuButtonItems.current.forEach((element, index) => {
           element.setAttribute('data-snui-menu-item-index', `${index}`);
         });
+
+        const tempObj: any = {};
+
+        menuButtonItems.current.forEach((element, index) => {
+          const firstLetter = element.textContent![0].toLowerCase();
+
+          if (tempObj[firstLetter]) {
+            tempObj[firstLetter].push(index);
+          } else {
+            tempObj[firstLetter] = [index];
+          }
+        });
+
+        setMenuItemsCotent(tempObj);
       }
 
       if (menuButtonItems?.current?.length) {
@@ -156,9 +178,50 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
             if (focusedIndex !== 0) {
               setFocusedIndex(0);
             }
+          } else if (
+            // if the key matches a property in the menuItemContent object
+            Object.keys(menuItemsContent).includes(key.toLowerCase())
+          ) {
+            const lowerCaseKey = key.toLowerCase();
+
+            // when the array length is equal to one
+            if (menuItemsContent[lowerCaseKey].length === 1) {
+              setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
+              // when greater than one
+            } else if (menuItemsContent[lowerCaseKey].length > 1) {
+              // number of items in the array.
+              const numberOfIndices = menuItemsContent[lowerCaseKey].length;
+
+              // when the focused index is not found in the menuItemContent array.
+              if (!menuItemsContent[lowerCaseKey].includes(focusedIndex)) {
+                setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
+              } else {
+                // the position of the focused index in the menuItemsContent[lowerCaseKey] array
+                const positionInTheArray = menuItemsContent[
+                  lowerCaseKey
+                ].indexOf(focusedIndex);
+
+                // if it's the last index in the array
+                if (
+                  positionInTheArray ===
+                  menuItemsContent[lowerCaseKey].indexOf(
+                    menuItemsContent[lowerCaseKey][numberOfIndices - 1]
+                  )
+                ) {
+                  // cycle back to the first
+                  setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
+                } else {
+                  // go to the next indice in the array.
+                  setFocusedIndex(
+                    menuItemsContent[lowerCaseKey][positionInTheArray + 1]
+                  );
+                }
+              }
+            }
           }
         }
       };
+
       window.addEventListener('keydown', handleKeyDown);
     }
 
