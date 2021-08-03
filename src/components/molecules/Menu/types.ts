@@ -9,10 +9,6 @@ export interface MenuProps {
    */
   closeOnEsc?: boolean;
   /**
-   * id to set
-   */
-  id?: string;
-  /**
    * Flag that determines when to open the Menu
    */
   isOpen: boolean;

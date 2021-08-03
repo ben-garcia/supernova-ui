@@ -19,9 +19,9 @@ export interface Menu {
     props: Omit<MenuListProps, 'children'>,
     ref: RefObject<HTMLDivElement>
   ) => void;
-  id: string;
   isOpen: boolean;
   menuButtonRef: RefObject<HTMLButtonElement> | null;
+  menuId: string;
   menuListRef: RefObject<HTMLDivElement> | null;
   onClose: () => void;
   setFocusedIndex: (newIndex: number) => void;

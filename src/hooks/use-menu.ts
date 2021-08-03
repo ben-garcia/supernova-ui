@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
 
 import { MenuContext } from '../contexts/menu';
 import { MenuProps } from '../components/molecules/Menu/types';
@@ -53,9 +53,8 @@ function mergeRefs<T>(...refs: (ReactRef<T> | undefined)[]) {
  * Hooks that returns the Menu props
  */
 const useMenuProvider = (props: MenuProps) => {
-  const { id: propId, isOpen, onClose, closeOnEsc } = props;
+  const { isOpen, onClose, closeOnEsc } = props;
 
-  const [id] = useState(propId || `menu-${Math.random()}`);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuListRef = useRef<HTMLDivElement>(null);
 
@@ -64,17 +63,16 @@ const useMenuProvider = (props: MenuProps) => {
       ...menuButtonProps,
       ref: mergeRefs(forwardedRef, menuButtonRef, () => {}),
     }),
-    [id]
+    []
   );
   const getMenuItemProps = useCallback(
     (menuItemProps = {}, forwardedRef = null) => {
       return {
         ...menuItemProps,
-        id: `${id}-menuitem-${Math.random()}`,
         ref: mergeRefs(forwardedRef, () => {}),
       };
     },
-    [id]
+    []
   );
   const getMenuListProps = useCallback(
     (menuListProps = {}, forwardedRef = null) => {
@@ -84,7 +82,7 @@ const useMenuProvider = (props: MenuProps) => {
         ref: mergeRefs(forwardedRef, menuListRef, () => {}),
       };
     },
-    [id]
+    []
   );
 
   return {
@@ -92,7 +90,6 @@ const useMenuProvider = (props: MenuProps) => {
     getMenuButtonProps,
     getMenuItemProps,
     getMenuListProps,
-    id,
     isOpen,
     menuButtonRef,
     menuListRef,
@@ -106,7 +103,7 @@ const useMenuProvider = (props: MenuProps) => {
 const useMenu = () => {
   const context = useContext(MenuContext);
 
-  if (!context.id) {
+  if (!context.menuId) {
     throw new Error(
       'useMenu: context is undefined, did you remember to wrap your app in a <Menu />'
     );

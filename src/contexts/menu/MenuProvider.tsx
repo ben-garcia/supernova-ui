@@ -4,7 +4,6 @@ import { Menu } from './types';
 
 const initialState: Menu = {
   focusedIndex: -1,
-  id: '',
   closeOnEsc: false,
   isOpen: false,
   onClose: () => {},
@@ -13,6 +12,7 @@ const initialState: Menu = {
   getMenuButtonProps: () => {},
   menuListRef: null,
   menuButtonRef: null,
+  menuId: '',
   setFocusedIndex: () => {},
 };
 

@@ -11,7 +11,7 @@ interface MenuButtonProps extends ButtonProps {
 
 const MenuButton: React.FC<MenuButtonProps> = props => {
   const { children, className, ...rest } = props;
-  const { id, isOpen, menuButtonRef } = useMenu();
+  const { isOpen, menuButtonRef, menuId } = useMenu();
   const classes = createClasses('', {
     [`${className}`]: isString(className),
   });
@@ -19,11 +19,11 @@ const MenuButton: React.FC<MenuButtonProps> = props => {
   return (
     <Button
       {...rest}
-      aria-controls={`${id}-list`}
+      aria-controls={`${menuId}__list`}
       aria-expanded={isOpen}
       aria-haspopup="menu"
       className={classes}
-      id={`${id}-button`}
+      id={`${menuId}__button`}
       ref={menuButtonRef}
     >
       {children}

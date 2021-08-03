@@ -39,7 +39,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const {
     focusedIndex,
     closeOnEsc,
-    id,
+    menuId,
     isOpen,
     onClose,
     getMenuListProps,
@@ -48,7 +48,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     setFocusedIndex,
   } = useMenu();
   const [mounted, setMounted] = useState(false);
-  const menuPortalId = useMemo(() => `${id}-portal`, []);
+  const menuPortalId = useMemo(() => `${menuId}-portal`, []);
   const menuButtonItems = useRef<HTMLButtonElement[]>([]);
   const [pos, setPos] = useState({ left: '', top: '' });
 
@@ -240,7 +240,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     const handleClick = (e: any) => {
       const { target } = e;
 
-      if (target?.parentElement?.id !== `${id}-list`) {
+      if (target?.parentElement?.id !== `${menuId}__list`) {
         onClose();
       }
     };
@@ -319,7 +319,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     <div
       {...getMenuListProps(rest, ref)}
       className={classes}
-      id={`${id}-list`}
+      id={`${menuId}__list`}
       role="menu"
       style={{
         minWidth,

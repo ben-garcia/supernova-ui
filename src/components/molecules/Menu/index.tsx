@@ -2,14 +2,13 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import { MenuProvider } from '../../../contexts/menu';
 import { MenuProps } from './types';
-import { isString } from '../../../utils';
 import { useMenuProvider } from '../../../hooks/use-menu';
+import { useUniqueId } from '../../../hooks';
 
 const Menu: React.FC<MenuProps> = props => {
-  const { children, closeOnEsc = true, id, isOpen, onClose } = props;
-  const [idToUse] = useState(
-    isString(id) ? `${id}-${Math.random()}` : `menu-${Math.random()}`
-  );
+  const { children, closeOnEsc = true, isOpen, onClose } = props;
+
+  const menuId = useUniqueId('snui-menu');
   const [focusedIndex, setFocusedIndexFunction] = useState(-1);
 
   const setFocusedIndex = useCallback((newIndex: number) => {
@@ -22,7 +21,7 @@ const Menu: React.FC<MenuProps> = props => {
       ...context,
       closeOnEsc,
       focusedIndex,
-      id: idToUse,
+      menuId,
       isOpen,
       onClose,
       setFocusedIndex,
@@ -30,7 +29,7 @@ const Menu: React.FC<MenuProps> = props => {
     [context]
   );
 
-  return <MenuProvider value={contextValue as any}>{children}</MenuProvider>;
+  return <MenuProvider value={contextValue}>{children}</MenuProvider>;
 };
 
 export default Menu;
