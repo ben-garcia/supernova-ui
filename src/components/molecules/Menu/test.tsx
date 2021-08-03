@@ -231,6 +231,82 @@ describe('<Menu />', () => {
     });
 
     describe('arrow keys', () => {
+      describe('ArrowLeft and ArrowRight', () => {
+        it('should set focus to the next and previous menu buttons', () => {
+          render(<Test />);
+
+          const button = screen.getByText('Open');
+          const profileItem = screen.getByText('Profile');
+          const settings = screen.getByText('Settings');
+          const nightMode = screen.getByText(/Night Mode/);
+          const signout = screen.getByText('Signout');
+
+          fireEvent.click(button);
+
+          jest.advanceTimersByTime(30);
+
+          expect(profileItem).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowRight' });
+          expect(settings).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowRight' });
+          expect(nightMode).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowRight' });
+          expect(signout).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowLeft' });
+          expect(nightMode).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowLeft' });
+          expect(settings).toHaveFocus();
+
+          fireEvent.keyDown(window, { key: 'ArrowLeft' });
+          expect(profileItem).toHaveFocus();
+        });
+
+        describe('ArrowLeft', () => {
+          it('should set focus to the last button when current focus is on the first button,', () => {
+            render(<Test />);
+
+            const button = screen.getByText('Open');
+            const profileItem = screen.getByText('Profile');
+            const signout = screen.getByText('Signout');
+
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(30);
+
+            expect(profileItem).toHaveFocus();
+
+            fireEvent.keyDown(window, { key: 'ArrowLeft' });
+            expect(signout).toHaveFocus();
+          });
+        });
+
+        describe('ArrowRight', () => {
+          it('should set focus to the first button when current focus is on the last button,', () => {
+            render(<Test />);
+
+            const button = screen.getByText('Open');
+            const profileItem = screen.getByText('Profile');
+            const signout = screen.getByText('Signout');
+
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(30);
+
+            // set focus to the last menu button item
+            fireEvent.keyDown(window, { key: 'End' });
+            expect(signout).toHaveFocus();
+
+            fireEvent.keyDown(window, { key: 'ArrowRight' });
+            expect(profileItem).toHaveFocus();
+          });
+        });
+      });
+
       describe('ArrowDown and ArrowUp', () => {
         it('should set focus to the next and previous menu buttons', () => {
           render(<Test />);
@@ -308,7 +384,7 @@ describe('<Menu />', () => {
       });
     });
 
-    describe('letter keys', () => {
+    describe.skip('letter keys', () => {
       it('should focus the menu button with first letter matching the key', () => {
         render(<Test />);
 
@@ -335,7 +411,7 @@ describe('<Menu />', () => {
         expect(settings).toHaveFocus();
       });
 
-      it.skip('should cycle through all menu buttons with the same key', () => {
+      it('should cycle through all menu buttons with the same key', () => {
         render(<Test />);
 
         const button = screen.getByText('Open');
