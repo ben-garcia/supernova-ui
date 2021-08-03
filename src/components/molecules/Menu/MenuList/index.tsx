@@ -111,7 +111,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
    */
   useEffect(
     () => () => {
-      if (menuButtonRef?.current) {
+      if (isOpen && menuButtonRef?.current) {
         resetMenuItems();
         menuButtonRef?.current?.focus();
       }
