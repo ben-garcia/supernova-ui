@@ -281,7 +281,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           : null) as any,
         color: colorToUse,
       }}
-      onMouseEnter={() => {
+      onMouseEnter={e => {
         if ((theme as any).colors[hoverBackgroundColor]) {
           setBackgroundColorToUse((theme as any).colors[hoverBackgroundColor]);
         } else {
@@ -297,7 +297,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
         }
 
         if (isFunction(onMouseEnter)) {
-          onMouseEnter!();
+          onMouseEnter!(e);
         }
       }}
       onMouseLeave={() => {

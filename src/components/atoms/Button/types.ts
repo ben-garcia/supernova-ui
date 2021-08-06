@@ -1,4 +1,4 @@
-import { RefObject, SyntheticEvent } from 'react';
+import { MouseEvent, RefObject, SyntheticEvent } from 'react';
 
 import {
   CommonProps,
@@ -34,7 +34,7 @@ export interface ButtonProps
    * Function to be executed when button has focus
    */
   onFocus?: () => void;
-  onMouseEnter?: () => void;
+  onMouseEnter?: (e?: MouseEvent) => void;
   onMouseLeave?: () => void;
   /**
    * Reference used primarily to set focus after Modal closes
