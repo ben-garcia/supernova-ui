@@ -1,4 +1,4 @@
-import { MouseEvent, RefObject, SyntheticEvent } from 'react';
+import { FocusEvent, MouseEvent, RefObject, SyntheticEvent } from 'react';
 
 import {
   CommonProps,
@@ -33,7 +33,7 @@ export interface ButtonProps
   /**
    * Function to be executed when button has focus
    */
-  onFocus?: () => void;
+  onFocus?: (e?: FocusEvent) => void;
   onMouseEnter?: (e?: MouseEvent) => void;
   onMouseLeave?: () => void;
   /**

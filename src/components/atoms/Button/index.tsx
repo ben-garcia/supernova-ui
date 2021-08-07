@@ -263,14 +263,14 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
         }
       }}
       onClick={onClick}
-      onFocus={() => {
+      onFocus={e => {
         if (isFunction(onFocus)) {
-          onFocus!();
+          onFocus!(e);
         }
         setFocusRingColor(theme.colors.focusRing);
 
         if (isFunction(onMouseEnter)) {
-          onMouseEnter!();
+          onMouseEnter!(e as any);
         }
       }}
       style={{
