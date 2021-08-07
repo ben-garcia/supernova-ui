@@ -12,6 +12,7 @@ import { createStyles, responsify } from './create-styles';
 import deepMergify from './deep-mergify';
 import { inputIsChecked } from './dom-assertions';
 
+export * from './position';
 export {
   colors,
   createClasses,
