@@ -1,26 +1,12 @@
 /* eslint jsx-a11y/no-noninteractive-tabindex: 0 */
-import React, {
-  Children,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { colors, isString } from '../../../utils';
+import { colors, getLeftTopPosition, isString } from '../../../utils';
 import { TooltipProps } from './types';
 import { useTheme } from '../../../hooks';
 
 import './styles.scss';
-
-const useSafeEffect =
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-    ? useLayoutEffect
-    : useEffect;
 
 const Tooltip: React.FC<TooltipProps> = props => {
   const {
@@ -32,23 +18,33 @@ const Tooltip: React.FC<TooltipProps> = props => {
   } = props;
   let jsx: React.ReactNode;
   const [show, setShow] = useState(false);
-  const triggerRef = useRef<any>(null);
   const contentRef = useRef<any>(null);
   const [pos, setPos] = useState<{ left: number; top: number }>({
-    left: 0,
-    top: 0,
+    left: -100,
+    top: -100,
   });
+
   const onMouseEnter = useCallback((e: React.MouseEvent | React.FocusEvent) => {
-    const { currentTarget } = e;
-
-    console.log('currentTarget: ', currentTarget);
-
     setShow(true);
+
+    if (e) {
+      const { currentTarget } = e;
+
+      setTimeout(() => {
+        setPos(
+          getLeftTopPosition(
+            currentTarget as HTMLElement,
+            contentRef?.current,
+            position
+          ) as any
+        );
+      }, 10);
+    }
   }, []);
   const onMouseLeave = useCallback(() => setShow(false), []);
   const styles: React.CSSProperties = {};
   const theme = useTheme();
-  const [tooltipId] = useState(`tooltip-${Math.random()}`);
+  const tooltipId = useMemo(() => `tooltip-${Math.random()}`, []);
 
   if (isString(children)) {
     jsx = (
@@ -58,7 +54,6 @@ const Tooltip: React.FC<TooltipProps> = props => {
         onFocus={onMouseEnter}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        ref={triggerRef}
         tabIndex={0}
       >
         {children}
@@ -69,7 +64,8 @@ const Tooltip: React.FC<TooltipProps> = props => {
 
     jsx = React.cloneElement(child as any, {
       'aria-describedby': show ? tooltipId : undefined,
-      ref: triggerRef,
+      onBlur: onMouseLeave,
+      onFocus: onMouseEnter,
       onMouseEnter,
       onMouseLeave,
     });
@@ -93,61 +89,13 @@ const Tooltip: React.FC<TooltipProps> = props => {
     }
   }
 
-  useSafeEffect(() => {
-    if (triggerRef?.current && contentRef?.current) {
-      const margin = 10;
-      const {
-        bottom,
-        left,
-        right,
-        top,
-      } = triggerRef.current.getBoundingClientRect();
-
-      if (position === 'bottom') {
-        setPos({
-          left:
-            left +
-            (triggerRef.current.offsetWidth - contentRef.current.offsetWidth) /
-              2,
-          top: bottom + margin / 1.5,
-        });
-      } else if (position === 'left') {
-        setPos({
-          left: left - contentRef.current.offsetWidth - margin,
-          top:
-            top +
-            (triggerRef.current.offsetHeight -
-              contentRef.current.offsetHeight) /
-              2,
-        });
-      } else if (position === 'right') {
-        setPos({
-          left: right + margin,
-          top:
-            top +
-            (triggerRef.current.offsetHeight -
-              contentRef.current.offsetHeight) /
-              2,
-        });
-      } else if (position === 'top') {
-        setPos({
-          left:
-            left +
-            (triggerRef.current.offsetWidth - contentRef.current.offsetWidth) /
-              2,
-          top: top - triggerRef.current.offsetHeight - margin / 2,
-        });
-      }
-    }
-  }, [triggerRef?.current, contentRef?.current, show]);
-
   return (
     <div className="snui-tooltip">
       {jsx}
       {show &&
         createPortal(
           <div
-            className="snui-tooltip-content snui-font-body"
+            className="snui-tooltip__content snui-font-body"
             ref={contentRef}
             style={{
               ...styles,
