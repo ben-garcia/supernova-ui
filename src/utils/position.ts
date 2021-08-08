@@ -33,6 +33,13 @@ interface Point {
   restrictRect(rect: ViewportBox): void;
 }
 
+export interface ArrowPosition {
+  bottom?: number;
+  left?: number;
+  right?: number;
+  top?: number;
+}
+
 /**
  * Function that return object with properties that help
  * to describe the position of an element.
@@ -104,6 +111,47 @@ export const point = (): Point => ({
     }
   },
 });
+
+/**
+ * Calcuate the position of the tooltip arrow
+ *
+ * @param arrowElement reference to the arrow element itself
+ * @param tooltipElement reference to the tooltip element
+ * @param postion current position of the tooltip
+ */
+export const getArrowPosition = (
+  arrowElement: HTMLDivElement,
+  tooltipElement: HTMLElement,
+  position: PositionType
+) => {
+  const arrowPosition: ArrowPosition = {};
+
+  if (tooltipElement && arrowElement) {
+    switch (position) {
+      case 'left':
+        arrowPosition.right = -(arrowElement.offsetWidth / 3);
+        arrowPosition.top =
+          tooltipElement.offsetHeight / 2 - arrowElement.offsetHeight / 2;
+        break;
+      case 'right':
+        arrowPosition.left = -(arrowElement.offsetWidth / 3);
+        arrowPosition.top =
+          tooltipElement.offsetHeight / 2 - arrowElement.offsetHeight / 2;
+        break;
+      case 'top':
+        arrowPosition.bottom = -(arrowElement.offsetHeight / 3);
+        arrowPosition.left =
+          tooltipElement.offsetWidth / 2 - arrowElement.offsetWidth / 2;
+        break;
+      default:
+        arrowPosition.top = -(arrowElement.offsetHeight / 3);
+        arrowPosition.left =
+          tooltipElement.offsetWidth / 2 - arrowElement.offsetWidth / 2;
+    }
+  }
+
+  return arrowPosition;
+};
 
 /**
  * Calcuate the left and top properties
