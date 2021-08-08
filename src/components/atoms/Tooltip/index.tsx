@@ -2,11 +2,21 @@
 import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { colors, getLeftTopPosition, isString } from '../../../utils';
+import {
+  ArrowPosition,
+  getArrowPosition,
+  getLeftTopPosition,
+  isString,
+} from '../../../utils';
 import { TooltipProps } from './types';
 import { useTheme } from '../../../hooks';
 
 import './styles.scss';
+
+interface TooltipPosition {
+  left: number;
+  top: number;
+}
 
 const Tooltip: React.FC<TooltipProps> = props => {
   const {
@@ -15,14 +25,17 @@ const Tooltip: React.FC<TooltipProps> = props => {
     children,
     content,
     position = 'bottom',
+    withArrow = true,
   } = props;
   let jsx: React.ReactNode;
   const [show, setShow] = useState(false);
   const contentRef = useRef<any>(null);
-  const [pos, setPos] = useState<{ left: number; top: number }>({
+  const arrowRef = useRef<HTMLDivElement | null>(null);
+  const [pos, setPos] = useState<TooltipPosition>({
     left: -100,
     top: -100,
   });
+  const [arrowPos, setArrowPos] = useState<ArrowPosition>({});
 
   const onMouseEnter = useCallback((e: React.MouseEvent | React.FocusEvent) => {
     setShow(true);
@@ -31,12 +44,22 @@ const Tooltip: React.FC<TooltipProps> = props => {
       const { currentTarget } = e;
 
       setTimeout(() => {
+        // get the position of the tooltip element
         setPos(
           getLeftTopPosition(
             currentTarget as HTMLElement,
             contentRef?.current,
             position
           ) as any
+        );
+
+        // get the position of the arrow
+        setArrowPos(
+          getArrowPosition(
+            arrowRef?.current as HTMLDivElement,
+            contentRef?.current,
+            position
+          )
         );
       }, 10);
     }
@@ -72,21 +95,27 @@ const Tooltip: React.FC<TooltipProps> = props => {
   }
 
   if (isString(backgroundColor)) {
-    if (colors.includes(backgroundColor as string)) {
+    // @ts-ignore
+    if (theme.colors[backgroundColor]) {
       styles.backgroundColor = `${
         (theme as any).colors[backgroundColor as any]
       }`;
     } else {
       styles.backgroundColor = backgroundColor;
     }
+  } else if (!backgroundColor) {
+    styles.backgroundColor = theme.colors.black;
   }
 
   if (isString(color)) {
-    if (colors.includes(backgroundColor as string)) {
-      styles.color = `${(theme as any).colors[backgroundColor as any]}`;
+    // @ts-ignore
+    if (theme.colors[color]) {
+      styles.color = `${(theme as any).colors[color as any]}`;
     } else {
-      styles.color = backgroundColor;
+      styles.color = color;
     }
+  } else if (!color) {
+    styles.color = theme.colors.white;
   }
 
   return (
@@ -99,12 +128,24 @@ const Tooltip: React.FC<TooltipProps> = props => {
             ref={contentRef}
             style={{
               ...styles,
-              left: `${pos.left}px`,
-              top: `${pos.top}px`,
+              left: pos.left,
+              top: pos.top,
             }}
           >
-            <div id={tooltipId} role="tooltip">
-              {content}
+            <div className="snui-tooltip__inner">
+              {withArrow && (
+                <div
+                  className="snui-tooltip__arrow"
+                  ref={arrowRef}
+                  style={{
+                    backgroundColor: styles.backgroundColor,
+                    ...arrowPos,
+                  }}
+                />
+              )}
+              <div id={tooltipId} role="tooltip" style={{ paddingTop: 2 }}>
+                {content}
+              </div>
             </div>
           </div>,
           document.body

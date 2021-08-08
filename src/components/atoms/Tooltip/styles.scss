@@ -1,6 +1,17 @@
 .snui-tooltip__content {
-  background-color: var(--snui-color-black);
-  color: var(--snui-color-white);
   position: absolute;
+}
+
+.snui-tooltip__inner {
+  display: flex;
+  justify-content: center;
   padding: 5px;
+  position: relative;
+}
+
+.snui-tooltip__arrow {
+  height: var(--snui-size-xs);
+  position: absolute;
+  transform: rotate(45deg);
+  width: var(--snui-size-xs);
 }

@@ -18,4 +18,10 @@ export interface TooltipProps
    * @default 'bottom'
    */
   position?: PositionTypes;
+  /**
+   * Configure whether to render with an arrow pointing to the trigger element
+   *
+   * @default true
+   */
+  withArrow?: boolean;
 }

@@ -15,6 +15,12 @@ export const Basic = () => (
   </div>
 );
 
+export const WithNoArrow = () => (
+  <Tooltip content="this is the label" withArrow={false}>
+    <Button>no arrow</Button>
+  </Tooltip>
+);
+
 export const WithButton = () => (
   <Tooltip content="this is the label">
     <Button>button</Button>
