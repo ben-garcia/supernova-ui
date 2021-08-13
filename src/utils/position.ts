@@ -124,27 +124,29 @@ export const getArrowPosition = (
   tooltipElement: HTMLElement,
   position: PositionType
 ) => {
-  const arrowPosition: ArrowPosition = {};
+  // const arrowPosition: ArrowPosition = {};
+  const arrowPosition: any = {};
 
   if (tooltipElement && arrowElement) {
     switch (position) {
       case 'left':
-        arrowPosition.right = -(arrowElement.offsetWidth / 3);
+        arrowPosition.right = -(arrowElement.offsetWidth * 1.3);
         arrowPosition.top =
           tooltipElement.offsetHeight / 2 - arrowElement.offsetHeight / 2;
+
         break;
       case 'right':
-        arrowPosition.left = -(arrowElement.offsetWidth / 3);
+        arrowPosition.left = -(arrowElement.offsetWidth * 1.3);
         arrowPosition.top =
           tooltipElement.offsetHeight / 2 - arrowElement.offsetHeight / 2;
         break;
       case 'top':
-        arrowPosition.bottom = -(arrowElement.offsetHeight / 3);
+        arrowPosition.bottom = -(arrowElement.offsetHeight * 1.3);
         arrowPosition.left =
           tooltipElement.offsetWidth / 2 - arrowElement.offsetWidth / 2;
         break;
       default:
-        arrowPosition.top = -(arrowElement.offsetHeight / 3);
+        arrowPosition.top = -(arrowElement.offsetHeight * 1.3);
         arrowPosition.left =
           tooltipElement.offsetWidth / 2 - arrowElement.offsetWidth / 2;
     }

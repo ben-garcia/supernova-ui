@@ -10,8 +10,7 @@
 }
 
 .snui-tooltip__arrow {
-  height: var(--snui-size-xs);
+  height: 0;
   position: absolute;
-  transform: rotate(45deg);
-  width: var(--snui-size-xs);
+  width: 0;
 }

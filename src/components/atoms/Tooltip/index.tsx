@@ -66,6 +66,7 @@ const Tooltip: React.FC<TooltipProps> = props => {
   }, []);
   const onMouseLeave = useCallback(() => setShow(false), []);
   const styles: React.CSSProperties = {};
+  const arrowStyles: React.CSSProperties = {};
   const theme = useTheme();
   const tooltipId = useMemo(() => `tooltip-${Math.random()}`, []);
 
@@ -118,6 +119,34 @@ const Tooltip: React.FC<TooltipProps> = props => {
     styles.color = theme.colors.white;
   }
 
+  /**
+   * NOTE tried to get these values in 'getArrowPosition' helper function
+   * but it wouldn't render anything until the second hover.
+   *
+   * I don't want to mess with hooks because of ssr
+   */
+  switch (position) {
+    case 'left':
+      arrowStyles.borderBottom = '8px solid transparent';
+      arrowStyles.borderLeft = `8px solid ${styles.backgroundColor}`;
+      arrowStyles.borderTop = '8px solid transparent';
+      break;
+    case 'right':
+      arrowStyles.borderBottom = '8px solid transparent';
+      arrowStyles.borderRight = `8px solid ${styles.backgroundColor}`;
+      arrowStyles.borderTop = '8px solid transparent';
+      break;
+    case 'top':
+      arrowStyles.borderLeft = '8px solid transparent';
+      arrowStyles.borderRight = '8px solid transparent';
+      arrowStyles.borderTop = `8px solid ${styles.backgroundColor}`;
+      break;
+    default:
+      arrowStyles.borderBottom = `8px solid ${styles.backgroundColor}`;
+      arrowStyles.borderLeft = '8px solid transparent';
+      arrowStyles.borderRight = '8px solid transparent';
+  }
+
   return (
     <div className="snui-tooltip">
       {jsx}
@@ -138,8 +167,8 @@ const Tooltip: React.FC<TooltipProps> = props => {
                   className="snui-tooltip__arrow"
                   ref={arrowRef}
                   style={{
-                    backgroundColor: styles.backgroundColor,
                     ...arrowPos,
+                    ...arrowStyles,
                   }}
                 />
               )}
