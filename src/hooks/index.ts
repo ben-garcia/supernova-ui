@@ -6,4 +6,5 @@ export * from './use-unique-id';
 export { useMenu } from './use-menu';
 export { useModal } from './use-modal';
 export { useNotification } from './use-notification';
+export * from './use-tabs';
 export { default as useTheme } from './use-theme';
