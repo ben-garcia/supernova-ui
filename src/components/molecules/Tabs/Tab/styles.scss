@@ -1,0 +1,39 @@
+.snui-tabs__tab {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  box-shadow: unset;
+  color: var(--snui-color-black);
+  font-weight: var(--snui-font-weight-md);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--horizontal {
+    border-bottom: 3px solid transparent;
+  }
+
+  &--fitted {
+    flex: 1 1 0%;
+  }
+
+  &--vertical {
+    border-left: 3px solid transparent;
+  }
+
+  &--sm {
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  &--md {
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+  }
+
+  &--lg {
+    font-size: var(--snui-font-size-lg);
+    padding: 0.75rem 1rem;
+  }
+}

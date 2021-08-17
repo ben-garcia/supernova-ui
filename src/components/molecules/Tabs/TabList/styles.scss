@@ -1,0 +1,24 @@
+.snui-tabs__tablist {
+  border-bottom: 1px solid var(--snui-color-gray-100);
+  display: flex;
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--fitted {
+    justify-content: space-around;
+  }
+
+  &--start {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--end {
+    justify-content: flex-end;
+  }
+}
