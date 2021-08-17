@@ -45,6 +45,10 @@ export interface ButtonProps
    */
   spinner?: CommonProps['children'];
   /**
+   *
+   */
+  tabIndex?: number;
+  /**
    * The look of the button
    *
    * default is 'filled'
