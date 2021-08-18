@@ -63,7 +63,12 @@ const TabList: React.FC<TabListProps> = props => {
 
   return (
     <TabListProvider value={contextValue as any}>
-      <div className={classes} ref={tabListRef} role="tablist">
+      <div
+        aria-orientation={orientation}
+        className={classes}
+        ref={tabListRef}
+        role="tablist"
+      >
         {children}
       </div>
     </TabListProvider>
