@@ -14,6 +14,11 @@ import Modal from './Modal';
 import ModalBody from './Modal/ModalBody';
 import ModalHeader from './Modal/ModalHeader';
 import ModalFooter from './Modal/ModalFooter';
+import Tab from './Tabs/Tab';
+import TabList from './Tabs/TabList';
+import TabPanel from './Tabs/TabPanel';
+import TabPanelList from './Tabs/TabPanelList';
+import Tabs from './Tabs';
 
 export {
   Accordion,
@@ -32,4 +37,9 @@ export {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanelList,
+  Tabs,
 };
