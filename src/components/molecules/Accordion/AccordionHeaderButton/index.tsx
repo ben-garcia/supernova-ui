@@ -29,7 +29,9 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     activeIndices,
     allowMultiple,
     allowToggle,
+    buttonsRef,
     defaultIndices,
+    focusedIndex,
     setActiveIndices,
     setFocusedIndex,
   } = useAccordion();
@@ -40,13 +42,14 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     onOpen,
     onClose,
   } = useAccordionItem();
+  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
   const classes = createClasses('snui-accordion__button', {
     [`${className}`]: isString(className),
   });
 
   const handleFocus = useCallback(() => {
     const index = Number(
-      ref.current!.getAttribute('data-snui-accordion-button-index')
+      buttonRef.current!.getAttribute('data-snui-accordion-button-index')
     );
     setFocusedIndex(index);
   }, []);
@@ -123,7 +126,39 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     [isOpen, activeIndices]
   );
 
-  const ref = React.useRef<HTMLButtonElement | null>(null);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      const { key } = e;
+      if (buttonsRef) {
+        if (key === 'ArrowUp') {
+          if (focusedIndex === 0) {
+            buttonsRef[buttonsRef.length - 1].focus();
+          } else {
+            buttonsRef[focusedIndex - 1].focus();
+          }
+        } else if (key === 'ArrowDown') {
+          const lastButtonIndex = buttonsRef.length - 1;
+
+          if (focusedIndex === lastButtonIndex) {
+            buttonsRef[0].focus();
+          } else {
+            buttonsRef[focusedIndex + 1].focus();
+          }
+        } else if (key === 'Home') {
+          if (focusedIndex !== 0) {
+            buttonsRef[0].focus();
+          }
+        } else if (key === 'End') {
+          const lastButtonIndex = buttonsRef.length - 1;
+
+          if (focusedIndex !== lastButtonIndex) {
+            buttonsRef[lastButtonIndex].focus();
+          }
+        }
+      }
+    },
+    [buttonsRef, focusedIndex]
+  );
 
   return (
     <Heading level={headingLevel as HeadingLevelType}>
@@ -138,7 +173,8 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
         id={accordionButtonId}
         onClick={handleClick}
         onFocus={handleFocus}
-        ref={ref}
+        onKeyDown={handleKeyDown}
+        ref={buttonRef}
         width="100%"
       >
         <div className="snui-accordion__text" style={{ color: 'black' }}>

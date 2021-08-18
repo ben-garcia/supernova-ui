@@ -5,6 +5,7 @@ export interface Accordion {
   activeIndices: number[];
   allowMultiple: boolean;
   allowToggle: boolean;
+  buttonsRef: HTMLButtonElement[] | null;
   getAccordionPanelProps: () => void;
   defaultIndices: number[];
   focusedIndex: number;

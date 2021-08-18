@@ -101,13 +101,11 @@ describe('<Accordion />', () => {
   });
 
   describe('keyboard navigation', () => {
-    let accordion: Element;
     let headerButtons: HTMLElement[];
 
     beforeEach(() => {
       render(<AccordionTest />);
 
-      accordion = screen.getByTestId('accordion').firstElementChild as Element;
       headerButtons = screen.getAllByRole('button');
     });
 
@@ -136,7 +134,7 @@ describe('<Accordion />', () => {
           // focus set to the first button
           fireEvent.focus(headerButtons[0]);
 
-          fireEvent.keyDown(accordion, { key: 'End' });
+          fireEvent.keyDown(headerButtons[0], { key: 'End' });
 
           expect(headerButtons[2]).toHaveFocus();
         });
@@ -147,7 +145,7 @@ describe('<Accordion />', () => {
           // focus set to the last button
           fireEvent.focus(headerButtons[2]);
 
-          fireEvent.keyDown(accordion, { key: 'Home' });
+          fireEvent.keyDown(headerButtons[2], { key: 'Home' });
 
           expect(headerButtons[0]).toHaveFocus();
         });
@@ -160,11 +158,11 @@ describe('<Accordion />', () => {
           // focus set to the first button
           fireEvent.focus(headerButtons[0]);
 
-          fireEvent.keyDown(accordion, { key: 'ArrowDown' });
+          fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown' });
 
           expect(headerButtons[1]).toHaveFocus();
 
-          fireEvent.keyDown(accordion, { key: 'ArrowDown' });
+          fireEvent.keyDown(headerButtons[1], { key: 'ArrowDown' });
 
           expect(headerButtons[2]).toHaveFocus();
         });
@@ -173,7 +171,7 @@ describe('<Accordion />', () => {
           // focus set to the first button
           fireEvent.focus(headerButtons[2]);
 
-          fireEvent.keyDown(accordion, { key: 'ArrowDown' });
+          fireEvent.keyDown(headerButtons[2], { key: 'ArrowDown' });
 
           expect(headerButtons[0]).toHaveFocus();
         });
@@ -184,11 +182,11 @@ describe('<Accordion />', () => {
           // focus set to the first button
           fireEvent.focus(headerButtons[2]);
 
-          fireEvent.keyDown(accordion, { key: 'ArrowUp' });
+          fireEvent.keyDown(headerButtons[2], { key: 'ArrowUp' });
 
           expect(headerButtons[1]).toHaveFocus();
 
-          fireEvent.keyDown(accordion, { key: 'ArrowUp' });
+          fireEvent.keyDown(headerButtons[1], { key: 'ArrowUp' });
 
           expect(headerButtons[0]).toHaveFocus();
         });
@@ -197,7 +195,7 @@ describe('<Accordion />', () => {
           // focus set to the first button
           fireEvent.focus(headerButtons[0]);
 
-          fireEvent.keyDown(accordion, { key: 'ArrowUp' });
+          fireEvent.keyDown(headerButtons[0], { key: 'ArrowUp' });
 
           expect(headerButtons[2]).toHaveFocus();
         });

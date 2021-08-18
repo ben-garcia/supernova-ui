@@ -110,42 +110,9 @@ const Accordion: React.FC<AccordionProps> = props => {
     [context, updatedButtonsRef]
   );
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'ArrowUp') {
-      if (focusedIndex === 0) {
-        buttonsRef.current![buttonsRef.current!.length - 1].focus();
-      } else {
-        buttonsRef.current![focusedIndex - 1].focus();
-      }
-    } else if (e.key === 'ArrowDown') {
-      const lastButtonIndex = buttonsRef.current!.length - 1;
-
-      if (focusedIndex === lastButtonIndex) {
-        buttonsRef.current![0].focus();
-      } else {
-        buttonsRef.current![focusedIndex + 1].focus();
-      }
-    } else if (e.key === 'Home') {
-      if (focusedIndex !== 0) {
-        buttonsRef.current![0].focus();
-      }
-    } else if (e.key === 'End') {
-      const lastButtonIndex = buttonsRef.current!.length - 1;
-
-      if (focusedIndex !== lastButtonIndex) {
-        buttonsRef.current![lastButtonIndex].focus();
-      }
-    }
-  };
-
   return (
     <AccordionProvider value={contextValue}>
-      <div
-        className={classes}
-        id={accordionId}
-        onKeyDown={handleKeyDown}
-        ref={accordionRef}
-      >
+      <div className={classes} id={accordionId} ref={accordionRef}>
         {children}
       </div>
     </AccordionProvider>
