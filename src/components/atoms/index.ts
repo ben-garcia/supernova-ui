@@ -5,6 +5,7 @@ export { default as Flex } from './Flex';
 export { default as FlexItem } from './Flex/FlexItem';
 export { default as Heading } from './Heading';
 export * from './Icon/Icons';
+export { default as Overlay } from './Overlay';
 export { default as Paragraph } from './Paragraph';
 export { default as Portal } from './Portal';
 export { default as Radio } from './Radio';
