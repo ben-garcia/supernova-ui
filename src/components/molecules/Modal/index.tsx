@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 
 import { Button, CloseIcon } from '../../atoms';
 import FocusLock from '../../atoms/FocusLock';
+import Overlay from '../../atoms/Overlay';
 import { ModalProps } from './types';
 import './styles.scss';
 
@@ -243,7 +244,7 @@ const Modal: React.FC<ModalProps> = props => {
         onClose={onClose}
         trapFocus={trapFocus}
       >
-        <div className="snui-overlay">
+        <Overlay>
           <section
             {...rest}
             aria-labelledby={`${context.id}__header`}
@@ -264,7 +265,7 @@ const Modal: React.FC<ModalProps> = props => {
             </Button>
             {children}
           </section>
-        </div>
+        </Overlay>
       </FocusLock>
     </ModalProvider>
   );
