@@ -71,7 +71,9 @@ describe('<Menu />', () => {
     const { getByTestId } = render(<MenuTest isOpen onClose={() => {}} />);
     const menuList = getByTestId('menu-list');
     const portal = menuList.parentElement;
-    const menuId = menuList?.getAttribute('id')?.replace('-list', '');
+    // since menu list element has id equal to '<menuId>__list'
+    // remove '__list' since its not neccessary
+    const menuId = menuList?.getAttribute('id')?.replace('__list', '');
 
     expect(portal?.getAttribute('id')).toBe(`${menuId}-portal`);
   });
