@@ -1,0 +1,7 @@
+.snui-alert-dialog__body {
+  align-self: flex-start;
+  overflow: auto;
+  padding-inline-end: var(--snui-size-xs);
+  padding: var(--snui-size-xs) var(--snui-size-sm);
+  width: 100%;
+}
