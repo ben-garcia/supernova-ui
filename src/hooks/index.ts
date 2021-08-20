@@ -1,6 +1,7 @@
 export { useAccordion } from './use-accordion';
 export { useAlertDialog } from './use-alert-dialog';
 export { default as useBreakpoint } from './use-breakpoint';
+export * from './use-drawer';
 export { useFormControl } from './use-form-control';
 export { default as useInputChecked } from './use-input-checked';
 export * from './use-unique-id';
