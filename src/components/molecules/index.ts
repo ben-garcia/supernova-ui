@@ -2,6 +2,14 @@ import Accordion from './Accordion';
 import AccordionHeaderButton from './Accordion/AccordionHeaderButton';
 import AccordionItem from './Accordion/AccordionItem';
 import AccordionPanel from './Accordion/AccordionPanel';
+import AlertDialog from './AlertDialog';
+import AlertDialogBody from './AlertDialog/AlertDialogBody';
+import AlertDialogFooter from './AlertDialog/AlertDialogFooter';
+import AlertDialogHeader from './AlertDialog/AlertDialogHeader';
+import Drawer from './Drawer';
+import DrawerBody from './Drawer/DrawerBody';
+import DrawerFooter from './Drawer/DrawerFooter';
+import DrawerHeader from './Drawer/DrawerHeader';
 import FormControl from './FormControl';
 import FormErrorMessage from './FormControl/FormErrorMessage';
 import FormHelperText from './FormControl/FormHelperText';
@@ -25,6 +33,14 @@ export {
   AccordionHeaderButton,
   AccordionItem,
   AccordionPanel,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
   FormControl,
   FormErrorMessage,
   FormHelperText,
