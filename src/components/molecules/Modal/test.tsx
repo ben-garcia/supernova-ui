@@ -231,7 +231,6 @@ describe('<Modal />', () => {
     fireEvent.click(closeButton);
 
     // final button should be focused when Modal has closed
-    // await waitFor(() => expect(finalButton).toHaveFocus());
     await waitFor(() => expect(finalButton).toHaveFocus());
   });
 

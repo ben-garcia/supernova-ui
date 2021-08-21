@@ -12,6 +12,7 @@ import {
   mockMatchMedia,
   render,
   userEvent,
+  waitFor, // wait for the set timeout function to be called
 } from '../../../test-utils';
 
 describe('<AlertDialog />', () => {
@@ -82,7 +83,7 @@ describe('<AlertDialog />', () => {
     );
   });
 
-  it('should call the onClose function when the close button is clicked', () => {
+  it('should call the onClose function when the close button is clicked', async () => {
     const mockOnClose = jest.fn();
     const ModalTest = () => {
       const leastDestructiveRef = React.useRef(null);
@@ -111,7 +112,7 @@ describe('<AlertDialog />', () => {
 
     fireEvent.click(closeButton);
 
-    expect(mockOnClose).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(mockOnClose).toHaveBeenCalledTimes(1));
   });
 
   describe('overlay click', () => {
@@ -258,6 +259,7 @@ describe('<AlertDialog />', () => {
             <button data-testid="cancel-button" ref={leastDestructiveRef}>
               cancel
             </button>
+
             <button data-testid="delete-button">delete</button>
           </AlertDialogFooter>
         </AlertDialog>
@@ -322,7 +324,7 @@ describe('<AlertDialog />', () => {
 
     // final button should be focused when Modal has closed
     // await waitFor(() => expect(finalButton).toHaveFocus());
-    expect(finalButton).toHaveFocus();
+    await waitFor(() => expect(finalButton).toHaveFocus());
   });
 
   describe('keyboard navigation', () => {

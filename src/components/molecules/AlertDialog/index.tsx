@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import { Button, CloseIcon } from '../../atoms';
@@ -54,10 +60,22 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
     ...rest
   } = props;
   const [mounted, setMounted] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const handleOnClose = useCallback(() => {
+    // trigger the scale out animation
+    setIsExiting(true);
+    // allow time for the animation
+    setTimeout(() => {
+      setIsExiting(false);
+      onClose();
+    }, 300);
+  }, []);
+
   const context = useAlertDialogProvider(props);
   const contextValue = useMemo(
     () => ({
       ...context,
+      onClose: handleOnClose,
     }),
     [context]
   );
@@ -97,8 +115,9 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
 
   const theme = useTheme();
   const breakpoint = useBreakpoint();
-  const classes = createClasses('snui-modal', {
+  const classes = createClasses('snui-alert-dialog', {
     [`${className}`]: isString(className),
+    'snui-alert-dialog--exiting': isExiting,
     [`snui-color-${backgroundColor}`]:
       backgroundColor &&
       backgroundColor !== '' &&
@@ -258,7 +277,7 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
               aria-label="Close the modal"
               className="snui-modal__close-button"
               hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
-              onClick={onClose}
+              onClick={handleOnClose}
               variant="outline"
             >
               <CloseIcon fill="#000" size="1rem" />
