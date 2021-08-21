@@ -10,7 +10,9 @@ import {
   fireEvent,
   mockMatchMedia,
   render,
+  screen,
   userEvent,
+  waitFor, // wait for the set timeout function to be called
 } from '../../../test-utils';
 
 describe('<Modal />', () => {
@@ -26,58 +28,57 @@ describe('<Modal />', () => {
     );
   });
   it('should contain the proper aria attributes', () => {
-    const { getByTestId, getByText } = render(
-      <Modal data-testid="modal" isOpen onClose={jest.fn()}>
+    render(
+      <Modal isOpen onClose={jest.fn()}>
         <ModalHeader>header</ModalHeader>
         <ModalBody>body</ModalBody>
         <ModalFooter>footer</ModalFooter>
       </Modal>
     );
 
-    const modal = getByTestId('modal');
+    const modal = screen.getByRole('dialog');
 
     // should have 'aria-modal' set to 'true' and 'role' of 'dialog'
     expect(modal).toHaveAttribute('aria-modal', 'true');
-    expect(modal).toHaveAttribute('role', 'dialog');
 
     // the id of `body` should equal the `aria-describedby` of the modal
-    expect(getByText('body').id).toEqual(
+    expect(screen.getByText('body').id).toEqual(
       modal.getAttribute('aria-describedby')
     );
 
     // the id of `header` should equal the `aria-labelledby` of the modal
-    expect(getByText('header').id).toEqual(
+    expect(screen.getByText('header').id).toEqual(
       modal.getAttribute('aria-labelledby')
     );
   });
 
-  it('should call the onClose function when the close button is clicked', () => {
+  it('should call the onClose function when the close button is clicked', async () => {
     const mockOnClose = jest.fn();
-    const { getByLabelText } = render(
-      <Modal data-testid="modal" isOpen onClose={mockOnClose}>
+    render(
+      <Modal isOpen onClose={mockOnClose}>
         <ModalHeader>Testing</ModalHeader>
         <ModalBody>body</ModalBody>
         <ModalFooter>footer</ModalFooter>
       </Modal>
     );
-    const closeButton = getByLabelText('Close the modal');
+    const closeButton = screen.getByLabelText('Close the modal');
 
     fireEvent.click(closeButton);
 
-    expect(mockOnClose).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(mockOnClose).toHaveBeenCalledTimes(1));
   });
 
   describe('overlay click', () => {
     it('should call the onClose function when the overlay window is clicked', () => {
       const mockOnClose = jest.fn();
-      const { getByTestId } = render(
-        <Modal data-testid="modal" isOpen onClose={mockOnClose}>
+      render(
+        <Modal isOpen onClose={mockOnClose}>
           <ModalHeader>Testing</ModalHeader>
           <ModalBody>body</ModalBody>
           <ModalFooter>footer</ModalFooter>
         </Modal>
       );
-      const modal = getByTestId('modal');
+      const modal = screen.getByRole('dialog');
 
       fireEvent.click(modal.parentElement!);
 
@@ -86,19 +87,14 @@ describe('<Modal />', () => {
 
     it('should not call the onClose function when closeOnOverlayClick is false', () => {
       const mockOnClose = jest.fn();
-      const { getByTestId } = render(
-        <Modal
-          closeOnOverlayClick={false}
-          data-testid="modal"
-          isOpen
-          onClose={mockOnClose}
-        >
+      render(
+        <Modal closeOnOverlayClick={false} isOpen onClose={mockOnClose}>
           <ModalHeader>Testing</ModalHeader>
           <ModalBody>body</ModalBody>
           <ModalFooter>footer</ModalFooter>
         </Modal>
       );
-      const modal = getByTestId('modal');
+      const modal = screen.getByRole('dialog');
 
       fireEvent.click(modal.parentElement!);
 
@@ -148,8 +144,8 @@ describe('<Modal />', () => {
         <ModalFooter>footer</ModalFooter>
       </Modal>
     );
-    const { getByRole } = render(<ModalTest />);
-    const closeButton = getByRole('button');
+    render(<ModalTest />);
+    const closeButton = screen.getByRole('button');
 
     expect(closeButton).toHaveFocus();
   });
@@ -181,13 +177,13 @@ describe('<Modal />', () => {
         </>
       );
     };
-    const { getByTestId } = render(<ModalTest />);
-    const openButton = getByTestId('open-button');
+    render(<ModalTest />);
+    const openButton = screen.getByTestId('open-button');
 
     // click the button
     fireEvent.click(openButton);
 
-    const modalInput = getByTestId('modal-input');
+    const modalInput = screen.getByTestId('modal-input');
 
     // modal input should be focused
     expect(modalInput).toHaveFocus();
@@ -223,20 +219,20 @@ describe('<Modal />', () => {
         </>
       );
     };
-    const { getByLabelText, getByTestId } = render(<ModalTest />);
-    const openButton = getByTestId('open-button');
-    const finalButton = getByTestId('final-button');
+    render(<ModalTest />);
+    const openButton = screen.getByTestId('open-button');
+    const finalButton = screen.getByTestId('final-button');
 
     // click the button
     fireEvent.click(openButton);
 
-    const closeButton = getByLabelText('Close the modal');
+    const closeButton = screen.getByLabelText('Close the modal');
 
     fireEvent.click(closeButton);
 
     // final button should be focused when Modal has closed
     // await waitFor(() => expect(finalButton).toHaveFocus());
-    expect(finalButton).toHaveFocus();
+    await waitFor(() => expect(finalButton).toHaveFocus());
   });
 
   describe('keyboard navigation', () => {
@@ -253,10 +249,10 @@ describe('<Modal />', () => {
           </Modal>
         );
 
-        const { getByRole, getByTestId } = render(<ModalTest />);
-        const closeButton = getByRole('button');
-        const modalInput1 = getByTestId('modal-input1');
-        const modalInput2 = getByTestId('modal-input2');
+        render(<ModalTest />);
+        const closeButton = screen.getByRole('button');
+        const modalInput1 = screen.getByTestId('modal-input1');
+        const modalInput2 = screen.getByTestId('modal-input2');
 
         expect(closeButton).toHaveFocus();
 
@@ -283,10 +279,10 @@ describe('<Modal />', () => {
             <ModalFooter>footer</ModalFooter>
           </Modal>
         );
-        const { getByRole, getByTestId } = render(<ModalTest />);
-        const closeButton = getByRole('button');
-        const modalInput1 = getByTestId('modal-input1');
-        const modalInput2 = getByTestId('modal-input2');
+        render(<ModalTest />);
+        const closeButton = screen.getByRole('button');
+        const modalInput1 = screen.getByTestId('modal-input1');
+        const modalInput2 = screen.getByTestId('modal-input2');
 
         expect(closeButton).toHaveFocus();
 
@@ -322,10 +318,10 @@ describe('<Modal />', () => {
           );
         };
 
-        const { getByRole, getByTestId } = render(<ModalTest />);
-        const closeButton = getByRole('button');
-        const modalInput1 = getByTestId('modal-input1');
-        const modalInput2 = getByTestId('modal-input2');
+        render(<ModalTest />);
+        const closeButton = screen.getByRole('button');
+        const modalInput1 = screen.getByTestId('modal-input1');
+        const modalInput2 = screen.getByTestId('modal-input2');
 
         expect(modalInput2).toHaveFocus();
 
@@ -363,10 +359,10 @@ describe('<Modal />', () => {
           );
         };
 
-        const { getByRole, getByTestId } = render(<ModalTest />);
-        const closeButton = getByRole('button');
-        const modalInput1 = getByTestId('modal-input1');
-        const modalInput2 = getByTestId('modal-input2');
+        render(<ModalTest />);
+        const closeButton = screen.getByRole('button');
+        const modalInput1 = screen.getByTestId('modal-input1');
+        const modalInput2 = screen.getByTestId('modal-input2');
 
         expect(modalInput2).toHaveFocus();
 
