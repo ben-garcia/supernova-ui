@@ -17,6 +17,7 @@ const DrawerFooter: React.FC<DrawerFooterProps> = props => {
   const enhancedChildren: ReactNode[] = [];
 
   // loop through the children
+  // eslint-disable-next-line
   Children.toArray(children).map((child: any) => {
     // make sure the child is an object
     if (isObject(child)) {
@@ -25,7 +26,7 @@ const DrawerFooter: React.FC<DrawerFooterProps> = props => {
           enhancedChildren.push(cloneElement(c, { onClick: handleOnClick }));
         } else {
           enhancedChildren.push(c);
-          //enhancedChildren.push(cloneElement(c));
+          // enhancedChildren.push(cloneElement(c));
         }
       });
     }

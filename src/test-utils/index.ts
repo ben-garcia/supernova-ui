@@ -13,7 +13,7 @@ import { RunOptions } from 'axe-core';
 import { axe } from 'jest-axe';
 import { isValidElement } from 'react';
 
-export { fireEvent, screen } from '@testing-library/react';
+export { fireEvent, screen, waitFor } from '@testing-library/react';
 
 export {
   act,
