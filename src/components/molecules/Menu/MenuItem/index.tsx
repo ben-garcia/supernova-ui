@@ -11,6 +11,9 @@ export interface MenuItemProps {
   onClick?: () => void;
 }
 
+/**
+ * Menu option to select from.
+ */
 const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
   const { children, className, onClick = null } = props;
   const {

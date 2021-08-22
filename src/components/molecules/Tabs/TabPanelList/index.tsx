@@ -8,6 +8,9 @@ interface TabPanelListProps {
   className?: string;
 }
 
+/**
+ * The wrapper for all TabPanel components
+ */
 const TabPanelList: React.FC<TabPanelListProps> = props => {
   const { children, className } = props;
   const tabPanelListRef = useRef<HTMLDivElement | null>(null);

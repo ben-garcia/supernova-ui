@@ -9,6 +9,9 @@ export interface AlertDialogBodyProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the header content of the AlertDialog.
+ */
 const AlertDialogBody: React.FC<AlertDialogBodyProps> = props => {
   const { children, ...rest } = props;
   const { getAlertDialogBodyProps } = useAlertDialog();

@@ -12,6 +12,9 @@ interface MenuGroupProps {
   title: string;
 }
 
+/**
+ * Wrapper to group relatved MenuItem
+ */
 const MenuGroup: React.FC<MenuGroupProps> = props => {
   const { children, className, title } = props;
   const classes = createClasses('snui-flex snui-flex-column', {

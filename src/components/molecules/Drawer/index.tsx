@@ -22,9 +22,8 @@ import { useDrawerProvider } from '../../../hooks/use-drawer';
 import { DrawerProvider } from '../../../contexts';
 
 /**
- *  A window overlaid on either the primary window or another dialog window.
- *
- *  used to direct the attention of the user.
+ * The container for all Drawer related components
+ * that provides context to its children.
  */
 const Drawer: React.FC<DrawerProps> = props => {
   const {

@@ -28,9 +28,8 @@ import { useAlertDialogProvider } from '../../../hooks/use-alert-dialog';
 import { AlertDialogProvider } from '../../../contexts';
 
 /**
- *  A window overlaid on either the primary window or another dialog window.
- *
- * used to indicate that action is required by the user.
+ * The container for all AlertDialog related components
+ * that provides context to its children.
  */
 const AlertDialog: React.FC<AlertDialogProps> = props => {
   const {

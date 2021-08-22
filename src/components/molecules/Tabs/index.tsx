@@ -7,6 +7,10 @@ import { useTheme, useUniqueId } from '../../../hooks';
 import { createClasses, isString } from '../../../utils';
 import './styles.scss';
 
+/**
+ * The container for all Tabs related components
+ * that provides context to its children.
+ */
 const Tabs: React.FC<TabsProps> = props => {
   const {
     activeColor = 'info700',

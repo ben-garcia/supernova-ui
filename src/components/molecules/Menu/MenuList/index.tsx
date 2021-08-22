@@ -13,7 +13,6 @@ import { createPortal } from 'react-dom';
 
 import { useMenu } from '../../../../hooks';
 import { createClasses, isString } from '../../../../utils';
-
 import './styles.scss';
 
 export interface MenuListProps {
@@ -25,6 +24,9 @@ export interface MenuListProps {
   width?: string;
 }
 
+/**
+ * Wrapper for all MenuItem
+ */
 // @ts-ignore
 const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const {

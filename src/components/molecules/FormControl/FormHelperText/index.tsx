@@ -8,6 +8,9 @@ export interface FormHelperTextProps {
   className?: string;
 }
 
+/**
+ * Used to provider feedback about how a field should be filled out.
+ */
 const FormHelperText = forwardRef(
   (props: FormHelperTextProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const { children, className } = props;

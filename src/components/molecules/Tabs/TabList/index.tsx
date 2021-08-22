@@ -10,6 +10,9 @@ interface TabListProps {
   className?: string;
 }
 
+/**
+ * The wrapper for all Tab buttons
+ */
 const TabList: React.FC<TabListProps> = props => {
   const { children, className } = props;
   const { align, orientation, isFitted, setNumberOfTabs } = useTabs();

@@ -8,7 +8,8 @@ import { useFormControlProvider } from '../../../hooks/use-form-control';
 import './styles.scss';
 
 /**
- * Component that holds the context for its children
+ * The container for all FormControl related components
+ * that provides context to its children.
  */
 const FormControl: React.FC<FormControlProps> = props => {
   const { children, className, id = '', tag = 'div' } = props;

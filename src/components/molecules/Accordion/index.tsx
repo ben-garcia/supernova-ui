@@ -13,6 +13,10 @@ import { useAccordionProvider } from '../../../hooks/use-accordion';
 import { useUniqueId } from '../../../hooks';
 import { createClasses, isString } from '../../../utils';
 
+/**
+ * The container for all Accordion related components
+ * that provides context for all AccordionItem.
+ */
 const Accordion: React.FC<AccordionProps> = props => {
   const {
     allowMultiple = false,

@@ -10,6 +10,9 @@ export interface AlertDialogFooterProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the footer content of the AlertDialog.
+ */
 const AlertDialogFooter: React.FC<AlertDialogFooterProps> = props => {
   const { children, ...rest } = props;
   const { getAlertDialogFooterProps, onClose } = useAlertDialog();

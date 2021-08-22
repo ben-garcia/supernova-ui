@@ -15,6 +15,9 @@ interface TabProps {
   className?: string;
 }
 
+/**
+ * Tab button used to activate a specific TabPanel
+ */
 const Tab: React.FC<TabProps> = props => {
   const { children, className } = props;
   const { tabsRef } = useTabList();

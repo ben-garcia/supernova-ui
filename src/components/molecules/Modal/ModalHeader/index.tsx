@@ -9,6 +9,9 @@ export interface ModalHeaderProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the header content of the Modal.
+ */
 const ModalHeader: React.FC<ModalHeaderProps> = props => {
   const { children, ...rest } = props;
   const { getModalHeaderProps } = useModal();

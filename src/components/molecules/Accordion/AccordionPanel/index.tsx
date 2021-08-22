@@ -11,6 +11,9 @@ interface AccordionPanelProps {
   className?: string;
 }
 
+/**
+ * Holds the main content for each accordion.
+ */
 const AccordionPanel: React.FC<AccordionPanelProps> = props => {
   const { children, className, ...rest } = props;
   const classes = createClasses('snui-accordion__panel', {

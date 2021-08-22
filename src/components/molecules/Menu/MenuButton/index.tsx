@@ -9,6 +9,9 @@ interface MenuButtonProps extends ButtonProps {
   className?: string;
 }
 
+/**
+ * The trigger for the Menu.
+ */
 const MenuButton: React.FC<MenuButtonProps> = props => {
   const { children, className, ...rest } = props;
   const { isOpen, menuButtonRef, menuId } = useMenu();

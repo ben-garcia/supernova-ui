@@ -22,6 +22,9 @@ interface AccordionHeaderButtonProps extends ButtonProps {
 
 type HeadingLevelType = 1 | 2 | 3 | 4 | 5 | 6;
 
+/**
+ * A button used to open/close the AccordionItem.
+ */
 const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
   const { children, className, headingLevel = 2, ...rest } = props;
   const { getAccordionButtonProps } = useAccordionItemProvider();

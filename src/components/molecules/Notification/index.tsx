@@ -14,6 +14,11 @@ import { NotificationProps } from './types';
 
 import './styles.scss';
 
+/**
+ * Alert that usually last a few seconds.
+ *
+ * NOTE: internal use
+ */
 const Notification: React.FC<NotificationProps> = props => {
   const {
     backgroundColor,

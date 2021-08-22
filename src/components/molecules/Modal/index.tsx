@@ -28,9 +28,8 @@ import { useModalProvider } from '../../../hooks/use-modal';
 import { ModalProvider } from '../../../contexts';
 
 /**
- *  A window overlaid on either the primary window or another dialog window.
- *
- *  used to direct the attention of the user.
+ * The container for all Modal related components
+ * that provides context to its children.
  */
 const Modal: React.FC<ModalProps> = props => {
   const {

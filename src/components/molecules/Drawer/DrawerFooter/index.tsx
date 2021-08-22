@@ -10,6 +10,9 @@ export interface DrawerFooterProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the footer content of the Drawer.
+ */
 const DrawerFooter: React.FC<DrawerFooterProps> = props => {
   const { children, ...rest } = props;
   const { getDrawerFooterProps, onClose } = useDrawer();

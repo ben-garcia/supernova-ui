@@ -8,6 +8,9 @@ interface TabPanelProps {
   className?: string;
 }
 
+/**
+ * Wrapper that holds the content associated with a Tab.
+ */
 const TabPanel: React.FC<TabPanelProps> = props => {
   const { children, className } = props;
   const { activeIndex, tabsId } = useTabs();

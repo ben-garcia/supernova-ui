@@ -9,6 +9,9 @@ export interface DrawerHeaderProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the header content of the Drawer.
+ */
 const DrawerHeader: React.FC<DrawerHeaderProps> = props => {
   const { children, ...rest } = props;
   const { getDrawerHeaderProps } = useDrawer();

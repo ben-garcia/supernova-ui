@@ -8,6 +8,9 @@ interface FormErrorMessageProps {
   className?: string;
 }
 
+/**
+ * Used to provider feedback about an invalid field.
+ */
 const FormErrorMessage = forwardRef(
   (props: FormErrorMessageProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const { children, className } = props;

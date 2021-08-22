@@ -10,6 +10,9 @@ export interface ModalFooterProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the footer content of the Modal.
+ */
 const ModalFooter: React.FC<ModalFooterProps> = props => {
   const { children, ...rest } = props;
   const { getModalFooterProps, onClose } = useModal();

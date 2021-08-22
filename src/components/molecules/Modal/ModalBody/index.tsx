@@ -9,6 +9,9 @@ export interface ModalBodyProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the main content of the Modal.
+ */
 const ModalBody: React.FC<ModalBodyProps> = props => {
   const { children, ...rest } = props;
   const { getModalBodyProps } = useModal();

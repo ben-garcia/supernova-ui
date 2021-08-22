@@ -9,6 +9,9 @@ export interface AlertDialogHeaderProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the header content of the AlertDialog.
+ */
 const AlertDialogHeader: React.FC<AlertDialogHeaderProps> = props => {
   const { children, ...rest } = props;
   const { getAlertDialogHeaderProps } = useAlertDialog();

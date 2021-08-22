@@ -5,6 +5,10 @@ import { MenuProps } from './types';
 import { useMenuProvider } from '../../../hooks/use-menu';
 import { useUniqueId } from '../../../hooks';
 
+/**
+ * The container for all Menu related components
+ * that provides context to its children.
+ */
 const Menu: React.FC<MenuProps> = props => {
   const { children, closeOnEsc = true, isOpen, onClose } = props;
 

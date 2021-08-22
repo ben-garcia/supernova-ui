@@ -9,6 +9,9 @@ export interface DrawerBodyProps {
   className?: string;
 }
 
+/**
+ * The wrapper for the main content of the Drawer.
+ */
 const ModalBody: React.FC<DrawerBodyProps> = props => {
   const { children, ...rest } = props;
   const { getDrawerBodyProps } = useDrawer();

@@ -12,6 +12,9 @@ export interface AccordionItemProps {
   className?: string;
 }
 
+/**
+ * A single accordion that provides context to AccordionButton and AccordionPanel.
+ */
 const AccordionItem: React.FC<AccordionItemProps> = props => {
   const { children, className, ...rest } = props;
   const classes = createClasses('snui-accordion__item', {
