@@ -27,7 +27,17 @@ export interface Menu {
   setFocusedIndex: (newIndex: number) => void;
 }
 
+export interface MenuList {
+  menuButtonItemsRef: RefObject<HTMLButtonElement[]> | null;
+  menuItemsContent: { [k: string]: number[] };
+}
+
 export interface MenuProviderProps {
   children: ReactNode;
   value: Menu;
+}
+
+export interface MenuListProviderProps {
+  children: ReactNode;
+  value: MenuList;
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useRef } from 'react';
 
-import { MenuContext } from '../contexts/menu';
+import { MenuContext, MenuListContext } from '../contexts/menu';
 import { MenuProps } from '../components/molecules/Menu/types';
 import { isFunction } from '../utils';
 
@@ -111,4 +111,18 @@ const useMenu = () => {
   return context;
 };
 
-export { useMenuProvider, useMenu };
+/**
+ * Hooks that returns all menu list props
+ */
+const useMenuList = () => {
+  const context = useContext(MenuListContext);
+
+  if (!context) {
+    throw new Error(
+      'useMenuList: context is undefined, did you remember to wrap your app in a pair of <MenuList>'
+    );
+  }
+  return context;
+};
+
+export { useMenuProvider, useMenu, useMenuList };

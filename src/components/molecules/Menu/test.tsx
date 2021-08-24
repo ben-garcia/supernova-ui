@@ -118,8 +118,6 @@ describe('<Menu />', () => {
     let Test: React.FC<Partial<MenuProps>>;
 
     beforeAll(() => {
-      jest.useFakeTimers();
-
       Test = props => {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
@@ -155,14 +153,9 @@ describe('<Menu />', () => {
         const button = screen.getByText('Open');
 
         fireEvent.click(button);
-
-        jest.advanceTimersByTime(30);
-
         expect(profileItem).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 'Escape' });
-        jest.advanceTimersByTime(30);
-
+        fireEvent.keyDown(profileItem, { key: 'Escape' });
         expect(button).toHaveFocus();
       });
 
@@ -174,12 +167,9 @@ describe('<Menu />', () => {
 
         fireEvent.click(button);
 
-        jest.advanceTimersByTime(30);
-
         expect(profileItem).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 'Escape' });
-        jest.advanceTimersByTime(30);
+        fireEvent.keyDown(profileItem, { key: 'Escape' });
 
         expect(profileItem).toHaveFocus();
       });
@@ -195,9 +185,6 @@ describe('<Menu />', () => {
         expect(profileItem).not.toHaveFocus();
 
         fireEvent.click(button);
-
-        jest.advanceTimersByTime(30);
-
         expect(profileItem).toHaveFocus();
 
         userEvent.tab();
@@ -218,15 +205,12 @@ describe('<Menu />', () => {
           const signout = screen.getByText('Signout');
 
           fireEvent.click(button);
-
-          jest.advanceTimersByTime(30);
-
           expect(profileItem).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'End' });
+          fireEvent.keyDown(profileItem, { key: 'End' });
           expect(signout).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'Home' });
+          fireEvent.keyDown(signout, { key: 'Home' });
           expect(profileItem).toHaveFocus();
         });
       });
@@ -244,27 +228,24 @@ describe('<Menu />', () => {
           const signout = screen.getByText('Signout');
 
           fireEvent.click(button);
-
-          jest.advanceTimersByTime(30);
-
           expect(profileItem).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowRight' });
+          fireEvent.keyDown(profileItem, { key: 'ArrowRight' });
           expect(settings).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowRight' });
+          fireEvent.keyDown(settings, { key: 'ArrowRight' });
           expect(nightMode).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowRight' });
+          fireEvent.keyDown(nightMode, { key: 'ArrowRight' });
           expect(signout).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowLeft' });
+          fireEvent.keyDown(signout, { key: 'ArrowLeft' });
           expect(nightMode).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowLeft' });
+          fireEvent.keyDown(nightMode, { key: 'ArrowLeft' });
           expect(settings).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowLeft' });
+          fireEvent.keyDown(settings, { key: 'ArrowLeft' });
           expect(profileItem).toHaveFocus();
         });
 
@@ -277,12 +258,9 @@ describe('<Menu />', () => {
             const signout = screen.getByText('Signout');
 
             fireEvent.click(button);
-
-            jest.advanceTimersByTime(30);
-
             expect(profileItem).toHaveFocus();
 
-            fireEvent.keyDown(window, { key: 'ArrowLeft' });
+            fireEvent.keyDown(profileItem, { key: 'ArrowLeft' });
             expect(signout).toHaveFocus();
           });
         });
@@ -297,13 +275,11 @@ describe('<Menu />', () => {
 
             fireEvent.click(button);
 
-            jest.advanceTimersByTime(30);
-
             // set focus to the last menu button item
-            fireEvent.keyDown(window, { key: 'End' });
+            fireEvent.keyDown(profileItem, { key: 'End' });
             expect(signout).toHaveFocus();
 
-            fireEvent.keyDown(window, { key: 'ArrowRight' });
+            fireEvent.keyDown(signout, { key: 'ArrowRight' });
             expect(profileItem).toHaveFocus();
           });
         });
@@ -320,27 +296,24 @@ describe('<Menu />', () => {
           const signout = screen.getByText('Signout');
 
           fireEvent.click(button);
-
-          jest.advanceTimersByTime(30);
-
           expect(profileItem).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowDown' });
+          fireEvent.keyDown(profileItem, { key: 'ArrowDown' });
           expect(settings).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowDown' });
+          fireEvent.keyDown(settings, { key: 'ArrowDown' });
           expect(nightMode).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowDown' });
+          fireEvent.keyDown(nightMode, { key: 'ArrowDown' });
           expect(signout).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowUp' });
+          fireEvent.keyDown(signout, { key: 'ArrowUp' });
           expect(nightMode).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowUp' });
+          fireEvent.keyDown(settings, { key: 'ArrowUp' });
           expect(settings).toHaveFocus();
 
-          fireEvent.keyDown(window, { key: 'ArrowUp' });
+          fireEvent.keyDown(profileItem, { key: 'ArrowUp' });
           expect(profileItem).toHaveFocus();
         });
 
@@ -353,12 +326,9 @@ describe('<Menu />', () => {
             const signout = screen.getByText('Signout');
 
             fireEvent.click(button);
-
-            jest.advanceTimersByTime(30);
-
             expect(profileItem).toHaveFocus();
 
-            fireEvent.keyDown(window, { key: 'ArrowUp' });
+            fireEvent.keyDown(profileItem, { key: 'ArrowUp' });
             expect(signout).toHaveFocus();
           });
         });
@@ -373,13 +343,11 @@ describe('<Menu />', () => {
 
             fireEvent.click(button);
 
-            jest.advanceTimersByTime(30);
-
             // set focus to the last menu button item
-            fireEvent.keyDown(window, { key: 'End' });
+            fireEvent.keyDown(profileItem, { key: 'End' });
             expect(signout).toHaveFocus();
 
-            fireEvent.keyDown(window, { key: 'ArrowDown' });
+            fireEvent.keyDown(signout, { key: 'ArrowDown' });
             expect(profileItem).toHaveFocus();
           });
         });
@@ -391,25 +359,23 @@ describe('<Menu />', () => {
         render(<Test />);
 
         const button = screen.getByText('Open');
-        const profile = screen.getByText('Profile');
+        const profileItem = screen.getByText('Profile');
         const settings = screen.getByText('Settings');
         const nightMode = screen.getByText(/Night Mode/);
 
         fireEvent.click(button);
 
-        jest.advanceTimersByTime(30);
-
         // set focus to the last menu button item
-        fireEvent.keyDown(window, { key: 's' });
+        fireEvent.keyDown(profileItem, { key: 's' });
         expect(settings).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 'p' });
-        expect(profile).toHaveFocus();
+        fireEvent.keyDown(settings, { key: 'p' });
+        expect(profileItem).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 'n' });
+        fireEvent.keyDown(profileItem, { key: 'n' });
         expect(nightMode).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 's' });
+        fireEvent.keyDown(nightMode, { key: 's' });
         expect(settings).toHaveFocus();
       });
 
@@ -417,21 +383,20 @@ describe('<Menu />', () => {
         render(<Test />);
 
         const button = screen.getByText('Open');
+        const profileItem = screen.getByText('Profile');
         const settings = screen.getByText('Settings');
         const signout = screen.getByText('Signout');
 
         fireEvent.click(button);
 
-        jest.advanceTimersByTime(30);
-
         // set focus to the last menu button item
-        fireEvent.keyDown(window, { key: 's' });
+        fireEvent.keyDown(profileItem, { key: 's' });
         expect(settings).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 's' });
+        fireEvent.keyDown(settings, { key: 's' });
         expect(signout).toHaveFocus();
 
-        fireEvent.keyDown(window, { key: 's' });
+        fireEvent.keyDown(signout, { key: 's' });
         expect(settings).toHaveFocus();
       });
     });

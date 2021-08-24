@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { MenuListProvider } from '../../../../contexts/menu';
 import { useMenu } from '../../../../hooks';
 import { createClasses, isString } from '../../../../utils';
 import './styles.scss';
@@ -39,8 +40,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     ...rest
   } = props;
   const {
-    focusedIndex,
-    closeOnEsc,
     menuId,
     isOpen,
     onClose,
@@ -51,7 +50,21 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   } = useMenu();
   const [mounted, setMounted] = useState(false);
   const menuPortalId = useMemo(() => `${menuId}-portal`, []);
-  const menuButtonItems = useRef<HTMLButtonElement[]>([]);
+  const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
+  /**
+   * obj that stores the first letters of menu items
+   * and the array index of those that match.
+   */
+  const [menuItemsContent, setMenuItemsContent] = useState<{
+    [k: string]: number[];
+  }>({});
+  const contextValue = useMemo(
+    () => ({
+      menuButtonItemsRef: menuButtonItemsRef.current,
+      menuItemsContent,
+    }),
+    [menuButtonItemsRef, menuItemsContent]
+  );
   const [pos, setPos] = useState({ left: '', top: '' });
 
   /**
@@ -61,7 +74,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
    * run on unmount
    */
   const resetMenuItems = useCallback(() => {
-    menuButtonItems?.current?.forEach(el => {
+    menuButtonItemsRef?.current?.forEach(el => {
       el.setAttribute('tabIndex', '-1');
     });
     setFocusedIndex(-1);
@@ -72,33 +85,25 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
    */
   useEffect(() => {
     if (menuButtonRef?.current) {
-      (menuButtonItems.current as any) = menuListRef?.current?.querySelectorAll(
+      (menuButtonItemsRef.current as any) = menuListRef?.current?.querySelectorAll(
         'button[role="menuitem"]'
       );
     }
   }, [menuListRef?.current]);
 
   /**
-   * obj that stores the first letters of menu items
-   * and the array index of those that match.
-   */
-  const [menuItemsContent, setMenuItemsCotent] = useState<{
-    [k: string]: number[];
-  }>({});
-
-  /**
    * add an index custom data prop to each menu item
    */
   useEffect(() => {
     if (isOpen) {
-      if (menuButtonItems?.current) {
-        menuButtonItems.current.forEach((element, index) => {
+      if (menuButtonItemsRef?.current) {
+        menuButtonItemsRef.current.forEach((element, index) => {
           element.setAttribute('data-snui-menu-item-index', `${index}`);
         });
 
         const tempObj: any = {};
 
-        menuButtonItems.current.forEach((element, index) => {
+        menuButtonItemsRef.current.forEach((element, index) => {
           const firstLetter = element.textContent![0].toLowerCase();
 
           if (tempObj[firstLetter]) {
@@ -108,13 +113,13 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
           }
         });
 
-        setMenuItemsCotent(tempObj);
+        setMenuItemsContent(tempObj);
       }
 
-      if (menuButtonItems?.current?.length) {
+      if (menuButtonItemsRef?.current?.length) {
         // needed to correctly set focus
         setTimeout(() => {
-          menuButtonItems.current[0].focus();
+          menuButtonItemsRef.current[0].focus();
         }, 15);
       }
     }
@@ -142,95 +147,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     },
     [isOpen, menuButtonRef?.current]
   );
-
-  /**
-   * add/remove the winodw key down listeners
-   */
-  useEffect(() => {
-    let handleKeyDown: (e: KeyboardEvent) => void;
-
-    if (isOpen) {
-      handleKeyDown = e => {
-        if (menuButtonItems?.current) {
-          const { key, shiftKey } = e;
-          const menuItemsLength = menuButtonItems.current.length;
-
-          if (key === 'Escape' && closeOnEsc) {
-            onClose();
-          } else if (key === 'Tab' || (shiftKey && key === 'Tab')) {
-            // prevent user from using 'Tab' or 'Shift + Tab' to set focus to another element
-            e.preventDefault();
-          } else if (key === 'ArrowDown' || key === 'ArrowRight') {
-            if (focusedIndex !== menuItemsLength - 1) {
-              setFocusedIndex(focusedIndex + 1);
-            } else {
-              setFocusedIndex(0);
-            }
-          } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
-            if (focusedIndex !== 0) {
-              setFocusedIndex(focusedIndex - 1);
-            } else {
-              setFocusedIndex(menuItemsLength - 1);
-            }
-          } else if (key === 'End') {
-            if (focusedIndex !== menuItemsLength - 1) {
-              setFocusedIndex(menuItemsLength - 1);
-            }
-          } else if (key === 'Home') {
-            if (focusedIndex !== 0) {
-              setFocusedIndex(0);
-            }
-          } else if (
-            // if the key matches a property in the menuItemContent object
-            Object.keys(menuItemsContent).includes(key.toLowerCase())
-          ) {
-            const lowerCaseKey = key.toLowerCase();
-
-            // when the array length is equal to one
-            if (menuItemsContent[lowerCaseKey].length === 1) {
-              setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
-              // when greater than one
-            } else if (menuItemsContent[lowerCaseKey].length > 1) {
-              // number of items in the array.
-              const numberOfIndices = menuItemsContent[lowerCaseKey].length;
-
-              // when the focused index is not found in the menuItemContent array.
-              if (!menuItemsContent[lowerCaseKey].includes(focusedIndex)) {
-                setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
-              } else {
-                // the position of the focused index in the menuItemsContent[lowerCaseKey] array
-                const positionInTheArray = menuItemsContent[
-                  lowerCaseKey
-                ].indexOf(focusedIndex);
-
-                // if it's the last index in the array
-                if (
-                  positionInTheArray ===
-                  menuItemsContent[lowerCaseKey].indexOf(
-                    menuItemsContent[lowerCaseKey][numberOfIndices - 1]
-                  )
-                ) {
-                  // cycle back to the first
-                  setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
-                } else {
-                  // go to the next indice in the array.
-                  setFocusedIndex(
-                    menuItemsContent[lowerCaseKey][positionInTheArray + 1]
-                  );
-                }
-              }
-            }
-          }
-        }
-      };
-
-      window.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, focusedIndex]);
 
   /**
    *
@@ -318,23 +234,25 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   }, [menuButtonRef]);
 
   const jsx = (
-    <div
-      {...getMenuListProps(rest, ref)}
-      className={classes}
-      id={`${menuId}__list`}
-      role="menu"
-      style={{
-        minWidth,
-        maxWidth,
-        width,
-        left: pos.left,
-        top: pos.top,
-        transform: `translateX(-20%)`,
-      }}
-      tabIndex={-1}
-    >
-      {children}
-    </div>
+    <MenuListProvider value={contextValue as any}>
+      <div
+        {...getMenuListProps(rest, ref)}
+        className={classes}
+        id={`${menuId}__list`}
+        role="menu"
+        style={{
+          minWidth,
+          maxWidth,
+          width,
+          left: pos.left,
+          top: pos.top,
+          transform: `translateX(-20%)`,
+        }}
+        tabIndex={-1}
+      >
+        {children}
+      </div>
+    </MenuListProvider>
   );
 
   return (

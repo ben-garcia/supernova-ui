@@ -5,7 +5,7 @@ export * from './use-drawer';
 export { useFormControl } from './use-form-control';
 export { default as useInputChecked } from './use-input-checked';
 export * from './use-unique-id';
-export { useMenu } from './use-menu';
+export * from './use-menu';
 export { useModal } from './use-modal';
 export { useNotification } from './use-notification';
 export * from './use-tabs';
