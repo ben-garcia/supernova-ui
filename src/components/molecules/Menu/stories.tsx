@@ -41,7 +41,7 @@ export const PositionRight = () => {
     <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
       <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
-        <MenuList position="right" width="200px">
+        <MenuList width="200px">
           <MenuItem>Profile</MenuItem>
           <MenuItem>Settings</MenuItem>
           <MenuItem>Night Mode</MenuItem>

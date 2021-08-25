@@ -21,7 +21,6 @@ export interface MenuListProps {
   className?: string;
   maxWidth?: string;
   minWidth?: string;
-  position?: 'left' | 'right';
   width?: string;
 }
 
@@ -35,7 +34,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     className,
     maxWidth = '',
     minWidth = '',
-    position = 'left',
     width = '',
     ...rest
   } = props;
@@ -65,7 +63,7 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     }),
     [menuButtonItemsRef, menuItemsContent]
   );
-  const [pos, setPos] = useState({ left: '', top: '' });
+  const [pos, setPos] = useState({ left: 0, top: 0 });
 
   /**
    * set tabindex of each menu item to -1
@@ -187,9 +185,8 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
       div.style.maxWidth = maxWidth;
 
       document.body.appendChild(div);
-
-      setMounted(true);
     }
+    setMounted(true);
   }, [isOpen]);
 
   const classes = createClasses(
@@ -202,36 +199,54 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   );
 
   useEffect(() => {
-    if (menuButtonRef?.current) {
+    if (menuButtonRef?.current && menuListRef?.current) {
       const menuButtonPosition = menuButtonRef.current.getBoundingClientRect();
+      const position = {
+        left: menuButtonPosition.left,
+        top: menuButtonPosition.bottom,
+      };
 
-      setTimeout(() => {
-        const menuListWidth = menuListRef!.current?.getBoundingClientRect()
-          .width;
+      /**
+       *
+       * when the menu goes outside the right side of the viewport
+       *
+       * @example
+       * --------------------
+       * |                  |
+       * |               -----------
+       * |    viewport   |         |
+       * |               |   menu  |
+       * |               -----------
+       * |                  |
+       * --------------------
+       *
+       * place the manu inside the viewport
+       */
+      if (
+        menuButtonPosition.right +
+          (menuListRef.current.offsetWidth -
+            menuButtonRef.current.offsetWidth) >
+        window.innerWidth
+      ) {
+        position.left =
+          menuButtonPosition.right - menuListRef.current.offsetWidth;
+      } else if (menuButtonPosition.left < 0) {
+        // when the trigger button is outside of the left side of the viewport
+        position.left = 0;
+      } else if (
+        menuButtonPosition.bottom +
+          (menuListRef.current.offsetHeight -
+            menuButtonRef.current.offsetHeight) >
+        window.innerHeight
+      ) {
+        // when the trigger button is outside of the bottom side of the viewport
+        position.top =
+          menuButtonPosition.top - menuListRef.current.offsetHeight;
+      }
 
-        if (position === 'left') {
-          setPos({
-            left: `${
-              menuButtonPosition.left +
-              menuButtonPosition.width / 2 +
-              window.pageXOffset
-            }px`,
-            top: `${menuButtonPosition.bottom + window.pageYOffset}px`,
-          });
-        } else if (position === 'right') {
-          setPos({
-            left: `${
-              menuButtonPosition.right +
-              menuButtonPosition.width / 2 -
-              menuListWidth! +
-              window.pageXOffset
-            }px`,
-            top: `${menuButtonPosition.bottom + window.pageYOffset}px`,
-          });
-        }
-      }, 10);
+      setPos(position);
     }
-  }, [menuButtonRef]);
+  }, [menuButtonRef?.current, menuListRef?.current]);
 
   const jsx = (
     <MenuListProvider value={contextValue as any}>
@@ -244,9 +259,8 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
           minWidth,
           maxWidth,
           width,
-          left: pos.left,
-          top: pos.top,
-          transform: `translateX(-20%)`,
+          left: `${pos.left}px`,
+          top: `${pos.top}px`,
         }}
         tabIndex={-1}
       >
