@@ -1,0 +1,38 @@
+.snui-slider__rail {
+  background-color: #c5c5c5;
+  cursor: pointer;
+
+  &--horizontal {
+    width: 100%;
+  }
+
+  &--vertical {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+  }
+
+  &--sm.snui-slider__rail--horizontal {
+    height: 4px;
+  }
+
+  &--md.snui-slider__rail--horizontal {
+    height: 6px;
+  }
+
+  &--lg.snui-slider__rail--horizontal {
+    height: 8px;
+  }
+
+  &--sm.snui-slider__rail--vertical {
+    width: 4px;
+  }
+
+  &--md.snui-slider__rail--vertical {
+    width: 6px;
+  }
+
+  &--lg.snui-slider__rail--vertical {
+    width: 8px;
+  }
+}

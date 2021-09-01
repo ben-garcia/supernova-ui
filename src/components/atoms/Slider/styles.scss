@@ -1,0 +1,35 @@
+.snui-slider {
+  position: relative;
+
+  &--horizontal {
+    width: 100%;
+  }
+
+  &--vertical {
+    height: 100%;
+  }
+
+  &--sm.snui-slider--horizontal {
+    padding: 5px 0;
+  }
+
+  &--md.snui-slider--horizontal {
+    padding: 7px 0;
+  }
+
+  &--lg.snui-slider--horizontal {
+    padding: 8px 0;
+  }
+
+  &--sm.snui-slider--vertical {
+    padding: 0 5px;
+  }
+
+  &--md.snui-slider--vertical {
+    padding: 0 7px;
+  }
+
+  &--lg.snui-slider--vertical {
+    padding: 0 8px;
+  }
+}

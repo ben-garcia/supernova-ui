@@ -1,0 +1,30 @@
+.snui-slider__thumb {
+  background: var(--snui-color-white);
+  border-radius: 50%;
+  box-shadow: var(--snui-shadow-md);
+  cursor: pointer;
+  position: absolute;
+
+  &--horizontal {
+    top: 0;
+  }
+
+  &--vertical {
+    left: 0;
+  }
+
+  &--sm {
+    height: 0.6rem;
+    width: 0.6rem;
+  }
+
+  &--md {
+    height: 0.85rem;
+    width: 0.85rem;
+  }
+
+  &--lg {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+}

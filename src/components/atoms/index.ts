@@ -11,6 +11,7 @@ export { default as Paragraph } from './Paragraph';
 export { default as Portal } from './Portal';
 export { default as Radio } from './Radio';
 export { default as RadioGroup } from './Radio/RadioGroup';
+export { default as Slider } from './Slider';
 export { default as Spinner } from './Spinner';
 export { default as Switch } from './Switch';
 export { default as Text } from './Text';
