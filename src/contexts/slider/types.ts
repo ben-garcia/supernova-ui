@@ -4,6 +4,7 @@ export interface SliderContextProps {
   ariaDescribedBy: string | undefined;
   ariaLabel: string | undefined;
   ariaLabelledBy: string | undefined;
+  ariaValueText: string | undefined;
   max: number;
   min: number;
   onChange: (newValue: number) => void;

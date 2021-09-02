@@ -14,6 +14,7 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
     ariaDescribedBy,
     ariaLabel,
     ariaLabelledBy,
+    ariaValueText,
     max,
     min,
     onChange,
@@ -24,7 +25,9 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
     value,
   } = useSlider();
   const theme = useTheme();
-  const [focusRingColor, setFocusRingColor] = useState('');
+  const [focusRing, setFocusRing] = useState(
+    `0 0 0 2px ${theme.colors.gray300}`
+  );
   const sliderThumbRef = useRef<HTMLDivElement | null>(null);
   const classes = createClasses('snui-slider__thumb', {
     [`${className}`]: isString(className),
@@ -153,13 +156,13 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
       }
     } else if (key === 'PageDown') {
       if (value - 10 < min) {
-        onChange(min!);
+        onChange(min);
       } else {
         onChange(value - 10);
       }
     } else if (key === 'PageUp') {
       if (value + 10 > max) {
-        onChange(max!);
+        onChange(max);
       } else {
         onChange(value + 10);
       }
@@ -175,19 +178,19 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}
+      aria-valuetext={ariaValueText}
       className={classes}
-      onBlur={() => setFocusRingColor('')}
-      onFocus={() => setFocusRingColor(theme.colors.focusRing)}
+      onBlur={() => setFocusRing(`0 0 0 2px ${theme.colors.gray300}`)}
+      onFocus={() => setFocusRing(`0 0 0 4px ${theme.colors.focusRing}`)}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMouseDown}
       ref={sliderThumbRef}
       role="slider"
       style={{
-        boxShadow: (isString(focusRingColor)
-          ? `0 0 0 4px ${focusRingColor}`
-          : null) as any,
-        left: orientation === 'horizontal' ? `${value}%` : undefined,
-        bottom: orientation === 'vertical' ? `${value}%` : undefined,
+        boxShadow: focusRing,
+        bottom: orientation === 'vertical' ? `${value}%` : '15%',
+        left: orientation === 'horizontal' ? `${value}%` : '15%',
+        top: orientation === 'horizontal' ? '2%' : undefined,
       }}
       tabIndex={0}
     />
