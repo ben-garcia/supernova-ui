@@ -56,8 +56,7 @@ const Slider: React.FC<SliderProps> = props => {
       size,
       sliderId,
       step,
-      // eslint-disable-next-line no-unneeded-ternary
-      value: value ? value : min ?? 0,
+      value,
     }),
     [props]
   );

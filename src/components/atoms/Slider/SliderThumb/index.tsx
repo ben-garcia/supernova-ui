@@ -36,8 +36,6 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
   });
 
   const handleMouseMove = (e: MouseEvent) => {
-    e.preventDefault();
-
     if (sliderThumbRef?.current) {
       const rail = document.getElementById(sliderId) as any;
       const { bottom, height, left, width } = rail.getBoundingClientRect();
@@ -119,15 +117,11 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
       }
     }
   };
-  const handleMouseUp = (e: MouseEvent) => {
-    e.preventDefault();
-
+  const handleMouseUp = React.useCallback(() => {
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
-  };
-  const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-
+  }, []);
+  const handleMouseDown = React.useCallback(() => {
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   }, []);
