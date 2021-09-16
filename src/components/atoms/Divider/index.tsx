@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties } from 'react';
 
 import { useTheme } from '../../../hooks';
 import { createClasses, isString } from '../../../utils';
@@ -20,13 +20,7 @@ export interface DividerProps {
 const Divider: React.FC<DividerProps> = props => {
   const { color, className, margin, orientation = 'horizontal' } = props;
   const theme = useTheme();
-  const styles: CSSProperties = useMemo(
-    () => ({
-      borderColor: color,
-      margin,
-    }),
-    [color, margin]
-  );
+  const styles: CSSProperties = {};
   const classes = createClasses('snui-divider', {
     [`${className}`]: isString(className),
     'snui-divider--horizontal': orientation === 'horizontal',
@@ -43,7 +37,7 @@ const Divider: React.FC<DividerProps> = props => {
     styles.borderColor = theme.colors.gray300;
   }
 
-  return <hr className={classes} style={styles} />;
+  return <hr className={classes} style={{ ...styles, margin }} />;
 };
 
 export default Divider;
