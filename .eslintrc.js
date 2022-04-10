@@ -9,6 +9,7 @@ module.exports = {
     'airbnb',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['node_modules/*'],
   overrides: [
@@ -34,7 +35,12 @@ module.exports = {
     // This rule clashes with Next.js's <Link /> component
     'jsx-a11y/anchor-is-valid': 'off',
     // Use tsx extension
-    'import/extensions': ['error', { extensions: ['.tsx'] }],
+    'import/extensions': [
+      'error',
+      {
+        extensions: ['.tsx'],
+      },
+    ],
     // @testing-library/react @testing-library/js-dom as devDependencies
     'import/no-extraneous-dependencies': 0,
     // Types from @storybook/react/types-6-0
@@ -43,7 +49,13 @@ module.exports = {
     'import/prefer-default-export': 0,
     'no-use-before-define': 'off',
     // Includes .prettierrc.js rules
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    'prettier/prettier': [
+      'error',
+      {},
+      {
+        usePrettierrc: true,
+      },
+    ],
     // jsx in files with .tsx since I am  using Typescript
     'react/jsx-filename-extension': 0,
     // Use spread syntax when passing props to components
