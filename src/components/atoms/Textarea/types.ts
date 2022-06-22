@@ -13,7 +13,7 @@ import {
 export interface TextareaProps
   extends Omit<
       CommonProps,
-      'children' | 'isLoading' | 'lefticon' | 'rightIcon' | 'size'
+      'children' | 'isLoading' | 'leftIcon' | 'rightIcon' | 'size'
     >,
     FormControlProps,
     SupernovaUIBaseProps,
