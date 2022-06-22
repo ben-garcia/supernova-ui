@@ -6,6 +6,10 @@ import { createClasses, isString } from '../../../utils';
 import EditableProps from './types';
 import './styles.scss';
 
+/**
+ * The container for all Editable related components
+ * that provides context for all subcomponents.
+ */
 const Editable: React.FC<EditableProps> = props => {
   const {
     children,

@@ -8,6 +8,9 @@ interface EditableInputProps {
   className?: string;
 }
 
+/**
+ * The component used to edit the previewed text by an input.
+ */
 const EditableInput: React.FC<EditableInputProps> = () => {
   const {
     className,

@@ -7,6 +7,9 @@ interface EditablePreviewProps {
   className?: string;
 }
 
+/**
+ * The component that holds the preview content to be editable.
+ */
 const EditablePreview: React.FC<EditablePreviewProps> = props => {
   const { className } = props;
   const {

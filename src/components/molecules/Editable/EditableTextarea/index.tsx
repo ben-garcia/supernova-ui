@@ -8,6 +8,9 @@ interface EditableTextareaProps {
   className?: string;
 }
 
+/**
+ * The component used to edit the previewed text in when a textarea is needed.
+ */
 const EditableTextarea: React.FC<EditableTextareaProps> = () => {
   const {
     className,
