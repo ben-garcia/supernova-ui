@@ -22,7 +22,7 @@ const Editable: React.FC<EditableProps> = props => {
     selectAllOnFocus = true,
     submitOnBlur = true,
   } = props;
-  const classes = createClasses('sniu-editable', {
+  const classes = createClasses('snui-editable', {
     [`${className}`]: isString(className),
   });
   const context = useEditableProvider(props);
