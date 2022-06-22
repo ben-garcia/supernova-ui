@@ -10,6 +10,10 @@ import Drawer from './Drawer';
 import DrawerBody from './Drawer/DrawerBody';
 import DrawerFooter from './Drawer/DrawerFooter';
 import DrawerHeader from './Drawer/DrawerHeader';
+import Editable from './Editable';
+import EditableInput from './Editable/EditableInput';
+import EditablePreview from './Editable/EditablePreview';
+import EditableTextarea from './Editable/EditableTextarea';
 import FormControl from './FormControl';
 import FormErrorMessage from './FormControl/FormErrorMessage';
 import FormHelperText from './FormControl/FormHelperText';
@@ -41,6 +45,10 @@ export {
   DrawerBody,
   DrawerFooter,
   DrawerHeader,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  EditableTextarea,
   FormControl,
   FormErrorMessage,
   FormHelperText,

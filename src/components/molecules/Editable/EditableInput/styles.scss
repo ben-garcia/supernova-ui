@@ -1,0 +1,11 @@
+.snui-editable__input {
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  font-size: inherit;
+  font-weight: inherit;
+  text-align: inherit;
+  border-radius: var(--snui-radii-md);
+  padding: var(--snui-space-xs);
+  background: transparent;
+  width: var(--snui-size-full);
+}

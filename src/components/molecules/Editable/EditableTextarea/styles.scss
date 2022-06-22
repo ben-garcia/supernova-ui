@@ -1,0 +1,12 @@
+.snui-editable__textarea {
+  background: transparent;
+  border-radius: var(--snui-radii-md);
+  font-size: 1.35em;
+  font-weight: inherit;
+  text-align: inherit;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  padding: var(--snui-space-xs);
+  resize: vertical;
+  width: var(--snui-size-full);
+}
