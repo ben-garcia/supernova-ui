@@ -1,5 +1,5 @@
-import { Meta, Story } from '@storybook/react';
-import React from 'react';
+import { Meta } from '@storybook/react';
+import React, { useState } from 'react';
 
 import { useEditableControls } from '../../../hooks/use-editable';
 import Editable from '.';
@@ -7,7 +7,6 @@ import EditablePreview from './EditablePreview';
 import EditableInput from './EditableInput';
 import EditableTextarea from './EditableTextarea';
 import argTypes from './arg-types';
-import EditableProps from './types';
 import Button from '../../atoms/Button';
 
 export default {
@@ -16,22 +15,28 @@ export default {
   title: 'Supernova UI/molecules/Editable',
 } as Meta;
 
-const InputTemplate: Story<EditableProps> = args => (
-  <div style={{ border: '1px solid #ccc', padding: '5px' }}>
-    <Editable {...args}>
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
-  </div>
-);
-const TextareaTemplate: Story<EditableProps> = args => (
-  <div style={{ border: '1px solid #ccc', padding: '5px' }}>
-    <Editable {...args}>
-      <EditablePreview />
-      <EditableTextarea />
-    </Editable>
-  </div>
-);
+export const Input = () => {
+  const [value, setValue] = useState('edit');
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '5px' }}>
+      <Editable onChange={val => setValue(val)} value={value}>
+        <EditablePreview />
+        <EditableInput />
+      </Editable>
+    </div>
+  );
+};
+export const Textarea = () => {
+  const [value, setValue] = useState('edit');
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '5px' }}>
+      <Editable onChange={val => setValue(val)} value={value}>
+        <EditablePreview />
+        <EditableTextarea />
+      </Editable>
+    </div>
+  );
+};
 const CustomEditableTextarea = () => {
   const {
     isEditing,
@@ -78,11 +83,14 @@ const CustomEditableTextarea = () => {
     </div>
   );
 };
-const CustomTextareaTemplate: Story<EditableProps> = args => (
-  <Editable {...args}>
-    <CustomEditableTextarea />
-  </Editable>
-);
+export const CustomTextarea = () => {
+  const [value, setValue] = useState('Add description');
+  return (
+    <Editable onChange={val => setValue(val)} value={value}>
+      <CustomEditableTextarea />
+    </Editable>
+  );
+};
 
 const CustomEditableInput = () => {
   const {
@@ -127,32 +135,11 @@ const CustomEditableInput = () => {
   );
 };
 
-const CustomInputTemplate: Story<EditableProps> = args => (
-  <Editable {...args}>
-    <CustomEditableInput />
-  </Editable>
-);
-
-export const Input = InputTemplate.bind({});
-
-Input.args = {
-  defaultValue: 'edit text',
-};
-
-export const Textarea = TextareaTemplate.bind({});
-
-Textarea.args = {
-  defaultValue: 'edit text',
-};
-
-export const CustomInput = CustomInputTemplate.bind({});
-
-CustomInput.args = {
-  defaultValue: 'Add description',
-};
-
-export const CustomTextarea = CustomTextareaTemplate.bind({});
-
-CustomTextarea.args = {
-  defaultValue: 'Add description',
+export const CustomInput = () => {
+  const [value, setValue] = useState('Add description');
+  return (
+    <Editable onChange={val => setValue(val)} value={value}>
+      <CustomEditableInput />
+    </Editable>
+  );
 };

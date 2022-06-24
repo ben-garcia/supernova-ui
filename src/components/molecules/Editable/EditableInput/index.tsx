@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { useEditable } from '../../../../hooks/use-editable';
-import { createClasses, isFunction, isString } from '../../../../utils';
+import {
+  createClasses,
+  isFunction,
+  isString,
+  validateDataProps,
+} from '../../../../utils';
 import './styles.scss';
 
 interface EditableInputProps {
@@ -11,9 +16,9 @@ interface EditableInputProps {
 /**
  * The component used to edit the previewed text by an input.
  */
-const EditableInput: React.FC<EditableInputProps> = () => {
+const EditableInput: React.FC<EditableInputProps> = props => {
+  const { className, ...rest } = props;
   const {
-    className,
     exitEditMode,
     isCustomEditable,
     isDisabled,
@@ -22,9 +27,9 @@ const EditableInput: React.FC<EditableInputProps> = () => {
     onCancel,
     onChange,
     onEdit,
+    onSubmit,
     placeholder,
     selectAllOnFocus,
-    setValue,
     submitOnBlur,
     value,
   } = useEditable();
@@ -33,13 +38,15 @@ const EditableInput: React.FC<EditableInputProps> = () => {
     [`${className}`]: isString(className),
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
     if (isFunction(onChange)) {
       onChange!(e.target.value);
     }
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      if (isFunction(onSubmit) && isString(value)) {
+        onSubmit!(value);
+      }
       exitEditMode();
     } else if (e.key === 'Escape' && submitOnBlur) {
       exitEditMode();
@@ -70,12 +77,20 @@ const EditableInput: React.FC<EditableInputProps> = () => {
 
   return (
     <input
+      {...validateDataProps(rest)}
       aria-disabled={isDisabled}
       className={classes}
       disabled={isDisabled}
       hidden={!isEditing || isDisabled}
       onBlur={
-        isCustomEditable ? () => setHasFocus(false) : () => exitEditMode()
+        isCustomEditable
+          ? () => setHasFocus(false)
+          : () => {
+              if (isFunction(onSubmit) && isString(value) && submitOnBlur) {
+                onSubmit!(value);
+              }
+              exitEditMode();
+            }
       }
       onChange={handleChange}
       onFocus={() => {

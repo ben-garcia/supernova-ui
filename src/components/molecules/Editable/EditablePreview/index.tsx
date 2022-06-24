@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useEditable } from '../../../../hooks/use-editable';
-import { createClasses, isString } from '../../../../utils';
+import { createClasses, isString, validateDataProps } from '../../../../utils';
 
 interface EditablePreviewProps {
   className?: string;
@@ -11,7 +11,7 @@ interface EditablePreviewProps {
  * The component that holds the preview content to be editable.
  */
 const EditablePreview: React.FC<EditablePreviewProps> = props => {
-  const { className } = props;
+  const { className, ...rest } = props;
   const {
     enterEditMode,
     inputRef,
@@ -28,6 +28,8 @@ const EditablePreview: React.FC<EditablePreviewProps> = props => {
   return (
     // eslint-disable-next-line
     <span
+      {...validateDataProps(rest)}
+      aria-disabled={isDisabled ?? undefined}
       className={classes}
       onFocus={() => {
         enterEditMode();
@@ -45,7 +47,7 @@ const EditablePreview: React.FC<EditablePreviewProps> = props => {
         }
         enterEditMode();
       }}
-      style={{ display: isEditing && !isDisabled ? 'none' : undefined }}
+      style={isEditing || isDisabled ? { display: 'none' } : undefined}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={isDisabled ? undefined : 0}
     >

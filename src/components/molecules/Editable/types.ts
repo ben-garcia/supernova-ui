@@ -1,10 +1,6 @@
 interface EditableProps {
   className?: string;
   /**
-   * The initial value shown in preview mode and when in edit mode.
-   */
-  defaultValue?: string;
-  /**
    * Flag used to check whether to trigger edit mode.
    *
    * @default false
@@ -22,11 +18,17 @@ interface EditableProps {
    *
    * @param nextValue updated value
    */
-  onChange?: (nextValue: string) => void;
+  onChange: (nextValue: string) => void;
   /**
    * Callback function called when in edit mode.
    */
   onEdit?: () => void;
+  /**
+   * Callback function called when exiting edit mode.
+   *
+   * @param val final value
+   */
+  onSubmit?: (val: string) => void;
   /**
    * The placeholder text for when the value is empty.
    */
@@ -38,12 +40,16 @@ interface EditableProps {
    */
   selectAllOnFocus?: boolean;
   /**
-   * Flag used to check whether to update the value and exit edit mode
+   * Flag used to check whether to update the value in exit edit mode
    * when the user removes focus.
    *
    * @default true
    */
   submitOnBlur?: boolean;
+  /**
+   * The value shown in preview mode and when in edit mode.
+   */
+  value: string;
 }
 
 export default EditableProps;

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { useEditable } from '../../../../hooks/use-editable';
-import { createClasses, isFunction, isString } from '../../../../utils';
+import {
+  createClasses,
+  isFunction,
+  isString,
+  validateDataProps,
+} from '../../../../utils';
 import './styles.scss';
 
 interface EditableTextareaProps {
@@ -11,9 +16,9 @@ interface EditableTextareaProps {
 /**
  * The component used to edit the previewed text in when a textarea is needed.
  */
-const EditableTextarea: React.FC<EditableTextareaProps> = () => {
+const EditableTextarea: React.FC<EditableTextareaProps> = props => {
+  const { className, ...rest } = props;
   const {
-    className,
     exitEditMode,
     isCustomEditable,
     isDisabled,
@@ -21,9 +26,9 @@ const EditableTextarea: React.FC<EditableTextareaProps> = () => {
     onCancel,
     onChange,
     onEdit,
+    onSubmit,
     placeholder,
     selectAllOnFocus,
-    setValue,
     submitOnBlur,
     textareaRef,
     value,
@@ -33,13 +38,15 @@ const EditableTextarea: React.FC<EditableTextareaProps> = () => {
     [`${className}`]: isString(className),
   });
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
     if (isFunction(onChange)) {
       onChange!(e.target.value);
     }
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Escape' && submitOnBlur) {
+      if (isFunction(onSubmit) && isString(value)) {
+        onSubmit!(value);
+      }
       exitEditMode();
       if (isFunction(onCancel) && isString(value)) {
         onCancel!(value as string);
@@ -68,12 +75,20 @@ const EditableTextarea: React.FC<EditableTextareaProps> = () => {
 
   return (
     <textarea
+      {...validateDataProps(rest)}
       aria-disabled={isDisabled}
       className={classes}
       disabled={isDisabled}
       hidden={!isEditing || isDisabled}
       onBlur={
-        isCustomEditable ? () => setHasFocus(false) : () => exitEditMode()
+        isCustomEditable
+          ? () => setHasFocus(false)
+          : () => {
+              if (isFunction(onSubmit) && isString(value)) {
+                onSubmit!(value);
+              }
+              exitEditMode();
+            }
       }
       onChange={handleChange}
       onFocus={() => {
