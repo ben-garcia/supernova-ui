@@ -1,4 +1,5 @@
 import { isFunction, isObject, isString } from './assertions';
+import validateDataProps from './validate-data-props';
 import {
   colors,
   objectToPropertiesArray,
@@ -28,4 +29,5 @@ export {
   responsify,
   shadows,
   sizes,
+  validateDataProps,
 };
