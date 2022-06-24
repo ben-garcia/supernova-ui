@@ -8,9 +8,9 @@ import { isFunction } from '../utils';
  * Hook that returns the EditableProvider props
  */
 const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
-  const { defaultValue, ...rest } = props;
+  const { value, ...rest } = props;
   const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState(defaultValue);
+  // const [valueState, setValue] = useState(defaultValue);
   const [isCustomEditable, setIsCustomEditableFunc] = useState(false);
 
   const exitEditMode = useCallback(() => setIsEditing(false), []);
@@ -26,7 +26,6 @@ const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
     isCustomEditable,
     isEditing,
     setIsEditing,
-    setValue,
     setIsCustomEditable,
     value,
     ...rest,
