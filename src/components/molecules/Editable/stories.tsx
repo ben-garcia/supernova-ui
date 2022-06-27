@@ -37,6 +37,17 @@ export const Textarea = () => {
     </div>
   );
 };
+export const IsAutoResizeTextarea = () => {
+  const [value, setValue] = useState('edit');
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '5px' }}>
+      <Editable onChange={val => setValue(val)} value={value}>
+        <EditablePreview />
+        <EditableTextarea isAutoResize maxLength={500} rows={1} />
+      </Editable>
+    </div>
+  );
+};
 const CustomEditableTextarea = () => {
   const {
     isEditing,

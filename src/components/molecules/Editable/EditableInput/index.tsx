@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEditable } from '../../../../hooks/use-editable';
 import {
@@ -10,6 +10,9 @@ import {
 import './styles.scss';
 
 interface EditableInputProps {
+  /**
+   * Class to add.
+   */
   className?: string;
 }
 
@@ -37,24 +40,27 @@ const EditableInput: React.FC<EditableInputProps> = props => {
   const classes = createClasses('snui-editable__input', {
     [`${className}`]: isString(className),
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (isFunction(onChange)) {
       onChange!(e.target.value);
     }
-  };
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (isFunction(onSubmit) && isString(value)) {
-        onSubmit!(value);
+  }, []);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        if (isFunction(onSubmit) && isString(value)) {
+          onSubmit!(value);
+        }
+        exitEditMode();
+      } else if (e.key === 'Escape' && submitOnBlur) {
+        exitEditMode();
+        if (isFunction(onCancel) && isString(value)) {
+          onCancel!(value as string);
+        }
       }
-      exitEditMode();
-    } else if (e.key === 'Escape' && submitOnBlur) {
-      exitEditMode();
-      if (isFunction(onCancel) && isString(value)) {
-        onCancel!(value as string);
-      }
-    }
-  };
+    },
+    [value]
+  );
 
   useEffect(() => {
     let handleClick: any;
