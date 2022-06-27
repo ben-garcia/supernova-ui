@@ -1,4 +1,4 @@
-import { isFunction, isObject, isString } from './assertions';
+import { isFunction, isNumber, isObject, isString } from './assertions';
 import validateDataProps from './validate-data-props';
 import {
   colors,
@@ -22,6 +22,7 @@ export {
   deepMergify,
   inputIsChecked,
   isFunction,
+  isNumber,
   isObject,
   isString,
   objectToPropertiesArray,
