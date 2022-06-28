@@ -43,7 +43,7 @@ const Text: React.FC<TextProps> = props => {
       backgroundColor &&
       backgroundColor !== '' &&
       colors.includes(backgroundColor),
-    [`snui-color-$color}`]: isString(color) && colors.includes(color),
+    [`snui-color-${color}`]: isString(color) && colors.includes(color),
     [`snui-font-${font}`]:
       (font && font === 'heading') || font === 'body' || font === 'mono',
     'snui-font-mono': tag === 'kbd' || tag === 'samp',

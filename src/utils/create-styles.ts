@@ -359,6 +359,8 @@ export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
     } else if (property === 'color') {
       if (color && !colors.includes(color as string)) {
         styles.color = value as string;
+      } else if (color && (theme as any).colors[value]) {
+        styles.color = (theme as any).colors[value];
       }
     } else if (property === 'font') {
       if (font && font !== 'heading' && font !== 'body' && font !== 'mono') {

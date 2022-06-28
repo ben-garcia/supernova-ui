@@ -41,7 +41,7 @@ const Paragraph: React.FC<ParagraphProps> = props => {
     [`snui-text-${align}`]:
       align === 'center' || align === 'left' || align === 'right',
     [`snui-color-${backgroundColor}`]: backgroundColor !== '',
-    [`snui-color-$color}`]: isString(color) && colors.includes(color),
+    [`snui-color-${color}`]: isString(color) && colors.includes(color),
     [`snui-font-${font}`]:
       (font && font === 'heading') || font === 'body' || font === 'mono',
     [`snui-text-${fontSize}`]:

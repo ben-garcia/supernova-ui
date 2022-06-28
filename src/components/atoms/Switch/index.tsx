@@ -83,7 +83,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
         isString(boxShadow) && shadows.includes(boxShadow),
-      [`snui-color-$color}`]: isString(color) && colors.includes(color),
+      [`snui-color-${color}`]: isString(color) && colors.includes(color),
       [`snui-font-${font}`]:
         (font && font === 'heading') || font === 'body' || font === 'mono',
       [`snui-text-${fontSize}`]:

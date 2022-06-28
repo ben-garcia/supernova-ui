@@ -37,7 +37,7 @@ const Badge: React.FC<BadgeProps> = props => {
   const breakpoint = useBreakpoint();
   const classes = createClasses('snui-badge', {
     [`${className}`]: isString(className),
-    [`snui-color-$color}`]: isString(color) && colors.includes(color),
+    [`snui-color-${color}`]: isString(color) && colors.includes(color),
     [`snui-font-${font}`]:
       (font && font === 'heading') || font === 'body' || font === 'mono',
     [`snui-text-${fontSize}`]:
