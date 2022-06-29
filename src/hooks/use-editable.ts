@@ -10,7 +10,6 @@ import { isFunction } from '../utils';
 const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
   const { value, ...rest } = props;
   const [isEditing, setIsEditing] = useState(false);
-  // const [valueState, setValue] = useState(defaultValue);
   const [isCustomEditable, setIsCustomEditableFunc] = useState(false);
 
   const exitEditMode = useCallback(() => setIsEditing(false), []);
@@ -51,7 +50,15 @@ const useEditable = () => {
  * Hook that returns functions to help create a custom Editable.
  */
 const useEditableControls = () => {
-  const { exitEditMode, isEditing, setIsCustomEditable } = useEditable();
+  const {
+    enterEditMode,
+    exitEditMode,
+    isEditing,
+    onCancel,
+    onSubmit,
+    setIsCustomEditable,
+    value,
+  } = useEditable();
 
   setIsCustomEditable();
   /**
@@ -61,6 +68,10 @@ const useEditableControls = () => {
    */
   const getCancelButtonProps = useCallback((callback?: () => void) => {
     const onClick = () => {
+      if (isFunction(onCancel)) {
+        onCancel!(value.slice(0, value.length - 1));
+      }
+
       if (isFunction(callback)) {
         callback!();
       }
@@ -78,6 +89,10 @@ const useEditableControls = () => {
    */
   const getSubmitButtonProps = useCallback((callback?: () => void) => {
     const onClick = () => {
+      if (isFunction(onSubmit)) {
+        onSubmit!(value);
+      }
+
       if (isFunction(callback)) {
         callback!();
       }
@@ -90,6 +105,8 @@ const useEditableControls = () => {
   }, []);
 
   return {
+    enterEditMode,
+    exitEditMode,
     getCancelButtonProps,
     getSubmitButtonProps,
     isEditing,
