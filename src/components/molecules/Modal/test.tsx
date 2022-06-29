@@ -3,6 +3,7 @@ import React from 'react';
 
 import Modal from '.';
 import ModalBody from './ModalBody';
+import ModalButton from './ModalButton';
 import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import {
@@ -27,6 +28,7 @@ describe('<Modal />', () => {
       </Modal>
     );
   });
+
   it('should contain the proper aria attributes', () => {
     render(
       <Modal isOpen onClose={jest.fn()}>
@@ -377,6 +379,65 @@ describe('<Modal />', () => {
         // return focus to the last element
         expect(modalInput2).not.toHaveFocus();
       });
+    });
+  });
+
+  describe('with ModalButton', () => {
+    it('should call modal button onclick functions', async () => {
+      const mockCancel = jest.fn();
+      const mockSubmit = jest.fn();
+
+      render(
+        <Modal isOpen onClose={() => {}}>
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>
+            <ModalButton aria-label="cancel" onClick={mockCancel}>
+              Cancel
+            </ModalButton>
+            <ModalButton aria-label="save" onClick={mockSubmit}>
+              Save
+            </ModalButton>
+          </ModalFooter>
+        </Modal>
+      );
+      const cancelButton = screen.getByLabelText('cancel');
+      const saveButton = screen.getByLabelText('save');
+
+      fireEvent.click(cancelButton);
+      await waitFor(() => expect(mockCancel).toHaveBeenCalledTimes(1));
+
+      fireEvent.click(saveButton);
+      await waitFor(() => expect(mockSubmit).toHaveBeenCalledTimes(1));
+    });
+
+    it('should not call the modal onClose function', async () => {
+      const mockClose = jest.fn();
+      const mockCancel = jest.fn();
+      const mockSubmit = jest.fn();
+
+      render(
+        <Modal isOpen onClose={mockClose}>
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>
+            <ModalButton aria-label="cancel" onClick={mockCancel}>
+              Cancel
+            </ModalButton>
+            <ModalButton aria-label="save" onClick={mockSubmit}>
+              Save
+            </ModalButton>
+          </ModalFooter>
+        </Modal>
+      );
+      const cancelButton = screen.getByLabelText('cancel');
+      const saveButton = screen.getByLabelText('save');
+
+      fireEvent.click(cancelButton);
+      await waitFor(() => expect(mockClose).not.toHaveBeenCalled());
+
+      fireEvent.click(saveButton);
+      await waitFor(() => expect(mockClose).not.toHaveBeenCalled());
     });
   });
 });

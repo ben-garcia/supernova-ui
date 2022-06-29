@@ -60,6 +60,8 @@ const Modal: React.FC<ModalProps> = props => {
   } = props;
   const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const enterExitMode = useCallback(() => setIsExiting(true), []);
+  const leaveExitMode = useCallback(() => setIsExiting(false), []);
   const handleOnClose = useCallback(() => {
     // trigger the scale out animation
     setIsExiting(true);
@@ -73,7 +75,9 @@ const Modal: React.FC<ModalProps> = props => {
   const contextValue = useMemo(
     () => ({
       ...context,
+      enterExitMode,
       onClose: handleOnClose,
+      leaveExitMode,
     }),
     [context]
   );

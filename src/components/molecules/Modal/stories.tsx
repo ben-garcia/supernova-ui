@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
 import Modal from '.';
+import ModalButton from './ModalButton';
 import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import ModalBody from './ModalBody';
@@ -17,11 +18,15 @@ export default {
 export const Basic = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
-
   return (
     <>
       <div>
-        <Button onClick={() => setIsOpen(true)} margin="0 sm">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          margin="0 sm"
+        >
           Open
         </Button>
       </div>
@@ -29,12 +34,14 @@ export const Basic = () => {
         <ModalHeader>Modal Title</ModalHeader>
         <ModalBody>This is a modal</ModalBody>
         <ModalFooter>
-          <>
-            <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
-              Cancel
-            </Button>
-            <Button onClick={handleClose}>Save</Button>
-          </>
+          <ModalButton
+            onClick={() => setIsOpen(false)}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </ModalButton>
+          <ModalButton onClick={() => setIsOpen(false)}>Save</ModalButton>
         </ModalFooter>
       </Modal>
     </>
@@ -84,10 +91,14 @@ export const InitialAndFinalRefs = () => {
         </ModalBody>
         <ModalFooter>
           <>
-            <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
+            <ModalButton
+              onClick={handleClose}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
               Cancel
-            </Button>
-            <Button onClick={handleClose}>Signup</Button>
+            </ModalButton>
+            <ModalButton onClick={handleClose}>Signup</ModalButton>
           </>
         </ModalFooter>
       </Modal>
@@ -178,12 +189,14 @@ export const Overflow = () => {
           </>
         </ModalBody>
         <ModalFooter>
-          <>
-            <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
-              Cancel
-            </Button>
-            <Button onClick={handleClose}>Save</Button>
-          </>
+          <ModalButton
+            onClick={handleClose}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </ModalButton>
+          <ModalButton onClick={handleClose}>Save</ModalButton>
         </ModalFooter>
       </Modal>
     </>
@@ -438,16 +451,16 @@ export const Sizes = () => {
             </>
           </ModalBody>
           <ModalFooter>
-            <>
-              <Button
-                onClick={() => setIsXxlModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
-              <Button onClick={() => setIsXxlModalOpen(false)}>Save</Button>
-            </>
+            <ModalButton
+              onClick={() => setIsXxlModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </ModalButton>
+            <ModalButton onClick={() => setIsXxlModalOpen(false)}>
+              Save
+            </ModalButton>
           </ModalFooter>
         </Modal>
       </div>

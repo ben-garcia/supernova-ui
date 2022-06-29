@@ -6,6 +6,7 @@ import { ModalHeaderProps } from '../../components/molecules/Modal/ModalHeader';
 
 export interface ModalContextProps {
   closeOnOverlayClick?: boolean;
+  enterExitMode?: () => void;
   finalFocusRef?: RefObject<HTMLElement> | null;
   getModalBodyProps: (props: Omit<ModalBodyProps, 'children'>) => void;
   getModalHeaderProps: (props: Omit<ModalHeaderProps, 'children'>) => void;
@@ -13,6 +14,7 @@ export interface ModalContextProps {
   id?: string;
   initialFocusRef?: RefObject<HTMLElement> | null;
   isOpen: boolean;
+  leaveExitMode?: () => void;
   onClose: () => void;
   trapFocus?: boolean;
 }
