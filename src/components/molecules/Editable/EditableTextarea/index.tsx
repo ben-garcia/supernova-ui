@@ -15,14 +15,30 @@ interface EditableTextareaProps {
    * Class to include.
    */
   className?: string;
+  /**
+   * textarea cols attribue.
+   */
   cols?: number;
   height?: string;
   /**
    * Flag to enable auto resize.
    */
   isAutoResize?: boolean;
+  /**
+   * textarea maxlength attribute.
+   */
   maxLength?: number;
   onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  /**
+   * Callback function to call when a click
+   * outside <EditableTextarea> component.
+   *
+   * @param val current value.
+   */
+  onClickOutside?: (val: string) => void;
+  /**
+   * textarea rows attribute.
+   */
   rows?: number;
   width?: string;
 }
@@ -37,6 +53,7 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
     height,
     isAutoResize = false,
     maxLength,
+    onClickOutside,
     onKeyDown,
     rows,
     width,
@@ -81,6 +98,7 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
         }
 
         exitEditMode();
+
         if (isFunction(onCancel) && isString(value)) {
           onCancel!(value as string);
         }
@@ -104,7 +122,10 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
     let handleClick: any;
     if (isCustomEditable) {
       handleClick = (e: React.KeyboardEvent) => {
-        if (e.target !== textareaRef!.current) {
+        if (e.target !== textareaRef?.current) {
+          if (isFunction(onClickOutside) && textareaRef?.current) {
+            onClickOutside!(textareaRef.current.value);
+          }
           exitEditMode();
         }
       };
@@ -152,7 +173,7 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
       onKeyUp={isAutoResize ? handleKeyUp : undefined}
       placeholder={placeholder}
       ref={textareaRef}
-      rows={isNumber(rows) && !isAutoResize ? rows : 1}
+      rows={isNumber(rows) ? rows : undefined}
       style={{
         boxShadow:
           isEditing && !isDisabled && hasFocus
