@@ -1,4 +1,3 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import { Meta } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
@@ -17,11 +16,7 @@ export default {
 
 export const Basic = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => {
-    console.log('handle close');
-    setIsOpen(false);
-  };
-
+  const handleClose = () => setIsOpen(false);
   return (
     <>
       <div>
@@ -35,24 +30,14 @@ export const Basic = () => {
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
           <DrawerButton
-            onClick={() => {
-              console.log('cancel');
-              setIsOpen(false);
-            }}
+            onClick={() => setIsOpen(false)}
             margin="0 sm 0 0"
             variant="outline"
           >
             Cancel
           </DrawerButton>
 
-          <DrawerButton
-            onClick={() => {
-              console.log('save');
-              setIsOpen(false);
-            }}
-          >
-            Save
-          </DrawerButton>
+          <DrawerButton onClick={() => setIsOpen(false)}>Save</DrawerButton>
         </DrawerFooter>
       </Drawer>
     </>
