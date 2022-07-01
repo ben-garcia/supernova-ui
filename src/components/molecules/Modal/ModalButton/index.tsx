@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 
 import { Button } from '../../../atoms';
 import { ButtonProps } from '../../../atoms/Button/types';
@@ -10,7 +10,7 @@ type ModalButtonProps = ButtonProps;
 /**
  * The button for the Modal component.
  */
-const ModalButton: React.FC<ModalButtonProps> = props => {
+const ModalButton = forwardRef((props: ModalButtonProps, ref: any) => {
   const { children, className, onClick, ...rest } = props;
 
   const { enterExitMode, leaveExitMode } = useModal();
@@ -29,10 +29,10 @@ const ModalButton: React.FC<ModalButtonProps> = props => {
   });
 
   return (
-    <Button onClick={handleClick} {...rest} className={classes}>
+    <Button onClick={handleClick} ref={ref} {...rest} className={classes}>
       {children}
     </Button>
   );
-};
+});
 
 export default ModalButton;

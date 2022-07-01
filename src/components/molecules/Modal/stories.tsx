@@ -90,16 +90,14 @@ export const InitialAndFinalRefs = () => {
           </form>
         </ModalBody>
         <ModalFooter>
-          <>
-            <ModalButton
-              onClick={handleClose}
-              margin="0 sm 0 0"
-              variant="outline"
-            >
-              Cancel
-            </ModalButton>
-            <ModalButton onClick={handleClose}>Signup</ModalButton>
-          </>
+          <ModalButton
+            onClick={handleClose}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </ModalButton>
+          <ModalButton onClick={handleClose}>Signup</ModalButton>
         </ModalFooter>
       </Modal>
     </>
