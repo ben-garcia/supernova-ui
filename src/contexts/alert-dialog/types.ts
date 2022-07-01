@@ -6,6 +6,7 @@ import { AlertDialogHeaderProps } from '../../components/molecules/AlertDialog/A
 
 export interface AlertDialogContextProps {
   closeOnOverlayClick?: boolean;
+  enterExitMode?: () => void;
   finalFocusRef?: RefObject<HTMLElement> | null;
   getAlertDialogBodyProps: (
     props: Omit<AlertDialogBodyProps, 'children'>
@@ -19,6 +20,7 @@ export interface AlertDialogContextProps {
   id?: string;
   isOpen: boolean;
   leastDestructiveRef?: RefObject<HTMLElement> | null;
+  leaveExitMode?: () => void;
   onClose: () => void;
   trapFocus?: boolean;
 }

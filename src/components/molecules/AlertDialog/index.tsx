@@ -60,6 +60,8 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
   } = props;
   const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const enterExitMode = useCallback(() => setIsExiting(true), []);
+  const leaveExitMode = useCallback(() => setIsExiting(false), []);
   const handleOnClose = useCallback(() => {
     // trigger the scale out animation
     setIsExiting(true);
@@ -74,7 +76,9 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
   const contextValue = useMemo(
     () => ({
       ...context,
+      enterExitMode,
       onClose: handleOnClose,
+      leaveExitMode,
     }),
     [context]
   );
@@ -273,8 +277,8 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
             style={styles}
           >
             <Button
-              aria-label="Close the modal"
-              className="snui-modal__close-button"
+              aria-label="Close the alert dialog"
+              className="snui-alert-dialog__close-button"
               hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
               onClick={handleOnClose}
               variant="outline"

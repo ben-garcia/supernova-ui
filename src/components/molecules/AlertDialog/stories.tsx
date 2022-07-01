@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 
 import AlertDialog from '.';
 import AlertDialogBody from './AlertDialogBody';
+import AlertDialogButton from './AlertDialogButton';
 import AlertDialogFooter from './AlertDialogFooter';
 import AlertDialogHeader from './AlertDialogHeader';
 import Button from '../../atoms/Button';
@@ -33,20 +34,22 @@ export const Basic = () => {
         <AlertDialogHeader>Delete your account</AlertDialogHeader>
         <AlertDialogBody>Are you sure?</AlertDialogBody>
         <AlertDialogFooter>
-          <>
-            <Button
-              onClick={() => setIsOpen(false)}
-              margin="0 sm 0 0"
-              ref={cancelButtonRef}
-              variant="outline"
-            >
-              Cancel
-            </Button>
+          <AlertDialogButton
+            onClick={() => setIsOpen(false)}
+            margin="0 sm 0 0"
+            ref={cancelButtonRef}
+            variant="outline"
+          >
+            Cancel
+          </AlertDialogButton>
 
-            <Button backgroundColor="error600" onClick={() => setIsOpen(false)}>
-              Delete
-            </Button>
-          </>
+          <AlertDialogButton
+            backgroundColor="error500"
+            hoverBackgroundColor="error700"
+            onClick={() => setIsOpen(false)}
+          >
+            Delete
+          </AlertDialogButton>
         </AlertDialogFooter>
       </AlertDialog>
     </>
@@ -81,20 +84,22 @@ export const FinalRef = () => {
         <AlertDialogHeader>Delete your account</AlertDialogHeader>
         <AlertDialogBody>Are you sure?</AlertDialogBody>
         <AlertDialogFooter>
-          <>
-            <Button
-              onClick={handleClose}
-              margin="0 sm 0 0"
-              ref={cancelButtonRef}
-              variant="outline"
-            >
-              Cancel
-            </Button>
+          <AlertDialogButton
+            onClick={handleClose}
+            margin="0 sm 0 0"
+            ref={cancelButtonRef}
+            variant="outline"
+          >
+            Cancel
+          </AlertDialogButton>
 
-            <Button backgroundColor="error600" onClick={handleClose}>
-              Delete
-            </Button>
-          </>
+          <AlertDialogButton
+            backgroundColor="error500"
+            hoverBackgroundColor="error700"
+            onClick={handleClose}
+          >
+            Delete
+          </AlertDialogButton>
         </AlertDialogFooter>
       </AlertDialog>
     </>
@@ -131,23 +136,22 @@ export const Sizes = () => {
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
           <AlertDialogBody>Are you sure?</AlertDialogBody>
           <AlertDialogFooter>
-            <>
-              <Button
-                onClick={() => setIsXsAlertDialogOpen(false)}
-                margin="0 sm 0 0"
-                ref={xsCancelButtonRef}
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <AlertDialogButton
+              onClick={() => setIsXsAlertDialogOpen(false)}
+              margin="0 sm 0 0"
+              ref={xsCancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-              <Button
-                backgroundColor="error600"
-                onClick={() => setIsXsAlertDialogOpen(false)}
-              >
-                Delete
-              </Button>
-            </>
+            <AlertDialogButton
+              backgroundColor="error500"
+              hoverBackgroundColor="error700"
+              onClick={() => setIsXsAlertDialogOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
           </AlertDialogFooter>
         </AlertDialog>
       </div>
@@ -166,23 +170,22 @@ export const Sizes = () => {
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
           <AlertDialogBody>Are you sure?</AlertDialogBody>
           <AlertDialogFooter>
-            <>
-              <Button
-                onClick={() => setIsSmAlertDialogOpen(false)}
-                margin="0 sm 0 0"
-                ref={smCancelButtonRef}
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <AlertDialogButton
+              onClick={() => setIsSmAlertDialogOpen(false)}
+              margin="0 sm 0 0"
+              ref={smCancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-              <Button
-                backgroundColor="error600"
-                onClick={() => setIsSmAlertDialogOpen(false)}
-              >
-                Delete
-              </Button>
-            </>
+            <AlertDialogButton
+              backgroundColor="error500"
+              hoverBackgroundColor="error700"
+              onClick={() => setIsSmAlertDialogOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
           </AlertDialogFooter>
         </AlertDialog>
       </div>
@@ -201,23 +204,22 @@ export const Sizes = () => {
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
           <AlertDialogBody>Are you sure?</AlertDialogBody>
           <AlertDialogFooter>
-            <>
-              <Button
-                onClick={() => setIsMdAlertDialogOpen(false)}
-                margin="0 sm 0 0"
-                ref={mdCancelButtonRef}
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <AlertDialogButton
+              onClick={() => setIsMdAlertDialogOpen(false)}
+              margin="0 sm 0 0"
+              ref={mdCancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-              <Button
-                backgroundColor="error600"
-                onClick={() => setIsMdAlertDialogOpen(false)}
-              >
-                Delete
-              </Button>
-            </>
+            <AlertDialogButton
+              backgroundColor="error500"
+              hoverBackgroundColor="error700"
+              onClick={() => setIsMdAlertDialogOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
           </AlertDialogFooter>
         </AlertDialog>
       </div>
@@ -236,23 +238,22 @@ export const Sizes = () => {
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
           <AlertDialogBody>Are you sure?</AlertDialogBody>
           <AlertDialogFooter>
-            <>
-              <Button
-                onClick={() => setIsLgAlertDialogOpen(false)}
-                margin="0 sm 0 0"
-                ref={lgCancelButtonRef}
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <AlertDialogButton
+              onClick={() => setIsLgAlertDialogOpen(false)}
+              margin="0 sm 0 0"
+              ref={lgCancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-              <Button
-                backgroundColor="error600"
-                onClick={() => setIsLgAlertDialogOpen(false)}
-              >
-                Delete
-              </Button>
-            </>
+            <AlertDialogButton
+              backgroundColor="error500"
+              hoverBackgroundColor="error700"
+              onClick={() => setIsLgAlertDialogOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
           </AlertDialogFooter>
         </AlertDialog>
       </div>
@@ -271,23 +272,22 @@ export const Sizes = () => {
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
           <AlertDialogBody>Are you sure?</AlertDialogBody>
           <AlertDialogFooter>
-            <>
-              <Button
-                onClick={() => setIsXlAlertDialogOpen(false)}
-                margin="0 sm 0 0"
-                ref={xlCancelButtonRef}
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <AlertDialogButton
+              onClick={() => setIsXlAlertDialogOpen(false)}
+              margin="0 sm 0 0"
+              ref={xlCancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-              <Button
-                backgroundColor="error600"
-                onClick={() => setIsXlAlertDialogOpen(false)}
-              >
-                Delete
-              </Button>
-            </>
+            <AlertDialogButton
+              backgroundColor="error500"
+              hoverBackgroundColor="error700"
+              onClick={() => setIsXlAlertDialogOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
           </AlertDialogFooter>
         </AlertDialog>
       </div>
@@ -306,23 +306,22 @@ export const Sizes = () => {
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
           <AlertDialogBody>Are you sure?</AlertDialogBody>
           <AlertDialogFooter>
-            <>
-              <Button
-                onClick={() => setIsXxlAlertDialogOpen(false)}
-                margin="0 sm 0 0"
-                ref={xxlCancelButtonRef}
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <AlertDialogButton
+              onClick={() => setIsXxlAlertDialogOpen(false)}
+              margin="0 sm 0 0"
+              ref={xxlCancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-              <Button
-                backgroundColor="error600"
-                onClick={() => setIsXxlAlertDialogOpen(false)}
-              >
-                Delete
-              </Button>
-            </>
+            <AlertDialogButton
+              backgroundColor="error500"
+              hoverBackgroundColor="error700"
+              onClick={() => setIsXxlAlertDialogOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
           </AlertDialogFooter>
         </AlertDialog>
       </div>

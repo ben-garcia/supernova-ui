@@ -4,6 +4,7 @@ import React from 'react';
 
 import AlertDialog from '.';
 import AlertDialogBody from './AlertDialogBody';
+import AlertDialogButton from './AlertDialogButton';
 import AlertDialogFooter from './AlertDialogFooter';
 import AlertDialogHeader from './AlertDialogHeader';
 import {
@@ -108,7 +109,7 @@ describe('<AlertDialog />', () => {
     };
 
     const { getByLabelText } = render(<ModalTest />);
-    const closeButton = getByLabelText('Close the modal');
+    const closeButton = getByLabelText('Close the alert dialog');
 
     fireEvent.click(closeButton);
 
@@ -243,88 +244,99 @@ describe('<AlertDialog />', () => {
     });
   });
 
-  it('should give focus to the leastDestructiveRef by default', () => {
-    const ModalTest = () => {
-      const leastDestructiveRef = React.useRef(null);
+  describe('focus', () => {
+    it('should give focus to the leastDestructiveRef by default', () => {
+      const ModalTest = () => {
+        const leastDestructiveRef = React.useRef(null);
 
-      return (
-        <AlertDialog
-          leastDestructiveRef={leastDestructiveRef}
-          isOpen
-          onClose={jest.fn()}
-        >
-          <AlertDialogHeader>header</AlertDialogHeader>
-          <AlertDialogBody>body</AlertDialogBody>
-          <AlertDialogFooter>
-            <button data-testid="cancel-button" ref={leastDestructiveRef}>
-              cancel
-            </button>
-
-            <button data-testid="delete-button">delete</button>
-          </AlertDialogFooter>
-        </AlertDialog>
-      );
-    };
-
-    const { getByTestId } = render(<ModalTest />);
-    const cancelButton = getByTestId('cancel-button');
-
-    expect(cancelButton).toHaveFocus();
-  });
-
-  it('should return focus to the finalFocusRef element', async () => {
-    const ModalTest = () => {
-      const [isOpen, setIsOpen] = React.useState(false);
-      const finalFocusRef = React.useRef(null);
-      const leastDestructiveRef = React.useRef(null);
-
-      return (
-        <>
-          <button
-            type="button"
-            data-testid="open-button"
-            onClick={() => setIsOpen(true)}
-          >
-            Open
-          </button>
-
-          <button data-testid="final-button" ref={finalFocusRef} type="button">
-            Receive focus
-          </button>
-
+        return (
           <AlertDialog
             leastDestructiveRef={leastDestructiveRef}
-            finalFocusRef={finalFocusRef}
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
+            isOpen
+            onClose={jest.fn()}
           >
             <AlertDialogHeader>header</AlertDialogHeader>
             <AlertDialogBody>body</AlertDialogBody>
             <AlertDialogFooter>
-              <button data-testid="cancel-button" ref={leastDestructiveRef}>
+              <AlertDialogButton
+                data-testid="cancel-button"
+                ref={leastDestructiveRef}
+              >
                 cancel
-              </button>
-              <button data-testid="delete-button">delete</button>
+              </AlertDialogButton>
+
+              <AlertDialogButton data-testid="delete-button">
+                delete
+              </AlertDialogButton>
             </AlertDialogFooter>
           </AlertDialog>
-        </>
-      );
-    };
+        );
+      };
 
-    const { getByLabelText, getByTestId } = render(<ModalTest />);
-    const openButton = getByTestId('open-button');
-    const finalButton = getByTestId('final-button');
+      const { getByText } = render(<ModalTest />);
+      const cancelButton = getByText('cancel');
 
-    // click the button
-    fireEvent.click(openButton);
+      expect(cancelButton).toHaveFocus();
+    });
 
-    const closeButton = getByLabelText('Close the modal');
+    it('should return focus to the finalFocusRef element', async () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const finalFocusRef = React.useRef(null);
+        const leastDestructiveRef = React.useRef(null);
 
-    fireEvent.click(closeButton);
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
 
-    // final button should be focused when Modal has closed
-    // await waitFor(() => expect(finalButton).toHaveFocus());
-    await waitFor(() => expect(finalButton).toHaveFocus());
+            <button
+              data-testid="final-button"
+              ref={finalFocusRef}
+              type="button"
+            >
+              Receive focus
+            </button>
+
+            <AlertDialog
+              leastDestructiveRef={leastDestructiveRef}
+              finalFocusRef={finalFocusRef}
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+            >
+              <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialog>
+          </>
+        );
+      };
+
+      const { getByLabelText, getByTestId } = render(<ModalTest />);
+      const openButton = getByTestId('open-button');
+      const finalButton = getByTestId('final-button');
+
+      // click the button
+      fireEvent.click(openButton);
+
+      const closeButton = getByLabelText('Close the alert dialog');
+
+      fireEvent.click(closeButton);
+
+      // final button should be focused when Modal has closed
+      // await waitFor(() => expect(finalButton).toHaveFocus());
+      await waitFor(() => expect(finalButton).toHaveFocus());
+    });
   });
 
   describe('keyboard navigation', () => {
@@ -354,7 +366,7 @@ describe('<AlertDialog />', () => {
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
-        const closeButton = getByLabelText('Close the modal');
+        const closeButton = getByLabelText('Close the alert dialog');
 
         expect(cancelButton).toHaveFocus();
 
@@ -391,7 +403,7 @@ describe('<AlertDialog />', () => {
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
-        const closeButton = getByLabelText('Close the modal');
+        const closeButton = getByLabelText('Close the alert dialog');
 
         expect(cancelButton).toHaveFocus();
 
@@ -432,7 +444,7 @@ describe('<AlertDialog />', () => {
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
-        const closeButton = getByLabelText('Close the modal');
+        const closeButton = getByLabelText('Close the alert dialog');
 
         expect(cancelButton).toHaveFocus();
 
@@ -470,7 +482,7 @@ describe('<AlertDialog />', () => {
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
-        const closeButton = getByLabelText('Close the modal');
+        const closeButton = getByLabelText('Close the alert dialog');
 
         expect(cancelButton).toHaveFocus();
 
@@ -484,6 +496,82 @@ describe('<AlertDialog />', () => {
         expect(closeButton).not.toHaveFocus();
         expect(cancelButton).not.toHaveFocus();
       });
+    });
+  });
+
+  describe('with AlertDialogButton', () => {
+    it('should call modal button onclick functions', async () => {
+      const mockCancel = jest.fn();
+      const mockSubmit = jest.fn();
+      const Test = () => {
+        const leastDestructiveRef = React.useRef(null);
+        return (
+          <AlertDialog
+            leastDestructiveRef={leastDestructiveRef}
+            isOpen
+            onClose={() => {}}
+          >
+            <AlertDialogHeader>Testing</AlertDialogHeader>
+            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialogFooter>
+              <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
+                Cancel
+              </AlertDialogButton>
+              <AlertDialogButton aria-label="save" onClick={mockSubmit}>
+                Save
+              </AlertDialogButton>
+            </AlertDialogFooter>
+          </AlertDialog>
+        );
+      };
+
+      const { getByText } = render(<Test />);
+      const cancelButton = getByText('Cancel');
+      const saveButton = getByText('Save');
+
+      fireEvent.click(cancelButton);
+      await waitFor(() => expect(mockCancel).toHaveBeenCalledTimes(1));
+
+      fireEvent.click(saveButton);
+      await waitFor(() => expect(mockSubmit).toHaveBeenCalledTimes(1));
+    });
+
+    it('should not call the modal onClose function', async () => {
+      const mockClose = jest.fn();
+      const mockCancel = jest.fn();
+      const mockSubmit = jest.fn();
+      const Test = () => {
+        const leastDestructiveRef = React.useRef(null);
+        return (
+          <AlertDialog
+            leastDestructiveRef={leastDestructiveRef}
+            isOpen
+            onClose={mockClose}
+          >
+            <AlertDialogHeader>Testing</AlertDialogHeader>
+            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialogFooter>
+              <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
+                Cancel
+              </AlertDialogButton>
+              <AlertDialogButton aria-label="save" onClick={mockSubmit}>
+                Save
+              </AlertDialogButton>
+            </AlertDialogFooter>
+          </AlertDialog>
+        );
+      };
+
+      const { getByText } = render(<Test />);
+
+      const cancelButton = getByText('Cancel');
+      const saveButton = getByText('Save');
+
+      fireEvent.click(cancelButton);
+      await waitFor(() => expect(mockClose).not.toHaveBeenCalled());
+
+      fireEvent.click(saveButton);
+      await waitFor(() => expect(mockClose).not.toHaveBeenCalled());
     });
   });
 });
