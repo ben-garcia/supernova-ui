@@ -1,4 +1,3 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
 import Modal from '.';

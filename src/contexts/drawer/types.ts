@@ -6,6 +6,7 @@ import { DrawerHeaderProps } from '../../components/molecules/Drawer/DrawerHeade
 
 export interface DrawerContextProps {
   closeOnOverlayClick?: boolean;
+  enterExitMode?: () => void;
   finalFocusRef?: RefObject<HTMLElement> | null;
   getDrawerBodyProps: (props: Omit<DrawerBodyProps, 'children'>) => void;
   getDrawerFooterProps: (props: Omit<DrawerFooterProps, 'children'>) => void;
@@ -13,6 +14,7 @@ export interface DrawerContextProps {
   id?: string;
   initialFocusRef?: RefObject<HTMLElement> | null;
   isOpen: boolean;
+  leaveExitMode?: () => void;
   onClose: () => void;
   trapFocus?: boolean;
 }

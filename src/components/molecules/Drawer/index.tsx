@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import { Button, CloseIcon } from '../../atoms';
@@ -54,6 +60,9 @@ const Drawer: React.FC<DrawerProps> = props => {
     ...rest
   } = props;
   const [mounted, setMounted] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const enterExitMode = useCallback(() => setIsExiting(true), []);
+  const leaveExitMode = useCallback(() => setIsExiting(false), []);
   const handleOnClose = React.useCallback(() => {
     // trigger the slide out animation
     setIsExiting(true);
@@ -63,12 +72,13 @@ const Drawer: React.FC<DrawerProps> = props => {
       onClose();
     }, 300);
   }, []);
-  const [isExiting, setIsExiting] = useState(false);
   const context = useDrawerProvider(props);
   const contextValue = useMemo(
     () => ({
       ...context,
+      enterExitMode,
       onClose: handleOnClose,
+      leaveExitMode,
     }),
     [context]
   );

@@ -1,8 +1,8 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
 import Drawer from '.';
 import DrawerBody from './DrawerBody';
+import DrawerButton from './DrawerButton';
 import DrawerFooter from './DrawerFooter';
 import DrawerHeader from './DrawerHeader';
 import {
@@ -140,111 +140,199 @@ describe('<Drawer />', () => {
     });
   });
 
-  it('should give focus to the close button by default', () => {
-    const ModalTest = () => (
-      <Drawer isOpen onClose={jest.fn()}>
-        <DrawerHeader>header</DrawerHeader>
-        <DrawerBody>
-          <input />
-        </DrawerBody>
-        <DrawerFooter>footer</DrawerFooter>
-      </Drawer>
-    );
-    render(<ModalTest />);
-
-    const closeButton = screen.getByRole('button');
-
-    expect(closeButton).toHaveFocus();
-  });
-
-  it('should give focus to the initialFocusRef element', () => {
-    const ModalTest = () => {
-      const [isOpen, setIsOpen] = React.useState(false);
-      const initialFocusRef = React.useRef(null);
-      return (
-        <>
-          <button
-            type="button"
-            data-testid="open-button"
-            onClick={() => setIsOpen(true)}
-          >
-            Open
-          </button>
-
-          <Drawer
-            initialFocusRef={initialFocusRef}
-            isOpen={isOpen}
-            onClose={jest.fn()}
-          >
-            <DrawerHeader>header</DrawerHeader>
-            <DrawerBody>
-              <input data-testid="modal-input" ref={initialFocusRef} />
-            </DrawerBody>
-            <DrawerFooter>footer</DrawerFooter>
-          </Drawer>
-        </>
+  describe('focus', () => {
+    it('should give focus to the close button by default', () => {
+      const ModalTest = () => (
+        <Drawer isOpen onClose={jest.fn()}>
+          <DrawerHeader>header</DrawerHeader>
+          <DrawerBody>
+            <input />
+          </DrawerBody>
+          <DrawerFooter>footer</DrawerFooter>
+        </Drawer>
       );
-    };
-    render(<ModalTest />);
+      render(<ModalTest />);
 
-    const openButton = screen.getByTestId('open-button');
+      const closeButton = screen.getByRole('button');
 
-    // click the button
-    fireEvent.click(openButton);
+      expect(closeButton).toHaveFocus();
+    });
 
-    const modalInput = screen.getByTestId('modal-input');
+    it('should give focus to the initialFocusRef element', () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const initialFocusRef = React.useRef(null);
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
 
-    // modal input should be focused
-    expect(modalInput).toHaveFocus();
-  });
+            <Drawer
+              initialFocusRef={initialFocusRef}
+              isOpen={isOpen}
+              onClose={jest.fn()}
+            >
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerBody>
+                <input data-testid="modal-input" ref={initialFocusRef} />
+              </DrawerBody>
+              <DrawerFooter>footer</DrawerFooter>
+            </Drawer>
+          </>
+        );
+      };
+      render(<ModalTest />);
 
-  it('should return focus to the finalFocusRef element', async () => {
-    const ModalTest = () => {
-      const [isOpen, setIsOpen] = React.useState(false);
-      const finalFocusRef = React.useRef(null);
-      return (
-        <>
-          <button
-            type="button"
-            data-testid="open-button"
-            onClick={() => setIsOpen(true)}
-          >
-            Open
-          </button>
+      const openButton = screen.getByTestId('open-button');
 
-          <button data-testid="final-button" ref={finalFocusRef} type="button">
-            Receive focus
-          </button>
+      // click the button
+      fireEvent.click(openButton);
 
-          <Drawer
-            finalFocusRef={finalFocusRef}
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-          >
-            <DrawerHeader>header</DrawerHeader>
-            <DrawerBody>
-              <input />
-            </DrawerBody>
-            <DrawerFooter>footer</DrawerFooter>
-          </Drawer>
-        </>
-      );
-    };
+      const modalInput = screen.getByTestId('modal-input');
 
-    render(<ModalTest />);
+      // modal input should be focused
+      expect(modalInput).toHaveFocus();
+    });
 
-    const openButton = screen.getByTestId('open-button');
-    const finalButton = screen.getByTestId('final-button');
+    it('should give focus to initialFocusRef as <ModalButton>', () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const initialFocusRef = React.useRef(null);
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
+            <Drawer
+              initialFocusRef={initialFocusRef}
+              isOpen={isOpen}
+              onClose={jest.fn()}
+            >
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerBody>
+                <input data-testid="drawer-input" ref={initialFocusRef} />
+              </DrawerBody>
+              <DrawerFooter>
+                <DrawerButton ref={initialFocusRef}>focus</DrawerButton>
+              </DrawerFooter>
+            </Drawer>
+          </>
+        );
+      };
+      render(<ModalTest />);
+      const openButton = screen.getByTestId('open-button');
 
-    // click the button
-    fireEvent.click(openButton);
+      // click the button
+      fireEvent.click(openButton);
 
-    const closeButton = screen.getByLabelText('Close the modal');
+      const drawerButton = screen.getByText('focus');
 
-    fireEvent.click(closeButton);
+      // modal button should be focused
+      expect(drawerButton).toHaveFocus();
+    });
 
-    // final button should be focused when Modal has closed
-    await waitFor(() => expect(finalButton).toHaveFocus());
+    it('should give focus to initialFocusRef as <DrawerButton>', () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const initialFocusRef = React.useRef(null);
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
+            <Drawer
+              initialFocusRef={initialFocusRef}
+              isOpen={isOpen}
+              onClose={jest.fn()}
+            >
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerBody>
+                <input data-testid="modal-input" ref={initialFocusRef} />
+              </DrawerBody>
+              <DrawerFooter>
+                <DrawerButton ref={initialFocusRef}>focus</DrawerButton>
+              </DrawerFooter>
+            </Drawer>
+          </>
+        );
+      };
+      render(<ModalTest />);
+      const openButton = screen.getByTestId('open-button');
+
+      // click the button
+      fireEvent.click(openButton);
+
+      const drawerButton = screen.getByText('focus');
+
+      // drawer button should be focused
+      expect(drawerButton).toHaveFocus();
+    });
+
+    it('should return focus to the finalFocusRef element', async () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const finalFocusRef = React.useRef(null);
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
+
+            <button
+              data-testid="final-button"
+              ref={finalFocusRef}
+              type="button"
+            >
+              Receive focus
+            </button>
+
+            <Drawer
+              finalFocusRef={finalFocusRef}
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+            >
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerBody>
+                <input />
+              </DrawerBody>
+              <DrawerFooter>footer</DrawerFooter>
+            </Drawer>
+          </>
+        );
+      };
+
+      render(<ModalTest />);
+
+      const openButton = screen.getByTestId('open-button');
+      const finalButton = screen.getByTestId('final-button');
+
+      // click the button
+      fireEvent.click(openButton);
+
+      const closeButton = screen.getByLabelText('Close the modal');
+
+      fireEvent.click(closeButton);
+
+      // final button should be focused when Modal has closed
+      await waitFor(() => expect(finalButton).toHaveFocus());
+    });
   });
 
   describe('keyboard navigation', () => {
@@ -394,6 +482,65 @@ describe('<Drawer />', () => {
         // return focus to the last element
         expect(modalInput2).not.toHaveFocus();
       });
+    });
+  });
+
+  describe('with <DrawerButton>', () => {
+    it('should call drawer button onclick functions', async () => {
+      const mockCancel = jest.fn();
+      const mockSubmit = jest.fn();
+
+      render(
+        <Drawer isOpen onClose={() => {}}>
+          <DrawerHeader>Testing</DrawerHeader>
+          <DrawerBody>body</DrawerBody>
+          <DrawerFooter>
+            <DrawerButton aria-label="cancel" onClick={mockCancel}>
+              Cancel
+            </DrawerButton>
+            <DrawerButton aria-label="save" onClick={mockSubmit}>
+              Save
+            </DrawerButton>
+          </DrawerFooter>
+        </Drawer>
+      );
+      const cancelButton = screen.getByLabelText('cancel');
+      const saveButton = screen.getByLabelText('save');
+
+      fireEvent.click(cancelButton);
+      await waitFor(() => expect(mockCancel).toHaveBeenCalledTimes(1));
+
+      fireEvent.click(saveButton);
+      await waitFor(() => expect(mockSubmit).toHaveBeenCalledTimes(1));
+    });
+
+    it('should not call the drawer onClose function', async () => {
+      const mockClose = jest.fn();
+      const mockCancel = jest.fn();
+      const mockSubmit = jest.fn();
+
+      render(
+        <Drawer isOpen onClose={mockClose}>
+          <DrawerHeader>Testing</DrawerHeader>
+          <DrawerBody>body</DrawerBody>
+          <DrawerFooter>
+            <DrawerButton aria-label="cancel" onClick={mockCancel}>
+              Cancel
+            </DrawerButton>
+            <DrawerButton aria-label="save" onClick={mockSubmit}>
+              Save
+            </DrawerButton>
+          </DrawerFooter>
+        </Drawer>
+      );
+      const cancelButton = screen.getByLabelText('cancel');
+      const saveButton = screen.getByLabelText('save');
+
+      fireEvent.click(cancelButton);
+      await waitFor(() => expect(mockClose).not.toHaveBeenCalled());
+
+      fireEvent.click(saveButton);
+      await waitFor(() => expect(mockClose).not.toHaveBeenCalled());
     });
   });
 });

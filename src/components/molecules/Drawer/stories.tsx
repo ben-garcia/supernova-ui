@@ -3,8 +3,9 @@ import { Meta } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
 import Drawer from '.';
-import DrawerFooter from './DrawerFooter';
 import DrawerBody from './DrawerBody';
+import DrawerButton from './DrawerButton';
+import DrawerFooter from './DrawerFooter';
 import DrawerHeader from './DrawerHeader';
 import Button from '../../atoms/Button';
 import TextInput from '../../atoms/TextInput';
@@ -16,7 +17,10 @@ export default {
 
 export const Basic = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    console.log('handle close');
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -30,13 +34,25 @@ export const Basic = () => {
         <DrawerHeader>Drawer Title</DrawerHeader>
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
-          <>
-            <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
-              Cancel
-            </Button>
+          <DrawerButton
+            onClick={() => {
+              console.log('cancel');
+              setIsOpen(false);
+            }}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </DrawerButton>
 
-            <Button onClick={handleClose}>Save</Button>
-          </>
+          <DrawerButton
+            onClick={() => {
+              console.log('save');
+              setIsOpen(false);
+            }}
+          >
+            Save
+          </DrawerButton>
         </DrawerFooter>
       </Drawer>
     </>
@@ -89,13 +105,15 @@ export const InitialAndFinalRefs = () => {
         </DrawerBody>
 
         <DrawerFooter>
-          <>
-            <Button onClick={handleClose} margin="0 sm 0 0" variant="outline">
-              Cancel
-            </Button>
+          <DrawerButton
+            onClick={handleClose}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </DrawerButton>
 
-            <Button onClick={handleClose}>Signup</Button>
-          </>
+          <DrawerButton onClick={handleClose}>Signup</DrawerButton>
         </DrawerFooter>
       </Drawer>
     </>
@@ -136,17 +154,17 @@ export const Position = () => {
         <DrawerHeader>Drawer Title</DrawerHeader>
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
-          <>
-            <Button
-              onClick={() => setBottomIsOpen(false)}
-              margin="0 sm 0 0"
-              variant="outline"
-            >
-              Cancel
-            </Button>
+          <DrawerButton
+            onClick={() => setBottomIsOpen(false)}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </DrawerButton>
 
-            <Button onClick={() => setBottomIsOpen(false)}>Save</Button>
-          </>
+          <DrawerButton onClick={() => setBottomIsOpen(false)}>
+            Save
+          </DrawerButton>
         </DrawerFooter>
       </Drawer>
 
@@ -154,17 +172,15 @@ export const Position = () => {
         <DrawerHeader>Drawer Title</DrawerHeader>
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
-          <>
-            <Button
-              onClick={() => setLeftIsOpen(false)}
-              margin="0 sm 0 0"
-              variant="outline"
-            >
-              Cancel
-            </Button>
+          <DrawerButton
+            onClick={() => setLeftIsOpen(false)}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </DrawerButton>
 
-            <Button onClick={() => setLeftIsOpen}>Save</Button>
-          </>
+          <DrawerButton onClick={() => setLeftIsOpen}>Save</DrawerButton>
         </DrawerFooter>
       </Drawer>
 
@@ -176,17 +192,17 @@ export const Position = () => {
         <DrawerHeader>Drawer Title</DrawerHeader>
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
-          <>
-            <Button
-              onClick={() => setRightIsOpen(false)}
-              margin="0 sm 0 0"
-              variant="outline"
-            >
-              Cancel
-            </Button>
+          <DrawerButton
+            onClick={() => setRightIsOpen(false)}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </DrawerButton>
 
-            <Button onClick={() => setRightIsOpen(false)}>Save</Button>
-          </>
+          <DrawerButton onClick={() => setRightIsOpen(false)}>
+            Save
+          </DrawerButton>
         </DrawerFooter>
       </Drawer>
 
@@ -198,17 +214,15 @@ export const Position = () => {
         <DrawerHeader>Drawer Title</DrawerHeader>
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
-          <>
-            <Button
-              onClick={() => setTopIsOpen(false)}
-              margin="0 sm 0 0"
-              variant="outline"
-            >
-              Cancel
-            </Button>
+          <DrawerButton
+            onClick={() => setTopIsOpen(false)}
+            margin="0 sm 0 0"
+            variant="outline"
+          >
+            Cancel
+          </DrawerButton>
 
-            <Button onClick={() => setTopIsOpen(false)}>Save</Button>
-          </>
+          <DrawerButton onClick={() => setTopIsOpen(false)}>Save</DrawerButton>
         </DrawerFooter>
       </Drawer>
     </>
@@ -256,17 +270,17 @@ export const Sizes = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <>
-              <Button
-                onClick={() => setIsXsModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <DrawerButton
+              onClick={() => setIsXsModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </DrawerButton>
 
-              <Button onClick={() => setIsXsModalOpen(false)}>Save</Button>
-            </>
+            <DrawerButton onClick={() => setIsXsModalOpen(false)}>
+              Save
+            </DrawerButton>
           </DrawerFooter>
         </Drawer>
       </div>
@@ -302,16 +316,16 @@ export const Sizes = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <>
-              <Button
-                onClick={() => setIsSmModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
-              <Button onClick={() => setIsSmModalOpen(false)}>Save</Button>
-            </>
+            <DrawerButton
+              onClick={() => setIsSmModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </DrawerButton>
+            <DrawerButton onClick={() => setIsSmModalOpen(false)}>
+              Save
+            </DrawerButton>
           </DrawerFooter>
         </Drawer>
       </div>
@@ -347,17 +361,17 @@ export const Sizes = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <>
-              <Button
-                onClick={() => setIsMdModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <DrawerButton
+              onClick={() => setIsMdModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </DrawerButton>
 
-              <Button onClick={() => setIsMdModalOpen(false)}>Save</Button>
-            </>
+            <DrawerButton onClick={() => setIsMdModalOpen(false)}>
+              Save
+            </DrawerButton>
           </DrawerFooter>
         </Drawer>
       </div>
@@ -393,17 +407,17 @@ export const Sizes = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <>
-              <Button
-                onClick={() => setIsLgModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <DrawerButton
+              onClick={() => setIsLgModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </DrawerButton>
 
-              <Button onClick={() => setIsLgModalOpen(false)}>Save</Button>
-            </>
+            <DrawerButton onClick={() => setIsLgModalOpen(false)}>
+              Save
+            </DrawerButton>
           </DrawerFooter>
         </Drawer>
       </div>
@@ -439,17 +453,17 @@ export const Sizes = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <>
-              <Button
-                onClick={() => setIsXlModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <DrawerButton
+              onClick={() => setIsXlModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </DrawerButton>
 
-              <Button onClick={() => setIsXlModalOpen(false)}>Save</Button>
-            </>
+            <DrawerButton onClick={() => setIsXlModalOpen(false)}>
+              Save
+            </DrawerButton>
           </DrawerFooter>
         </Drawer>
       </div>
@@ -485,17 +499,17 @@ export const Sizes = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <>
-              <Button
-                onClick={() => setIsXxlModalOpen(false)}
-                margin="0 sm 0 0"
-                variant="outline"
-              >
-                Cancel
-              </Button>
+            <DrawerButton
+              onClick={() => setIsXxlModalOpen(false)}
+              margin="0 sm 0 0"
+              variant="outline"
+            >
+              Cancel
+            </DrawerButton>
 
-              <Button onClick={() => setIsXxlModalOpen(false)}>Save</Button>
-            </>
+            <DrawerButton onClick={() => setIsXxlModalOpen(false)}>
+              Save
+            </DrawerButton>
           </DrawerFooter>
         </Drawer>
       </div>
