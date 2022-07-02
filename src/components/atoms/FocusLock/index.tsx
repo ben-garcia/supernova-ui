@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
+import { isFunction } from '../../../utils';
 import { FocusLockProps } from './types';
 
 /**
@@ -15,12 +16,39 @@ const FocusLock: React.FC<FocusLockProps> = props => {
     children,
     closeOnEsc,
     closeOnOverlayClick,
+    enterExitMode,
     initialFocusRef,
+    leaveExitMode,
+    onClickOutside,
     onClose,
+    onEscPress,
     trapFocus = true,
   } = props;
   const rootNode = useRef<HTMLDivElement | null>(null);
   const focusableItems = useRef<HTMLElement[]>([]);
+  const triggerCloseAnimation = useCallback((isForEsc: boolean) => {
+    enterExitMode();
+    setTimeout(() => {
+      leaveExitMode();
+      if (isForEsc) {
+        // invoke the 'onEscPress' prop passed in
+        if (isFunction(onEscPress) && closeOnEsc) {
+          onEscPress!();
+          // invoke the 'onClickOutside' prop passed in
+        } else {
+          onClose();
+        }
+      } else {
+        // eslint-disable-next-line
+        if (isFunction(onClickOutside) && closeOnOverlayClick) {
+          onClickOutside!();
+        } else {
+          // otherwise
+          onClose();
+        }
+      }
+    }, 300);
+  }, []);
 
   useEffect(() => {
     // check for all the focusable children of the root node
@@ -86,10 +114,9 @@ const FocusLock: React.FC<FocusLockProps> = props => {
         [length - 1]: lastItem,
       } = focusableItems.current;
 
-      // when the Esc key is press and closeOnEsc is true
       // close the Modal
-      if (closeOnEsc && key === 'Escape') {
-        onClose();
+      if (key === 'Escape') {
+        triggerCloseAnimation(true);
       }
 
       if (trapFocus && key === 'Tab') {
@@ -124,8 +151,8 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   const handleClick = useCallback((e: React.SyntheticEvent) => {
     // when the overlay is clicked closeOnOverlayClick prop is true
     // close the Modal
-    if (closeOnOverlayClick && e.target === rootNode.current?.firstChild) {
-      onClose();
+    if (e.target === rootNode.current?.firstChild) {
+      triggerCloseAnimation(false);
     }
   }, []);
   const handleMouseDown = useCallback((e: any) => {

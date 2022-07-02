@@ -50,7 +50,9 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
     letterSpacing = '',
     lineHeight = '',
     margin = '',
+    onClickOutside,
     onClose,
+    onEscPress,
     padding = '',
     size = 'md',
     textTransform = '',
@@ -77,7 +79,9 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
     () => ({
       ...context,
       enterExitMode,
+      onClickOutside,
       onClose: handleOnClose,
+      onEscPress,
       leaveExitMode,
     }),
     [context]
@@ -262,8 +266,12 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
       <FocusLock
         closeOnEsc={closeOnEsc}
         closeOnOverlayClick={closeOnOverlayClick}
+        enterExitMode={enterExitMode}
         initialFocusRef={leastDestructiveRef}
+        leaveExitMode={leaveExitMode}
+        onClickOutside={onClickOutside}
         onClose={handleOnClose}
+        onEscPress={onEscPress}
         trapFocus={trapFocus}
       >
         <Overlay>

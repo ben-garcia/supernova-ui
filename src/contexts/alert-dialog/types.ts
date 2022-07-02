@@ -21,7 +21,9 @@ export interface AlertDialogContextProps {
   isOpen: boolean;
   leastDestructiveRef?: RefObject<HTMLElement> | null;
   leaveExitMode?: () => void;
+  onClickOutside?: () => void;
   onClose: () => void;
+  onEscPress?: () => void;
   trapFocus?: boolean;
 }
 

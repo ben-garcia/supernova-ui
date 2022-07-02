@@ -15,6 +15,10 @@ export interface FocusLockProps {
    */
   closeOnOverlayClick?: boolean;
   /**
+   * Function to trigger the exit animation.
+   */
+  enterExitMode: () => void;
+  /**
    * The reference of element to receive focus when the Modal closes
    */
   finalFocusRef?: RefObject<HTMLElement>;
@@ -23,9 +27,21 @@ export interface FocusLockProps {
    */
   initialFocusRef?: RefObject<HTMLElement>;
   /**
+   * Function to trigger the exit animation.
+   */
+  leaveExitMode: () => void;
+  /**
+   * Function to execute after an overlay click.
+   */
+  onClickOutside?: () => void;
+  /**
    * Function to execute to close the Modal
    */
   onClose: () => void;
+  /**
+   * Function to execute after esc key press.
+   */
+  onEscPress?: () => void;
   /**
    * Should the focus be allowed outside the component
    *

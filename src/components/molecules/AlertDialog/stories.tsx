@@ -28,9 +28,10 @@ export const Basic = () => {
 
       <AlertDialog
         isOpen={isOpen}
-        closeOnOverlayClick={false}
         leastDestructiveRef={cancelButtonRef}
         onClose={() => setIsOpen(false)}
+        onEscPress={() => setIsOpen(false)}
+        onClickOutside={() => setIsOpen(false)}
       >
         <AlertDialogHeader>Delete your account</AlertDialogHeader>
         <AlertDialogBody>Are you sure?</AlertDialogBody>
