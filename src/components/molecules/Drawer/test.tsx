@@ -292,6 +292,66 @@ describe('<Drawer />', () => {
       // final button should be focused when Modal has closed
       await waitFor(() => expect(finalButton).toHaveFocus());
     });
+
+    it('should keep the active element focused when closeOnOverlayClick is false', async () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const initialFocusRef = React.useRef(null);
+
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
+
+            <Drawer
+              closeOnOverlayClick={false}
+              initialFocusRef={initialFocusRef}
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+            >
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerBody>body</DrawerBody>
+              <DrawerFooter>
+                <DrawerButton data-testid="cancel-button" ref={initialFocusRef}>
+                  cancel
+                </DrawerButton>
+                <DrawerButton data-testid="delete-button">delete</DrawerButton>
+              </DrawerFooter>
+            </Drawer>
+          </>
+        );
+      };
+
+      const { getByRole, getByTestId, getByText } = render(<ModalTest />);
+      const openButton = getByTestId('open-button');
+
+      // click the button
+      fireEvent.click(openButton);
+
+      const modal = getByRole('dialog');
+      const cancelButton = getByTestId('cancel-button');
+      const deleteButton = getByTestId('delete-button');
+      const body = getByText('body');
+
+      expect(cancelButton).toHaveFocus();
+
+      fireEvent.click(modal.parentElement!);
+      expect(cancelButton).toHaveFocus();
+
+      // shouldn't loose focus when clicking in side the drawer
+      userEvent.click(body);
+      expect(cancelButton).toHaveFocus();
+
+      userEvent.tab();
+
+      fireEvent.click(modal.parentElement!);
+      expect(deleteButton).toHaveFocus();
+    });
   });
 
   describe('keyboard navigation', () => {

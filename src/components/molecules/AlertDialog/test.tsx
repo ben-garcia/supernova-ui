@@ -338,6 +338,66 @@ describe('<AlertDialog />', () => {
       // await waitFor(() => expect(finalButton).toHaveFocus());
       await waitFor(() => expect(finalButton).toHaveFocus());
     });
+
+    it('should keep the active element focused when closeOnOverlayClick is false', async () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        const leastDestructiveRef = React.useRef(null);
+
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
+
+            <AlertDialog
+              closeOnOverlayClick={false}
+              leastDestructiveRef={leastDestructiveRef}
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+            >
+              <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialog>
+          </>
+        );
+      };
+
+      const { getByRole, getByTestId, getByText } = render(<ModalTest />);
+      const openButton = getByTestId('open-button');
+
+      // click the button
+      fireEvent.click(openButton);
+
+      const modal = getByRole('alertdialog');
+      const cancelButton = getByTestId('cancel-button');
+      const deleteButton = getByTestId('delete-button');
+      const body = getByText('body');
+
+      expect(cancelButton).toHaveFocus();
+
+      fireEvent.click(modal.parentElement!);
+      expect(cancelButton).toHaveFocus();
+
+      // shouldn't loose focus when clicking in side the dialog
+      userEvent.click(body);
+      expect(cancelButton).toHaveFocus();
+
+      userEvent.tab();
+
+      fireEvent.click(modal.parentElement!);
+      expect(deleteButton).toHaveFocus();
+    });
   });
 
   describe('keyboard navigation', () => {

@@ -28,6 +28,7 @@ export const Basic = () => {
 
       <AlertDialog
         isOpen={isOpen}
+        closeOnOverlayClick={false}
         leastDestructiveRef={cancelButtonRef}
         onClose={() => setIsOpen(false)}
       >

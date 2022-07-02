@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import { FocusLockProps } from './types';
 
@@ -121,19 +121,29 @@ const FocusLock: React.FC<FocusLockProps> = props => {
       window.removeEventListener('keydown', handleKeyPress);
     };
   }, [trapFocus, focusableItems]);
-  const handleClick = (e: React.SyntheticEvent) => {
+  const handleClick = useCallback((e: React.SyntheticEvent) => {
     // when the overlay is clicked closeOnOverlayClick prop is true
     // close the Modal
     if (closeOnOverlayClick && e.target === rootNode.current?.firstChild) {
       onClose();
     }
-  };
+  }, []);
+  const handleMouseDown = useCallback((e: any) => {
+    if (e.target.localName.toLowerCase() !== 'button') {
+      e.preventDefault();
+    }
+  }, []);
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     // eslint-disable-next-line
-    <div data-trap-focus={trapFocus} onClick={handleClick} ref={rootNode}>
+    <div
+      data-trap-focus={trapFocus}
+      onClick={handleClick}
+      onMouseDown={!closeOnOverlayClick ? handleMouseDown : undefined}
+      ref={rootNode}
+    >
       {children}
     </div>
   );
