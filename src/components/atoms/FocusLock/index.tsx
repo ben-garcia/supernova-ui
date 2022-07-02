@@ -1,5 +1,3 @@
-/* eslint jsx-a11y/no-static-element-interactions: 0 */
-/* eslint jsx-a11y/click-events-have-key-events: 0 */
 import React, { useEffect, useRef } from 'react';
 
 import { FocusLockProps } from './types';
@@ -132,7 +130,10 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   };
 
   return (
-    <div data-trap-focus={`${trapFocus}`} onClick={handleClick} ref={rootNode}>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    // eslint-disable-next-line
+    <div data-trap-focus={trapFocus} onClick={handleClick} ref={rootNode}>
       {children}
     </div>
   );

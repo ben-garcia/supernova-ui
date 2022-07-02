@@ -263,7 +263,7 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
         closeOnEsc={closeOnEsc}
         closeOnOverlayClick={closeOnOverlayClick}
         initialFocusRef={leastDestructiveRef}
-        onClose={onClose}
+        onClose={handleOnClose}
         trapFocus={trapFocus}
       >
         <Overlay>

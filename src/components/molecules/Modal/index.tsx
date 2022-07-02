@@ -262,7 +262,7 @@ const Modal: React.FC<ModalProps> = props => {
         closeOnEsc={closeOnEsc}
         closeOnOverlayClick={closeOnOverlayClick}
         initialFocusRef={initialFocusRef}
-        onClose={onClose}
+        onClose={handleOnClose}
         trapFocus={trapFocus}
       >
         <Overlay>

@@ -117,7 +117,7 @@ describe('<AlertDialog />', () => {
   });
 
   describe('overlay click', () => {
-    it('should call the onClose function when the overlay window is clicked', () => {
+    it('should call the onClose function when the overlay window is clicked', async () => {
       const mockOnClose = jest.fn();
       const ModalTest = () => {
         const leastDestructiveRef = React.useRef(null);
@@ -146,16 +146,17 @@ describe('<AlertDialog />', () => {
 
       fireEvent.click(modal.parentElement!);
 
-      expect(mockOnClose).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(mockOnClose).toHaveBeenCalledTimes(1));
     });
 
-    it('should not call the onClose function when closeOnOverlayClick is false', () => {
+    it('should not call the onClose function when closeOnOverlayClick is false', async () => {
       const mockOnClose = jest.fn();
       const ModalTest = () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
           <AlertDialog
+            closeOnOverlayClick={false}
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={jest.fn()}
@@ -178,12 +179,12 @@ describe('<AlertDialog />', () => {
 
       fireEvent.click(modal.parentElement!);
 
-      expect(mockOnClose).toHaveBeenCalledTimes(0);
+      await waitFor(() => expect(mockOnClose).not.toHaveBeenCalledTimes(1));
     });
   });
 
   describe('esc key', () => {
-    it('should call the onClose function when the esc key is pressed', () => {
+    it('should call the onClose function when the esc key is pressed', async () => {
       const mockOnClose = jest.fn();
       const ModalTest = () => {
         const leastDestructiveRef = React.useRef(null);
@@ -210,7 +211,7 @@ describe('<AlertDialog />', () => {
 
       fireEvent.keyDown(window, { key: 'Escape' });
 
-      expect(mockOnClose).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(mockOnClose).not.toHaveBeenCalledTimes(1));
     });
 
     it('should not call the onClose function when closeOnEsc is false', () => {
