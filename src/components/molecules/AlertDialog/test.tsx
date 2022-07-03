@@ -117,7 +117,7 @@ describe('<AlertDialog />', () => {
   });
 
   describe('overlay click', () => {
-    it('should call onClickOutside and not onClose when closeOnOverlayClick is true', async () => {
+    it('should call onClickOutside and not onClose when closeOnOverlayClick is true and onClickOutside is a function', async () => {
       const mockOnClickOutside = jest.fn();
       const mockOnClose = jest.fn();
       const ModalTest = () => {
@@ -154,7 +154,7 @@ describe('<AlertDialog />', () => {
       });
     });
 
-    it('should call onClose and not call the onClickOutside when closeOnOverlayClick is false', async () => {
+    it('should not call onClose nor onClickOutside when closeOnOverlayClick is false', async () => {
       const mockOnClose = jest.fn();
       const mockOnClickOutside = jest.fn();
       const ModalTest = () => {
@@ -187,14 +187,14 @@ describe('<AlertDialog />', () => {
       fireEvent.click(modal.parentElement!);
 
       await waitFor(() => {
-        expect(mockOnClose).toHaveBeenCalledTimes(1);
+        expect(mockOnClose).not.toHaveBeenCalled();
         expect(mockOnClickOutside).not.toHaveBeenCalledTimes(1);
       });
     });
   });
 
   describe('esc key', () => {
-    it('should call onEscPress and not onClose when closeOnEsc is true', async () => {
+    it('should call onEscPress and not onClose when closeOnEsc is true and onEscPress is a function', async () => {
       const mockOnClose = jest.fn();
       const mockEscPress = jest.fn();
       const ModalTest = () => {
@@ -225,11 +225,11 @@ describe('<AlertDialog />', () => {
 
       await waitFor(() => {
         expect(mockEscPress).toHaveBeenCalledTimes(1);
-        expect(mockOnClose).not.toHaveBeenCalledTimes(1);
+        expect(mockOnClose).not.toHaveBeenCalled();
       });
     });
 
-    it('should call onClose not onEscPress when closeOnEsc is false', async () => {
+    it('should not call onClose nor onEscPress when closeOnEsc is false', async () => {
       const mockOnClose = jest.fn();
       const mockOnEscPress = jest.fn();
       const ModalTest = () => {
@@ -259,7 +259,7 @@ describe('<AlertDialog />', () => {
       fireEvent.keyDown(window, { key: 'Escape' });
 
       await waitFor(() => {
-        expect(mockOnClose).toHaveBeenCalledTimes(1);
+        expect(mockOnClose).not.toHaveBeenCalled();
         expect(mockOnEscPress).not.toHaveBeenCalled();
       });
     });
