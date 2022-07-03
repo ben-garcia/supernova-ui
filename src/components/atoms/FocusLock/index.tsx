@@ -28,23 +28,29 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   const focusableItems = useRef<HTMLElement[]>([]);
   const triggerCloseAnimation = useCallback((isForEsc: boolean) => {
     enterExitMode();
+
+    if (
+      !isFunction(onEscPress) &&
+      closeOnEsc &&
+      !isFunction(onClickOutside) &&
+      closeOnOverlayClick
+    ) {
+      onClose();
+      return;
+    }
+
     setTimeout(() => {
       leaveExitMode();
       if (isForEsc) {
         // invoke the 'onEscPress' prop passed in
         if (isFunction(onEscPress) && closeOnEsc) {
           onEscPress!();
-          // invoke the 'onClickOutside' prop passed in
-        } else {
-          onClose();
         }
       } else {
         // eslint-disable-next-line
         if (isFunction(onClickOutside) && closeOnOverlayClick) {
+          // invoke the 'onClickOutside' prop passed in
           onClickOutside!();
-        } else {
-          // otherwise
-          onClose();
         }
       }
     }, 300);
@@ -115,7 +121,7 @@ const FocusLock: React.FC<FocusLockProps> = props => {
       } = focusableItems.current;
 
       // close the Modal
-      if (key === 'Escape') {
+      if (key === 'Escape' && closeOnEsc) {
         triggerCloseAnimation(true);
       }
 
@@ -151,7 +157,7 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   const handleClick = useCallback((e: React.SyntheticEvent) => {
     // when the overlay is clicked closeOnOverlayClick prop is true
     // close the Modal
-    if (e.target === rootNode.current?.firstChild) {
+    if (e.target === rootNode.current?.firstChild && closeOnOverlayClick) {
       triggerCloseAnimation(false);
     }
   }, []);
