@@ -50,7 +50,9 @@ const Modal: React.FC<ModalProps> = props => {
     letterSpacing = '',
     lineHeight = '',
     margin = '',
+    onClickOutside,
     onClose,
+    onEscPress,
     padding = '',
     size = 'md',
     textTransform = '',
@@ -261,8 +263,12 @@ const Modal: React.FC<ModalProps> = props => {
       <FocusLock
         closeOnEsc={closeOnEsc}
         closeOnOverlayClick={closeOnOverlayClick}
+        enterExitMode={enterExitMode}
         initialFocusRef={initialFocusRef}
+        leaveExitMode={leaveExitMode}
+        onClickOutside={onClickOutside}
         onClose={handleOnClose}
+        onEscPress={onEscPress}
         trapFocus={trapFocus}
       >
         <Overlay>

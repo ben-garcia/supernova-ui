@@ -70,10 +70,12 @@ describe('<Modal />', () => {
   });
 
   describe('overlay click', () => {
-    it('should call the onClose function when the overlay window is clicked', async () => {
+    it('should call onClickOutside and not onClose when closeOnOverlayClick is true and onClickOutside is a function', async () => {
+      const mockOnClickOutside = jest.fn();
       const mockOnClose = jest.fn();
+
       render(
-        <Modal isOpen onClose={mockOnClose}>
+        <Modal isOpen onClose={mockOnClose} onClickOutside={mockOnClickOutside}>
           <ModalHeader>Testing</ModalHeader>
           <ModalBody>body</ModalBody>
           <ModalFooter>footer</ModalFooter>
@@ -83,13 +85,23 @@ describe('<Modal />', () => {
 
       fireEvent.click(modal.parentElement!);
 
-      await waitFor(() => expect(mockOnClose).toHaveBeenCalledTimes(1));
+      await waitFor(() => {
+        expect(mockOnClose).not.toHaveBeenCalled();
+        expect(mockOnClickOutside).toHaveBeenCalledTimes(1);
+      });
     });
 
-    it('should not call the onClose function when closeOnOverlayClick is false', async () => {
+    it('should call onClickOutside and not onClose when closeOnOverlayClick is true, onClickOutside is a function and closeOnEsc is false', async () => {
+      const mockOnClickOutside = jest.fn();
       const mockOnClose = jest.fn();
+
       render(
-        <Modal closeOnOverlayClick={false} isOpen onClose={mockOnClose}>
+        <Modal
+          closeOnEsc={false}
+          isOpen
+          onClose={mockOnClose}
+          onClickOutside={mockOnClickOutside}
+        >
           <ModalHeader>Testing</ModalHeader>
           <ModalBody>body</ModalBody>
           <ModalFooter>footer</ModalFooter>
@@ -99,15 +111,45 @@ describe('<Modal />', () => {
 
       fireEvent.click(modal.parentElement!);
 
-      await waitFor(() => expect(mockOnClose).not.toHaveBeenCalledTimes(1));
+      await waitFor(() => {
+        expect(mockOnClose).not.toHaveBeenCalled();
+        expect(mockOnClickOutside).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    it('should not call onClose nor onClickOutside when closeOnOverlayClick is false', async () => {
+      const mockOnClose = jest.fn();
+      const mockOnClickOutside = jest.fn();
+
+      render(
+        <Modal
+          closeOnOverlayClick={false}
+          isOpen
+          onClose={mockOnClose}
+          onClickOutside={mockOnClickOutside}
+        >
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>footer</ModalFooter>
+        </Modal>
+      );
+      const modal = screen.getByRole('dialog');
+
+      fireEvent.click(modal.parentElement!);
+
+      await waitFor(() => {
+        expect(mockOnClose).not.toHaveBeenCalled();
+        expect(mockOnClickOutside).not.toHaveBeenCalledTimes(1);
+      });
     });
   });
 
   describe('esc key', () => {
-    it('should call the onClose function when the esc key is pressed', async () => {
+    it('should call onEscPress and not onClose when closeOnEsc is true and onEscPress is a function', async () => {
       const mockOnClose = jest.fn();
+      const mockEscPress = jest.fn();
       render(
-        <Modal isOpen onClose={mockOnClose}>
+        <Modal isOpen onClose={mockOnClose} onEscPress={mockEscPress}>
           <ModalHeader>Testing</ModalHeader>
           <ModalBody>body</ModalBody>
           <ModalFooter>footer</ModalFooter>
@@ -116,13 +158,48 @@ describe('<Modal />', () => {
 
       fireEvent.keyDown(window, { key: 'Escape' });
 
-      await waitFor(() => expect(mockOnClose).toHaveBeenCalledTimes(1));
+      await waitFor(() => {
+        expect(mockEscPress).toHaveBeenCalledTimes(1);
+        expect(mockOnClose).not.toHaveBeenCalled();
+      });
+    });
+
+    it('should call onEscPress and not onClose when closeOnEsc is true and onEscPress is a function and closeOnOverlayClick is false', async () => {
+      const mockOnClose = jest.fn();
+      const mockEscPress = jest.fn();
+
+      render(
+        <Modal
+          closeOnOverlayClick={false}
+          isOpen
+          onClose={mockOnClose}
+          onEscPress={mockEscPress}
+        >
+          <ModalHeader>Testing</ModalHeader>
+          <ModalBody>body</ModalBody>
+          <ModalFooter>footer</ModalFooter>
+        </Modal>
+      );
+
+      fireEvent.keyDown(window, { key: 'Escape' });
+
+      await waitFor(() => {
+        expect(mockEscPress).toHaveBeenCalledTimes(1);
+        expect(mockOnClose).not.toHaveBeenCalled();
+      });
     });
 
     it('should not call the onClose function when closeOnEsc is false', async () => {
       const mockOnClose = jest.fn();
+      const mockOnEscPress = jest.fn();
+
       render(
-        <Modal closeOnEsc={false} isOpen onClose={mockOnClose}>
+        <Modal
+          closeOnEsc={false}
+          isOpen
+          onClose={mockOnClose}
+          onEscPress={mockOnEscPress}
+        >
           <ModalHeader>Testing</ModalHeader>
           <ModalBody>body</ModalBody>
           <ModalFooter>footer</ModalFooter>
@@ -131,7 +208,10 @@ describe('<Modal />', () => {
 
       fireEvent.keyDown(window, { key: 'Escape' });
 
-      await waitFor(() => expect(mockOnClose).not.toHaveBeenCalledTimes(1));
+      await waitFor(() => {
+        expect(mockOnClose).not.toHaveBeenCalled();
+        expect(mockOnEscPress).not.toHaveBeenCalled();
+      });
     });
   });
 
