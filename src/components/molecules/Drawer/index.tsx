@@ -50,7 +50,9 @@ const Drawer: React.FC<DrawerProps> = props => {
     letterSpacing = '',
     lineHeight = '',
     margin = '',
+    onClickOutside,
     onClose,
+    onEscPress,
     padding = '',
     position = 'left',
     size = 'md',
@@ -268,8 +270,12 @@ const Drawer: React.FC<DrawerProps> = props => {
       <FocusLock
         closeOnEsc={closeOnEsc}
         closeOnOverlayClick={closeOnOverlayClick}
+        enterExitMode={enterExitMode}
         initialFocusRef={initialFocusRef}
+        leaveExitMode={leaveExitMode}
+        onClickOutside={onClickOutside}
         onClose={handleOnClose}
+        onEscPress={onEscPress}
         trapFocus={trapFocus}
       >
         <Overlay>

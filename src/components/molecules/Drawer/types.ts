@@ -38,9 +38,21 @@ export interface DrawerProps
    */
   isOpen: boolean;
   /**
-   * Function to execute to close the Modal
+   * Function to execute after an overlay click.
+   *
+   * NOTE: closeOnOverlayClick must be set to true.
+   */
+  onClickOutside?: () => void;
+  /**
+   * Function to execute to close the Drawer,
    */
   onClose: () => void;
+  /**
+   * Function to execute after esc key press.
+   *
+   * NOTE: closeOnEsc must be set to true.
+   */
+  onEscPress?: () => void;
   /**
    * The position relative to the viewport
    *

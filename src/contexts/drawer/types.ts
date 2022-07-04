@@ -15,7 +15,9 @@ export interface DrawerContextProps {
   initialFocusRef?: RefObject<HTMLElement> | null;
   isOpen: boolean;
   leaveExitMode?: () => void;
+  onClickOutside?: () => void;
   onClose: () => void;
+  onEscPress?: () => void;
   trapFocus?: boolean;
 }
 
