@@ -30,10 +30,18 @@ const FocusLock: React.FC<FocusLockProps> = props => {
     enterExitMode();
 
     if (
-      !isFunction(onEscPress) &&
-      closeOnEsc &&
-      !isFunction(onClickOutside) &&
-      closeOnOverlayClick
+      (!isFunction(onEscPress) &&
+        closeOnEsc &&
+        !isFunction(onClickOutside) &&
+        closeOnOverlayClick) ||
+      (!isFunction(onClickOutside) &&
+        closeOnOverlayClick &&
+        !isFunction(onEscPress) &&
+        !closeOnEsc) ||
+      (!isFunction(onEscPress) &&
+        closeOnEsc &&
+        !isFunction(onClickOutside) &&
+        !closeOnOverlayClick)
     ) {
       onClose();
       return;
