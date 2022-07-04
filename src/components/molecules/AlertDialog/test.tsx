@@ -154,6 +154,44 @@ describe('<AlertDialog />', () => {
       });
     });
 
+    it('should call onClickOutside and not onClose when closeOnOverlayClick is true, onClickOutside is a function and closeOnEsc is false', async () => {
+      const mockOnClickOutside = jest.fn();
+      const mockOnClose = jest.fn();
+      const ModalTest = () => {
+        const leastDestructiveRef = React.useRef(null);
+
+        return (
+          <AlertDialog
+            closeOnEsc={false}
+            leastDestructiveRef={leastDestructiveRef}
+            isOpen
+            onClose={mockOnClose}
+            onClickOutside={mockOnClickOutside}
+          >
+            <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialogFooter>
+              <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                cancel
+              </button>
+              <button data-testid="delete-button">delete</button>
+            </AlertDialogFooter>
+          </AlertDialog>
+        );
+      };
+
+      const { getByRole } = render(<ModalTest />);
+
+      const modal = getByRole('alertdialog');
+
+      fireEvent.click(modal.parentElement!);
+
+      await waitFor(() => {
+        expect(mockOnClose).not.toHaveBeenCalled();
+        expect(mockOnClickOutside).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('should not call onClose nor onClickOutside when closeOnOverlayClick is false', async () => {
       const mockOnClose = jest.fn();
       const mockOnClickOutside = jest.fn();
@@ -202,6 +240,42 @@ describe('<AlertDialog />', () => {
 
         return (
           <AlertDialog
+            leastDestructiveRef={leastDestructiveRef}
+            isOpen
+            onClose={mockOnClose}
+            onEscPress={mockEscPress}
+          >
+            <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialogFooter>
+              <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                cancel
+              </button>
+              <button data-testid="delete-button">delete</button>
+            </AlertDialogFooter>
+          </AlertDialog>
+        );
+      };
+
+      render(<ModalTest />);
+
+      fireEvent.keyDown(window, { key: 'Escape' });
+
+      await waitFor(() => {
+        expect(mockEscPress).toHaveBeenCalledTimes(1);
+        expect(mockOnClose).not.toHaveBeenCalled();
+      });
+    });
+
+    it('should call onEscPress and not onClose when closeOnEsc is true and onEscPress is a function and closeOnOverlayClick is false', async () => {
+      const mockOnClose = jest.fn();
+      const mockEscPress = jest.fn();
+      const ModalTest = () => {
+        const leastDestructiveRef = React.useRef(null);
+
+        return (
+          <AlertDialog
+            closeOnOverlayClick={false}
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}

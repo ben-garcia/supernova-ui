@@ -1,4 +1,3 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
