@@ -1,3 +1,5 @@
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 module.exports = {
   addons: [
     '@storybook/addon-links',
@@ -15,5 +17,15 @@ module.exports = {
       propFilter: prop =>
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
+  },
+  // modify webpack to allow absolute paths.
+  webpackFinal: async config => {
+    config.resolve.plugins = [
+      ...(config.resolve.plugins || []),
+      new TsconfigPathsPlugin({
+        extensions: config.resolve.extensions,
+      }),
+    ];
+    return config;
   },
 };

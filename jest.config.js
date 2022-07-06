@@ -24,6 +24,13 @@ module.exports = {
   moduleNameMapper: {
     '\\.scss': '<rootDir>/src/__mocks__/styles.ts',
     '\\.svg': '<rootDir>/src/__mocks__/svg.ts',
+    '@/(.*)': '<rootDir>/src/$1',
+    '@atoms/(.*)': '<rootDir>/src/components/atoms/$1',
+    '@molecules/(.*)': '<rootDir>/src/components/molecules/$1',
+    '@contexts/(.*)': '<rootDir>/src/contexts/$1',
+    '@hooks/(.*)': '<rootDir>/src/hooks/$1',
+    '@utils/(.*)': '<rootDir>/src/utils/$1',
+    '@testUtils/(.*)': '<rootDir>/src/test-utils/$1',
   },
   roots: ['<rootDir>/src'],
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],

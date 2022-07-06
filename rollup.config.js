@@ -7,6 +7,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 
 const packageJson = require('./package.json');
+const tsConfig = require('./tsconfig.json');
 
 export default [
   {
@@ -46,7 +47,15 @@ export default [
     input: 'dist/esm/types/index.d.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     // create single d.ts
-    plugins: [dts()],
+    plugins: [
+      dts({
+        // use paths from tsconfig file
+        compilerOptions: {
+          baseUrl: tsConfig.compilerOptions.baseUrl,
+          paths: tsConfig.compilerOptions.paths,
+        },
+      }),
+    ],
     // ignore styles
     external: [/\.scss$/],
   },

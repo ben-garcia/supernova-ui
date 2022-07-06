@@ -23,6 +23,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "dist",
+    "paths": {
+      "@/*": ["."],
+      "@atoms/*": ["components/atoms/*"],
+      "@molecules/*": ["components/molecules/*"],
+      "@hooks/*": ["hooks/*"],
+      "@contexts/*": ["contexts/*"],
+      "@utils/*": ["utils/*"],
+      "@testUtils/*": ["test-utils/*"]
+    },
     "removeComments": false,
     "resolveJsonModule": true,
     "rootDir": "src",
@@ -34,13 +43,6 @@
     "strictPropertyInitialization": true,
     "target": "es5"
   },
-  "exclude": [
-    "node_modules",
-    "src/**/*.test.(ts|tsx)",
-    "src/**/*.stories.tsx",
-    "src/test-utils",
-    "dist",
-    "rollup.config.js"
-  ],
+  "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"]
 }
