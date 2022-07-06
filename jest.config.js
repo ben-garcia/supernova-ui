@@ -30,6 +30,6 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
   },
-  setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/setup-tests.js'],
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/.storybook'],
 };
