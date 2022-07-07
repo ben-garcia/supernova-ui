@@ -1,13 +1,8 @@
 import React from 'react';
 
-import RadioGroup from '.';
-import Radio from '..';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-} from '../../../../test-utils';
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils/index';
+
+import { Radio, RadioGroup } from '..';
 
 describe('<GroupRadio />', () => {
   beforeAll(() => mockMatchMedia());

@@ -6,9 +6,9 @@ import {
   useInputChecked,
   useFormControl,
   useTheme,
-} from '../../../hooks';
-import { SwitchProps } from './types';
+} from '@hooks/index';
 
+import { SwitchProps } from './types';
 import './styles.scss';
 
 import {

@@ -1,13 +1,13 @@
 /* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { forwardRef, useMemo, useState } from 'react';
 
-import { CheckmarkIcon } from '@atoms/index';
 import {
-  useBreakpoint,
   useInputChecked,
+  useBreakpoint,
   useFormControl,
   useTheme,
 } from '@hooks/index';
+
 import {
   colors,
   createClasses,
@@ -20,18 +20,20 @@ import {
   shadows,
   sizes,
 } from '@utils/index';
-import { MarginPaddingProps } from '@/types';
-import { Sizes } from '@/types/common';
 
-import { CheckboxProps } from './types';
+import { MarginPaddingProps } from '@/types/index';
+import { Sizes } from '@/types/common';
+import { RadioProps } from './types';
+
 import './styles.scss';
 
 /**
- * UI interactive component used to enter information
+ * UI interactive component used to indicate that only one choice must
+ * be selected of a given number of choices presented
  */
-const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
+const Radio = forwardRef((props: RadioProps, ref: any) => {
   const {
-    backgroundColor = 'info700',
+    backgroundColor = '',
     borderRadius = '',
     boxShadow = '',
     className,
@@ -51,6 +53,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     padding = '',
     size = 'md',
     textTransform = '',
+    value,
     width = '',
     ...rest
   } = props;
@@ -64,25 +67,29 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     isInvalid,
     isRequired,
   } = useFormControl();
-  const [checkboxIsChecked, setCheckboxIsChecked] = useState(isChecked);
-  const checkboxId = useMemo(
-    () => (isString(fieldId) ? fieldId : `snui-checkbox-${Math.random()}`),
+  const [radioIsChecked, setRadioIsChecked] = useState(isChecked);
+  const radioInputId = useMemo(
+    () =>
+      isString(fieldId)
+        ? `${fieldId}-${Math.random()}`
+        : `snui-radio-${Math.random()}`,
     []
   );
   const backgroundColorToUse = useInputChecked(
-    checkboxId,
+    radioInputId,
     backgroundColor,
-    checkboxIsChecked
+    radioIsChecked,
+    isChecked
   );
   const classes = createClasses(
-    'snui-checkbox snui-inline-flex snui-flex-center',
+    'snui-radio snui-inline-flex snui-justify-center',
     {
       [`${className}`]: isString(className),
       [`snui-border-radius-${borderRadius}`]:
         isString(borderRadius) && radii.includes(borderRadius),
       [`snui-box-shadow-${boxShadow}`]:
         isString(boxShadow) && shadows.includes(boxShadow),
-      [`snui-color-$color}`]: isString(color) && colors.includes(color),
+      [`snui-color-${color}`]: isString(color) && colors.includes(color),
       [`snui-font-${font}`]:
         (font && font === 'heading') || font === 'body' || font === 'mono',
       [`snui-text-${fontSize}`]:
@@ -202,19 +209,26 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
     theme,
     breakpoint
   );
-
-  if (isString(backgroundColor) && checkboxIsChecked) {
-    if (colors.includes(backgroundColor as string)) {
-      styles.backgroundColor = `${(theme as any).colors[backgroundColor]}`;
-    } else {
-      styles.backgroundColor = backgroundColor;
-    }
-  }
+  const circleStyles: any = {};
 
   if (isString(size)) {
     if (sizes.includes(size as string)) {
-      styles.height = `calc(${theme.sizes[size as Sizes]} * 0.55)`;
-      styles.width = `calc(${theme.sizes[size as Sizes]} * 0.55)`;
+      if (size === 'xs') {
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.4)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.4)`;
+        styles.height = `calc(${theme.sizes[size as Sizes]} * 0.7)`;
+        styles.width = `calc(${theme.sizes[size as Sizes]} * 0.7)`;
+      } else if (size === 'sm') {
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        styles.height = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
+        styles.width = `calc(${theme.sizes[size as Sizes]} * 0.6)`;
+      } else {
+        circleStyles.height = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        circleStyles.width = `calc(${theme.sizes[size as Sizes]} * 0.3)`;
+        styles.height = `calc(${theme.sizes[size as Sizes]} * 0.65)`;
+        styles.width = `calc(${theme.sizes[size as Sizes]} * 0.65)`;
+      }
     } else {
       styles.height = size as string;
       styles.width = size as string;
@@ -247,36 +261,36 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
       <input
         {...rest}
         aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
-        aria-invalid={isInvalid ?? undefined}
-        checked={checkboxIsChecked || formControlIsDisabled}
-        className="snui-hidden-checkbox snui-visually-hidden"
-        disabled={isDisabled}
-        id={checkboxId}
+        checked={isChecked && radioIsChecked}
+        className="snui-hidden-radio snui-visually-hidden"
+        disabled={isDisabled || formControlIsDisabled}
+        id={radioInputId}
         onChange={e => {
           if (!isDisabled) {
             if (isFunction(onChange)) {
               onChange!(e);
             }
-            setCheckboxIsChecked(e.target.checked);
+            setRadioIsChecked(e.target.checked);
           }
         }}
         ref={ref}
-        type="checkbox"
+        type="radio"
+        value={value}
       />
       <span
-        className="snui-checkbox__control"
+        aria-hidden="true"
+        className="snui-radio__control"
         style={{
           ...styles,
           backgroundColor: backgroundColorToUse,
         }}
       >
-        <div className="snui-flex snui-flex-center snui-fill-parent">
-          {checkboxIsChecked && (
-            <CheckmarkIcon fill="#fff" height="100%" width="100%" />
-          )}
-        </div>
+        <span className="snui-radio__circle" style={{ ...circleStyles }} />
       </span>
-      <span className="snui-checkbox__label snui-flex snui-flex-center">
+      <span
+        className="snui-radio__label snui-flex snui-flex-center"
+        style={{ fontSize: `${theme.typography.fontSizes[size as Sizes]}` }}
+      >
         {label}
         {isRequired && isString(label) && (
           <span aria-hidden="true" className="snui-error" role="presentation">
@@ -288,4 +302,4 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
   );
 });
 
-export default Checkbox;
+export default Radio;

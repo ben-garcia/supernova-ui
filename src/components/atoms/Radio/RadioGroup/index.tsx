@@ -1,7 +1,8 @@
 import React, { Children } from 'react';
 
+import { createClasses, isString } from '@utils/index';
+
 import { RadioGroupProps } from './types';
-import { createClasses, isString } from '../../../../utils';
 
 /**
  * UI component used as a wrapper for Radio components

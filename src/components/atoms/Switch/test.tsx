@@ -1,12 +1,7 @@
 import React from 'react';
 
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils/index';
 import Switch from '.';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-} from '../../../test-utils';
 
 describe('<Switch />', () => {
   beforeAll(() => mockMatchMedia());

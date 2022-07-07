@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
+import { sizes } from '@utils/index';
 import Badge from '.';
-import { BadgeProps } from './types';
 import argTypes from './argTypes';
-import { sizes } from '../../../utils';
+import { BadgeProps } from './types';
 
 export default {
   argTypes,

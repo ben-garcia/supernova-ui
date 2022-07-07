@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
+import { sizes } from '@utils/index';
 import Heading from '.';
 import { HeadingProps } from './types';
 import argTypes from './argTypes';
-import { sizes } from '../../../utils';
 
 export default {
   argTypes,

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Sizes } from 'types/common';
-import { SpinnerProps } from './types';
+import { useBreakpoint, useTheme } from '@hooks/index';
+import { createClasses, createStyles, isString, sizes } from '@utils/index';
+import { Sizes } from '@/types/common';
+import { MarginPaddingProps } from '@/types/index';
 
-import { createClasses, createStyles, isString, sizes } from '../../../utils';
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useTheme } from '../../../hooks';
+import { SpinnerProps } from './types';
 import './styles.scss';
 
 /**

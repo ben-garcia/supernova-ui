@@ -1,9 +1,5 @@
 import React from 'react';
 
-import Slider, { SliderProps } from '.';
-import SliderRail from './SliderRail';
-import SliderFilledRail from './SliderFilledRail';
-import SliderThumb from './SliderThumb';
 import {
   a11yTest,
   fireEvent,
@@ -11,7 +7,10 @@ import {
   render,
   screen,
   userEvent,
-} from '../../../test-utils';
+} from '@testUtils/index';
+
+import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '.';
+import { SliderProps } from './types';
 
 describe('<Slider />', () => {
   beforeAll(() => {

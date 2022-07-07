@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
-import { isString } from '../../../utils';
+import { isString } from '@utils/index';
 
 interface PortalProps {
   children: ReactNode;

@@ -1,8 +1,6 @@
 import React, { forwardRef, useState, useMemo } from 'react';
 
-import { TextInputProps } from './types';
-import './styles.scss';
-
+import { useBreakpoint, useFormControl, useTheme } from '@hooks/index';
 import {
   colors,
   createClasses,
@@ -14,11 +12,12 @@ import {
   responsify,
   shadows,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
 
-import { MarginPaddingProps } from '../../../types';
-import { Sizes } from '../../../types/common';
-import { useBreakpoint, useFormControl, useTheme } from '../../../hooks';
+import { MarginPaddingProps } from '@/types/index';
+import { Sizes } from '@/types/common';
+import { TextInputProps } from './types';
+import './styles.scss';
 
 /**
  * UI interactive component used to enter information

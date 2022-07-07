@@ -1,8 +1,7 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import Flex from '.';
-import FlexItem from './FlexItem';
+import { Flex, FlexItem } from '.';
 
 export default {
   component: Flex,

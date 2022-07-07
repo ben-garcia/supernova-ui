@@ -1,11 +1,8 @@
 /* eslint react/button-has-type: 0 */
 import React, { forwardRef, useEffect, useState } from 'react';
 
-import Spinner from '../Spinner';
-import { ButtonProps } from './types';
-import { Sizes } from '../../../types/common';
-import './styles.scss';
-
+import { Spinner } from '@atoms/index';
+import { useBreakpoint, useTheme } from '@hooks/index';
 import {
   createClasses,
   createStyles,
@@ -15,10 +12,12 @@ import {
   responsify,
   shadows,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
+import { MarginPaddingProps } from '@/types/index';
+import { Sizes } from '@/types/common';
 
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useTheme } from '../../../hooks';
+import { ButtonProps } from './types';
+import './styles.scss';
 
 /**
  * UI interactive component used to trigger an action

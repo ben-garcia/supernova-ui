@@ -2,10 +2,14 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import Radio from '.';
-import RadioGroup from './RadioGroup';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+} from '@molecules/index';
+
+import { Radio, RadioGroup } from '.';
 import { UserIcon } from '../Icon/Icons';
-import { FormControl, FormErrorMessage, FormHelperText } from '../../molecules';
 import argTypes from './argTypes';
 
 export default {

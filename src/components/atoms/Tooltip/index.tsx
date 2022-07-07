@@ -2,15 +2,15 @@
 import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useTheme } from '@hooks/index';
 import {
   ArrowPosition,
   getArrowPosition,
   getLeftTopPosition,
   isString,
-} from '../../../utils';
-import { TooltipProps } from './types';
-import { useTheme } from '../../../hooks';
+} from '@utils/index';
 
+import { TooltipProps } from './types';
 import './styles.scss';
 
 interface TooltipPosition {

@@ -1,12 +1,7 @@
 import React from 'react';
 
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils/index';
 import Checkbox from '.';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-} from '../../../test-utils';
 
 describe('<Checkbox />', () => {
   beforeAll(() => mockMatchMedia());

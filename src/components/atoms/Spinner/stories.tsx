@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import argTypes from './argTypes';
-import { SpinnerProps } from './types';
-
 import Spinner from '.';
+import argTypes from './argTypes';
+
+import { SpinnerProps } from './types';
 
 export default {
   argTypes,

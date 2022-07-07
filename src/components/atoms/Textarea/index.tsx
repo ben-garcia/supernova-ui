@@ -1,8 +1,6 @@
 import React, { forwardRef, useState, useMemo } from 'react';
 
-import { TextareaProps } from './types';
-import './styles.scss';
-
+import { useBreakpoint, useFormControl, useTheme } from '@hooks/index';
 import {
   colors,
   createClasses,
@@ -12,10 +10,11 @@ import {
   radii,
   shadows,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
+import { MarginPaddingProps } from '@/types/index';
 
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useFormControl, useTheme } from '../../../hooks';
+import { TextareaProps } from './types';
+import './styles.scss';
 
 /**
  * UI textarea component used to enter multiple lines of text

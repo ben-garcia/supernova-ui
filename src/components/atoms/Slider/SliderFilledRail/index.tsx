@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { useSlider, useTheme } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { useSlider, useTheme } from '@hooks/index';
+import { createClasses, isString } from '@utils/index';
+
 import './styles.scss';
 
 export interface SliderFilledRailProps {

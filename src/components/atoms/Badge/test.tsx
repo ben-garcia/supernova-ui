@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { a11yTest, mockMatchMedia, render } from '@testUtils/index';
 import Badge from '.';
-import { a11yTest, mockMatchMedia, render } from '../../../test-utils';
 
 describe('<Badge />', () => {
   beforeAll(() => mockMatchMedia());

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useBreakpoint, useTheme } from '@hooks/index';
 import {
   colors,
   createClasses,
@@ -7,10 +8,10 @@ import {
   createStyles,
   isString,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
+
+import { MarginPaddingProps } from '@/types';
 import { HeadingProps } from './types';
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
  * Ui component to display headings

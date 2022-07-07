@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { useBreakpoint } from '@hooks/index';
+import { createClasses, isString } from '@utils/index';
+
 import { FlexItemProps } from './types';
-import { useBreakpoint } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
 
 const FlexItem: React.FC<FlexItemProps> = props => {
   const {

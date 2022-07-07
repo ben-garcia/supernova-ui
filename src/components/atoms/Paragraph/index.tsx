@@ -1,15 +1,16 @@
 import React from 'react';
 
+import { useBreakpoint, useTheme } from '@hooks/index';
 import {
   colors,
   createClasses,
   createStyles,
   isString,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
+
+import { MarginPaddingProps } from '@/types';
 import { ParagraphProps } from './types';
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
  * UI component to display a paragraph

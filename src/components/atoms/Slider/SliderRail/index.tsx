@@ -2,8 +2,9 @@
 /* eslint jsx-a11y/click-events-have-key-events: 0 */
 import React, { useRef } from 'react';
 
-import { useSlider } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { useSlider } from '@hooks/index';
+import { createClasses, isString } from '@utils/index';
+
 import './styles.scss';
 
 export interface SliderRailProps {

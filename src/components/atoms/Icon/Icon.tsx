@@ -1,11 +1,10 @@
 import React from 'react';
 
+import { useBreakpoint, useTheme } from '@hooks/index';
+import { createClasses, createStyles, isString, sizes } from '@utils/index';
+import { MarginPaddingProps } from '@/types/index';
 import { Sizes } from 'types/common';
 import { IconBaseProps } from './types';
-
-import { createClasses, createStyles, isString, sizes } from '../../../utils';
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useTheme } from '../../../hooks';
 
 /**
  * The base Icon component

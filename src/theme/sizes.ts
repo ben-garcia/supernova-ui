@@ -5,7 +5,6 @@ const sizes = {
   lg: '2.5rem',
   xl: '3rem',
   xxl: '3.5rem',
-  full: '100%',
 };
 
 export default sizes;

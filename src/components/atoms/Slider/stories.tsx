@@ -1,10 +1,9 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import Slider, { SliderProps } from '.';
-import SliderRail from './SliderRail';
-import SliderFilledRail from './SliderFilledRail';
-import SliderThumb from './SliderThumb';
+import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '.';
+
+import { SliderProps } from './types';
 
 export default {
   argTypes: {

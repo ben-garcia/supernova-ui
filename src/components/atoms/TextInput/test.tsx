@@ -1,13 +1,9 @@
 import React from 'react';
 
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils/index';
+
 import TextInput from '.';
 import { UserIcon } from '../Icon/Icons';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-} from '../../../test-utils';
 
 describe('<TextInput />', () => {
   beforeAll(() => mockMatchMedia());

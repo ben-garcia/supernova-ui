@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import { isFunction } from '../../../utils';
+import { isFunction } from '@utils/index';
+
 import { FocusLockProps } from './types';
 
 /**

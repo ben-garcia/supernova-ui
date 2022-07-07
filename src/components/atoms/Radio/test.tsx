@@ -1,12 +1,7 @@
 import React from 'react';
 
-import Radio from '.';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-} from '../../../test-utils';
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils/index';
+import Radio from './Radio';
 
 describe('<Radio />', () => {
   beforeAll(() => mockMatchMedia());
