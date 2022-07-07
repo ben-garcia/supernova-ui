@@ -1,18 +1,27 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import Modal from '.';
-import ModalButton from './ModalButton';
-import ModalFooter from './ModalFooter';
-import ModalHeader from './ModalHeader';
-import ModalBody from './ModalBody';
-import Button from '../../atoms/Button';
-import TextInput from '../../atoms/TextInput';
-import argTypes from './arg-types';
+import { Button, TextInput } from '@atoms/index';
+import { Modal, ModalButton, ModalFooter, ModalHeader, ModalBody } from '.';
+
 import { ModalProps } from './types';
 
 export default {
-  argTypes,
+  argTypes: {
+    closeOnEsc: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+    closeOnOverlayClick: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'md',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    },
+  },
   component: Modal,
   title: 'Supernova UI/Molecules/Modal',
 } as Meta;

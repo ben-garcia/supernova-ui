@@ -1,10 +1,12 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import Accordion from '.';
-import AccordionHeaderButton from './AccordionHeaderButton';
-import AccordionPanel from './AccordionPanel';
-import AccordionItem from './AccordionItem';
+import {
+  Accordion,
+  AccordionHeaderButton,
+  AccordionPanel,
+  AccordionItem,
+} from '.';
 
 export default {
   component: Accordion,

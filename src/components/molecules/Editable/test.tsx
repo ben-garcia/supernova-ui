@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 
-import Editable from '.';
-import EditableInput from './EditableInput';
-import EditablePreview from './EditablePreview';
-import EditableTextarea from './EditableTextarea';
-import EditableProps from './types';
 import {
   a11yTest,
   fireEvent,
@@ -13,7 +8,10 @@ import {
   screen,
   userEvent,
   waitFor,
-} from '../../../test-utils';
+} from '@testUtils/index';
+import { Editable, EditableInput, EditablePreview, EditableTextarea } from '.';
+
+import EditableProps from './types';
 
 describe('<Editable>', () => {
   beforeAll(() => mockMatchMedia());

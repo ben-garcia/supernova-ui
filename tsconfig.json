@@ -24,7 +24,7 @@
     "noUnusedParameters": true,
     "outDir": "dist",
     "paths": {
-      "@/*": ["."],
+      "@/*": ["./*"],
       "@atoms/*": ["components/atoms/*"],
       "@molecules/*": ["components/molecules/*"],
       "@hooks/*": ["hooks/*"],

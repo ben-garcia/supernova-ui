@@ -1,17 +1,33 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import AlertDialog from '.';
-import AlertDialogBody from './AlertDialogBody';
-import AlertDialogButton from './AlertDialogButton';
-import AlertDialogFooter from './AlertDialogFooter';
-import AlertDialogHeader from './AlertDialogHeader';
-import Button from '../../atoms/Button';
-import argTypes from './arg-types';
+import { Button } from '@atoms/index';
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogButton,
+  AlertDialogFooter,
+  AlertDialogHeader,
+} from '@molecules/AlertDialog';
+
 import { AlertDialogProps } from './types';
 
 export default {
-  argTypes,
+  argTypes: {
+    closeOnEsc: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+    closeOnOverlayClick: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'md',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    },
+  },
   component: AlertDialog,
   title: 'Supernova UI/Molecules/AlertDialog',
 } as Meta;

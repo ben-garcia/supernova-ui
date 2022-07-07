@@ -1,17 +1,8 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import Menu from '.';
-import MenuButton from './MenuButton';
-import MenuList from './MenuList';
-import MenuItem from './MenuItem';
-import MenuGroup from './MenuGroup';
-import {
-  SettingsIcon,
-  UserIcon,
-  LogoutIcon,
-  HalfMoonIcon,
-} from '../../atoms/Icon/Icons';
+import { SettingsIcon, UserIcon, LogoutIcon, HalfMoonIcon } from '@atoms/index';
+import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '.';
 
 export default {
   component: Menu,

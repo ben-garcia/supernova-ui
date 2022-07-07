@@ -1,11 +1,6 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
-import Accordion from '.';
-import AccordionHeaderButton from './AccordionHeaderButton';
-import AccordionItem from './AccordionItem';
-import AccordionPanel from './AccordionPanel';
-import { AccordionProps } from './types';
 import {
   a11yTest,
   fireEvent,
@@ -13,7 +8,15 @@ import {
   render,
   screen,
   userEvent,
-} from '../../../test-utils';
+} from '@testUtils/index';
+import {
+  Accordion,
+  AccordionHeaderButton,
+  AccordionItem,
+  AccordionPanel,
+} from '.';
+
+import { AccordionProps } from './types';
 
 describe('<Accordion />', () => {
   beforeAll(() => mockMatchMedia());

@@ -2,11 +2,6 @@
 /* eslint react/button-has-type: 0 */
 import React from 'react';
 
-import AlertDialog from '.';
-import AlertDialogBody from './AlertDialogBody';
-import AlertDialogButton from './AlertDialogButton';
-import AlertDialogFooter from './AlertDialogFooter';
-import AlertDialogHeader from './AlertDialogHeader';
 import {
   a11yTest,
   fireEvent,
@@ -14,7 +9,15 @@ import {
   render,
   userEvent,
   waitFor, // wait for the set timeout function to be called
-} from '../../../test-utils';
+} from '@testUtils/index';
+
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogButton,
+  AlertDialogFooter,
+  AlertDialogHeader,
+} from '@molecules/AlertDialog';
 
 describe('<AlertDialog />', () => {
   beforeAll(() => mockMatchMedia());

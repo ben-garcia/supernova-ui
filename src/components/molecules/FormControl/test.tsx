@@ -1,12 +1,11 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
-import FormControl from '.';
+import { TextInput } from '@atoms/index';
+import { a11yTest, mockMatchMedia, render } from '@testUtils/index';
+import { FormControl, FormErrorMessage, FormHelperText } from '.';
+
 import { FormControlProps } from './types';
-import FormErrorMessage from './FormErrorMessage';
-import FormHelperText from './FormHelperText';
-import TextInput from '../../atoms/TextInput';
-import { a11yTest, mockMatchMedia, render } from '../../../test-utils';
 
 describe('<FormControl />', () => {
   beforeAll(() => mockMatchMedia());

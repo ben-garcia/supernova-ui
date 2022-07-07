@@ -1,13 +1,10 @@
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { useEditableControls } from '../../../hooks/use-editable';
-import Editable from '.';
-import EditablePreview from './EditablePreview';
-import EditableInput from './EditableInput';
-import EditableTextarea from './EditableTextarea';
+import { useEditableControls } from '@hooks/index';
+import { Button } from '@atoms/index';
+import { Editable, EditablePreview, EditableInput, EditableTextarea } from '.';
 import argTypes from './arg-types';
-import Button from '../../atoms/Button';
 
 export default {
   argTypes,

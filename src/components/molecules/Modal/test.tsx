@@ -1,10 +1,5 @@
 import React from 'react';
 
-import Modal from '.';
-import ModalBody from './ModalBody';
-import ModalButton from './ModalButton';
-import ModalFooter from './ModalFooter';
-import ModalHeader from './ModalHeader';
 import {
   a11yTest,
   fireEvent,
@@ -13,7 +8,8 @@ import {
   screen,
   userEvent,
   waitFor, // wait for the set timeout function to be called
-} from '../../../test-utils';
+} from '@testUtils/index';
+import { Modal, ModalBody, ModalButton, ModalFooter, ModalHeader } from '.';
 
 describe('<Modal />', () => {
   beforeAll(() => mockMatchMedia());

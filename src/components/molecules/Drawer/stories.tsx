@@ -1,18 +1,32 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import Drawer from '.';
-import DrawerBody from './DrawerBody';
-import DrawerButton from './DrawerButton';
-import DrawerFooter from './DrawerFooter';
-import DrawerHeader from './DrawerHeader';
-import Button from '../../atoms/Button';
-import TextInput from '../../atoms/TextInput';
-import argTypes from './arg-types';
+import { Button, TextInput } from '@atoms/index';
+import {
+  Drawer,
+  DrawerBody,
+  DrawerButton,
+  DrawerFooter,
+  DrawerHeader,
+} from '.';
 import { DrawerProps } from './types';
 
 export default {
-  argTypes,
+  argTypes: {
+    closeOnEsc: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+    closeOnOverlayClick: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'md',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    },
+  },
   component: Drawer,
   title: 'Supernova UI/Molecules/Drawer',
 } as Meta;

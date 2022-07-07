@@ -1,11 +1,8 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import FormControl from '.';
-import FormHelperText from './FormHelperText';
-import FormErrorMessage from './FormErrorMessage';
-import TextInput from '../../atoms/TextInput';
-import Textarea from '../../atoms/Textarea';
+import { TextInput, Textarea } from '@atoms/index';
+import { FormControl, FormHelperText, FormErrorMessage } from '.';
 
 export default {
   component: FormControl,

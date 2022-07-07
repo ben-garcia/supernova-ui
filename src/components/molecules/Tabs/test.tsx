@@ -1,12 +1,6 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
-import Tabs from '.';
-import TabList from './TabList';
-import Tab from './Tab';
-import TabPanelList from './TabPanelList';
-import TabPanel from './TabPanel';
-import { TabsProps } from './types';
 import {
   a11yTest,
   fireEvent,
@@ -14,7 +8,10 @@ import {
   render,
   screen,
   userEvent,
-} from '../../../test-utils';
+} from '@testUtils/index';
+import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '.';
+
+import { TabsProps } from './types';
 
 describe('<Tabs />', () => {
   beforeAll(() => mockMatchMedia());

@@ -1,11 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import Tabs from '.';
-import Tab from './Tab';
-import TabList from './TabList';
-import TabPanel from './TabPanel';
-import TabPanelList from './TabPanelList';
+import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '.';
+
 import { TabsProps } from './types';
 
 export default {

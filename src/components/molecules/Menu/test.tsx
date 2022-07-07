@@ -1,21 +1,17 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
-import Menu from '.';
-import { MenuProps } from './types';
-import MenuButton from './MenuButton';
-import MenuItem from './MenuItem';
-import MenuGroup from './MenuGroup';
-import MenuList from './MenuList';
 import {
-  // act,
   a11yTest,
   fireEvent,
   mockMatchMedia,
   render,
   screen,
   userEvent,
-} from '../../../test-utils';
+} from '@testUtils/index';
+import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '.';
+
+import { MenuProps } from './types';
 
 describe('<Menu />', () => {
   beforeAll(() => mockMatchMedia());
