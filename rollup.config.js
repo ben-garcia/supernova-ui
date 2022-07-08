@@ -4,6 +4,7 @@ import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
 const packageJson = require('./package.json');
@@ -25,22 +26,22 @@ export default [
       },
     ],
     plugins: [
-      // Automatically externalize peerDependencies in a rollup bundle.
+      // Prevent bundling peerDependencies
       peerDepsExternal(),
-      // Locate modules using the Node resolution algorithm,
-      // for using third party modules in node_modules
+      // Resolve third party dependencies in node_modules
       resolve(),
-      // A Rollup plugin to convert CommonJS modules to ES6,
-      // so they can be included in a Rollup bundle
+      // Convert commonjs modules into ES6
       commonjs(),
-      // A Rollup plugin for seamless integration between Rollup and Typescript.
+      // Transpile Typescript code to JS
       typescript({ tsconfig: './tsconfig.json' }),
-      // Seamless integration between Rollup and PostCSS.
+      // Merge our scss files into a single css file
       postcss({
         extract: 'css/supernova-ui.min.css',
         plugins: [autoprefixer()],
         minimize: true,
       }),
+      // Minify bundle
+      terser(),
     ],
   },
   {
