@@ -1,7 +1,8 @@
 import React, { createContext } from 'react';
 
-import { Portal } from '../../components/atoms';
-import Notification from '../../components/molecules/Notification';
+import { Portal } from '@atoms/index';
+import Notification from '@molecules/Notification';
+
 import reducer from './reducer';
 import {
   Notification as NotificationType,
