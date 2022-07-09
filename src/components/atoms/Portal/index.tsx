@@ -1,45 +1,55 @@
-import { ReactNode, useEffect, useState } from 'react';
-
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useUniqueId } from '@hooks/index';
 import { isString } from '@utils/index';
 
-interface PortalProps {
+export interface PortalProps {
   children: ReactNode;
   /**
-   * A unique id for the portal
+   * A unique id for the portal.
    */
   id?: string;
+  /**
+   * Used to control when the Portal should be rendered.
+   *
+   * @default true
+   */
+  isMounted?: boolean;
 }
 
 /**
  * Component that renders it's children in a React Portal
  */
-const Portal = (props: PortalProps) => {
-  const { children, id } = props;
+const Portal: FC<PortalProps> = props => {
+  const { children, id, isMounted = true } = props;
 
-  const [portalId] = useState(
-    isString(id) ? `${id}-${Math.random()}-portal` : `portal-${Math.random()}`
-  );
-  const [mounted, setMounted] = useState(false);
+  const portalId = isString(id) ? id : useUniqueId('snui-portal');
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
-    const div = document.createElement('div');
+    let div: HTMLDivElement;
 
-    div.id = portalId;
-    document.body.appendChild(div);
-
-    setMounted(true);
+    if (isMounted) {
+      div = document.createElement('div');
+      div.id = portalId as string;
+      document.body.appendChild(div);
+      setRender(true);
+    }
 
     return () => {
       if (div) {
+        setRender(false);
         document.body.removeChild(div);
       }
     };
-  }, []);
+  }, [isMounted]);
 
-  return mounted
-    ? createPortal(children, document.getElementById(portalId) as Element)
+  return render && isMounted
+    ? createPortal(
+        children,
+        document.getElementById(portalId as string) as Element
+      )
     : null;
 };
 
