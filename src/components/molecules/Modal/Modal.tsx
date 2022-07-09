@@ -5,15 +5,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 
-import { Button, CloseIcon } from '@atoms/index';
+import { Button, CloseIcon, Portal } from '@atoms/index';
 import FocusLock from '@atoms/FocusLock';
 import Overlay from '@atoms/Overlay';
-
-import { ModalProps } from './types';
-import './styles.scss';
-
+import { useBreakpoint, useTheme } from '@hooks/index';
+import { useModalProvider } from '@hooks/use-modal';
+import { ModalProvider } from '@contexts/index';
 import {
   colors,
   createClasses,
@@ -21,12 +19,11 @@ import {
   isString,
   shadows,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
 
-import { MarginPaddingProps } from '../../../types';
-import { useBreakpoint, useTheme } from '../../../hooks';
-import { useModalProvider } from '../../../hooks/use-modal';
-import { ModalProvider } from '../../../contexts';
+import { MarginPaddingProps } from '@/types/index';
+import { ModalProps } from './types';
+import './styles.scss';
 
 /**
  * The container for all Modal related components
@@ -61,7 +58,6 @@ const Modal: React.FC<ModalProps> = props => {
     width = '',
     ...rest
   } = props;
-  const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const enterExitMode = useCallback(() => setIsExiting(true), []);
   const leaveExitMode = useCallback(() => setIsExiting(false), []);
@@ -74,15 +70,16 @@ const Modal: React.FC<ModalProps> = props => {
       onClose();
     }, 300);
   }, []);
-  const context = useModalProvider(props);
+  const { id: modalId, ...restContext } = useModalProvider(props);
   const contextValue = useMemo(
     () => ({
-      ...context,
+      ...restContext,
       enterExitMode,
-      onClose: handleOnClose,
+      id: modalId,
       leaveExitMode,
+      onClose: handleOnClose,
     }),
-    [context]
+    [modalId, restContext]
   );
   const previousActiveElement = useRef<Element | null>(null);
 
@@ -97,23 +94,6 @@ const Modal: React.FC<ModalProps> = props => {
         (previousActiveElement!.current! as HTMLElement).focus();
       } else {
         finalFocusRef.current.focus();
-      }
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    let div: HTMLDivElement;
-    if (isOpen) {
-      div = document.createElement('div');
-      div.id = context.id;
-      document.body.appendChild(div);
-      setMounted(true);
-    }
-
-    return () => {
-      if (div) {
-        setMounted(false);
-        document.body.removeChild(div);
       }
     };
   }, [isOpen]);
@@ -258,49 +238,46 @@ const Modal: React.FC<ModalProps> = props => {
     }
   }
 
-  // storing jsx in a variable to make eslint happy
-  const jsx = (
-    <ModalProvider value={contextValue}>
-      <FocusLock
-        closeOnEsc={closeOnEsc}
-        closeOnOverlayClick={closeOnOverlayClick}
-        enterExitMode={enterExitMode}
-        initialFocusRef={initialFocusRef}
-        leaveExitMode={leaveExitMode}
-        onClickOutside={onClickOutside}
-        onClose={handleOnClose}
-        onEscPress={onEscPress}
-        trapFocus={trapFocus}
-      >
-        <Overlay>
-          <section
-            {...rest}
-            aria-labelledby={`${context.id}__header`}
-            aria-describedby={`${context.id}__body`}
-            aria-modal="true"
-            className={classes}
-            role="dialog"
-            style={styles}
-          >
-            <Button
-              aria-label="Close the modal"
-              className="snui-modal__close-button"
-              hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
-              onClick={handleOnClose}
-              variant="outline"
+  return (
+    <Portal isMounted={isOpen}>
+      <ModalProvider value={contextValue}>
+        <FocusLock
+          closeOnEsc={closeOnEsc}
+          closeOnOverlayClick={closeOnOverlayClick}
+          enterExitMode={enterExitMode}
+          initialFocusRef={initialFocusRef}
+          leaveExitMode={leaveExitMode}
+          onClickOutside={onClickOutside}
+          onClose={handleOnClose}
+          onEscPress={onEscPress}
+          trapFocus={trapFocus}
+        >
+          <Overlay>
+            <section
+              {...rest}
+              aria-labelledby={`${modalId}__header`}
+              aria-describedby={`${modalId}__body`}
+              aria-modal="true"
+              className={classes}
+              role="dialog"
+              style={styles}
             >
-              <CloseIcon fill="#000" size="1rem" />
-            </Button>
-            {children}
-          </section>
-        </Overlay>
-      </FocusLock>
-    </ModalProvider>
+              <Button
+                aria-label="Close the modal"
+                className="snui-modal__close-button"
+                hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
+                onClick={handleOnClose}
+                variant="outline"
+              >
+                <CloseIcon fill="#000" size="1rem" />
+              </Button>
+              {children}
+            </section>
+          </Overlay>
+        </FocusLock>
+      </ModalProvider>
+    </Portal>
   );
-
-  return isOpen && mounted
-    ? createPortal(jsx, document.getElementById(context.id) as Element)
-    : null;
 };
 
 export default Modal;

@@ -5,7 +5,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 
 import {
   colors,
@@ -15,7 +14,7 @@ import {
   shadows,
   sizes,
 } from '@utils/index';
-import { Button, CloseIcon } from '@atoms/index';
+import { Button, CloseIcon, Portal } from '@atoms/index';
 import FocusLock from '@atoms/FocusLock';
 import Overlay from '@atoms/Overlay';
 import { DrawerProvider } from '@contexts/index';
@@ -60,7 +59,6 @@ const Drawer: React.FC<DrawerProps> = props => {
     width = '',
     ...rest
   } = props;
-  const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const enterExitMode = useCallback(() => setIsExiting(true), []);
   const leaveExitMode = useCallback(() => setIsExiting(false), []);
@@ -73,15 +71,16 @@ const Drawer: React.FC<DrawerProps> = props => {
       onClose();
     }, 300);
   }, []);
-  const context = useDrawerProvider(props);
+  const { id: drawerId, ...restContext } = useDrawerProvider(props);
   const contextValue = useMemo(
     () => ({
-      ...context,
+      ...restContext,
       enterExitMode,
-      onClose: handleOnClose,
+      id: drawerId,
       leaveExitMode,
+      onClose: handleOnClose,
     }),
-    [context]
+    [drawerId, restContext]
   );
   const previousActiveElement = useRef<Element | null>(null);
 
@@ -96,23 +95,6 @@ const Drawer: React.FC<DrawerProps> = props => {
         (previousActiveElement!.current! as HTMLElement).focus();
       } else {
         finalFocusRef.current.focus();
-      }
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    let div: HTMLDivElement;
-    if (isOpen) {
-      div = document.createElement('div');
-      div.id = context.id;
-      document.body.appendChild(div);
-      setMounted(true);
-    }
-
-    return () => {
-      if (div) {
-        setMounted(false);
-        document.body.removeChild(div);
       }
     };
   }, [isOpen]);
@@ -263,49 +245,46 @@ const Drawer: React.FC<DrawerProps> = props => {
     }
   }
 
-  // storing jsx in a variable to make eslint happy
-  const jsx = (
-    <DrawerProvider value={contextValue}>
-      <FocusLock
-        closeOnEsc={closeOnEsc}
-        closeOnOverlayClick={closeOnOverlayClick}
-        enterExitMode={enterExitMode}
-        initialFocusRef={initialFocusRef}
-        leaveExitMode={leaveExitMode}
-        onClickOutside={onClickOutside}
-        onClose={handleOnClose}
-        onEscPress={onEscPress}
-        trapFocus={trapFocus}
-      >
-        <Overlay>
-          <section
-            {...rest}
-            aria-labelledby={`${context.id}__header`}
-            aria-describedby={`${context.id}__body`}
-            aria-modal="true"
-            className={classes}
-            role="dialog"
-            style={styles}
-          >
-            <Button
-              aria-label="Close the modal"
-              className="snui-drawer__close-button"
-              hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
-              onClick={handleOnClose}
-              variant="outline"
+  return (
+    <Portal isMounted={isOpen}>
+      <DrawerProvider value={contextValue}>
+        <FocusLock
+          closeOnEsc={closeOnEsc}
+          closeOnOverlayClick={closeOnOverlayClick}
+          enterExitMode={enterExitMode}
+          initialFocusRef={initialFocusRef}
+          leaveExitMode={leaveExitMode}
+          onClickOutside={onClickOutside}
+          onClose={handleOnClose}
+          onEscPress={onEscPress}
+          trapFocus={trapFocus}
+        >
+          <Overlay>
+            <section
+              {...rest}
+              aria-labelledby={`${drawerId}__header`}
+              aria-describedby={`${drawerId}__body`}
+              aria-modal="true"
+              className={classes}
+              role="dialog"
+              style={styles}
             >
-              <CloseIcon fill="#000" size="1rem" />
-            </Button>
-            {children}
-          </section>
-        </Overlay>
-      </FocusLock>
-    </DrawerProvider>
+              <Button
+                aria-label="Close the modal"
+                className="snui-drawer__close-button"
+                hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
+                onClick={handleOnClose}
+                variant="outline"
+              >
+                <CloseIcon fill="#000" size="1rem" />
+              </Button>
+              {children}
+            </section>
+          </Overlay>
+        </FocusLock>
+      </DrawerProvider>
+    </Portal>
   );
-
-  return isOpen && mounted
-    ? createPortal(jsx, document.getElementById(context.id) as Element)
-    : null;
 };
 
 export default Drawer;

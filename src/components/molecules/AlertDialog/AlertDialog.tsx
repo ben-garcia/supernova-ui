@@ -5,9 +5,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 
-import { Button, CloseIcon } from '@atoms/index';
+import { Button, CloseIcon, Portal } from '@atoms/index';
 import FocusLock from '@atoms/FocusLock';
 import Overlay from '@atoms/Overlay';
 import { AlertDialogProvider } from '@contexts/index';
@@ -59,7 +58,6 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
     width = '',
     ...rest
   } = props;
-  const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const enterExitMode = useCallback(() => setIsExiting(true), []);
   const leaveExitMode = useCallback(() => setIsExiting(false), []);
@@ -73,17 +71,18 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
     }, 300);
   }, []);
 
-  const context = useAlertDialogProvider(props);
+  const { id: alertDialogId, ...restContext } = useAlertDialogProvider(props);
   const contextValue = useMemo(
     () => ({
-      ...context,
+      ...restContext,
       enterExitMode,
+      id: alertDialogId,
+      leaveExitMode,
       onClickOutside,
       onClose: handleOnClose,
       onEscPress,
-      leaveExitMode,
     }),
-    [context]
+    [alertDialogId, restContext]
   );
   const previousActiveElement = useRef<Element | null>(null);
 
@@ -98,23 +97,6 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
         (previousActiveElement!.current! as HTMLElement).focus();
       } else {
         finalFocusRef.current.focus();
-      }
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    let div: HTMLDivElement;
-    if (isOpen) {
-      div = document.createElement('div');
-      div.id = context.id;
-      document.body.appendChild(div);
-      setMounted(true);
-    }
-
-    return () => {
-      if (div) {
-        setMounted(false);
-        document.body.removeChild(div);
       }
     };
   }, [isOpen]);
@@ -259,49 +241,46 @@ const AlertDialog: React.FC<AlertDialogProps> = props => {
     }
   }
 
-  // storing jsx in a variable to make eslint happy
-  const jsx = (
-    <AlertDialogProvider value={contextValue}>
-      <FocusLock
-        closeOnEsc={closeOnEsc}
-        closeOnOverlayClick={closeOnOverlayClick}
-        enterExitMode={enterExitMode}
-        initialFocusRef={leastDestructiveRef}
-        leaveExitMode={leaveExitMode}
-        onClickOutside={onClickOutside}
-        onClose={handleOnClose}
-        onEscPress={onEscPress}
-        trapFocus={trapFocus}
-      >
-        <Overlay>
-          <section
-            {...rest}
-            aria-labelledby={`${context.id}__header`}
-            aria-describedby={`${context.id}__body`}
-            aria-modal="true"
-            className={classes}
-            role="alertdialog"
-            style={styles}
-          >
-            <Button
-              aria-label="Close the alert dialog"
-              className="snui-alert-dialog__close-button"
-              hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
-              onClick={handleOnClose}
-              variant="outline"
+  return (
+    <Portal isMounted={isOpen}>
+      <AlertDialogProvider value={contextValue}>
+        <FocusLock
+          closeOnEsc={closeOnEsc}
+          closeOnOverlayClick={closeOnOverlayClick}
+          enterExitMode={enterExitMode}
+          initialFocusRef={leastDestructiveRef}
+          leaveExitMode={leaveExitMode}
+          onClickOutside={onClickOutside}
+          onClose={handleOnClose}
+          onEscPress={onEscPress}
+          trapFocus={trapFocus}
+        >
+          <Overlay>
+            <section
+              {...rest}
+              aria-labelledby={`${alertDialogId}__header`}
+              aria-describedby={`${alertDialogId}__body`}
+              aria-modal="true"
+              className={classes}
+              role="alertdialog"
+              style={styles}
             >
-              <CloseIcon fill="#000" size="1rem" />
-            </Button>
-            {children}
-          </section>
-        </Overlay>
-      </FocusLock>
-    </AlertDialogProvider>
+              <Button
+                aria-label="Close the alert dialog"
+                className="snui-alert-dialog__close-button"
+                hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
+                onClick={handleOnClose}
+                variant="outline"
+              >
+                <CloseIcon fill="#000" size="1rem" />
+              </Button>
+              {children}
+            </section>
+          </Overlay>
+        </FocusLock>
+      </AlertDialogProvider>
+    </Portal>
   );
-
-  return isOpen && mounted
-    ? createPortal(jsx, document.getElementById(context.id) as Element)
-    : null;
 };
 
 export default AlertDialog;
