@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useBreakpoint, useTheme } from '@hooks/index';
 import { createClasses, createStyles, isString, sizes } from '@utils/index';
+
 import { Sizes } from '@/types/common';
 import { MarginPaddingProps } from '@/types/index';
-
 import { SpinnerProps } from './types';
 import './styles.scss';
 

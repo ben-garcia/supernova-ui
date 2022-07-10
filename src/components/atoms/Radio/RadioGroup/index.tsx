@@ -34,7 +34,7 @@ const RadioGroup: React.FC<RadioGroupProps> = props => {
     [`${className}`]: isString(className),
     [`snui-flex-${direction}`]: isString(direction),
     'snui-flex-center': isString(direction) && direction === 'row',
-    'snui-items-start': isString(direction) && direction === 'column',
+    'snui-items-flex-start': isString(direction) && direction === 'column',
   });
   return (
     <div className={classes} role="radiogroup">

@@ -1,38 +1,66 @@
-import { Meta, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import Button from '.';
 import { ArrowLeftIcon, ArrowRightIcon, UserIcon } from '../Icon/Icons';
-import { ButtonProps } from './types';
-import argTypes from './argTypes';
 
 export default {
-  argTypes,
+  argTypes: {
+    asSubmitButton: {
+      control: 'boolean',
+      defaultValue: false,
+    },
+    backgroundColor: {
+      control: 'color',
+      defaultValue: '#0273b0',
+    },
+    fontSize: {
+      control: 'text',
+      defaultValue: 'md',
+    },
+    isDisabled: {
+      control: 'boolean',
+      defaultValue: false,
+    },
+    isLoading: {
+      control: 'boolean',
+      defaultValue: false,
+    },
+    loadingText: {
+      control: 'text',
+    },
+    variant: {
+      control: { type: 'radio' },
+      defaultValue: 'filled',
+      options: ['filled', 'outline'],
+    },
+  },
   component: Button,
   title: 'Supernova UI/Atoms/Button',
-} as Meta;
+} as ComponentMeta<typeof Button>;
 
-const Template: Story<ButtonProps> = args => <Button {...args} />;
+const parameters = {
+  controls: {
+    include: [
+      'asSubmitButton',
+      'backgroundColor',
+      'fontSize',
+      'loadingText',
+      'isDisabled',
+      'isLoading',
+      'variant',
+    ],
+  },
+};
 
-export const Default = Template.bind({});
+const Template: ComponentStory<typeof Button> = args => <Button {...args} />;
 
-Default.args = {
+export const Basic = Template.bind({});
+
+Basic.args = {
   children: 'Submit',
 };
-
-export const Disabled = Template.bind({});
-
-Disabled.args = {
-  children: 'Disabled',
-  isDisabled: true,
-};
-
-export const Loading = Template.bind({});
-
-Loading.args = {
-  children: 'Loading',
-  isLoading: true,
-};
+Basic.parameters = parameters;
 
 export const WithLeftIcon = Template.bind({});
 
@@ -40,6 +68,7 @@ WithLeftIcon.args = {
   children: 'Back',
   leftIcon: <ArrowLeftIcon fill="#fff" size="xs" />,
 };
+WithLeftIcon.parameters = parameters;
 
 export const WithIcons = Template.bind({});
 
@@ -48,6 +77,7 @@ WithIcons.args = {
   leftIcon: <ArrowLeftIcon fill="#fff" size="xs" />,
   rightIcon: <ArrowRightIcon fill="#fff" size="xs" />,
 };
+WithIcons.parameters = parameters;
 
 export const WithRightIcon = Template.bind({});
 
@@ -55,6 +85,7 @@ WithRightIcon.args = {
   children: 'SignIn',
   rightIcon: <ArrowRightIcon fill="#fff" size="xs" />,
 };
+WithRightIcon.parameters = parameters;
 
 export const AsIcon = Template.bind({});
 
@@ -64,34 +95,4 @@ AsIcon.args = {
   fontSize: 'sm',
   variant: 'outline',
 };
-
-export const Sizes = () => (
-  <div>
-    <Button fontSize="xxl" margin="0 sm">
-      Button
-    </Button>
-    <Button fontSize="xl" margin="0 sm">
-      Button
-    </Button>
-    <Button fontSize="lg" margin="0 sm">
-      Button
-    </Button>
-    <Button fontSize="md" margin="0 sm">
-      Button
-    </Button>
-    <Button fontSize="sm" margin="0 sm">
-      Button
-    </Button>
-    <Button fontSize="xs" margin="0 sm">
-      Button
-    </Button>
-  </div>
-);
-
-export const WithHoverBackgroundAndColor = Template.bind({});
-
-WithHoverBackgroundAndColor.args = {
-  hoverBackgroundColor: 'error700',
-  hoverColor: 'warning500',
-  children: 'Submit',
-};
+AsIcon.parameters = parameters;

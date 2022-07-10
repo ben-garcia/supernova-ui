@@ -1,7 +1,8 @@
 import React, { CSSProperties } from 'react';
 
-import { useTheme } from '../../../hooks';
-import { createClasses, isString } from '../../../utils';
+import { useTheme } from '@hooks/index';
+import { createClasses, isString } from '@utils/index';
+
 import './styles.scss';
 
 export interface DividerProps {

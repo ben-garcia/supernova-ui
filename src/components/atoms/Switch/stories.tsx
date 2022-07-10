@@ -1,18 +1,47 @@
-import { Meta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import Switch from '.';
-import argTypes from './argTypes';
 
 export default {
-  argTypes,
+  argTypes: {
+    backgroundColor: {
+      control: 'color',
+      defaultValue: '#0273b0',
+    },
+    fontSize: {
+      control: 'text',
+      defaultValue: 'md',
+    },
+    label: { control: 'text' },
+    isDisabled: {
+      control: 'boolean',
+      defaultValue: false,
+    },
+    size: {
+      control: { type: 'select' },
+      defaultValue: 'md',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    },
+  },
   component: Switch,
   title: 'Supernova UI/Atoms/Switch',
-} as Meta;
+} as ComponentMeta<typeof Switch>;
 
+const parameters = {
+  controls: {
+    include: ['backgroundColor', 'fontSize', 'label', 'isDisabled', 'size'],
+  },
+};
 const label = 'Reveal your secrets?';
 
-export const Controlled = () => {
+const Template: ComponentStory<typeof Switch> = args => <Switch {...args} />;
+
+export const Basic = Template.bind({});
+Basic.args = { label };
+Basic.parameters = parameters;
+
+const ControlledTemplate: ComponentStory<typeof Switch> = () => {
   const [checked, setChecked] = React.useState(true);
 
   return (
@@ -27,42 +56,6 @@ export const Controlled = () => {
   );
 };
 
-export const CustomBackgroundColors = () => (
-  <div className="snui-flex sniu-flex-center">
-    <Switch
-      backgroundColor="error600"
-      isChecked
-      label="error600"
-      margin="0 sm"
-    />
-    <Switch
-      backgroundColor="warning600"
-      isChecked
-      label="warning600"
-      margin="0 sm"
-    />
-    <Switch
-      backgroundColor="success600"
-      isChecked
-      label="success600"
-      margin="0 sm"
-    />
-    <Switch backgroundColor="cyan600" isChecked label="cyan600" margin="0 sm" />
-    <Switch backgroundColor="info400" isChecked label="info400" margin="0 sm" />
-  </div>
-);
-
-export const Disabled = () => <Switch isDisabled label={label} />;
-
-export const Default = () => <Switch label={label} />;
-
-export const Sizes = () => (
-  <div className="snui-flex sniu-flex-center">
-    <Switch isChecked label="xs" margin="0 sm" size="xs" />
-    <Switch isChecked label="sm" margin="0 sm" size="sm" />
-    <Switch isChecked label="md" margin="0 sm" size="md" />
-    <Switch isChecked label="lg" margin="0 sm" size="lg" />
-    <Switch isChecked label="xl" margin="0 sm" size="xl" />
-    <Switch isChecked label="xxl" margin="0 sm" size="xxl" />
-  </div>
-);
+export const Controlled = ControlledTemplate.bind({});
+Controlled.args = { label };
+Controlled.parameters = parameters;

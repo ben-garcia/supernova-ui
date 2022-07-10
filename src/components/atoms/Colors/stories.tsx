@@ -1,13 +1,20 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Meta } from '@storybook/react';
 
 import colors from '@/theme/colors';
 
 export default {
   title: 'Supernova UI/Atoms/Colors',
-} as Meta;
+} as ComponentMeta<typeof Colors>;
 
-export const Colors = () => (
+const Template: ComponentStory<typeof Colors> = () => <Colors />;
+
+export const All = Template.bind({});
+All.parameters = {
+  controls: { hideNoControlsWarning: true },
+};
+
+const Colors = () => (
   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
     {Object.entries(colors).map(([color, hex]) => (
       <div

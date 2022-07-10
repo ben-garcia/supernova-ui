@@ -1,4 +1,3 @@
-/* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { forwardRef, useMemo, useState } from 'react';
 
 import {
@@ -7,10 +6,6 @@ import {
   useFormControl,
   useTheme,
 } from '@hooks/index';
-
-import { SwitchProps } from './types';
-import './styles.scss';
-
 import {
   colors,
   createClasses,
@@ -22,10 +17,12 @@ import {
   responsify,
   shadows,
   sizes,
-} from '../../../utils';
+} from '@utils/index';
 
-import { MarginPaddingProps } from '../../../types';
-import { Sizes } from '../../../types/common';
+import { MarginPaddingProps } from '@/types/index';
+import { Sizes } from '@/types/common';
+import { SwitchProps } from './types';
+import './styles.scss';
 
 /**
  * UI interactive component used to indicate a boolean value
@@ -43,12 +40,12 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
     height = '',
     isChecked = false,
     isDisabled = false,
-    label = undefined,
+    label,
     letterSpacing = '',
     lineHeight = '',
     isTruncated = false,
     margin = '',
-    onChange = undefined,
+    onChange,
     padding = '',
     size = 'md',
     textTransform = '',
@@ -255,6 +252,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
   }
 
   return (
+    // eslint-disable-next-line
     <label
       className={`snui-position-relative ${classes} ${
         isDisabled ? 'snui-disabled' : ''

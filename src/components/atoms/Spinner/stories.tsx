@@ -1,29 +1,32 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
 
 import Spinner from '.';
-import argTypes from './argTypes';
-
-import { SpinnerProps } from './types';
 
 export default {
-  argTypes,
+  argTypes: {
+    borderWidth: { control: 'text' },
+    duration: { control: 'text' },
+    primaryColor: { control: 'color', defaultValue: 'info700' },
+    secondaryColor: { control: 'color', defaultValue: 'transparent' },
+    size: { control: 'text' },
+  },
   title: 'Supernova UI/Atoms/Spinner',
-} as Meta;
+} as ComponentMeta<typeof Spinner>;
 
-const Template: Story<SpinnerProps> = args => <Spinner {...args} />;
+const Template: ComponentStory<typeof Spinner> = args => <Spinner {...args} />;
 
-export const Default = Template.bind({});
+export const Basic = Template.bind({});
 
-Default.args = {};
-
-export const Sizes = () => (
-  <div className="snui-flex">
-    <Spinner size="xxl" />
-    <Spinner size="xl" />
-    <Spinner size="lg" />
-    <Spinner size="md" />
-    <Spinner size="sm" />
-    <Spinner size="xs" />
-  </div>
-);
+Basic.args = {};
+Basic.parameters = {
+  controls: {
+    include: [
+      'borderWidth',
+      'duration',
+      'primaryColor',
+      'secondaryColor',
+      'size',
+    ],
+  },
+};

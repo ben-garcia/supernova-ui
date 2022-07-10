@@ -45,7 +45,7 @@ export interface ButtonProps
    */
   spinner?: CommonProps['children'];
   /**
-   *
+   * tabindex html attribute
    */
   tabIndex?: number;
   /**

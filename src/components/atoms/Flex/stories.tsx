@@ -1,14 +1,20 @@
-import { Meta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { Flex, FlexItem } from '.';
 
 export default {
-  component: Flex,
   title: 'Supernova UI/Atoms/Flex',
-} as Meta;
+} as ComponentMeta<typeof Default>;
 
-export const Basic = () => (
+const Template: ComponentStory<typeof Default> = () => <Default />;
+
+export const Basic = Template.bind({});
+Basic.parameters = {
+  controls: { hideNoControlsWarning: true },
+};
+
+const Default = () => (
   <Flex spacing={2}>
     <FlexItem xs={12}>
       <div

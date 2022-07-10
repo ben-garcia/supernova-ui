@@ -1,4 +1,3 @@
-/* eslint jsx-a11y/no-noninteractive-tabindex: 0 */
 import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -37,33 +36,36 @@ const Tooltip: React.FC<TooltipProps> = props => {
   });
   const [arrowPos, setArrowPos] = useState<ArrowPosition>({});
 
-  const onMouseEnter = useCallback((e: React.MouseEvent | React.FocusEvent) => {
-    setShow(true);
+  const onMouseEnter = useCallback(
+    (e: React.MouseEvent | React.FocusEvent) => {
+      setShow(true);
 
-    if (e) {
-      const { currentTarget } = e;
+      if (e) {
+        const { currentTarget } = e;
 
-      setTimeout(() => {
-        // get the position of the tooltip element
-        setPos(
-          getLeftTopPosition(
-            currentTarget as HTMLElement,
-            contentRef?.current,
-            position
-          ) as any
-        );
+        setTimeout(() => {
+          // get the position of the tooltip element
+          setPos(
+            getLeftTopPosition(
+              currentTarget as HTMLElement,
+              contentRef?.current,
+              position
+            ) as any
+          );
 
-        // get the position of the arrow
-        setArrowPos(
-          getArrowPosition(
-            arrowRef?.current as HTMLDivElement,
-            contentRef?.current,
-            position
-          )
-        );
-      }, 10);
-    }
-  }, []);
+          // get the position of the arrow
+          setArrowPos(
+            getArrowPosition(
+              arrowRef?.current as HTMLDivElement,
+              contentRef?.current,
+              position
+            )
+          );
+        }, 10);
+      }
+    },
+    [position]
+  );
   const onMouseLeave = useCallback(() => setShow(false), []);
   const styles: React.CSSProperties = {};
   const arrowStyles: React.CSSProperties = {};
@@ -78,6 +80,7 @@ const Tooltip: React.FC<TooltipProps> = props => {
         onFocus={onMouseEnter}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
       >
         {children}

@@ -1,35 +1,67 @@
-import { Meta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import Textarea from '.';
-import argTypes from './argTypes';
 
 export default {
-  argTypes,
+  argTypes: {
+    finalLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
+    floatLabel: { control: 'boolean', defaultValue: false },
+    initialLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
+    isDisabled: { control: 'boolean', defaultValue: false },
+    resize: {
+      control: { type: 'select' },
+      defaultValue: 'none',
+      options: ['both', 'horizontal', 'none', 'vertical'],
+    },
+    size: {
+      control: 'text',
+    },
+    variant: {
+      control: { type: 'radio' },
+      defaultValue: 'filled',
+      options: ['filled', 'flushed', 'outline'],
+    },
+  },
   component: Textarea,
   title: 'Supernova UI/Atoms/Textarea',
-} as Meta;
+} as ComponentMeta<typeof Textarea>;
 
-const label = 'Reveal your secrets here';
+const parameters = {
+  controls: {
+    include: [
+      'finalLabelTransform',
+      'floatLabel',
+      'initialLabelTransform',
+      'resize',
+      'size',
+      'variant',
+    ],
+  },
+};
+const label = 'Reveal your secrets';
 
-export const Disabled = () => <Textarea isDisabled label={label} />;
-
-export const Filled = () => <Textarea label={label} variant="filled" />;
-
-export const Flushed = () => <Textarea label={label} variant="flushed" />;
-
-export const Outline = () => <Textarea label={label} variant="outline" />;
-
-export const FloatingLabel = () => (
-  <div>
-    <Textarea floatLabel label="Filled" margin="sm 0" variant="filled" />
-    <Textarea floatLabel label="Flushed" margin="sm 0" variant="flushed" />
-    <Textarea floatLabel label="Outline" margin="sm 0" variant="outline" />
-  </div>
+const Template: ComponentStory<typeof Textarea> = args => (
+  <Textarea {...args} />
 );
 
-export const InitialAndFinalLabelTransform = () => (
+export const Basic = Template.bind({});
+Basic.args = { label };
+Basic.parameters = parameters;
+
+const FloatingLabelTemplate: ComponentStory<typeof Textarea> = args => (
+  <Textarea {...args} floatLabel margin="sm 0" />
+);
+
+export const FloatingLabel = FloatingLabelTemplate.bind({});
+FloatingLabel.args = { floatLabel: true, label };
+FloatingLabel.parameters = parameters;
+
+const InitialAndFinalLabelTransformTemplate: ComponentStory<
+  typeof Textarea
+> = args => (
   <Textarea
+    {...args}
     finalLabelTransform="translate(5rem, -1rem) scale(1)"
     floatLabel
     initialLabelTransform="translate(5rem) scale(3)"
@@ -38,28 +70,8 @@ export const InitialAndFinalLabelTransform = () => (
   />
 );
 
-export const Resizes = () => (
-  <>
-    <Textarea
-      label="Horizontal"
-      margin="sm 0"
-      resize="horizontal"
-      variant="outline"
-    />
-    <Textarea
-      label="Vertical"
-      margin="sm 0"
-      resize="vertical"
-      variant="outline"
-    />
-    <Textarea label="Both" margin="sm 0" resize="both" variant="outline" />
-  </>
+export const InitialAndFinalLabelTransform = InitialAndFinalLabelTransformTemplate.bind(
+  {}
 );
-
-export const WithHoverBackgroundAndColor = () => (
-  <Textarea
-    hoverBackgroundColor="error700"
-    hoverColor="warning500"
-    label={label}
-  />
-);
+InitialAndFinalLabelTransform.args = { floatLabel: true, label };
+InitialAndFinalLabelTransform.parameters = parameters;

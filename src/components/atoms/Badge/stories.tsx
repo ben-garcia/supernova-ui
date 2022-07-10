@@ -1,47 +1,34 @@
-import { Meta, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { sizes } from '@utils/index';
 import Badge from '.';
-import argTypes from './argTypes';
-import { BadgeProps } from './types';
 
 export default {
-  argTypes,
+  argTypes: {
+    backgroundColor: {
+      control: 'color',
+    },
+    fontSize: {
+      control: 'text',
+      defaultValue: 'md',
+    },
+    variant: {
+      control: { type: 'radio' },
+      defaultValue: 'solid',
+      options: ['outline', 'solid'],
+    },
+  },
   component: Badge,
   title: 'Supernova UI/Atoms/Badge',
-} as Meta;
+} as ComponentMeta<typeof Badge>;
 
-const Template: Story<BadgeProps> = args => <Badge {...args} />;
+const Template: ComponentStory<typeof Badge> = args => <Badge {...args} />;
 
-export const Default = Template.bind({});
+export const Basic = Template.bind({});
 
-Default.args = {
+Basic.args = {
   children: 'badge',
 };
-
-export const Sizes = () => (
-  <div>
-    <div style={{ margin: '10px 0' }}>
-      {sizes.map(size => (
-        <>
-          <Badge fontSize={size} key={size} margin="0 sm">
-            {`${size}`}
-          </Badge>
-        </>
-      ))}
-    </div>
-  </div>
-);
-
-export const Variants = () => (
-  <div>
-    <Badge margin="0 sm" variant="outline">
-      outline
-    </Badge>
-
-    <Badge margin="0 sm" variant="solid">
-      solid
-    </Badge>
-  </div>
-);
+Basic.parameters = {
+  controls: { include: ['fontSize', 'variant'] },
+};

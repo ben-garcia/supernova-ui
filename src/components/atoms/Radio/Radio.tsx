@@ -1,4 +1,3 @@
-/* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { forwardRef, useMemo, useState } from 'react';
 
 import {
@@ -253,6 +252,7 @@ const Radio = forwardRef((props: RadioProps, ref: any) => {
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       className={`snui-position-relative ${classes} ${
         isDisabled ? 'snui-disabled' : ''

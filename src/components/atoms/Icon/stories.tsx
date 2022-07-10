@@ -1,8 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import argTypes from './argTypes';
-
 import { IconProps } from './types';
 
 import {
@@ -36,46 +34,45 @@ import {
 } from './Icons';
 
 export default {
-  argTypes,
+  argTypes: {
+    fill: { control: 'color' },
+    size: { control: 'text' },
+  },
   title: 'Supernova UI/Atoms/Icons',
 } as Meta;
 
-const Template: Story<IconProps> = args => <UserIcon {...args} />;
-
-export const Default = Template.bind({});
-
-Default.args = {
-  size: '5rem',
-};
-
-export const All = () => (
+export const All: Story<IconProps> = args => (
   <div>
-    <AddIcon size="3rem" />
-    <AttachmentIcon size="3rem" />
-    <ArrowDownIcon size="3rem" />
-    <ArrowLeftIcon size="3rem" />
-    <ArrowRightIcon size="3rem" />
-    <ArrowUpIcon size="3rem" />
-    <CheckmarkIcon size="3rem" />
-    <ChevronDownIcon size="3rem" />
-    <ChevronLeftIcon size="3rem" />
-    <ChevronRightIcon size="3rem" />
-    <ChevronUpIcon size="3rem" />
-    <CloseIcon size="3rem" />
-    <ConnectivityIcon size="3rem" />
-    <DownloadIcon size="3rem" />
-    <EditIcon size="3rem" />
-    <EnvelopIcon size="3rem" />
-    <HalfMoonIcon size="3rem" />
-    <HelpIcon size="3rem" />
-    <InfoIcon size="3rem" />
-    <LinkIcon size="3rem" />
-    <LogoutIcon size="3rem" />
-    <SearchIcon size="3rem" />
-    <SettingsIcon size="3rem" />
-    <TrashIcon size="3rem" />
-    <TriangleDownIcon size="3rem" />
-    <TriangleUpIcon size="3rem" />
-    <UserIcon size="3rem" />
+    <AddIcon {...args} />
+    <AttachmentIcon {...args} />
+    <ArrowDownIcon {...args} />
+    <ArrowLeftIcon {...args} />
+    <ArrowRightIcon {...args} />
+    <ArrowUpIcon {...args} />
+    <CheckmarkIcon {...args} />
+    <ChevronDownIcon {...args} />
+    <ChevronLeftIcon {...args} />
+    <ChevronRightIcon {...args} />
+    <ChevronUpIcon {...args} />
+    <CloseIcon {...args} />
+    <ConnectivityIcon {...args} />
+    <DownloadIcon {...args} />
+    <EditIcon {...args} />
+    <EnvelopIcon {...args} />
+    <HalfMoonIcon {...args} />
+    <HelpIcon {...args} />
+    <InfoIcon {...args} />
+    <LinkIcon {...args} />
+    <LogoutIcon {...args} />
+    <SearchIcon {...args} />
+    <SettingsIcon {...args} />
+    <TrashIcon {...args} />
+    <TriangleDownIcon {...args} />
+    <TriangleUpIcon {...args} />
+    <UserIcon {...args} />
   </div>
 );
+
+All.args = {
+  size: '4rem',
+};

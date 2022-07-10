@@ -13,22 +13,7 @@ import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '.';
 import { SliderProps } from './types';
 
 describe('<Slider />', () => {
-  beforeAll(() => {
-    mockMatchMedia();
-
-    // window.HTMLElement.prototype.getBoundingClientRect = jest
-    //   .fn()
-    //   .mockReturnValue({
-    //     x: 16,
-    //     y: 16,
-    //     width: 150,
-    //     height: 150,
-    //     top: 16,
-    //     right: 166,
-    //     bottom: 166,
-    //     left: 16,
-    //   });
-  });
+  beforeAll(() => mockMatchMedia());
 
   const SliderTest = (props: Partial<SliderProps>) => {
     const { value: valueProp } = props;

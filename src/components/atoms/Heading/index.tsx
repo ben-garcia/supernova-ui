@@ -24,7 +24,7 @@ const Heading: React.FC<HeadingProps> = props => {
     className = '',
     color = '',
     font = 'heading',
-    fontSize = '',
+    fontSize = 'md',
     fontWeight = 'xxl',
     height = '',
     letterSpacing = 'md',

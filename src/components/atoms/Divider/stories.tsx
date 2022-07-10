@@ -1,14 +1,25 @@
-import { Meta, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import Divider, { DividerProps } from '.';
+import Divider from '.';
 
 export default {
+  argTypes: {
+    color: {
+      control: 'color',
+      defaultValue: 'rgb(183, 189, 200)',
+    },
+    orientation: {
+      control: { type: 'radio' },
+      defaultValue: 'horizontal',
+      options: ['horizontal', 'vertical'],
+    },
+  },
   component: Divider,
   title: 'Supernova UI/Atoms/Divider',
-} as Meta;
+} as ComponentMeta<typeof Divider>;
 
-const Template: Story<DividerProps> = args => (
+const Template: ComponentStory<typeof Divider> = args => (
   <div
     style={{ height: args.orientation === 'vertical' ? '300px' : undefined }}
   >
@@ -16,12 +27,9 @@ const Template: Story<DividerProps> = args => (
   </div>
 );
 
-export const Horizontal = Template.bind({});
-
-Horizontal.args = {};
-
-export const Vertical = Template.bind({});
-
-Vertical.args = {
-  orientation: 'vertical',
+export const Basic = Template.bind({});
+Basic.parameters = {
+  controls: {
+    include: ['color', 'orientation'],
+  },
 };

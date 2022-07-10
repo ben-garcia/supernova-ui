@@ -1,102 +1,104 @@
-import { Meta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import TextInput from '.';
 import { UserIcon, SearchIcon } from '../Icon/Icons';
-import argTypes from './argTypes';
 
 export default {
-  argTypes,
+  argTypes: {
+    finalLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
+    floatLabel: { control: 'boolean', defaultValue: false },
+    initialLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
+    isDisabled: { control: 'boolean', defaultValue: false },
+    size: {
+      control: 'text',
+    },
+    variant: {
+      control: { type: 'radio' },
+      defaultValue: 'filled',
+      options: ['filled', 'flushed', 'outline'],
+    },
+  },
   component: TextInput,
   title: 'Supernova UI/Atoms/TextInput',
-} as Meta;
+} as ComponentMeta<typeof TextInput>;
 
 const label = 'Reveal your secrets here';
+const parameters = {
+  controls: {
+    include: [
+      'finalLabelTransform',
+      'floatLabel',
+      'initialLabelTransform',
+      'isDisabled',
+      'size',
+      'variant',
+    ],
+  },
+};
 
-export const Disabled = () => (
-  <TextInput isDisabled label={label} variant="filled" />
+const Template: ComponentStory<typeof TextInput> = args => (
+  <TextInput {...args} />
 );
 
-export const Filled = () => <TextInput label={label} variant="filled" />;
+export const Basic = Template.bind({});
+Basic.args = { label };
+Basic.parameters = parameters;
 
-export const Flushed = () => <TextInput label={label} variant="flushed" />;
-
-export const Outline = () => <TextInput label={label} variant="outline" />;
-
-export const FloatingLabel = () => (
-  <div>
-    <TextInput margin="sm 0" floatLabel label="Filled" variant="filled" />
-    <TextInput margin="sm 0" floatLabel label="Flushed" variant="flushed" />
-    <TextInput margin="sm 0" floatLabel label="Outline" variant="outline" />
-  </div>
+const FloatingLabelTemplate: ComponentStory<typeof TextInput> = args => (
+  <TextInput {...args} floatLabel margin="sm 0" />
 );
 
-export const InitialAndFinalLabelTransform = () => (
+export const FloatingLabel = FloatingLabelTemplate.bind({});
+FloatingLabel.args = { floatLabel: true, label };
+FloatingLabel.parameters = parameters;
+
+const InitialAndFinalLabelTransformTemplate: ComponentStory<
+  typeof TextInput
+> = args => (
   <TextInput
-    finalLabelTransform="translate(1rem) scale(1)"
+    {...args}
+    finalLabelTransform="translate(5rem, -1rem) scale(1)"
     floatLabel
-    initialLabelTransform="translate(5rem) scale(2)"
+    initialLabelTransform="translate(5rem) scale(3)"
     label="Custom"
     margin="sm 0"
   />
 );
 
-export const Sizes = () => (
-  <div>
-    <TextInput floatLabel label="Username" margin="sm 0" size="sm" />
-    <TextInput floatLabel label="Password" margin="sm 0" size="md" />
-
-    <TextInput
-      floatLabel
-      label="Usernameusername"
-      margin="sm 0"
-      size="sm"
-      variant="flushed"
-    />
-    <TextInput
-      floatLabel
-      label="Passwordpassword"
-      margin="sm 0"
-      size="md"
-      variant="flushed"
-    />
-
-    <TextInput
-      floatLabel
-      label="Username username"
-      margin="sm 0"
-      size="sm"
-      variant="filled"
-    />
-    <TextInput
-      floatLabel
-      label="Password password"
-      margin="sm 0"
-      size="md"
-      variant="filled"
-    />
-  </div>
+export const InitialAndFinalLabelTransform = InitialAndFinalLabelTransformTemplate.bind(
+  {}
 );
+InitialAndFinalLabelTransform.args = { floatLabel: true, label };
+InitialAndFinalLabelTransform.parameters = parameters;
 
-export const WithHoverBackgroundAndColor = () => (
-  <TextInput
-    hoverBackgroundColor="error700"
-    hoverColor="warning500"
-    label={label}
-  />
+const WithIconsTemplate: ComponentStory<typeof TextInput> = args => (
+  <TextInput {...args} />
 );
+const WithIcons = WithIconsTemplate.bind({});
+WithIcons.args = {
+  label,
+  leftIcon: <UserIcon size="1.3rem" />,
+  rightIcon: <SearchIcon size="1.3rem" />,
+};
+FloatingLabel.parameters = parameters;
 
-export const WithIcons = () => (
-  <TextInput
-    label={label}
-    leftIcon={<UserIcon size="1.3rem" />}
-    rightIcon={<SearchIcon size="1.3rem" />}
-  />
+const WithLeftIconTemplate: ComponentStory<typeof TextInput> = args => (
+  <TextInput {...args} />
 );
-export const WithLeftIcon = () => (
-  <TextInput label={label} leftIcon={<UserIcon size="1.3rem" />} />
-);
+export const WithLeftIcon = WithLeftIconTemplate.bind({});
+WithLeftIcon.args = {
+  label,
+  leftIcon: <UserIcon size="1.3rem" />,
+};
+WithLeftIcon.parameters = parameters;
 
-export const WithRightIcon = () => (
-  <TextInput label={label} rightIcon={<SearchIcon size="1.3rem" />} />
+const WithRightIconTemplate: ComponentStory<typeof TextInput> = args => (
+  <TextInput {...args} />
 );
+export const WithRightIcon = WithRightIconTemplate.bind({});
+WithRightIcon.args = {
+  label,
+  rightIcon: <SearchIcon size="1.3rem" />,
+};
+WithRightIcon.parameters = parameters;

@@ -8,8 +8,8 @@ import {
   isString,
   sizes,
 } from '@utils/index';
-import { MarginPaddingProps } from '@/types/index';
 
+import { MarginPaddingProps } from '@/types/index';
 import { BadgeProps } from './types';
 
 /**
