@@ -1,4 +1,3 @@
-import { isFunction, isNumber, isObject, isString } from './assertions';
 import validateDataProps from './validate-data-props';
 import {
   colors,
@@ -13,6 +12,7 @@ import { createStyles, responsify } from './create-styles';
 import deepMergify from './deep-mergify';
 import { inputIsChecked } from './dom-assertions';
 
+export * from './assertions';
 export * from './position';
 export {
   colors,
@@ -21,10 +21,6 @@ export {
   createStyles,
   deepMergify,
   inputIsChecked,
-  isFunction,
-  isNumber,
-  isObject,
-  isString,
   objectToPropertiesArray,
   radii,
   responsify,

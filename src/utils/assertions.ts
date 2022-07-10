@@ -1,4 +1,17 @@
 /**
+ * check whether a value is an array
+ *
+ * @param value the variable to check against
+ *
+ * @return result whether value is an array
+ */
+export const isArray = (value: any): boolean =>
+  Object.prototype.toString.call(value) === '[object Array]' &&
+  Array.isArray(value) &&
+  value !== undefined &&
+  value !== null;
+
+/**
  * check whether a value is a function
  *
  * @param value the variable to check against

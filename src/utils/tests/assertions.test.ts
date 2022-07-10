@@ -1,6 +1,39 @@
-import { isFunction, isNumber, isObject, isString } from '../assertions';
+import {
+  isArray,
+  isFunction,
+  isNumber,
+  isObject,
+  isString,
+} from '../assertions';
 
 describe('assertions', () => {
+  describe('isArray', () => {
+    it('should be false when supplied an object', () => {
+      const result = isArray({ a: 1 });
+      expect(result).toBe(false);
+    });
+
+    it('should be true when supplied an array', () => {
+      const result = isArray([1, 2]);
+      expect(result).toBe(true);
+    });
+
+    it('should be false when supplied a number', () => {
+      const result = isArray(2);
+      expect(result).toBe(false);
+    });
+
+    it('should be false when supplied a boolean', () => {
+      const result = isArray(false);
+      expect(result).toBe(false);
+    });
+
+    it('should be false when supplied a function', () => {
+      const result = isArray(() => {});
+      expect(result).toBe(false);
+    });
+  });
+
   describe('isFunction', () => {
     it('should be false when supplied an object', () => {
       const result = isFunction({ a: 1 });
