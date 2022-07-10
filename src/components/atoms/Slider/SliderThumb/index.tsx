@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { useSlider, useTheme } from '@hooks/index';
 import { createClasses, isString } from '@utils/index';
@@ -118,51 +118,54 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
       }
     }
   };
-  const handleMouseUp = React.useCallback(() => {
+  const handleMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
-  }, []);
-  const handleMouseDown = React.useCallback(() => {
+  }, [orientation]);
+  const handleMouseDown = useCallback(() => {
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
-  }, []);
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    const { key } = e;
+  }, [orientation]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const { key } = e;
 
-    if (key === 'ArrowRight' || key === 'ArrowUp') {
-      if (value + step > max) {
-        onChange(max);
-      } else {
-        onChange(value + step);
+      if (key === 'ArrowRight' || key === 'ArrowUp') {
+        if (value + step > max) {
+          onChange(max);
+        } else {
+          onChange(value + step);
+        }
+      } else if (key === 'ArrowLeft' || key === 'ArrowDown') {
+        if (value - step < min) {
+          onChange(min);
+        } else {
+          onChange(value - step);
+        }
+      } else if (key === 'End') {
+        if (value !== max) {
+          onChange(max);
+        }
+      } else if (key === 'Home') {
+        if (value !== min) {
+          onChange(min);
+        }
+      } else if (key === 'PageDown') {
+        if (value - 10 < min) {
+          onChange(min);
+        } else {
+          onChange(value - 10);
+        }
+      } else if (key === 'PageUp') {
+        if (value + 10 > max) {
+          onChange(max);
+        } else {
+          onChange(value + 10);
+        }
       }
-    } else if (key === 'ArrowLeft' || key === 'ArrowDown') {
-      if (value - step < min) {
-        onChange(min);
-      } else {
-        onChange(value - step);
-      }
-    } else if (key === 'End') {
-      if (value !== max) {
-        onChange(max);
-      }
-    } else if (key === 'Home') {
-      if (value !== min) {
-        onChange(min);
-      }
-    } else if (key === 'PageDown') {
-      if (value - 10 < min) {
-        onChange(min);
-      } else {
-        onChange(value - 10);
-      }
-    } else if (key === 'PageUp') {
-      if (value + 10 > max) {
-        onChange(max);
-      } else {
-        onChange(value + 10);
-      }
-    }
-  };
+    },
+    [props]
+  );
 
   return (
     <div
