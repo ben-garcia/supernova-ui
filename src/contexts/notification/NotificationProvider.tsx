@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { ReactNode, createContext, useMemo, useReducer } from 'react';
 
 import { Portal } from '@atoms/index';
 import Notification from '@molecules/Notification';
@@ -30,17 +30,17 @@ export const NotificationContext = createContext<{
 });
 
 interface NotificationProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const NotificationProvider = (props: NotificationProviderProps) => {
   const { children } = props;
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-  const contextValue = React.useMemo(() => ({ state, dispatch }), [dispatch]);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const contextValue = useMemo(() => ({ state, dispatch }), [dispatch]);
 
   return (
     <NotificationContext.Provider value={contextValue}>
-      <Portal id="snui-notifications">
+      <Portal>
         <div
           className="snui-flex snui-flex-column snui-items-center snui-position-fixed snui-notification-bottom"
           id="snui-notification-bottom"

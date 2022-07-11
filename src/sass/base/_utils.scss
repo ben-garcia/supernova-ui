@@ -815,7 +815,9 @@
 }
 
 // disabled
-.snui-disabled {
+.snui-disabled,
+[aria-disabled='true'],
+:disabled {
   cursor: not-allowed !important;
   opacity: 0.4 !important;
 }

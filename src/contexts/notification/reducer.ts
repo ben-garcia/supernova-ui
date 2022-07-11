@@ -7,7 +7,7 @@ const reducer = (state: NotificationState, action: NotificationAction) => {
     if (action.payload?.id) {
       id = action.payload.id;
     } else {
-      id = `_snui-notification-${Math.random()}`;
+      id = `snui-notification-${Math.random()}`;
     }
   }
 
