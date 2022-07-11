@@ -344,6 +344,7 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
       <input
         {...rest}
         aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
+        aria-disabled={isDisabled || formControlIsDisabled}
         aria-invalid={isInvalid ?? undefined}
         className={classes}
         disabled={isDisabled || formControlIsDisabled}
