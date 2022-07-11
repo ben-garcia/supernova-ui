@@ -1,76 +1,53 @@
-import { Meta, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '.';
 
-import { TabsProps } from './types';
-
 export default {
-  component: Tabs,
-  title: 'Supernova UI/Molecules/Tabs',
-  // NOTE: doesn't work correctly when importing from a seperate file
   argTypes: {
     activeColor: {
-      control: {
-        type: 'color',
-      },
-    },
-    align: {
-      control: { type: 'select' },
-      options: ['start', 'center', 'end'],
-      table: {
-        defaultValue: { summary: 'start' },
-        type: { summary: 'select' },
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
+      control: 'color',
     },
     defaultIndex: {
-      table: {
-        disable: true,
-      },
+      control: 'object',
     },
     orientation: {
-      control: { type: 'select' },
+      control: 'select',
+      defaultValue: 'horizontal',
       options: ['horizontal', 'vertical'],
-      table: {
-        defaultValue: { summary: 'horizontal' },
-        type: { summary: 'select' },
-      },
     },
     size: {
-      control: { type: 'select' },
+      control: 'select',
+      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
-      table: {
-        defaultValue: { summary: 'md' },
-        type: { summary: 'select' },
-      },
     },
     isFitted: {
-      control: {
-        type: 'boolean',
-      },
-      table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
-      },
+      control: 'boolean',
+      defaultValue: false,
     },
     isManual: {
-      control: {
-        type: 'boolean',
-      },
-      table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
-      },
+      control: 'boolean',
+      defaultValue: false,
     },
   },
-} as Meta;
+  component: Tabs,
+  title: 'Supernova UI/Molecules/Tabs',
+} as ComponentMeta<typeof Tabs>;
 
-const Template: Story<TabsProps> = args => (
+const parameters = {
+  controls: {
+    include: [
+      'activeColor',
+      'defaultIndex',
+      'orientation',
+      'size',
+      'isFitted',
+      'isManual',
+    ],
+  },
+};
+
+const Template: ComponentStory<typeof Tabs> = args => (
   <div style={{ margin: '0 auto', width: '50%' }}>
     <Tabs {...args}>
       <TabList>
@@ -88,24 +65,7 @@ const Template: Story<TabsProps> = args => (
   </div>
 );
 
-export const Default = Template.bind({});
+export const Basic = Template.bind({});
 
-Default.args = {};
-
-export const DefaultIndex = () => (
-  <div style={{ margin: '0 auto', width: '50%' }}>
-    <Tabs defaultIndex={1}>
-      <TabList>
-        <Tab>one</Tab>
-        <Tab>two</Tab>
-        <Tab>three</Tab>
-      </TabList>
-
-      <TabPanelList>
-        <TabPanel>panel one</TabPanel>
-        <TabPanel>panel two</TabPanel>
-        <TabPanel>panel three</TabPanel>
-      </TabPanelList>
-    </Tabs>
-  </div>
-);
+Basic.args = {};
+Basic.parameters = parameters;

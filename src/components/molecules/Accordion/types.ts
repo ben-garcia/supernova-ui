@@ -3,10 +3,14 @@ import { ReactNode } from 'react';
 export interface AccordionProps {
   /**
    * Configure whether more than one item can be expanded.
+   *
+   * @default false
    */
   allowMultiple?: boolean;
   /**
    * Configure whether an expanded item is collapsible.
+   *
+   * @default false
    */
   allowToggle?: boolean;
   children: ReactNode;

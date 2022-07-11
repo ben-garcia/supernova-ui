@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { FormControlProvider } from '@contexts/form-control';
-import { createElement, createClasses, isString } from '@utils/index';
+import { useUniqueId } from '@hooks/index';
 import { useFormControlProvider } from '@hooks/use-form-control';
+import { createElement, createClasses, isString } from '@utils/index';
 
 import { FormControlProps } from './types';
 import './styles.scss';
@@ -21,16 +22,16 @@ const FormControl: React.FC<FormControlProps> = props => {
     { className: classes, role: 'group' },
     children
   );
-  let idToUse: string;
+  const textInputId = isString(id) ? id : useUniqueId('snui-text-input');
 
-  if (!isString(id)) {
-    idToUse = `field-${Math.random()}`;
-  } else {
-    idToUse = `${id}-${Math.random()}`;
-  }
+  // if (isString(id)) {
+  //   idToUse = `${id}-${Math.random()}`;
+  // } else {
+  //   idToUse = `field-${Math.random()}`;
+  // }
 
   const context = useFormControlProvider(props);
-  const contextValue = React.useMemo(() => ({ ...context, id: idToUse }), [
+  const contextValue = React.useMemo(() => ({ ...context, id: textInputId }), [
     context,
   ]);
 

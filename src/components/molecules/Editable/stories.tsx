@@ -1,51 +1,66 @@
-import { Meta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { useEditableControls } from '@hooks/index';
 import { Button } from '@atoms/index';
 import { Editable, EditablePreview, EditableInput, EditableTextarea } from '.';
-import argTypes from './arg-types';
 
 export default {
-  argTypes,
+  argTypes: {
+    isAutoResize: { control: 'boolean', defaultValue: true },
+    isDisabled: { control: 'boolean', defaultValue: false },
+    placeholder: { control: 'text' },
+    selectAllOnFocus: { control: 'boolean', defaultValue: true },
+    submitOnBlur: { control: 'boolean', defaultValue: true },
+  },
   component: Editable,
   title: 'Supernova UI/molecules/Editable',
-} as Meta;
+} as ComponentMeta<typeof Editable>;
 
-export const Input = () => {
+const parameters = {
+  controls: {
+    include: [
+      'isAutoResize',
+      'isDisabled',
+      'placeholder',
+      'selectAllOnFocus',
+      'submitOnBlur',
+    ],
+  },
+};
+
+const Template: ComponentStory<typeof Editable> = args => {
   const [value, setValue] = useState('edit');
   return (
     <div style={{ border: '1px solid #ccc', padding: '5px' }}>
-      <Editable onChange={val => setValue(val)} value={value}>
+      <Editable {...args} onChange={val => setValue(val)} value={value}>
         <EditablePreview />
         <EditableInput />
       </Editable>
     </div>
   );
 };
-export const Textarea = () => {
+
+export const WithInput = Template.bind({});
+WithInput.parameters = parameters;
+
+const WithTextareaTemplate: ComponentStory<any> = args => {
   const [value, setValue] = useState('edit');
   return (
     <div style={{ border: '1px solid #ccc', padding: '5px' }}>
-      <Editable onChange={val => setValue(val)} value={value}>
+      <Editable {...args} onChange={val => setValue(val)} value={value}>
         <EditablePreview />
-        <EditableTextarea />
+        <EditableTextarea isAutoResize={args.isAutoResize} />
       </Editable>
     </div>
   );
 };
-export const IsAutoResizeTextarea = () => {
-  const [value, setValue] = useState('edit');
-  return (
-    <div style={{ border: '1px solid #ccc', padding: '5px' }}>
-      <Editable onChange={val => setValue(val)} value={value}>
-        <EditablePreview />
-        <EditableTextarea isAutoResize maxLength={500} rows={1} />
-      </Editable>
-    </div>
-  );
-};
-const CustomEditableTextarea = () => {
+
+export const WithTextarea = WithTextareaTemplate.bind({});
+WithTextarea.parameters = parameters;
+
+const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
+  const { isAutoResize } = props;
   const {
     isEditing,
     getCancelButtonProps,
@@ -56,7 +71,7 @@ const CustomEditableTextarea = () => {
     <div
       style={{ border: '1px solid #ccc', padding: '5px', position: 'relative' }}
     >
-      <EditableTextarea />
+      <EditableTextarea isAutoResize={isAutoResize} />
       {isEditing ? (
         <div
           style={{
@@ -91,14 +106,18 @@ const CustomEditableTextarea = () => {
     </div>
   );
 };
-export const CustomTextarea = () => {
+
+const WithCustomTextareaTemplate: ComponentStory<any> = args => {
   const [value, setValue] = useState('Add description');
   return (
-    <Editable onChange={val => setValue(val)} value={value}>
-      <CustomEditableTextarea />
+    <Editable {...args} onChange={val => setValue(val)} value={value}>
+      <CustomEditableTextarea isAutoResize={args.isAutoResize} />
     </Editable>
   );
 };
+
+export const WithCustomTextarea = WithCustomTextareaTemplate.bind({});
+WithCustomTextarea.parameters = parameters;
 
 const CustomEditableInput = () => {
   const {
@@ -143,11 +162,14 @@ const CustomEditableInput = () => {
   );
 };
 
-export const CustomInput = () => {
+const WithCustomInput: ComponentStory<typeof Editable> = args => {
   const [value, setValue] = useState('Add description');
   return (
-    <Editable onChange={val => setValue(val)} value={value}>
+    <Editable {...args} onChange={val => setValue(val)} value={value}>
       <CustomEditableInput />
     </Editable>
   );
 };
+
+export const CustomInput = WithCustomInput.bind({});
+CustomInput.parameters = parameters;

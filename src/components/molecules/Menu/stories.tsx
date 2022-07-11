@@ -1,19 +1,26 @@
-import { Meta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { SettingsIcon, UserIcon, LogoutIcon, HalfMoonIcon } from '@atoms/index';
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '.';
 
 export default {
+  argTypes: {
+    closeOnEsc: { control: 'boolean', defaultValue: true },
+  },
   component: Menu,
   title: 'Supernova UI/Molecules/Menu',
-} as Meta;
+} as ComponentMeta<typeof Menu>;
 
-export const Basic = () => {
+const parameters = {
+  controls: { include: ['closeOnEsc'] },
+};
+
+const Template: ComponentStory<typeof Menu> = args => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
       <MenuList width="250px">
         <MenuItem>Profile</MenuItem>
@@ -25,29 +32,14 @@ export const Basic = () => {
   );
 };
 
-export const PositionRight = () => {
+export const Basic = Template.bind({});
+Basic.parameters = parameters;
+
+const WithGroupTemplate: ComponentStory<typeof Menu> = args => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-      <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
-        <MenuList width="200px">
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>Settings</MenuItem>
-          <MenuItem>Night Mode</MenuItem>
-          <MenuItem>Sign Out</MenuItem>
-        </MenuList>
-      </Menu>
-    </div>
-  );
-};
-
-export const WithGroup = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  return (
-    <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
       <MenuList width="250px">
         <MenuGroup title="My Stuff">
@@ -63,11 +55,14 @@ export const WithGroup = () => {
   );
 };
 
-export const WithIcons = () => {
+export const WithGroup = WithGroupTemplate.bind({});
+WithGroup.parameters = parameters;
+
+const WithIconsTemplate: ComponentStory<typeof Menu> = args => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <MenuButton onClick={() => setIsOpen(true)}>icons</MenuButton>
       <MenuList width="250px">
         <MenuGroup title="My Stuff">
@@ -94,3 +89,6 @@ export const WithIcons = () => {
     </Menu>
   );
 };
+
+export const WithIcons = WithIconsTemplate.bind({});
+WithIcons.parameters = parameters;

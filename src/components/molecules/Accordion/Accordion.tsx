@@ -1,4 +1,3 @@
-/* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React, {
   useCallback,
   useEffect,
@@ -10,7 +9,7 @@ import React, {
 import { AccordionProvider } from '@contexts/index';
 import { useAccordionProvider } from '@hooks/use-accordion';
 import { useUniqueId } from '@hooks/index';
-import { createClasses, isString } from '@utils/index';
+import { createClasses, isArray, isString } from '@utils/index';
 
 import { AccordionProps } from './types';
 
@@ -77,11 +76,13 @@ const Accordion: React.FC<AccordionProps> = props => {
   // open panels when defaultIndices prop is passed.
   useEffect(() => {
     buttonsRef?.current?.forEach((el, index) => {
-      if (defaultIndices.includes(index)) {
-        el.click();
+      if (isArray(defaultIndices)) {
+        if (defaultIndices.includes(index)) {
+          el.click();
+        }
       }
     });
-  }, [defaultIndices]);
+  }, [props]);
 
   useEffect(() => {
     if (buttonsRef?.current) {
@@ -91,12 +92,14 @@ const Accordion: React.FC<AccordionProps> = props => {
           el.getAttribute('data-snui-accordion-button-index')
         );
 
-        if (isExpanded && !activeIndices.includes(buttonIndex)) {
-          el.click();
+        if (isArray(defaultIndices)) {
+          if (isExpanded && !activeIndices.includes(buttonIndex)) {
+            el.click();
+          }
         }
       });
     }
-  }, [buttonsRef?.current, activeIndices]);
+  }, [buttonsRef?.current, activeIndices, props]);
 
   const contextValue = useMemo(
     () => ({

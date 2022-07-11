@@ -26,7 +26,7 @@ const FormErrorMessage = forwardRef(
       <div
         {...getErrorMessageProps(props, ref)}
         className={classes}
-        id={`${id}-feedback`}
+        id={`${id}__feedback`}
       >
         {children}
       </div>

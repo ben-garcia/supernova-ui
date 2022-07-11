@@ -5,6 +5,7 @@
   margin: var(--snui-space-sm);
   min-width: 300px;
   position: relative;
+  z-index: var(--snui-z-index-notification);
 
   &--bottom {
     animation: slide-in-bottom 0.4s ease;
