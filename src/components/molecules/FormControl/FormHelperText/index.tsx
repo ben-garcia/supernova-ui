@@ -25,7 +25,7 @@ const FormHelperText = forwardRef(
     return (
       <div
         {...getHelpTextProps(props, ref)}
-        id={`${id}__helper-text`}
+        id={`${id}-helper-text`}
         className={classes}
       >
         {children}
