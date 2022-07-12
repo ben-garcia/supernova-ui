@@ -6,8 +6,9 @@ import React, {
   ReactNode,
 } from 'react';
 
-import { useTabList, useTabs, useTheme } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { useTabList, useTabs, useTheme } from '@hooks';
+import { createClasses, isString } from '@utils';
+
 import './styles.scss';
 
 interface TabProps {

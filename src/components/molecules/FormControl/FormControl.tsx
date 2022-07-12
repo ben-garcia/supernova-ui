@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { FormControlProvider } from '@contexts/form-control';
-import { useUniqueId } from '@hooks/index';
-import { useFormControlProvider } from '@hooks/use-form-control';
-import { createElement, createClasses, isString } from '@utils/index';
+import { FormControlProvider } from '@contexts';
+import { useFormControlProvider, useUniqueId } from '@hooks';
+import { createElement, createClasses, isString } from '@utils';
 
 import { FormControlProps } from './types';
 import './styles.scss';

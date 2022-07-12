@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDrawer } from '../../../../hooks';
+import { useDrawer } from '@hooks';
 
 import './styles.scss';
 

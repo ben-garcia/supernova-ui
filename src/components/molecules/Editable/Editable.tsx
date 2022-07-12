@@ -1,8 +1,8 @@
 import React, { useMemo, useRef } from 'react';
 
-import { EditableProvider } from '@contexts/index';
-import { useEditableProvider } from '@hooks/use-editable';
-import { createClasses, isString } from '@utils/index';
+import { EditableProvider } from '@contexts';
+import { useEditableProvider } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 import EditableProps from './types';
 import './styles.scss';

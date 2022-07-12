@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 
-import { Button, ChevronDownIcon, Heading } from '../../../atoms';
+import { Button, ChevronDownIcon, Heading } from '@atoms';
 import {
   useAccordionItemProvider,
   useAccordion,
   useAccordionItem,
-} from '../../../../hooks/use-accordion';
-import { ButtonProps } from '../../../atoms/Button/types';
-import { createClasses, isString } from '../../../../utils';
+} from '@hooks';
+import { ButtonProps } from '@atoms/Button/types';
+import { createClasses, isString } from '@utils';
 import './styles.scss';
 
 interface AccordionHeaderButtonProps extends ButtonProps {

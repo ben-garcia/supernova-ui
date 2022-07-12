@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
 import {
+  Editable,
+  EditableInput,
+  EditablePreview,
+  EditableTextarea,
+} from '@molecules';
+import {
   a11yTest,
   fireEvent,
   mockMatchMedia,
@@ -8,8 +14,7 @@ import {
   screen,
   userEvent,
   waitFor,
-} from '@testUtils/index';
-import { Editable, EditableInput, EditablePreview, EditableTextarea } from '.';
+} from '@testUtils';
 
 import EditableProps from './types';
 

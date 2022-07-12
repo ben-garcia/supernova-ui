@@ -1,14 +1,14 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button } from '@atoms/index';
+import { Button } from '@atoms';
 import {
   AlertDialog,
   AlertDialogBody,
   AlertDialogButton,
   AlertDialogFooter,
   AlertDialogHeader,
-} from '@molecules/AlertDialog';
+} from '@molecules';
 
 import { AlertDialogProps } from './types';
 

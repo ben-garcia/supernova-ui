@@ -24,13 +24,15 @@
     "noUnusedParameters": true,
     "outDir": "dist",
     "paths": {
-      "@/*": ["./*"],
+      "@types": ["types"],
+      "@atoms": ["components/atoms"],
       "@atoms/*": ["components/atoms/*"],
+      "@molecules": ["components/molecules"],
       "@molecules/*": ["components/molecules/*"],
-      "@hooks/*": ["hooks/*"],
-      "@contexts/*": ["contexts/*"],
-      "@utils/*": ["utils/*"],
-      "@testUtils/*": ["test-utils/*"]
+      "@hooks": ["hooks"],
+      "@contexts": ["contexts"],
+      "@utils": ["utils"],
+      "@testUtils": ["test-utils"]
     },
     "removeComments": false,
     "resolveJsonModule": true,

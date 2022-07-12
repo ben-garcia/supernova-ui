@@ -1,8 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Button } from '@atoms/index';
-import { useNotification } from '@hooks/index';
+import { Button } from '@atoms';
+import { useNotification } from '@hooks';
 
 export default {
   argTypes: {

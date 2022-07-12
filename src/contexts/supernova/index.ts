@@ -1,1 +1,1 @@
-export { default as SupernovaProvider } from './SupernovaProvider';
+export { SupernovaProvider } from './SupernovaProvider';

@@ -7,9 +7,9 @@ import {
   render,
   screen,
   userEvent,
-} from '@testUtils/index';
-
+} from '@testUtils';
 import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '.';
+
 import { SliderProps } from './types';
 
 describe('<Slider />', () => {

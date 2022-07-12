@@ -1,3 +1,3 @@
-export { CommonProps, FormControlProps } from './common';
-export { MarginPaddingProps, SupernovaUIBaseProps } from './supernova-ui-base';
-export { TypographyProps } from './typography';
+export * from './common';
+export * from './supernova-ui-base';
+export * from './typography';

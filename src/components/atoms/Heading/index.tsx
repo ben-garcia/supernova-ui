@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useBreakpoint, useTheme } from '@hooks/index';
+import { useBreakpoint, useTheme } from '@hooks';
 import {
   colors,
   createClasses,
@@ -8,9 +8,9 @@ import {
   createStyles,
   isString,
   sizes,
-} from '@utils/index';
+} from '@utils';
 
-import { MarginPaddingProps } from '@/types';
+import { MarginPaddingProps } from '@types';
 import { HeadingProps } from './types';
 
 /**

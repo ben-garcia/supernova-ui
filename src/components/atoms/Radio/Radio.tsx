@@ -5,7 +5,7 @@ import {
   useBreakpoint,
   useFormControl,
   useTheme,
-} from '@hooks/index';
+} from '@hooks';
 
 import {
   colors,
@@ -18,12 +18,10 @@ import {
   responsify,
   shadows,
   sizes,
-} from '@utils/index';
+} from '@utils';
 
-import { MarginPaddingProps } from '@/types/index';
-import { Sizes } from '@/types/common';
+import { MarginPaddingProps, Sizes } from '@types';
 import { RadioProps } from './types';
-
 import './styles.scss';
 
 /**

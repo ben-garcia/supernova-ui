@@ -4,9 +4,9 @@ import React from 'react';
 import {
   Accordion,
   AccordionHeaderButton,
-  AccordionPanel,
   AccordionItem,
-} from '.';
+  AccordionPanel,
+} from '@molecules';
 
 export default {
   argTypes: {

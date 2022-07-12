@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils/index';
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils';
 
 import TextInput from '.';
 import { UserIcon } from '../Icon/Icons';

@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { useEditable } from '../../../../hooks/use-editable';
+import { useEditable } from '@hooks';
 import {
   createClasses,
   isFunction,
   isNumber,
   isString,
   validateDataProps,
-} from '../../../../utils';
+} from '@utils';
+
 import './styles.scss';
 
 interface EditableTextareaProps {

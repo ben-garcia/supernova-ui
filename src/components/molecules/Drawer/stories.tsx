@@ -1,14 +1,15 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button, TextInput } from '@atoms/index';
+import { Button, TextInput } from '@atoms';
 import {
   Drawer,
   DrawerBody,
   DrawerButton,
   DrawerFooter,
   DrawerHeader,
-} from '.';
+} from '@molecules';
+
 import { DrawerProps } from './types';
 
 export default {

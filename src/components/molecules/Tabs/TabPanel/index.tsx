@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useTabs } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { useTabs } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 interface TabPanelProps {
   children: ReactNode;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useMenu } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { useMenu } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 interface MenuGroupProps {
   children: React.ReactNode;

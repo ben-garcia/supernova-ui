@@ -1,12 +1,7 @@
 import React from 'react';
 
+import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils';
 import Button from '.';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-} from '../../../test-utils';
 
 describe('<Button />', () => {
   beforeAll(() => mockMatchMedia());

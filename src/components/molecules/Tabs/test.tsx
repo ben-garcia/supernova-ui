@@ -1,6 +1,7 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
+import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@molecules';
 import {
   a11yTest,
   fireEvent,
@@ -8,8 +9,7 @@ import {
   render,
   screen,
   userEvent,
-} from '@testUtils/index';
-import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '.';
+} from '@testUtils';
 
 import { TabsProps } from './types';
 

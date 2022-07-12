@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { MenuProvider } from '@contexts/menu';
-import { useUniqueId } from '@hooks/index';
-import { useMenuProvider } from '@hooks/use-menu';
+import { MenuProvider } from '@contexts';
+import { useMenuProvider, useUniqueId } from '@hooks';
 
 import { MenuProps } from './types';
 

@@ -1,13 +1,13 @@
 import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useTheme } from '@hooks/index';
+import { useTheme } from '@hooks';
 import {
   ArrowPosition,
   getArrowPosition,
   getLeftTopPosition,
   isString,
-} from '@utils/index';
+} from '@utils';
 
 import { TooltipProps } from './types';
 import './styles.scss';

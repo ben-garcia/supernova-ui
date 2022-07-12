@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createClasses, isString } from '@utils/index';
+import { createClasses, isString } from '@utils';
 
 import { FlexProps } from './types';
 

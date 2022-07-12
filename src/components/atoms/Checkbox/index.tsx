@@ -1,13 +1,13 @@
 /* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { forwardRef, useMemo, useState } from 'react';
 
-import { CheckmarkIcon } from '@atoms/index';
+import { CheckmarkIcon } from '@atoms';
 import {
   useBreakpoint,
   useInputChecked,
   useFormControl,
   useTheme,
-} from '@hooks/index';
+} from '@hooks';
 import {
   colors,
   createClasses,
@@ -19,10 +19,9 @@ import {
   responsify,
   shadows,
   sizes,
-} from '@utils/index';
-import { MarginPaddingProps } from '@/types';
-import { Sizes } from '@/types/common';
+} from '@utils';
 
+import { MarginPaddingProps, Sizes } from '@types';
 import { CheckboxProps } from './types';
 import './styles.scss';
 

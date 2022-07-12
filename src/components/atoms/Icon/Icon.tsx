@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useBreakpoint, useTheme } from '@hooks/index';
-import { createClasses, createStyles, isString, sizes } from '@utils/index';
-import { MarginPaddingProps } from '@/types/index';
-import { Sizes } from 'types/common';
+import { useBreakpoint, useTheme } from '@hooks';
+import { createClasses, createStyles, isString, sizes } from '@utils';
+
+import { MarginPaddingProps, Sizes } from '@types';
 import { IconBaseProps } from './types';
 
 /**

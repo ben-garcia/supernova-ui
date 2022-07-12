@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '.';
+import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@molecules';
 
 export default {
   argTypes: {

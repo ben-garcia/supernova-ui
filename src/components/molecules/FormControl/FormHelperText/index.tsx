@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 
-import { useFormControl } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { useFormControl } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 export interface FormHelperTextProps {
   children: ReactNode;

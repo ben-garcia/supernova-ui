@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, ReactNode } from 'react';
 
-import { createClasses, isString } from '../../../../utils';
+import { createClasses, isString } from '@utils';
+
 import './styles.scss';
 
 interface TabPanelListProps {

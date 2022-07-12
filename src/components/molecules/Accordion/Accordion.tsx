@@ -6,10 +6,10 @@ import React, {
   useState,
 } from 'react';
 
-import { AccordionProvider } from '@contexts/index';
-import { useAccordionProvider } from '@hooks/use-accordion';
-import { useUniqueId } from '@hooks/index';
-import { createClasses, isArray, isString } from '@utils/index';
+import { AccordionProvider } from '@contexts';
+import { useAccordionProvider, useUniqueId } from '@hooks';
+
+import { createClasses, isArray, isString } from '@utils';
 
 import { AccordionProps } from './types';
 

@@ -1,12 +1,14 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
-import { AccordionContext, AccordionItemContext } from '../contexts/accordion';
-import { AccordionProps } from '../components/molecules/Accordion/types';
+import { AccordionContext, AccordionItemContext } from '@contexts';
+import { AccordionProps } from '@molecules/Accordion/types';
 
 /**
  * Hook that returns the Accordion props
  */
-const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
+export const useAccordionProvider = (
+  props: Omit<AccordionProps, 'children'>
+) => {
   const { defaultIndices = [] } = props;
 
   const id = useMemo(() => `snui-accordion-${Math.random()}`, []);
@@ -35,7 +37,7 @@ const useAccordionProvider = (props: Omit<AccordionProps, 'children'>) => {
 /**
  * Hook that returns the Accordion Item props
  */
-const useAccordionItemProvider = () => {
+export const useAccordionItemProvider = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const getAccordionButtonProps = useCallback(
@@ -66,7 +68,7 @@ const useAccordionItemProvider = () => {
 /**
  * Hook that returns all accordion props
  */
-const useAccordion = () => {
+export const useAccordion = () => {
   const context = useContext(AccordionContext);
 
   if (!context) {
@@ -78,7 +80,7 @@ const useAccordion = () => {
   return context;
 };
 
-const useAccordionItem = () => {
+export const useAccordionItem = () => {
   const context = useContext(AccordionItemContext);
 
   if (!context) {
@@ -88,11 +90,4 @@ const useAccordionItem = () => {
   }
 
   return context;
-};
-
-export {
-  useAccordionProvider,
-  useAccordionItemProvider,
-  useAccordion,
-  useAccordionItem,
 };

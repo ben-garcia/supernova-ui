@@ -5,6 +5,8 @@ export * from './editable';
 export * from './form-control';
 export * from './menu';
 export * from './modal';
+export * from './notification';
+export * from './slider';
 export * from './supernova';
 export * from './tabs';
 export * from './theme';

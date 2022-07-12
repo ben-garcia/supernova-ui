@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
-import { useMenu, useMenuList, useTheme } from '../../../../hooks';
-import { createClasses, isFunction, isString } from '../../../../utils';
+import { useMenu, useMenuList, useTheme } from '@hooks';
+import { createClasses, isFunction, isString } from '@utils';
 
 import './styles.scss';
 

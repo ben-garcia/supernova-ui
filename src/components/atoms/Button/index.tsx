@@ -1,8 +1,8 @@
 /* eslint react/button-has-type: 0 */
 import React, { forwardRef, useEffect, useState } from 'react';
 
-import { Spinner } from '@atoms/index';
-import { useBreakpoint, useTheme } from '@hooks/index';
+import { Spinner } from '@atoms';
+import { useBreakpoint, useTheme } from '@hooks';
 import {
   createClasses,
   createStyles,
@@ -12,10 +12,9 @@ import {
   responsify,
   shadows,
   sizes,
-} from '@utils/index';
-import { MarginPaddingProps } from '@/types/index';
-import { Sizes } from '@/types/common';
+} from '@utils';
 
+import { MarginPaddingProps, Sizes } from '@types';
 import { ButtonProps } from './types';
 import './styles.scss';
 

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import colors from '@/theme/colors';
+import colors from '../../../theme/colors';
 
 export default {
   title: 'Supernova UI/Atoms/Colors',

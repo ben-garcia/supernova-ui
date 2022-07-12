@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useRef } from 'react';
 
-import { MenuContext, MenuListContext } from '../contexts/menu';
-import { MenuProps } from '../components/molecules/Menu/types';
-import { isFunction } from '../utils';
+import { MenuContext, MenuListContext } from '@contexts';
+import { isFunction } from '@utils';
 
+import { MenuProps } from '@molecules/Menu/types';
 /**
  * credit https://github.com/chakra-ui/chakra-ui/blob/53d0d0cfec7b4404fd2bc123991352f81bd39a82/packages/react-utils/src/refs.ts#L34
  */
@@ -52,7 +52,7 @@ function mergeRefs<T>(...refs: (ReactRef<T> | undefined)[]) {
 /**
  * Hooks that returns the Menu props
  */
-const useMenuProvider = (props: MenuProps) => {
+export const useMenuProvider = (props: MenuProps) => {
   const { isOpen, onClose, closeOnEsc } = props;
 
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -100,7 +100,7 @@ const useMenuProvider = (props: MenuProps) => {
 /**
  * Hooks that returns all menu props
  */
-const useMenu = () => {
+export const useMenu = () => {
   const context = useContext(MenuContext);
 
   if (!context.menuId) {
@@ -114,7 +114,7 @@ const useMenu = () => {
 /**
  * Hooks that returns all menu list props
  */
-const useMenuList = () => {
+export const useMenuList = () => {
   const context = useContext(MenuListContext);
 
   if (!context) {
@@ -124,5 +124,3 @@ const useMenuList = () => {
   }
   return context;
 };
-
-export { useMenuProvider, useMenu, useMenuList };

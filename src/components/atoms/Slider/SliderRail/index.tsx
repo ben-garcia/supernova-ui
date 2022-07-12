@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
-import { useSlider } from '@hooks/index';
-import { createClasses, isString } from '@utils/index';
+import { useSlider } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 import './styles.scss';
 

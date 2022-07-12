@@ -1,6 +1,6 @@
-import React, { Children } from 'react';
+import React, { FC, Children } from 'react';
 
-import { createClasses, isString } from '@utils/index';
+import { createClasses, isString } from '@utils';
 
 import { RadioGroupProps } from './types';
 
@@ -9,7 +9,7 @@ import { RadioGroupProps } from './types';
  *
  * injects 'name', 'onChange' handler, and 'isChecked' props to its children
  */
-const RadioGroup: React.FC<RadioGroupProps> = props => {
+const RadioGroup: FC<RadioGroupProps> = props => {
   const {
     children,
     className,

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button } from '@atoms/index';
+import { Button } from '@atoms';
 import {
   CheckmarkIcon,
   CloseIcon,
   InfoIcon,
   HelpIcon,
 } from '@atoms/Icon/Icons';
-import { NotificationContext } from '@contexts/notification/NotificationProvider';
-import { useTheme } from '@hooks/index';
-import { isFunction, isString } from '@utils/index';
+import { NotificationContext } from '@contexts';
+import { useTheme } from '@hooks';
+import { isFunction, isString } from '@utils';
 
 import { NotificationProps } from './types';
 

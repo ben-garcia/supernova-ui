@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, useMemo } from 'react';
 
-import { useBreakpoint, useFormControl, useTheme } from '@hooks/index';
+import { useBreakpoint, useFormControl, useTheme } from '@hooks';
 import {
   colors,
   createClasses,
@@ -12,10 +12,9 @@ import {
   responsify,
   shadows,
   sizes,
-} from '@utils/index';
+} from '@utils';
 
-import { MarginPaddingProps } from '@/types/index';
-import { Sizes } from '@/types/common';
+import { MarginPaddingProps, Sizes } from '@types';
 import { TextInputProps } from './types';
 import './styles.scss';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useBreakpoint } from '@hooks/index';
-import { createClasses, isString } from '@utils/index';
+import { useBreakpoint } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 import { FlexItemProps } from './types';
 

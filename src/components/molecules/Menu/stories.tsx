@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { SettingsIcon, UserIcon, LogoutIcon, HalfMoonIcon } from '@atoms/index';
-import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '.';
+import { SettingsIcon, UserIcon, LogoutIcon, HalfMoonIcon } from '@atoms';
+import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '@molecules';
 
 export default {
   argTypes: {

@@ -6,12 +6,11 @@ import React, {
   useState,
 } from 'react';
 
-import { Button, CloseIcon, Portal } from '@atoms/index';
+import { Button, CloseIcon, Portal } from '@atoms';
 import FocusLock from '@atoms/FocusLock';
 import Overlay from '@atoms/Overlay';
-import { useBreakpoint, useTheme } from '@hooks/index';
-import { useModalProvider } from '@hooks/use-modal';
-import { ModalProvider } from '@contexts/index';
+import { ModalProvider } from '@contexts';
+import { useBreakpoint, useModalProvider, useTheme } from '@hooks';
 import {
   colors,
   createClasses,
@@ -19,9 +18,9 @@ import {
   isString,
   shadows,
   sizes,
-} from '@utils/index';
+} from '@utils';
 
-import { MarginPaddingProps } from '@/types/index';
+import { MarginPaddingProps } from '@types';
 import { ModalProps } from './types';
 import './styles.scss';
 

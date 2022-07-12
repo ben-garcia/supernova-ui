@@ -9,7 +9,7 @@ import {
   render,
   userEvent,
   waitFor, // wait for the set timeout function to be called
-} from '@testUtils/index';
+} from '@testUtils';
 
 import {
   AlertDialog,
@@ -17,7 +17,7 @@ import {
   AlertDialogButton,
   AlertDialogFooter,
   AlertDialogHeader,
-} from '@molecules/AlertDialog';
+} from '@molecules';
 
 describe('<AlertDialog />', () => {
   beforeAll(() => mockMatchMedia());

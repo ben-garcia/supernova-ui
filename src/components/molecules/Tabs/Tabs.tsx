@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 
-import { TabsProvider } from '@contexts/index';
-import { useTheme, useUniqueId, useTabsProvider } from '@hooks/index';
-import { createClasses, isString } from '@utils/index';
+import { TabsProvider } from '@contexts';
+import { useTheme, useUniqueId, useTabsProvider } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 import { TabsProps } from './types';
 import './styles.scss';
@@ -11,7 +11,7 @@ import './styles.scss';
  * The container for all Tabs related components
  * that provides context to its children.
  */
-const Tabs: React.FC<TabsProps> = props => {
+const Tabs: FC<TabsProps> = props => {
   const {
     activeColor = 'info700',
     align = 'start',

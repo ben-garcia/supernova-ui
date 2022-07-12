@@ -11,9 +11,10 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
-import { MenuListProvider } from '../../../../contexts/menu';
-import { useMenu } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { MenuListProvider } from '@contexts';
+import { useMenu } from '@hooks';
+import { createClasses, isString } from '@utils';
+
 import './styles.scss';
 
 export interface MenuListProps {

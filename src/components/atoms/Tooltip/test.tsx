@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { act, a11yTest, fireEvent, render, screen } from '@testUtils/index';
+import { act, a11yTest, fireEvent, render, screen } from '@testUtils';
 
 import Tooltip from '.';
 

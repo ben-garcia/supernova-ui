@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import { useAlertDialog } from '../../../../hooks';
+import { useAlertDialog } from '@hooks';
 
 import './styles.scss';
 
@@ -12,7 +12,7 @@ export interface AlertDialogBodyProps {
 /**
  * The wrapper for the header content of the AlertDialog.
  */
-const AlertDialogBody: React.FC<AlertDialogBodyProps> = props => {
+const AlertDialogBody: FC<AlertDialogBodyProps> = props => {
   const { children, ...rest } = props;
   const { getAlertDialogBodyProps } = useAlertDialog();
 

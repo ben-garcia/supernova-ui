@@ -1,8 +1,8 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useUniqueId } from '@hooks/index';
-import { isString } from '@utils/index';
+import { useUniqueId } from '@hooks';
+import { isString } from '@utils';
 
 export interface PortalProps {
   children: ReactNode;

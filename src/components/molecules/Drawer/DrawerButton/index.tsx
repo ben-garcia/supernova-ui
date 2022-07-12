@@ -1,9 +1,10 @@
 import React, { forwardRef, useCallback } from 'react';
 
-import { Button } from '../../../atoms';
-import { ButtonProps } from '../../../atoms/Button/types';
-import { createClasses, isFunction, isString } from '../../../../utils';
-import { useDrawer } from '../../../../hooks';
+import { Button } from '@atoms';
+import { useDrawer } from '@hooks';
+import { createClasses, isFunction, isString } from '@utils';
+
+import { ButtonProps } from '@atoms/Button/types';
 
 type DrawerButtonProps = ButtonProps;
 

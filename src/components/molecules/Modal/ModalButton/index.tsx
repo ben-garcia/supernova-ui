@@ -1,9 +1,10 @@
 import React, { forwardRef, useCallback } from 'react';
 
-import { Button } from '../../../atoms';
+import { Button } from '@atoms';
+import { useModal } from '@hooks';
+import { createClasses, isFunction, isString } from '@utils';
+
 import { ButtonProps } from '../../../atoms/Button/types';
-import { createClasses, isFunction, isString } from '../../../../utils';
-import { useModal } from '../../../../hooks';
 
 type ModalButtonProps = ButtonProps;
 

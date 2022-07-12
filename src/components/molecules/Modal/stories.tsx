@@ -1,8 +1,14 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button, TextInput } from '@atoms/index';
-import { Modal, ModalButton, ModalFooter, ModalHeader, ModalBody } from '.';
+import { Button, TextInput } from '@atoms';
+import {
+  Modal,
+  ModalButton,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+} from '@molecules';
 
 import { ModalProps } from './types';
 

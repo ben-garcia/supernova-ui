@@ -1,6 +1,13 @@
 import React from 'react';
 
 import {
+  Modal,
+  ModalBody,
+  ModalButton,
+  ModalFooter,
+  ModalHeader,
+} from '@molecules';
+import {
   a11yTest,
   fireEvent,
   mockMatchMedia,
@@ -8,8 +15,7 @@ import {
   screen,
   userEvent,
   waitFor, // wait for the set timeout function to be called
-} from '@testUtils/index';
-import { Modal, ModalBody, ModalButton, ModalFooter, ModalHeader } from '.';
+} from '@testUtils';
 
 describe('<Modal />', () => {
   beforeAll(() => mockMatchMedia());

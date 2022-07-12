@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { SliderProvider } from '@contexts/slider';
-import { useUniqueId } from '@hooks/index';
-import { createClasses, isString } from '@utils/index';
+import { SliderProvider } from '@contexts';
+import { useUniqueId } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 import { SliderProps } from './types';
 

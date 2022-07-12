@@ -1,9 +1,9 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
-import { TextInput } from '@atoms/index';
-import { a11yTest, mockMatchMedia, render } from '@testUtils/index';
-import { FormControl, FormErrorMessage, FormHelperText } from '.';
+import { TextInput } from '@atoms';
+import { FormControl, FormErrorMessage, FormHelperText } from '@molecules';
+import { a11yTest, mockMatchMedia, render } from '@testUtils';
 
 import { FormControlProps } from './types';
 

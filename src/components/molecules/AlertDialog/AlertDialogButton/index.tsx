@@ -1,9 +1,9 @@
 import React, { forwardRef, useCallback } from 'react';
 
-import { Button } from '../../../atoms';
-import { ButtonProps } from '../../../atoms/Button/types';
-import { createClasses, isFunction, isString } from '../../../../utils';
-import { useAlertDialog } from '../../../../hooks';
+import { Button } from '@atoms';
+import { ButtonProps } from '@atoms/Button/types';
+import { createClasses, isFunction, isString } from '@utils';
+import { useAlertDialog } from '@hooks';
 
 type AlertDialogButtonProps = ButtonProps;
 

@@ -1,9 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { useEditableControls } from '@hooks/index';
-import { Button } from '@atoms/index';
-import { Editable, EditablePreview, EditableInput, EditableTextarea } from '.';
+import { Button } from '@atoms';
+import { useEditableControls } from '@hooks';
+import {
+  Editable,
+  EditablePreview,
+  EditableInput,
+  EditableTextarea,
+} from '@molecules';
 
 export default {
   argTypes: {

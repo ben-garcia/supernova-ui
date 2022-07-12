@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useRef, ReactNode } from 'react';
 
-import { TabListProvider } from '../../../../contexts';
-import { useTabs } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { TabListProvider } from '@contexts';
+import { useTabs } from '@hooks';
+import { createClasses, isString } from '@utils';
+
 import './styles.scss';
 
 interface TabListProps {

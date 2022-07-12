@@ -6,6 +6,11 @@ import React, {
   useState,
 } from 'react';
 
+import { Button, CloseIcon, Portal } from '@atoms';
+import FocusLock from '@atoms/FocusLock';
+import Overlay from '@atoms/Overlay';
+import { DrawerProvider } from '@contexts';
+import { useBreakpoint, useDrawerProvider, useTheme } from '@hooks';
 import {
   colors,
   createClasses,
@@ -13,15 +18,9 @@ import {
   isString,
   shadows,
   sizes,
-} from '@utils/index';
-import { Button, CloseIcon, Portal } from '@atoms/index';
-import FocusLock from '@atoms/FocusLock';
-import Overlay from '@atoms/Overlay';
-import { DrawerProvider } from '@contexts/index';
-import { useBreakpoint, useTheme } from '@hooks/index';
-import { useDrawerProvider } from '@hooks/use-drawer';
+} from '@utils';
 
-import { MarginPaddingProps } from '@/types/index';
+import { MarginPaddingProps } from '@types';
 import { DrawerProps } from './types';
 import './styles.scss';
 

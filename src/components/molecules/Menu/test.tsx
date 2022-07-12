@@ -1,6 +1,7 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
+import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '@molecules';
 import {
   a11yTest,
   fireEvent,
@@ -8,8 +9,7 @@ import {
   render,
   screen,
   userEvent,
-} from '@testUtils/index';
-import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '.';
+} from '@testUtils';
 
 import { MenuProps } from './types';
 

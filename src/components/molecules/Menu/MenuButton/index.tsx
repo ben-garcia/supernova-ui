@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { useMenu } from '../../../../hooks';
-import Button from '../../../atoms/Button';
-import { ButtonProps } from '../../../atoms/Button/types';
-import { createClasses, isString } from '../../../../utils';
+import { Button } from '@atoms';
+import { useMenu } from '@hooks';
+import { createClasses, isString } from '@utils';
+
+import { ButtonProps } from '@atoms/Button/types';
 
 interface MenuButtonProps extends ButtonProps {
   className?: string;

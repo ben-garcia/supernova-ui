@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
-import { SliderContext } from '../contexts/slider';
+import { SliderContext } from '@contexts';
 
 /**
  * Hooks that returns all Slider props
  */
-const useSlider = () => {
+export const useSlider = () => {
   const context = useContext(SliderContext);
 
   if (!context) {
@@ -15,5 +15,3 @@ const useSlider = () => {
   }
   return context;
 };
-
-export { useSlider };

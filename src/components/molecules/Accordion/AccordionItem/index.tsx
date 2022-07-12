@@ -1,12 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { AccordionItemProvider } from '../../../../contexts/accordion';
-import {
-  useAccordionItemProvider,
-  useAccordion,
-} from '../../../../hooks/use-accordion';
-import { useUniqueIds } from '../../../../hooks';
-import { createClasses, isString } from '../../../../utils';
+import { AccordionItemProvider } from '@contexts';
+import { useAccordionItemProvider, useAccordion, useUniqueIds } from '@hooks';
+import { createClasses, isString } from '@utils';
 
 export interface AccordionItemProps {
   className?: string;

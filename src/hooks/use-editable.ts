@@ -1,13 +1,14 @@
 import { useCallback, useContext, useState } from 'react';
 
-import { EditableContext } from '../contexts/editable';
-import EditableProps from '../components/molecules/Editable/types';
-import { isFunction } from '../utils';
+import { EditableContext } from '@contexts';
+import { isFunction } from '@utils';
+
+import EditableProps from '@molecules/Editable/types';
 
 /**
  * Hook that returns the EditableProvider props
  */
-const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
+export const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
   const { value, ...rest } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [isCustomEditable, setIsCustomEditableFunc] = useState(false);
@@ -34,7 +35,7 @@ const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
 /**
  * Hook that returns contents from Editable context.
  */
-const useEditable = () => {
+export const useEditable = () => {
   const context = useContext(EditableContext);
 
   if (!context) {
@@ -49,7 +50,7 @@ const useEditable = () => {
 /**
  * Hook that returns functions to help create a custom Editable.
  */
-const useEditableControls = () => {
+export const useEditableControls = () => {
   const {
     enterEditMode,
     exitEditMode,
@@ -112,5 +113,3 @@ const useEditableControls = () => {
     isEditing,
   };
 };
-
-export { useEditable, useEditableControls, useEditableProvider };

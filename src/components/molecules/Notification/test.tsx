@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { SupernovaProvider } from '../../../contexts/supernova';
-import { useNotification } from '../../../hooks';
-import { act, mockMatchMedia, renderHook, screen } from '../../../test-utils';
+import { SupernovaProvider } from '@contexts';
+import { useNotification } from '@hooks';
+import { act, mockMatchMedia, renderHook, screen } from '@testUtils';
 
 describe('<Notification />', () => {
   beforeAll(() => mockMatchMedia());

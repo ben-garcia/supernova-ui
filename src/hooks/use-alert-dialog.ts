@@ -1,13 +1,14 @@
 import { useCallback, useContext } from 'react';
 
-import { AlertDialogContext } from '../contexts';
-import { useUniqueId } from '.';
-import { createClasses, isString } from '../utils';
-import { AlertDialogProps } from '../components/molecules/AlertDialog/types';
+import { AlertDialogContext } from '@contexts';
+import { useUniqueId } from '@hooks';
+import { createClasses, isString } from '@utils';
+
+import { AlertDialogProps } from '@molecules/AlertDialog/types';
 
 /** Hooks that returns the AlertDialog props
  */
-const useAlertDialogProvider = (props: AlertDialogProps) => {
+export const useAlertDialogProvider = (props: AlertDialogProps) => {
   const {
     isOpen,
     onClose,
@@ -78,7 +79,7 @@ const useAlertDialogProvider = (props: AlertDialogProps) => {
 /**
  * Hooks that returns all AlertDialog props
  */
-const useAlertDialog = () => {
+export const useAlertDialog = () => {
   const context = useContext(AlertDialogContext);
 
   if (!context.id) {
@@ -88,5 +89,3 @@ const useAlertDialog = () => {
   }
   return context;
 };
-
-export { useAlertDialog, useAlertDialogProvider };

@@ -1,15 +1,10 @@
 import React from 'react';
 
-import { useBreakpoint, useTheme } from '@hooks/index';
-import {
-  colors,
-  createClasses,
-  createStyles,
-  isString,
-  sizes,
-} from '@utils/index';
+import { useBreakpoint, useTheme } from '@hooks';
+import { colors, createClasses, createStyles, isString, sizes } from '@utils';
 
-import { MarginPaddingProps } from '@/types/index';
+import { MarginPaddingProps } from '@types';
+
 import { BadgeProps } from './types';
 
 /**

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import { createClasses, isString } from '../../../utils';
+import { createClasses, isString } from '@utils';
+
 import './styles.scss';
 
 export interface OverlayProps {

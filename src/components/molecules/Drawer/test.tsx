@@ -1,6 +1,13 @@
 import React from 'react';
 
 import {
+  Drawer,
+  DrawerBody,
+  DrawerButton,
+  DrawerFooter,
+  DrawerHeader,
+} from '@molecules';
+import {
   a11yTest,
   fireEvent,
   mockMatchMedia,
@@ -8,14 +15,7 @@ import {
   screen,
   userEvent,
   waitFor, // wait for the set timeout function to be called
-} from '@testUtils/index';
-import {
-  Drawer,
-  DrawerBody,
-  DrawerButton,
-  DrawerFooter,
-  DrawerHeader,
-} from '.';
+} from '@testUtils';
 
 describe('<Drawer />', () => {
   beforeAll(() => mockMatchMedia());

@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { TextInput, Textarea } from '@atoms/index';
-import { FormControl, FormHelperText, FormErrorMessage } from '.';
+import { TextInput, Textarea } from '@atoms';
+import { FormControl, FormHelperText, FormErrorMessage } from '@molecules';
 
 export default {
   argTypes: {

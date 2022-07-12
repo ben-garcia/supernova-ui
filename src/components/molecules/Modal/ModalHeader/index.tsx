@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useModal } from '../../../../hooks';
+import { useModal } from '@hooks';
 
 import './styles.scss';
 

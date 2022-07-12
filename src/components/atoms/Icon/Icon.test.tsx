@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { a11yTest, mockMatchMedia, render } from '@testUtils/index';
+import { a11yTest, mockMatchMedia, render } from '@testUtils';
 import Icon from './Icon';
 
 describe('<Icon />', () => {

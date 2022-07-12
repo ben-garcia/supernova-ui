@@ -1,11 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-} from '@molecules/index';
+import { FormControl, FormErrorMessage, FormHelperText } from '@molecules';
 
 import { Radio, RadioGroup } from '.';
 import { UserIcon } from '../Icon/Icons';

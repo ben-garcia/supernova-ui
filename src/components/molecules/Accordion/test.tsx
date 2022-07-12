@@ -1,4 +1,3 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
 import {
@@ -8,7 +7,7 @@ import {
   render,
   screen,
   userEvent,
-} from '@testUtils/index';
+} from '@testUtils';
 import {
   Accordion,
   AccordionHeaderButton,

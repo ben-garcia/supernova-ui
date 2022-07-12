@@ -6,12 +6,11 @@ import React, {
   useState,
 } from 'react';
 
-import { Button, CloseIcon, Portal } from '@atoms/index';
+import { Button, CloseIcon, Portal } from '@atoms';
 import FocusLock from '@atoms/FocusLock';
 import Overlay from '@atoms/Overlay';
-import { AlertDialogProvider } from '@contexts/index';
-import { useBreakpoint, useTheme } from '@hooks/index';
-import { useAlertDialogProvider } from '@hooks/use-alert-dialog';
+import { AlertDialogProvider } from '@contexts';
+import { useAlertDialogProvider, useBreakpoint, useTheme } from '@hooks';
 import {
   colors,
   createClasses,
@@ -19,10 +18,10 @@ import {
   isString,
   shadows,
   sizes,
-} from '@utils/index';
+} from '@utils';
 
 import { AlertDialogProps } from '@molecules/AlertDialog/types';
-import { MarginPaddingProps } from '@/types/index';
+import { MarginPaddingProps } from '@types';
 import './styles.scss';
 
 /**

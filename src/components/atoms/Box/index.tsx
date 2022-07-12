@@ -5,7 +5,7 @@ import {
 import React, { AriaAttributes } from 'react';
 
 import Portal from '@atoms/Portal';
-import { isString } from '@utils/index';
+import { isString } from '@utils';
 
 interface Props {
   className?: string;

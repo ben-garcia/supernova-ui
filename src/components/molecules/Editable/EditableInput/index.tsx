@@ -1,12 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { useEditable } from '@hooks/use-editable';
-import {
-  createClasses,
-  isFunction,
-  isString,
-  validateDataProps,
-} from '@utils/index';
+import { useEditable } from '@hooks';
+import { createClasses, isFunction, isString, validateDataProps } from '@utils';
+
 import './styles.scss';
 
 interface EditableInputProps {

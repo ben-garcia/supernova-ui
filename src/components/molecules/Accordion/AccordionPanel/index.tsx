@@ -1,10 +1,8 @@
 import React from 'react';
 
-import {
-  useAccordionItem,
-  useAccordionProvider,
-} from '../../../../hooks/use-accordion';
-import { createClasses, isString } from '../../../../utils';
+import { useAccordionItem, useAccordionProvider } from '@hooks';
+import { createClasses, isString } from '@utils';
+
 import './styles.scss';
 
 interface AccordionPanelProps {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useEditable } from '../../../../hooks/use-editable';
-import { createClasses, isString, validateDataProps } from '../../../../utils';
+import { useEditable } from '@hooks';
+import { createClasses, isString, validateDataProps } from '@utils';
 
 interface EditablePreviewProps {
   className?: string;

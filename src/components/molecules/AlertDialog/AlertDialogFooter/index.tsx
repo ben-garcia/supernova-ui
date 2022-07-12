@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAlertDialog } from '../../../../hooks';
+import { useAlertDialog } from '@hooks';
 
 import './styles.scss';
 
