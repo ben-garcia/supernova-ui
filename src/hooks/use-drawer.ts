@@ -1,9 +1,10 @@
 import { useCallback, useContext } from 'react';
 
-import { DrawerContext } from '../contexts';
-import { useUniqueId } from '.';
-import { createClasses, isString } from '../utils';
-import { DrawerProps } from '../components/molecules/Drawer/types';
+import { DrawerContext } from '@contexts';
+import { useUniqueId } from '@hooks';
+import { createClasses, isString } from '@utils';
+
+import { DrawerProps } from '@molecules/Drawer/Drawer';
 
 /** Hooks that returns the Drawer props
  */

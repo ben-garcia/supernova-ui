@@ -10,7 +10,7 @@ import {
   AlertDialogHeader,
 } from '@molecules';
 
-import { AlertDialogProps } from './types';
+import { AlertDialogProps } from './AlertDialog';
 
 export default {
   argTypes: {

@@ -10,7 +10,7 @@ import {
   ModalBody,
 } from '@molecules';
 
-import { ModalProps } from './types';
+import { ModalProps } from './Modal';
 
 export default {
   argTypes: {

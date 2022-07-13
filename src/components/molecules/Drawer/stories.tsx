@@ -10,7 +10,7 @@ import {
   DrawerHeader,
 } from '@molecules';
 
-import { DrawerProps } from './types';
+import { DrawerProps } from './Drawer';
 
 export default {
   argTypes: {

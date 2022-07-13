@@ -1,9 +1,10 @@
 import { useCallback, useContext } from 'react';
 
-import { ModalContext } from '../contexts';
-import { useUniqueId } from '.';
-import { createClasses, isString } from '../utils';
-import { ModalProps } from '../components/molecules/Modal/types';
+import { ModalContext } from '@contexts';
+import { useUniqueId } from '@hooks';
+import { createClasses, isString } from '@utils';
+
+import { ModalProps } from '@molecules/Modal/Modal';
 
 /** Hooks that returns the Modal props
  */

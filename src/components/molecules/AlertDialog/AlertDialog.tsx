@@ -1,4 +1,5 @@
 import React, {
+  RefObject,
   useCallback,
   useEffect,
   useMemo,
@@ -20,9 +21,15 @@ import {
   sizes,
 } from '@utils';
 
-import { AlertDialogProps } from '@molecules/AlertDialog/types';
-import { MarginPaddingProps } from '@types';
+import { DialogLikeProps, MarginPaddingProps } from '@types';
 import './styles.scss';
+
+export interface AlertDialogProps extends DialogLikeProps {
+  /**
+   * The reference element to receive focus when the AlertDialog opens
+   */
+  leastDestructiveRef: RefObject<HTMLElement>;
+}
 
 /**
  * The container for all AlertDialog related components

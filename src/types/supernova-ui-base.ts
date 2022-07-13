@@ -1,12 +1,5 @@
 import { AriaProps, Breakpoints, Sizes } from './common';
 
-/**
- * Used to allow 'data-*' props
-interface AnyProps {
-  [k: string]: string;
-}
-*/
-
 export interface MarginPaddingProps {
   /**
    * css property: margin-bottom

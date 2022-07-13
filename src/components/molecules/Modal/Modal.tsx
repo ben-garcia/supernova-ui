@@ -1,4 +1,5 @@
 import React, {
+  RefObject,
   useCallback,
   useEffect,
   useMemo,
@@ -20,9 +21,15 @@ import {
   sizes,
 } from '@utils';
 
-import { MarginPaddingProps } from '@types';
-import { ModalProps } from './types';
+import { DialogLikeProps, MarginPaddingProps } from '@types';
 import './styles.scss';
+
+export interface ModalProps extends DialogLikeProps {
+  /**
+   * The reference element to receive focus when the Modal first opens
+   */
+  initialFocusRef?: RefObject<HTMLElement>;
+}
 
 /**
  * The container for all Modal related components

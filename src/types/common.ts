@@ -1,4 +1,12 @@
-import { AriaAttributes, ChangeEvent, FocusEvent, ReactNode } from 'react';
+import {
+  AriaAttributes,
+  ChangeEvent,
+  RefObject,
+  FocusEvent,
+  ReactNode,
+} from 'react';
+
+import { SupernovaUIBaseProps, TypographyProps } from '@types';
 
 /**
  * The WAI ARIA supported attributes
@@ -143,6 +151,57 @@ export interface CommonProps {
    *	size="3rem"
    */
   size?: Breakpoints | string;
+}
+
+/**
+ * Props for AlertDialog, Drawer, and Modal
+ */
+export interface DialogLikeProps
+  extends Pick<CommonProps, 'boxShadow' | 'size'>,
+    SupernovaUIBaseProps,
+    Omit<TypographyProps, 'align'> {
+  /**
+   * Configure whether Dialog should close when Esc key is pressed
+   *
+   * @default true
+   */
+  closeOnEsc?: boolean;
+  /**
+   * Configure whether Dialog should close when the overlay window is clicked
+   *
+   * @default true
+   */
+  closeOnOverlayClick?: boolean;
+  /**
+   * The reference of element to receive focus when the Dialog closes
+   */
+  finalFocusRef?: RefObject<HTMLElement>;
+  /**
+   * Flag that determines when to open the Dialog
+   */
+  isOpen: boolean;
+  /**
+   * Function to execute after an overlay click.
+   *
+   * NOTE: closeOnOverlayClick must be set to true.
+   */
+  onClickOutside?: () => void;
+  /**
+   * Function to execute to close the Dialog,
+   */
+  onClose: () => void;
+  /**
+   * Function to execute after esc key press.
+   *
+   * NOTE: closeOnEsc must be set to true.
+   */
+  onEscPress?: () => void;
+  /**
+   * Configure whether focus should be locked inside the Modal
+   *
+   * @default true
+   */
+  trapFocus?: boolean;
 }
 
 /**

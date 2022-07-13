@@ -1,4 +1,5 @@
 import React, {
+  RefObject,
   useCallback,
   useEffect,
   useMemo,
@@ -20,9 +21,21 @@ import {
   sizes,
 } from '@utils';
 
-import { MarginPaddingProps } from '@types';
-import { DrawerProps } from './types';
+import { DialogLikeProps, MarginPaddingProps } from '@types';
 import './styles.scss';
+
+export interface DrawerProps extends DialogLikeProps {
+  /**
+   * The reference element to receive focus when the Drawer first opens
+   */
+  initialFocusRef?: RefObject<HTMLElement>;
+  /**
+   * The position relative to the viewport
+   *
+   * @default 'left'
+   */
+  position?: 'bottom' | 'left' | 'right' | 'top';
+}
 
 /**
  * The container for all Drawer related components

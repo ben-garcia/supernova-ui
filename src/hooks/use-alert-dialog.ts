@@ -4,7 +4,7 @@ import { AlertDialogContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString } from '@utils';
 
-import { AlertDialogProps } from '@molecules/AlertDialog/types';
+import { AlertDialogProps } from '@molecules/AlertDialog/AlertDialog';
 
 /** Hooks that returns the AlertDialog props
  */
