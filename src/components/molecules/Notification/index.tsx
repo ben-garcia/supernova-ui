@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 import { Button } from '@atoms';
 import {
@@ -41,25 +41,49 @@ const Notification: React.FC<NotificationProps> = props => {
   const [isExiting, setIsExiting] = useState(false);
 
   let backgroundColorToUse: string = '';
-  let icon: React.ReactNode;
+  let icon: ReactNode;
   let actionType: string;
 
   switch (status) {
     case 'error':
       backgroundColorToUse = theme.colors.error600;
-      icon = <CloseIcon margin="0 sm 0 0" size="25px" />;
+      icon = (
+        <CloseIcon
+          fill="var(--snui-color-white)"
+          margin="0 0.7rem 0 0"
+          size="1.5rem"
+        />
+      );
       break;
     case 'success':
       backgroundColorToUse = theme.colors.success600;
-      icon = <CheckmarkIcon margin="0 sm 0 0" size="25px" />;
+      icon = (
+        <CheckmarkIcon
+          fill="var(--snui-color-white)"
+          margin="0 0.7rem 0 0"
+          size="1.5rem"
+        />
+      );
       break;
     case 'warning':
       backgroundColorToUse = theme.colors.warning600;
-      icon = <HelpIcon margin="0 sm 0 0" size="xs" />;
+      icon = (
+        <HelpIcon
+          fill="var(--snui-color-white)"
+          margin="0 0.7rem 0 0"
+          size="1.5rem"
+        />
+      );
       break;
     default:
-      icon = <InfoIcon margin="0 sm 0 0" size="xs" />;
       backgroundColorToUse = theme.colors.info600;
+      icon = (
+        <InfoIcon
+          fill="var(--snui-color-white)"
+          margin="0 0.7rem 0 0"
+          size="1.5rem"
+        />
+      );
   }
 
   switch (position) {
@@ -165,8 +189,8 @@ const Notification: React.FC<NotificationProps> = props => {
         padding: theme.sizes.xs,
       }}
     >
-      <div className="snui-self-center">{icon}</div>
-      <div className="snui-flex snui-flex-column snui-margin-right-md">
+      <div>{icon}</div>
+      <div className="snui-flex snui-flex-column snui-margin-right-sm">
         <p className="snui-notification__title snui-font-weight-xxl">{title}</p>
         <p className="snui-notification__message">{message}</p>
       </div>
@@ -178,7 +202,7 @@ const Notification: React.FC<NotificationProps> = props => {
           onClick={() => setProgressbarWidth(0)}
           variant="outline"
         >
-          <CloseIcon fill="#000" size="1rem" />
+          <CloseIcon fill="var(--snui-color-white)" size="0.7rem" />
         </Button>
       )}
       {isPausable && (
