@@ -196,9 +196,9 @@ const Notification: React.FC<NotificationProps> = props => {
       </div>
       {isCloseable && (
         <Button
-          aria-label="Close the alert"
+          aria-label="Close the notification"
           className="snui-notification__close-button"
-          hoverBackgroundColor="rgba(0, 0, 0, 0.04)"
+          hoverBackgroundColor="rgba(0, 0, 0, 0.2)"
           onClick={() => setProgressbarWidth(0)}
           variant="outline"
         >

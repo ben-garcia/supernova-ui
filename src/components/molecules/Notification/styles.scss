@@ -58,11 +58,11 @@
   &__close-button {
     border: none !important;
     box-shadow: none !important;
+    height: auto !important;
     padding-inline-end: 0 !important;
     padding-inline-start: 0 !important;
     position: absolute;
     right: var(--snui-space-md);
-    top: var(--snui-space-sm);
   }
 
   &__progressbar {
