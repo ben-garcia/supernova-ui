@@ -12,7 +12,6 @@ export default {
     },
     backgroundColor: {
       control: 'color',
-      defaultValue: '#0273b0',
     },
     fontSize: {
       control: 'text',

@@ -316,8 +316,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
       ref={ref}
       style={{
         ...styles,
-        backgroundColor:
-          variant === 'filled' ? backgroundColorToUse : undefined,
+        backgroundColor: backgroundColorToUse,
         boxShadow: (isString(focusRingColor)
           ? `0 0 0 4px ${focusRingColor}`
           : null) as any,
