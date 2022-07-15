@@ -1,4 +1,3 @@
-/* eslint react/button-has-type: 0 */
 import React, { forwardRef, useEffect, useState } from 'react';
 
 import { Spinner } from '@atoms';
@@ -271,14 +270,6 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           onMouseEnter!(e as any);
         }
       }}
-      style={{
-        ...styles,
-        backgroundColor: backgroundColorToUse,
-        boxShadow: (isString(focusRingColor)
-          ? `0 0 0 4px ${focusRingColor}`
-          : null) as any,
-        color: colorToUse,
-      }}
       onMouseEnter={e => {
         if ((theme as any).colors[hoverBackgroundColor]) {
           setBackgroundColorToUse((theme as any).colors[hoverBackgroundColor]);
@@ -323,7 +314,16 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
         }
       }}
       ref={ref}
-      type={asSubmitButton ? 'submit' : undefined}
+      style={{
+        ...styles,
+        backgroundColor:
+          variant === 'filled' ? backgroundColorToUse : undefined,
+        boxShadow: (isString(focusRingColor)
+          ? `0 0 0 4px ${focusRingColor}`
+          : null) as any,
+        color: colorToUse,
+      }}
+      type={asSubmitButton ? 'submit' : 'button'}
     >
       {leftIcon && !isLoading && leftIcon}
       {!spinner && !isLoading && (leftIcon || rightIcon) && (
