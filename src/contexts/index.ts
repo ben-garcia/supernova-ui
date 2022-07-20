@@ -7,6 +7,7 @@ export * from './menu';
 export * from './modal';
 export * from './notification';
 export * from './slider';
+export * from './style';
 export * from './supernova';
 export * from './tabs';
 export * from './theme';
