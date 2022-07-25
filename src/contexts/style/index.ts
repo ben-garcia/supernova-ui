@@ -1,2 +1,2 @@
-export { StyleContext, StyleProvider } from './StyleProvider';
-export { StyleContextProps } from './types';
+export * from './StyleProvider';
+export * from './types';

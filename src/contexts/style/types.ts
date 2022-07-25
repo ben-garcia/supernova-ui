@@ -1,20 +1,12 @@
-import { createContext } from 'react';
+import { MutableRefObject } from 'react';
 
 type PseudoClass = 'focus' | 'hover';
 
-interface StyleClass {
+export interface StyleClass {
   className: string;
+  count: number;
   pseudoKind: PseudoClass;
   styles: string;
 }
 
-export interface StyleContextProps {
-  classes: StyleClass[];
-}
-
-const initialState: StyleContextProps = {
-  classes: [],
-};
-
-export const StyleContext = createContext<StyleContextProps>(initialState);
-export const StyleProvider = StyleContext.Provider;
+export type StyleContextProps = MutableRefObject<StyleClass[]>;

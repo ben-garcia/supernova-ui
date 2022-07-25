@@ -20,12 +20,12 @@ export const SupernovaProvider = (props: SupernovaProviderProps) => {
   const countRef = useRef({
     count: 0,
   });
-  const styleClassesRef = useRef({ classes: [] });
+  const styleClassesRef = useRef([]);
 
   return (
     <ThemeProvider value={themeToUse as ThemeProviderProps['value']}>
       <IdProvider value={countRef.current}>
-        <StyleProvider value={styleClassesRef.current}>
+        <StyleProvider value={styleClassesRef}>
           <NotificationProvider>{children}</NotificationProvider>
         </StyleProvider>
       </IdProvider>
