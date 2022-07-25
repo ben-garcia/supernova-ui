@@ -1,4 +1,12 @@
-import {
+import type {
+  StandardLonghandPropertiesHyphen,
+  StandardLonghandProperties,
+  StandardShorthandPropertiesHyphen,
+  StandardShorthandProperties,
+  VendorLonghandProperties,
+  VendorShorthandProperties,
+} from 'csstype';
+import type {
   AriaAttributes,
   ChangeEvent,
   RefObject,
@@ -6,15 +14,15 @@ import {
   ReactNode,
 } from 'react';
 
-import { SupernovaUIBaseProps, TypographyProps } from '@types';
+import type { SupernovaUIBaseProps, TypographyProps } from '@types';
 
 /**
- * The WAI ARIA supported attributes
+ * The WAI ARIA supported attributes.
  */
 export type AriaProps = AriaAttributes;
 
 /**
- * Available breakpoints defined in the theme
+ * Available breakpoints defined in the theme.
  */
 export interface Breakpoints {
   /**
@@ -68,7 +76,7 @@ export interface Breakpoints {
   xxl?: Sizes | string;
 }
 /**
- * Props that are common to more than 1 component
+ * Props that are common to more than 1 component.
  */
 export interface CommonProps {
   /**
@@ -154,7 +162,7 @@ export interface CommonProps {
 }
 
 /**
- * Props for AlertDialog, Drawer, and Modal
+ * Props for AlertDialog, Drawer, and Modal.
  */
 export interface DialogLikeProps
   extends Pick<CommonProps, 'boxShadow' | 'size'>,
@@ -205,7 +213,7 @@ export interface DialogLikeProps
 }
 
 /**
- * Props used in form control components
+ * Props used in form control components.
  */
 export interface FormControlProps {
   /**
@@ -252,11 +260,46 @@ export interface FormControlProps {
 }
 
 /**
- * Available fonts to choose from
+ * Component font families.
  */
 export type Fonts = 'heading' | 'body' | 'mono';
 
 /**
- * Available sizes to choose from
+ * Component sizes.
  */
 export type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
+/**
+ * All CSS properties
+ *
+ * includes shorthand properties like 'background'
+ * and longhand properties like 'backgroundColor'.
+ */
+export type StandardCSSProperties = StandardLonghandProperties &
+  StandardShorthandProperties;
+
+/**
+ * All vendor prefix CSS properties
+ *
+ * includes shorthand properties like 'mozAnimation'
+ * and longhand properties like 'mozAnimationDelay'.
+ */
+export type VendorCSSProperties = VendorLonghandProperties &
+  VendorShorthandProperties;
+
+/**
+ * All hyphenated prefix CSS properties
+ *
+ * includes shorthand properties like 'animation'
+ * and longhand properties like 'animation-delay'.
+ */
+export type HyphenCSSProperities = StandardLonghandPropertiesHyphen &
+  StandardShorthandPropertiesHyphen;
+
+/**
+ * Props to handle CSS pseudo classes.
+ */
+export interface PseudoClassProps {
+  _focus?: StandardCSSProperties & VendorCSSProperties;
+  _hover?: StandardCSSProperties & VendorCSSProperties;
+}
