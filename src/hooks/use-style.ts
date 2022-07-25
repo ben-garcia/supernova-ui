@@ -171,7 +171,11 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
         // inject HTML <style> with valid with the correct styles.
         if (!styleObj) {
           const temp = className.current;
-          className.current = `${className.current.replace(/f$/, 'h')}`;
+          if (_focus) {
+            className.current = `${className.current.replace(/f$/, 'h')}`;
+          } else {
+            className.current = `${className.current}h`;
+          }
           styleEl[1] = document.createElement('style');
           styleEl[1].setAttribute('id', className.current);
 
@@ -185,7 +189,9 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
           ];
           str[1] = `.${className.current}:hover{${str[1]};}`;
           styleEl[1].appendChild(document.createTextNode(str[1]));
-          className.current = `${temp} ${className.current}`;
+          if (_focus) {
+            className.current = `${temp} ${className.current}`;
+          }
           document.head.appendChild(styleEl[1]);
         } else {
           // when there is already an object that matches those styles,
