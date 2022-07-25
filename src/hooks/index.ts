@@ -10,5 +10,6 @@ export * from './use-menu';
 export * from './use-modal';
 export { useNotification } from './use-notification';
 export * from './use-slider';
+export * from './use-style';
 export * from './use-tabs';
 export { default as useTheme } from './use-theme';
