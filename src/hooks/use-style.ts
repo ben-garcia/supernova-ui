@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useRef } from 'react';
+import { compile, middleware, prefixer, serialize, stringify } from 'stylis';
 
 import { StyleClass, StyleContext } from '@contexts';
 import { isString } from '@utils';
@@ -140,7 +141,11 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
             },
           ];
           str[0] = `.${className.current}:focus{${str[0]};}`;
-          styleEl[0].appendChild(document.createTextNode(str[0]));
+          styleEl[0].appendChild(
+            document.createTextNode(
+              serialize(compile(str[0]), middleware([prefixer, stringify]))
+            )
+          );
           document.head.appendChild(styleEl[0]);
         } else {
           // when there is already an object that matches those styles,
@@ -188,7 +193,11 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
             },
           ];
           str[1] = `.${className.current}:hover{${str[1]};}`;
-          styleEl[1].appendChild(document.createTextNode(str[1]));
+          styleEl[1].appendChild(
+            document.createTextNode(
+              serialize(compile(str[1]), middleware([prefixer, stringify]))
+            )
+          );
           if (_focus) {
             className.current = `${temp} ${className.current}`;
           }
