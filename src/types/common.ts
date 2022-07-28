@@ -3,8 +3,6 @@ import type {
   StandardLonghandProperties,
   StandardShorthandPropertiesHyphen,
   StandardShorthandProperties,
-  VendorLonghandProperties,
-  VendorShorthandProperties,
 } from 'csstype';
 import type {
   AriaAttributes,
@@ -279,15 +277,6 @@ export type StandardCSSProperties = StandardLonghandProperties &
   StandardShorthandProperties;
 
 /**
- * All vendor prefix CSS properties
- *
- * includes shorthand properties like 'mozAnimation'
- * and longhand properties like 'mozAnimationDelay'.
- */
-export type VendorCSSProperties = VendorLonghandProperties &
-  VendorShorthandProperties;
-
-/**
  * All hyphenated prefix CSS properties
  *
  * includes shorthand properties like 'animation'
@@ -300,6 +289,6 @@ export type HyphenCSSProperities = StandardLonghandPropertiesHyphen &
  * Props to handle CSS pseudo classes.
  */
 export interface PseudoClassProps {
-  _focus?: StandardCSSProperties & VendorCSSProperties;
-  _hover?: StandardCSSProperties & VendorCSSProperties;
+  _focus?: StandardCSSProperties;
+  _hover?: StandardCSSProperties;
 }
