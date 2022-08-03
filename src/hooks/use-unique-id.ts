@@ -3,6 +3,24 @@ import { useContext, useMemo } from 'react';
 import { IdContext } from '../contexts';
 
 /**
+ * React hooks that generates a unique string id.
+ *
+ * @eample
+ * ```js
+ * const id = useUniqueId();
+ *
+ * // id will be `snui-<alphanumeric-string>-<unique-number>`
+ * ````
+ */
+export const useUniqueStringId = () => {
+  const context = useContext(IdContext);
+  const id = `snui-${Math.random().toString(36).substring(2, 6)}`;
+
+  // eslint-disable-next-line
+  return useMemo(() => `${id}${++context!.count}`, []);
+};
+
+/**
  * React hooks to generate a unique id.
  *
  * @param prefix human readable identifier
