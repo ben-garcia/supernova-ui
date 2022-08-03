@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useRef } from 'react';
 import { compile, middleware, prefixer, serialize, stringify } from 'stylis';
 
+import { useUniqueStringId } from '@hooks';
 import { StyleClass, StyleContext } from '@contexts';
 import { isString } from '@utils';
 
@@ -35,9 +36,8 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
   const { _focus, _hover } = props;
   const styleClassesRef = usePseudoClasses();
 
-  const className = useRef(
-    _focus || _hover ? `snui-${Math.random().toString(36).substring(2, 7)}` : ''
-  );
+  const uniqueId = useUniqueStringId();
+  const className = useRef(_focus || _hover ? uniqueId : '');
   const newClassRef = useRef<string[]>(['', '']);
 
   /**
