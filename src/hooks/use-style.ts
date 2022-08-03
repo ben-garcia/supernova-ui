@@ -185,6 +185,7 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
           styleEl[1].setAttribute('id', className.current);
 
           styleClassesRef.current = [
+            ...styleClassesRef.current,
             {
               className: className.current,
               count: 1,
