@@ -1,6 +1,7 @@
 export * from './use-accordion';
 export * from './use-alert-dialog';
 export { default as useBreakpoint } from './use-breakpoint';
+export * from './use-class';
 export * from './use-drawer';
 export * from './use-editable';
 export * from './use-form-control';
