@@ -1,20 +1,26 @@
-import { useCallback, useContext, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { compile, middleware, prefixer, serialize, stringify } from 'stylis';
 
 import { useUniqueStringId } from '@hooks';
 import { StyleClass, StyleContext } from '@contexts';
 import { isString } from '@utils';
 
-import type {
-  HyphenCSSProperities,
-  PseudoClassProps,
-  StandardCSSProperties,
-} from '@types';
+import type { CSSPropsHyphen, PseudoClassProps, CSSProps } from '@types';
+
+/**
+ * Force an update.
+ */
+const forceUpdate = () => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(count + 1);
+  }, []);
+};
 
 /**
  * Hook that returns the StyleProvider context.
  */
-const usePseudoClasses = () => {
+const useStyle = () => {
   const context = useContext(StyleContext);
 
   if (!context) {
@@ -32,9 +38,9 @@ const usePseudoClasses = () => {
  *
  *  @returns className/s with the corresponding styles.
  */
-export const useStyle = (props: Partial<PseudoClassProps>) => {
+export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
   const { _focus, _hover } = props;
-  const styleClassesRef = usePseudoClasses();
+  const styleClassesRef = useStyle();
 
   const uniqueId = useUniqueStringId();
   const className = useRef(_focus || _hover ? uniqueId : '');
@@ -80,8 +86,8 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
    *
    * @returns CSS valid object.
    */
-  const cssCamelCaseToHyphenated = useCallback((obj: StandardCSSProperties) => {
-    const newObj: HyphenCSSProperities = {};
+  const cssCamelCaseToHyphenated = useCallback((obj: CSSProps) => {
+    const newObj: CSSPropsHyphen = {};
     // keep track of the index to used when accessing values array.
     let index;
     const values = Object.values(obj);
@@ -313,6 +319,8 @@ export const useStyle = (props: Partial<PseudoClassProps>) => {
       }
     };
   }, []);
+
+  forceUpdate();
 
   return {
     className: isString(newClassRef.current.join(' '))
