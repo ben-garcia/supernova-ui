@@ -7,12 +7,19 @@ import type {
 import type {
   AriaAttributes,
   ChangeEvent,
+  FC,
   RefObject,
   FocusEvent,
   ReactNode,
 } from 'react';
 
-import type { SupernovaUIBaseProps, TypographyProps } from '@types';
+import type {
+  HTMLAttributes,
+  HTMLElements,
+  SupernovaUIBaseProps,
+  TypographyProps,
+  WithResponsiveProps,
+} from '@types';
 
 /**
  * The WAI ARIA supported attributes.
@@ -273,8 +280,7 @@ export type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
  * includes shorthand properties like 'background'
  * and longhand properties like 'backgroundColor'.
  */
-export type StandardCSSProperties = StandardLonghandProperties &
-  StandardShorthandProperties;
+export type CSSProps = StandardLonghandProperties & StandardShorthandProperties;
 
 /**
  * All hyphenated prefix CSS properties
@@ -282,13 +288,20 @@ export type StandardCSSProperties = StandardLonghandProperties &
  * includes shorthand properties like 'animation'
  * and longhand properties like 'animation-delay'.
  */
-export type HyphenCSSProperities = StandardLonghandPropertiesHyphen &
+export type CSSPropsHyphen = StandardLonghandPropertiesHyphen &
   StandardShorthandPropertiesHyphen;
 
 /**
- * Props to handle CSS pseudo classes.
+ * Props for pseudo class.
  */
 export interface PseudoClassProps {
-  _focus?: StandardCSSProperties;
-  _hover?: StandardCSSProperties;
+  _focus?: CSSProps;
+  _hover?: CSSProps;
 }
+
+/**
+ * Props shared by all supernova-ui components.
+ */
+export type SupernovaProps<String = ''> = String extends HTMLElements
+  ? WithResponsiveProps<CSSProps> & PseudoClassProps & HTMLAttributes<String>
+  : FC<WithResponsiveProps<CSSProps> & PseudoClassProps>;
