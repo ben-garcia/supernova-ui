@@ -1,6 +1,11 @@
 import React, { useMemo, useRef } from 'react';
 
-import { IdProvider, NotificationProvider, StyleProvider } from '@contexts';
+import {
+  ClassProvider,
+  IdProvider,
+  NotificationProvider,
+  StyleProvider,
+} from '@contexts';
 import { deepMergify } from '@utils';
 
 import { ThemeProvider, ThemeProviderProps } from '../theme';
@@ -20,14 +25,17 @@ export const SupernovaProvider = (props: SupernovaProviderProps) => {
   const countRef = useRef({
     count: 0,
   });
+  const classesRef = useRef([]);
   const styleClassesRef = useRef([]);
 
   return (
     <ThemeProvider value={themeToUse as ThemeProviderProps['value']}>
       <IdProvider value={countRef.current}>
-        <StyleProvider value={styleClassesRef}>
-          <NotificationProvider>{children}</NotificationProvider>
-        </StyleProvider>
+        <ClassProvider value={classesRef}>
+          <StyleProvider value={styleClassesRef}>
+            <NotificationProvider>{children}</NotificationProvider>
+          </StyleProvider>
+        </ClassProvider>
       </IdProvider>
     </ThemeProvider>
   );
