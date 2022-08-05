@@ -8,8 +8,7 @@
 export const isArray = (value: any): boolean =>
   Object.prototype.toString.call(value) === '[object Array]' &&
   Array.isArray(value) &&
-  value !== undefined &&
-  value !== null;
+  value?.length !== 0;
 
 /**
  * check whether a value is a function

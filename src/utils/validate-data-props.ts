@@ -1,11 +1,15 @@
 /**
- * Filter for data attributes.
+ * Filter for data and aria attributes.
  */
-const validateDataProps = (props: any) => {
+const validateDataAndAriaProps = (props: any) => {
   const newProps: any = {};
 
   Object.keys(props).forEach(key => {
-    if (key.startsWith('data-')) {
+    if (
+      key.startsWith('data-') ||
+      key.startsWith('aria-') ||
+      key.startsWith('on')
+    ) {
       newProps[key] = props[key];
     }
   });
@@ -13,4 +17,4 @@ const validateDataProps = (props: any) => {
   return newProps;
 };
 
-export default validateDataProps;
+export default validateDataAndAriaProps;
