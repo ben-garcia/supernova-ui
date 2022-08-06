@@ -1,14 +1,14 @@
 interface CreateClassesObject {
-  [k: string]: any;
+  [k: string]: boolean;
 }
 
 /**
  * Concatenates all the necessary classes into a string
  */
-const createClasses = (
+export const createClasses = (
   initialClass: string,
   obj: CreateClassesObject
-): string => {
+) => {
   // check for a valid object
   if (Object.keys(obj).length === 0) {
     return initialClass;
@@ -27,5 +27,3 @@ const createClasses = (
   // combine all the classes into a single string
   return classes.join(' ');
 };
-
-export default createClasses;

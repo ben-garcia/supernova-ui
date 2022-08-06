@@ -9,7 +9,7 @@ interface AnyObject {
  * The new object will have all the properties from baseObject
  * and overriden properties from extendedObject.
  */
-const deepMergify = (
+export const deepMergify = (
   baseObject: AnyObject,
   extendedObject: AnyObject
 ): AnyObject => {
@@ -59,5 +59,3 @@ const deepMergify = (
 
   return newObject;
 };
-
-export default deepMergify;
