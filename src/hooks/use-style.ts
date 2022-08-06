@@ -322,9 +322,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
 
   forceUpdate();
 
-  return {
-    className: isString(newClassRef.current.join(' '))
-      ? newClassRef.current.join(' ')
-      : className.current,
-  };
+  return isString(newClassRef.current.join(' '))
+    ? newClassRef.current.join(' ')
+    : className.current;
 };
