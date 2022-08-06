@@ -1,4 +1,3 @@
-import validateDataProps from './validate-data-props';
 import {
   colors,
   objectToPropertiesArray,
@@ -12,6 +11,7 @@ import { createStyles, responsify } from './create-styles';
 import deepMergify from './deep-mergify';
 import { inputIsChecked } from './dom-assertions';
 
+export * from './validate-data-props';
 export * from './assertions';
 export * from './position';
 export {
@@ -26,5 +26,4 @@ export {
   responsify,
   shadows,
   sizes,
-  validateDataProps,
 };
