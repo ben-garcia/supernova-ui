@@ -5,7 +5,7 @@ import { ThemeContext } from '../contexts/theme';
 /**
  * Hooks that returns the theme object
  */
-const useTheme = () => {
+export const useTheme = () => {
   const theme = useContext(ThemeContext);
 
   if (!theme) {
@@ -16,5 +16,3 @@ const useTheme = () => {
 
   return theme;
 };
-
-export default useTheme;

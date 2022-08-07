@@ -1,10 +1,9 @@
-import useMediaQuery from './use-media-query';
-import useTheme from './use-theme';
+import { useMediaQuery, useTheme } from '@hooks';
 
 /**
  * Hooks that returns the active breakpoint
  */
-const useBreakpoint = () => {
+export const useBreakpoint = () => {
   const theme = useTheme();
   const isXs = useMediaQuery(
     `(min-width: ${theme.breakpoints.xs}) and (max-width: ${theme.breakpoints.sm})`
@@ -41,5 +40,3 @@ const useBreakpoint = () => {
 
   return isXxl ? 'xxl' : 'xxl';
 };
-
-export default useBreakpoint;

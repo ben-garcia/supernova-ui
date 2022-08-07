@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  *
  * @param mediaQuery query to check against the window
  */
-const useMediaQuery = (mediaQuery: string) => {
+export const useMediaQuery = (mediaQuery: string) => {
   const [isMatch, setIsMatch] = useState<boolean>();
 
   useEffect(() => {
@@ -27,5 +27,3 @@ const useMediaQuery = (mediaQuery: string) => {
 
   return isMatch;
 };
-
-export default useMediaQuery;
