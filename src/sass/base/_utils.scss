@@ -367,15 +367,18 @@
 }
 
 .snui-padding-top-sm {
-  padding-top: var(--snui-space-sm);
+  // padding-top: var(--snui-space-sm);
+  padding-top: 0.1rem;
 }
 
 .snui-padding-top-md {
-  padding-top: var(--snui-space-md);
+  // padding-top: var(--snui-space-md);
+  padding-top: 0.5rem;
 }
 
 .snui-padding-top-lg {
-  padding-top: var(--snui-space-lg);
+  // padding-top: var(--snui-space-lg);
+  padding-top: 0.3rem;
 }
 
 .snui-padding-top-xl {
@@ -906,4 +909,17 @@
 .snui-notification-top-right {
   top: env(safe-area-inset-top, 0);
   right: env(safe-area-inset-right, 0);
+}
+
+// --------------------------------
+// Animations
+// --------------------------------
+@keyframes snui-rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

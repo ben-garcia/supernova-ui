@@ -4,14 +4,7 @@ import type {
   StandardShorthandPropertiesHyphen,
   StandardShorthandProperties,
 } from 'csstype';
-import type {
-  AriaAttributes,
-  ChangeEvent,
-  FC,
-  RefObject,
-  FocusEvent,
-  ReactNode,
-} from 'react';
+import type { AriaAttributes, FC, RefObject, ReactNode } from 'react';
 
 import type {
   HTMLAttributes,
@@ -20,6 +13,8 @@ import type {
   TypographyProps,
   WithResponsiveProps,
 } from '@types';
+
+import colors from '../theme/colors';
 
 /**
  * The WAI ARIA supported attributes.
@@ -37,7 +32,7 @@ export interface Breakpoints {
    * value of xs breakpoint is (min-width: 0)
    * but can be user defined
    */
-  xs?: Sizes | string;
+  xs?: ComponentSize | string;
   /**
    * Configure how the component should render
    * when the viewport width equals the sm breakpoint
@@ -45,7 +40,7 @@ export interface Breakpoints {
    * value of sm breakpoint is (min-width: 480px)
    * but can be user defined
    */
-  sm?: Sizes | string;
+  sm?: ComponentSize | string;
   /**
    * Configure how the component should render
    * when the viewport width equals the md breakpoint
@@ -53,7 +48,7 @@ export interface Breakpoints {
    * value of md breakpoint is (min-width: 768px)
    * but can be user defined
    */
-  md?: Sizes | string;
+  md?: ComponentSize | string;
   /**
    * Configure how the component should render
    * when the viewport width equals the lg breakpoint
@@ -61,7 +56,7 @@ export interface Breakpoints {
    * value of lg breakpoint is (min-width: 992px)
    * but can be user defined
    */
-  lg?: Sizes | string;
+  lg?: ComponentSize | string;
   /**
    * Configure how the component should render
    * when the viewport width equals the xl breakpoint
@@ -69,7 +64,7 @@ export interface Breakpoints {
    * value of xl breakpoint is (min-width: 1280px)
    * but can be user defined
    */
-  xl?: Sizes | string;
+  xl?: ComponentSize | string;
   /**
    *
    * Configure how the component should render
@@ -78,7 +73,7 @@ export interface Breakpoints {
    * value of xxl breakpoint is (min-width: 1536px)
    * but can be user defined
    */
-  xxl?: Sizes | string;
+  xxl?: ComponentSize | string;
 }
 /**
  * Props that are common to more than 1 component.
@@ -99,7 +94,7 @@ export interface CommonProps {
    * e.g.
    *	borderRadius="1px solid green"
    */
-  borderRadius?: Sizes | string;
+  borderRadius?: ComponentSize | string;
   /**
    * The box shadow
    *
@@ -115,7 +110,7 @@ export interface CommonProps {
    * e.g.
    *	boxShadow="0 0 1px black"
    */
-  boxShadow?: Sizes | string;
+  boxShadow?: ComponentSize | string;
   /**
    * React children
    */
@@ -218,44 +213,30 @@ export interface DialogLikeProps
 }
 
 /**
+ * Colors from the theme.
+ */
+export type ColorVariant = keyof typeof colors;
+
+/**
  * Props used in form control components.
  */
 export interface FormControlProps {
   /**
-   * Configure the label transform position after transition ends
-   */
-  finalLabelTransform?: string;
-  /**
-   * The label should float to the top when in focus
-   */
-  floatLabel?: boolean;
-  /**
-   * Configure the initial transform position before the transition begins
-   */
-  initialLabelTransform?: string;
-  /**
-   * The label for the interactive component
+   * Set the background using a color from the theme.
    *
-   * used to set the value of 'aria-label' and 'placeholder' props
-   * when 'floatLabel' is 'false'
+   * NOTE: This will override 'background'.
    */
-  label: string;
+  colorVariant?: ColorVariant;
   /**
-   * Name for the form control component
+   * Disable interactivity
+   *
+   * @default false
    */
-  name?: string;
+  isDisabled?: boolean;
   /**
-   * Function to be executed for onBlur event
+   * Set size for the component.
    */
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-  /**
-   * Function to be executed for onChange event
-   */
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  /**
-   * Value of the form control component
-   */
-  value?: string;
+  size?: ComponentSize;
   /**
    * The look of the button
    *
@@ -272,7 +253,7 @@ export type Fonts = 'heading' | 'body' | 'mono';
 /**
  * Component sizes.
  */
-export type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type ComponentSize = 'sm' | 'md' | 'lg';
 
 /**
  * All CSS properties

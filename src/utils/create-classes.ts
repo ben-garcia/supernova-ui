@@ -1,5 +1,5 @@
 interface CreateClassesObject {
-  [k: string]: boolean;
+  [k: string]: any;
 }
 
 /**
