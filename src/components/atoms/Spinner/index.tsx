@@ -3,7 +3,7 @@ import React from 'react';
 import { useBreakpoint, useTheme } from '@hooks';
 import { createClasses, createStyles, isString, sizes } from '@utils';
 
-import { MarginPaddingProps, Sizes } from '@types';
+import { MarginPaddingProps, ComponentSize } from '@types';
 import { SpinnerProps } from './types';
 import './styles.scss';
 

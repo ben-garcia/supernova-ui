@@ -3,7 +3,7 @@ import React from 'react';
 import { useBreakpoint, useTheme } from '@hooks';
 import { createClasses, createStyles, isString, sizes } from '@utils';
 
-import { MarginPaddingProps, Sizes } from '@types';
+import { MarginPaddingProps, ComponentSize } from '@types';
 import { IconBaseProps } from './types';
 
 /**
@@ -14,7 +14,7 @@ const Icon: React.FC<IconBaseProps> = props => {
     children,
     className,
     fill = '',
-    size = 'md',
+    size,
     viewBox = '0 0 4.208 4.208',
     width = '',
     height = '',
@@ -129,6 +129,9 @@ const Icon: React.FC<IconBaseProps> = props => {
       styles.height = size as string;
       styles.width = size as string;
     }
+  } else {
+    styles.height = '100%';
+    styles.width = '100%';
   }
   if (isString(fill)) {
     if ((theme as any).colors[fill]) {
