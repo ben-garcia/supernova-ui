@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { colors } from '@utils';
 import Button from '.';
 import { ArrowLeftIcon, ArrowRightIcon, UserIcon } from '../Icon/Icons';
 
@@ -10,12 +11,9 @@ export default {
       control: 'boolean',
       defaultValue: false,
     },
-    backgroundColor: {
-      control: 'color',
-    },
-    fontSize: {
-      control: 'text',
-      defaultValue: 'md',
+    colorVariant: {
+      control: 'select',
+      options: colors,
     },
     isDisabled: {
       control: 'boolean',
@@ -27,6 +25,11 @@ export default {
     },
     loadingText: {
       control: 'text',
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'md',
+      options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: { type: 'radio' },
@@ -42,11 +45,11 @@ const parameters = {
   controls: {
     include: [
       'asSubmitButton',
-      'backgroundColor',
-      'fontSize',
+      'colorVariant',
       'loadingText',
       'isDisabled',
       'isLoading',
+      'size',
       'variant',
     ],
   },
@@ -65,7 +68,7 @@ export const WithLeftIcon = Template.bind({});
 
 WithLeftIcon.args = {
   children: 'Back',
-  leftIcon: <ArrowLeftIcon fill="#fff" size="xs" />,
+  leftIcon: <ArrowLeftIcon fill="#fff" />,
 };
 WithLeftIcon.parameters = parameters;
 
@@ -73,8 +76,8 @@ export const WithIcons = Template.bind({});
 
 WithIcons.args = {
   children: 'Submit',
-  leftIcon: <ArrowLeftIcon fill="#fff" size="xs" />,
-  rightIcon: <ArrowRightIcon fill="#fff" size="xs" />,
+  leftIcon: <ArrowLeftIcon fill="#fff" />,
+  rightIcon: <ArrowRightIcon fill="#fff" />,
 };
 WithIcons.parameters = parameters;
 
@@ -82,16 +85,14 @@ export const WithRightIcon = Template.bind({});
 
 WithRightIcon.args = {
   children: 'SignIn',
-  rightIcon: <ArrowRightIcon fill="#fff" size="xs" />,
+  rightIcon: <ArrowRightIcon fill="#fff" />,
 };
 WithRightIcon.parameters = parameters;
 
 export const AsIcon = Template.bind({});
 
 AsIcon.args = {
-  borderRadius: 'xxl',
-  children: <UserIcon fill="#000" size="1.5rem" />,
-  fontSize: 'sm',
+  children: <UserIcon fill="#000" />,
   variant: 'outline',
 };
 AsIcon.parameters = parameters;

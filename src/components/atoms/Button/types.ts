@@ -1,53 +1,41 @@
-import { FocusEvent, MouseEvent, RefObject, SyntheticEvent } from 'react';
+import type { ReactNode } from 'react';
 
-import {
-  CommonProps,
-  SupernovaUIBaseProps,
-  TypographyProps,
-} from '../../../types';
+import { FormControlProps, SupernovaProps } from '@types';
 
 /**
  * Props for the Button component
  */
 export interface ButtonProps
-  extends Omit<CommonProps, 'size'>,
-    SupernovaUIBaseProps,
-    Omit<TypographyProps, 'align'> {
+  extends SupernovaProps<'button'>,
+    Omit<FormControlProps, 'variant'> {
   /**
    * Whether to set the type as 'submit'
    */
   asSubmitButton?: boolean;
-  id?: string;
+  /**
+   * Disable interactivity
+   */
+  isDisabled?: boolean;
+  /**
+   * Indicates to the user that something is happening
+   */
+  isLoading?: boolean;
   /**
    * Icon to the left of the Button text
    */
-  leftIcon?: CommonProps['children'];
+  leftIcon?: ReactNode;
   /**
    * Text to accompany the loading spinner
    */
   loadingText?: string;
   /**
-   * Function to be executed for onClick event
+   * Icon to the right of the Button text
    */
-  onClick?: (e: SyntheticEvent) => void;
-  /**
-   * Function to be executed when button has focus
-   */
-  onFocus?: (e?: FocusEvent) => void;
-  onMouseEnter?: (e?: MouseEvent) => void;
-  onMouseLeave?: () => void;
-  /**
-   * Reference used primarily to set focus after Modal closes
-   */
-  ref?: RefObject<HTMLButtonElement>;
+  rightIcon?: ReactNode;
   /**
    * Spinner to use for the loading state
    */
-  spinner?: CommonProps['children'];
-  /**
-   * tabindex html attribute
-   */
-  tabIndex?: number;
+  spinner?: ReactNode;
   /**
    * The look of the button
    *
