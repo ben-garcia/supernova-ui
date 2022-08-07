@@ -1,4 +1,4 @@
-import createClasses from '../create-classes';
+import { createClasses } from '../create-classes';
 
 describe('createClasses', () => {
   const classOne = 'first-class';

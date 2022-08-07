@@ -1,8 +1,10 @@
-import validateDataProps from '../validate-data-props';
+import { validateDataAndAriaProps } from '../validate-data-props';
 
-describe('validateDataProps', () => {
-  it('should filter non "data-*" props', () => {
+describe('validateDataAndAriaProps', () => {
+  it('should filter for data-*, aria-* and on<listener>* props', () => {
     const props = {
+      'aria-label': 'best label',
+      'aria-describedby': 'testid',
       age: 10,
       name: 'ben',
       user: { id: 10 },
@@ -10,11 +12,14 @@ describe('validateDataProps', () => {
       'data-name': 'ben',
       'datat-number': 20,
     };
+
     const expected = {
+      'aria-label': 'best label',
+      'aria-describedby': 'testid',
       'data-testid': 'testid',
       'data-name': 'ben',
     };
 
-    expect(validateDataProps(props)).toStrictEqual(expected);
+    expect(validateDataAndAriaProps(props)).toEqual(expected);
   });
 });

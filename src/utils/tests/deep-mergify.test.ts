@@ -1,4 +1,4 @@
-import deepMergify from '../deep-mergify';
+import { deepMergify } from '../deep-mergify';
 
 describe('deepMergify', () => {
   it('should return empty object when both object are empty', () => {
