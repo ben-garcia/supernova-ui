@@ -1,11 +1,16 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { compile, middleware, prefixer, serialize, stringify } from 'stylis';
 
 import { useUniqueStringId } from '@hooks';
 import { StyleClass, StyleContext } from '@contexts';
-import { isString } from '@utils';
+import {
+  addStyleToDOM,
+  addCSSPrefixes,
+  cssCamelCaseToHyphenated,
+  isString,
+  removeStyleFromDOM,
+} from '@utils';
 
-import type { CSSPropsHyphen, PseudoClassProps, CSSProps } from '@types';
+import type { PseudoClassProps } from '@types';
 
 /**
  * Force an update.
@@ -75,46 +80,6 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
     []
   );
 
-  /**
-   * Convert JS CSS properties object into an object with valid CSS.
-   *
-   * Example
-   *     input => {backgroundColor: 'red', color: 'white'}
-   *     output => {'background-color': 'red', color: 'white'}
-   *
-   * @param obj Javascript CSS object
-   *
-   * @returns CSS valid object.
-   */
-  const cssCamelCaseToHyphenated = useCallback((obj: CSSProps) => {
-    const newObj: CSSPropsHyphen = {};
-    // keep track of the index to used when accessing values array.
-    let index;
-    const values = Object.values(obj);
-    Object.keys(obj).forEach((k, idx) => {
-      index = idx;
-      let str = '';
-      // loop through each letter of the key and
-      // if it is a uppercase letter convert to lowercase and
-      // add '-' between the words.
-
-      // eslint-disable-next-line
-      for (const i in k as any) {
-        const asciiCode = k.charCodeAt(parseInt(i, 10));
-        if (asciiCode >= 65 && asciiCode <= 90) {
-          str = `${str}-${String.fromCharCode(
-            k.charCodeAt(parseInt(i, 10)) + 32
-          )}`;
-        } else {
-          str = `${str}${k.charAt(parseInt(i, 10))}`;
-        }
-      }
-      (newObj as any)[str] = values[index];
-    });
-
-    return newObj;
-  }, []);
-
   useEffect(() => {
     const styleEl: HTMLStyleElement[] = [];
 
@@ -136,8 +101,6 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
         // inject HTML <style> with valid with the correct styles.
         if (!styleObj) {
           className.current = `${className.current}f`;
-          styleEl[0] = document.createElement('style');
-          styleEl[0].setAttribute('id', className.current);
           styleClassesRef.current = [
             {
               className: className.current,
@@ -147,12 +110,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
             },
           ];
           str[0] = `.${className.current}:focus{${str[0]};}`;
-          styleEl[0].appendChild(
-            document.createTextNode(
-              serialize(compile(str[0]), middleware([prefixer, stringify]))
-            )
-          );
-          document.head.appendChild(styleEl[0]);
+          styleEl[0] = addStyleToDOM(className.current, str[0]);
         } else {
           // when there is already an object that matches those styles,
           // increment count by one and update style context object.
@@ -187,8 +145,6 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
           } else {
             className.current = `${className.current}h`;
           }
-          styleEl[1] = document.createElement('style');
-          styleEl[1].setAttribute('id', className.current);
 
           styleClassesRef.current = [
             ...styleClassesRef.current,
@@ -200,15 +156,10 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
             },
           ];
           str[1] = `.${className.current}:hover{${str[1]};}`;
-          styleEl[1].appendChild(
-            document.createTextNode(
-              serialize(compile(str[1]), middleware([prefixer, stringify]))
-            )
-          );
+          styleEl[1] = addStyleToDOM(className.current, addCSSPrefixes(str[1]));
           if (_focus) {
             className.current = `${temp} ${className.current}`;
           }
-          document.head.appendChild(styleEl[1]);
         } else {
           // when there is already an object that matches those styles,
           // increment count by one and update style context object.
@@ -235,7 +186,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
           );
           if (style) {
             if (style.count === 1) {
-              document.head.removeChild(styleEl[0]);
+              removeStyleFromDOM(styleEl[0]);
               const filtered = styleClassesRef.current.filter(
                 e => e.className !== className.current.split(' ')[0]
               );
@@ -255,7 +206,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
           );
           if (style) {
             if (style.count === 1) {
-              document.head.removeChild(styleEl[1]);
+              removeStyleFromDOM(styleEl[1]);
               const filtered = styleClassesRef.current.filter(
                 e => e.className !== className.current.split(' ')[1]
               );
@@ -278,9 +229,8 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
           );
           if (style) {
             if (style.count === 1) {
-              document.head.removeChild(
-                document.getElementById(newClassRef.current[0])!
-              );
+              removeStyleFromDOM(newClassRef.current[0]);
+
               const filtered = styleClassesRef.current.filter(
                 e => e.className !== newClassRef.current[0]
               );
@@ -294,15 +244,15 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
             }
           }
         }
+
         if (isString(newClassRef.current[1])) {
           const style = styleClassesRef.current.find(
             e => e.className === newClassRef.current[1]
           );
           if (style) {
             if (style.count === 1) {
-              document.head.removeChild(
-                document.getElementById(newClassRef.current[1])!
-              );
+              removeStyleFromDOM(newClassRef.current[1]);
+
               const filtered = styleClassesRef.current.filter(
                 e => e.className !== newClassRef.current[1]
               );

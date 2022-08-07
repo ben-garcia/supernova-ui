@@ -1,10 +1,19 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { compile, serialize, stringify, middleware, prefixer } from 'stylis';
+import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 
 import { ClassContext } from '@contexts';
 import { useTheme, useUniqueStringId } from '@hooks';
-import { isArray, isNumber, isObject, isString } from '@utils';
-import { CSSPropsHyphen } from '@types';
+import {
+  addCSSPrefixes,
+  addStyleToDOM,
+  cssCamelCaseToHyphenated,
+  isArray,
+  isElementInDOM,
+  isNumber,
+  isObject,
+  isString,
+  removeStyleFromDOM,
+} from '@utils';
+import { CSSProps, CSSPropsHyphen } from '@types';
 
 /**
  * Hook that returns the ClassProvider context.
@@ -20,36 +29,7 @@ export const useClass = () => {
   return context;
 };
 
-const cssify = (props: any) => {
-  const newObj = {};
-  const values = Object.values(props);
-
-  let idx;
-  Object.keys(props).forEach((k, i) => {
-    idx = i;
-    let str = '';
-    // eslint-disable-next-line
-    for (const letter of k) {
-      if (letter.charCodeAt(0) >= 65 && letter.charCodeAt(0) <= 90) {
-        str = `${str}-${String.fromCharCode(letter.charCodeAt(0) + 32)}`;
-      } else {
-        str = `${str}${letter}`;
-      }
-    }
-    // @ts-ignore
-    newObj[str] = values[idx];
-  });
-
-  return newObj;
-};
-
-const createMediaQueryString = (
-  breakpoint: string,
-  styles: string,
-  className: string
-) => `@media screen and (min-width:${breakpoint}){.${className}{${styles}}}`;
-
-export const useAddStyles = (mainProps: any) => {
+export const useClassStyles = (mainProps: any) => {
   if (!isObject(mainProps)) {
     return '';
   }
@@ -62,7 +42,7 @@ export const useAddStyles = (mainProps: any) => {
   const styleElements = useRef<HTMLStyleElement[]>([]);
   const { breakpoints } = useTheme();
 
-  const filterProps = useCallback((filterTheseProps: any) => {
+  const filterProps = useCallback((filterTheseProps: CSSProps) => {
     const normalProps = {};
     const arrayProps = {};
     const keys = Object.keys(filterTheseProps);
@@ -76,8 +56,8 @@ export const useAddStyles = (mainProps: any) => {
       }
     });
     return {
-      normalProps: cssify(normalProps),
-      arrayProps: cssify(arrayProps),
+      normalProps: cssCamelCaseToHyphenated(normalProps),
+      arrayProps: cssCamelCaseToHyphenated(arrayProps),
     };
   }, []);
 
@@ -98,22 +78,15 @@ export const useAddStyles = (mainProps: any) => {
         formattedValue = value;
       }
 
-      // @ts-ignore
       str = `${str}${keys[i]}:${formattedValue};`;
     });
     formattedStr = `.${className.current}{${str}}`;
-    formattedStr = serialize(
-      compile(formattedStr),
-      middleware([prefixer, stringify])
-    );
+    formattedStr = addCSSPrefixes(formattedStr);
 
-    if (!document.getElementById(className.current)) {
-      const style = document.createElement('style');
-      style.setAttribute('id', className.current);
-      const textNode = document.createTextNode(formattedStr);
-      style.appendChild(textNode);
-      styleElements.current.push(style);
-      document.head.appendChild(style);
+    if (!isElementInDOM(className.current)) {
+      styleElements.current.push(
+        addStyleToDOM(className.current, formattedStr)
+      );
     }
   }, []);
 
@@ -123,7 +96,6 @@ export const useAddStyles = (mainProps: any) => {
       newStyles.current = { ...normalProps };
 
       const stringifyStyles = JSON.stringify({ ...normalProps, ...arrayProps });
-
       const classObj = classesRef.current.find(
         c => c.styles === stringifyStyles
       );
@@ -148,10 +120,7 @@ export const useAddStyles = (mainProps: any) => {
         },
       ];
 
-      // @ts-ignore
-      // eslint-disable-next-line
-      for (let i = 0; i < arrKeys.length; i++) {
-        // @ts-ignore
+      for (let i = 0; i < arrKeys.length; i += 1) {
         // eslint-disable-next-line
         newStyles.current[arrKeys[i]] = arrayProps[arrKeys[i]][0];
         // @ts-ignore
@@ -163,7 +132,6 @@ export const useAddStyles = (mainProps: any) => {
 
       Object.values(updatedArrayProps.current).forEach(
         (arr: any, i: number) => {
-          // @ts-ignore
           // eslint-disable-next-line
           for (let idx in breakpoints) {
             if (arr[idx]) {
@@ -189,29 +157,16 @@ export const useAddStyles = (mainProps: any) => {
 
       injectCSSClass(newStyles.current);
 
-      // @ts-ignore
       // eslint-disable-next-line
       for (let index in breakpoints) {
         if (styles.current[index]) {
-          let str = createMediaQueryString(
-            breakpoints[index],
-            styles.current[index],
-            className.current
-          );
-          str = serialize(compile(str), middleware([prefixer, stringify]));
-          if (
-            !document.getElementById(
-              `${className.current}-${breakpoints[index]}`
-            )
-          ) {
-            const style = document.createElement('style');
-            style.setAttribute(
-              'id',
-              `${className.current}-${breakpoints[index]}`
-            );
-            style.appendChild(document.createTextNode(str));
-            styleElements.current.push(style);
-            document.head.appendChild(style);
+          let str = `@media screen and (min-width:${breakpoints[index]}){.${className.current}{${styles.current[index]}}}`;
+          const classNameStr = `${className.current}-${breakpoints[index]}`;
+
+          str = addCSSPrefixes(str);
+
+          if (!isElementInDOM(classNameStr)) {
+            styleElements.current.push(addStyleToDOM(classNameStr, str));
           }
         }
       }
@@ -219,7 +174,8 @@ export const useAddStyles = (mainProps: any) => {
     []
   );
 
-  const [{ arrayProps, normalProps }] = useState(filterProps(mainProps));
+  const { arrayProps, normalProps } = useMemo(() => filterProps(mainProps), []);
+
   useEffect(() => {
     injectCSSMediaQueries(arrayProps, normalProps);
 
@@ -232,7 +188,7 @@ export const useAddStyles = (mainProps: any) => {
           const filteredClasses = classesRef.current.filter(
             c => c.className !== classObj!.className
           );
-          styleElements.current.forEach(c => document.head.removeChild(c));
+          removeStyleFromDOM(styleElements.current);
           classesRef.current = [...filteredClasses];
         } else {
           const filteredClasses = classesRef.current.filter(
@@ -249,13 +205,10 @@ export const useAddStyles = (mainProps: any) => {
           const filteredClasses = classesRef.current.filter(
             c => c.className !== classObj!.className
           );
-          document.head.removeChild(
-            document.getElementById(className.current)!
-          );
+          removeStyleFromDOM(className.current);
+
           breakpoints.forEach(b => {
-            document.head.removeChild(
-              document.getElementById(`${className.current}-${b}`)!
-            );
+            removeStyleFromDOM(`${className.current}-${b}`);
           });
           classesRef.current = [...filteredClasses];
         } else {
@@ -267,7 +220,7 @@ export const useAddStyles = (mainProps: any) => {
         }
       }
     };
-  }, [injectCSSMediaQueries, arrayProps, normalProps]);
+  }, []);
 
   return className.current;
 };
