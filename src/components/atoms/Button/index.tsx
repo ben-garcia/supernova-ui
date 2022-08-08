@@ -6,13 +6,9 @@ import {
   useCreateClassString,
   useInlineStyles,
   usePseudoClasses,
+  useValidateProps,
 } from '@hooks';
-import {
-  filterDataAriaListernerProps,
-  isObject,
-  isString,
-  validateDataAndAriaProps,
-} from '@utils';
+import { isObject, isString } from '@utils';
 
 import { ButtonProps } from './types';
 import './styles.scss';
@@ -34,18 +30,19 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     size = 'md',
     spinner,
     variant = 'filled',
-    _hover,
-    _focus,
     ...rest
   } = props;
-  const pseudoClassName = usePseudoClasses({ _focus, _hover });
-  const stylesClassName = useClassStyles({
-    ...filterDataAriaListernerProps(rest),
-  });
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const isPaddingTopNeeded =
     !leftIcon && !rightIcon && !isLoading && !isObject(children);
   const createInlineStyles = useInlineStyles(colorVariant);
-  const addClasses = useCreateClassString('snui-button', {
+  const addClasses = useCreateClassString('snui snui-button', {
     'snui-flex snui-items-center':
       isObject(leftIcon) ||
       isObject(rightIcon) ||
@@ -63,7 +60,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
 
   return (
     <button
-      {...validateDataAndAriaProps(rest)}
+      {...remainingProps}
       {...createInlineStyles()}
       {...addClasses()}
       aria-disabled={isDisabled || isLoading}

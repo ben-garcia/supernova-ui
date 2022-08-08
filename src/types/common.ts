@@ -17,6 +17,13 @@ import type {
 import colors from '../theme/colors';
 
 /**
+ * Any object
+ */
+export interface AnyObject {
+  [key: string]: any;
+}
+
+/**
  * The WAI ARIA supported attributes.
  */
 export type AriaProps = AriaAttributes;
