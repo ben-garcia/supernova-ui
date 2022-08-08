@@ -17,3 +17,4 @@ export * from './use-style';
 export * from './use-tabs';
 export * from './use-theme';
 export * from './use-unique-id';
+export * from './use-validate-props';
