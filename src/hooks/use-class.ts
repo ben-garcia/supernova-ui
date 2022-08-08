@@ -80,7 +80,7 @@ export const useClassStyles = (mainProps: any) => {
 
       str = `${str}${keys[i]}:${formattedValue};`;
     });
-    formattedStr = `.${className.current}{${str}}`;
+    formattedStr = `.snui.${className.current}{${str}}`;
     formattedStr = addCSSPrefixes(formattedStr);
 
     if (!isElementInDOM(className.current)) {
@@ -160,7 +160,7 @@ export const useClassStyles = (mainProps: any) => {
       // eslint-disable-next-line
       for (let index in breakpoints) {
         if (styles.current[index]) {
-          let str = `@media screen and (min-width:${breakpoints[index]}){.${className.current}{${styles.current[index]}}}`;
+          let str = `@media screen and (min-width:${breakpoints[index]}){.snui.${className.current}{${styles.current[index]}}}`;
           const classNameStr = `${className.current}-${breakpoints[index]}`;
 
           str = addCSSPrefixes(str);

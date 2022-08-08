@@ -109,7 +109,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
               styles: str[0],
             },
           ];
-          str[0] = `.${className.current}:focus{${str[0]};}`;
+          str[0] = `.snui.${className.current}:focus{${str[0]};}`;
           styleEl[0] = addStyleToDOM(className.current, str[0]);
         } else {
           // when there is already an object that matches those styles,
@@ -155,7 +155,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
               styles: str[1],
             },
           ];
-          str[1] = `.${className.current}:hover{${str[1]};}`;
+          str[1] = `.snui.${className.current}:hover{${str[1]};}`;
           styleEl[1] = addStyleToDOM(className.current, addCSSPrefixes(str[1]));
           if (_focus) {
             className.current = `${temp} ${className.current}`;
