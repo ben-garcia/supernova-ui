@@ -1,4 +1,5 @@
 export * from './assertions';
+export * from './colors';
 export * from './conversions';
 export * from './create-classes';
 export * from './create-element';

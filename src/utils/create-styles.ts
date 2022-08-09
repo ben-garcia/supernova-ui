@@ -6,7 +6,7 @@ import { CSSProperties } from 'react';
 import { isObject, isString } from './assertions';
 import { createCssJsProperty, colors, sizes } from './conversions';
 import { Theme } from '../theme';
-import { Breakpoints, Sizes } from '../types/common';
+import { Breakpoints, ComponentSize } from '../types/common';
 
 interface Props {
   [key: string]: any;
@@ -65,7 +65,7 @@ export const createMarginPaddingStyles = (
 
         // check for a valid size
         if (validSizes.includes(outerPropValue as string)) {
-          styles[cssJsProperty] = spacingTheme[outerPropValue as Sizes];
+          styles[cssJsProperty] = spacingTheme[outerPropValue as ComponentSize];
         } else if (!validSizes.includes(outerPropValue as string)) {
           // when not a valid size
           styles[cssJsProperty] = outerPropValue;
@@ -152,9 +152,9 @@ export const createMarginPaddingStyles = (
                 // if v(value) is a valid size
                 if (validSizes.includes(innerPropValue as string)) {
                   styles[`${propertyName}Left`] =
-                    spacingTheme[innerPropValue as Sizes];
+                    spacingTheme[innerPropValue as ComponentSize];
                   styles[`${propertyName}Right`] =
-                    spacingTheme[innerPropValue as Sizes];
+                    spacingTheme[innerPropValue as ComponentSize];
                 } else {
                   styles[`${propertyName}Left`] = innerPropValue;
                   styles[`${propertyName}Right`] = innerPropValue;
@@ -173,9 +173,9 @@ export const createMarginPaddingStyles = (
                 // if v(value) is a valid size
                 if (validSizes.includes(innerPropValue as string)) {
                   styles[`${propertyName}Bottom`] =
-                    spacingTheme[innerPropValue as Sizes];
+                    spacingTheme[innerPropValue as ComponentSize];
                   styles[`${propertyName}Top`] =
-                    spacingTheme[innerPropValue as Sizes];
+                    spacingTheme[innerPropValue as ComponentSize];
                 } else {
                   styles[`${propertyName}Bottom`] = innerPropValue;
                   styles[`${propertyName}Top`] = innerPropValue;
@@ -202,9 +202,9 @@ export const createMarginPaddingStyles = (
         // first value is a valid size
         if (validSizes.includes(directionOptions[0])) {
           styles[propertyValues[0]] =
-            spacingTheme[directionOptions[0] as Sizes];
+            spacingTheme[directionOptions[0] as ComponentSize];
           styles[propertyValues[2]] =
-            spacingTheme[directionOptions[0] as Sizes];
+            spacingTheme[directionOptions[0] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[0])) {
           // when first value is not a valid size
           // set the property on styles object to the first value
@@ -214,9 +214,9 @@ export const createMarginPaddingStyles = (
         // second value is a valid size
         if (validSizes.includes(directionOptions[1])) {
           styles[propertyValues[1]] =
-            spacingTheme[directionOptions[1] as Sizes];
+            spacingTheme[directionOptions[1] as ComponentSize];
           styles[propertyValues[3]] =
-            spacingTheme[directionOptions[1] as Sizes];
+            spacingTheme[directionOptions[1] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[1])) {
           // not a valid size
           styles[propertyValues[1]] = directionOptions[1];
@@ -228,7 +228,7 @@ export const createMarginPaddingStyles = (
         // first value is a valid size
         if (validSizes.includes(directionOptions[0])) {
           styles[propertyValues[0]] =
-            spacingTheme[directionOptions[0] as Sizes];
+            spacingTheme[directionOptions[0] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[0])) {
           // when first value is not a valid size
           // set the property on styles object to the first value
@@ -237,9 +237,9 @@ export const createMarginPaddingStyles = (
         // second value is a valid size
         if (validSizes.includes(directionOptions[1])) {
           styles[propertyValues[1]] =
-            spacingTheme[directionOptions[1] as Sizes];
+            spacingTheme[directionOptions[1] as ComponentSize];
           styles[propertyValues[3]] =
-            spacingTheme[directionOptions[1] as Sizes];
+            spacingTheme[directionOptions[1] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[1])) {
           // not a valid size
           styles[propertyValues[1]] = directionOptions[1];
@@ -248,7 +248,7 @@ export const createMarginPaddingStyles = (
         // third value is a valid size
         if (validSizes.includes(directionOptions[2])) {
           styles[propertyValues[2]] =
-            spacingTheme[directionOptions[2] as Sizes];
+            spacingTheme[directionOptions[2] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[2])) {
           // not a valid size
           styles[propertyValues[2]] = directionOptions[2];
@@ -259,7 +259,7 @@ export const createMarginPaddingStyles = (
         // first value is a valid size
         if (validSizes.includes(directionOptions[0])) {
           styles[propertyValues[0]] =
-            spacingTheme[directionOptions[0] as Sizes];
+            spacingTheme[directionOptions[0] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[0])) {
           // when first value is not a valid size
           // set the property on styles object to the first value
@@ -268,7 +268,7 @@ export const createMarginPaddingStyles = (
         // second value is a valid size
         if (validSizes.includes(directionOptions[1])) {
           styles[propertyValues[1]] =
-            spacingTheme[directionOptions[1] as Sizes];
+            spacingTheme[directionOptions[1] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[1])) {
           // not a valid size
           styles[propertyValues[1]] = directionOptions[1];
@@ -276,7 +276,7 @@ export const createMarginPaddingStyles = (
         // third value is a valid size
         if (validSizes.includes(directionOptions[2])) {
           styles[propertyValues[2]] =
-            spacingTheme[directionOptions[2] as Sizes];
+            spacingTheme[directionOptions[2] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[2])) {
           // not a valid size
           styles[propertyValues[2]] = directionOptions[2];
@@ -284,7 +284,7 @@ export const createMarginPaddingStyles = (
         // third value is a valid size
         if (validSizes.includes(directionOptions[3])) {
           styles[propertyValues[3]] =
-            spacingTheme[directionOptions[3] as Sizes];
+            spacingTheme[directionOptions[3] as ComponentSize];
         } else if (!validSizes.includes(directionOptions[3])) {
           // not a valid size
           styles[propertyValues[3]] = directionOptions[3];
@@ -306,7 +306,11 @@ export const createMarginPaddingStyles = (
  *
  * @returns styles object with all the created css properties formatted for js
  */
-export const createStyles = (props: Props, theme: Theme, breakpoint: Sizes) => {
+export const createStyles = (
+  props: Props,
+  theme: Theme,
+  breakpoint: ComponentSize
+) => {
   if (!Object.keys(props).length) {
     return {};
   }
