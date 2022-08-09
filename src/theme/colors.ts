@@ -1,6 +1,4 @@
 const colors = {
-  black: '#000',
-
   cyan100: '#e5ffff',
   cyan200: '#b3ffff',
   cyan300: '#80ffff',
@@ -43,6 +41,8 @@ const colors = {
   info800: '#02527e',
   info900: '#01314c',
 
+  primary: '#0078D4',
+
   success100: '#f2f8ec',
   success200: '#d7ebc7',
   success300: '#bddea1',
@@ -53,8 +53,6 @@ const colors = {
   success800: '#3e5e21',
   success900: '#253814',
 
-  transparent: 'transparent',
-
   warning100: '#fff8e6',
   warning200: '#fee9b4',
   warning300: '#fdda82',
@@ -64,8 +62,6 @@ const colors = {
   warning700: '#af7f03',
   warning800: '#7d5a02',
   warning900: '#4b3601',
-
-  white: '#fff',
 };
 
 export default colors;

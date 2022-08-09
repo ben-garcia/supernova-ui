@@ -3,7 +3,7 @@
   border: none;
   border-radius: var(--snui-radii-sm);
   box-shadow: var(--snui-shadow-sm);
-  color: var(--snui-color-white);
+  color: #fff;
   cursor: pointer;
   font-weight: var(--snui-font-weight-lg);
   outline: currentColor none medium;
@@ -16,21 +16,21 @@
   }
 
   &--filled {
-    background: var(--snui-color-info-700);
+    background: var(--snui-color-primary);
 
     &:not(:disabled):hover {
-      background: var(--snui-color-info-800);
+      background: var(--snui-color-info800);
       box-shadow: var(--snui-shadow-md);
     }
   }
 
   &--outline {
-    background: var(--snui-color-transparent);
-    border: 1px solid var(--snui-color-info-700);
-    color: var(--snui-color-info-700);
+    background: transparent;
+    border: 1px solid var(--snui-color-primary);
+    color: var(--snui-color-primary);
 
     &:not(:disabled):hover {
-      background: var(--snui-color-info-100);
+      background: var(--snui-color-info100);
       box-shadow: var(--snui-shadow-md);
     }
   }
