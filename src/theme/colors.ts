@@ -1,4 +1,6 @@
 const colors = {
+  black: '#000000',
+
   cyan100: '#e5ffff',
   cyan200: '#b3ffff',
   cyan300: '#80ffff',
@@ -62,6 +64,8 @@ const colors = {
   warning700: '#af7f03',
   warning800: '#7d5a02',
   warning900: '#4b3601',
+
+  white: '#ffffff',
 };
 
 export default colors;
