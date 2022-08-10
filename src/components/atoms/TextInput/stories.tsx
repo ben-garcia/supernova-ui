@@ -6,16 +6,15 @@ import { UserIcon, SearchIcon } from '../Icon/Icons';
 
 export default {
   argTypes: {
-    finalLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
-    floatLabel: { control: 'boolean', defaultValue: false },
-    initialLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
     isDisabled: { control: 'boolean', defaultValue: false },
     size: {
-      control: 'text',
+      control: 'select',
+      defaultValue: 'md',
+      options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: { type: 'radio' },
-      defaultValue: 'filled',
+      defaultValue: 'outline',
       options: ['filled', 'flushed', 'outline'],
     },
   },
@@ -45,43 +44,15 @@ export const Basic = Template.bind({});
 Basic.args = { label };
 Basic.parameters = parameters;
 
-const FloatingLabelTemplate: ComponentStory<typeof TextInput> = args => (
-  <TextInput {...args} floatLabel margin="sm 0" />
-);
-
-export const FloatingLabel = FloatingLabelTemplate.bind({});
-FloatingLabel.args = { floatLabel: true, label };
-FloatingLabel.parameters = parameters;
-
-const InitialAndFinalLabelTransformTemplate: ComponentStory<
-  typeof TextInput
-> = args => (
-  <TextInput
-    {...args}
-    finalLabelTransform="translate(5rem, -1rem) scale(1)"
-    floatLabel
-    initialLabelTransform="translate(5rem) scale(3)"
-    label="Custom"
-    margin="sm 0"
-  />
-);
-
-export const InitialAndFinalLabelTransform = InitialAndFinalLabelTransformTemplate.bind(
-  {}
-);
-InitialAndFinalLabelTransform.args = { floatLabel: true, label };
-InitialAndFinalLabelTransform.parameters = parameters;
-
 const WithIconsTemplate: ComponentStory<typeof TextInput> = args => (
   <TextInput {...args} />
 );
 const WithIcons = WithIconsTemplate.bind({});
 WithIcons.args = {
   label,
-  leftIcon: <UserIcon size="1.3rem" />,
-  rightIcon: <SearchIcon size="1.3rem" />,
+  leftIcon: <UserIcon />,
+  rightIcon: <SearchIcon />,
 };
-FloatingLabel.parameters = parameters;
 
 const WithLeftIconTemplate: ComponentStory<typeof TextInput> = args => (
   <TextInput {...args} />
@@ -89,7 +60,7 @@ const WithLeftIconTemplate: ComponentStory<typeof TextInput> = args => (
 export const WithLeftIcon = WithLeftIconTemplate.bind({});
 WithLeftIcon.args = {
   label,
-  leftIcon: <UserIcon size="1.3rem" />,
+  leftIcon: <UserIcon />,
 };
 WithLeftIcon.parameters = parameters;
 
@@ -99,6 +70,6 @@ const WithRightIconTemplate: ComponentStory<typeof TextInput> = args => (
 export const WithRightIcon = WithRightIconTemplate.bind({});
 WithRightIcon.args = {
   label,
-  rightIcon: <SearchIcon size="1.3rem" />,
+  rightIcon: <SearchIcon />,
 };
 WithRightIcon.parameters = parameters;

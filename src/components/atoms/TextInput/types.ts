@@ -1,38 +1,28 @@
-import { RefObject } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
 
-import {
-  CommonProps,
-  FormControlProps,
-  SupernovaUIBaseProps,
-  TypographyProps,
-} from '../../../types';
+import { FormControlProps, SupernovaProps } from '@types';
+
+type ReactInputProps = Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  'size'
+>;
 
 /**
  * Props for the TextInput component
  */
 export interface TextInputProps
-  extends Omit<CommonProps, 'children' | 'isLoading' | 'size'>,
-    FormControlProps,
-    SupernovaUIBaseProps,
-    Omit<TypographyProps, 'align'> {
+  extends SupernovaProps<ReactInputProps>,
+    FormControlProps {
   /**
-   * The class to be set on the label
+   * The HTML label to be associated with the input.
    */
-  labelClassName?: string;
+  label?: string;
   /**
-   * React reference
+   * Icon to the left of the Button text
    */
-  ref?: RefObject<HTMLInputElement>;
+  leftIcon?: ReactNode;
   /**
-   * The size of the input
-   *
-   * @default 'md'
+   * Icon to the right of the Button text
    */
-  size?: 'sm' | 'md';
-  /**
-   * Indiacate the type of input
-   *
-   * @default 'text'
-   */
-  typeOf?: 'email' | 'text' | 'password';
+  rightIcon?: ReactNode;
 }
