@@ -51,8 +51,7 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
     'snui-padding-top-md': size === 'md' && isPaddingTopNeeded,
     'snui-padding-top-lg': size === 'lg' && isPaddingTopNeeded,
     [`snui-button--${variant}`]: isString(variant) && !props.backgroundColor,
-    [`snui-button--${size}`]:
-      isString(variant) && !props.height && !props.width,
+    [`snui-button--${size}`]: isString(size) && !props.height && !props.width,
     [`${className}`]: isString(className),
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
