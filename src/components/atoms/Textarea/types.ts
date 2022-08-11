@@ -1,33 +1,19 @@
-import { RefObject } from 'react';
-
-import {
-  CommonProps,
-  FormControlProps,
-  SupernovaUIBaseProps,
-  TypographyProps,
-} from '../../../types';
+import { FormControlProps, SupernovaProps } from '@types';
 
 /**
  * Props for the Textarea component
  */
 export interface TextareaProps
-  extends Omit<
-      CommonProps,
-      'children' | 'isLoading' | 'leftIcon' | 'rightIcon' | 'size'
-    >,
-    FormControlProps,
-    SupernovaUIBaseProps,
-    Omit<TypographyProps, 'align'> {
+  extends SupernovaProps<'textarea'>,
+    Omit<FormControlProps, 'size'> {
   /**
-   * Reference used primarily to set focus after Modal closes
+   * The HTML label to be associated with the textarea.
    */
-  ref?: RefObject<HTMLTextAreaElement>;
+  label?: string;
   /**
-   * Configure whether the user can resize the textarea
+   * The height should be determined by the content.
    *
-   * css property resize
-   *
-   * @default 'none'
+   * @default true
    */
-  resize?: 'horizontal' | 'vertical' | 'both' | 'none';
+  isAutoResize?: boolean;
 }

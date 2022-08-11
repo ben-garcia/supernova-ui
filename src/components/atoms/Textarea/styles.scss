@@ -1,52 +1,63 @@
+.snui-textarea-wrapper {
+  position: relative;
+}
+
 .snui-textarea {
   appearance: none;
   border: none;
   border-radius: var(--snui-radii-sm);
-  box-shadow: var(--snui-shadow-sm);
   color: var(--snui-color-black);
   font-size: 1.2rem;
   font-weight: var(--snui-font-weight-sm);
-  min-height: 80px;
   outline: currentColor none medium;
-  padding-bottom: calc(var(--snui-size-xs) * 0.9);
-  padding-inline-start: var(--snui-size-md);
-  padding-inline-end: var(--snui-size-md);
-  padding-top: calc(var(--snui-size-xs) * 0.9);
+  padding: 0.5rem 0.9rem;
   width: 100%;
-}
 
-.snui-textarea-label {
-  cursor: text;
-  left: 0;
-  top: 0;
-  transform: translate(1.8rem, 1.1rem) scale(1.2);
-  transition: transform 200ms linear;
-  transform-origin: top left;
-}
+  &--auto-resize {
+    resize: none;
+  }
 
-.snui-textarea-label-floating {
-  transform: translate(2rem, -1.1rem) scale(1);
-  z-index: 100;
-}
+  &:focus {
+    border: none;
+    outline: 3px solid var(--snui-color-focus-ring);
+    outline-offset: 2px;
+  }
 
-.snui-textarea-input-filled {
-  background: var(--snui-color-gray-100);
+  &--filled {
+    background: var(--snui-color-gray100);
 
-  &:not(:disabled):hover {
-    border: 1px solid var(--snui-color-info-500);
+    &:not(:disabled):hover {
+      border: 1px solid var(--snui-color-primary);
+    }
+  }
+
+  &--flushed {
+    background: transparent;
+    border-bottom: 1px solid var(--snui-color-primary);
+  }
+
+  &--outline {
+    background: transparent;
+    border: 1px solid var(--snui-color-primary);
   }
 }
 
-.snui-textarea-flushed {
-  background: var(--snui-color-transparent);
-  border-bottom: 1px solid var(--snui-color-info-500);
+.snui-textarea-label {
+  background-color: var(--clr-bg);
+  color: var(--snui-color-black);
+  cursor: text;
+  font-size: 1.05rem;
+  left: 0.5rem;
+  position: absolute;
+  padding: 0 0.5rem;
+  top: 0.5rem;
+  transition: transform 150ms ease-in, font-size 150ms ease-in;
 }
 
-.snui-textarea-outline {
-  background: var(--snui-color-transparent);
-  border: 1px solid var(--snui-color-info-500);
-}
-
-.snui-textarea-disabled {
-  background: var(--snui-color-disabled);
+.snui-textarea:focus ~ .snui-textarea-label,
+.snui-textarea:not(:placeholder-shown).snui-textarea:not(:focus)
+  ~ .snui-textarea-label {
+  background-color: var(--snui-color-white);
+  font-size: 0.7rem;
+  transform: translate(-0.1rem, -1.1rem);
 }

@@ -5,21 +5,11 @@ import Textarea from '.';
 
 export default {
   argTypes: {
-    finalLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
-    floatLabel: { control: 'boolean', defaultValue: false },
-    initialLabelTransform: { control: 'text', if: { arg: 'floatLabel' } },
+    isAutoResize: { control: 'boolean', defaultValue: true },
     isDisabled: { control: 'boolean', defaultValue: false },
-    resize: {
-      control: { type: 'select' },
-      defaultValue: 'none',
-      options: ['both', 'horizontal', 'none', 'vertical'],
-    },
-    size: {
-      control: 'text',
-    },
     variant: {
       control: { type: 'radio' },
-      defaultValue: 'filled',
+      defaultValue: 'outline',
       options: ['filled', 'flushed', 'outline'],
     },
   },
@@ -29,14 +19,7 @@ export default {
 
 const parameters = {
   controls: {
-    include: [
-      'finalLabelTransform',
-      'floatLabel',
-      'initialLabelTransform',
-      'resize',
-      'size',
-      'variant',
-    ],
+    include: ['isAutoResize', 'isDisabled', 'variant'],
   },
 };
 const label = 'Reveal your secrets';
@@ -50,28 +33,9 @@ Basic.args = { label };
 Basic.parameters = parameters;
 
 const FloatingLabelTemplate: ComponentStory<typeof Textarea> = args => (
-  <Textarea {...args} floatLabel margin="sm 0" />
+  <Textarea {...args} />
 );
 
 export const FloatingLabel = FloatingLabelTemplate.bind({});
-FloatingLabel.args = { floatLabel: true, label };
+FloatingLabel.args = { label };
 FloatingLabel.parameters = parameters;
-
-const InitialAndFinalLabelTransformTemplate: ComponentStory<
-  typeof Textarea
-> = args => (
-  <Textarea
-    {...args}
-    finalLabelTransform="translate(5rem, -1rem) scale(1)"
-    floatLabel
-    initialLabelTransform="translate(5rem) scale(3)"
-    label="Custom"
-    margin="sm 0"
-  />
-);
-
-export const InitialAndFinalLabelTransform = InitialAndFinalLabelTransformTemplate.bind(
-  {}
-);
-InitialAndFinalLabelTransform.args = { floatLabel: true, label };
-InitialAndFinalLabelTransform.parameters = parameters;
