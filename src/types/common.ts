@@ -4,11 +4,18 @@ import type {
   StandardShorthandPropertiesHyphen,
   StandardShorthandProperties,
 } from 'csstype';
-import type { AriaAttributes, FC, RefObject, ReactNode } from 'react';
+import type {
+  AriaAttributes,
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  FC,
+  InputHTMLAttributes,
+  RefObject,
+  ReactNode,
+  TextareaHTMLAttributes,
+} from 'react';
 
 import type {
-  HTMLAttributes,
-  HTMLElements,
   SupernovaUIBaseProps,
   TypographyProps,
   WithResponsiveProps,
@@ -288,8 +295,39 @@ export interface PseudoClassProps {
 }
 
 /**
+ * All attributes supplied to a React button.
+ */
+type ReactButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+/**
+ * All attributes supplied to a React input.
+ */
+type ReactInputProps = Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  'size'
+>;
+/**
+ * All attributes supplied to a React textarea.
+ */
+type ReactTextareaProps = DetailedHTMLProps<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  HTMLTextAreaElement
+>;
+
+/**
+ * React elements with their respective attributes.
+ */
+interface ReactElementProps {
+  button: ReactButtonProps;
+  input: ReactInputProps;
+  textarea: ReactTextareaProps;
+}
+
+/**
  * Props shared by all supernova-ui components.
  */
-export type SupernovaProps<String = ''> = String extends HTMLElements
-  ? WithResponsiveProps<CSSProps> & PseudoClassProps & HTMLAttributes<String>
+export type SupernovaProps<Type = ''> = Type extends keyof ReactElementProps
+  ? WithResponsiveProps<CSSProps> & PseudoClassProps & ReactElementProps[Type]
   : FC<WithResponsiveProps<CSSProps> & PseudoClassProps>;

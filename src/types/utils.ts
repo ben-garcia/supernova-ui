@@ -1,17 +1,3 @@
-import { HTMLAttributes as ReactHTMLAttributes } from 'react';
-
-/**
- * Interactive HTML Elements.
- */
-export type HTMLElements = 'button';
-
-/**
- * Get all React HTML attributes for a particular element.
- */
-export type HTMLAttributes<
-  TypeElement extends HTMLElements
-> = ReactHTMLAttributes<`HTML${Capitalize<TypeElement>}Element`>;
-
 /**
  * Create a tuple with a length of 6.
  * Each element will be of type 'Type' or null.
