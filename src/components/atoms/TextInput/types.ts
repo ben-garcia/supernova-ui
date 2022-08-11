@@ -1,17 +1,12 @@
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { FormControlProps, SupernovaProps } from '@types';
-
-type ReactInputProps = Omit<
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-  'size'
->;
 
 /**
  * Props for the TextInput component
  */
 export interface TextInputProps
-  extends SupernovaProps<ReactInputProps>,
+  extends SupernovaProps<'input'>,
     FormControlProps {
   /**
    * The HTML label to be associated with the input.

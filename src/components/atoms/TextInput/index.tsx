@@ -18,14 +18,13 @@ import './styles.scss';
  */
 const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   const {
-    className = '',
+    className,
     value,
     isDisabled = false,
     label,
-    leftIcon = null,
-    onChange,
+    leftIcon,
     placeholder,
-    rightIcon = null,
+    rightIcon,
     size = 'md',
     variant = 'outline',
     ...rest
@@ -48,14 +47,12 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
   const uniqueId = useUniqueId('snui-text-input');
   const [inputValue, setInputValue] = useState(value || '');
   const inputId = useMemo(() => (isString(fieldId) ? fieldId : uniqueId), []);
-  const wrapperClasses = createClasses('', {
-    [`snui-text-input-wrapper snui-text-input-wrapper--${size}`]: isString(
-      size
-    ),
+  const wrapperClasses = createClasses('snui-text-input-wrapper', {
+    [`snui-text-input-wrapper--${size}`]: isString(size),
   });
   const labelClasses = createClasses('snui snui-text-label', {
     [`snui-text-label--${size}`]: isString(size),
-    'snui-text-label--padding-left': leftIcon,
+    'snui-text-label--padding-left': isObject(leftIcon),
     'snui-disabled': isDisabled,
   });
   const addInputClasses = useCreateClassString('snui snui-text-input', {
@@ -105,14 +102,19 @@ const TextInput = forwardRef((props: TextInputProps, ref: any) => {
         id={inputId}
         onChange={e => {
           if (!isDisabled) {
-            if (isFunction(onChange)) {
-              onChange!(e as any);
+            if (isFunction(props?.onChange)) {
+              props.onChange!(e);
             }
             setInputValue(e.target.value);
           }
         }}
         placeholder={isString(placeholder) ? placeholder : ''}
         ref={ref}
+        style={
+          isInvalid
+            ? { border: '2px solid var(--snui-color-error500)' }
+            : undefined
+        }
         value={inputValue}
       />
       {isObject(rightIcon) && (
