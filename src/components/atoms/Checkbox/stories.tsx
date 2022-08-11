@@ -1,23 +1,25 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { colors } from '@utils';
 import Checkbox from '.';
 import { UserIcon } from '../Icon/Icons';
 
 export default {
   argTypes: {
-    backgroundColor: {
-      control: 'color',
-      defaultValue: '#0273b0',
-    },
-    fontSize: {
-      control: 'text',
-      defaultValue: 'md',
+    colorVariant: {
+      control: 'select',
+      options: colors,
     },
     label: { control: 'text' },
     isDisabled: {
       control: 'boolean',
       defaultValue: false,
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'md',
+      options: ['sm', 'md', 'lg'],
     },
   },
   component: Checkbox,
@@ -26,7 +28,7 @@ export default {
 
 const parameters = {
   controls: {
-    include: ['backgroundColor', 'fontSize', 'label', 'isDisabled'],
+    include: ['colorVariant', 'label', 'isDisabled', 'size'],
   },
 };
 const label = 'Reveal your secrets?';

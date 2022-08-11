@@ -1,31 +1,11 @@
-import { ReactNode, RefObject } from 'react';
-
-import {
-  CommonProps,
-  FormControlProps,
-  SupernovaUIBaseProps,
-  TypographyProps,
-} from '../../../types';
+import type { FormControlProps, SupernovaProps } from '@types';
 
 /**
  * Props for the Checkbox component
  */
 export interface CheckboxProps
-  extends Omit<
-      CommonProps,
-      'children' | 'isLoading' | 'leftIcon' | 'rightIcon'
-    >,
-    Omit<
-      FormControlProps,
-      | 'finalLabelTransform'
-      | 'label'
-      | 'floatLabel'
-      | 'initialLabelTransform'
-      | 'value'
-      | 'variant'
-    >,
-    SupernovaUIBaseProps,
-    Omit<TypographyProps, 'align'> {
+  extends SupernovaProps<'input'>,
+    Omit<FormControlProps, 'variant'> {
   /**
    * The visible helper text that describes the radio input option
    *
@@ -33,13 +13,9 @@ export interface CheckboxProps
    * or
    * a component that is to be rendered.
    */
-  label: string | ReactNode;
+  label?: string;
   /**
    * Configure the checked state of the checkbox
    */
   isChecked?: boolean;
-  /**
-   * React reference
-   */
-  ref?: RefObject<HTMLInputElement>;
 }

@@ -7,20 +7,52 @@
   outline: currentColor none medium;
 
   &__control {
-    border-color: var(--snui-color-gray-200);
+    border-color: var(--snui-color-gray200);
     border-radius: var(--snui-radii-xs);
     border-style: solid;
     border-width: var(--snui-radii-xs);
-    height: var(--snui-size-sm);
     margin-right: var(--snui-space-sm);
-    width: var(--snui-size-sm);
   }
 
-  .snui-hidden-checkbox:focus ~ .snui-checkbox__control {
-    box-shadow: 0 0 0 3px var(--snui-color-focus-ring);
+  &--sm {
+    height: 1.1rem;
+    width: 1.1rem;
+  }
+
+  &--md {
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+
+  &--lg {
+    height: 1.5rem;
+    width: 1.5rem;
   }
 
   &__label {
+    cursor: pointer;
     user-select: none;
+
+    &--sm {
+      font-size: 0.8rem;
+    }
+
+    &--md {
+      font-size: 0.95rem;
+    }
+
+    &--lg {
+      font-size: 1.05rem;
+    }
   }
+}
+
+.snui-hidden-checkbox:focus ~ .snui-checkbox__control {
+  border: none;
+  outline: 3px solid var(--snui-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.snui-hidden-checkbox:checked ~ .snui-checkbox__control {
+  background-color: var(--snui-color-primary);
 }
