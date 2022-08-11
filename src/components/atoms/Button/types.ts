@@ -1,17 +1,12 @@
-import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { FormControlProps, SupernovaProps } from '@types';
-
-type ReactButtonProps = DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
 
 /**
  * Props for the Button component
  */
 export interface ButtonProps
-  extends SupernovaProps<ReactButtonProps>,
+  extends SupernovaProps<'button'>,
     Omit<FormControlProps, 'variant'> {
   /**
    * Whether to set the type as 'submit'
