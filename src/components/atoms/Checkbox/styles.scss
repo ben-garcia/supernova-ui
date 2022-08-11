@@ -12,6 +12,7 @@
     border-style: solid;
     border-width: var(--snui-radii-xs);
     margin-right: var(--snui-space-sm);
+    transition: background-color 0.4s ease;
   }
 
   &--sm {
