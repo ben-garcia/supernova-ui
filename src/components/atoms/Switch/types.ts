@@ -1,36 +1,21 @@
-import { RefObject } from 'react';
-
-import {
-  CommonProps,
-  FormControlProps,
-  SupernovaUIBaseProps,
-  TypographyProps,
-} from '../../../types';
+import type { FormControlProps, SupernovaProps } from '@types';
 
 /**
  * Props for the Switch component
  */
 export interface SwitchProps
-  extends Omit<
-      CommonProps,
-      'children' | 'isLoading' | 'leftIcon' | 'rightIcon'
-    >,
-    Omit<
-      FormControlProps,
-      | 'finalLabelTransform'
-      | 'floatLabel'
-      | 'initialLabelTransform'
-      | 'value'
-      | 'variant'
-    >,
-    SupernovaUIBaseProps,
-    Omit<TypographyProps, 'align'> {
+  extends SupernovaProps<'input'>,
+    Omit<FormControlProps, 'variant'> {
+  /**
+   * The visible helper text that describes the radio input option
+   *
+   * can be a string
+   * or
+   * a component that is to be rendered.
+   */
+  label?: string;
   /**
    * Configure the checked state of the checkbox
    */
   isChecked?: boolean;
-  /**
-   * React reference
-   */
-  ref?: RefObject<HTMLInputElement>;
 }

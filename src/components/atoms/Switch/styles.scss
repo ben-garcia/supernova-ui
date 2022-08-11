@@ -1,41 +1,87 @@
 .snui-switch {
-  appearance: none;
-  border: none;
-  border-radius: var(--snui-radii-sm);
-  color: var(--snui-color-black);
-  cursor: pointer;
-  outline: currentColor none medium;
-  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 
   &__control {
     align-items: center;
-    background-color: var(--snui-color-gray-200);
+    background-color: var(--snui-color-gray200);
     border-radius: var(--snui-radii-xxl);
+    cursor: pointer;
     display: inline-flex;
-    height: var(--snui-size-sm);
     padding: var(--snui-space-xs);
     transition: background-color 0.4s ease;
-    width: var(--snui-size-md);
+
+    &--sm {
+      height: 1rem;
+      width: 2rem;
+    }
+
+    &--md {
+      height: 1.3rem;
+      width: 2.7rem;
+    }
+    &--lg {
+      height: 1.5rem;
+      width: 3.2rem;
+    }
   }
 
   .snui-hidden-switch:focus ~ .snui-switch__control {
-    box-shadow: 0 0 0 3px var(--snui-color-focus-ring);
+    border: none;
+    outline: 3px solid var(--snui-color-focus-ring);
+    outline-offset: 2px;
   }
 
   &__circle {
     background-color: var(--snui-color-white);
     border-radius: var(--snui-radii-xxl);
-    height: var(--snui-size-md);
-    transform: translateX(20%);
     transition: transform 0.4s ease;
-    width: var(--snui-size-md);
-  }
 
-  .snui-hidden-switch:checked ~ .snui-switch__control .snui-switch__circle {
-    transform: translateX(110%);
+    &--sm {
+      height: 0.8rem;
+      width: 0.8rem;
+    }
+
+    &--md {
+      height: 1.1rem;
+      width: 1.1rem;
+    }
+    &--lg {
+      height: 1.3rem;
+      width: 1.3rem;
+    }
   }
 
   &__label {
+    cursor: pointer;
     user-select: none;
+    &--sm {
+      font-size: 0.8rem;
+    }
+
+    &--md {
+      font-size: 0.95rem;
+    }
+
+    &--lg {
+      font-size: 1.05rem;
+    }
   }
+}
+
+.snui-hidden-switch:checked ~ .snui-switch__control {
+  background-color: var(--snui-color-primary);
+}
+
+.snui-hidden-switch:checked ~ .snui-switch__control .snui-switch__circle--sm {
+  transform: translateX(90%);
+}
+
+.snui-hidden-switch:checked ~ .snui-switch__control .snui-switch__circle--md {
+  transform: translateX(100%);
+}
+
+.snui-hidden-switch:checked ~ .snui-switch__control .snui-switch__circle--lg {
+  transform: translateX(110%);
 }

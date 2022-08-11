@@ -1,17 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { colors } from '@utils';
 import Switch from '.';
 
 export default {
   argTypes: {
-    backgroundColor: {
-      control: 'color',
-      defaultValue: '#0273b0',
-    },
-    fontSize: {
-      control: 'text',
-      defaultValue: 'md',
+    colorVariant: {
+      control: 'select',
+      options: colors,
     },
     label: { control: 'text' },
     isDisabled: {
@@ -21,7 +18,7 @@ export default {
     size: {
       control: { type: 'select' },
       defaultValue: 'md',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['sm', 'md', 'lg'],
     },
   },
   component: Switch,
@@ -30,7 +27,7 @@ export default {
 
 const parameters = {
   controls: {
-    include: ['backgroundColor', 'fontSize', 'label', 'isDisabled', 'size'],
+    include: ['colorVariant', 'label', 'isDisabled', 'size'],
   },
 };
 const label = 'Reveal your secrets?';
