@@ -63,6 +63,10 @@
     padding-inline-start: 0 !important;
     position: absolute;
     right: var(--snui-space-md);
+
+    &:hover {
+      background: none !important;
+    }
   }
 
   &__progressbar {

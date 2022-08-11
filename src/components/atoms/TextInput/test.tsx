@@ -15,7 +15,7 @@ describe('<TextInput />', () => {
   });
 
   it('should pass a11y tests when floating label', async () => {
-    await a11yTest(<TextInput floatLabel label={label} />);
+    await a11yTest(<TextInput label={label} />);
   });
 
   it('should render', () => {

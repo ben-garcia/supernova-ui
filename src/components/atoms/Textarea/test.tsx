@@ -13,7 +13,7 @@ describe('<Textarea />', () => {
   });
 
   it('should pass a11y tests when floating label', async () => {
-    await a11yTest(<Textarea floatLabel label={label} />);
+    await a11yTest(<Textarea label={label} />);
   });
 
   it('should render', () => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import useTheme from './use-theme';
+import { useTheme } from '@hooks';
 import { colors, inputIsChecked as inputHasChecked, isString } from '../utils';
 
 /**
@@ -12,7 +12,7 @@ import { colors, inputIsChecked as inputHasChecked, isString } from '../utils';
  * @param inputIsChecked used to control the state of the input
  * @param isChecked prop used to indicate whether the input is checked
  */
-const useInputChecked = (
+export const useInputChecked = (
   elementId: string,
   backgroundColor: string,
   inputIsChecked: boolean,
@@ -41,5 +41,3 @@ const useInputChecked = (
 
   return backgroundColorToUse;
 };
-
-export default useInputChecked;
