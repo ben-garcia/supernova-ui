@@ -8,4 +8,5 @@ export * from './deep-mergify';
 export * from './dom';
 export * from './dom-assertions';
 export * from './position';
+export * from './react';
 export * from './validate-data-props';
