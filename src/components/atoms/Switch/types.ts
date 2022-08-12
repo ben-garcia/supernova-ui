@@ -13,7 +13,7 @@ export interface SwitchProps
    * or
    * a component that is to be rendered.
    */
-  label?: string;
+  label: string;
   /**
    * Configure the checked state of the checkbox
    */

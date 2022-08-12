@@ -53,9 +53,8 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
-  const addLabelClasses = useCreateClassString('snui-switch__label', {
-    [`snui-switch__label--${size}`]:
-      isString(size) && !props.height && !props.width,
+  const addLabelClasses = useCreateClassString('snui-switch', {
+    [`snui-switch--${size}`]: isString(size) && !props.height && !props.width,
     'snui-disabled': isDisabled,
   });
   const addCircleClasses = useCreateClassString('snui-switch__circle', {
@@ -63,11 +62,6 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
       isString(size) && !props.height && !props.width,
     'snui-disabled': isDisabled,
   });
-  const handleToggleCheck = () => {
-    if (!isDisabled) {
-      setSwitchIsChecked(!switchIsChecked);
-    }
-  };
 
   const labelIds: string[] = [];
 
@@ -80,7 +74,15 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
   }
 
   return (
-    <div className="snui-switch">
+    // eslint-disable-next-line
+    <label {...addLabelClasses()}>
+      {label}
+      {isRequired && isString(label) && (
+        <span aria-hidden="true" className="snui-error" role="presentation">
+          *
+        </span>
+      )}
+
       <input
         {...remainingProps}
         aria-checked={switchIsChecked || formControlIsDisabled}
@@ -105,7 +107,6 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
       {/* eslint-disable-next-line */}
       <span
         {...addControlClasses()}
-        onClick={handleToggleCheck}
         style={
           switchIsChecked && isString(colorVariant)
             ? { backgroundColor: colors[colorVariant!] }
@@ -114,19 +115,7 @@ const Switch = forwardRef((props: SwitchProps, ref: any) => {
       >
         <span {...addCircleClasses()} />
       </span>
-
-      {isString(label) && (
-        // eslint-disable-next-line
-        <label {...addLabelClasses()} onClick={handleToggleCheck}>
-          {label}
-          {isRequired && isString(label) && (
-            <span aria-hidden="true" className="snui-error" role="presentation">
-              *
-            </span>
-          )}
-        </label>
-      )}
-    </div>
+    </label>
   );
 });
 

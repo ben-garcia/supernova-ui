@@ -1,7 +1,20 @@
 .snui-switch {
+  cursor: pointer;
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
+  user-select: none;
+
+  &--sm {
+    font-size: 0.8rem;
+  }
+
+  &--md {
+    font-size: 0.95rem;
+  }
+
+  &--lg {
+    font-size: 1.05rem;
+  }
 
   &__control {
     align-items: center;
@@ -27,12 +40,6 @@
     }
   }
 
-  .snui-hidden-switch:focus ~ .snui-switch__control {
-    border: none;
-    outline: 3px solid var(--snui-color-focus-ring);
-    outline-offset: 2px;
-  }
-
   &__circle {
     background-color: var(--snui-color-white);
     border-radius: var(--snui-radii-xxl);
@@ -52,22 +59,12 @@
       width: 1.3rem;
     }
   }
+}
 
-  &__label {
-    cursor: pointer;
-    user-select: none;
-    &--sm {
-      font-size: 0.8rem;
-    }
-
-    &--md {
-      font-size: 0.95rem;
-    }
-
-    &--lg {
-      font-size: 1.05rem;
-    }
-  }
+.snui-hidden-switch:focus ~ .snui-switch__control {
+  border: none;
+  outline: 3px solid var(--snui-color-focus-ring);
+  outline-offset: 2px;
 }
 
 .snui-hidden-switch:checked ~ .snui-switch__control {
