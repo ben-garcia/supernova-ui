@@ -1,30 +1,30 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { FormControl, FormErrorMessage, FormHelperText } from '@molecules';
-
+import { colors } from '@utils';
 import { Radio, RadioGroup } from '.';
 import { UserIcon } from '../Icon/Icons';
 
 export default {
   argTypes: {
-    backgroundColor: {
-      control: 'color',
-      defaultValue: '#0273b0',
+    colorVariant: {
+      control: 'select',
+      options: colors,
     },
     direction: {
       control: { type: 'radio' },
       defaultValue: 'row',
       options: ['column', 'row'],
     },
-    fontSize: {
-      control: 'text',
-      defaultValue: 'md',
-    },
     label: { control: 'text' },
     isDisabled: {
       control: 'boolean',
       defaultValue: false,
+    },
+    size: {
+      control: { type: 'select' },
+      defaultValue: 'md',
+      options: ['sm', 'md', 'lg'],
     },
   },
   component: Radio,
@@ -33,13 +33,7 @@ export default {
 
 const parameters = {
   controls: {
-    include: [
-      'backgroundColor',
-      'direction',
-      'fontSize',
-      'label',
-      'isDisabled',
-    ],
+    include: ['colorVariant', 'label', 'isDisabled', 'size'],
   },
 };
 const label = 'Reveal your secrets?';
@@ -71,9 +65,9 @@ const RadioGroupTemplate: ComponentStory<any> = args => {
           name="frameworks"
           onChange={setFramework}
         >
-          <Radio label="angular" {...args} margin="0 sm" value="angular" />
-          <Radio label="react" {...args} margin="0 sm" value="react" />
-          <Radio label="vue" {...args} margin="0 sm" value="vue" />
+          <Radio label="angular" value="angular" />
+          <Radio label="react" value="react" />
+          <Radio label="vue" value="vue" />
         </RadioGroup>
       </div>
     </div>
@@ -82,7 +76,7 @@ const RadioGroupTemplate: ComponentStory<any> = args => {
 
 export const WithRadioGroup = RadioGroupTemplate.bind({});
 WithRadioGroup.args = {};
-WithRadioGroup.parameters = parameters;
+WithRadioGroup.parameters = { controls: { include: ['direction'] } };
 
 const WithComponentAsLabelTemplate: ComponentStory<any> = args => {
   const [checked, setChecked] = React.useState(false);
@@ -92,41 +86,19 @@ const WithComponentAsLabelTemplate: ComponentStory<any> = args => {
       onChange={e => setChecked(e.target.checked)}
       label={
         <>
-          <UserIcon margin="0 0.5rem 0 0" size="1rem" />
+          <UserIcon size="1rem" />
           <div>this is a custom label</div>
         </>
       }
       {...args}
-      margin="0 sm"
     />
   );
 };
 
 export const WithComponentAsLabel = WithComponentAsLabelTemplate.bind({});
 WithComponentAsLabel.args = {};
-WithComponentAsLabel.parameters = parameters;
-
-const WithFormControlTemplate: ComponentStory<any> = args => {
-  const [answer, setAnswer] = React.useState('3.14159');
-
-  return (
-    <FormControl isInvalid={answer !== '3.14159'}>
-      <RadioGroup
-        {...args}
-        defaultValue={answer}
-        name="answer"
-        onChange={setAnswer}
-      >
-        <Radio label="3.14195" margin="0 sm" value="3.14195" />
-        <Radio label="3.15149" margin="0 sm" value="3.15249" />
-        <Radio label="3.14159" margin="0 sm" value="3.14159" />
-      </RadioGroup>
-      <FormHelperText>Choose the correct value of PI</FormHelperText>
-      <FormErrorMessage>error has been detected</FormErrorMessage>
-    </FormControl>
-  );
+WithComponentAsLabel.parameters = {
+  controls: {
+    include: ['colorVariant', 'isDisabled', 'size'],
+  },
 };
-
-export const WithFormControl = WithFormControlTemplate.bind({});
-WithFormControl.args = {};
-WithFormControl.parameters = parameters;

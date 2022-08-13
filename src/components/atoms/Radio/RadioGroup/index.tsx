@@ -30,12 +30,15 @@ const RadioGroup: FC<RadioGroupProps> = props => {
     });
     enhancedChildren.push(newChild);
   });
-  const classes = createClasses('snui-radio-group snui-inline-flex', {
-    [`${className}`]: isString(className),
-    [`snui-flex-${direction}`]: isString(direction),
-    'snui-flex-center': isString(direction) && direction === 'row',
-    'snui-items-flex-start': isString(direction) && direction === 'column',
-  });
+  const classes = createClasses(
+    'snui-radio-group snui-inline-flex snui-gap-5',
+    {
+      [`${className}`]: isString(className),
+      [`snui-flex-${direction}`]: isString(direction),
+      'snui-flex-center': isString(direction) && direction === 'row',
+      'snui-items-flex-start': isString(direction) && direction === 'column',
+    }
+  );
   return (
     <div className={classes} role="radiogroup">
       {enhancedChildren}
