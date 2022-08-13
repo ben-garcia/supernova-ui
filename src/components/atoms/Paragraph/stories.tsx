@@ -5,9 +5,10 @@ import Paragraph from '.';
 
 export default {
   argTypes: {
-    fontSize: {
-      control: 'text',
-      defaultValue: 'md',
+    size: {
+      control: 'select',
+      defaultValue: 'xl',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxl', 'xxxl'],
     },
   },
   component: Paragraph,
@@ -25,5 +26,5 @@ Basic.args = {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lobortis nulla a velit suscipit faucibus. Sed mattis ac turpis vel efficitur. Aliquam eget ligula ut diam tincidunt porta.',
 };
 Basic.parameters = {
-  controls: { include: ['fontSize'] },
+  controls: { include: ['size'] },
 };

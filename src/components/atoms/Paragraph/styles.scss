@@ -1,0 +1,31 @@
+.snui-paragraph {
+  font-family: var(--snui-font-body);
+
+  &--xs {
+    font-size: 0.75rem;
+  }
+
+  &--sm {
+    font-size: 0.875rem;
+  }
+
+  &--md {
+    font-size: 1rem;
+  }
+
+  &--lg {
+    font-size: 1.125rem;
+  }
+
+  &--xl {
+    font-size: 1.25rem;
+  }
+
+  &--xxl {
+    font-size: 1.5rem;
+  }
+
+  &--xxxl {
+    font-size: 1.85rem;
+  }
+}

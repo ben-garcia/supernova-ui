@@ -15,7 +15,7 @@ import './styles.scss';
  * Ui component to display headings
  */
 const Heading: FC<HeadingProps> = props => {
-  const { children, className, level = 1, size = 'md', ...rest } = props;
+  const { children, className, level = 1, size = 'xl', ...rest } = props;
   const {
     remainingProps,
     validatedCSSProps,
