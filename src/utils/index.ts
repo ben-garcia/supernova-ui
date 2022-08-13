@@ -2,7 +2,6 @@ export * from './assertions';
 export * from './colors';
 export * from './conversions';
 export * from './create-classes';
-export * from './create-element';
 export * from './create-styles';
 export * from './deep-mergify';
 export * from './dom';

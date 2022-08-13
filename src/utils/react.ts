@@ -1,5 +1,10 @@
 // Helper functions involving React.
-import { MutableRefObject } from 'react';
+import {
+  ClassAttributes,
+  InputHTMLAttributes,
+  MutableRefObject,
+  createElement as rcreateElement,
+} from 'react';
 
 /**
  * Merge multiple React refs in a single ref.
@@ -19,3 +24,16 @@ export function mergeRefs<T>(...refs: (T | MutableRefObject<T>)[]) {
     }
   };
 }
+
+type Params = Parameters<typeof rcreateElement>;
+
+/**
+ * Wrapper for React.createElement
+ */
+export const createElement = (
+  element: Params[0],
+  // props: Params[1],
+  props: InputHTMLAttributes<HTMLInputElement> &
+    ClassAttributes<HTMLInputElement>,
+  children: Params[2]
+) => rcreateElement(element, props, children);
