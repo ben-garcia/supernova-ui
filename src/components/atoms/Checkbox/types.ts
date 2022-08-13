@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import type { FormControlProps, SupernovaProps } from '@types';
 
 /**
@@ -13,7 +15,7 @@ export interface CheckboxProps
    * or
    * a component that is to be rendered.
    */
-  label?: string;
+  label?: string | ReactNode;
   /**
    * Configure the checked state of the checkbox
    */
