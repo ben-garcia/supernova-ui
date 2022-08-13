@@ -1,0 +1,31 @@
+.snui-heading {
+  font-family: var(--snui-font-heading);
+
+  &--xs {
+    font-size: 0.875rem;
+  }
+
+  &--sm {
+    font-size: 1rem;
+  }
+
+  &--md {
+    font-size: 1.25rem;
+  }
+
+  &--lg {
+    font-size: 1.875rem;
+  }
+
+  &--xl {
+    font-size: 2.25rem;
+  }
+
+  &--xxl {
+    font-size: 3rem;
+  }
+
+  &--xxxl {
+    font-size: 3.75rem;
+  }
+}

@@ -5,12 +5,15 @@ import Heading from '.';
 
 export default {
   argTypes: {
-    fontSize: {
-      control: 'text',
-    },
     level: {
       control: 'select',
+      defaultValue: 1,
       options: [1, 2, 3, 4, 5, 6],
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'xl',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxl', 'xxxl'],
     },
   },
   component: Heading,
@@ -25,5 +28,5 @@ Basic.args = {
   children: 'Supernova UI',
 };
 Basic.parameters = {
-  controls: { include: ['fontSize', 'level'] },
+  controls: { include: ['level', 'size'] },
 };
