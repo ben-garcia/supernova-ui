@@ -1,20 +1,43 @@
 .snui-divider {
   border: none;
+  border-color: var(--snui-color-gray300);
   opacity: 0.6;
 
-  &--horizontal {
+  &-horizontal {
     border-top-style: solid;
-    border-top-width: 1px;
     height: 0;
     margin: 1rem 0;
     width: 100%;
+
+    &--sm {
+      border-top-width: 2px;
+    }
+
+    &--md {
+      border-top-width: 4px;
+    }
+
+    &--lg {
+      border-top-width: 6px;
+    }
   }
 
-  &--vertical {
+  &-vertical {
     border-left-style: solid;
-    border-left-width: 1px;
     height: 100%;
     margin: 0 1rem;
     width: 0;
+
+    &--sm {
+      border-left-width: 2px;
+    }
+
+    &--md {
+      border-left-width: 4px;
+    }
+
+    &--lg {
+      border-left-width: 6px;
+    }
   }
 }

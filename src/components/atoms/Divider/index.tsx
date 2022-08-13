@@ -1,44 +1,58 @@
-import React, { CSSProperties } from 'react';
+import React, { FC } from 'react';
 
-import { useTheme } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useTheme,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { DividerProps } from './types';
 import './styles.scss';
 
-export interface DividerProps {
-  color?: string;
-  className?: string;
-  margin?: string;
-  /**
-   * @default 'horizontal'
-   */
-  orientation?: 'horizontal' | 'vertical';
-}
-
 /**
- * A line that helps seperator related content.
+ * A line that helps visually seperate content.
+ *
+ * NOTE: parent element must have a height for
+ * orientation of vertial to work correctly.
  */
-const Divider: React.FC<DividerProps> = props => {
-  const { color, className, margin, orientation = 'horizontal' } = props;
-  const theme = useTheme();
-  const styles: CSSProperties = {};
-  const classes = createClasses('snui-divider', {
+const Divider: FC<DividerProps> = props => {
+  const {
+    colorVariant,
+    className,
+    orientation = 'horizontal',
+    size = 'md',
+    ...rest
+  } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const { colors } = useTheme();
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-divider', {
     [`${className}`]: isString(className),
-    'snui-divider--horizontal': orientation === 'horizontal',
-    'snui-divider--vertical': orientation === 'vertical',
+    [`snui-divider-${orientation}`]: isString(orientation),
+    [`snui-divider-${orientation}--${size}`]: isString(size),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
 
-  if (isString(color)) {
-    if ((theme as any).colors[color as any]) {
-      styles.borderColor = (theme as any).colors[color as any];
-    } else {
-      styles.borderColor = color;
-    }
-  } else {
-    styles.borderColor = theme.colors.gray300;
-  }
-
-  return <hr className={classes} style={{ ...styles, margin }} />;
+  return (
+    <hr
+      {...remainingProps}
+      {...addClasses()}
+      style={
+        isString(colorVariant)
+          ? { borderColor: colors[colorVariant!] }
+          : undefined
+      }
+    />
+  );
 };
 
 export default Divider;
