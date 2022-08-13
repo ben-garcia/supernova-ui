@@ -1,15 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { colors } from '@utils';
 import Spinner from '.';
 
 export default {
   argTypes: {
-    borderWidth: { control: 'text' },
+    borderThickness: { control: 'text' },
     duration: { control: 'text' },
-    primaryColor: { control: 'color', defaultValue: 'info700' },
-    secondaryColor: { control: 'color', defaultValue: 'transparent' },
-    size: { control: 'text' },
+    primaryColor: { control: 'select', options: colors },
+    secondaryColor: { control: 'select', options: colors },
+    size: {
+      control: 'select',
+      defaultValue: 'lg',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'],
+    },
   },
   title: 'Supernova UI/Atoms/Spinner',
 } as ComponentMeta<typeof Spinner>;
@@ -22,7 +27,7 @@ Basic.args = {};
 Basic.parameters = {
   controls: {
     include: [
-      'borderWidth',
+      'borderThickness',
       'duration',
       'primaryColor',
       'secondaryColor',

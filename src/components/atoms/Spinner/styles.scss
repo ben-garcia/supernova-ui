@@ -1,22 +1,45 @@
 .snui-spinner {
-  animation: rotate 1s infinite linear;
-  border-bottom-color: var(--snui-color-info-700);
-  border-left-color: var(--snui-color-transparent);
+  animation: snui-rotate 1s infinite linear;
+  border-bottom-color: var(--snui-color-primary);
+  border-left-color: transparent;
   border-radius: var(--snui-radii-xxl);
-  border-right-color: var(--snui-color-info-700);
-  border-top-color: var(--snui-color-transparent);
+  border-right-color: var(--snui-color-primary);
+  border-top-color: transparent;
   border-style: solid;
   border-width: 4px;
-  height: calc(var(--snui-size-md) * 5);
-  width: calc(var(--snui-size-md) * 5);
-}
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
+  &--xs {
+    height: 1rem;
+    width: 1rem;
   }
 
-  100% {
-    transform: rotate(360deg);
+  &--sm {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &--md {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &--lg {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  &--xl {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  &--xxl {
+    height: 5rem;
+    width: 5rem;
+  }
+
+  &--xxxl {
+    height: 6.5rem;
+    width: 6.5rem;
   }
 }
