@@ -1,25 +1,40 @@
-import React, { ReactNode } from 'react';
+import React, { FC } from 'react';
 
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { OverlayProps } from './types';
 import './styles.scss';
-
-export interface OverlayProps {
-  children: ReactNode;
-  className?: string;
-}
 
 /**
  * UI component that is used to dim the background
  * to set the focus to its children.
  */
-const Overlay: React.FC<OverlayProps> = props => {
-  const { children, className } = props;
-  const classes = createClasses('snui-overlay', {
+const Overlay: FC<OverlayProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-overlay', {
     [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
 
-  return <div className={classes}>{children}</div>;
+  return (
+    <div {...remainingProps} {...addClasses()}>
+      {children}
+    </div>
+  );
 };
 
 export default Overlay;
