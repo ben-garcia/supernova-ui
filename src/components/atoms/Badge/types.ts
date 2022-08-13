@@ -1,11 +1,11 @@
-import { CommonProps, TypographyProps } from '../../../types';
+import { FormControlProps, SupernovaProps } from '@types';
 
 /**
  * Props for the Badge component
  */
 export interface BadgeProps
-  extends Omit<TypographyProps, 'align'>,
-    Pick<CommonProps, 'children'> {
+  extends SupernovaProps,
+    Pick<FormControlProps, 'colorVariant' | 'size'> {
   /**
    * Configure the look of the Badge.
    *

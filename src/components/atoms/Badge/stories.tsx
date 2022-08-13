@@ -1,16 +1,19 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { colors } from '@utils';
 import Badge from '.';
 
 export default {
   argTypes: {
-    backgroundColor: {
-      control: 'color',
+    colorVariant: {
+      control: 'select',
+      options: colors,
     },
-    fontSize: {
-      control: 'text',
+    size: {
+      control: { type: 'select' },
       defaultValue: 'md',
+      options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: { type: 'radio' },
@@ -30,5 +33,5 @@ Basic.args = {
   children: 'badge',
 };
 Basic.parameters = {
-  controls: { include: ['fontSize', 'variant'] },
+  controls: { include: ['colorVariant', 'size', 'variant'] },
 };
