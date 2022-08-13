@@ -30,17 +30,14 @@ const Heading: FC<HeadingProps> = props => {
     [`${stylesClassName}`]: isString(stylesClassName),
   });
 
-  const heading = createElement(
+  return createElement(
     `h${level}`,
     {
-      ...rest,
       ...remainingProps,
       ...addClasses(),
-    } as any,
+    },
     children
   );
-
-  return heading;
 };
 
 export default Heading;

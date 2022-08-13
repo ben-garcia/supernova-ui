@@ -15,7 +15,7 @@ import './styles.scss';
  * UI component to display a paragraph
  */
 const Paragraph: React.FC<ParagraphProps> = props => {
-  const { children, className, size = 'md', ...rest } = props;
+  const { children, className, size = 'xl', ...rest } = props;
   const {
     remainingProps,
     validatedCSSProps,
