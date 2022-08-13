@@ -8,7 +8,6 @@ import type {
   AriaAttributes,
   ButtonHTMLAttributes,
   DetailedHTMLProps,
-  FC,
   InputHTMLAttributes,
   RefObject,
   ReactNode,
@@ -325,9 +324,20 @@ interface ReactElementProps {
   textarea: ReactTextareaProps;
 }
 
+interface SharedProps {
+  /**
+   * class HTML attribute to add.
+   */
+  className?: string;
+  /**
+   * id HTML attribute to add.
+   */
+  id?: string;
+}
+
 /**
  * Props shared by all supernova-ui components.
  */
 export type SupernovaProps<Type = ''> = Type extends keyof ReactElementProps
   ? WithResponsiveProps<CSSProps> & PseudoClassProps & ReactElementProps[Type]
-  : FC<WithResponsiveProps<CSSProps> & PseudoClassProps>;
+  : WithResponsiveProps<CSSProps> & PseudoClassProps & SharedProps;
