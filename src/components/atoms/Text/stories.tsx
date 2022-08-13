@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Paragraph } from '@atoms';
 import Text from '.';
 
 const tags = [

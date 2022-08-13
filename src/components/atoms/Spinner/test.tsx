@@ -25,7 +25,7 @@ describe('<Spinner />', () => {
 
   it('should render with aria label passed in', () => {
     const ariaLabel = 'Loading...';
-    const { getByLabelText } = render(<Spinner ariaLabel={ariaLabel} />);
+    const { getByLabelText } = render(<Spinner aria-label={ariaLabel} />);
     const result = getByLabelText(ariaLabel);
 
     expect(result).toBeInTheDocument();
