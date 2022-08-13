@@ -728,10 +728,6 @@
   background-color: var(--snui-color-error, #a72323);
 }
 
-.snui-color-white {
-  background-color: var(--snui-color-white, #fff);
-}
-
 // --------------------------------
 // Display
 // --------------------------------
@@ -910,6 +906,14 @@
   top: env(safe-area-inset-top, 0);
   right: env(safe-area-inset-right, 0);
 }
+
+// --------------------------------
+// Gaps
+// --------------------------------
+.snui-gap-5 {
+  gap: 0.5rem;
+}
+
 
 // --------------------------------
 // Animations
