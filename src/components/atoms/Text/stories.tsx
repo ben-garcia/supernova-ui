@@ -1,32 +1,31 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { Paragraph } from '@atoms';
 import Text from '.';
 
+const tags = [
+  'abbr',
+  'cite',
+  'del',
+  'em',
+  'i',
+  'ins',
+  'kdb',
+  'mark',
+  's',
+  'samp',
+  'span',
+  'sub',
+  'sup',
+  'u',
+];
 export default {
   argTypes: {
-    fontSize: {
-      control: 'text',
-    },
     tag: {
       control: { type: 'select' },
       defaultValue: 'span',
-      options: [
-        'abbr',
-        'cite',
-        'del',
-        'em',
-        'i',
-        'ins',
-        'kdb',
-        'mark',
-        's',
-        'samp',
-        'span',
-        'sub',
-        'sup',
-        'u',
-      ],
+      options: tags,
     },
   },
   component: Text,
@@ -41,5 +40,5 @@ Basic.args = {
   children: 'text',
 };
 Basic.parameters = {
-  controls: { include: ['fontSize', 'tag'] },
+  controls: { include: ['tag'] },
 };

@@ -1,6 +1,6 @@
-import { CommonProps, TypographyProps } from '../../../types';
+import { SupernovaProps } from '@types';
 
-type Tag =
+type Tags =
   | 'abbr'
   | 'cite'
   | 'del'
@@ -19,9 +19,11 @@ type Tag =
 /**
  * Props for the Text component
  */
-export interface TextProps
-  extends Omit<TypographyProps, 'align'>,
-    Pick<CommonProps, 'children'> {
+export interface TextProps extends SupernovaProps {
+  /**
+   * The size of the component.
+   */
+  // size?: FormControlProps['size'] | 'xl' | 'xxl' | 'xxxl';
   /**
    * The html tag to render text that is
    *
@@ -43,5 +45,5 @@ export interface TextProps
    *
    * default is 'span'
    */
-  tag?: Tag;
+  tag?: Tags;
 }
