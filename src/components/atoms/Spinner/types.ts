@@ -5,7 +5,7 @@ import { FormControlProps, SupernovaProps } from '@types';
  */
 export interface SpinnerProps
   extends SupernovaProps,
-    Pick<FormControlProps, 'colorVariant' | 'size'> {
+    Pick<FormControlProps, 'colorVariant'> {
   /**
    * The thickness of the border
    *
@@ -30,4 +30,8 @@ export interface SpinnerProps
    * @default 'transparent'
    */
   secondaryColor?: string;
+  /**
+   * size of the component
+   */
+  size?: FormControlProps['size'] | 'xs' | 'xl' | 'xxl' | 'xxxl';
 }
