@@ -46,11 +46,28 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
         const diffX = pageX - left;
         const diffY = bottom - pageY;
         let newValue;
+        let newVal;
 
         if (orientation === 'vertical') {
-          newValue = Math.round(((max - min) * diffY) / height);
+          newVal = Math.round(((max - min) * diffY) / height);
+          // keep values between min and max
+          if (newVal > max) {
+            newValue = max;
+          } else if (newVal < min) {
+            newValue = min;
+          } else {
+            newValue = newVal;
+          }
         } else {
-          newValue = Math.round(((max - min) * diffX) / width);
+          newVal = Math.round(((max - min) * diffX) / width);
+          // keep values between min and max
+          if (newVal > max) {
+            newValue = max;
+          } else if (newVal < min) {
+            newValue = min;
+          } else {
+            newValue = newVal;
+          }
         }
 
         onChange(newValue);
