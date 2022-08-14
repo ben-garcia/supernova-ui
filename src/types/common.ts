@@ -177,10 +177,7 @@ export interface CommonProps {
 /**
  * Props for AlertDialog, Drawer, and Modal.
  */
-export interface DialogLikeProps
-  extends Pick<CommonProps, 'boxShadow' | 'size'>,
-    SupernovaUIBaseProps,
-    Omit<TypographyProps, 'align'> {
+export interface DialogLikeProps {
   /**
    * Configure whether Dialog should close when Esc key is pressed
    *
@@ -217,6 +214,10 @@ export interface DialogLikeProps
    * NOTE: closeOnEsc must be set to true.
    */
   onEscPress?: () => void;
+  /**
+   * The size of the component.
+   */
+  size?: FormControlProps['size'] | 'xl' | 'xxl';
   /**
    * Configure whether focus should be locked inside the Modal
    *
