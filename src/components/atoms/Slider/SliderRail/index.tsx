@@ -1,24 +1,35 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 
-import { useSlider } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useSlider,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SliderRailProps } from './types';
 import './styles.scss';
 
-export interface SliderRailProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const SliderRail: React.FC<SliderRailProps> = props => {
-  const { children, className } = props;
-  const sliderRailRef = useRef<HTMLDivElement | null>(null);
+const SliderRail: FC<SliderRailProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const { max, min, onChange, orientation, sliderId, size, step } = useSlider();
-  const classes = createClasses('snui-slider__rail', {
+  const addClasses = useCreateClassString('snui snui-slider__rail', {
     [`${className}`]: isString(className),
     [`snui-slider__rail--${size}`]: true,
     [`snui-slider__rail--${orientation}`]: true,
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
+  const sliderRailRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = React.useCallback(
     (e: React.MouseEvent) => {
@@ -111,11 +122,10 @@ const SliderRail: React.FC<SliderRailProps> = props => {
   );
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     // eslint-disable-next-line
     <div
-      className={classes}
+      {...remainingProps}
+      {...addClasses()}
       id={`${sliderId}__rail`}
       onClick={handleClick}
       ref={sliderRailRef}

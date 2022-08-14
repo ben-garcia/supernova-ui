@@ -1,17 +1,16 @@
-import { ReactNode } from 'react';
+import { FormControlProps, SupernovaProps } from '@types';
 
-export interface SliderProps {
+export interface SliderProps
+  extends SupernovaProps,
+    Pick<FormControlProps, 'size'> {
   ariaLabel?: string;
   ariaDescribedBy?: string;
   ariaLabelledBy?: string;
   ariaValueText?: string;
-  children: ReactNode;
-  className?: string;
   max?: number;
   min?: number;
   onChange: (newValue: number) => void;
   orientation?: 'horizontal' | 'vertical';
-  size?: 'sm' | 'md' | 'lg';
   step?: number;
   value: number;
 }

@@ -11,10 +11,10 @@ export default {
       },
     },
     max: {
-      control: { type: 'number' },
+      control: { type: 'number', min: 1 },
     },
     min: {
-      control: { type: 'number' },
+      control: { type: 'number', min: 1 },
     },
     orientation: {
       control: { type: 'select' },
@@ -26,7 +26,7 @@ export default {
       options: ['sm', 'md', 'lg'],
     },
     step: {
-      control: { type: 'number' },
+      control: { type: 'number', min: 1 },
     },
   },
   component: Slider,

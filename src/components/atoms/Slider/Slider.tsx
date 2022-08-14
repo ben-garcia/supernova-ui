@@ -1,8 +1,14 @@
 import React, { useMemo } from 'react';
 
 import { SliderProvider } from '@contexts';
-import { useUniqueId } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useUniqueId,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
 import { SliderProps } from './types';
 
@@ -23,12 +29,22 @@ const Slider: React.FC<SliderProps> = props => {
     size = 'md',
     step = 1,
     value,
+    ...rest
   } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const sliderId = useUniqueId('snui-slider');
-  const classes = createClasses('snui-slider', {
+  const addClasses = useCreateClassString('snui snui-slider', {
     [`${className}`]: isString(className),
     [`snui-slider--${size}`]: true,
     [`snui-slider--${orientation}`]: true,
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
   const contextValue = useMemo(
     () => ({
@@ -50,7 +66,7 @@ const Slider: React.FC<SliderProps> = props => {
 
   return (
     <SliderProvider value={contextValue}>
-      <div className={classes} id={sliderId}>
+      <div {...remainingProps} {...addClasses()} id={sliderId}>
         {children}
       </div>
     </SliderProvider>

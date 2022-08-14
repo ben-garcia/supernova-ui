@@ -1,16 +1,27 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 
-import { useSlider, useTheme } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useSlider,
+  useTheme,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SliderThumbProps } from './types';
 import './styles.scss';
 
-export interface SliderThumbProps {
-  className?: string;
-}
-
-const SliderThumb: React.FC<SliderThumbProps> = props => {
-  const { className } = props;
+const SliderThumb: FC<SliderThumbProps> = props => {
+  const { className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     ariaDescribedBy,
     ariaLabel,
@@ -25,15 +36,15 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
     step,
     value,
   } = useSlider();
-  const theme = useTheme();
-  const [focusRing, setFocusRing] = useState(
-    `0 0 0 2px ${theme.colors.gray300}`
-  );
+  const { colors } = useTheme();
+  const [focusRing, setFocusRing] = useState('none');
   const sliderThumbRef = useRef<HTMLDivElement | null>(null);
-  const classes = createClasses('snui-slider__thumb', {
+  const addClasses = useCreateClassString('snui snui-slider__thumb', {
     [`${className}`]: isString(className),
-    [`snui-slider__thumb--${size}`]: true,
-    [`snui-slider__thumb--${orientation}`]: true,
+    [`snui-slider__thumb--${size}`]: isString(size),
+    [`snui-slider__thumb--${orientation}`]: isString(orientation),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -186,6 +197,8 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
 
   return (
     <div
+      {...remainingProps}
+      {...addClasses()}
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
@@ -194,17 +207,18 @@ const SliderThumb: React.FC<SliderThumbProps> = props => {
       aria-valuemax={max}
       aria-valuenow={value}
       aria-valuetext={ariaValueText}
-      className={classes}
-      onBlur={() => setFocusRing(`0 0 0 2px ${theme.colors.gray300}`)}
-      onFocus={() => setFocusRing(`0 0 0 4px ${theme.colors.focusRing}`)}
+      id={`${sliderId}__thumb`}
+      onBlur={() => setFocusRing('none')}
+      onFocus={() => setFocusRing(`3px solid ${colors.focusRing}`)}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMouseDown}
       ref={sliderThumbRef}
       role="slider"
       style={{
-        boxShadow: focusRing,
         bottom: orientation === 'vertical' ? `${value}%` : '15%',
         left: orientation === 'horizontal' ? `${value}%` : '15%',
+        outline: focusRing,
+        outlineOffset: '2px',
         top: orientation === 'horizontal' ? '2%' : undefined,
       }}
       tabIndex={0}
