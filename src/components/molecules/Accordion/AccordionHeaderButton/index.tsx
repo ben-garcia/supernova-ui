@@ -46,7 +46,7 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     onClose,
   } = useAccordionItem();
   const buttonRef = React.useRef<HTMLButtonElement | null>(null);
-  const classes = createClasses('snui-accordion__button', {
+  const classes = createClasses('snui snui-accordion__button', {
     [`${className}`]: isString(className),
   });
 
@@ -172,24 +172,22 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
         aria-disabled={!allowToggle && isOpen ? true : undefined}
         aria-expanded={isOpen}
         className={classes}
-        hoverBackgroundColor="var(--snui-color-gray-100)"
         id={accordionButtonId}
         onClick={handleClick}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         ref={buttonRef}
-        width="100%"
       >
-        <div className="snui-accordion__text" style={{ color: 'black' }}>
-          {children}
-        </div>
+        <div className="snui-accordion__text">{children}</div>
+
         <ChevronDownIcon
           className={`snui-accordion__icon${
             isOpen
               ? ' snui-accordion__icon--expanded'
               : ' snui-accordion__icon--collapsed'
           }`}
-          size="0.7rem"
+          height="0.6rem"
+          width="0.6rem"
         />
       </Button>
     </Heading>

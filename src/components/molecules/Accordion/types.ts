@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { SupernovaProps } from '@types';
 
-export interface AccordionProps {
+export interface AccordionProps extends SupernovaProps {
   /**
    * Configure whether more than one item can be expanded.
    *
@@ -13,11 +13,6 @@ export interface AccordionProps {
    * @default false
    */
   allowToggle?: boolean;
-  children: ReactNode;
-  /**
-   * Add a class
-   */
-  className?: string;
   /**
    * Configure the accordion panels that should render in the open state.
    */

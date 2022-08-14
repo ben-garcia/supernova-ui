@@ -1,14 +1,23 @@
 .snui-accordion__button {
   background: transparent;
-  border-top: 1px solid var(--snui-color-gray-100);
-  overflow-anchor: none;
+  border-top: 1px solid var(--snui-color-gray100);
   box-shadow: unset;
+  display: flex;
+  flex-direction: row;
+  overflow-anchor: none;
   justify-content: flex-start;
   padding-inline-end: var(--snui-size-xs);
   padding-inline-start: var(--snui-size-xs);
+  width: 100%;
+
+  &.snui-button:hover {
+    background: var(--snui-color-gray100);
+    box-shadow: none;
+  }
 }
 
 .snui-accordion__text {
+  color: var(--snui-color-black);
   flex-grow: 1;
   text-align: left;
 }

@@ -7,9 +7,16 @@ import React, {
 } from 'react';
 
 import { AccordionProvider } from '@contexts';
-import { useAccordionProvider, useUniqueId } from '@hooks';
+import {
+  useAccordionProvider,
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useUniqueId,
+  useValidateProps,
+} from '@hooks';
 
-import { createClasses, isArray, isString } from '@utils';
+import { isArray, isString } from '@utils';
 
 import { AccordionProps } from './types';
 
@@ -24,9 +31,19 @@ const Accordion: React.FC<AccordionProps> = props => {
     children,
     className,
     defaultIndices = [],
+    ...rest
   } = props;
-  const classes = createClasses('snui-accordion', {
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-accordion', {
     [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const buttonsRef = useRef<HTMLButtonElement[]>(null);
@@ -119,7 +136,12 @@ const Accordion: React.FC<AccordionProps> = props => {
 
   return (
     <AccordionProvider value={contextValue}>
-      <div className={classes} id={accordionId} ref={accordionRef}>
+      <div
+        {...remainingProps}
+        {...addClasses()}
+        id={accordionId}
+        ref={accordionRef}
+      >
         {children}
       </div>
     </AccordionProvider>
