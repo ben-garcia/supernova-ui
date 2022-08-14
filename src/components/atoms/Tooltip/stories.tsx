@@ -6,18 +6,16 @@ import Tooltip from '.';
 
 const parameters = {
   controls: {
-    include: ['backgroundColor', 'content', 'color', 'position', 'withArrow'],
+    include: ['content', 'placement', 'withArrow'],
   },
 };
 
 export default {
   argTypes: {
-    backgroundColor: { control: 'color' },
     content: { control: 'text' },
-    color: { control: 'color' },
-    position: {
+    placement: {
       control: 'select',
-      defaultValue: 'top',
+      defaultValue: 'bottom',
       options: ['bottom', 'left', 'right', 'top'],
     },
     withArrow: { control: 'boolean', defaultValue: true },

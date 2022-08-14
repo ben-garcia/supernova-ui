@@ -1,7 +1,13 @@
-import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
+import React, { Children, FC, useCallback, useRef, useState } from 'react';
 
 import { Portal } from '@atoms';
-import { useTheme } from '@hooks';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useInlineStyles,
+  useUniqueId,
+  useValidateProps,
+} from '@hooks';
 import {
   ArrowPosition,
   getArrowPosition,
@@ -9,23 +15,30 @@ import {
   isString,
 } from '@utils';
 
-import { TooltipProps } from './types';
+import { TooltipPosition, TooltipProps } from './types';
 import './styles.scss';
 
-interface TooltipPosition {
-  left: number;
-  top: number;
-}
-
-const Tooltip: React.FC<TooltipProps> = props => {
+const Tooltip: FC<TooltipProps> = props => {
   const {
-    backgroundColor,
-    color,
     children,
+    className,
+    colorVariant,
     content,
-    position = 'bottom',
+    placement = 'bottom',
     withArrow = true,
+    ...rest
   } = props;
+  const { remainingProps, validatedCSSProps } = useValidateProps(rest);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const createInlineStyles = useInlineStyles(colorVariant);
+  const addClasses = useCreateClassString('snui snui-tooltip', {
+    [`${className}`]: isString(className),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
+  const addArrowClasses = useCreateClassString('snui-tooltip-arrow', {
+    [`snui-tooltip-arrow--${placement}`]: isString(placement),
+  });
+  const tooltipId = useUniqueId('snui-tooltip');
   let jsx: React.ReactNode;
   const [show, setShow] = useState(false);
   const contentRef = useRef<any>(null);
@@ -49,7 +62,7 @@ const Tooltip: React.FC<TooltipProps> = props => {
             getLeftTopPosition(
               currentTarget as HTMLElement,
               contentRef?.current,
-              position
+              placement
             ) as any
           );
 
@@ -58,19 +71,17 @@ const Tooltip: React.FC<TooltipProps> = props => {
             getArrowPosition(
               arrowRef?.current as HTMLDivElement,
               contentRef?.current,
-              position
+              placement
             )
           );
         }, 10);
       }
     },
-    [position]
+    [placement]
   );
   const onMouseLeave = useCallback(() => setShow(false), []);
   const styles: React.CSSProperties = {};
   const arrowStyles: React.CSSProperties = {};
-  const theme = useTheme();
-  const tooltipId = useMemo(() => `tooltip-${Math.random()}`, []);
 
   if (isString(children)) {
     jsx = (
@@ -98,64 +109,12 @@ const Tooltip: React.FC<TooltipProps> = props => {
     });
   }
 
-  if (isString(backgroundColor)) {
-    // @ts-ignore
-    if (theme.colors[backgroundColor]) {
-      styles.backgroundColor = `${
-        (theme as any).colors[backgroundColor as any]
-      }`;
-    } else {
-      styles.backgroundColor = backgroundColor;
-    }
-  } else if (!backgroundColor) {
-    styles.backgroundColor = theme.colors.black;
-  }
-
-  if (isString(color)) {
-    // @ts-ignore
-    if (theme.colors[color]) {
-      styles.color = `${(theme as any).colors[color as any]}`;
-    } else {
-      styles.color = color;
-    }
-  } else if (!color) {
-    styles.color = theme.colors.white;
-  }
-
-  /**
-   * NOTE tried to get these values in 'getArrowPosition' helper function
-   * but it wouldn't render anything until the second hover.
-   *
-   * I don't want to mess with hooks because of ssr
-   */
-  switch (position) {
-    case 'left':
-      arrowStyles.borderBottom = '8px solid transparent';
-      arrowStyles.borderLeft = `8px solid ${styles.backgroundColor}`;
-      arrowStyles.borderTop = '8px solid transparent';
-      break;
-    case 'right':
-      arrowStyles.borderBottom = '8px solid transparent';
-      arrowStyles.borderRight = `8px solid ${styles.backgroundColor}`;
-      arrowStyles.borderTop = '8px solid transparent';
-      break;
-    case 'top':
-      arrowStyles.borderLeft = '8px solid transparent';
-      arrowStyles.borderRight = '8px solid transparent';
-      arrowStyles.borderTop = `8px solid ${styles.backgroundColor}`;
-      break;
-    default:
-      arrowStyles.borderBottom = `8px solid ${styles.backgroundColor}`;
-      arrowStyles.borderLeft = '8px solid transparent';
-      arrowStyles.borderRight = '8px solid transparent';
-  }
-
   return (
-    <div className="snui-tooltip">
+    <div>
       {jsx}
       <Portal isMounted={show}>
         <div
-          className="snui-tooltip__content snui-font-body"
+          className="snui-position-absolute"
           ref={contentRef}
           style={{
             ...styles,
@@ -163,10 +122,10 @@ const Tooltip: React.FC<TooltipProps> = props => {
             top: pos.top,
           }}
         >
-          <div className="snui-tooltip__inner">
+          <div className="snui-tooltip-inner">
             {withArrow && (
               <div
-                className="snui-tooltip__arrow"
+                {...addArrowClasses()}
                 ref={arrowRef}
                 style={{
                   ...arrowPos,
@@ -174,7 +133,14 @@ const Tooltip: React.FC<TooltipProps> = props => {
                 }}
               />
             )}
-            <div id={tooltipId} role="tooltip" style={{ paddingTop: 2 }}>
+
+            <div
+              {...remainingProps}
+              {...addClasses()}
+              id={tooltipId}
+              role="tooltip"
+              style={{ ...createInlineStyles().style }}
+            >
               {content}
             </div>
           </div>
