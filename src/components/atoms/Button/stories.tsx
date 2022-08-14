@@ -68,7 +68,7 @@ export const WithLeftIcon = Template.bind({});
 
 WithLeftIcon.args = {
   children: 'Back',
-  leftIcon: <ArrowLeftIcon fill="#fff" />,
+  leftIcon: <ArrowLeftIcon color="#fff" />,
 };
 WithLeftIcon.parameters = parameters;
 
@@ -76,8 +76,8 @@ export const WithIcons = Template.bind({});
 
 WithIcons.args = {
   children: 'Submit',
-  leftIcon: <ArrowLeftIcon fill="#fff" />,
-  rightIcon: <ArrowRightIcon fill="#fff" />,
+  leftIcon: <ArrowLeftIcon color="#fff" />,
+  rightIcon: <ArrowRightIcon color="#fff" />,
 };
 WithIcons.parameters = parameters;
 
@@ -85,14 +85,14 @@ export const WithRightIcon = Template.bind({});
 
 WithRightIcon.args = {
   children: 'SignIn',
-  rightIcon: <ArrowRightIcon fill="#fff" />,
+  rightIcon: <ArrowRightIcon color="#fff" />,
 };
 WithRightIcon.parameters = parameters;
 
 export const AsIcon = Template.bind({});
 
 AsIcon.args = {
-  children: <UserIcon fill="#000" />,
+  children: <UserIcon color="#000" />,
   variant: 'outline',
 };
 AsIcon.parameters = parameters;

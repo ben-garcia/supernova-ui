@@ -50,8 +50,8 @@ const WithIconsTemplate: ComponentStory<typeof TextInput> = args => (
 const WithIcons = WithIconsTemplate.bind({});
 WithIcons.args = {
   label,
-  leftIcon: <UserIcon />,
-  rightIcon: <SearchIcon />,
+  leftIcon: <UserIcon height="100%" width="100" />,
+  rightIcon: <SearchIcon height="100%" width="100" />,
 };
 
 const WithLeftIconTemplate: ComponentStory<typeof TextInput> = args => (
@@ -60,7 +60,7 @@ const WithLeftIconTemplate: ComponentStory<typeof TextInput> = args => (
 export const WithLeftIcon = WithLeftIconTemplate.bind({});
 WithLeftIcon.args = {
   label,
-  leftIcon: <UserIcon />,
+  leftIcon: <UserIcon height="100%" width="100" />,
 };
 WithLeftIcon.parameters = parameters;
 
@@ -70,6 +70,6 @@ const WithRightIconTemplate: ComponentStory<typeof TextInput> = args => (
 export const WithRightIcon = WithRightIconTemplate.bind({});
 WithRightIcon.args = {
   label,
-  rightIcon: <SearchIcon />,
+  rightIcon: <SearchIcon height="100%" width="100" />,
 };
 WithRightIcon.parameters = parameters;
