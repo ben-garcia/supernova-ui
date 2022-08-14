@@ -39,23 +39,17 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
   } = useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
-  const isPaddingTopNeeded =
-    !leftIcon && !rightIcon && !isLoading && !isObject(children);
   const createInlineStyles = useInlineStyles(colorVariant);
-  const addClasses = useCreateClassString('snui snui-button', {
-    'snui-flex snui-items-center':
-      isObject(leftIcon) ||
-      isObject(rightIcon) ||
-      (isObject(spinner) && isLoading),
-    'snui-padding-top-sm': size === 'sm' && isPaddingTopNeeded,
-    'snui-padding-top-md': size === 'md' && isPaddingTopNeeded,
-    'snui-padding-top-lg': size === 'lg' && isPaddingTopNeeded,
-    [`snui-button--${variant}`]: isString(variant) && !props.backgroundColor,
-    [`snui-button--${size}`]: isString(size) && !props.height && !props.width,
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addClasses = useCreateClassString(
+    'snui snui-button snui-flex snui-items-center',
+    {
+      [`snui-button--${variant}`]: isString(variant) && !props.backgroundColor,
+      [`snui-button--${size}`]: isString(size) && !props.height && !props.width,
+      [`${className}`]: isString(className),
+      [`${pseudoClassName}`]: isString(pseudoClassName),
+      [`${stylesClassName}`]: isString(stylesClassName),
+    }
+  );
 
   return (
     <button
@@ -67,11 +61,8 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
       ref={ref}
       type={asSubmitButton ? 'submit' : 'button'}
     >
-      {leftIcon && !isLoading && (
-        <div style={{ height: size === 'sm' ? '0.8rem' : '1rem' }}>
-          {leftIcon}
-        </div>
-      )}
+      {leftIcon && !isLoading && <>{leftIcon}</>}
+
       {!isLoading && (leftIcon || rightIcon) && (
         <span
           style={{
@@ -81,20 +72,20 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           {children}
         </span>
       )}
+
       {/* when rendering with icon */}
       {!isLoading && !isObject(leftIcon) && !isObject(rightIcon) && (
-        <div style={{ height: size === 'sm' ? '0.9rem' : '1.5rem' }}>
-          {children}
-        </div>
+        <>{children}</>
       )}
+
       {/* use default spinner */}
       {!spinner && isLoading && (
         <Spinner
-          height={size === 'sm' ? '0.8rem' : '1rem'}
-          width={size === 'sm' ? '0.8rem' : '1rem'}
-          primaryColor={variant === 'filled' ? '#fff' : '#000'}
+          primaryColor={variant === 'filled' ? 'white' : 'black'}
+          size={size === 'sm' ? 'xs' : 'sm'}
         />
       )}
+
       {/* treat 'spinner' prop as the spinner */}
       {spinner && isLoading && (
         <div
@@ -110,16 +101,14 @@ const Button = forwardRef((props: ButtonProps, ref: any) => {
           {spinner}
         </div>
       )}
+
       {isLoading && isString(loadingText) && (
         <span className="snui-self-center snui-margin-left-sm">
           {loadingText}
         </span>
       )}
-      {rightIcon && !isLoading && (
-        <div style={{ height: size === 'sm' ? '0.8rem' : '1rem' }}>
-          {rightIcon}
-        </div>
-      )}
+
+      {rightIcon && !isLoading && <>{rightIcon}</>}
     </button>
   );
 });
