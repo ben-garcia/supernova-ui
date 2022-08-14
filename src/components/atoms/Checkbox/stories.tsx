@@ -3,7 +3,6 @@ import React from 'react';
 
 import { colors } from '@utils';
 import Checkbox from '.';
-import { UserIcon } from '../Icon/Icons';
 
 export default {
   argTypes: {
@@ -64,23 +63,3 @@ Controlled.args = {
   label,
 };
 Controlled.parameters = parameters;
-
-const WithComponentAsLabelTemplate: ComponentStory<typeof Checkbox> = args => (
-  <Checkbox
-    {...args}
-    isChecked
-    label={
-      <>
-        <UserIcon margin="0 xs" size="1rem" />
-        component as label
-      </>
-    }
-    margin="0 sm"
-  />
-);
-
-export const WithComponentAsLabel = WithComponentAsLabelTemplate.bind({});
-WithComponentAsLabel.args = {
-  label,
-};
-WithComponentAsLabel.parameters = parameters;

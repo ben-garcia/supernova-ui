@@ -117,7 +117,7 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
         <div className="snui-fill-parent">
           {checkboxIsChecked && (
             <CheckmarkIcon
-              fill="var(--snui-color-white)"
+              color="var(--snui-color-white)"
               height="100%"
               width="100%"
             />

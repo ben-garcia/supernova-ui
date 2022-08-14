@@ -86,7 +86,7 @@ const WithComponentAsLabelTemplate: ComponentStory<any> = args => {
       onChange={e => setChecked(e.target.checked)}
       label={
         <>
-          <UserIcon size="1rem" />
+          <UserIcon size="xs" />
           <div>this is a custom label</div>
         </>
       }
