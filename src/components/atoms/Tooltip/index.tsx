@@ -1,6 +1,6 @@
 import React, { Children, useCallback, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
 
+import { Portal } from '@atoms';
 import { useTheme } from '@hooks';
 import {
   ArrowPosition,
@@ -153,35 +153,33 @@ const Tooltip: React.FC<TooltipProps> = props => {
   return (
     <div className="snui-tooltip">
       {jsx}
-      {show &&
-        createPortal(
-          <div
-            className="snui-tooltip__content snui-font-body"
-            ref={contentRef}
-            style={{
-              ...styles,
-              left: pos.left,
-              top: pos.top,
-            }}
-          >
-            <div className="snui-tooltip__inner">
-              {withArrow && (
-                <div
-                  className="snui-tooltip__arrow"
-                  ref={arrowRef}
-                  style={{
-                    ...arrowPos,
-                    ...arrowStyles,
-                  }}
-                />
-              )}
-              <div id={tooltipId} role="tooltip" style={{ paddingTop: 2 }}>
-                {content}
-              </div>
+      <Portal isMounted={show}>
+        <div
+          className="snui-tooltip__content snui-font-body"
+          ref={contentRef}
+          style={{
+            ...styles,
+            left: pos.left,
+            top: pos.top,
+          }}
+        >
+          <div className="snui-tooltip__inner">
+            {withArrow && (
+              <div
+                className="snui-tooltip__arrow"
+                ref={arrowRef}
+                style={{
+                  ...arrowPos,
+                  ...arrowStyles,
+                }}
+              />
+            )}
+            <div id={tooltipId} role="tooltip" style={{ paddingTop: 2 }}>
+              {content}
             </div>
-          </div>,
-          document.body
-        )}
+          </div>
+        </div>
+      </Portal>
     </div>
   );
 };
