@@ -1,20 +1,39 @@
-import { SupernovaUIBaseProps } from '../../../types';
-import { CommonProps } from '../../../types/common';
-
 /**
  * Props for the Icon component
  */
-export interface IconBaseProps
-  extends Omit<SupernovaUIBaseProps, 'backgroundColor' | 'color'>,
-    CommonProps {
+export interface IconBaseProps {
   /**
-   * fill for the svg
+   * class to add
    */
-  fill?: string;
+  className?: string;
+  /**
+   * fill for the componenet
+   */
+  color?: string;
+  /**
+   * height HTML attribute
+   */
+  height?: string;
+  /**
+   * padding HTML attribute
+   */
+  padding?: string;
+  /**
+   * margin HTML attribute
+   */
+  margin?: string;
+  /**
+   * size of the component
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
   /**
    * The svg viewbox
    */
   viewBox?: string;
+  /**
+   * width HTML attribute
+   */
+  width?: string;
 }
 
 /**

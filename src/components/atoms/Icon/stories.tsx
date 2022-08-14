@@ -1,7 +1,5 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-
-import { IconProps } from './types';
 
 import {
   AddIcon,
@@ -35,13 +33,17 @@ import {
 
 export default {
   argTypes: {
-    fill: { control: 'color' },
-    size: { control: 'text' },
+    color: { control: 'color', defaultValue: '#000' },
+    size: {
+      control: 'select',
+      defaultValue: 'xs',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'],
+    },
   },
   title: 'Supernova UI/Atoms/Icons',
-} as Meta;
+} as ComponentMeta<any>;
 
-export const All: Story<IconProps> = args => (
+export const All: ComponentStory<any> = args => (
   <div>
     <AddIcon {...args} />
     <AttachmentIcon {...args} />
@@ -73,6 +75,4 @@ export const All: Story<IconProps> = args => (
   </div>
 );
 
-All.args = {
-  size: '4rem',
-};
+All.args = {};

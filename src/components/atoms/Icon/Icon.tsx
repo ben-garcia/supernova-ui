@@ -1,153 +1,63 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
-import { useBreakpoint, useTheme } from '@hooks';
-import { createClasses, createStyles, isString, sizes } from '@utils';
-
-import { MarginPaddingProps, ComponentSize } from '@types';
 import { IconBaseProps } from './types';
 
 /**
  * The base Icon component
  */
-const Icon: React.FC<IconBaseProps> = props => {
+const Icon: FC<IconBaseProps> = props => {
   const {
     children,
     className,
-    fill = '',
-    size,
+    color = '#000',
+    height,
+    margin,
+    padding,
+    size: sizeProp,
     viewBox = '0 0 4.208 4.208',
-    width = '',
-    height = '',
-    padding = '',
-    margin = '',
-    ...rest
+    width,
   } = props;
-  const theme = useTheme();
-  const breakpoint = useBreakpoint();
-  const classes = createClasses('', {
-    [`${className}`]: isString(className),
-    [`snui-height-${height}`]:
-      isString(height) && sizes.includes(height as string),
-    // margin
-    [`snui-margin-${margin}`]:
-      typeof margin === 'string' && margin !== '' && sizes.includes(margin),
-    [`snui-margin-bottom-${(margin as MarginPaddingProps).bottom}`]:
-      typeof margin === 'object' &&
-      margin.bottom &&
-      typeof margin.bottom === 'string' &&
-      sizes.includes((margin as MarginPaddingProps).bottom as string),
-    [`snui-margin-left-${(margin as MarginPaddingProps).left}`]:
-      typeof margin === 'object' &&
-      margin.left &&
-      typeof margin.left === 'string' &&
-      sizes.includes((margin as MarginPaddingProps).left as string),
-    [`snui-margin-right-${(margin as MarginPaddingProps).right}`]:
-      typeof margin === 'object' &&
-      margin.right &&
-      typeof margin.right === 'string' &&
-      sizes.includes((margin as MarginPaddingProps).right as string),
-    [`snui-margin-top-${(margin as MarginPaddingProps).top}`]:
-      typeof margin === 'object' &&
-      margin.top &&
-      typeof margin.top === 'string' &&
-      sizes.includes((margin as MarginPaddingProps).top as string),
-    [`snui-margin-x-${(margin as MarginPaddingProps).x}`]:
-      // make sure that left and right properties have not been defined
-      !(margin as MarginPaddingProps).left &&
-      !(margin as MarginPaddingProps).right &&
-      typeof margin === 'object' &&
-      margin.x &&
-      typeof margin.y === 'string' &&
-      sizes.includes((margin as MarginPaddingProps).x as string),
-    [`snui-margin-y-${(margin as MarginPaddingProps).y}`]:
-      // make sure that top and bottom properties have not been defined
-      !(margin as MarginPaddingProps).bottom &&
-      !(margin as MarginPaddingProps).top &&
-      typeof margin === 'object' &&
-      margin.y &&
-      typeof margin.y === 'string' &&
-      sizes.includes((margin as MarginPaddingProps).y as string),
-    // padding
-    [`snui-padding-${padding}`]:
-      typeof padding === 'string' && padding !== '' && sizes.includes(padding),
-    [`snui-padding-bottom-${(padding as MarginPaddingProps).bottom}`]:
-      typeof padding === 'object' &&
-      padding.bottom &&
-      typeof padding.bottom === 'string' &&
-      sizes.includes((padding as MarginPaddingProps).bottom as string),
-    [`snui-padding-left-${(padding as any).left}`]:
-      typeof padding === 'object' &&
-      padding.left &&
-      sizes.includes((padding as MarginPaddingProps).left as string),
-    [`snui-padding-right-${(padding as MarginPaddingProps).right}`]:
-      typeof padding === 'object' &&
-      padding.right &&
-      typeof padding.right === 'string' &&
-      sizes.includes((padding as MarginPaddingProps).right as string),
-    [`snui-padding-top-${(padding as any).top}`]:
-      typeof padding === 'object' &&
-      padding.top &&
-      typeof padding.top === 'string' &&
-      sizes.includes((padding as MarginPaddingProps).top as string),
-    [`snui-padding-x-${(padding as MarginPaddingProps).x}`]:
-      !(padding as MarginPaddingProps).left &&
-      !(padding as MarginPaddingProps).right &&
-      typeof padding === 'object' &&
-      padding.x &&
-      typeof padding.x === 'string' &&
-      sizes.includes((padding as MarginPaddingProps).x as string),
-    [`snui-padding-y-${(padding as MarginPaddingProps).y}`]:
-      !(padding as MarginPaddingProps).bottom &&
-      !(padding as MarginPaddingProps).top &&
-      typeof padding === 'object' &&
-      padding.y &&
-      typeof padding.y === 'string' &&
-      sizes.includes((padding as MarginPaddingProps).y as string),
-    [`snui-width-${width}`]: isString(width) && sizes.includes(width as string),
+  const [size, setSize] = useState({
+    height: height ?? '1rem',
+    width: width ?? '1rem',
   });
-  const styles = createStyles(
-    {
-      height,
-      margin,
-      padding,
-      width,
-      size,
-    },
-    theme,
-    breakpoint
-  );
 
-  // width and height takes precedence
-  // check that size is a string
-  if (isString(size) && !width && !height) {
-    // check for a valid size
-    if (sizes.includes(size as string)) {
-      styles.height = `calc(${theme.sizes[size as Sizes]} * 2)`;
-      styles.width = `calc(${theme.sizes[size as Sizes]} * 2)`;
-    } else {
-      // when size isn't found in the theme
-      styles.height = size as string;
-      styles.width = size as string;
+  useEffect(() => {
+    if (!height && !width) {
+      switch (sizeProp) {
+        case 'sm':
+          setSize({ height: '1.5rem', width: '1.5rem' });
+          break;
+        case 'md':
+          setSize({ height: '2rem', width: '2rem' });
+          break;
+        case 'lg':
+          setSize({ height: '3rem', width: '3rem' });
+          break;
+        case 'xl':
+          setSize({ height: '4rem', width: '4rem' });
+          break;
+        case 'xxl':
+          setSize({ height: '5rem', width: '5rem' });
+          break;
+        case 'xxxl':
+          setSize({ height: '6.5rem', width: '6.5rem' });
+          break;
+        default:
+          setSize({ height: '1rem', width: '1rem' });
+      }
     }
-  } else {
-    styles.height = '100%';
-    styles.width = '100%';
-  }
-  if (isString(fill)) {
-    if ((theme as any).colors[fill]) {
-      styles.fill = (theme as any).colors[fill];
-    } else {
-      styles.fill = fill;
-    }
-  }
+  }, [sizeProp]);
 
   return (
     <svg
-      {...rest}
       aria-hidden="true"
-      className={classes}
+      className={`snui-icon${
+        typeof className === 'string' ? ` ${className}` : ''
+      }`}
       focusable="false"
-      style={styles}
+      fill={color}
+      style={{ margin, padding, ...size }}
       viewBox={viewBox}
     >
       {children}
