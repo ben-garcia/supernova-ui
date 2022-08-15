@@ -1,8 +1,8 @@
 import React, { MouseEvent, forwardRef, useCallback } from 'react';
 
 import { Button } from '@atoms';
-import { useDrawer } from '@hooks';
-import { createClasses, isFunction, isString } from '@utils';
+import { useCreateClassString, useDrawer } from '@hooks';
+import { isFunction, isString } from '@utils';
 
 import { ButtonProps } from '@atoms/Button/types';
 
@@ -25,12 +25,12 @@ const DrawerButton = forwardRef((props: DrawerButtonProps, ref: any) => {
     }, 300);
   }, []);
 
-  const classes = createClasses('snui snui-drawer__button', {
+  const addClasses = useCreateClassString('snui-drawer__button', {
     [`${className}`]: isString(className),
   });
 
   return (
-    <Button onClick={handleClick} ref={ref} {...rest} className={classes}>
+    <Button onClick={handleClick} ref={ref} {...rest} {...addClasses()}>
       {children}
     </Button>
   );

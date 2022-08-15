@@ -11,7 +11,7 @@
   z-index: var(--snui-z-index-modal);
 
   &--exiting {
-    animation: scale-down 0.4s ease;
+    animation: snui-scale-down 0.4s ease;
   }
 
   &--sm {

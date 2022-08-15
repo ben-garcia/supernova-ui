@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 
 import {
   useClassStyles,
@@ -17,7 +17,7 @@ export interface DrawerFooterProps extends SupernovaProps {}
 /**
  * The wrapper for the footer content of the Drawer.
  */
-const DrawerFooter: React.FC<DrawerFooterProps> = props => {
+const DrawerFooter: FC<DrawerFooterProps> = props => {
   const { children, className, ...rest } = props;
   const {
     remainingProps,
