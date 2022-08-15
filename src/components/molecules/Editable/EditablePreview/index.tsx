@@ -1,17 +1,35 @@
 import React from 'react';
 
-import { useEditable } from '@hooks';
-import { createClasses, isString, validateDataProps } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useEditable,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
-interface EditablePreviewProps {
-  className?: string;
-}
+import { SupernovaProps } from '@types';
+
+interface EditablePreviewProps extends SupernovaProps {}
 
 /**
  * The component that holds the preview content to be editable.
  */
 const EditablePreview: React.FC<EditablePreviewProps> = props => {
   const { className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-editable-preview', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const {
     enterEditMode,
     inputRef,
@@ -21,16 +39,13 @@ const EditablePreview: React.FC<EditablePreviewProps> = props => {
     textareaRef,
     value,
   } = useEditable();
-  const classes = createClasses('snui-editable__preview', {
-    [`${className}`]: isString(className),
-  });
 
   return (
     // eslint-disable-next-line
     <span
-      {...validateDataProps(rest)}
+      {...remainingProps}
+      {...addClasses()}
       aria-disabled={isDisabled ?? undefined}
-      className={classes}
       onFocus={() => {
         enterEditMode();
         setTimeout(() => {

@@ -1,5 +1,6 @@
-interface EditableProps {
-  className?: string;
+import { SupernovaProps } from '@types';
+
+interface EditableProps extends SupernovaProps {
   /**
    * Flag used to check whether to trigger edit mode.
    *

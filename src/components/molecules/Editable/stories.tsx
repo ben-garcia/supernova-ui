@@ -80,7 +80,7 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
       {isEditing ? (
         <div
           style={{
-            display: 'inline-block',
+            display: 'flex',
             float: 'right',
             margin: '10px',
             position: 'absolute',
@@ -90,17 +90,15 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
           }}
         >
           <Button
-            backgroundColor="error500"
             color="white"
-            hoverBackgroundColor="error700"
+            colorVariant="error700"
             {...getCancelButtonProps()}
           >
             Cancel
           </Button>
           <Button
-            backgroundColor="success500"
+            colorVariant="success500"
             color="white"
-            hoverBackgroundColor="success700"
             {...getSubmitButtonProps()}
           >
             Save
@@ -143,21 +141,11 @@ const CustomEditableInput = () => {
       <EditableInput />
       {isEditing ? (
         <div style={{ display: 'flex', margin: '0 10px' }}>
-          <Button
-            backgroundColor="error500"
-            color="white"
-            hoverBackgroundColor="error700"
-            margin="0 sm"
-            {...getCancelButtonProps()}
-          >
+          <Button colorVariant="error700" {...getCancelButtonProps()}>
             Cancel
           </Button>
-          <Button
-            backgroundColor="success500"
-            color="white"
-            hoverBackgroundColor="success700"
-            {...getSubmitButtonProps()}
-          >
+
+          <Button colorVariant="success500" {...getSubmitButtonProps()}>
             Save
           </Button>
         </div>

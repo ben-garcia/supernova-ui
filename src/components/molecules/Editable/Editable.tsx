@@ -1,8 +1,14 @@
-import React, { useMemo, useRef } from 'react';
+import React, { FC, useMemo, useRef } from 'react';
 
 import { EditableProvider } from '@contexts';
-import { useEditableProvider } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useEditableProvider,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
 import EditableProps from './types';
 import './styles.scss';
@@ -11,7 +17,7 @@ import './styles.scss';
  * The container for all Editable related components
  * that provides context for all subcomponents.
  */
-const Editable: React.FC<EditableProps> = props => {
+const Editable: FC<EditableProps> = props => {
   const {
     children,
     className,
@@ -23,9 +29,20 @@ const Editable: React.FC<EditableProps> = props => {
     placeholder,
     selectAllOnFocus = true,
     submitOnBlur = true,
+    value,
+    ...rest
   } = props;
-  const classes = createClasses('snui-editable', {
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-editable', {
     [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
   const context = useEditableProvider(props);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -45,12 +62,15 @@ const Editable: React.FC<EditableProps> = props => {
       selectAllOnFocus,
       submitOnBlur,
       textareaRef,
+      value,
     };
   }, [context, inputRef]);
 
   return (
     <EditableProvider value={contextValue as any}>
-      <div className={classes}>{children}</div>
+      <div {...remainingProps} {...addClasses()}>
+        {children}
+      </div>
     </EditableProvider>
   );
 };

@@ -1,26 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
-import { useEditable } from '@hooks';
 import {
-  createClasses,
-  isFunction,
-  isNumber,
-  isString,
-  validateDataProps,
-} from '@utils';
+  useClassStyles,
+  useCreateClassString,
+  useEditable,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isFunction, isNumber, isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface EditableTextareaProps {
-  /**
-   * Class to include.
-   */
-  className?: string;
+interface EditableTextareaProps extends SupernovaProps {
   /**
    * textarea cols attribue.
    */
   cols?: number;
-  height?: string;
+  initialHeight?: string;
   /**
    * Flag to enable auto resize.
    */
@@ -41,25 +38,37 @@ interface EditableTextareaProps {
    * textarea rows attribute.
    */
   rows?: number;
-  width?: string;
+  initialWidth?: string;
 }
 
 /**
  * The component used to edit the previewed text in when a textarea is needed.
  */
-const EditableTextarea: React.FC<EditableTextareaProps> = props => {
+const EditableTextarea: FC<EditableTextareaProps> = props => {
   const {
     className,
     cols,
-    height,
+    initialHeight,
     isAutoResize = false,
     maxLength,
     onClickOutside,
     onKeyDown,
     rows,
-    width,
+    initialWidth,
     ...rest
   } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-editable__textarea', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const {
     exitEditMode,
     isCustomEditable,
@@ -76,9 +85,7 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
     value,
   } = useEditable();
   const [hasFocus, setHasFocus] = useState(false);
-  const classes = createClasses('snui-editable__textarea', {
-    [`${className}`]: isString(className),
-  });
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (isFunction(onChange)) {
@@ -142,9 +149,9 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
 
   return (
     <textarea
-      {...validateDataProps(rest)}
+      {...remainingProps}
+      {...addClasses()}
       aria-disabled={isDisabled}
-      className={classes}
       cols={isNumber(cols) ? cols : undefined}
       disabled={isDisabled}
       hidden={!isEditing || isDisabled}
@@ -180,10 +187,11 @@ const EditableTextarea: React.FC<EditableTextareaProps> = props => {
           isEditing && !isDisabled && hasFocus
             ? '0 0 0 3px var(--snui-color-focus-ring)'
             : undefined,
-        height: isString(height) && !isAutoResize ? height : undefined,
+        height:
+          isString(initialHeight) && !isAutoResize ? initialHeight : undefined,
         overflow: isAutoResize ? 'hidden' : undefined,
         resize: isAutoResize ? 'none' : undefined,
-        width: isString(width) ? width : undefined,
+        width: isString(initialWidth) ? initialWidth : undefined,
       }}
       value={value}
     />

@@ -1,22 +1,36 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
-import { useEditable } from '@hooks';
-import { createClasses, isFunction, isString, validateDataProps } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useEditable,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isFunction, isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface EditableInputProps {
-  /**
-   * Class to add.
-   */
-  className?: string;
-}
+interface EditableInputProps extends SupernovaProps<'input'> {}
 
 /**
  * The component used to edit the previewed text by an input.
  */
-const EditableInput: React.FC<EditableInputProps> = props => {
+const EditableInput: FC<EditableInputProps> = props => {
   const { className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-editable__input', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const {
     exitEditMode,
     isCustomEditable,
@@ -33,9 +47,6 @@ const EditableInput: React.FC<EditableInputProps> = props => {
     value,
   } = useEditable();
   const [hasFocus, setHasFocus] = useState(false);
-  const classes = createClasses('snui-editable__input', {
-    [`${className}`]: isString(className),
-  });
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (isFunction(onChange)) {
       onChange!(e.target.value);
@@ -79,9 +90,9 @@ const EditableInput: React.FC<EditableInputProps> = props => {
 
   return (
     <input
-      {...validateDataProps(rest)}
+      {...remainingProps}
+      {...addClasses()}
       aria-disabled={isDisabled}
-      className={classes}
       disabled={isDisabled}
       hidden={!isEditing || isDisabled}
       onBlur={
