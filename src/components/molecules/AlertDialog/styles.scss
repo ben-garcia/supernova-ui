@@ -1,6 +1,6 @@
 .snui-alert-dialog {
   align-items: center;
-  animation: scale-up 0.4s ease;
+  animation: snui-scale-up 0.4s ease;
   background: var(--snui-color-white);
   border-radius: var(--snui-radii-sm);
   display: flex;
@@ -8,40 +8,42 @@
   justify-content: center;
   max-height: calc(calc(var(--snui-size-xs) * -7) + 100vh);
   position: relative;
-  width: calc(var(--snui-size-md) * 14);
   z-index: var(--snui-z-index-modal);
 
   &--exiting {
     animation: scale-down 0.4s ease;
   }
 
-  &__close-button {
+  &--sm {
+    width: 20rem;
+  }
+
+  &--md {
+    width: 24rem;
+  }
+
+  &--lg {
+    width: 28rem;
+  }
+
+  &--xl {
+    width: 36rem;
+  }
+
+  &--xxl {
+    width: 100vw;
+  }
+
+  &__close-button.snui-button {
     border: none;
     box-shadow: none;
-    padding: 1rem;
     position: absolute;
     right: var(--snui-space-sm);
     top: var(--snui-space-sm);
-  }
-}
 
-// animations
-@keyframes scale-up {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes scale-down {
-  0% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(0);
+    &.snui-button:hover {
+      background: none;
+      box-shadow: none;
+    }
   }
 }

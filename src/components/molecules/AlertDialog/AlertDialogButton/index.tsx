@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { MouseEvent, forwardRef, useCallback } from 'react';
 
 import { Button } from '@atoms';
 import { ButtonProps } from '@atoms/Button/types';
@@ -15,7 +15,7 @@ const AlertDialogButton = forwardRef(
     const { children, className, onClick, ...rest } = props;
 
     const { enterExitMode, leaveExitMode } = useAlertDialog();
-    const handleClick = useCallback((e: React.SyntheticEvent<Element>) => {
+    const handleClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
       enterExitMode!();
       setTimeout(() => {
         leaveExitMode!();
@@ -25,7 +25,7 @@ const AlertDialogButton = forwardRef(
       }, 300);
     }, []);
 
-    const classes = createClasses('snui-alert-dialog__button', {
+    const classes = createClasses('snui snui-alert-dialog__button', {
       [`${className}`]: isString(className),
     });
 

@@ -25,7 +25,7 @@ export default {
     size: {
       control: 'select',
       defaultValue: 'md',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },
   component: AlertDialog,
@@ -38,9 +38,7 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
   return (
     <>
       <div>
-        <Button onClick={() => setIsOpen(true)} margin="0 sm">
-          Open
-        </Button>
+        <Button onClick={() => setIsOpen(true)}>Open</Button>
       </div>
 
       <AlertDialog
@@ -54,7 +52,6 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
         <AlertDialogFooter>
           <AlertDialogButton
             onClick={() => setIsOpen(false)}
-            margin="0 sm 0 0"
             ref={cancelButtonRef}
             variant="outline"
           >
@@ -62,8 +59,7 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
           </AlertDialogButton>
 
           <AlertDialogButton
-            backgroundColor="error500"
-            hoverBackgroundColor="error700"
+            colorVariant="error700"
             onClick={() => setIsOpen(false)}
           >
             Delete
@@ -90,9 +86,7 @@ const FinalFocusRefTemplate: Story<AlertDialogProps> = args => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Button onClick={() => setOpen(true)} margin="0 sm">
-          Open
-        </Button>
+        <Button onClick={() => setOpen(true)}>Open</Button>
 
         <Button ref={finalFocusRef} variant="outline">
           finalFocusRef
@@ -111,18 +105,13 @@ const FinalFocusRefTemplate: Story<AlertDialogProps> = args => {
         <AlertDialogFooter>
           <AlertDialogButton
             onClick={handleClose}
-            margin="0 sm 0 0"
             ref={cancelButtonRef}
             variant="outline"
           >
             Cancel
           </AlertDialogButton>
 
-          <AlertDialogButton
-            backgroundColor="error500"
-            hoverBackgroundColor="error700"
-            onClick={handleClose}
-          >
+          <AlertDialogButton colorVariant="error700" onClick={handleClose}>
             Delete
           </AlertDialogButton>
         </AlertDialogFooter>

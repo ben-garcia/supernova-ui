@@ -1,22 +1,45 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import { useAlertDialog } from '@hooks';
+import {
+  useAlertDialog,
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface AlertDialogHeaderProps {
-  children: React.ReactNode;
-  className?: string;
-}
+export interface AlertDialogHeaderProps extends SupernovaProps {}
 
 /**
  * The wrapper for the header content of the AlertDialog.
  */
-const AlertDialogHeader: React.FC<AlertDialogHeaderProps> = props => {
-  const { children, ...rest } = props;
+const AlertDialogHeader: FC<AlertDialogHeaderProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-alert-dialog__header', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const { getAlertDialogHeaderProps } = useAlertDialog();
 
-  return <header {...getAlertDialogHeaderProps(rest)}>{children}</header>;
+  return (
+    <header
+      {...getAlertDialogHeaderProps({ ...remainingProps, ...addClasses() })}
+    >
+      {children}
+    </header>
+  );
 };
 
 export default AlertDialogHeader;
