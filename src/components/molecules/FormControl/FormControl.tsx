@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { FC, useMemo } from 'react';
 
 import { FormControlProvider } from '@contexts';
-import { useFormControlProvider, useUniqueId } from '@hooks';
-import { createElement, createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useFormControlProvider,
+  usePseudoClasses,
+  useUniqueId,
+  useValidateProps,
+} from '@hooks';
+import { createElement, isString } from '@utils';
 
 import { FormControlProps } from './types';
 import './styles.scss';
@@ -11,28 +18,28 @@ import './styles.scss';
  * The container for all FormControl related components
  * that provides context to its children.
  */
-const FormControl: React.FC<FormControlProps> = props => {
-  const { children, className, id = '', tag = 'div' } = props;
-  const classes = createClasses('snui-form-control snui-margin-y-sm', {
+const FormControl: FC<FormControlProps> = props => {
+  const { children, className, tag = 'div', ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-form-control', {
     [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
   const elementToRender = createElement(
     tag,
-    { className: classes, role: 'group' },
+    { ...remainingProps, ...addClasses(), role: 'group' },
     children
   );
-  const textInputId = isString(id) ? id : useUniqueId('snui-text-input');
-
-  // if (isString(id)) {
-  //   idToUse = `${id}-${Math.random()}`;
-  // } else {
-  //   idToUse = `field-${Math.random()}`;
-  // }
-
+  const id = useUniqueId('snui-form-control');
   const context = useFormControlProvider(props);
-  const contextValue = React.useMemo(() => ({ ...context, id: textInputId }), [
-    context,
-  ]);
+  const contextValue = useMemo(() => ({ ...context, id }), [context]);
 
   return (
     <FormControlProvider value={contextValue as any}>

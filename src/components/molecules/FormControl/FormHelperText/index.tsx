@@ -1,32 +1,44 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
 
-import { useFormControl } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useFormControl,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
+import { SupernovaProps } from '@types';
 
-export interface FormHelperTextProps {
+export interface FormHelperTextProps extends SupernovaProps {
   children: ReactNode;
-  className?: string;
 }
 
 /**
  * Used to provider feedback about how a field should be filled out.
  */
 const FormHelperText = forwardRef(
-  (props: FormHelperTextProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    const { children, className } = props;
-    const classes = createClasses(
-      'snui-form-helper-text snui-font-body snui-margin-y-sm',
-      {
-        [`${className}`]: isString(className),
-      }
-    );
+  (props: FormHelperTextProps, ref: ForwardedRef<HTMLDivElement>) => {
+    const { children, className, ...rest } = props;
+    const {
+      remainingProps,
+      validatedCSSProps,
+      validatedPseudoClassProps,
+    } = useValidateProps(rest);
+    const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+    const stylesClassName = useClassStyles(validatedCSSProps);
+    const addClasses = useCreateClassString('snui snui-form-helper-text', {
+      [`${className}`]: isString(className),
+      [`${pseudoClassName}`]: isString(pseudoClassName),
+      [`${stylesClassName}`]: isString(stylesClassName),
+    });
     const { id, getHelpTextProps } = useFormControl();
 
     return (
       <div
-        {...getHelpTextProps(props, ref)}
+        {...getHelpTextProps(remainingProps as any, ref)}
+        {...addClasses()}
         id={`${id}-helper-text`}
-        className={classes}
       >
         {children}
       </div>

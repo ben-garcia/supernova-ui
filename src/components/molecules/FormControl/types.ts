@@ -1,15 +1,9 @@
-import { ReactNode } from 'react';
+import { SupernovaProps } from '@types';
 
 /**
  * Props fro the FormControl component
  */
-export interface FormControlProps {
-  children: ReactNode;
-  className?: string;
-  /**
-   * id that will be shared across all the children
-   */
-  id?: string;
+export interface FormControlProps extends SupernovaProps {
   /**
    * Whether the form field is disabled
    *

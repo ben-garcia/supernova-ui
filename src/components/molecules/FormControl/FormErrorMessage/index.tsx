@@ -1,31 +1,47 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
 
-import { useFormControl } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useFormControl,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
-interface FormErrorMessageProps {
+import { SupernovaProps } from '@types';
+
+interface FormErrorMessageProps extends SupernovaProps {
   children: ReactNode;
-  className?: string;
 }
 
 /**
  * Used to provider feedback about an invalid field.
  */
 const FormErrorMessage = forwardRef(
-  (props: FormErrorMessageProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    const { children, className } = props;
-    const classes = createClasses(
-      'snui-error snui-font-body snui-margin-y-sm',
+  (props: FormErrorMessageProps, ref: ForwardedRef<HTMLDivElement>) => {
+    const { children, className, ...rest } = props;
+    const {
+      remainingProps,
+      validatedCSSProps,
+      validatedPseudoClassProps,
+    } = useValidateProps(rest);
+    const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+    const stylesClassName = useClassStyles(validatedCSSProps);
+    const addClasses = useCreateClassString(
+      'snui snui-form-error-message snui-error snui-font-body snui-margin-y-sm',
       {
         [`${className}`]: isString(className),
+        [`${pseudoClassName}`]: isString(pseudoClassName),
+        [`${stylesClassName}`]: isString(stylesClassName),
       }
     );
     const { id, isInvalid, getErrorMessageProps } = useFormControl();
 
     return isInvalid ? (
       <div
-        {...getErrorMessageProps(props, ref)}
-        className={classes}
+        {...getErrorMessageProps(remainingProps as any, ref)}
+        {...addClasses()}
         id={`${id}-feedback`}
       >
         {children}
