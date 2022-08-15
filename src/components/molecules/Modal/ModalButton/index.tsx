@@ -2,7 +2,7 @@ import React, { MouseEvent, forwardRef, useCallback } from 'react';
 
 import { Button } from '@atoms';
 import { useCreateClassString, useModal } from '@hooks';
-import { createClasses, isFunction, isString } from '@utils';
+import { isFunction, isString } from '@utils';
 
 import { ButtonProps } from '../../../atoms/Button/types';
 

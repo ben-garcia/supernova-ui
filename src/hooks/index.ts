@@ -1,6 +1,5 @@
 export * from './use-accordion';
 export * from './use-alert-dialog';
-export * from './use-breakpoint';
 export * from './use-class';
 export * from './use-create-class';
 export * from './use-drawer';
@@ -8,7 +7,6 @@ export * from './use-editable';
 export * from './use-form-control';
 export * from './use-inline-styles';
 export * from './use-input-checked';
-export * from './use-media-query';
 export * from './use-menu';
 export * from './use-modal';
 export * from './use-notification';
