@@ -9,13 +9,38 @@
   width: calc(var(--snui-size-md) * 14);
   z-index: var(--snui-z-index-modal);
 
-  &__close-button {
+  &--sm {
+    width: 20rem;
+  }
+
+  &--md {
+    width: 24rem;
+  }
+
+  &--lg {
+    width: 28rem;
+  }
+
+  &--xl {
+    width: 36rem;
+  }
+
+  &--xxl {
+    width: 100vw;
+  }
+
+  &__close-button.snui-button {
     border: none;
     box-shadow: none;
     padding: 1rem;
     position: absolute;
     right: var(--snui-space-sm);
     top: var(--snui-space-sm);
+
+    &.snui-button:hover {
+      background: none;
+      box-shadow: none;
+    }
   }
 
   &--bottom {

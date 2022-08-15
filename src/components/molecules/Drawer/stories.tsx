@@ -22,6 +22,11 @@ export default {
       control: 'boolean',
       defaultValue: true,
     },
+    placement: {
+      control: 'select',
+      defaultValue: 'left',
+      options: ['bottom', 'left', 'right', 'top'],
+    },
     size: {
       control: 'select',
       defaultValue: 'md',
@@ -31,6 +36,12 @@ export default {
   component: Drawer,
   title: 'Supernova UI/Molecules/Drawer',
 } as Meta;
+
+const parameters = {
+  controls: {
+    include: ['closeOnEsc', 'closeOnOverlayClick', 'placement', 'size'],
+  },
+};
 
 const BasicTemplate: Story<DrawerProps> = args => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,9 +75,7 @@ const BasicTemplate: Story<DrawerProps> = args => {
 
 export const Basic = BasicTemplate.bind({});
 Basic.args = {};
-Basic.parameters = {
-  controls: { include: ['closeOnEsc', 'closeOnOverlayClick', 'size'] },
-};
+Basic.parameters = parameters;
 
 const FinalFocusRefTemplate: Story<DrawerProps> = args => {
   const [isOpen, setOpen] = useState(false);
@@ -98,28 +107,13 @@ const FinalFocusRefTemplate: Story<DrawerProps> = args => {
 
         <DrawerBody>
           <form>
-            <TextInput
-              floatLabel
-              label="Email"
-              margin="sm 0"
-              ref={initialFocusRef}
-              typeOf="email"
-            />
-            <TextInput
-              floatLabel
-              label="Password"
-              margin="sm 0"
-              typeOf="password"
-            />
+            <TextInput label="Email" ref={initialFocusRef} type="email" />
+            <TextInput label="Password" type="password" />
           </form>
         </DrawerBody>
 
         <DrawerFooter>
-          <DrawerButton
-            onClick={handleClose}
-            margin="0 sm 0 0"
-            variant="outline"
-          >
+          <DrawerButton onClick={handleClose} variant="outline">
             Cancel
           </DrawerButton>
 
@@ -132,6 +126,4 @@ const FinalFocusRefTemplate: Story<DrawerProps> = args => {
 
 export const FinalFocusRef = FinalFocusRefTemplate.bind({});
 FinalFocusRef.args = {};
-FinalFocusRef.parameters = {
-  controls: { include: ['closeOnEsc', 'closeOnOverlayClick', 'size'] },
-};
+FinalFocusRef.parameters = parameters;

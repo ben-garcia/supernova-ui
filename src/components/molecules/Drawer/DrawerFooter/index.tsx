@@ -1,22 +1,43 @@
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
-import { useDrawer } from '@hooks';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useDrawer,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface DrawerFooterProps {
-  children: ReactNode;
-  className?: string;
-}
+export interface DrawerFooterProps extends SupernovaProps {}
 
 /**
  * The wrapper for the footer content of the Drawer.
  */
 const DrawerFooter: React.FC<DrawerFooterProps> = props => {
-  const { children, ...rest } = props;
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const { getDrawerFooterProps } = useDrawer();
 
-  return <footer {...getDrawerFooterProps(rest)}>{children}</footer>;
+  return (
+    <footer {...getDrawerFooterProps({ ...remainingProps, ...addClasses() })}>
+      {children}
+    </footer>
+  );
 };
 
 export default DrawerFooter;

@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { MouseEvent, forwardRef, useCallback } from 'react';
 
 import { Button } from '@atoms';
 import { useDrawer } from '@hooks';
@@ -15,7 +15,7 @@ const DrawerButton = forwardRef((props: DrawerButtonProps, ref: any) => {
   const { children, className, onClick, ...rest } = props;
 
   const { enterExitMode, leaveExitMode } = useDrawer();
-  const handleClick = useCallback((e: React.SyntheticEvent<Element>) => {
+  const handleClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     enterExitMode!();
     setTimeout(() => {
       leaveExitMode!();
@@ -25,7 +25,7 @@ const DrawerButton = forwardRef((props: DrawerButtonProps, ref: any) => {
     }, 300);
   }, []);
 
-  const classes = createClasses('snui-drawer__button', {
+  const classes = createClasses('snui snui-drawer__button', {
     [`${className}`]: isString(className),
   });
 
