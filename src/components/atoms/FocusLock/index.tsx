@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { FC, useCallback, useEffect, useRef } from 'react';
 
 import { isFunction } from '@utils';
 
@@ -12,7 +12,7 @@ import { FocusLockProps } from './types';
  * credit
  * @see https://medium.com/tamman-inc/create-a-reusable-focus-lock-in-react-to-improve-user-experience-and-accessibility-90829426fae2
  */
-const FocusLock: React.FC<FocusLockProps> = props => {
+const FocusLock: FC<FocusLockProps> = props => {
   const {
     children,
     closeOnEsc,
@@ -94,10 +94,10 @@ const FocusLock: React.FC<FocusLockProps> = props => {
 
     // set the focus to the user defined element
     if (initialFocusRef && initialFocusRef.current) {
-      // make sure the initialFocusRef is not disabled
+      // make sure that initialFocusRef is not disabled
       if (
-        !initialFocusRef.current.hasAttribute('disabled') &&
-        !initialFocusRef.current.hasAttribute('aria-disabled')
+        initialFocusRef.current.getAttribute('disabled') ||
+        initialFocusRef.current.getAttribute('aria-disabled')
       ) {
         focusableItems.current.forEach(item => {
           // make sure the initialFocusRef is focusable
@@ -108,7 +108,7 @@ const FocusLock: React.FC<FocusLockProps> = props => {
         });
       } else {
         // when the initialFocusRef prop is set to a disabled element
-        // the the focus should go to the first focusable element
+        // focus should go to the first focusable element
         focusableItems.current[0].focus();
       }
     }
@@ -177,8 +177,6 @@ const FocusLock: React.FC<FocusLockProps> = props => {
   }, []);
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     // eslint-disable-next-line
     <div
       data-trap-focus={trapFocus}
