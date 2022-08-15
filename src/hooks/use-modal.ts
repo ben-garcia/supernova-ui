@@ -16,7 +16,7 @@ const useModalProvider = (props: ModalProps) => {
   const getModalBodyProps = useCallback(
     (modalBodyProps = {}) => {
       const { className } = modalBodyProps;
-      const classes = createClasses('snui-modal__body', {
+      const classes = createClasses('snui snui-modal__body', {
         [`${className}`]: isString(className),
       });
       return {
@@ -30,7 +30,7 @@ const useModalProvider = (props: ModalProps) => {
   const getModalHeaderProps = useCallback(
     (modalHeaderProps = {}) => {
       const { className } = modalHeaderProps;
-      const classes = createClasses('snui-modal__header', {
+      const classes = createClasses('snui snui-modal__header', {
         [`${className}`]: isString(className),
       });
       return {
@@ -44,7 +44,7 @@ const useModalProvider = (props: ModalProps) => {
   const getModalFooterProps = useCallback(
     (modalFooterProps = {}) => {
       const { className } = modalFooterProps;
-      const classes = createClasses('snui-modal__footer', {
+      const classes = createClasses('snui snui-modal__footer', {
         [`${className}`]: isString(className),
       });
 

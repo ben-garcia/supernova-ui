@@ -22,7 +22,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
   const getAlertDialogBodyProps = useCallback(
     (alertDialogBodyProps = {}) => {
       const { className } = alertDialogBodyProps;
-      const classes = createClasses('snui-alert-dialog__body', {
+      const classes = createClasses('snui snui-alert-dialog__body', {
         [`${className}`]: isString(className),
       });
       return {
@@ -36,7 +36,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
   const getAlertDialogHeaderProps = useCallback(
     (alertDialogHeaderProps = {}) => {
       const { className } = alertDialogHeaderProps;
-      const classes = createClasses('snui-alert-dialog__header', {
+      const classes = createClasses('snui snui-alert-dialog__header', {
         [`${className}`]: isString(className),
       });
       return {
@@ -50,7 +50,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
   const getAlertDialogFooterProps = useCallback(
     (alertDialogFooterProps = {}) => {
       const { className } = alertDialogFooterProps;
-      const classes = createClasses('snui-alert-dialog__footer', {
+      const classes = createClasses('snui snui-alert-dialog__footer', {
         [`${className}`]: isString(className),
       });
 

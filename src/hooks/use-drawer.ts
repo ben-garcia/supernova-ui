@@ -16,7 +16,7 @@ const useDrawerProvider = (props: DrawerProps) => {
   const getDrawerBodyProps = useCallback(
     (drawerBodyProps = {}) => {
       const { className } = drawerBodyProps;
-      const classes = createClasses('snui-drawer__body', {
+      const classes = createClasses('snui snui-drawer__body', {
         [`${className}`]: isString(className),
       });
       return {
@@ -30,7 +30,7 @@ const useDrawerProvider = (props: DrawerProps) => {
   const getDrawerHeaderProps = useCallback(
     (drawerHeaderProps = {}) => {
       const { className } = drawerHeaderProps;
-      const classes = createClasses('snui-drawer__header', {
+      const classes = createClasses('snui snui-drawer__header', {
         [`${className}`]: isString(className),
       });
       return {
@@ -44,7 +44,7 @@ const useDrawerProvider = (props: DrawerProps) => {
   const getDrawerFooterProps = useCallback(
     (drawerFooterProps = {}) => {
       const { className } = drawerFooterProps;
-      const classes = createClasses('snui-drawer__footer', {
+      const classes = createClasses('snui snui-drawer__footer', {
         [`${className}`]: isString(className),
       });
 
