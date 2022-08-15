@@ -1,22 +1,43 @@
-import React, { ReactNode } from 'react';
+import React, { FC } from 'react';
 
-import { useModal } from '@hooks';
+import {
+  useClassStyles,
+  useCreateClassString,
+  useModal,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface ModalFooterProps {
-  children: ReactNode;
-  className?: string;
-}
+export interface ModalFooterProps extends SupernovaProps {}
 
 /**
  * The wrapper for the footer content of the Modal.
  */
-const ModalFooter: React.FC<ModalFooterProps> = props => {
-  const { children, ...rest } = props;
+const ModalFooter: FC<ModalFooterProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const { getModalFooterProps } = useModal();
 
-  return <footer {...getModalFooterProps(rest)}>{children}</footer>;
+  return (
+    <footer {...getModalFooterProps({ ...remainingProps, ...addClasses() })}>
+      {children}
+    </footer>
+  );
 };
 
 export default ModalFooter;

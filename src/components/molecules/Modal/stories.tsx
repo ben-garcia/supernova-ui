@@ -25,7 +25,7 @@ export default {
     size: {
       control: 'select',
       defaultValue: 'md',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },
   component: Modal,
@@ -98,19 +98,8 @@ const FinalFocusRefTemplate: Story<ModalProps> = args => {
         <ModalHeader>Create an account</ModalHeader>
         <ModalBody>
           <form>
-            <TextInput
-              floatLabel
-              label="Email"
-              margin="sm 0"
-              ref={initialFocusRef}
-              typeOf="email"
-            />
-            <TextInput
-              floatLabel
-              label="Password"
-              margin="sm 0"
-              typeOf="password"
-            />
+            <TextInput label="Email" ref={initialFocusRef} type="email" />
+            <TextInput label="Password" type="password" />
           </form>
         </ModalBody>
         <ModalFooter>
