@@ -26,7 +26,7 @@ const AlertDialogFooter: FC<AlertDialogFooterProps> = props => {
   } = useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-alert-dialog__footer', {
+  const addClasses = useCreateClassString('', {
     [`${className}`]: isString(className),
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
