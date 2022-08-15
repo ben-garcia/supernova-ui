@@ -25,7 +25,7 @@ const EditablePreview: React.FC<EditablePreviewProps> = props => {
   } = useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-editable-preview', {
+  const addClasses = useCreateClassString('snui snui-editable__preview', {
     [`${className}`]: isString(className),
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
