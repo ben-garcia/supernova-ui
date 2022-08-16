@@ -1,8 +1,16 @@
 import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import { TabsProvider } from '@contexts';
-import { useTheme, useUniqueId, useTabsProvider } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useUniqueId,
+  useTabsProvider,
+  useTheme,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
 import { TabsProps } from './types';
 import './styles.scss';
@@ -13,7 +21,7 @@ import './styles.scss';
  */
 const Tabs: FC<TabsProps> = props => {
   const {
-    activeColor = 'info700',
+    colorVariant,
     align = 'start',
     children,
     className,
@@ -22,10 +30,20 @@ const Tabs: FC<TabsProps> = props => {
     isManual = false,
     orientation = 'horizontal',
     size = 'md',
+    ...rest
   } = props;
-  const classes = createClasses('snui-tabs', {
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-tabs', {
     [`${className}`]: isString(className),
     [`snui-tabs--vertical`]: orientation === 'vertical',
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
   const [activeIndex, setActiveIndexState] = useState(defaultIndex);
   const [focusedIndex, setFocusedIndexState] = useState(defaultIndex);
@@ -40,15 +58,17 @@ const Tabs: FC<TabsProps> = props => {
     setFocusedIndexState(newIndex);
   }, []);
   const tabsId = useUniqueId('snui-tabs');
-  const theme = useTheme();
+  const { colors } = useTheme();
   const context = useTabsProvider(props);
 
   const contextValue = useMemo(
     () => ({
       ...context,
       // use user defined color
-      // otherwise use default(info700)
-      activeColor: (theme as any).colors[activeColor] ?? activeColor,
+      // otherwise use default(primary)
+      activeColor: isString(colorVariant)
+        ? colors[colorVariant as keyof typeof colors]
+        : colors.primary,
       activeIndex,
       align,
       defaultIndex,
@@ -68,7 +88,7 @@ const Tabs: FC<TabsProps> = props => {
 
   return (
     <TabsProvider value={contextValue}>
-      <div className={classes} id={tabsId}>
+      <div {...remainingProps} {...addClasses()} id={tabsId}>
         {children}
       </div>
     </TabsProvider>

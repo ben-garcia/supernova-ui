@@ -2,11 +2,13 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@molecules';
+import { colors } from '@utils';
 
 export default {
   argTypes: {
-    activeColor: {
-      control: 'color',
+    colorVariant: {
+      control: 'select',
+      options: colors,
     },
     defaultIndex: {
       control: 'object',
@@ -16,11 +18,6 @@ export default {
       defaultValue: 'horizontal',
       options: ['horizontal', 'vertical'],
     },
-    size: {
-      control: 'select',
-      defaultValue: 'md',
-      options: ['sm', 'md', 'lg'],
-    },
     isFitted: {
       control: 'boolean',
       defaultValue: false,
@@ -28,6 +25,11 @@ export default {
     isManual: {
       control: 'boolean',
       defaultValue: false,
+    },
+    size: {
+      control: 'select',
+      defaultValue: 'md',
+      options: ['sm', 'md', 'lg'],
     },
   },
   component: Tabs,
@@ -37,32 +39,30 @@ export default {
 const parameters = {
   controls: {
     include: [
-      'activeColor',
+      'colorVariant',
       'defaultIndex',
       'orientation',
-      'size',
       'isFitted',
       'isManual',
+      'size',
     ],
   },
 };
 
 const Template: ComponentStory<typeof Tabs> = args => (
-  <div style={{ margin: '0 auto', width: '50%' }}>
-    <Tabs {...args}>
-      <TabList>
-        <Tab>one</Tab>
-        <Tab>two</Tab>
-        <Tab>three</Tab>
-      </TabList>
+  <Tabs {...args}>
+    <TabList>
+      <Tab>one</Tab>
+      <Tab>two</Tab>
+      <Tab>three</Tab>
+    </TabList>
 
-      <TabPanelList>
-        <TabPanel>panel one</TabPanel>
-        <TabPanel>panel two</TabPanel>
-        <TabPanel>panel three</TabPanel>
-      </TabPanelList>
-    </Tabs>
-  </div>
+    <TabPanelList>
+      <TabPanel>panel one</TabPanel>
+      <TabPanel>panel two</TabPanel>
+      <TabPanel>panel three</TabPanel>
+    </TabPanelList>
+  </Tabs>
 );
 
 export const Basic = Template.bind({});

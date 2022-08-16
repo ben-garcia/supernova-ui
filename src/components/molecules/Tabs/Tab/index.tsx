@@ -1,26 +1,33 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  ReactNode,
-} from 'react';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 
-import { useTabList, useTabs, useTheme } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useTabList,
+  useTabs,
+  useTheme,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface TabProps {
-  children: ReactNode;
-  className?: string;
-}
+interface TabProps extends SupernovaProps {}
 
 /**
  * Tab button used to activate a specific TabPanel
  */
-const Tab: React.FC<TabProps> = props => {
-  const { children, className } = props;
+const Tab: FC<TabProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const { tabsRef } = useTabList();
   const {
     activeColor,
@@ -35,6 +42,14 @@ const Tab: React.FC<TabProps> = props => {
     size,
     tabsId,
   } = useTabs();
+  const addClasses = useCreateClassString('snui snui-tabs__tab', {
+    [`${className}`]: isString(className),
+    [`snui-tabs__tab--${size}`]: true,
+    [`snui-tabs__tab--${orientation}`]: true,
+    'snui-tabs__tab--fitted': isFitted,
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const tabRef = useRef<HTMLButtonElement | null>(null);
   const tabId = React.useMemo(() => {
     if (tabRef?.current) {
@@ -45,15 +60,9 @@ const Tab: React.FC<TabProps> = props => {
 
     return undefined;
   }, [tabRef?.current]);
-  const theme = useTheme();
+  const { colors } = useTheme();
   const [isActive, setIsActive] = useState(false);
   const [focusRingColor, setFocusRingColor] = useState('');
-  const classes = createClasses('snui-tabs__tab', {
-    [`${className}`]: isString(className),
-    [`snui-tabs__tab--${size}`]: true,
-    [`snui-tabs__tab--${orientation}`]: true,
-    'snui-tabs__tab--fitted': isFitted,
-  });
 
   useEffect(() => {
     if (tabRef?.current) {
@@ -227,15 +236,16 @@ const Tab: React.FC<TabProps> = props => {
 
   return (
     <button
+      {...remainingProps}
+      {...addClasses()}
       aria-controls={
         tabId ? `${tabsId}__tab-panel-${tabId[tabId.length - 1]}` : undefined
       }
       aria-selected={isActive ?? false}
-      className={classes}
       id={tabId}
       onBlur={() => setFocusRingColor('')}
       onClick={handleClick}
-      onFocus={() => setFocusRingColor(theme.colors.focusRing)}
+      onFocus={() => setFocusRingColor(`3px solid ${colors.focusRing}`)}
       onKeyDown={handleKeyDown}
       ref={tabRef}
       role="tab"
@@ -244,9 +254,8 @@ const Tab: React.FC<TabProps> = props => {
           isActive && orientation === 'horizontal' ? activeColor : undefined,
         borderLeftColor:
           isActive && orientation === 'vertical' ? activeColor : undefined,
-        boxShadow: (isString(focusRingColor)
-          ? `0 0 0 4px ${focusRingColor}`
-          : null) as any,
+        outline: isString(focusRingColor) ? focusRingColor : undefined,
+        outlineOffset: 2,
         color: isActive ? activeColor : undefined,
         width: isFitted ? '100%' : undefined,
       }}

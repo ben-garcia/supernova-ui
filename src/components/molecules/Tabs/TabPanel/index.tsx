@@ -1,18 +1,35 @@
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useTabs } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useTabs,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
-interface TabPanelProps {
-  children: ReactNode;
-  className?: string;
-}
+import { SupernovaProps } from '@types';
+
+interface TabPanelProps extends SupernovaProps {}
 
 /**
  * Wrapper that holds the content associated with a Tab.
  */
-const TabPanel: React.FC<TabPanelProps> = props => {
-  const { children, className } = props;
+const TabPanel: FC<TabPanelProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
+  const addClasses = useCreateClassString('snui snui-tabs__tab-panel', {
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const { activeIndex, tabsId } = useTabs();
   const tabPanelRef = useRef<HTMLDivElement | null>(null);
   const [isActive, setIsActive] = useState(false);
@@ -26,10 +43,6 @@ const TabPanel: React.FC<TabPanelProps> = props => {
     }
     return undefined;
   }, [tabPanelRef?.current]);
-
-  const classes = createClasses('snui-tabs__tab-panel', {
-    [`${className}`]: isString(className),
-  });
 
   useEffect(() => {
     if (tabPanelRef?.current) {
@@ -63,12 +76,13 @@ const TabPanel: React.FC<TabPanelProps> = props => {
 
   return (
     <div
+      {...remainingProps}
+      {...addClasses()}
       aria-describedby={
         tabPanelId
           ? `${tabsId}__tab-${tabPanelId[tabPanelId.length - 1]}`
           : undefined
       }
-      className={classes}
       id={tabPanelId}
       ref={tabPanelRef}
       role="tabpanel"

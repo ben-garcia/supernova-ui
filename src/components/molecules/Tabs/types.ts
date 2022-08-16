@@ -1,23 +1,14 @@
-import { ReactNode } from 'react';
+import { FormControlProps, SupernovaProps } from '@types';
 
-export interface TabsProps {
-  /**
-   * The color of the active state
-   *
-   * @default 'info800'
-   */
-  activeColor?: string;
+export interface TabsProps
+  extends SupernovaProps,
+    Pick<FormControlProps, 'colorVariant' | 'size'> {
   /**
    * How the tabs should be alinged
    *
    * @default 'start'
    */
   align?: 'end' | 'center' | 'start';
-  children: ReactNode;
-  /**
-   * Add a class
-   */
-  className?: string;
   /**
    * Configure the TabPanel that should render in the active state
    *
@@ -45,10 +36,4 @@ export interface TabsProps {
    * @default 'horizontal'
    */
   orientation?: 'horizontal' | 'vertical';
-  /**
-   * The size of the tabs
-   *
-   * @default 'md'
-   */
-  size?: 'sm' | 'md' | 'lg';
 }

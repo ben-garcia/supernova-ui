@@ -1,30 +1,43 @@
-import React, { useEffect, useMemo, useRef, ReactNode } from 'react';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
 
 import { TabListProvider } from '@contexts';
-import { useTabs } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useTabs,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface TabListProps {
-  children: ReactNode;
-  className?: string;
-}
+interface TabListProps extends SupernovaProps {}
 
 /**
  * The wrapper for all Tab buttons
  */
-const TabList: React.FC<TabListProps> = props => {
-  const { children, className } = props;
+const TabList: FC<TabListProps> = props => {
+  const { children, className, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const { align, orientation, isFitted, setNumberOfTabs } = useTabs();
-  const tabListRef = useRef<HTMLDivElement | null>(null);
-  const tabsRef = useRef<HTMLButtonElement[] | null>(null);
-  const classes = createClasses('snui-tabs__tablist', {
+  const addClasses = useCreateClassString('snui snui-tabs__tablist', {
     [`${className}`]: isString(className),
     [`snui-tabs__tablist--vertical`]: orientation === 'vertical',
     [`snui-tabs__tablist--fitted`]: isFitted,
     [`snui-tabs__tablist--${align}`]: isString(align),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
   });
+  const tabListRef = useRef<HTMLDivElement | null>(null);
+  const tabsRef = useRef<HTMLButtonElement[] | null>(null);
   const contextValue = useMemo(
     () => ({
       tabsRef: tabsRef?.current,
@@ -68,8 +81,9 @@ const TabList: React.FC<TabListProps> = props => {
   return (
     <TabListProvider value={contextValue as any}>
       <div
+        {...remainingProps}
+        {...addClasses()}
         aria-orientation={orientation}
-        className={classes}
         ref={tabListRef}
         role="tablist"
       >
