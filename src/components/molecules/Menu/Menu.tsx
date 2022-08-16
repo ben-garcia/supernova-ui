@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import { MenuProvider } from '@contexts';
 import { useMenuProvider, useUniqueId } from '@hooks';
@@ -9,7 +9,7 @@ import { MenuProps } from './types';
  * The container for all Menu related components
  * that provides context to its children.
  */
-const Menu: React.FC<MenuProps> = props => {
+const Menu: FC<MenuProps> = props => {
   const { children, closeOnEsc = true, isOpen, onClose } = props;
 
   const menuId = useUniqueId('snui-menu');

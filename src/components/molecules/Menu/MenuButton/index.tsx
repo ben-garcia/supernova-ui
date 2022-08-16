@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { Button } from '@atoms';
 import { useMenu } from '@hooks';
@@ -6,14 +6,12 @@ import { createClasses, isString } from '@utils';
 
 import { ButtonProps } from '@atoms/Button/types';
 
-interface MenuButtonProps extends ButtonProps {
-  className?: string;
-}
+interface MenuButtonProps extends ButtonProps {}
 
 /**
  * The trigger for the Menu.
  */
-const MenuButton: React.FC<MenuButtonProps> = props => {
+const MenuButton: FC<MenuButtonProps> = props => {
   const { children, className, ...rest } = props;
   const { isOpen, menuButtonRef, menuId } = useMenu();
   const classes = createClasses('', {

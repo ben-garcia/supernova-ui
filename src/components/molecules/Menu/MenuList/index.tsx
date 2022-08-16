@@ -1,8 +1,6 @@
-/* eslint no-param-reassign: 0 */
-/* eslint prefer-destructuring: 0 */
 import React, {
-  forwardRef,
   ReactNode,
+  forwardRef,
   useCallback,
   useEffect,
   useMemo,
@@ -12,17 +10,20 @@ import React, {
 import { createPortal } from 'react-dom';
 
 import { MenuListProvider } from '@contexts';
-import { useMenu } from '@hooks';
-import { createClasses, isString } from '@utils';
+import {
+  useCreateClassString,
+  useClassStyles,
+  useMenu,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface MenuListProps {
+export interface MenuListProps extends SupernovaProps {
   children: ReactNode;
-  className?: string;
-  maxWidth?: string;
-  minWidth?: string;
-  width?: string;
 }
 
 /**
@@ -30,14 +31,14 @@ export interface MenuListProps {
  */
 // @ts-ignore
 const MenuList = forwardRef((props: MenuListProps, ref: any) => {
+  const { children, className, ...rest } = props;
   const {
-    children,
-    className,
-    maxWidth = '',
-    minWidth = '',
-    width = '',
-    ...rest
-  } = props;
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     menuId,
     isOpen,
@@ -47,6 +48,13 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     menuButtonRef,
     setFocusedIndex,
   } = useMenu();
+  const addClasses = useCreateClassString('snui snui-menu', {
+    [`${className}`]: isString(className),
+    'snui-menu--visible': isOpen,
+    'snui-menu--invisible': !isOpen,
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
   const [mounted, setMounted] = useState(false);
   const menuPortalId = useMemo(() => `${menuId}-portal`, []);
   const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
@@ -181,23 +189,11 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     // make to not to append more than one menu portal with a unique id
     if (!menuPortal) {
       div.id = menuPortalId;
-      div.style.width = width;
-      div.style.minWidth = minWidth;
-      div.style.maxWidth = maxWidth;
 
       document.body.appendChild(div);
     }
     setMounted(true);
   }, [isOpen]);
-
-  const classes = createClasses(
-    'snui-menu snui-flex snui-flex-column snui-margin-top-xs snui-padding-y-sm snui-border-radius-xs snui-color-white',
-    {
-      [`${className}`]: isString(className),
-      'snui-menu--visible': isOpen,
-      'snui-menu--invisible': !isOpen,
-    }
-  );
 
   useEffect(() => {
     if (menuButtonRef?.current && menuListRef?.current) {
@@ -252,14 +248,10 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
   const jsx = (
     <MenuListProvider value={contextValue as any}>
       <div
-        {...getMenuListProps(rest, ref)}
-        className={classes}
+        {...getMenuListProps({ ...remainingProps, ...addClasses() }, ref)}
         id={`${menuId}__list`}
         role="menu"
         style={{
-          minWidth,
-          maxWidth,
-          width,
           left: `${pos.left}px`,
           top: `${pos.top}px`,
         }}

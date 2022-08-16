@@ -1,7 +1,4 @@
-import { ReactNode } from 'react';
-
 export interface MenuProps {
-  children: ReactNode;
   /**
    * Configure whether the Menu should close when Esc key is pressed
    *

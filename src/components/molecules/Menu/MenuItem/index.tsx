@@ -1,13 +1,27 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-import { useMenu, useMenuList, useTheme } from '@hooks';
-import { createClasses, isFunction, isString } from '@utils';
+import {
+  useCreateClassString,
+  useClassStyles,
+  useMenu,
+  useMenuList,
+  usePseudoClasses,
+  useTheme,
+  useValidateProps,
+} from '@hooks';
+import { isFunction, isString } from '@utils';
 
+import { SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface MenuItemProps {
-  children: React.ReactNode;
-  className?: string;
+export interface MenuItemProps extends SupernovaProps {
+  children: ReactNode;
   onClick?: () => void;
 }
 
@@ -15,7 +29,14 @@ export interface MenuItemProps {
  * Menu option to select from.
  */
 const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
-  const { children, className, onClick = null } = props;
+  const { children, className, onClick, ...rest } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     closeOnEsc,
     focusedIndex,
@@ -29,10 +50,12 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [backgroundColor, setBackgroundColor] = useState('');
   const [color, setColor] = useState('');
-  const classes = createClasses(
-    'snui-menu-item snui-flex snui-items-center snui-padding-inline-left',
+  const addClasses = useCreateClassString(
+    'snui snui-menu__item snui-flex snui-items-center snui-padding-inline-left',
     {
       [`${className}`]: isString(className),
+      [`${pseudoClassName}`]: isString(pseudoClassName),
+      [`${stylesClassName}`]: isString(stylesClassName),
     }
   );
 
@@ -45,11 +68,11 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
       if (focusedIndex === index) {
         buttonRef.current.focus();
         buttonRef.current.setAttribute('tabIndex', '0');
-        setBackgroundColor(theme.colors.info600);
+        setBackgroundColor(theme.colors.primary);
         setColor(theme.colors.white);
       } else {
         buttonRef.current.setAttribute('tabIndex', '-1');
-        setBackgroundColor(theme.colors.transparent);
+        setBackgroundColor('transparent');
         setColor(theme.colors.black);
       }
     }
@@ -153,8 +176,10 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
 
   return (
     <button
-      {...getMenuItemProps(props, ref)}
-      className={classes}
+      {...getMenuItemProps(
+        { ...(remainingProps as any), ...addClasses() },
+        ref
+      )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       onMouseEnter={handleMouseEnter}

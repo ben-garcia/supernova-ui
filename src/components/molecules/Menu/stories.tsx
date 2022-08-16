@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof Menu> = args => {
   return (
     <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
-      <MenuList width="250px">
+      <MenuList>
         <MenuItem>Profile</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Night Mode</MenuItem>
@@ -41,7 +41,7 @@ const WithGroupTemplate: ComponentStory<typeof Menu> = args => {
   return (
     <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
-      <MenuList width="250px">
+      <MenuList>
         <MenuGroup title="My Stuff">
           <MenuItem>Profile</MenuItem>
           <MenuItem>Settings</MenuItem>
@@ -63,25 +63,25 @@ const WithIconsTemplate: ComponentStory<typeof Menu> = args => {
 
   return (
     <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <MenuButton onClick={() => setIsOpen(true)}>icons</MenuButton>
-      <MenuList width="250px">
+      <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
+      <MenuList>
         <MenuGroup title="My Stuff">
           <MenuItem>
-            <UserIcon margin="0 10px 0 0" size="15px" />
+            <UserIcon margin="0 10px 0 0" size="xs" />
             Profile
           </MenuItem>
           <MenuItem>
-            <SettingsIcon margin="0 10px 0 0" size="15px" />
+            <SettingsIcon margin="0 10px 0 0" size="xs" />
             Settings
           </MenuItem>
         </MenuGroup>
         <MenuGroup title="Other">
           <MenuItem>
-            <HalfMoonIcon margin="0 10px 0 0" size="15px" />
+            <HalfMoonIcon margin="0 10px 0 0" size="xs" />
             Night Mode
           </MenuItem>
           <MenuItem>
-            <LogoutIcon margin="0 10px 0 0" size="15px" />
+            <LogoutIcon margin="0 10px 0 0" size="xs" />
             Sign Out
           </MenuItem>
         </MenuGroup>
