@@ -49,9 +49,10 @@ const Notification: React.FC<NotificationProps> = props => {
       backgroundColorToUse = theme.colors.error600;
       icon = (
         <CloseIcon
-          fill="var(--snui-color-white)"
+          color="var(--snui-color-white)"
+          height="0.7rem"
           margin="0 0.7rem 0 0"
-          size="1.5rem"
+          width="0.7rem"
         />
       );
       break;
@@ -59,9 +60,10 @@ const Notification: React.FC<NotificationProps> = props => {
       backgroundColorToUse = theme.colors.success600;
       icon = (
         <CheckmarkIcon
-          fill="var(--snui-color-white)"
+          color="var(--snui-color-white)"
+          height="0.7rem"
           margin="0 0.7rem 0 0"
-          size="1.5rem"
+          width="0.7rem"
         />
       );
       break;
@@ -69,9 +71,9 @@ const Notification: React.FC<NotificationProps> = props => {
       backgroundColorToUse = theme.colors.warning600;
       icon = (
         <HelpIcon
-          fill="var(--snui-color-white)"
+          color="var(--snui-color-white)"
           margin="0 0.7rem 0 0"
-          size="1.5rem"
+          size="xs"
         />
       );
       break;
@@ -79,9 +81,9 @@ const Notification: React.FC<NotificationProps> = props => {
       backgroundColorToUse = theme.colors.info600;
       icon = (
         <InfoIcon
-          fill="var(--snui-color-white)"
+          color="var(--snui-color-white)"
           margin="0 0.7rem 0 0"
-          size="1.5rem"
+          size="xs"
         />
       );
   }
@@ -191,7 +193,7 @@ const Notification: React.FC<NotificationProps> = props => {
     >
       <div>{icon}</div>
       <div className="snui-flex snui-flex-column snui-margin-right-sm">
-        <p className="snui-notification__title snui-font-weight-xxl">{title}</p>
+        <p className="snui-notification__title">{title}</p>
         <p className="snui-notification__message">{message}</p>
       </div>
       {isCloseable && (
@@ -201,7 +203,11 @@ const Notification: React.FC<NotificationProps> = props => {
           onClick={() => setProgressbarWidth(0)}
           variant="outline"
         >
-          <CloseIcon fill="var(--snui-color-white)" size="0.7rem" />
+          <CloseIcon
+            color="var(--snui-color-white)"
+            height="0.7rem"
+            width="0.7rem"
+          />
         </Button>
       )}
       {isPausable && (

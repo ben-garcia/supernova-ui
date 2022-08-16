@@ -9,7 +9,7 @@ export default {
     duration: { control: 'number', defaultValue: 5000 },
     isCloseable: { control: 'boolean', defaultValue: true },
     isPausable: { control: 'boolean', defaultValue: true },
-    message: { control: 'text', defaultValue: 'This is a message' },
+    message: { control: 'text', defaultValue: 'message' },
     position: {
       control: 'select',
       defaultValue: 'top-right',
@@ -71,15 +71,8 @@ const WithCustomTemplate: Story<any> = args => {
       ...args,
       render: onClose => (
         <div className="snui-flex snui-padding-sm">
-          <Button
-            backgroundColor="transparent"
-            boxShadow="0"
-            hoverBackgroundColor="transparent"
-            onClick={onClose}
-          >
-            X
-          </Button>
-          <div className="snui-flex snui-flex-column">
+          <Button onClick={onClose}>X</Button>
+          <div className="snui-flex snui-flex-column snui-margin-sm">
             <p>custom title</p>
             <p>custom message</p>
           </div>

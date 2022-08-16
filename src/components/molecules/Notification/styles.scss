@@ -55,17 +55,29 @@
     }
   }
 
-  &__close-button {
-    border: none !important;
-    box-shadow: none !important;
-    height: auto !important;
-    padding-inline-end: 0 !important;
-    padding-inline-start: 0 !important;
+  &__title {
+    font-family: var(--snui-font-heading);
+    font-size: var(--snui-font-size-md);
+    font-weight: var(--snui-font-weight-xl);
+  }
+
+  &__message {
+    font-family: var(--snui-font-body);
+    font-size: var(--snui-font-size-sm);
+  }
+
+  &__close-button.snui-button {
+    border: none;
+    box-shadow: none;
+    height: auto;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
     position: absolute;
-    right: var(--snui-space-md);
+    right: 1rem;
+    width: auto;
 
     &:hover {
-      background: none !important;
+      background: none;
     }
   }
 
