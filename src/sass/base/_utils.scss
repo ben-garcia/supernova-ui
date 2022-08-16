@@ -708,24 +708,32 @@
 // --------------------------------
 // Colors
 // --------------------------------
-.snui-color-primary {
-  background-color: var(--snui-color-primary, #0a6ab6);
-}
-
-.snui-color-info {
-  background-color: var(--snui-color-info, #026da7);
-}
-
-.snui-color-warning {
-  background-color: var(--snui-color-warning, #b07f03);
-}
-
-.snui-color-success {
-  background-color: var(--snui-color-success, #537f2d);
+.snui-color-black {
+  color: var(--snui-color-black);
 }
 
 .snui-color-error {
-  background-color: var(--snui-color-error, #a72323);
+  background-color: var(--snui-color-error);
+}
+
+.snui-color-info {
+  background-color: var(--snui-color-info);
+}
+
+.snui-color-primary {
+  background-color: var(--snui-color-primary);
+}
+
+.snui-color-success {
+  background-color: var(--snui-color-success);
+}
+
+.snui-color-warning {
+  background-color: var(--snui-color-warning);
+}
+
+.snui-color-white {
+  color: var(--snui-color-white);
 }
 
 // --------------------------------
@@ -913,7 +921,6 @@
 .snui-gap-5 {
   gap: 0.5rem;
 }
-
 
 // --------------------------------
 // Animations

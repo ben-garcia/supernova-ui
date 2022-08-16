@@ -14,6 +14,34 @@
   }
 }
 
+.snui-text-label {
+  color: var(--snui-color-black);
+  cursor: text;
+  left: 0.5rem;
+  padding: 0 0.5rem;
+  position: absolute;
+  transition: transform 150ms ease-in, font-size 150ms ease-in;
+
+  &--sm {
+    font-size: 0.9rem;
+    transform: translateY(0.6rem);
+  }
+
+  &--md {
+    font-size: 1.05rem;
+    transform: translateY(0.7rem);
+  }
+
+  &--lg {
+    font-size: 1.1rem;
+    transform: translateY(0.7rem);
+  }
+
+  &--padding-left {
+    padding-left: 1.5rem;
+  }
+}
+
 .snui-text-input {
   appearance: none;
   background: none;
@@ -82,44 +110,15 @@
   }
 }
 
-.snui-text-label {
-  color: var(--snui-color-black);
-  cursor: text;
-  left: 0.5rem;
-  padding: 0 0.5rem;
-  position: absolute;
-  transition: transform 150ms ease-in, font-size 150ms ease-in;
-
-  &--sm {
-    font-size: 0.9rem;
-    transform: translateY(0.6rem);
-  }
-
-  &--md {
-    font-size: 1.05rem;
-    transform: translateY(0.7rem);
-  }
-
-  &--lg {
-    font-size: 1.1rem;
-    transform: translateY(0.7rem);
-  }
-
-  &--padding-left {
-    padding-left: 1.5rem;
-  }
-}
-
 .snui-text-input:focus ~ .snui-text-label,
-.snui-text-input:not(:placeholder-shown).snui-text-input:not(:focus)
-  ~ .snui-text-label {
+.snui-text-input:not(:placeholder-shown).snui-text-input:not(:focus) ~ .snui-text-label {
   background-color: var(--snui-color-white);
   font-size: 0.7rem;
   transform: translate(-0.1rem, -0.55rem);
 }
+
 .snui-text-input--md:focus ~ .snui-text-label--md,
-.snui-text-input--md:not(:placeholder-shown).snui-text-input--md:not(:focus)
-  ~ .snui-text-label--md {
+.snui-text-input--md:not(:placeholder-shown).snui-text-input--md:not(:focus) ~ .snui-text-label--md {
   background-color: var(--snui-color-white);
   transform: translate(-0.1rem, -0.5rem);
 }
