@@ -7,8 +7,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 
+import { Portal } from '@atoms';
 import { MenuListProvider } from '@contexts';
 import {
   useCreateClassString,
@@ -55,8 +55,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
-  const [mounted, setMounted] = useState(false);
-  const menuPortalId = useMemo(() => `${menuId}-portal`, []);
   const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
   /**
    * obj that stores the first letters of menu items
@@ -181,20 +179,6 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     };
   }, [isOpen]);
 
-  // add React portal
-  useEffect(() => {
-    const div: HTMLDivElement = document.createElement('div');
-    const menuPortal = document.getElementById(menuPortalId);
-
-    // make to not to append more than one menu portal with a unique id
-    if (!menuPortal) {
-      div.id = menuPortalId;
-
-      document.body.appendChild(div);
-    }
-    setMounted(true);
-  }, [isOpen]);
-
   useEffect(() => {
     if (menuButtonRef?.current && menuListRef?.current) {
       const menuButtonPosition = menuButtonRef.current.getBoundingClientRect();
@@ -245,26 +229,23 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     }
   }, [menuButtonRef?.current, menuListRef?.current]);
 
-  const jsx = (
-    <MenuListProvider value={contextValue as any}>
-      <div
-        {...getMenuListProps({ ...remainingProps, ...addClasses() }, ref)}
-        id={`${menuId}__list`}
-        role="menu"
-        style={{
-          left: `${pos.left}px`,
-          top: `${pos.top}px`,
-        }}
-        tabIndex={-1}
-      >
-        {children}
-      </div>
-    </MenuListProvider>
-  );
-
   return (
-    mounted &&
-    createPortal(jsx, document.getElementById(menuPortalId) as Element)
+    <Portal>
+      <MenuListProvider value={contextValue as any}>
+        <div
+          {...getMenuListProps({ ...remainingProps, ...addClasses() }, ref)}
+          id={`${menuId}__list`}
+          role="menu"
+          style={{
+            left: `${pos.left}px`,
+            top: `${pos.top}px`,
+          }}
+          tabIndex={-1}
+        >
+          {children}
+        </div>
+      </MenuListProvider>
+    </Portal>
   );
 });
 
