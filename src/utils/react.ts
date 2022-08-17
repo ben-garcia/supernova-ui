@@ -6,6 +6,8 @@ import {
   createElement as rcreateElement,
 } from 'react';
 
+export { createPortal } from 'react-dom';
+
 /**
  * Merge multiple React refs in a single ref.
  *
