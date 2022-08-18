@@ -87,12 +87,10 @@ describe('<Accordion />', () => {
       accordionPanel?.getAttribute('id')
     );
 
-    fireEvent.click(headerButton as HTMLElement);
+    fireEvent.click(headerButton);
 
     // 'aria-expanded' should indicate that the button was clicked.
     expect(headerButton).toHaveAttribute('aria-expanded', 'true');
-    // indicates that the panel cannot be collapsed by default.
-    expect(headerButton).toHaveAttribute('aria-disabled', 'true');
 
     expect(accordionPanel).toHaveAttribute('role', 'region');
     // 'aria-labelledby' must match id of the panel.
@@ -213,7 +211,7 @@ describe('<Accordion />', () => {
         const headerButtons = screen.getAllByRole('button');
 
         /**
-         * 'aria-expanded' set to true indicates that panel associtaed with
+         * 'aria-expanded' set to true indicates that panel associated with
          * the button is open.
          */
 
@@ -225,7 +223,6 @@ describe('<Accordion />', () => {
         // click the first header button
         fireEvent.click(headerButtons[0]);
         expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'true');
-        expect(headerButtons[0]).toHaveAttribute('aria-disabled', 'true');
         expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
         expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
 
@@ -233,7 +230,6 @@ describe('<Accordion />', () => {
         fireEvent.click(headerButtons[1]);
         expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
         expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'true');
-        expect(headerButtons[1]).toHaveAttribute('aria-disabled', 'true');
         expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'false');
 
         // click the third header button
@@ -241,7 +237,6 @@ describe('<Accordion />', () => {
         expect(headerButtons[0]).toHaveAttribute('aria-expanded', 'false');
         expect(headerButtons[1]).toHaveAttribute('aria-expanded', 'false');
         expect(headerButtons[2]).toHaveAttribute('aria-expanded', 'true');
-        expect(headerButtons[2]).toHaveAttribute('aria-disabled', 'true');
       });
     });
 
