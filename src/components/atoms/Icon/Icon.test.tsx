@@ -26,19 +26,25 @@ describe('<Icon />', () => {
 
   it('should render as an svg', () => {
     const { getByTestId } = render(
-      <Icon data-testid="svg">
-        <path d="125 1560" />
-      </Icon>
+      <div data-testid="svg-parrent">
+        <Icon>
+          <path d="125 1560" />
+        </Icon>
+      </div>
     );
-    const result = getByTestId('svg');
+    const result = getByTestId('svg-parrent');
 
-    expect(result.nodeName).toBe('svg');
+    expect(result!.firstChild!.nodeName).toBe('svg');
   });
 
   it('should render path as children', () => {
     const path = <path d="125 1560" />;
-    const { getByTestId } = render(<Icon data-testid="svg">{path}</Icon>);
-    const result = getByTestId('svg').firstChild;
+    const { getByTestId } = render(
+      <div data-testid="svg-parent">
+        <Icon>{path}</Icon>
+      </div>
+    );
+    const result = getByTestId('svg-parent').firstChild?.firstChild;
 
     expect(result!.nodeName).toBe('path');
   });
