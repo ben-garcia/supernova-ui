@@ -16,13 +16,6 @@ describe('<Spinner />', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should render with an aria label by default', () => {
-    const { getByLabelText } = render(<Spinner />);
-    const result = getByLabelText('Action is being processed');
-
-    expect(result).toBeInTheDocument();
-  });
-
   it('should render with aria label passed in', () => {
     const ariaLabel = 'Loading...';
     const { getByLabelText } = render(<Spinner aria-label={ariaLabel} />);
