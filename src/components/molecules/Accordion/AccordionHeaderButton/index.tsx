@@ -1,4 +1,11 @@
-import React, { useCallback } from 'react';
+import React, {
+  FC,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
 import { Button, ChevronDownIcon, Heading } from '@atoms';
 import {
@@ -11,7 +18,6 @@ import { createClasses, isString } from '@utils';
 import './styles.scss';
 
 interface AccordionHeaderButtonProps extends ButtonProps {
-  className?: string;
   /**
    * Configure the header level
    *
@@ -20,12 +26,10 @@ interface AccordionHeaderButtonProps extends ButtonProps {
   headingLevel?: number;
 }
 
-type HeadingLevelType = 1 | 2 | 3 | 4 | 5 | 6;
-
 /**
  * A button used to open/close the AccordionItem.
  */
-const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
+const AccordionHeaderButton: FC<AccordionHeaderButtonProps> = props => {
   const { children, className, headingLevel = 2, ...rest } = props;
   const { getAccordionButtonProps } = useAccordionItemProvider();
   const {
@@ -45,7 +49,8 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     onOpen,
     onClose,
   } = useAccordionItem();
-  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const buttonIndexRef = useRef<number>();
   const classes = createClasses('snui snui-accordion__button', {
     [`${className}`]: isString(className),
   });
@@ -57,11 +62,27 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
     setFocusedIndex(index);
   }, []);
 
+  // collapses buttons that are not active.
+  useEffect(() => {
+    if (!allowMultiple) {
+      // @ts-ignore
+      if (!activeIndices.includes(buttonIndexRef.current)) {
+        onClose();
+      }
+    }
+  }, [activeIndices]);
+
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
+    (e: MouseEvent<HTMLButtonElement>) => {
       // get the index of the button that was clicked,
       // used to compare with the activeIndices array.
-      const accordionButtonIndex = Number(
+      // const accordionButtonIndex = Number(
+      //   e.currentTarget.attributes.getNamedItem(
+      //     'data-snui-accordion-button-index'
+      //   )?.nodeValue
+      // );
+
+      buttonIndexRef.current = Number(
         e.currentTarget.attributes.getNamedItem(
           'data-snui-accordion-button-index'
         )?.nodeValue
@@ -69,20 +90,23 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
 
       if (!allowToggle && !allowMultiple) {
         if (isOpen) {
-          if (!activeIndices.includes(accordionButtonIndex) && defaultIndices) {
+          if (
+            !activeIndices.includes(buttonIndexRef.current) &&
+            defaultIndices
+          ) {
             setActiveIndices(
-              activeIndices.filter(n => n !== accordionButtonIndex)
+              activeIndices.filter(n => n !== buttonIndexRef.current)
             );
             onClose();
           }
         } else {
           if (
-            defaultIndices.includes(accordionButtonIndex) &&
-            activeIndices.includes(accordionButtonIndex)
+            defaultIndices.includes(buttonIndexRef.current) &&
+            activeIndices.includes(buttonIndexRef.current)
           ) {
             // setActiveIndices([accordionButtonIndex]);
           } else {
-            setActiveIndices([accordionButtonIndex]);
+            setActiveIndices([buttonIndexRef.current]);
           }
           onOpen();
         }
@@ -91,24 +115,24 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
       if (allowToggle) {
         if (isOpen) {
           if (
-            defaultIndices.includes(accordionButtonIndex) &&
-            activeIndices.includes(accordionButtonIndex)
+            defaultIndices.includes(buttonIndexRef.current) &&
+            activeIndices.includes(buttonIndexRef.current)
           ) {
-            setActiveIndices([accordionButtonIndex]);
+            setActiveIndices([buttonIndexRef.current]);
           } else {
             setActiveIndices(
-              activeIndices.filter(n => n !== accordionButtonIndex)
+              activeIndices.filter(n => n !== buttonIndexRef.current)
             );
           }
           onClose();
         } else {
           if (
-            defaultIndices.includes(accordionButtonIndex) &&
-            activeIndices.includes(accordionButtonIndex)
+            defaultIndices.includes(buttonIndexRef.current) &&
+            activeIndices.includes(buttonIndexRef.current)
           ) {
             // setActiveIndices([accordionButtonIndex]);
           } else {
-            setActiveIndices([accordionButtonIndex]);
+            setActiveIndices([buttonIndexRef.current]);
           }
           onOpen();
         }
@@ -117,11 +141,11 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
       if (allowMultiple) {
         if (isOpen) {
           setActiveIndices(
-            activeIndices.filter(n => n !== accordionButtonIndex)
+            activeIndices.filter(n => n !== buttonIndexRef.current)
           );
           onClose();
         } else {
-          setActiveIndices([...activeIndices, accordionButtonIndex]);
+          setActiveIndices([...activeIndices, buttonIndexRef.current]);
           onOpen();
         }
       }
@@ -130,7 +154,7 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
   );
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
+    (e: KeyboardEvent<HTMLDivElement>) => {
       const { key } = e;
       if (buttonsRef) {
         if (key === 'ArrowUp') {
@@ -164,9 +188,10 @@ const AccordionHeaderButton: React.FC<AccordionHeaderButtonProps> = props => {
   );
 
   return (
-    <Heading level={headingLevel as HeadingLevelType}>
+    <Heading
+      level={headingLevel as keyof AccordionHeaderButtonProps['headingLevel']}
+    >
       <Button
-        {...rest}
         {...getAccordionButtonProps(rest)}
         aria-controls={accordionPanelId}
         aria-disabled={!allowToggle && isOpen ? true : undefined}
