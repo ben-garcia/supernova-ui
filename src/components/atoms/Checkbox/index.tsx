@@ -127,7 +127,11 @@ const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
 
       {isString(label) && (
         // eslint-disable-next-line
-        <label {...addLabelClasses()} onClick={handleToggleCheck}>
+        <label
+          {...addLabelClasses()}
+          htmlFor={checkboxId}
+          onClick={handleToggleCheck}
+        >
           {label}
           {isRequired && isString(label) && (
             <span aria-hidden="true" className="snui-error" role="presentation">
