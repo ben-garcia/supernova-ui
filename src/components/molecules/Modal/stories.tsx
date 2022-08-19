@@ -42,7 +42,6 @@ const BasicTemplate: Story<ModalProps> = args => {
           onClick={() => {
             setIsOpen(true);
           }}
-          margin="0 sm"
         >
           Open
         </Button>
@@ -51,11 +50,7 @@ const BasicTemplate: Story<ModalProps> = args => {
         <ModalHeader>Modal Title</ModalHeader>
         <ModalBody>This is a modal</ModalBody>
         <ModalFooter>
-          <ModalButton
-            onClick={() => setIsOpen(false)}
-            margin="0 sm 0 0"
-            variant="outline"
-          >
+          <ModalButton onClick={() => setIsOpen(false)} variant="outline">
             Cancel
           </ModalButton>
           <ModalButton onClick={() => setIsOpen(false)}>Save</ModalButton>
@@ -73,7 +68,7 @@ Basic.parameters = {
 
 const FinalFocusRefTemplate: Story<ModalProps> = args => {
   const [isOpen, setOpen] = useState(false);
-  const initialFocusRef = useRef<HTMLButtonElement | null>(null);
+  const initialFocusRef = useRef<HTMLInputElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClose = () => setOpen(false);
@@ -81,9 +76,7 @@ const FinalFocusRefTemplate: Story<ModalProps> = args => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Button onClick={() => setOpen(true)} margin="0 sm">
-          Open
-        </Button>
+        <Button onClick={() => setOpen(true)}>Open</Button>
         <Button ref={finalFocusRef} variant="outline">
           finalFocusRef
         </Button>
@@ -103,11 +96,7 @@ const FinalFocusRefTemplate: Story<ModalProps> = args => {
           </form>
         </ModalBody>
         <ModalFooter>
-          <ModalButton
-            onClick={handleClose}
-            margin="0 sm 0 0"
-            variant="outline"
-          >
+          <ModalButton onClick={handleClose} variant="outline">
             Cancel
           </ModalButton>
           <ModalButton onClick={handleClose}>Signup</ModalButton>

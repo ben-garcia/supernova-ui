@@ -49,20 +49,14 @@ const BasicTemplate: Story<DrawerProps> = args => {
   return (
     <>
       <div>
-        <Button onClick={() => setIsOpen(true)} margin="0 sm">
-          Open
-        </Button>
+        <Button onClick={() => setIsOpen(true)}>Open</Button>
       </div>
 
       <Drawer {...args} onClose={handleClose} isOpen={isOpen}>
         <DrawerHeader>Drawer Title</DrawerHeader>
         <DrawerBody>This is a drawer</DrawerBody>
         <DrawerFooter>
-          <DrawerButton
-            onClick={() => setIsOpen(false)}
-            margin="0 sm 0 0"
-            variant="outline"
-          >
+          <DrawerButton onClick={() => setIsOpen(false)} variant="outline">
             Cancel
           </DrawerButton>
 
@@ -87,9 +81,7 @@ const FinalFocusRefTemplate: Story<DrawerProps> = args => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Button onClick={() => setOpen(true)} margin="0 sm">
-          Open
-        </Button>
+        <Button onClick={() => setOpen(true)}>Open</Button>
 
         <Button ref={finalFocusRef} variant="outline">
           finalFocusRef
