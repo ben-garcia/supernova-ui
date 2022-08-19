@@ -96,9 +96,8 @@ const FocusLock: FC<FocusLockProps> = props => {
     if (initialFocusRef && initialFocusRef.current) {
       // make sure that initialFocusRef is not disabled
       if (
-        !initialFocusRef.current.getAttribute('disabled') ||
-        (initialFocusRef.current.hasAttribute('aria-disabled') &&
-          !initialFocusRef.current.getAttribute('aria-disabled'))
+        !initialFocusRef.current.hasAttribute('disabled') &&
+        initialFocusRef.current.getAttribute('aria-disabled') !== 'true'
       ) {
         focusableItems.current.forEach(item => {
           // make sure the initialFocusRef is focusable
