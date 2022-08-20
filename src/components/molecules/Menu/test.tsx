@@ -63,17 +63,6 @@ describe('<Menu />', () => {
     expect(menuItemProfile).toHaveAttribute('role', 'menuitem');
   });
 
-  it('should render menu list inside a portal', () => {
-    const { getByTestId } = render(<MenuTest isOpen onClose={() => {}} />);
-    const menuList = getByTestId('menu-list');
-    const portal = menuList.parentElement;
-    // since menu list element has id equal to '<menuId>__list'
-    // remove '__list' since its not neccessary
-    const menuId = menuList?.getAttribute('id')?.replace('__list', '');
-
-    expect(portal?.getAttribute('id')).toBe(`${menuId}-portal`);
-  });
-
   it('should call the onClick function', () => {
     const mockFunction = jest.fn();
     const { getByText } = render(
