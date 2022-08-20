@@ -1,4 +1,4 @@
-import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
+import React, { ReactNode } from 'react';
 
 import {
   useClassStyles,
@@ -7,7 +7,7 @@ import {
   usePseudoClasses,
   useValidateProps,
 } from '@hooks';
-import { isString } from '@utils';
+import { forwardRef, isString } from '@utils';
 import { SupernovaProps } from '@types';
 
 export interface FormHelperTextProps extends SupernovaProps {
@@ -17,8 +17,8 @@ export interface FormHelperTextProps extends SupernovaProps {
 /**
  * Used to provider feedback about how a field should be filled out.
  */
-const FormHelperText = forwardRef(
-  (props: FormHelperTextProps, ref: ForwardedRef<HTMLDivElement>) => {
+const FormHelperText = forwardRef<FormHelperTextProps, HTMLDivElement>(
+  (props, ref) => {
     const { children, className, ...rest } = props;
     const {
       remainingProps,

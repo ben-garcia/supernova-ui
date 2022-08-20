@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import {
   useClassStyles,
@@ -8,7 +8,13 @@ import {
   useUniqueId,
   useValidateProps,
 } from '@hooks';
-import { createClasses, isFunction, isObject, isString } from '@utils';
+import {
+  createClasses,
+  forwardRef,
+  isFunction,
+  isObject,
+  isString,
+} from '@utils';
 
 import { TextInputProps } from './types';
 import './styles.scss';
@@ -16,7 +22,7 @@ import './styles.scss';
 /**
  * UI interactive component used to enter information
  */
-const TextInput = forwardRef((props: TextInputProps, ref: any) => {
+const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
   const {
     className,
     value,

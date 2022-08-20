@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import {
   useClassStyles,
@@ -9,7 +9,7 @@ import {
   useUniqueId,
   useValidateProps,
 } from '@hooks';
-import { isFunction, isString } from '@utils';
+import { forwardRef, isFunction, isString } from '@utils';
 
 import { SwitchProps } from './types';
 import './styles.scss';
@@ -17,7 +17,7 @@ import './styles.scss';
 /**
  * UI interactive component used to toogle between 2 states.
  * */
-const Switch = forwardRef((props: SwitchProps, ref: any) => {
+const Switch = forwardRef<SwitchProps, HTMLInputElement>((props, ref) => {
   const {
     className,
     colorVariant,

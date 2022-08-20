@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { Spinner } from '@atoms';
 import {
@@ -8,7 +8,7 @@ import {
   usePseudoClasses,
   useValidateProps,
 } from '@hooks';
-import { isObject, isString } from '@utils';
+import { forwardRef, isObject, isString } from '@utils';
 
 import { ButtonProps } from './types';
 import './styles.scss';
@@ -16,7 +16,7 @@ import './styles.scss';
 /**
  * UI interactive component used to trigger an action
  */
-const Button = forwardRef((props: ButtonProps, ref: any) => {
+const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
   const {
     asSubmitButton = false,
     children,

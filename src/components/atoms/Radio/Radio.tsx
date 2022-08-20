@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import {
   useClassStyles,
@@ -10,7 +10,7 @@ import {
   useValidateProps,
 } from '@hooks';
 
-import { isFunction, isString } from '@utils';
+import { forwardRef, isFunction, isString } from '@utils';
 
 import { RadioProps } from './types';
 import './styles.scss';
@@ -19,7 +19,7 @@ import './styles.scss';
  * UI interactive component used to indicate that only one choice must
  * be selected of a given number of choices presented
  */
-const Radio = forwardRef((props: RadioProps, ref: any) => {
+const Radio = forwardRef<RadioProps, HTMLInputElement>((props, ref) => {
   const {
     className,
     colorVariant,

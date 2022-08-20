@@ -1,4 +1,4 @@
-import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
+import React, { ReactNode } from 'react';
 
 import {
   useClassStyles,
@@ -7,7 +7,7 @@ import {
   usePseudoClasses,
   useValidateProps,
 } from '@hooks';
-import { isString } from '@utils';
+import { forwardRef, isString } from '@utils';
 
 import { SupernovaProps } from '@types';
 
@@ -18,8 +18,8 @@ interface FormErrorMessageProps extends SupernovaProps {
 /**
  * Used to provider feedback about an invalid field.
  */
-const FormErrorMessage = forwardRef(
-  (props: FormErrorMessageProps, ref: ForwardedRef<HTMLDivElement>) => {
+const FormErrorMessage = forwardRef<FormErrorMessageProps, HTMLDivElement>(
+  (props, ref) => {
     const { children, className, ...rest } = props;
     const {
       remainingProps,

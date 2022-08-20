@@ -1,10 +1,4 @@
-import React, {
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import {
   useCreateClassString,
@@ -15,7 +9,7 @@ import {
   useTheme,
   useValidateProps,
 } from '@hooks';
-import { isFunction, isString } from '@utils';
+import { forwardRef, isFunction, isString } from '@utils';
 
 import { SupernovaProps } from '@types';
 import './styles.scss';
@@ -28,7 +22,7 @@ export interface MenuItemProps extends SupernovaProps {
 /**
  * Menu option to select from.
  */
-const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
+const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
   const { children, className, onClick, ...rest } = props;
   const {
     remainingProps,
@@ -178,7 +172,7 @@ const MenuItem = forwardRef((props: MenuItemProps, ref: any) => {
     <button
       {...getMenuItemProps(
         { ...(remainingProps as any), ...addClasses() },
-        ref
+        ref as any
       )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}

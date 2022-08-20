@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { CheckmarkIcon } from '@atoms';
 import {
@@ -10,7 +10,7 @@ import {
   useUniqueId,
   useValidateProps,
 } from '@hooks';
-import { isFunction, isString } from '@utils';
+import { forwardRef, isFunction, isString } from '@utils';
 
 import { CheckboxProps } from './types';
 import './styles.scss';
@@ -19,7 +19,7 @@ import './styles.scss';
  * UI interactive component used to select one or more options
  * of a limited number of choices.
  */
-const Checkbox = forwardRef((props: CheckboxProps, ref: any) => {
+const Checkbox = forwardRef<CheckboxProps, HTMLInputElement>((props, ref) => {
   const {
     className,
     colorVariant,

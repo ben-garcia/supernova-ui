@@ -73,7 +73,7 @@ Basic.parameters = parameters;
 
 const FinalFocusRefTemplate: Story<DrawerProps> = args => {
   const [isOpen, setOpen] = useState(false);
-  const initialFocusRef = useRef<HTMLButtonElement | null>(null);
+  const initialFocusRef = useRef<HTMLInputElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClose = () => setOpen(false);

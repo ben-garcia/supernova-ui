@@ -1,8 +1,8 @@
-import React, { MouseEvent, forwardRef, useCallback } from 'react';
+import React, { MouseEvent, useCallback } from 'react';
 
 import { Button } from '@atoms';
 import { ButtonProps } from '@atoms/Button/types';
-import { createClasses, isFunction, isString } from '@utils';
+import { createClasses, forwardRef, isFunction, isString } from '@utils';
 import { useAlertDialog } from '@hooks';
 
 type AlertDialogButtonProps = ButtonProps;
@@ -10,8 +10,8 @@ type AlertDialogButtonProps = ButtonProps;
 /**
  * The button for the AlertDialog component.
  */
-const AlertDialogButton = forwardRef(
-  (props: AlertDialogButtonProps, ref: any) => {
+const AlertDialogButton = forwardRef<AlertDialogButtonProps, HTMLButtonElement>(
+  (props, ref) => {
     const { children, className, onClick, ...rest } = props;
 
     const { enterExitMode, leaveExitMode } = useAlertDialog();
@@ -30,7 +30,12 @@ const AlertDialogButton = forwardRef(
     });
 
     return (
-      <Button onClick={handleClick} ref={ref} {...rest} className={classes}>
+      <Button
+        onClick={handleClick}
+        ref={ref as any}
+        {...rest}
+        className={classes}
+      >
         {children}
       </Button>
     );

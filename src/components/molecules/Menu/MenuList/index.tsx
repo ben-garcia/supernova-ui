@@ -1,6 +1,5 @@
 import React, {
   ReactNode,
-  forwardRef,
   useCallback,
   useEffect,
   useMemo,
@@ -17,7 +16,7 @@ import {
   usePseudoClasses,
   useValidateProps,
 } from '@hooks';
-import { isString } from '@utils';
+import { forwardRef, isString } from '@utils';
 
 import { SupernovaProps } from '@types';
 import './styles.scss';
@@ -30,7 +29,7 @@ export interface MenuListProps extends SupernovaProps {
  * Wrapper for all MenuItem
  */
 // @ts-ignore
-const MenuList = forwardRef((props: MenuListProps, ref: any) => {
+const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   const { children, className, ...rest } = props;
   const {
     remainingProps,
@@ -233,7 +232,10 @@ const MenuList = forwardRef((props: MenuListProps, ref: any) => {
     <Portal>
       <MenuListProvider value={contextValue as any}>
         <div
-          {...getMenuListProps({ ...remainingProps, ...addClasses() }, ref)}
+          {...getMenuListProps(
+            { ...remainingProps, ...addClasses() },
+            ref as any
+          )}
           id={`${menuId}__list`}
           role="menu"
           style={{

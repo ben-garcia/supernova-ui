@@ -11,7 +11,8 @@ import { MenuProps } from '@molecules/Menu/types';
 type ReactRef<T> =
   | React.Ref<T>
   | React.RefObject<T>
-  | React.MutableRefObject<T>;
+  | React.MutableRefObject<T>
+  | React.ForwardedRef<T>;
 
 /**
  * Assigns a value to a ref function or object
