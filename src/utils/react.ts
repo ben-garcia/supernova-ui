@@ -1,12 +1,21 @@
 // Helper functions involving React.
 import {
   ClassAttributes,
+  ForwardedRef,
+  ForwardRefRenderFunction,
   InputHTMLAttributes,
   MutableRefObject,
   createElement as rcreateElement,
+  forwardRef as rforwardRef,
 } from 'react';
 
 export { createPortal } from 'react-dom';
+
+export function forwardRef<TProps, TElement>(
+  render: ForwardRefRenderFunction<TElement, TProps>
+) {
+  return rforwardRef<TElement, TProps>(render);
+}
 
 /**
  * Merge multiple React refs in a single ref.
@@ -14,7 +23,9 @@ export { createPortal } from 'react-dom';
  * @param 'refs' array of refs to merge.
  * @return function passed to React ref attribute.
  */
-export function mergeRefs<T>(...refs: (T | MutableRefObject<T>)[]) {
+export function mergeRefs<T>(
+  ...refs: (T | MutableRefObject<T> | ForwardedRef<T>)[]
+) {
   return (node: T) => {
     // @ts-ignore
     // eslint-disable-next-line
