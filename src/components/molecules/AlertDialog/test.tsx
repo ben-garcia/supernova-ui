@@ -5,7 +5,6 @@ import React from 'react';
 import {
   a11yTest,
   fireEvent,
-  mockMatchMedia,
   render,
   userEvent,
   waitFor, // wait for the set timeout function to be called
@@ -20,8 +19,6 @@ import {
 } from '@molecules';
 
 describe('<AlertDialog />', () => {
-  beforeAll(() => mockMatchMedia());
-
   it('should pass a11y tests', async () => {
     const ModalTest = () => {
       const leastDestructiveRef = React.useRef(null);

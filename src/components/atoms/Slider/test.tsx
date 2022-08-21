@@ -1,20 +1,11 @@
 import React from 'react';
 
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-  screen,
-  userEvent,
-} from '@testUtils';
+import { a11yTest, fireEvent, render, screen, userEvent } from '@testUtils';
 import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '.';
 
 import { SliderProps } from './types';
 
 describe('<Slider />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const SliderTest = (props: Partial<SliderProps>) => {
     const { value: valueProp } = props;
     const [value, setValue] = React.useState(valueProp || 0);

@@ -2,20 +2,11 @@
 import React from 'react';
 
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '@molecules';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-  screen,
-  userEvent,
-} from '@testUtils';
+import { a11yTest, fireEvent, render, screen, userEvent } from '@testUtils';
 
 import { MenuProps } from './types';
 
 describe('<Menu />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const MenuTest = (props: Omit<MenuProps, 'children'>) => {
     return (
       <Menu {...props}>

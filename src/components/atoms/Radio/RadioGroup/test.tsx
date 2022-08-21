@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils';
+import { a11yTest, fireEvent, render } from '@testUtils';
 
 import { Radio, RadioGroup } from '..';
 
 describe('<GroupRadio />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const TestRadioGroup = () => {
     const [value, setValue] = React.useState('one');
     return (

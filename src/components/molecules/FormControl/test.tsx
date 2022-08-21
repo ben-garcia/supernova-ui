@@ -3,13 +3,11 @@ import React from 'react';
 
 import { TextInput } from '@atoms';
 import { FormControl, FormErrorMessage, FormHelperText } from '@molecules';
-import { a11yTest, mockMatchMedia, render } from '@testUtils';
+import { a11yTest, render } from '@testUtils';
 
 import { FormControlProps } from './types';
 
 describe('<FormControl />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const errorMessage = 'error message';
   const helperText = 'helper text';
   const label = 'testing label';

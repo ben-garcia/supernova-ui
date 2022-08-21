@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { a11yTest, mockMatchMedia, render } from '@testUtils';
+import { a11yTest, render } from '@testUtils';
 import Paragraph from '.';
 
 describe('<Paragraph />', () => {
-  beforeAll(() => mockMatchMedia());
-
   it('should pass a11y tests', async () => {
     await a11yTest(
       <Paragraph>this paragraph contain the secrets of the universe.</Paragraph>

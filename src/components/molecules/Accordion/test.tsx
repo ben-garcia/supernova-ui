@@ -1,13 +1,6 @@
 import React from 'react';
 
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-  screen,
-  userEvent,
-} from '@testUtils';
+import { a11yTest, fireEvent, render, screen, userEvent } from '@testUtils';
 import {
   Accordion,
   AccordionHeaderButton,
@@ -18,8 +11,6 @@ import {
 import { AccordionProps } from './types';
 
 describe('<Accordion />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const buttonOneContent = 'Section 1';
   const panelOneContent = 'section 1 panel';
   const buttonTwoContent = 'Section 2';

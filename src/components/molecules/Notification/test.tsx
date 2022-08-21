@@ -2,11 +2,9 @@ import React from 'react';
 
 import { SupernovaProvider } from '@contexts';
 import { useNotification } from '@hooks';
-import { act, mockMatchMedia, renderHook, screen } from '@testUtils';
+import { act, renderHook, screen } from '@testUtils';
 
 describe('<Notification />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const title = 'notification title';
   const message = 'notification message';
 

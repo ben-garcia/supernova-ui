@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils';
+import { a11yTest, fireEvent, render } from '@testUtils';
 import Checkbox from '.';
 
 describe('<Checkbox />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const label = 'Testing in progress';
 
   it('should pass a11y tests', async () => {

@@ -2,20 +2,11 @@
 import React from 'react';
 
 import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@molecules';
-import {
-  a11yTest,
-  fireEvent,
-  mockMatchMedia,
-  render,
-  screen,
-  userEvent,
-} from '@testUtils';
+import { a11yTest, fireEvent, render, screen, userEvent } from '@testUtils';
 
 import { TabsProps } from './types';
 
 describe('<Tabs />', () => {
-  beforeAll(() => mockMatchMedia());
-
   const tabOneContent = 'Tab 1';
   const panelOneContent = 'panel 1';
   const tabTwoContent = 'Tab 2';

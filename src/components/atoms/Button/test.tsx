@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, mockMatchMedia, render } from '@testUtils';
+import { a11yTest, fireEvent, render } from '@testUtils';
 import Button from '.';
 
 describe('<Button />', () => {
-  beforeAll(() => mockMatchMedia());
-
   it('should pass a11y tests', async () => {
     await a11yTest(<Button>Submit</Button>);
   });

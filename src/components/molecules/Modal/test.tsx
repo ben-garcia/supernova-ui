@@ -10,7 +10,6 @@ import {
 import {
   a11yTest,
   fireEvent,
-  mockMatchMedia,
   render,
   screen,
   userEvent,
@@ -18,8 +17,6 @@ import {
 } from '@testUtils';
 
 describe('<Modal />', () => {
-  beforeAll(() => mockMatchMedia());
-
   it('should pass a11y tests', async () => {
     await a11yTest(
       <Modal isOpen onClose={jest.fn()}>

@@ -9,7 +9,6 @@ import {
 import {
   a11yTest,
   fireEvent,
-  mockMatchMedia,
   render,
   screen,
   userEvent,
@@ -19,8 +18,6 @@ import {
 import EditableProps from './types';
 
 describe('<Editable>', () => {
-  beforeAll(() => mockMatchMedia());
-
   describe('with <EditableInput>', () => {
     const EditableInputTest = (props: Partial<EditableProps>) => {
       const [value, setValue] = useState('test');
