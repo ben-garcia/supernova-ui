@@ -1,11 +1,11 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+
+import { SupernovaProps } from '@types';
 
 /**
  * Props for the RadioGroup component
  */
-export interface RadioGroupProps {
-  children: ReactNode | ReactNode[];
-  className?: string;
+export interface RadioGroupProps extends SupernovaProps {
   /**
    * Configure the default Radio component to be checked by matching
    * this value to the value prop of one of it's children
@@ -16,7 +16,7 @@ export interface RadioGroupProps {
    *
    * @default 'row'
    */
-  direction?: 'column' | 'row';
+  orientation?: 'column' | 'row';
   /**
    * Name input prop assigned to each Radio component,
    * to indicate that all children elements are joined

@@ -1,6 +1,12 @@
 import React, { FC, Children } from 'react';
 
-import { createClasses, isString } from '@utils';
+import {
+  useClassStyles,
+  useCreateClassString,
+  usePseudoClasses,
+  useValidateProps,
+} from '@hooks';
+import { isString } from '@utils';
 
 import { RadioGroupProps } from './types';
 
@@ -14,10 +20,18 @@ const RadioGroup: FC<RadioGroupProps> = props => {
     children,
     className,
     defaultValue,
-    direction = 'row',
+    orientation = 'row',
     name,
     onChange = () => {},
+    ...rest
   } = props;
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
+  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
+  const stylesClassName = useClassStyles(validatedCSSProps);
   // children with the added props to be rendered
   const enhancedChildren: React.ReactNode[] = [];
   Children.toArray(children).forEach((child: any) => {
@@ -30,17 +44,20 @@ const RadioGroup: FC<RadioGroupProps> = props => {
     });
     enhancedChildren.push(newChild);
   });
-  const classes = createClasses(
-    'snui-radio-group snui-inline-flex snui-gap-5',
+  const addClasses = useCreateClassString(
+    'snui snui-radio-group snui-inline-flex snui-gap-5',
     {
       [`${className}`]: isString(className),
-      [`snui-flex-${direction}`]: isString(direction),
-      'snui-flex-center': isString(direction) && direction === 'row',
-      'snui-items-flex-start': isString(direction) && direction === 'column',
+      [`snui-flex-${orientation}`]: isString(orientation),
+      'snui-flex-center': isString(orientation) && orientation === 'row',
+      'snui-items-flex-start':
+        isString(orientation) && orientation === 'column',
+      [`${pseudoClassName}`]: isString(pseudoClassName),
+      [`${stylesClassName}`]: isString(stylesClassName),
     }
   );
   return (
-    <div className={classes} role="radiogroup">
+    <div {...remainingProps} {...addClasses()} role="radiogroup">
       {enhancedChildren}
     </div>
   );
