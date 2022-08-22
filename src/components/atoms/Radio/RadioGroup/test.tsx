@@ -2,17 +2,20 @@ import React from 'react';
 
 import { a11yTest, fireEvent, render } from '@testUtils';
 
-import { Radio, RadioGroup } from '..';
+import { Radio, RadioGroup } from '@atoms';
 
 describe('<GroupRadio />', () => {
   const TestRadioGroup = () => {
     const [value, setValue] = React.useState('one');
     return (
-      <div data-testid="radiogroup-parent">
-        <RadioGroup defaultValue={value} name="testing" onChange={setValue}>
-          <Radio label="one" value="one" />
-        </RadioGroup>
-      </div>
+      <RadioGroup
+        data-testid="radiogroup"
+        defaultValue={value}
+        name="testing"
+        onChange={setValue}
+      >
+        <Radio label="one" value="one" />
+      </RadioGroup>
     );
   };
 
@@ -28,8 +31,8 @@ describe('<GroupRadio />', () => {
 
   it('should render with the correct role of radiogroup', () => {
     const { getByTestId } = render(<TestRadioGroup />);
-    const result = getByTestId('radiogroup-parent');
-    expect(result.firstChild).toHaveAttribute('role', 'radiogroup');
+    const result = getByTestId('radiogroup');
+    expect(result).toHaveAttribute('role', 'radiogroup');
   });
 
   it('should render with the correct Radio checked', () => {

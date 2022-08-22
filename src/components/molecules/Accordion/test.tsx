@@ -6,7 +6,7 @@ import {
   AccordionHeaderButton,
   AccordionItem,
   AccordionPanel,
-} from '.';
+} from '@molecules';
 
 import { AccordionProps } from './types';
 
@@ -20,24 +20,22 @@ describe('<Accordion />', () => {
 
   const AccordionTest = (props: Omit<AccordionProps, 'children'>) => {
     return (
-      <div data-testid="accordion">
-        <Accordion {...props}>
-          <AccordionItem>
-            <AccordionHeaderButton>{buttonOneContent}</AccordionHeaderButton>
-            <AccordionPanel>{panelOneContent}</AccordionPanel>
-          </AccordionItem>
+      <Accordion data-testid="accordion" {...props}>
+        <AccordionItem>
+          <AccordionHeaderButton>{buttonOneContent}</AccordionHeaderButton>
+          <AccordionPanel>{panelOneContent}</AccordionPanel>
+        </AccordionItem>
 
-          <AccordionItem>
-            <AccordionHeaderButton>{buttonTwoContent}</AccordionHeaderButton>
-            <AccordionPanel>{panelTwoContent}</AccordionPanel>
-          </AccordionItem>
+        <AccordionItem>
+          <AccordionHeaderButton>{buttonTwoContent}</AccordionHeaderButton>
+          <AccordionPanel>{panelTwoContent}</AccordionPanel>
+        </AccordionItem>
 
-          <AccordionItem>
-            <AccordionHeaderButton>{buttonThreeContent}</AccordionHeaderButton>
-            <AccordionPanel>{panelThreeContent}</AccordionPanel>
-          </AccordionItem>
-        </Accordion>
-      </div>
+        <AccordionItem>
+          <AccordionHeaderButton>{buttonThreeContent}</AccordionHeaderButton>
+          <AccordionPanel>{panelThreeContent}</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
     );
   };
 
