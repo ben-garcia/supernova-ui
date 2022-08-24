@@ -1,10 +1,4 @@
 import type {
-  StandardLonghandPropertiesHyphen,
-  StandardLonghandProperties,
-  StandardShorthandPropertiesHyphen,
-  StandardShorthandProperties,
-} from 'csstype';
-import type {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   InputHTMLAttributes,
@@ -12,7 +6,7 @@ import type {
   TextareaHTMLAttributes,
 } from 'react';
 
-import type { WithResponsiveProps } from '@types';
+import type { CSSProps, PseudoClassProps, WithResponsiveProps } from '@types';
 
 import colors from '../theme/colors';
 
@@ -112,31 +106,6 @@ export interface FormControlProps {
  * Component sizes.
  */
 export type ComponentSize = 'sm' | 'md' | 'lg';
-
-/**
- * All CSS properties
- *
- * includes shorthand properties like 'background'
- * and longhand properties like 'backgroundColor'.
- */
-export type CSSProps = StandardLonghandProperties & StandardShorthandProperties;
-
-/**
- * All hyphenated prefix CSS properties
- *
- * includes shorthand properties like 'animation'
- * and longhand properties like 'animation-delay'.
- */
-export type CSSPropsHyphen = StandardLonghandPropertiesHyphen &
-  StandardShorthandPropertiesHyphen;
-
-/**
- * Props for pseudo class.
- */
-export interface PseudoClassProps {
-  _focus?: CSSProps;
-  _hover?: CSSProps;
-}
 
 /**
  * All attributes supplied to a React button.
