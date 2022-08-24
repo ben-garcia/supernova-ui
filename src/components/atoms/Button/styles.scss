@@ -3,11 +3,15 @@
   border: none;
   border-radius: var(--snui-radii-sm);
   box-shadow: var(--snui-shadow-sm);
-  color: #fff;
+  color: var(--snui-color-white);
   cursor: pointer;
   font-weight: var(--snui-font-weight-lg);
   outline: currentColor none medium;
   width: auto;
+
+  &:active {
+    transform: scale(1.1);
+  }
 
   &:focus {
     outline: 3px solid var(--snui-color-focus-ring);
