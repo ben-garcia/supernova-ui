@@ -5,16 +5,20 @@ import { IdContext } from '../contexts';
 /**
  * React hooks that generates a unique string id.
  *
- * @eample
+ * @param length number of characters to use for the id.
+ *
+ * @example
  * ```js
  * const id = useUniqueId();
  *
  * // id will be `snui-<alphanumeric-string>-<unique-number>`
  * ````
  */
-export const useUniqueStringId = () => {
+export const useUniqueStringId = (length: number = 5) => {
   const context = useContext(IdContext);
-  const id = `snui-${Math.random().toString(36).substring(2, 6)}`;
+  const id = `snui-${Math.random()
+    .toString(36)
+    .substring(2, length + 1)}`;
 
   // eslint-disable-next-line
   return useMemo(() => `${id}${++context!.count}`, []);
