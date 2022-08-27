@@ -2,7 +2,52 @@ import React from 'react';
 
 import { AnyObject } from '@types';
 
-const validPseudoClassProps = ['_focus', '_hover'];
+const validPseudoClassProps = {
+  _active: true,
+  _anyLink: true,
+  _autofill: true,
+  _blank: true,
+  _checked: true,
+  _current: true,
+  _default: true,
+  _disabled: true,
+  _empty: true,
+  _enabled: true,
+  _firstChild: true,
+  _firstOfChild: true,
+  _focus: true,
+  _focusWithin: true,
+  _focusVisible: true,
+  _fullscreen: true,
+  _future: true,
+  _hover: true,
+  _indeterminate: true,
+  _inRange: true,
+  _invalid: true,
+  _lastChild: true,
+  _lastOfType: true,
+  _link: true,
+  _localLink: true,
+  _modal: true,
+  _optional: true,
+  _onlyChild: true,
+  _outOfRange: true,
+  _onlyOfType: true,
+  _past: true,
+  _paused: true,
+  _pictureInPicture: true,
+  _placeholderShown: true,
+  _playing: true,
+  _readOnly: true,
+  _readWrite: true,
+  _required: true,
+  _scope: true,
+  _target: true,
+  _targetWithin: true,
+  _userInvalid: true,
+  _valid: true,
+  _visited: true,
+};
 const validCSSProps = {
   // Longhand Properties
   alignContent: true,
@@ -417,7 +462,7 @@ export const useValidateProps = (props: any) => {
   Object.keys(props).forEach((key, index) => {
     if (key in validCSSProps) {
       cssProps[key] = values[index];
-    } else if (validPseudoClassProps.includes(key)) {
+    } else if (key in validPseudoClassProps) {
       pseudoClassProps[key] = values[index];
     } else {
       rest[key] = values[index];

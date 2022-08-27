@@ -6,11 +6,12 @@ import {
   addStyleToDOM,
   addCSSPrefixes,
   cssCamelCaseToHyphenated,
+  isObject,
   isString,
   removeStyleFromDOM,
 } from '@utils';
 
-import type { PseudoClassProps } from '@types';
+import type { CSSProps, PseudoClassProps } from '@types';
 
 /**
  * Force an update.
@@ -39,17 +40,17 @@ const useStyle = () => {
 /**
  *  Hook that injects classes in the DOM based on _focus and _hover props.
  *
- *  @param props pseduo classes object.
+ *  @param props pseudo classes object.
  *
  *  @returns className/s with the corresponding styles.
  */
 export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
-  const { _focus, _hover } = props;
   const styleClassesRef = useStyle();
 
-  const uniqueId = useUniqueStringId();
-  const className = useRef(_focus || _hover ? uniqueId : '');
-  const newClassRef = useRef<string[]>(['', '']);
+  const uniqueId = useUniqueStringId(3);
+  const className = useRef(isObject(props) ? uniqueId : '');
+  const classNames = useRef<string[]>([]);
+  const newClassRef = useRef<string[]>([]);
 
   /**
    * Get the style object from Style context.
@@ -62,11 +63,7 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
    * otherwise null is returned.
    */
   const getStyleObject = useCallback(
-    (
-      classObj: StyleClass[],
-      stylesToFind: string,
-      pseudoClass: 'focus' | 'hover'
-    ) => {
+    (classObj: StyleClass[], stylesToFind: string, pseudoClass: string) => {
       const obj = classObj.find(
         e => e.styles === stylesToFind && e.pseudoKind === pseudoClass
       );
@@ -81,89 +78,77 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
   );
 
   useEffect(() => {
-    const styleEl: HTMLStyleElement[] = [];
+    const styleElements: HTMLStyleElement[] = [];
 
-    if (_focus || _hover) {
-      const str: string[] = ['', ''];
+    if (isObject(props)) {
+      const formattedStylesString: string[] = [];
 
-      if (_focus) {
-        // format the _focus object into valid CSS.
-        str[0] = JSON.stringify(cssCamelCaseToHyphenated(_focus));
-        str[0] = str[0].replace(/,/g, ';');
-        str[0] = str[0].replace(/[{}"]/g, '');
-        // look for styles string in the style context.
-        const styleObj = getStyleObject(
-          styleClassesRef.current,
-          str[0],
-          'focus'
-        );
-        // when no object is found,
-        // inject HTML <style> with valid with the correct styles.
-        if (!styleObj) {
-          className.current = `${className.current}f`;
-          styleClassesRef.current = [
-            {
-              className: className.current,
-              count: 1,
-              pseudoKind: 'focus',
-              styles: str[0],
-            },
-          ];
-          str[0] = `.snui.${className.current}:focus{${str[0]};}`;
-          styleEl[0] = addStyleToDOM(className.current, str[0]);
-        } else {
-          // when there is already an object that matches those styles,
-          // increment count by one and update style context object.
-          newClassRef.current[0] = styleObj.className;
-          const filtered = styleClassesRef.current.filter(
-            e =>
-              e.styles !== styleObj.styles ||
-              e.pseudoKind !== styleObj.pseudoKind
-          );
-          styleObj.count += 1;
-          styleClassesRef.current = [...filtered, styleObj];
-        }
-      }
-
-      if (_hover) {
-        // format the _hover object into valid CSS.
-        str[1] = JSON.stringify(cssCamelCaseToHyphenated(_hover));
-        str[1] = str[1].replace(/,/g, ';');
-        str[1] = str[1].replace(/[{}"]/g, '');
-        // look for styles string in the style context.
-        const styleObj = getStyleObject(
-          styleClassesRef.current,
-          str[1],
-          'hover'
-        );
-        // when no object is found,
-        // inject HTML <style> with valid with the correct styles.
-        if (!styleObj) {
-          const temp = className.current;
-          if (_focus) {
-            className.current = `${className.current.replace(/f$/, 'h')}`;
+      const keys = Object.keys(props).map(prop => {
+        let str = '';
+        const newStr = prop.substring(1, prop.length);
+        // @ts-ignore
+        // eslint-disable-next-line
+        for (const i in newStr) {
+          const asciiCode = newStr.charCodeAt(parseInt(i, 10));
+          if (asciiCode >= 65 && asciiCode <= 90) {
+            str = `${str}-${String.fromCharCode(
+              newStr.charCodeAt(parseInt(i, 10)) + 32
+            )}`;
           } else {
-            className.current = `${className.current}h`;
+            str = `${str}${newStr.charAt(parseInt(i, 10))}`;
           }
+        }
+        return str;
+      });
 
+      Object.values(props).forEach((styles, index) => {
+        formattedStylesString.push(
+          JSON.stringify(cssCamelCaseToHyphenated(styles as CSSProps))
+        );
+        formattedStylesString[index] = formattedStylesString[index].replace(
+          /,/g,
+          ';'
+        );
+        formattedStylesString[index] = formattedStylesString[index].replace(
+          /[{}"]/g,
+          ''
+        );
+
+        const styleObj = getStyleObject(
+          styleClassesRef.current,
+          formattedStylesString[index],
+          keys[index] as any
+        );
+
+        if (!styleObj) {
+          const first = keys[index][0];
+          const middle = keys[index][Math.round(keys[index].length / 2)];
+          const last = keys[index][keys[index].length - 1];
+          classNames.current.push(
+            `${className.current}${first}${middle}${last}`
+          );
           styleClassesRef.current = [
             ...styleClassesRef.current,
             {
-              className: className.current,
+              className: `${className.current}${first}${middle}${last}`,
               count: 1,
-              pseudoKind: 'hover',
-              styles: str[1],
+              pseudoKind: keys[index] as any,
+              styles: formattedStylesString[index],
             },
           ];
-          str[1] = `.snui.${className.current}:hover{${str[1]};}`;
-          styleEl[1] = addStyleToDOM(className.current, addCSSPrefixes(str[1]));
-          if (_focus) {
-            className.current = `${temp} ${className.current}`;
-          }
+          formattedStylesString[
+            index
+          ] = `.snui.${classNames.current[index]}:${keys[index]}{${formattedStylesString[index]};}`;
+          styleElements.push(
+            addStyleToDOM(
+              classNames.current[index],
+              addCSSPrefixes(formattedStylesString[index])
+            )
+          );
         } else {
           // when there is already an object that matches those styles,
           // increment count by one and update style context object.
-          newClassRef.current[1] = styleObj.className;
+          newClassRef.current.push(styleObj.className);
           const filtered = styleClassesRef.current.filter(
             e =>
               e.styles !== styleObj.styles ||
@@ -172,107 +157,64 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
           styleObj.count += 1;
           styleClassesRef.current = [...filtered, styleObj];
         }
-      }
+      });
     }
 
     // cleanup function is used to remove the HTML <style> tags when
     // there is not other element that is using them.
     // otherwise it will decrement the style context count property.
     return () => {
-      if (styleEl.length) {
-        if (styleEl[0]) {
-          const style = styleClassesRef.current.find(
-            e => e.className === className.current.split(' ')[0]
+      if (isString(classNames.current.join(' '))) {
+        classNames.current.forEach(classs => {
+          const styleObj = styleClassesRef.current.find(
+            e => e.className === classs
           );
-          if (style) {
-            if (style.count === 1) {
-              removeStyleFromDOM(styleEl[0]);
+          if (styleObj) {
+            if (styleObj.count === 1) {
+              removeStyleFromDOM(classs);
               const filtered = styleClassesRef.current.filter(
-                e => e.className !== className.current.split(' ')[0]
+                e => e.className !== classs
               );
               styleClassesRef.current = [...filtered];
             } else {
               const filtered = styleClassesRef.current.filter(
-                e => e.className !== className.current.split(' ')[0]
+                e => e.className !== classs
               );
-              style.count -= 1;
-              styleClassesRef.current = [...filtered, style];
+              styleObj.count -= 1;
+              styleClassesRef.current = [...filtered, styleObj];
             }
           }
-        }
-        if (styleEl[1]) {
-          const style = styleClassesRef.current.find(
-            e => e.className === className.current.split(' ')[1]
-          );
-          if (style) {
-            if (style.count === 1) {
-              removeStyleFromDOM(styleEl[1]);
-              const filtered = styleClassesRef.current.filter(
-                e => e.className !== className.current.split(' ')[1]
-              );
-              styleClassesRef.current = [...filtered];
-            } else {
-              const filtered = styleClassesRef.current.filter(
-                e => e.className !== className.current.split(' ')[1]
-              );
-              style.count -= 1;
-              styleClassesRef.current = [...filtered, style];
-            }
-          }
-        }
+        });
       }
 
       if (isString(newClassRef.current.join(' '))) {
-        if (isString(newClassRef.current[0])) {
-          const style = styleClassesRef.current.find(
-            e => e.className === newClassRef.current[0]
+        newClassRef.current.forEach(classs => {
+          const styleObj = styleClassesRef.current.find(
+            e => e.className === classs
           );
-          if (style) {
-            if (style.count === 1) {
-              removeStyleFromDOM(newClassRef.current[0]);
-
+          if (styleObj) {
+            if (styleObj.count === 1) {
+              removeStyleFromDOM(classs);
               const filtered = styleClassesRef.current.filter(
-                e => e.className !== newClassRef.current[0]
+                e => e.className !== classs
               );
               styleClassesRef.current = [...filtered];
             } else {
               const filtered = styleClassesRef.current.filter(
-                e => e.className !== newClassRef.current[0]
+                e => e.className !== classs
               );
-              style.count -= 1;
-              styleClassesRef.current = [...filtered, style];
+              styleObj.count -= 1;
+              styleClassesRef.current = [...filtered, styleObj];
             }
           }
-        }
-
-        if (isString(newClassRef.current[1])) {
-          const style = styleClassesRef.current.find(
-            e => e.className === newClassRef.current[1]
-          );
-          if (style) {
-            if (style.count === 1) {
-              removeStyleFromDOM(newClassRef.current[1]);
-
-              const filtered = styleClassesRef.current.filter(
-                e => e.className !== newClassRef.current[1]
-              );
-              styleClassesRef.current = [...filtered];
-            } else {
-              const filtered = styleClassesRef.current.filter(
-                e => e.className !== newClassRef.current[1]
-              );
-              style.count -= 1;
-              styleClassesRef.current = [...filtered, style];
-            }
-          }
-        }
+        });
       }
     };
   }, []);
 
   forceUpdate();
 
-  return isString(newClassRef.current.join(' '))
-    ? newClassRef.current.join(' ')
-    : className.current;
+  return newClassRef.current
+    .join(' ')
+    .concat(` ${classNames.current.join(' ')}`);
 };
