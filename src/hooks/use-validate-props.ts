@@ -1,11 +1,13 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { AnyObject } from '@types';
 
-const validPseudoClassProps = {
+const validPseudoProps = {
   _active: true,
+  _after: true,
   _anyLink: true,
   _autofill: true,
+  _before: true,
   _blank: true,
   _checked: true,
   _current: true,
@@ -15,6 +17,8 @@ const validPseudoClassProps = {
   _enabled: true,
   _firstChild: true,
   _firstOfChild: true,
+  _firstLetter: true,
+  _firstLine: true,
   _focus: true,
   _focusWithin: true,
   _focusVisible: true,
@@ -36,12 +40,14 @@ const validPseudoClassProps = {
   _past: true,
   _paused: true,
   _pictureInPicture: true,
+  _placeholder: true,
   _placeholderShown: true,
   _playing: true,
   _readOnly: true,
   _readWrite: true,
   _required: true,
   _scope: true,
+  _selection: true,
   _target: true,
   _targetWithin: true,
   _userInvalid: true,
@@ -462,18 +468,16 @@ export const useValidateProps = (props: any) => {
   Object.keys(props).forEach((key, index) => {
     if (key in validCSSProps) {
       cssProps[key] = values[index];
-    } else if (key in validPseudoClassProps) {
+    } else if (key in validPseudoProps) {
       pseudoClassProps[key] = values[index];
     } else {
       rest[key] = values[index];
     }
   });
 
-  const remainingProps = React.useMemo(() => rest, [props]);
-  const validatedCSSProps = React.useMemo(() => cssProps, [props]);
-  const validatedPseudoClassProps = React.useMemo(() => pseudoClassProps, [
-    props,
-  ]);
+  const remainingProps = useMemo(() => rest, [props]);
+  const validatedCSSProps = useMemo(() => cssProps, [props]);
+  const validatedPseudoClassProps = useMemo(() => pseudoClassProps, [props]);
 
   return { remainingProps, validatedCSSProps, validatedPseudoClassProps };
 };

@@ -11,7 +11,7 @@ import {
   removeStyleFromDOM,
 } from '@utils';
 
-import type { CSSProps, PseudoClassProps } from '@types';
+import type { CSSProps, PseudoProps } from '@types';
 
 /**
  * Force an update.
@@ -44,13 +44,21 @@ const useStyle = () => {
  *
  *  @returns className/s with the corresponding styles.
  */
-export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
+export const usePseudoClasses = (props: Partial<PseudoProps>) => {
   const styleClassesRef = useStyle();
 
   const uniqueId = useUniqueStringId(3);
   const className = useRef(isObject(props) ? uniqueId : '');
   const classNames = useRef<string[]>([]);
   const newClassRef = useRef<string[]>([]);
+  const pseudoElements = [
+    'after',
+    'before',
+    'first-letter',
+    'first-line',
+    'placeholder',
+    'seelction',
+  ];
 
   /**
    * Get the style object from Style context.
@@ -102,6 +110,11 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
       });
 
       Object.values(props).forEach((styles, index) => {
+        if (styles?.content === '') {
+          throw new Error(
+            "You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"\"'`"
+          );
+        }
         formattedStylesString.push(
           JSON.stringify(cssCamelCaseToHyphenated(styles as CSSProps))
         );
@@ -112,6 +125,10 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
         formattedStylesString[index] = formattedStylesString[index].replace(
           /[{}"]/g,
           ''
+        );
+        formattedStylesString[index] = formattedStylesString[index].replace(
+          /[\\]/g,
+          '"'
         );
 
         const styleObj = getStyleObject(
@@ -136,9 +153,16 @@ export const usePseudoClasses = (props: Partial<PseudoClassProps>) => {
               styles: formattedStylesString[index],
             },
           ];
-          formattedStylesString[
-            index
-          ] = `.snui.${classNames.current[index]}:${keys[index]}{${formattedStylesString[index]};}`;
+          // add '::' before pseudo-elements.
+          if (pseudoElements.includes(keys[index])) {
+            formattedStylesString[
+              index
+            ] = `.snui.${classNames.current[index]}::${keys[index]}{${formattedStylesString[index]};}`;
+          } else {
+            formattedStylesString[
+              index
+            ] = `.snui.${classNames.current[index]}:${keys[index]}{${formattedStylesString[index]};}`;
+          }
           styleElements.push(
             addStyleToDOM(
               classNames.current[index],
