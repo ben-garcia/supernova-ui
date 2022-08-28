@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { useUniqueStringId } from '@hooks';
-import { StyleClass, StyleContext } from '@contexts';
+import { PseudoClassesAndElements, StyleClass, StyleContext } from '@contexts';
 import {
   addStyleToDOM,
   addCSSPrefixes,
@@ -149,7 +149,7 @@ export const usePseudoClasses = (props: Partial<PseudoProps>) => {
             {
               className: `${className.current}${first}${middle}${last}`,
               count: 1,
-              pseudoKind: keys[index] as any,
+              pseudoKind: keys[index] as PseudoClassesAndElements,
               styles: formattedStylesString[index],
             },
           ];
