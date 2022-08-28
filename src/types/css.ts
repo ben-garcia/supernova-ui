@@ -22,10 +22,12 @@ export type CSSProps = StandardLonghandProperties & StandardShorthandProperties;
 export type CSSPropsHyphen = StandardLonghandPropertiesHyphen &
   StandardShorthandPropertiesHyphen;
 
+export type PseudoProps = PseudoClassProps & PseudoElementProps;
+
 /**
- * Props for pseudo class.
+ * Props for pseudo-classes.
  */
-export interface PseudoClassProps {
+interface PseudoClassProps {
   /**
    * This pseudo-class requires some interaction by the user in order
    * for them to apply, such as holding a mouse pointer over an element.
@@ -369,4 +371,46 @@ export interface PseudoClassProps {
    * Matches links that have been visited.
    */
   _visited?: CSSProps;
+}
+
+/*
+ * Props for pseudo-elements.
+ */
+interface PseudoElementProps {
+  /**
+   * The ::after CSS pseudo-element creates a pseudo-element that is the last child of the selected element.
+   * It is often used to add cosmetic content to an element with
+   * the content property. It is inline by default.
+   */
+  _after?: CSSProps;
+  /**
+   * The ::before CSS pseudo-element creates a pseudo-element that is the
+   * first child of the selected element.
+   * It is often used to add cosmetic content to an element with
+   * the content property. It is inline by default.
+   */
+  _before?: CSSProps;
+  /**
+   * The ::first-letter CSS pseudo-element applies styles to the first letter
+   * of the first line
+   * of a block-level element, but only when not preceded by other content *
+   * (such as images or inline tables).
+   */
+  _firstLetter?: CSSProps;
+  /**
+   * The ::first-line CSS pseudo-element applies styles to the first line
+   * of a block-level element.
+   */
+  _firstLine?: CSSProps;
+  /**
+   * The ::placeholder CSS pseudo-element represents the placeholder text in
+   * an <input> or <textarea> element.
+   */
+  _placeholder?: CSSProps;
+  /**
+   * The ::selection CSS pseudo-element applies styles to the part of a
+   * document that has been highlighted by the user (such as clicking and
+   * dragging the mouse across text).
+   */
+  _selection?: CSSProps;
 }

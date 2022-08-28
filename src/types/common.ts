@@ -6,7 +6,7 @@ import type {
   TextareaHTMLAttributes,
 } from 'react';
 
-import type { CSSProps, PseudoClassProps, WithResponsiveProps } from '@types';
+import type { CSSProps, PseudoProps, WithResponsiveProps } from '@types';
 
 import colors from '../theme/colors';
 
@@ -153,5 +153,5 @@ interface SharedProps {
  * Props shared by all supernova-ui components.
  */
 export type SupernovaProps<Type = ''> = Type extends keyof ReactElementProps
-  ? WithResponsiveProps<CSSProps> & PseudoClassProps & ReactElementProps[Type]
-  : WithResponsiveProps<CSSProps> & PseudoClassProps & SharedProps;
+  ? WithResponsiveProps<CSSProps> & PseudoProps & ReactElementProps[Type]
+  : WithResponsiveProps<CSSProps> & PseudoProps & SharedProps;
