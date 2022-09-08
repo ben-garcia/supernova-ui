@@ -105,6 +105,47 @@ export const cssCamelCaseToHyphenated = (props: CSSProps) => {
   return newObj;
 };
 
+// source: https://github.com/chakra-ui/chakra-ui/blob/8bdd883da77cc74722121ee6d10b129243a31284/packages/utilities/number-utils/src/index.ts#L45
+
+/**
+ * Convert a value to percentage based on lower and upper bound values
+ *
+ * @param value the value in number
+ * @param min the minimum value
+ * @param max the maximum value
+ */
+export function valueToPercent(value: number, min: number, max: number) {
+  return ((value - min) * 100) / (max - min);
+}
+/**
+ * Decrease slider thumb's height or width from the current value; Decrease slider thumb's height or width from the current value.
+ *
+ * @param value the value in number
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param sliderThumb reference to the thumb element
+ * @param orientation direction of the slider
+ */
+export function decreaseThumbFromValue(
+  value: number,
+  min: number,
+  max: number,
+  sliderThumb: HTMLElement | null,
+  orientation: 'horizontal' | 'vertical'
+) {
+  if (!sliderThumb) {
+    return 0;
+  }
+
+  const { height, width } = sliderThumb.getBoundingClientRect();
+
+  if (orientation === 'vertical') {
+    return `calc(${valueToPercent(value, min, max)}% - ${height / 2}px)`;
+  }
+
+  return `calc(${valueToPercent(value, min, max)}% - ${width / 2}px)`;
+}
+
 /**
  * Add css prefixes.
  *
