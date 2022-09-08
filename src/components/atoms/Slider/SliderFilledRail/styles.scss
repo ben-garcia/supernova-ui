@@ -1,5 +1,14 @@
 .snui-slider__filled-rail {
   background: var(--snui-color-primary);
   border-radius: 4px;
-  height: inherit;
+
+  &--horizontal {
+    height: inherit;
+    width: 0;
+  }
+
+  &--vertical {
+    height: 0;
+    width: inherit;
+  }
 }

@@ -2,11 +2,13 @@
   position: relative;
 
   &--horizontal {
+    height: 0;
     width: 100%;
   }
 
   &--vertical {
     height: 100%;
+    width: 0;
   }
 
   &--sm.snui-slider--horizontal {

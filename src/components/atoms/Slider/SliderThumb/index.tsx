@@ -1,14 +1,13 @@
-import React, { FC, useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useRef } from 'react';
 
 import {
   useClassStyles,
   useCreateClassString,
   usePseudoClasses,
   useSlider,
-  useTheme,
   useValidateProps,
 } from '@hooks';
-import { isString } from '@utils';
+import { decreaseThumbFromValue, isString } from '@utils';
 
 import { SliderThumbProps } from './types';
 import './styles.scss';
@@ -36,9 +35,8 @@ const SliderThumb: FC<SliderThumbProps> = props => {
     step,
     value,
   } = useSlider();
-  const { colors } = useTheme();
-  const [focusRing, setFocusRing] = useState('none');
-  const sliderThumbRef = useRef<HTMLDivElement | null>(null);
+  const thumbRef = useRef<HTMLDivElement | null>(null);
+  const railRef = useRef<HTMLElement | null>(null);
   const addClasses = useCreateClassString('snui snui-slider__thumb', {
     [`${className}`]: isString(className),
     [`snui-slider__thumb--${size}`]: isString(size),
@@ -47,113 +45,126 @@ const SliderThumb: FC<SliderThumbProps> = props => {
     [`${stylesClassName}`]: isString(stylesClassName),
   });
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (sliderThumbRef?.current) {
-      const rail = document.getElementById(sliderId) as any;
-      const { bottom, height, left, width } = rail.getBoundingClientRect();
+  useEffect(() => {
+    railRef.current = document.getElementById(sliderId);
+  }, []);
 
-      if (step === 1) {
-        const { pageX, pageY } = e;
-        const diffX = pageX - left;
-        const diffY = bottom - pageY;
-        let newValue;
-        let newVal;
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (thumbRef?.current) {
+        const {
+          bottom,
+          height,
+          left,
+          width,
+        } = railRef.current!.getBoundingClientRect();
 
-        if (orientation === 'vertical') {
-          newVal = Math.round(((max - min) * diffY) / height);
-          // keep values between min and max
-          if (newVal > max) {
-            newValue = max;
-          } else if (newVal < min) {
-            newValue = min;
-          } else {
-            newValue = newVal;
-          }
-        } else {
-          newVal = Math.round(((max - min) * diffX) / width);
-          // keep values between min and max
-          if (newVal > max) {
-            newValue = max;
-          } else if (newVal < min) {
-            newValue = min;
-          } else {
-            newValue = newVal;
-          }
-        }
+        if (step === 1) {
+          const { pageX, pageY } = e;
+          const diffX = pageX - left;
+          const diffY = bottom - pageY;
+          let newValue;
 
-        onChange(newValue);
-      } else {
-        const maxStep = Math.floor(max / step);
-        const heightStep = Math.floor(max / maxStep);
-        const arr: number[] = [];
-
-        for (let i = 0; i < maxStep; i += 1) {
-          if (i === 0) {
-            arr.push(heightStep);
-          } else {
-            arr.push(arr[i - 1] + heightStep);
-          }
-        }
-
-        const { pageX, pageY } = e;
-        const diffX = pageX - left;
-        const diffY = bottom - pageY;
-        const halfDiff = (arr[1] - arr[0]) / 2;
-        let newValue;
-
-        if (orientation === 'vertical') {
-          newValue = Math.round(((max - min) * diffY) / height);
-        } else {
-          newValue = Math.round(((max - min) * diffX) / width);
-        }
-
-        for (let i = 0; i < arr.length; i += 1) {
-          if (i === 0) {
-            if (newValue > arr[0] - halfDiff && newValue < arr[1]) {
-              onChange(arr[0]);
-              break;
-            } else if (newValue < arr[0] - halfDiff) {
-              onChange(0);
-              break;
+          if (orientation === 'vertical') {
+            newValue = Math.round(((max - min) * diffY) / height);
+            // keep values between min and max
+            if (newValue > max) {
+              newValue = max;
+            } else if (newValue < min) {
+              newValue = min;
             }
-          } else if (i === arr.length - 1) {
-            if (newValue > arr[arr.length - 1] - halfDiff) {
-              onChange(arr[arr.length - 1]);
-              break;
+          } else {
+            newValue = Math.round(((max - min) * diffX) / width);
+            // keep values between min and max
+            if (newValue > max) {
+              newValue = max;
+            } else if (newValue < min) {
+              newValue = min;
+            }
+          }
+
+          onChange(newValue);
+        } else {
+          const maxStep = Math.floor(max / step);
+          const heightStep = Math.floor(max / maxStep);
+          const arr: number[] = [];
+
+          for (let i = 0; i < maxStep; i += 1) {
+            if (i === 0) {
+              arr.push(heightStep);
+            } else {
+              arr.push(arr[i - 1] + heightStep);
+            }
+          }
+
+          const { pageX, pageY } = e;
+          const diffX = pageX - left;
+          const diffY = bottom - pageY;
+          const halfDiff = (arr[1] - arr[0]) / 2;
+          let newValue;
+
+          if (orientation === 'vertical') {
+            newValue = Math.round(((max - min) * diffY) / height);
+          } else {
+            newValue = Math.round(((max - min) * diffX) / width);
+          }
+
+          for (let i = 0; i < arr.length; i += 1) {
+            if (i === 0) {
+              if (newValue > arr[0] - halfDiff && newValue < arr[1]) {
+                onChange(arr[0]);
+                break;
+              } else if (newValue < arr[0] - halfDiff) {
+                onChange(0);
+                break;
+              }
+            } else if (i === arr.length - 1) {
+              if (newValue > arr[arr.length - 1] - halfDiff) {
+                onChange(arr[arr.length - 1]);
+                break;
+              } else if (
+                newValue < arr[arr.length - 1] - halfDiff &&
+                newValue > arr[arr.length - 2]
+              ) {
+                onChange(arr[arr.length - 2]);
+                break;
+              }
             } else if (
-              newValue < arr[arr.length - 1] - halfDiff &&
-              newValue > arr[arr.length - 2]
+              i !== 0 &&
+              i !== arr.length - 1 &&
+              newValue > arr[i] - halfDiff &&
+              newValue < arr[i + 1]
             ) {
-              onChange(arr[arr.length - 2]);
-              break;
+              onChange(arr[i]);
+            } else if (
+              i !== 0 &&
+              i !== arr.length - 1 &&
+              newValue < arr[i] - halfDiff &&
+              newValue > arr[i - 1]
+            ) {
+              onChange(arr[i - 1]);
             }
-          } else if (
-            i !== 0 &&
-            i !== arr.length - 1 &&
-            newValue > arr[i] - halfDiff &&
-            newValue < arr[i + 1]
-          ) {
-            onChange(arr[i]);
-          } else if (
-            i !== 0 &&
-            i !== arr.length - 1 &&
-            newValue < arr[i] - halfDiff &&
-            newValue > arr[i - 1]
-          ) {
-            onChange(arr[i - 1]);
           }
         }
       }
-    }
-  };
+    },
+    [max, min, orientation, step]
+  );
   const handleMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
-  }, [orientation]);
-  const handleMouseDown = useCallback(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  }, [orientation]);
+  }, [max, min, orientation, step]);
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      // cancel if right mouse button was clicked.
+      if (e.button === 2) {
+        return;
+      }
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    },
+    [max, min, orientation, step]
+  );
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       const { key } = e;
@@ -208,17 +219,31 @@ const SliderThumb: FC<SliderThumbProps> = props => {
       aria-valuenow={value}
       aria-valuetext={ariaValueText}
       id={`${sliderId}__thumb`}
-      onBlur={() => setFocusRing('none')}
-      onFocus={() => setFocusRing(`3px solid ${colors.focusRing}`)}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMouseDown}
-      ref={sliderThumbRef}
+      ref={thumbRef}
       role="slider"
       style={{
-        bottom: orientation === 'vertical' ? `${value}%` : '15%',
-        left: orientation === 'horizontal' ? `${value}%` : '15%',
-        outline: focusRing,
-        outlineOffset: '2px',
+        bottom:
+          orientation === 'vertical'
+            ? `${decreaseThumbFromValue(
+                value,
+                min,
+                max,
+                thumbRef.current,
+                orientation
+              )}`
+            : '15%',
+        left:
+          orientation === 'horizontal'
+            ? `${decreaseThumbFromValue(
+                value,
+                min,
+                max,
+                thumbRef.current,
+                orientation
+              )}`
+            : '15%',
         top: orientation === 'horizontal' ? '2%' : undefined,
       }}
       tabIndex={0}

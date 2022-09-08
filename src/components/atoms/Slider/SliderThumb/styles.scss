@@ -5,6 +5,11 @@
   cursor: pointer;
   position: absolute;
 
+  &:focus {
+    outline: solid var(--snui-color-focus-ring);
+    outline-offset: 2px;
+  }
+
   &--horizontal {
     top: 0;
   }

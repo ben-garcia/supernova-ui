@@ -7,7 +7,7 @@ import {
   useSlider,
   useValidateProps,
 } from '@hooks';
-import { isString } from '@utils';
+import { isString, valueToPercent } from '@utils';
 
 import { SliderFilledRailProps } from './types';
 import './styles.scss';
@@ -21,9 +21,10 @@ const SliderFilledRail: FC<SliderFilledRailProps> = props => {
   } = useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
-  const { orientation, value } = useSlider();
+  const { orientation, min, max, value } = useSlider();
   const addClasses = useCreateClassString('snui snui-slider__filled-rail', {
     [`${className}`]: isString(className),
+    [`snui-slider__filled-rail--${orientation}`]: true,
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
@@ -33,8 +34,14 @@ const SliderFilledRail: FC<SliderFilledRailProps> = props => {
       {...remainingProps}
       {...addClasses()}
       style={{
-        height: orientation === 'vertical' ? `${value}%` : undefined,
-        width: orientation === 'horizontal' ? `${value}%` : undefined,
+        height:
+          orientation === 'vertical'
+            ? `${valueToPercent(value, min, max)}%`
+            : undefined,
+        width:
+          orientation === 'horizontal'
+            ? `${valueToPercent(value, min, max)}%`
+            : undefined,
       }}
     />
   );
