@@ -1,7 +1,7 @@
-import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useContext, useMemo, useRef } from 'react';
 
 import { ClassContext } from '@contexts';
-import { useTheme, useUniqueStringId } from '@hooks';
+import { useSafeEffect, useTheme, useUniqueStringId } from '@hooks';
 import {
   addCSSPrefixes,
   addStyleToDOM,
@@ -176,7 +176,7 @@ export const useClassStyles = (mainProps: any) => {
 
   const { arrayProps, normalProps } = useMemo(() => filterProps(mainProps), []);
 
-  useEffect(() => {
+  useSafeEffect(() => {
     injectCSSMediaQueries(arrayProps, normalProps);
 
     return () => {
