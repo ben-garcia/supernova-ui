@@ -24,6 +24,9 @@ export const addStyleToDOM = (className: string, textNodeContent: string) => {
 };
 
 /**
+ * Return an element in the DOM.
+ *
+ * @param id identification to use in the lookup.
  *
  */
 export const getElementFromDOM = (id: string) => {
@@ -33,6 +36,11 @@ export const getElementFromDOM = (id: string) => {
   }
   return null;
 };
+
+/**
+ * Check for the window object.
+ */
+export const isBrowser = () => typeof window !== 'undefined';
 
 /**
  * Query the DOM for an element with the given id.
