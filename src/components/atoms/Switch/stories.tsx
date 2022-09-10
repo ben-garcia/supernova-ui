@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { colors } from '@utils';
-import Switch from '.';
+import { Paragraph, Switch } from '@atoms';
 
 export default {
   argTypes: {
@@ -48,7 +48,7 @@ const ControlledTemplate: ComponentStory<typeof Switch> = () => {
         onChange={() => setChecked(!checked)}
         label={label}
       />
-      <p>{`checked: ${JSON.stringify(checked)}`}</p>
+      <Paragraph>{`checked: ${JSON.stringify(checked)}`}</Paragraph>
     </>
   );
 };

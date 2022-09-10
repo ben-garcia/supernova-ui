@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '.';
+import { Box, Slider, SliderRail, SliderFilledRail, SliderThumb } from '@atoms';
 
 export default {
   argTypes: {
@@ -37,47 +37,18 @@ export default {
   title: 'Supernova UI/Atoms/Slider',
 } as ComponentMeta<typeof Slider>;
 
-export const Test = () => {
-  const [value, setValue] = React.useState(0);
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        width: 150,
-        height: 150,
-      }}
-    >
-      <Slider min={0} max={200} onChange={setValue} value={value}>
-        <SliderRail>
-          <SliderFilledRail />
-        </SliderRail>
-        <SliderThumb />
-      </Slider>
-    </div>
-  );
-};
-
 const Template: ComponentStory<typeof Slider> = args => {
   const [value, setValue] = React.useState(0);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        width: 150,
-        height: 150,
-      }}
-    >
+    <Box display="flex" justifyContent="center" width="150px" height="150px">
       <Slider {...args} onChange={setValue} value={value}>
         <SliderRail>
           <SliderFilledRail />
         </SliderRail>
         <SliderThumb />
       </Slider>
-    </div>
+    </Box>
   );
 };
 

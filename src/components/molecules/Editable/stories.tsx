@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { Button } from '@atoms';
+import { Box, Button } from '@atoms';
 import { useEditableControls } from '@hooks';
 import {
   Editable,
@@ -37,12 +37,12 @@ const parameters = {
 const Template: ComponentStory<typeof Editable> = args => {
   const [value, setValue] = useState('edit');
   return (
-    <div style={{ border: '1px solid #ccc', padding: '5px' }}>
+    <Box border="1px solid #ccc" padding="5px">
       <Editable {...args} onChange={val => setValue(val)} value={value}>
         <EditablePreview />
         <EditableInput />
       </Editable>
-    </div>
+    </Box>
   );
 };
 
@@ -52,12 +52,12 @@ WithInput.parameters = parameters;
 const WithTextareaTemplate: ComponentStory<any> = args => {
   const [value, setValue] = useState('edit');
   return (
-    <div style={{ border: '1px solid #ccc', padding: '5px' }}>
+    <Box border="1px solid #ccc" padding="5px">
       <Editable {...args} onChange={val => setValue(val)} value={value}>
         <EditablePreview />
         <EditableTextarea isAutoResize={args.isAutoResize} />
       </Editable>
-    </div>
+    </Box>
   );
 };
 
@@ -73,21 +73,17 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
   } = useEditableControls();
 
   return (
-    <div
-      style={{ border: '1px solid #ccc', padding: '5px', position: 'relative' }}
-    >
+    <Box border="1px solid #ccc" padding="5px" position="relative">
       <EditableTextarea isAutoResize={isAutoResize} />
       {isEditing ? (
-        <div
-          style={{
-            display: 'flex',
-            float: 'right',
-            margin: '10px',
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            zIndex: 9999,
-          }}
+        <Box
+          display="flex"
+          float="right"
+          margin="10px"
+          position="absolute"
+          bottom={0}
+          right={0}
+          zIndex={9999}
         >
           <Button
             color="white"
@@ -103,10 +99,10 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
           >
             Save
           </Button>
-        </div>
+        </Box>
       ) : null}
       <EditablePreview />
-    </div>
+    </Box>
   );
 };
 
@@ -130,17 +126,15 @@ const CustomEditableInput = () => {
   } = useEditableControls();
 
   return (
-    <div
-      style={{
-        border: '1px solid #ccc',
-        padding: '5px',
-        position: 'relative',
-        display: 'flex',
-      }}
+    <Box
+      border="1px solid #ccc"
+      padding="5px"
+      position="relative"
+      display="flex"
     >
       <EditableInput />
       {isEditing ? (
-        <div style={{ display: 'flex', margin: '0 10px' }}>
+        <Box display="flex" margin="0 10px">
           <Button colorVariant="error700" {...getCancelButtonProps()}>
             Cancel
           </Button>
@@ -148,10 +142,10 @@ const CustomEditableInput = () => {
           <Button colorVariant="success500" {...getSubmitButtonProps()}>
             Save
           </Button>
-        </div>
+        </Box>
       ) : null}
       <EditablePreview />
-    </div>
+    </Box>
   );
 };
 

@@ -2,8 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { colors } from '@utils';
-import { Radio, RadioGroup } from '.';
-import { UserIcon } from '../Icon/Icons';
+import { Box, Paragraph, Radio, RadioGroup, UserIcon } from '@atoms';
 
 export default {
   argTypes: {
@@ -56,9 +55,19 @@ Basic.parameters = parameters;
 const RadioGroupTemplate: ComponentStory<any> = args => {
   const [framework, setFramework] = React.useState('react');
   return (
-    <div className="snui-flex snui-flex-column snui-flex-center">
-      <div className="snui-margin-y-md">
-        <p className="snui-margin-y-sm">Favorite framework/library</p>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box marginTop="var(--snui-space-md)" marginBottom="var(--snui-space-md)">
+        <Paragraph
+          marginTop="var(--snui-space-sm)"
+          marginBottom="var(--snui-space-sm)"
+        >
+          Favorite framework/library
+        </Paragraph>
         <RadioGroup
           defaultValue={framework}
           direction={args.direction}
@@ -69,8 +78,8 @@ const RadioGroupTemplate: ComponentStory<any> = args => {
           <Radio label="react" value="react" />
           <Radio label="vue" value="vue" />
         </RadioGroup>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
@@ -87,7 +96,7 @@ const WithComponentAsLabelTemplate: ComponentStory<any> = args => {
       label={
         <>
           <UserIcon size="xs" />
-          <div>this is a custom label</div>
+          <Box>this is a custom label</Box>
         </>
       }
       {...args}

@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button, TextInput } from '@atoms';
+import { Box, Button, TextInput } from '@atoms';
 import {
   Drawer,
   DrawerBody,
@@ -48,9 +48,9 @@ const BasicTemplate: Story<DrawerProps> = args => {
   const handleClose = () => setIsOpen(false);
   return (
     <>
-      <div>
+      <Box>
         <Button onClick={() => setIsOpen(true)}>Open</Button>
-      </div>
+      </Box>
 
       <Drawer {...args} onClose={handleClose} isOpen={isOpen}>
         <DrawerHeader>Drawer Title</DrawerHeader>
@@ -80,13 +80,13 @@ const FinalFocusRefTemplate: Story<DrawerProps> = args => {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <Box display="flex">
         <Button onClick={() => setOpen(true)}>Open</Button>
 
         <Button ref={finalFocusRef} variant="outline">
           finalFocusRef
         </Button>
-      </div>
+      </Box>
 
       <Drawer
         {...args}

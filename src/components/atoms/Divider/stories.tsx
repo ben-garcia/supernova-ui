@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { colors } from '@utils';
-import Divider from '.';
+import { Box, Divider } from '@atoms';
 
 export default {
   argTypes: {
@@ -28,11 +28,9 @@ export default {
 // parent element must have a height for
 // orientation of vertial to work correctly.
 const Template: ComponentStory<typeof Divider> = args => (
-  <div
-    style={{ height: args.orientation === 'vertical' ? '200px' : undefined }}
-  >
+  <Box height={args.orientation === 'vertical' ? '200px' : undefined}>
     <Divider {...args} />
-  </div>
+  </Box>
 );
 
 export const Basic = Template.bind({});

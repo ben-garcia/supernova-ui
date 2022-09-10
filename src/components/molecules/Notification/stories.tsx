@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Button } from '@atoms';
+import { Box, Button, Paragraph } from '@atoms';
 import { useNotification } from '@hooks';
 
 export default {
@@ -54,9 +54,9 @@ const Template: Story<any> = args => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <Box position="relative">
       <Button onClick={handleClick}>Open</Button>
-    </div>
+    </Box>
   );
 };
 
@@ -70,13 +70,17 @@ const WithCustomTemplate: Story<any> = args => {
     notification({
       ...args,
       render: onClose => (
-        <div className="snui-flex snui-padding-sm">
+        <Box display="flex" padding="var(--snui-space-sm)">
           <Button onClick={onClose}>X</Button>
-          <div className="snui-flex snui-flex-column snui-margin-sm">
-            <p>custom title</p>
-            <p>custom message</p>
-          </div>
-        </div>
+          <Box
+            display="flex"
+            flexDirection="column"
+            margin="var(--snui-space-sm)"
+          >
+            <Paragraph>custom title</Paragraph>
+            <Paragraph>custom message</Paragraph>
+          </Box>
+        </Box>
       ),
     });
   };

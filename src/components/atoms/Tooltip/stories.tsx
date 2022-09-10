@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Button } from '@atoms';
+import { Box, Button } from '@atoms';
 import Tooltip from '.';
 
 const parameters = {
@@ -25,9 +25,9 @@ export default {
 } as ComponentMeta<typeof Tooltip>;
 
 const Template: ComponentStory<typeof Tooltip> = args => (
-  <div className="_snui-flex _snui-flex-center">
+  <Box>
     <Tooltip {...args} />
-  </div>
+  </Box>
 );
 
 export const Basic = Template.bind({});

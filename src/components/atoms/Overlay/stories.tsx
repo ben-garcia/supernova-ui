@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import Overlay from '.';
+import { Box, Overlay } from '@atoms';
 
 export default {
   component: Overlay,
@@ -10,9 +10,9 @@ export default {
 
 const Template: ComponentStory<typeof Overlay> = args => (
   <Overlay {...args}>
-    <div style={{ border: '1px solid white', color: 'white', padding: '10px' }}>
+    <Box border="1px solid white" color="white" padding="10px">
       Overlay example
-    </div>
+    </Box>
   </Overlay>
 );
 

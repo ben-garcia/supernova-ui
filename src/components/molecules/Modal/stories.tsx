@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button, TextInput } from '@atoms';
+import { Box, Button, TextInput } from '@atoms';
 import {
   Modal,
   ModalButton,
@@ -37,7 +37,7 @@ const BasicTemplate: Story<ModalProps> = args => {
   const handleClose = () => setIsOpen(false);
   return (
     <>
-      <div>
+      <Box>
         <Button
           onClick={() => {
             setIsOpen(true);
@@ -45,7 +45,7 @@ const BasicTemplate: Story<ModalProps> = args => {
         >
           Open
         </Button>
-      </div>
+      </Box>
       <Modal {...args} onClose={handleClose} isOpen={isOpen}>
         <ModalHeader>Modal Title</ModalHeader>
         <ModalBody>This is a modal</ModalBody>
@@ -75,12 +75,12 @@ const FinalFocusRefTemplate: Story<ModalProps> = args => {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <Box display="flex">
         <Button onClick={() => setOpen(true)}>Open</Button>
         <Button ref={finalFocusRef} variant="outline">
           finalFocusRef
         </Button>
-      </div>
+      </Box>
       <Modal
         {...args}
         finalFocusRef={finalFocusRef}
