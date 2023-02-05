@@ -43,7 +43,7 @@ const BasicTemplate: Story<ModalProps> = args => {
             setIsOpen(true);
           }}
         >
-          Open
+          Trigger Modal
         </Button>
       </Box>
       <Modal {...args} onClose={handleClose} isOpen={isOpen}>

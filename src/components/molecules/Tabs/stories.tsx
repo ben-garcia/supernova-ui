@@ -58,9 +58,23 @@ const Template: ComponentStory<typeof Tabs> = args => (
     </TabList>
 
     <TabPanelList>
-      <TabPanel>panel one</TabPanel>
-      <TabPanel>panel two</TabPanel>
-      <TabPanel>panel three</TabPanel>
+      <TabPanel>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Tellus in hac
+        habitasse platea dictumst vestibulum. Bibendum est ultricies integer
+        quis auctor elit sed.
+      </TabPanel>
+      <TabPanel>
+        Velit egestas dui id ornare. Vulputate mi sit amet mauris commodo quis
+        imperdiet. In fermentum posuere urna nec. Proin nibh nisl condimentum id
+        venenatis a condimentum vitae sapien. Gravida quis blandit turpis
+        cursus.
+      </TabPanel>
+      <TabPanel>
+        met cursus sit amet dictum sit amet justo donec enim. Sapien eget mi
+        proin sed libero enim sed faucibus turpis. Feugiat sed lectus vestibulum
+        mattis.
+      </TabPanel>
     </TabPanelList>
   </Tabs>
 );

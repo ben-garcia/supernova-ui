@@ -49,7 +49,7 @@ const BasicTemplate: Story<DrawerProps> = args => {
   return (
     <>
       <Box>
-        <Button onClick={() => setIsOpen(true)}>Open</Button>
+        <Button onClick={() => setIsOpen(true)}>Trigger Drawer</Button>
       </Box>
 
       <Drawer {...args} onClose={handleClose} isOpen={isOpen}>

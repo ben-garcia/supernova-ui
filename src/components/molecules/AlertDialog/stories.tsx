@@ -38,7 +38,7 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
   return (
     <>
       <div>
-        <Button onClick={() => setIsOpen(true)}>Open</Button>
+        <Button onClick={() => setIsOpen(true)}>Trigger AlertDialog</Button>
       </div>
 
       <AlertDialog

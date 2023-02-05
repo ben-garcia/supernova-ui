@@ -21,7 +21,7 @@ const Template: ComponentStory<typeof Menu> = args => {
 
   return (
     <Menu {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
+      <MenuButton onClick={() => setIsOpen(true)}>Trigger Menu</MenuButton>
       <MenuList>
         <MenuItem>Profile</MenuItem>
         <MenuItem>Settings</MenuItem>

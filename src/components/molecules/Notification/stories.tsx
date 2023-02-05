@@ -55,7 +55,7 @@ const Template: Story<any> = args => {
 
   return (
     <Box position="relative">
-      <Button onClick={handleClick}>Open</Button>
+      <Button onClick={handleClick}>Trigger notification</Button>
     </Box>
   );
 };

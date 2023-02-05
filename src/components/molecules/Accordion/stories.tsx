@@ -23,7 +23,7 @@ const parameters = {
 };
 
 const Template: ComponentStory<typeof Accordion> = args => (
-  <div style={{ margin: '0 auto', width: '50%' }}>
+  <div>
     <Accordion {...args}>
       <AccordionItem>
         <AccordionHeaderButton>Section 1</AccordionHeaderButton>
