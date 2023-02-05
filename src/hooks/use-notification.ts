@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 
+import { isFunction } from '@utils';
 import { NotificationContext } from '../contexts/notification/NotificationProvider';
 import {
   AddNotificationProps,
@@ -9,7 +10,7 @@ import {
 export const useNotification = () => {
   const { dispatch } = useContext(NotificationContext);
 
-  if (dispatch.name !== 'bound dispatchAction') {
+  if (!isFunction(dispatch)) {
     throw new Error(
       'useNotification: dispatch is undefined, did you remember to wrap your app in a <SupernovaProvider />'
     );
