@@ -2,7 +2,7 @@
 import React from 'react';
 
 import {
-  Badge,
+  Tag,
   Box,
   Button,
   Checkbox,
@@ -121,8 +121,8 @@ export const All = () => {
           ]}
         >
           <Box>
-            <Badge>New</Badge>
-            <Paragraph>Badge</Paragraph>
+            <Tag>New</Tag>
+            <Paragraph>Tag</Paragraph>
           </Box>
 
           <Box>

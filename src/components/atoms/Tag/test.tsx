@@ -1,22 +1,22 @@
 import React from 'react';
 
 import { a11yTest, render } from '@testUtils';
-import Badge from '.';
+import Tag from '.';
 
-describe('<Badge />', () => {
+describe('<Tag />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(<Badge>badge</Badge>);
+    await a11yTest(<Tag>tag</Tag>);
   });
 
   it('should render', () => {
-    const { container } = render(<Badge>badge</Badge>);
+    const { container } = render(<Tag>tag</Tag>);
 
     expect(container).toBeInTheDocument();
   });
 
   it('should render as a span', () => {
-    const text = 'badge';
-    const { getByText } = render(<Badge>{text}</Badge>);
+    const text = 'tag';
+    const { getByText } = render(<Tag>{text}</Tag>);
     const result = getByText(text);
 
     expect(result.nodeName).toBe('SPAN');

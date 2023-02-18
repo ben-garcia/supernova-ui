@@ -9,13 +9,13 @@ import {
 } from '@hooks';
 import { isString } from '@utils';
 
-import { BadgeProps } from './types';
+import { TagProps } from './types';
 import './styles.scss';
 
 /**
  * UI component to display an item's summary information.
  */
-const Badge: FC<BadgeProps> = props => {
+const Tag: FC<TagProps> = props => {
   const {
     colorVariant,
     children,
@@ -32,10 +32,10 @@ const Badge: FC<BadgeProps> = props => {
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const createInlineStyles = useInlineStyles(colorVariant);
-  const addClasses = useCreateClassString('snui snui-badge', {
+  const addClasses = useCreateClassString('snui snui-tag', {
     [`${className}`]: isString(className),
-    [`snui-badge--${size}`]: isString(size),
-    [`snui-badge--${variant}`]: isString(variant),
+    [`snui-tag--${size}`]: isString(size),
+    [`snui-tag--${variant}`]: isString(variant),
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
@@ -47,4 +47,4 @@ const Badge: FC<BadgeProps> = props => {
   );
 };
 
-export default Badge;
+export default Tag;

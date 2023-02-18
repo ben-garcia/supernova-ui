@@ -1,4 +1,3 @@
-export { default as Badge } from './Badge';
 export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
@@ -12,6 +11,7 @@ export * from './Radio';
 export * from './Slider';
 export { default as Spinner } from './Spinner';
 export { default as Switch } from './Switch';
+export { default as Tag } from './Tag';
 export { default as Text } from './Text';
 export { default as Textarea } from './Textarea';
 export { default as TextInput } from './TextInput';

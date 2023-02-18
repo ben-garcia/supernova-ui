@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { colors } from '@utils';
-import Badge from '.';
+import Tag from '.';
 
 export default {
   argTypes: {
@@ -21,16 +21,16 @@ export default {
       options: ['outline', 'solid'],
     },
   },
-  component: Badge,
-  title: 'Supernova UI/Atoms/Badge',
-} as ComponentMeta<typeof Badge>;
+  component: Tag,
+  title: 'Supernova UI/Atoms/Tag',
+} as ComponentMeta<typeof Tag>;
 
-const Template: ComponentStory<typeof Badge> = args => <Badge {...args} />;
+const Template: ComponentStory<typeof Tag> = args => <Tag {...args} />;
 
 export const Basic = Template.bind({});
 
 Basic.args = {
-  children: 'badge',
+  children: 'tag',
 };
 Basic.parameters = {
   controls: { include: ['colorVariant', 'size', 'variant'] },
