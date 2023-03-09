@@ -1,17 +1,170 @@
-/**
- * This file contains functions that help calculate
- * an elements position relative to another.
- *
- * for use in the Tooltip component
- *
- * credit
- * @see https://github.com/salimd83/bookslib/blob/main/src/ui/Tooltip.js
- */
+import { ArrowPosition, FloatingPlacement } from '@types';
 
-/**
- * The possible options for the Tooltip position
- */
-type PositionType = 'bottom' | 'left' | 'right' | 'top';
+function calculatePosition(
+  pos: FloatingPlacement,
+  withArrow: boolean,
+  arrowSize: number,
+  spacing: number,
+  triggerRect: DOMRect,
+  toolRect: DOMRect
+) {
+  const margin = withArrow ? (arrowSize / 2) * 1.4 + spacing : spacing;
+  const newPos = {
+    left: -100,
+    top: -100,
+  };
+  if (pos === 'bottom-end') {
+    newPos.left =
+      window.scrollX + triggerRect.left + triggerRect.width - toolRect.width;
+    newPos.top = window.scrollY + triggerRect.top + triggerRect.height + margin;
+  } else if (pos === 'bottom-start') {
+    newPos.left = window.scrollX + triggerRect.left;
+    newPos.top = window.scrollY + triggerRect.top + triggerRect.height + margin;
+  } else if (pos === 'top') {
+    newPos.left =
+      window.scrollX +
+      triggerRect.left +
+      (triggerRect.width - toolRect.width) / 2;
+    newPos.top = window.scrollY + triggerRect.top - toolRect.height - margin;
+  } else if (pos === 'top-start') {
+    newPos.left = window.scrollX + triggerRect.left;
+    newPos.top = window.scrollY + triggerRect.top - toolRect.height - margin;
+  } else if (pos === 'top-end') {
+    newPos.left =
+      window.scrollX + triggerRect.left + triggerRect.width - toolRect.width;
+    newPos.top = window.scrollY + triggerRect.top - toolRect.height - margin;
+  } else if (pos === 'left') {
+    newPos.left = window.scrollX + triggerRect.left - toolRect.width - margin;
+    newPos.top =
+      window.scrollY +
+      triggerRect.top +
+      (triggerRect.height - toolRect.height) / 2;
+  } else if (pos === 'left-end') {
+    newPos.left = window.scrollX + triggerRect.left - toolRect.width - margin;
+    newPos.top = window.scrollY + triggerRect.bottom - toolRect.height;
+  } else if (pos === 'left-start') {
+    newPos.left = window.scrollX + triggerRect.left - toolRect.width - margin;
+    newPos.top = window.scrollY + triggerRect.top;
+  } else if (pos === 'right') {
+    newPos.left = window.scrollX + triggerRect.right + margin;
+    newPos.top =
+      window.scrollY +
+      triggerRect.top +
+      (triggerRect.height - toolRect.height) / 2;
+  } else if (pos === 'right-start') {
+    newPos.left = window.scrollX + triggerRect.right + margin;
+    newPos.top = window.scrollY + triggerRect.top;
+  } else if (pos === 'right-end') {
+    newPos.left = window.scrollX + triggerRect.right + margin;
+    newPos.top = window.scrollY + triggerRect.bottom - toolRect.height;
+  } else {
+    newPos.left =
+      window.scrollX +
+      triggerRect.left +
+      (triggerRect.width - toolRect.width) / 2;
+    newPos.top = window.scrollY + triggerRect.top + triggerRect.height + margin;
+  }
+
+  return {
+    left: Math.round(newPos.left),
+    top: Math.round(newPos.top),
+  };
+}
+
+function isNumber(val: any) {
+  return Object.prototype.toString.call(val) === '[object Number]';
+}
+
+export function calculateArrowPosition(
+  pos: FloatingPlacement,
+  arrowEl: HTMLElement,
+  toolEl: HTMLElement
+) {
+  const arrowBox = arrowEl.getBoundingClientRect();
+  const toolBox = toolEl.getBoundingClientRect();
+  const arrowPos: ArrowPosition = {};
+  if (pos === 'bottom-end') {
+    arrowPos.right = arrowBox.width / 2;
+    arrowPos.top = -arrowBox.height;
+  } else if (pos === 'bottom-start') {
+    arrowPos.left = arrowBox.width / 2;
+    arrowPos.top = -arrowBox.height;
+  } else if (pos === 'top') {
+    arrowPos.left = -arrowBox.width / 2 + toolBox.width / 2;
+    arrowPos.bottom = -arrowBox.height;
+  } else if (pos === 'top-start') {
+    arrowPos.left = arrowBox.width / 2;
+    arrowPos.bottom = -arrowBox.height;
+  } else if (pos === 'top-end') {
+    arrowPos.right = arrowBox.width / 2;
+    arrowPos.bottom = -arrowBox.height;
+  } else if (pos === 'left') {
+    arrowPos.right = -arrowBox.width;
+    arrowPos.top = toolBox.height / 2 - arrowBox.height / 2;
+  } else if (pos === 'left-end') {
+    arrowPos.right = -arrowBox.width;
+    arrowPos.bottom = arrowBox.height / 2;
+  } else if (pos === 'left-start') {
+    arrowPos.right = -arrowBox.width;
+    arrowPos.top = arrowBox.height / 2;
+  } else if (pos === 'right') {
+    arrowPos.left = -arrowBox.width;
+    arrowPos.top = toolBox.height / 2 - arrowBox.height / 2;
+  } else if (pos === 'right-start') {
+    arrowPos.left = -arrowBox.width;
+    arrowPos.top = arrowBox.height / 2;
+  } else if (pos === 'right-end') {
+    arrowPos.left = -arrowBox.width;
+    arrowPos.bottom = arrowBox.height / 2;
+  } else {
+    arrowPos.left = -arrowBox.width / 2 + toolBox.width / 2;
+    arrowPos.top = -arrowBox.height;
+  }
+
+  // return as numbers with 2 decimal places.
+  return {
+    bottom: isNumber(arrowPos.bottom)
+      ? Number((arrowPos.bottom as number).toFixed(2))
+      : undefined,
+    left: isNumber(arrowPos.left)
+      ? Number((arrowPos.left as number).toFixed(2))
+      : undefined,
+    right: isNumber(arrowPos.right)
+      ? Number((arrowPos.right as number).toFixed(2))
+      : undefined,
+    top: isNumber(arrowPos.top)
+      ? Number((arrowPos.top as number).toFixed(2))
+      : undefined,
+  };
+}
+
+function negatePosition(pos: FloatingPlacement) {
+  let value: FloatingPlacement = 'top';
+  if (pos === 'top') {
+    value = 'bottom';
+  } else if (pos === 'top-start') {
+    value = 'bottom-start';
+  } else if (pos === 'top-end') {
+    value = 'bottom-end';
+  } else if (pos === 'bottom-start') {
+    value = 'top-start';
+  } else if (pos === 'bottom-end') {
+    value = 'top-end';
+  } else if (pos === 'left') {
+    value = 'right';
+  } else if (pos === 'left-end') {
+    value = 'right-end';
+  } else if (pos === 'left-start') {
+    value = 'right-start';
+  } else if (pos === 'right-end') {
+    value = 'left-end';
+  } else if (pos === 'right') {
+    value = 'left';
+  } else if (pos === 'right-start') {
+    value = 'left-start';
+  }
+  return value;
+}
 
 /**
  * interface that represents the dimensions of the viewport
@@ -33,18 +186,11 @@ interface Point {
   restrictRect(rect: ViewportBox): void;
 }
 
-export interface ArrowPosition {
-  bottom?: number;
-  left?: number;
-  right?: number;
-  top?: number;
-}
-
 /**
  * Function that return object with properties that help
  * to describe the position of an element.
  */
-export const getPosition = (position: PositionType) => ({
+const getPosition = (position: FloatingPlacement) => ({
   /**
    * the position of the element
    */
@@ -58,16 +204,7 @@ export const getPosition = (position: PositionType) => ({
    * @return PositionType
    */
   negate() {
-    switch (this.position) {
-      case 'left':
-        return 'right';
-      case 'right':
-        return 'left';
-      case 'top':
-        return 'bottom';
-      default:
-        return 'top';
-    }
+    return negatePosition(this.position);
   },
   /**
    * Whether position is either 'left' or 'right'
@@ -75,7 +212,14 @@ export const getPosition = (position: PositionType) => ({
    * @return if position is horizontal
    */
   isHorizontal(): boolean {
-    return this.position === 'left' || this.position === 'right';
+    return (
+      this.position === 'left' ||
+      this.position === 'right' ||
+      this.position === 'left-start' ||
+      this.position === 'right-start' ||
+      this.position === 'left-end' ||
+      this.position === 'right-end'
+    );
   },
   /**
    * Whether position is either 'bottom' or 'top'
@@ -83,7 +227,14 @@ export const getPosition = (position: PositionType) => ({
    * @return if position is vertical
    */
   isVertical(): boolean {
-    return this.position === 'bottom' || this.position === 'top';
+    return (
+      this.position === 'top' ||
+      this.position === 'bottom' ||
+      this.position === 'top-start' ||
+      this.position === 'top-end' ||
+      this.position === 'bottom-start' ||
+      this.position === 'bottom-end'
+    );
   },
 });
 
@@ -91,7 +242,7 @@ export const getPosition = (position: PositionType) => ({
  * Function that return object with properties that help
  * to describe the left and top positions of an element.
  */
-export const point = (): Point => ({
+const point = (): Point => ({
   left: null,
   top: null,
   reset(p: Pick<ViewportBox, 'left' | 'top'>) {
@@ -112,104 +263,53 @@ export const point = (): Point => ({
   },
 });
 
-/**
- * Calcuate the position of the tooltip arrow
- *
- * @param arrowElement reference to the arrow element itself
- * @param tooltipElement reference to the tooltip element
- * @param postion current position of the tooltip
- */
-export const getArrowPosition = (
-  arrowElement: HTMLDivElement,
-  tooltipElement: HTMLElement,
-  position: PositionType
-) => {
-  // const arrowPosition: ArrowPosition = {};
-  const arrowPosition: any = {};
-
-  if (tooltipElement && arrowElement) {
-    switch (position) {
-      case 'left':
-        arrowPosition.right = -(arrowElement.offsetWidth * 1.3);
-        arrowPosition.top =
-          tooltipElement.offsetHeight / 2 - arrowElement.offsetHeight / 2;
-
-        break;
-      case 'right':
-        arrowPosition.left = -(arrowElement.offsetWidth * 1.3);
-        arrowPosition.top =
-          tooltipElement.offsetHeight / 2 - arrowElement.offsetHeight / 2;
-        break;
-      case 'top':
-        arrowPosition.bottom = -(arrowElement.offsetHeight * 1.3);
-        arrowPosition.left =
-          tooltipElement.offsetWidth / 2 - arrowElement.offsetWidth / 2;
-        break;
-      default:
-        arrowPosition.top = -(arrowElement.offsetHeight * 1.3);
-        arrowPosition.left =
-          tooltipElement.offsetWidth / 2 - arrowElement.offsetWidth / 2;
-    }
-  }
-
-  return arrowPosition;
-};
-
-/**
- * Calcuate the left and top properties
- *
- * @param triggerElement reference to the element that triggers the tooltip
- * @param tooltipElement reference to the tooltip element
- * @param postion current position of the tooltip
- */
-export const getLeftTopPosition = (
+export function handlePos(
+  position: FloatingPlacement,
+  withArrow: boolean,
+  arrowSize: number,
+  spacing: number,
   triggerElement: HTMLElement,
-  tooltipElement: HTMLElement,
-  position: PositionType
-) => {
+  tooltipElement: HTMLElement
+) {
+  const positionValues: {
+    finalPosition: FloatingPlacement;
+    tooltip: { left: number; top: number };
+  } = { finalPosition: position, tooltip: { left: -200, top: -200 } };
   if (tooltipElement) {
     let recurCount = 0;
+    let finalPosition = position;
     const pt = point();
-    const space = 10;
     // viewport dimensions which will make the tooltip visible
+    // important to include scrolling in the calculation.
     const boundary: ViewportBox = {
-      bottom: window.innerHeight - (tooltipElement.clientHeight + space),
-      left: space,
-      right: document.body.clientWidth - (tooltipElement.clientWidth + space),
-      top: space,
+      bottom:
+        window.scrollY +
+        window.innerHeight -
+        (tooltipElement.clientHeight + spacing),
+      left: spacing,
+      right:
+        window.scrollX +
+        document.body.clientWidth -
+        (tooltipElement.clientWidth + spacing),
+      top: spacing,
     };
-    const { bottom, left, right, top } = triggerElement.getBoundingClientRect();
+    const triggerRect = triggerElement.getBoundingClientRect();
+    const toolRect = tooltipElement.getBoundingClientRect();
 
-    return (function recursive(currentPosition: PositionType) {
+    const tooltip = (function recursive(currentPosition: FloatingPlacement) {
       recurCount += 1;
-
+      finalPosition = currentPosition;
       const pos = getPosition(currentPosition);
-
-      switch (pos.position) {
-        case 'left':
-          pt.left = left - (tooltipElement.offsetWidth + space);
-          pt.top =
-            top +
-            (triggerElement.offsetHeight - tooltipElement.offsetHeight) / 2;
-          break;
-        case 'right':
-          pt.left = right + space;
-          pt.top =
-            top +
-            (triggerElement.offsetHeight - tooltipElement.offsetHeight) / 2;
-          break;
-        case 'top':
-          pt.left =
-            left +
-            (triggerElement.offsetWidth - tooltipElement.offsetWidth) / 2;
-          pt.top = top - (tooltipElement.offsetHeight + space);
-          break;
-        default:
-          pt.left =
-            left +
-            (triggerElement.offsetWidth - tooltipElement.offsetWidth) / 2;
-          pt.top = bottom + space;
-      }
+      const { left, top } = calculatePosition(
+        currentPosition,
+        withArrow,
+        arrowSize,
+        spacing,
+        triggerRect,
+        toolRect
+      );
+      pt.left = left;
+      pt.top = top;
 
       if (recurCount < 3)
         if (
@@ -218,16 +318,64 @@ export const getLeftTopPosition = (
           (pos.isVertical() &&
             (pt.top! < boundary.top || pt.top! > boundary.bottom))
         ) {
-          pt.reset(recursive(pos.negate()) as any);
+          pt.reset(recursive(pos.negate()));
         }
-
       // make sure the tooltip doesn't go outside the boundary
       pt.restrictRect(boundary);
-
-      return pt;
+      return { left: pt.left, top: pt.top };
     })(position);
+    positionValues.tooltip = tooltip;
+    positionValues.finalPosition = finalPosition;
   }
+  return positionValues;
+}
 
-  // place the tooltip outside the viewport
-  return { left: -100, top: -100 };
-};
+export function addArrowClasses(pos: FloatingPlacement) {
+  let classes = 'snui snui-floating__arrow snui-floating__arrow--up';
+  if (pos === 'top' || pos === 'top-start' || pos === 'top-end') {
+    classes = 'snui snui-floating__arrow snui-floating__arrow--down';
+  } else if (pos === 'right' || pos === 'right-start' || pos === 'right-end') {
+    classes = 'snui snui-floating__arrow snui-floating__arrow--left';
+  } else if (pos === 'left' || pos === 'left-start' || pos === 'left-end') {
+    classes = 'snui snui-floating__arrow snui-floating__arrow--right';
+  }
+  return classes;
+}
+
+export function calculcateArrowInlineStyles(
+  pos: FloatingPlacement,
+  arrowSize: number,
+  arrowColor: string = '#4d5665'
+) {
+  const size = (arrowSize / 2) * 1.4;
+  if (pos === 'top' || pos === 'top-start' || pos === 'top-end') {
+    return {
+      borderLeftWidth: size,
+      borderRightWidth: size,
+      borderTopWidth: size,
+      borderTopColor: arrowColor,
+    };
+  }
+  if (pos === 'right' || pos === 'right-start' || pos === 'right-end') {
+    return {
+      borderBottomWidth: size,
+      borderRightWidth: size,
+      borderTopWidth: size,
+      borderRightColor: arrowColor,
+    };
+  }
+  if (pos === 'left' || pos === 'left-start' || pos === 'left-end') {
+    return {
+      borderBottomWidth: size,
+      borderLeftWidth: size,
+      borderTopWidth: size,
+      borderLeftColor: arrowColor,
+    };
+  }
+  return {
+    borderBottomWidth: size,
+    borderLeftWidth: size,
+    borderRightWidth: size,
+    borderBottomColor: arrowColor,
+  };
+}

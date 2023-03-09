@@ -1,5 +1,6 @@
 export * from './use-accordion';
 export * from './use-alert-dialog';
+export * from './use-calculate-position';
 export * from './use-class';
 export * from './use-create-class';
 export * from './use-drawer';

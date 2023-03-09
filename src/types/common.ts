@@ -2,6 +2,8 @@ import type {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   InputHTMLAttributes,
+  MutableRefObject,
+  ReactNode,
   RefObject,
   TextareaHTMLAttributes,
 } from 'react';
@@ -16,6 +18,26 @@ import colors from '../theme/colors';
 export interface AnyObject {
   [key: string]: any;
 }
+
+/**
+ * Represents values for the arrow element for the Floating component.
+ */
+export interface ArrowPosition {
+  bottom?: number;
+  left?: number;
+  right?: number;
+  top?: number;
+}
+
+/**
+ * Colors from the theme.
+ */
+export type ColorVariant = keyof typeof colors;
+
+/**
+ * Component sizes.
+ */
+export type ComponentSize = 'sm' | 'md' | 'lg';
 
 /**
  * Props for AlertDialog, Drawer, and Modal.
@@ -70,9 +92,21 @@ export interface DialogLikeProps {
 }
 
 /**
- * Colors from the theme.
+ * Options for placement prop for the Floating component.
  */
-export type ColorVariant = keyof typeof colors;
+export type FloatingPlacement =
+  | 'bottom'
+  | 'bottom-end'
+  | 'bottom-start'
+  | 'left'
+  | 'left-end'
+  | 'left-start'
+  | 'right'
+  | 'right-end'
+  | 'right-start'
+  | 'top'
+  | 'top-end'
+  | 'top-start';
 
 /**
  * Props used in form control components.
@@ -103,9 +137,74 @@ export interface FormControlProps {
 }
 
 /**
- * Component sizes.
+ * Props for the Floating component.
  */
-export type ComponentSize = 'sm' | 'md' | 'lg';
+export interface FloatingProps {
+  /**
+   * Color of the arrow element.
+   *
+   * @default 'gray700'
+   */
+  arrowColor?: ColorVariant;
+  /**
+   * Size, in px, of the arrow element.
+   *
+   * @default 15
+   */
+  arrowSize?: number;
+  /**
+   * Content to be rendered.
+   */
+  children: ReactNode;
+  /**
+   * The ammount of time, in ms, to wait before
+   * the component is unmounted.
+   *
+   * @default 0
+   */
+  closeDelay?: number;
+  /**
+   * Flag to indicate whether the component is interactive.
+   *
+   * @default false
+   */
+  isDisabled?: boolean;
+  /**
+   * The ammount of time, in ms, to wait before
+   * the component is mounted.
+   *
+   * @default 0
+   */
+  openDelay?: number;
+  /**
+   * Where the content of the tooltip should be positioned
+   * relative to the trigger
+   *
+   * @default 'bottom'
+   */
+  placement?: FloatingPlacement;
+  /**
+   * Flag that indicates whether the component is rendered.
+   */
+  show: boolean;
+  /**
+   * Space, in px, between the trigger element
+   * and the component with arrow.
+   *
+   * @default 5
+   */
+  spacing?: number;
+  /**
+   * The element used to determine the component plaement.
+   */
+  triggerRef: MutableRefObject<HTMLElement | null>;
+  /**
+   * Configure whether to render with an arrow pointing to the trigger element
+   *
+   * @default false
+   */
+  withArrow?: boolean;
+}
 
 /**
  * All attributes supplied to a React button.
@@ -138,6 +237,9 @@ interface ReactElementProps {
   textarea: ReactTextareaProps;
 }
 
+/**
+ * Props shared by all supernova-ui components.
+ */
 interface SharedProps {
   /**
    * class HTML attribute to add.
@@ -150,7 +252,7 @@ interface SharedProps {
 }
 
 /**
- * Props shared by all supernova-ui components.
+ * Base type used by all supernova-ui components.
  */
 export type SupernovaProps<Type = ''> = Type extends keyof ReactElementProps
   ? WithResponsiveProps<CSSProps> & PseudoProps & ReactElementProps[Type]
