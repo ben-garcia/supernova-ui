@@ -3,7 +3,7 @@ import { MutableRefObject, useCallback, useEffect, useState } from 'react';
 import { ArrowPosition, FloatingPlacement } from '@types';
 import {
   addArrowClasses,
-  calculcateArrowInlineStyles,
+  calculateArrowInlineStyles,
   calculateArrowPosition,
   handlePos,
 } from '@utils';
@@ -94,14 +94,14 @@ export function useCalculatePosition(
       ref: arrowRef,
       style: {
         ...arrowPos,
-        ...calculcateArrowInlineStyles(
+        ...calculateArrowInlineStyles(
           finalPos as FloatingPlacement,
           arrowSize,
           arrowColor
         ),
       },
     }),
-    [arrowPos, arrowSize, finalPos, arrowRef]
+    [arrowPos, arrowSize, finalPos, arrowRef, arrowColor]
   );
 
   return { calcPosition, addElementStyles, addArrowStyles };

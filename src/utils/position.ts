@@ -342,10 +342,10 @@ export function addArrowClasses(pos: FloatingPlacement) {
   return classes;
 }
 
-export function calculcateArrowInlineStyles(
+export function calculateArrowInlineStyles(
   pos: FloatingPlacement,
   arrowSize: number,
-  arrowColor: string = '#4d5665'
+  arrowColor: string
 ) {
   const size = (arrowSize / 2) * 1.4;
   if (pos === 'top' || pos === 'top-start' || pos === 'top-end') {

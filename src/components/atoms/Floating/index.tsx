@@ -4,6 +4,8 @@ import { Portal } from '@atoms';
 import { useCalculatePosition, useCreateClassString } from '@hooks';
 import { FloatingProps } from '@types';
 
+import './styles.scss';
+
 /**
  * Floating element that renders next to another element. It is the base
  * component for Tooltip, Propover, Menu and Select.

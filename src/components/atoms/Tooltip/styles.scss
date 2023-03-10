@@ -1,46 +1,6 @@
 .snui-tooltip {
   background: var(--snui-color-gray700);
+  border-radius: 4px; 
   color: var(--snui-color-white);
   padding: 0.3rem;
-}
-
-.snui-tooltip-inner {
-  display: flex;
-  justify-content: center;
-  padding: 5px;
-  position: relative;
-}
-
-.snui-tooltip-arrow {
-  height: 0;
-  position: absolute;
-  width: 0;
-
-  &--bottom {
-    border-bottom: 8px solid var(--snui-color-gray700);
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    transform: translateY(50%);
-  }
-
-  &--left {
-    border-bottom: 8px solid transparent;
-    border-left: 8px solid var(--snui-color-gray700);
-    border-top: 8px solid transparent;
-    transform: translateX(-50%);
-  }
-
-  &--right {
-    border-bottom: 8px solid transparent;
-    border-right: 8px solid var(--snui-color-gray700);
-    border-top: 8px solid transparent;
-    transform: translateX(50%);
-  }
-
-  &--top {
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid var(--snui-color-gray700);
-    transform: translateY(50%);
-  }
 }

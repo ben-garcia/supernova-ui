@@ -196,7 +196,7 @@ export const All = () => {
           </Box>
 
           <Box>
-            <Tooltip content="This is a tooltip">Hover me</Tooltip>
+            <Tooltip label="This is a tooltip">Hover me</Tooltip>
             <Paragraph>Tooltip</Paragraph>
           </Box>
 

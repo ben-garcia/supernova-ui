@@ -6,7 +6,7 @@ import { isDarkColor } from '@utils';
 import { ColorVariant } from '@types';
 
 /**
- * React hooks converts colorVariant prop to inline React style prop.
+ * React hook to convert colorVariant prop to inline React style prop.
  */
 export const useInlineStyles = (colorVariant: ColorVariant | undefined) => {
   const { colors } = useTheme();

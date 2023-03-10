@@ -1,152 +1,128 @@
-import React, { Children, FC, useCallback, useRef, useState } from 'react';
+import React, {
+  FC,
+  Children,
+  cloneElement,
+  useMemo,
+  useState,
+  useRef,
+} from 'react';
 
-import { Portal } from '@atoms';
+import Floating from '@atoms/Floating';
 import {
   useClassStyles,
   useCreateClassString,
   useInlineStyles,
+  useTheme,
   useUniqueId,
   useValidateProps,
 } from '@hooks';
-import {
-  ArrowPosition,
-  getArrowPosition,
-  getLeftTopPosition,
-  isString,
-} from '@utils';
+import { isString } from '@utils';
+import { TooltipProps } from './types';
 
-import { TooltipPosition, TooltipProps } from './types';
 import './styles.scss';
 
 const Tooltip: FC<TooltipProps> = props => {
   const {
+    arrowSize = 15,
     children,
     className,
+    closeDelay = 0,
     colorVariant,
-    content,
+    id,
+    isDisabled = false,
+    label,
+    openDelay = 0,
     placement = 'bottom',
-    withArrow = true,
+    spacing = 5,
+    withArrow = false,
+    background,
+    backgroundColor,
     ...rest
   } = props;
-  const { remainingProps, validatedCSSProps } = useValidateProps(rest);
+  const { remainingProps, validatedCSSProps } = useValidateProps({
+    ...rest,
+    background,
+    backgroundColor,
+  });
   const stylesClassName = useClassStyles(validatedCSSProps);
-  const createInlineStyles = useInlineStyles(colorVariant);
   const addClasses = useCreateClassString('snui snui-tooltip', {
     [`${className}`]: isString(className),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
-  const addArrowClasses = useCreateClassString('snui-tooltip-arrow', {
-    [`snui-tooltip-arrow--${placement}`]: isString(placement),
-  });
-  const tooltipId = useUniqueId('snui-tooltip');
-  let jsx: React.ReactNode;
+  const createInlineStyles = useInlineStyles(colorVariant);
+  const triggerRef = useRef<any>(null);
+  const tooltipId = id ?? useUniqueId('snui-tooltip');
   const [show, setShow] = useState(false);
-  const contentRef = useRef<any>(null);
-  const arrowRef = useRef<HTMLDivElement | null>(null);
-  const [pos, setPos] = useState<TooltipPosition>({
-    left: -100,
-    top: -100,
-  });
-  const [arrowPos, setArrowPos] = useState<ArrowPosition>({});
-
-  const onMouseEnter = useCallback(
-    (e: React.MouseEvent | React.FocusEvent) => {
-      setShow(true);
-
-      if (e) {
-        const { currentTarget } = e;
-
-        setTimeout(() => {
-          // get the position of the tooltip element
-          setPos(
-            getLeftTopPosition(
-              currentTarget as HTMLElement,
-              contentRef?.current,
-              placement
-            ) as any
-          );
-
-          // get the position of the arrow
-          setArrowPos(
-            getArrowPosition(
-              arrowRef?.current as HTMLDivElement,
-              contentRef?.current,
-              placement
-            )
-          );
-        }, 10);
-      }
-    },
-    [placement]
-  );
-  const onMouseLeave = useCallback(() => setShow(false), []);
-  const styles: React.CSSProperties = {};
-  const arrowStyles: React.CSSProperties = {};
-
-  if (isString(children)) {
-    jsx = (
-      <span
-        aria-describedby={show ? tooltipId : undefined}
-        onBlur={onMouseLeave}
-        onFocus={onMouseEnter}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={0}
-      >
-        {children}
-      </span>
-    );
-  } else {
-    const child = Children.only(children);
-
-    jsx = React.cloneElement(child as any, {
-      'aria-describedby': show ? tooltipId : undefined,
-      onBlur: onMouseLeave,
-      onFocus: onMouseEnter,
-      onMouseEnter,
-      onMouseLeave,
-    });
-  }
+  const { colors } = useTheme();
+  const arrColor = useMemo(() => {
+    if (isString(colorVariant) && (colors as any)[colorVariant!]) {
+      return (colors as any)[colorVariant!];
+    }
+    if (isString(backgroundColor)) {
+      return backgroundColor;
+    }
+    if (isString(background)) {
+      return (background as string).split(' ')[0];
+    }
+    return '#4d5665';
+  }, [colorVariant, background, backgroundColor]);
+  const onMouseEnter = React.useCallback(() => {
+    setShow(true);
+  }, []);
+  const onMouseLeave = React.useCallback(() => {
+    setShow(false);
+  }, []);
 
   return (
-    <div>
-      {jsx}
-      <Portal isMounted={show}>
-        <div
-          className="snui-position-absolute"
-          ref={contentRef}
-          style={{
-            ...styles,
-            left: pos.left,
-            top: pos.top,
-          }}
+    <>
+      {isString(children) ? (
+        <span
+          aria-describedby={show ? tooltipId : undefined}
+          onBlur={isDisabled ? undefined : onMouseLeave}
+          onFocus={isDisabled ? undefined : onMouseEnter}
+          onMouseEnter={isDisabled ? undefined : onMouseEnter}
+          onMouseLeave={isDisabled ? undefined : onMouseLeave}
+          ref={isDisabled ? undefined : triggerRef}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          tabIndex={isDisabled ? undefined : 0}
         >
-          <div className="snui-tooltip-inner">
-            {withArrow && (
-              <div
-                {...addArrowClasses()}
-                ref={arrowRef}
-                style={{
-                  ...arrowPos,
-                  ...arrowStyles,
-                }}
-              />
-            )}
-
-            <div
-              {...remainingProps}
-              {...addClasses()}
-              id={tooltipId}
-              role="tooltip"
-              style={{ ...createInlineStyles().style }}
-            >
-              {content}
-            </div>
-          </div>
+          {children}
+        </span>
+      ) : (
+          cloneElement(Children.only(children) as any, {
+            'aria-describedby': show ? tooltipId : undefined,
+            onBlur: isDisabled ? undefined : onMouseLeave,
+            onFocus: isDisabled ? undefined : onMouseEnter,
+            onMouseEnter: isDisabled ? undefined : onMouseEnter,
+            onMouseLeave: isDisabled ? undefined : onMouseLeave,
+            ref: isDisabled ? undefined : triggerRef,
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+            tabIndex: 0,
+          })
+        )}
+      <Floating
+        arrowColor={arrColor}
+        arrowSize={arrowSize}
+        closeDelay={closeDelay}
+        openDelay={openDelay}
+        isDisabled={isDisabled}
+        placement={placement}
+        show={show}
+        spacing={spacing}
+        triggerRef={triggerRef}
+        withArrow={withArrow}
+      >
+        <div
+          {...remainingProps}
+          {...addClasses()}
+          {...createInlineStyles()}
+          id={tooltipId}
+          role="tooltip"
+        >
+          {label}
         </div>
-      </Portal>
-    </div>
+      </Floating>
+    </>
   );
 };
 
