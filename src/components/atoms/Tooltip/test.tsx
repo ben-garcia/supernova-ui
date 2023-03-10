@@ -6,80 +6,232 @@ import Tooltip from '.';
 
 describe('<Tooltip />', () => {
   const buttonLabel = 'button label';
-  const tooltipContent = 'tooltip label';
-  const TooltipTest = () => (
-    <Tooltip content={tooltipContent}>
+  const tooltipLabel = 'tooltip label';
+  // amount of time needed for the fade-out animation.
+  const closeDelayAnimation = 100;
+  // amount of time needed for the fade-in animation.
+  const openDelayAnimation = 20;
+  const TooltipTest = (props: any) => (
+    <Tooltip label={tooltipLabel} {...props}>
       <button type="button">{buttonLabel}</button>
     </Tooltip>
   );
 
-  it('should pass a11y tests', async () => {
-    render(<TooltipTest />);
-
-    fireEvent.mouseOver(screen.getByText(buttonLabel));
-
-    const tooltip = await screen.findByRole('tooltip');
-
-    await act(() => a11yTest(tooltip));
+  beforeAll(() => {
+    jest.useFakeTimers();
   });
 
-  it('should render on mouseEnter and close on mouseLeave', async () => {
+  afterAll(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+  });
+
+  it('should pass a11y tests', () => {
     render(<TooltipTest />);
 
+    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation);
     });
 
-    const tooltip = await screen.findByRole('tooltip');
+    const tooltip = screen.getByRole('tooltip');
 
-    expect(screen.getByText(buttonLabel)).toBeInTheDocument();
-    expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    act(() => a11yTest(tooltip));
+  });
 
+  it('should render on mouseEnter and close on mouseLeave when children is a string', () => {
+    render(<Tooltip label={tooltipLabel}>{buttonLabel}</Tooltip>);
+
+    let tooltip = screen.queryByRole('tooltip');
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+
+    // Wrapper function to prevent warning.
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should now be visible.
+    expect(tooltip).toBeInTheDocument();
+
+    // Wrapper function to prevent the warning.
     act(() => {
       fireEvent.mouseLeave(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to unmount.
+      jest.advanceTimersByTime(closeDelayAnimation);
     });
 
+    // Tooltip should now be removed from the DOM.
     expect(tooltip).not.toBeInTheDocument();
   });
 
-  it('should render child with correct aria-describedby', async () => {
+  it('should NOT render when isDisabled is true', () => {
+    render(<TooltipTest isDisabled />);
+
+    let tooltip = screen.queryByRole('tooltip');
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+
+    // Wrapper function to prevent warning.
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+  });
+
+  it('should NOT render when isDisabled is true and passing string', () => {
+    render(
+      <Tooltip isDisabled label={tooltipLabel}>
+        {buttonLabel}
+      </Tooltip>
+    );
+
+    let tooltip = screen.queryByRole('tooltip');
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+
+    // Wrapper function to prevent warning.
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+  });
+
+  it('should wait before rendering with openDelay prop', () => {
+    const delay = 300;
+    render(<TooltipTest openDelay={delay} />);
+
+    let tooltip = screen.queryByRole('tooltip');
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+
+    // Wrapper function to prevent warning.
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed by default to render.
+      jest.advanceTimersByTime(openDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should still not be visible.
+    expect(tooltip).not.toBeInTheDocument();
+
+    act(() => {
+      // fast forward the delay
+      jest.advanceTimersByTime(delay);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should now not be visible.
+    expect(tooltip).toBeInTheDocument();
+  });
+
+  it('should wait before unmounting with closeDelay prop', () => {
+    const delay = 300;
+    render(<TooltipTest closeDelay={delay} />);
+
+    let tooltip = screen.queryByRole('tooltip');
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+
+    // Wrapper function to prevent warning.
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed by default to render.
+      jest.advanceTimersByTime(openDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should still not be visible.
+    expect(tooltip).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.mouseLeave(screen.getByText(buttonLabel));
+      jest.advanceTimersByTime(closeDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should still be visible.
+    expect(tooltip).toBeInTheDocument();
+
+    act(() => {
+      // fast forward the delay
+      jest.advanceTimersByTime(delay);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should NOT be visible.
+    expect(tooltip).not.toBeInTheDocument();
+  });
+
+  it('should render on mouseEnter and close on mouseLeave', () => {
     render(<TooltipTest />);
 
-    const button = await screen.findByText(buttonLabel);
+    let tooltip = screen.queryByRole('tooltip');
+    // Tooltip element should not be present at first.
+    expect(tooltip).not.toBeInTheDocument();
+
+    // Wrapper function to prevent warning.
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+
+    // Tooltip should now be visible.
+    expect(tooltip).toBeInTheDocument();
+
+    // Wrapper function to prevent the warning.
+    act(() => {
+      fireEvent.mouseLeave(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to unmount.
+      jest.advanceTimersByTime(closeDelayAnimation);
+    });
+
+    // Tooltip should now be removed from the DOM.
+    expect(tooltip).not.toBeInTheDocument();
+  });
+
+  it('should render child with correct aria-describedby', () => {
+    render(<TooltipTest />);
+
+    const button = screen.getByText(buttonLabel);
 
     expect(button).not.toHaveAttribute('aria-describedby');
 
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
+      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation);
     });
 
     const tooltip = screen.getByRole('tooltip');
 
     expect(button.getAttribute('aria-describedby')).toBe(tooltip.id);
-  });
-
-  it('should wrap children in a span when children is a string', () => {
-    render(<Tooltip content={tooltipContent}>{buttonLabel}</Tooltip>);
-
-    expect(screen.getByText(buttonLabel).nodeName).toBe('SPAN');
-  });
-
-  it('should render on mouseEnter and close on mouseLeave when children is a string', async () => {
-    render(<Tooltip content={tooltipContent}>{buttonLabel}</Tooltip>);
-
-    act(() => {
-      fireEvent.mouseEnter(screen.getByText(buttonLabel));
-    });
-
-    const tooltip = await screen.findByRole('tooltip');
-
-    expect(screen.getByText(buttonLabel)).toBeInTheDocument();
-    expect(screen.getByRole('tooltip')).toBeInTheDocument();
-
-    act(() => {
-      fireEvent.mouseLeave(screen.getByText(buttonLabel));
-    });
-
-    expect(tooltip).not.toBeInTheDocument();
   });
 });
