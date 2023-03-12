@@ -1,23 +1,9 @@
 .snui-menu {
-  position: absolute;
+  background-color: var(--snui-color-white);
   border-radius: var(--snui-radii-sm);
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 8px 16px, rgba(0, 0, 0, 0.12) 0px 0px 2px;
   color: var(--snui-color-white);
   display: flex;
   flex-direction: column;
-  margin-top: var(--snui-space-xs);
-  padding-top: var(--snui-space-sm);
-  transition: all 300ms ease;
-
-  &--invisible {
-    opacity: 0;
-    transform: translateY(-10%);
-    visibility: hidden;
-  }
-
-  &--visible {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-  }
+  width: max-content;
 }

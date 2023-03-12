@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 
-import { Portal } from '@atoms';
+import Floating from '@atoms/Floating';
 import { MenuListProvider } from '@contexts';
 import {
   useCreateClassString,
@@ -31,11 +31,8 @@ export interface MenuListProps extends SupernovaProps {
 // @ts-ignore
 const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
+  const { remainingProps, validatedCSSProps, validatedPseudoClassProps } =
+    useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const {
@@ -43,22 +40,18 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     isOpen,
     onClose,
     getMenuListProps,
-    menuListRef,
+    // menuListRef,
     menuButtonRef,
     setFocusedIndex,
   } = useMenu();
   const addClasses = useCreateClassString('snui snui-menu', {
     [`${className}`]: isString(className),
-    'snui-menu--visible': isOpen,
-    'snui-menu--invisible': !isOpen,
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
   const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
-  /**
-   * obj that stores the first letters of menu items
-   * and the array index of those that match.
-   */
+  //obj that stores the first letters of menu items
+  // and the array index of those that match.
   const [menuItemsContent, setMenuItemsContent] = useState<{
     [k: string]: number[];
   }>({});
@@ -69,101 +62,70 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     }),
     [menuButtonItemsRef, menuItemsContent]
   );
-  const [pos, setPos] = useState({ left: 0, top: 0 });
 
-  /**
-   * set tabindex of each menu item to -1
-   * set focused index to -1
-   *
-   * run on unmount
-   */
-  const resetMenuItems = useCallback(() => {
-    menuButtonItemsRef?.current?.forEach(el => {
-      el.setAttribute('tabIndex', '-1');
-    });
-    setFocusedIndex(-1);
-  }, []);
-
-  /**
-   * set a reference to the list of button menu items
-   */
+  // manually interact with the DOM  rather than through React ref objects.
+  // my attempt at using refs didn't work.
+  // NOTE: just focused on it working for now
+  //       will refactor in the future.
   useEffect(() => {
-    if (menuButtonRef?.current) {
-      (menuButtonItemsRef.current as any) = menuListRef?.current?.querySelectorAll(
-        'button[role="menuitem"]'
-      );
-    }
-  }, [menuListRef?.current]);
+    if (isOpen && menuId) {
+      let id = `${menuId}__list`;
+      setTimeout(() => {
+        let menuList = document.getElementById(id);
+        if (menuList) {
+          let items = menuList.querySelectorAll('button[role="menuitem"]');
+          let tempObj: any = {};
+          menuButtonItemsRef.current = items as any;
 
-  /**
-   * add an index custom data prop to each menu item
-   */
+          items.forEach((element, index) => {
+            element.setAttribute('data-snui-menu-item-index', `${index}`);
+            let firstLetter = element.textContent![0].toLowerCase();
+
+            if (tempObj[firstLetter]) {
+              tempObj[firstLetter].push(index);
+            } else {
+              tempObj[firstLetter] = [index];
+            }
+          });
+          setMenuItemsContent(tempObj);
+        }
+
+        menuButtonItemsRef.current[0].focus();
+      }, 30); // wait 10 ms longer the the Floating component takes to render.
+    }
+  }, [isOpen, menuId]);
+
+  // set focused index to 0 after rendering.
   useEffect(() => {
-    if (isOpen) {
-      if (menuButtonItemsRef?.current) {
-        menuButtonItemsRef.current.forEach((element, index) => {
-          element.setAttribute('data-snui-menu-item-index', `${index}`);
-        });
-
-        const tempObj: any = {};
-
-        menuButtonItemsRef.current.forEach((element, index) => {
-          const firstLetter = element.textContent![0].toLowerCase();
-
-          if (tempObj[firstLetter]) {
-            tempObj[firstLetter].push(index);
-          } else {
-            tempObj[firstLetter] = [index];
-          }
-        });
-
-        setMenuItemsContent(tempObj);
-      }
-
-      if (menuButtonItemsRef?.current?.length) {
-        // needed to correctly set focus
-        setTimeout(() => {
-          menuButtonItemsRef.current[0].focus();
-        }, 15);
-      }
+    if (isOpen && menuButtonItemsRef?.current?.length) {
+      // NOTE: setTimeout solves the  problem with positioning
+      //       window.scrollY = 0 without setTimeout
+      setTimeout(() => {
+        // set the intial focus index ONLY if there is at least 1 menu item
+        setFocusedIndex(0);
+      }, 40); // 20 ms after Floating component take to render.
     }
-  }, [isOpen]);
+  }, [isOpen, menuButtonItemsRef?.current]);
 
-  /**
-   * set focused index to 0
-   */
-  useEffect(() => {
-    // set the intial focus index ONLY if there is at least 1 menu item
-    if (isOpen) {
-      setFocusedIndex(0);
+  // Return focus to the menu button that triggered the opening.
+  const returnFocus = useCallback(() => {
+    if (isOpen && menuButtonRef?.current) {
+      menuButtonRef?.current?.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, menuButtonRef?.current]);
 
-  /**
-   * return focus to the menu button that tiggered the menu to open
-   */
-  useEffect(
-    () => () => {
-      if (isOpen && menuButtonRef?.current) {
-        resetMenuItems();
-        menuButtonRef?.current?.focus();
-      }
-    },
-    [isOpen, menuButtonRef?.current]
-  );
+  // cleanup effect that returns focus to menu button
+  useEffect(() => () => returnFocus());
 
-  /**
-   *
-   * close menu when user clicks outside the menu list element
-   *
-   * add/remove window click listeners
-   */
+  // close menu when user clicks outside the menu list element
+  // add/remove window click listeners
   useEffect(() => {
     const handleClick = (e: any) => {
       const { target } = e;
 
       if (target?.parentElement?.id !== `${menuId}__list`) {
         onClose();
+        returnFocus();
       }
     };
 
@@ -178,58 +140,8 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (menuButtonRef?.current && menuListRef?.current) {
-      const menuButtonPosition = menuButtonRef.current.getBoundingClientRect();
-      const position = {
-        left: menuButtonPosition.left,
-        top: menuButtonPosition.bottom,
-      };
-
-      /**
-       *
-       * when the menu goes outside the right side of the viewport
-       *
-       * @example
-       * --------------------
-       * |                  |
-       * |               -----------
-       * |    viewport   |         |
-       * |               |   menu  |
-       * |               -----------
-       * |                  |
-       * --------------------
-       *
-       * place the manu inside the viewport
-       */
-      if (
-        menuButtonPosition.right +
-          (menuListRef.current.offsetWidth -
-            menuButtonRef.current.offsetWidth) >
-        window.innerWidth
-      ) {
-        position.left =
-          menuButtonPosition.right - menuListRef.current.offsetWidth;
-      } else if (menuButtonPosition.left < 0) {
-        // when the trigger button is outside of the left side of the viewport
-        position.left = 0;
-      } else if (
-        menuButtonPosition.bottom +
-          (menuListRef.current.offsetHeight -
-            menuButtonRef.current.offsetHeight) >
-        window.innerHeight
-      ) {
-        // when the trigger button is outside of the bottom side of the viewport
-        position.top =
-          menuButtonPosition.top - menuListRef.current.offsetHeight;
-      }
-
-      setPos(position);
-    }
-  }, [menuButtonRef?.current, menuListRef?.current]);
-
   return (
-    <Portal>
+    <Floating show={isOpen} triggerRef={menuButtonRef as any}>
       <MenuListProvider value={contextValue as any}>
         <div
           {...getMenuListProps(
@@ -238,16 +150,12 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
           )}
           id={`${menuId}__list`}
           role="menu"
-          style={{
-            left: `${pos.left}px`,
-            top: `${pos.top}px`,
-          }}
           tabIndex={-1}
         >
           {children}
         </div>
       </MenuListProvider>
-    </Portal>
+    </Floating>
   );
 });
 
