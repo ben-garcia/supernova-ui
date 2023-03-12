@@ -1,6 +1,7 @@
 .snui-tooltip {
   background: var(--snui-color-gray700);
-  border-radius: 4px; 
+  border-radius: 4px;
   color: var(--snui-color-white);
   padding: 0.3rem;
+  width: max-content;
 }
