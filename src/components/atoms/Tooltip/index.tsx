@@ -89,17 +89,17 @@ const Tooltip: FC<TooltipProps> = props => {
           {children}
         </span>
       ) : (
-          cloneElement(Children.only(children) as any, {
-            'aria-describedby': show ? tooltipId : undefined,
-            onBlur: isDisabled ? undefined : onMouseLeave,
-            onFocus: isDisabled ? undefined : onMouseEnter,
-            onMouseEnter: isDisabled ? undefined : onMouseEnter,
-            onMouseLeave: isDisabled ? undefined : onMouseLeave,
-            ref: isDisabled ? undefined : triggerRef,
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-            tabIndex: 0,
-          })
-        )}
+        cloneElement(Children.only(children) as any, {
+          'aria-describedby': show ? tooltipId : undefined,
+          onBlur: isDisabled ? undefined : onMouseLeave,
+          onFocus: isDisabled ? undefined : onMouseEnter,
+          onMouseEnter: isDisabled ? undefined : onMouseEnter,
+          onMouseLeave: isDisabled ? undefined : onMouseLeave,
+          ref: isDisabled ? undefined : triggerRef,
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          tabIndex: 0,
+        })
+      )}
       <Floating
         arrowColor={arrColor}
         arrowSize={arrowSize}
