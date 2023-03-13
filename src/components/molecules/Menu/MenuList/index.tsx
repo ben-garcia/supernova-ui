@@ -18,11 +18,31 @@ import {
 } from '@hooks';
 import { forwardRef, isString } from '@utils';
 
-import { SupernovaProps } from '@types';
+import { FloatingProps, SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface MenuListProps extends SupernovaProps {
+export interface MenuListProps
+  extends SupernovaProps,
+    Pick<FloatingProps, 'arrowSize' | 'spacing'> {
   children: ReactNode;
+  /**
+   * Where the content of the Menu should be positioned
+   * relative to the bottom of the trigger.
+   *
+   * @default 'start'
+   */
+  placement?: 'start' | 'center' | 'end';
+  /**
+   * Configure whether to render with an arrow pointing to the trigger element.
+   *
+   * NOTE: By default the color of the arrow is white.
+   *       You can set a custom color by adding a
+   *       'background' or 'backgroundColor' prop.
+   *       If both are added, 'backgroundColor' takes precedence.
+   *
+   * @default false
+   */
+  withArrow?: boolean;
 }
 
 /**
@@ -30,12 +50,22 @@ export interface MenuListProps extends SupernovaProps {
  */
 // @ts-ignore
 const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
-  const { children, className, ...rest } = props;
+  const {
+    arrowSize,
+    backgroundColor,
+    background,
+    children,
+    className,
+    placement = 'center',
+    spacing,
+    withArrow,
+    ...rest
+  } = props;
   const {
     remainingProps,
     validatedCSSProps,
     validatedPseudoClassProps,
-  } = useValidateProps(rest);
+  } = useValidateProps({ ...rest, background, backgroundColor });
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const {
@@ -53,6 +83,24 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
+  const placementValue = useMemo(() => {
+    if (placement === 'end') {
+      return 'bottom-end';
+    }
+    if (placement === 'center') {
+      return 'bottom';
+    }
+    return 'bottom-start';
+  }, [placement]);
+  const arrColor: any = useMemo(() => {
+    if (isString(backgroundColor)) {
+      return backgroundColor;
+    }
+    if (isString(background)) {
+      return (background as string).split(' ')[0];
+    }
+    return 'var(--snui-color-white)';
+  }, [background, backgroundColor]);
   const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
   // obj that stores the first letters of menu items
   // and the array index of those that match.
@@ -152,7 +200,15 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   }, [isOpen]);
 
   return (
-    <Floating show={isOpen} triggerRef={menuButtonRef as any}>
+    <Floating
+      arrowColor={arrColor}
+      arrowSize={arrowSize}
+      placement={placementValue}
+      show={isOpen}
+      spacing={spacing}
+      triggerRef={menuButtonRef as any}
+      withArrow={withArrow}
+    >
       <MenuListProvider value={contextValue as any}>
         <div
           {...getMenuListProps(
