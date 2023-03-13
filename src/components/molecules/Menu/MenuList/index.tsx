@@ -31,8 +31,11 @@ export interface MenuListProps extends SupernovaProps {
 // @ts-ignore
 const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   const { children, className, ...rest } = props;
-  const { remainingProps, validatedCSSProps, validatedPseudoClassProps } =
-    useValidateProps(rest);
+  const {
+    remainingProps,
+    validatedCSSProps,
+    validatedPseudoClassProps,
+  } = useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const {
@@ -41,6 +44,7 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     onClose,
     getMenuListProps,
     // menuListRef,
+    focusedIndex,
     menuButtonRef,
     setFocusedIndex,
   } = useMenu();
@@ -50,7 +54,7 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     [`${stylesClassName}`]: isString(stylesClassName),
   });
   const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
-  //obj that stores the first letters of menu items
+  // obj that stores the first letters of menu items
   // and the array index of those that match.
   const [menuItemsContent, setMenuItemsContent] = useState<{
     [k: string]: number[];
@@ -69,17 +73,17 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   //       will refactor in the future.
   useEffect(() => {
     if (isOpen && menuId) {
-      let id = `${menuId}__list`;
+      const id = `${menuId}__list`;
       setTimeout(() => {
-        let menuList = document.getElementById(id);
+        const menuList = document.getElementById(id);
         if (menuList) {
-          let items = menuList.querySelectorAll('button[role="menuitem"]');
-          let tempObj: any = {};
+          const items = menuList.querySelectorAll('button[role="menuitem"]');
+          const tempObj: any = {};
           menuButtonItemsRef.current = items as any;
 
           items.forEach((element, index) => {
             element.setAttribute('data-snui-menu-item-index', `${index}`);
-            let firstLetter = element.textContent![0].toLowerCase();
+            const firstLetter = element.textContent![0].toLowerCase();
 
             if (tempObj[firstLetter]) {
               tempObj[firstLetter].push(index);
@@ -105,6 +109,13 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
         setFocusedIndex(0);
       }, 40); // 20 ms after Floating component take to render.
     }
+    return () => {
+      if (!isOpen && focusedIndex !== -1) {
+        // reset focused index when unmounting
+        // fix: all menu items would have focused backgroundColor
+        setFocusedIndex(-1);
+      }
+    };
   }, [isOpen, menuButtonItemsRef?.current]);
 
   // Return focus to the menu button that triggered the opening.
