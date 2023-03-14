@@ -3,7 +3,12 @@ import React from 'react';
 
 import { colors } from '@utils';
 import Button from '.';
-import { ArrowLeftIcon, ArrowRightIcon, UserIcon } from '../Icon/Icons';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  LinkIcon,
+  UserIcon,
+} from '../Icon/Icons';
 
 export default {
   argTypes: {
@@ -92,3 +97,11 @@ AsIcon.args = {
   variant: 'outline',
 };
 AsIcon.parameters = parameters;
+
+export const WithCustomSpinner = Template.bind({});
+
+WithCustomSpinner.args = {
+  children: 'Custom spinner',
+  spinner: <LinkIcon />,
+};
+WithCustomSpinner.parameters = parameters;

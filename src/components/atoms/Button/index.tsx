@@ -57,12 +57,23 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
       disabled={isDisabled || isLoading}
       ref={ref}
     >
-      {leftIcon && !isLoading && <>{leftIcon}</>}
-
-      {!isLoading && (leftIcon || rightIcon) && (
+      {leftIcon && (
         <span
           style={{
+            display: isLoading && loadingText ? 'none' : undefined,
+            visibility: isLoading ? 'hidden' : 'visible',
+          }}
+        >
+          {leftIcon}
+        </span>
+      )}
+
+      {(leftIcon || rightIcon) && (
+        <span
+          style={{
+            display: isLoading && loadingText ? 'none' : undefined,
             margin: leftIcon || rightIcon ? '0.2rem 0.5rem 0 0.5rem' : '',
+            visibility: isLoading ? 'hidden' : 'visible',
           }}
         >
           {children}
@@ -70,13 +81,21 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
       )}
 
       {/* when rendering with icon */}
-      {!isLoading && !isObject(leftIcon) && !isObject(rightIcon) && (
-        <>{children}</>
+      {!isObject(leftIcon) && !isObject(rightIcon) && (
+        <span
+          style={{
+            display: isLoading && loadingText ? 'none' : undefined,
+            visibility: isLoading ? 'hidden' : 'visible',
+          }}
+        >
+          {children}
+        </span>
       )}
 
       {/* use default spinner */}
       {!spinner && isLoading && (
         <Spinner
+          className={loadingText ? '' : 'snui-position-absolute'}
           primaryColor={variant === 'filled' ? 'white' : 'black'}
           size={size === 'sm' ? 'xs' : 'sm'}
         />
@@ -92,6 +111,7 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
             animationName: 'snui-rotate',
             animationTimingFunction: 'linear',
             height: size === 'sm' ? '0.8rem' : '1rem',
+            position: loadingText ? undefined : 'absolute',
           }}
         >
           {spinner}
@@ -104,7 +124,16 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
         </span>
       )}
 
-      {rightIcon && !isLoading && <>{rightIcon}</>}
+      {rightIcon && (
+        <span
+          style={{
+            display: isLoading && loadingText ? 'none' : 'inline',
+            visibility: isLoading ? 'hidden' : 'visible',
+          }}
+        >
+          {rightIcon}
+        </span>
+      )}
     </button>
   );
 });
