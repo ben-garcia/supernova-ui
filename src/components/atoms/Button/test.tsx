@@ -4,6 +4,7 @@ import { a11yTest, fireEvent, render } from '@testUtils';
 import Button from '.';
 
 describe('<Button />', () => {
+  const buttonText = 'Submit';
   it('should pass a11y tests', async () => {
     await a11yTest(<Button>Submit</Button>);
   });
@@ -14,18 +15,37 @@ describe('<Button />', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should render as a button with correct text', () => {
-    const buttonText = 'Submit';
+  it('should render with correct text', () => {
     const { getByText } = render(<Button>{buttonText}</Button>);
     const result = getByText(buttonText);
 
-    expect(result.nodeName).toBe('BUTTON');
     expect(result.textContent).toBe(buttonText);
+  });
+
+  it('should render loadingText when isLoading is true', () => {
+    const loadingText = 'loading...';
+    const { queryByText, rerender } = render(
+      <Button loadingText={loadingText} isLoading={false}>
+        {buttonText}
+      </Button>
+    );
+    let text = queryByText(loadingText);
+
+    expect(text).not.toBeInTheDocument();
+
+    rerender(
+      <Button isLoading loadingText={loadingText}>
+        {buttonText}
+      </Button>
+    );
+
+    text = queryByText(loadingText);
+
+    expect(text).toBeInTheDocument();
   });
 
   it('should call the onClick handler', () => {
     const mockOnClickHandler = jest.fn();
-    const buttonText = 'Submit';
     const { getByText } = render(
       <Button onClick={mockOnClickHandler}>{buttonText}</Button>
     );
