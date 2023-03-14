@@ -7,10 +7,6 @@ import { ArrowLeftIcon, ArrowRightIcon, UserIcon } from '../Icon/Icons';
 
 export default {
   argTypes: {
-    asSubmitButton: {
-      control: 'boolean',
-      defaultValue: false,
-    },
     colorVariant: {
       control: 'select',
       options: colors,
@@ -25,6 +21,7 @@ export default {
     },
     loadingText: {
       control: 'text',
+      defaultValue: '',
     },
     size: {
       control: 'select',
@@ -44,7 +41,6 @@ export default {
 const parameters = {
   controls: {
     include: [
-      'asSubmitButton',
       'colorVariant',
       'loadingText',
       'isDisabled',

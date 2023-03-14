@@ -18,7 +18,6 @@ import './styles.scss';
  */
 const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
   const {
-    asSubmitButton = false,
     children,
     className,
     colorVariant,
@@ -40,26 +39,23 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const createInlineStyles = useInlineStyles(colorVariant);
-  const addClasses = useCreateClassString(
-    'snui snui-button snui-flex snui-items-center',
-    {
-      [`snui-button--${variant}`]: isString(variant) && !props.backgroundColor,
-      [`snui-button--${size}`]: isString(size) && !props.height && !props.width,
-      [`${className}`]: isString(className),
-      [`${pseudoClassName}`]: isString(pseudoClassName),
-      [`${stylesClassName}`]: isString(stylesClassName),
-    }
-  );
+  const addClasses = useCreateClassString('snui snui-button', {
+    [`snui-button--${variant}`]: isString(variant) && !props.backgroundColor,
+    [`snui-button--${size}`]: isString(size) && !props.height && !props.width,
+    [`${className}`]: isString(className),
+    [`${pseudoClassName}`]: isString(pseudoClassName),
+    [`${stylesClassName}`]: isString(stylesClassName),
+  });
 
+  /* eslint react/button-has-type: 0 */
   return (
     <button
       {...remainingProps}
       {...createInlineStyles()}
       {...addClasses()}
-      aria-disabled={isDisabled || isLoading}
+      aria-disabled={isDisabled === true || isLoading === true || undefined}
       disabled={isDisabled || isLoading}
       ref={ref}
-      type={asSubmitButton ? 'submit' : 'button'}
     >
       {leftIcon && !isLoading && <>{leftIcon}</>}
 

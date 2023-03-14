@@ -1,11 +1,14 @@
 .snui-button {
+  align-items: center;
   appearance: none;
   border: none;
   border-radius: var(--snui-radii-sm);
   box-shadow: var(--snui-shadow-sm);
   color: var(--snui-color-white);
   cursor: pointer;
+  display: flex;
   font-weight: var(--snui-font-weight-lg);
+  justify-content: center;
   outline: currentColor none medium;
   width: auto;
 

@@ -9,10 +9,6 @@ export interface ButtonProps
   extends SupernovaProps<'button'>,
     Omit<FormControlProps, 'variant'> {
   /**
-   * Whether to set the type as 'submit'
-   */
-  asSubmitButton?: boolean;
-  /**
    * Disable interactivity
    */
   isDisabled?: boolean;
