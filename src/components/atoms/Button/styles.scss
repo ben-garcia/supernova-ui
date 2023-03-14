@@ -12,14 +12,14 @@
   outline: currentColor none medium;
   width: auto;
 
-  &:active {
-    transform: scale(1.1);
-  }
-
   &:focus {
     outline: 3px solid var(--snui-color-focus-ring);
     outline-offset: 2px;
     box-shadow: var(--snui-shadow-md);
+  }
+
+  &:not(:disabled):active {
+    transform: scale(1.05);
   }
 
   &--filled {
