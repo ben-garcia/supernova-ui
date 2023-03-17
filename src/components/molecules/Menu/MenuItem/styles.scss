@@ -10,4 +10,8 @@
   padding-inline-end: var(--snui-size-md);
   outline: currentColor none medium;
   width: auto;
+
+  &:focus {
+    background: var(--snui-color-gray100);
+  }
 }

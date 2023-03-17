@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 import {
   useCreateClassString,
@@ -6,7 +6,6 @@ import {
   useMenu,
   useMenuList,
   usePseudoClasses,
-  useTheme,
   useValidateProps,
 } from '@hooks';
 import { forwardRef, isFunction, isString } from '@utils';
@@ -40,10 +39,7 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
     setFocusedIndex,
   } = useMenu();
   const { menuButtonItemsRef, menuItemsContent } = useMenuList();
-  const theme = useTheme();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [backgroundColor, setBackgroundColor] = useState('');
-  const [color, setColor] = useState('');
   const addClasses = useCreateClassString(
     'snui snui-menu__item snui-flex snui-items-center snui-padding-inline-left',
     {
@@ -62,12 +58,8 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
       if (focusedIndex === index) {
         buttonRef.current.focus();
         buttonRef.current.setAttribute('tabIndex', '0');
-        setBackgroundColor(theme.colors.primary);
-        setColor(theme.colors.white);
       } else {
         buttonRef.current.setAttribute('tabIndex', '-1');
-        setBackgroundColor('transparent');
-        setColor(theme.colors.black);
       }
     }
   }, [isOpen, focusedIndex, buttonRef?.current]);
@@ -180,10 +172,6 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
       onMouseLeave={handleMouseLeave}
       ref={buttonRef}
       role="menuitem"
-      style={{
-        backgroundColor,
-        color,
-      }}
       tabIndex={-1}
       type="button"
     >
