@@ -57,7 +57,7 @@ export const usePseudoClasses = (props: Partial<PseudoProps>) => {
     'first-letter',
     'first-line',
     'placeholder',
-    'seelction',
+    'selection',
   ];
 
   /**
