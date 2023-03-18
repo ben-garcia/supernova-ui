@@ -9,6 +9,7 @@ export * from './use-form-control';
 export * from './use-inline-styles';
 export * from './use-menu';
 export * from './use-modal';
+export * from './use-mount-transition';
 export * from './use-notification';
 export * from './use-safe-effect';
 export * from './use-slider';
