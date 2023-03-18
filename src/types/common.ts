@@ -2,7 +2,6 @@ import type {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   InputHTMLAttributes,
-  MutableRefObject,
   ReactNode,
   RefObject,
   TextareaHTMLAttributes,
@@ -137,15 +136,10 @@ export interface FormControlProps {
 }
 
 /**
- * Props for the Floating component.
+ *  Shared props used for components that use
+ *  anchor positioning like Tooltip, Menu, Popover, Select.
  */
-export interface FloatingProps {
-  /**
-   * Color of the arrow element.
-   *
-   * @default 'gray700'
-   */
-  arrowColor?: ColorVariant;
+export interface SharedAnchorPositioningProps {
   /**
    * Size, in px, of the arrow element.
    *
@@ -157,26 +151,6 @@ export interface FloatingProps {
    */
   children: ReactNode;
   /**
-   * The ammount of time, in ms, to wait before
-   * the component is unmounted.
-   *
-   * @default 0
-   */
-  closeDelay?: number;
-  /**
-   * Flag to indicate whether the component is interactive.
-   *
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * The ammount of time, in ms, to wait before
-   * the component is mounted.
-   *
-   * @default 0
-   */
-  openDelay?: number;
-  /**
    * Where the content of the tooltip should be positioned
    * relative to the trigger
    *
@@ -184,20 +158,12 @@ export interface FloatingProps {
    */
   placement?: FloatingPlacement;
   /**
-   * Flag that indicates whether the component is rendered.
-   */
-  show: boolean;
-  /**
    * Space, in px, between the trigger element
    * and the component with arrow.
    *
    * @default 5
    */
   spacing?: number;
-  /**
-   * The element used to determine the component plaement.
-   */
-  triggerRef: MutableRefObject<HTMLElement | null>;
   /**
    * Configure whether to render with an arrow pointing to the trigger element
    *
