@@ -2,6 +2,16 @@
   background: var(--snui-color-gray700);
   border-radius: 4px;
   color: var(--snui-color-white);
+  opacity: 0;
   padding: 0.3rem;
+  transform: scale(0.85);
+  transition: all 0.2s ease;
+  visibility: hidden;
   width: max-content;
+
+  &--show.in {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
 }

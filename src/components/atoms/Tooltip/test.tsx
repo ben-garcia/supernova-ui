@@ -7,10 +7,9 @@ import Tooltip from '.';
 describe('<Tooltip />', () => {
   const buttonLabel = 'button label';
   const tooltipLabel = 'tooltip label';
-  // amount of time needed for the fade-out animation.
-  const closeDelayAnimation = 100;
-  // amount of time needed for the fade-in animation.
-  const openDelayAnimation = 20;
+  // for css transitions
+  const closeDelayAnimation = 200;
+  const openDelayAnimation = 0;
   const TooltipTest = (props: any) => (
     <Tooltip label={tooltipLabel} {...props}>
       <button type="button">{buttonLabel}</button>

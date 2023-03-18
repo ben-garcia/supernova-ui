@@ -7,11 +7,13 @@ import React, {
   useRef,
 } from 'react';
 
-import Floating from '@atoms/Floating';
+import { Portal } from '@atoms';
 import {
+  useCalculatePosition,
   useClassStyles,
   useCreateClassString,
   useInlineStyles,
+  useMountTransition,
   useTheme,
   useUniqueId,
   useValidateProps,
@@ -45,14 +47,21 @@ const Tooltip: FC<TooltipProps> = props => {
     backgroundColor,
   });
   const stylesClassName = useClassStyles(validatedCSSProps);
+  const [show, setShow] = useState(false);
+  const hasTransitionedIn = useMountTransition(show, 200);
   const addClasses = useCreateClassString('snui snui-tooltip', {
     [`${className}`]: isString(className),
     [`${stylesClassName}`]: isString(stylesClassName),
+    'snui-tooltip--show': show,
+    'snui-tooltip--hide': !show,
+    in: hasTransitionedIn,
   });
   const createInlineStyles = useInlineStyles(colorVariant);
   const triggerRef = useRef<any>(null);
+  const toolRef = React.useRef<any>(null);
+  const arrowRef = React.useRef<HTMLDivElement | null>(null);
   const tooltipId = id ?? useUniqueId('snui-tooltip');
-  const [show, setShow] = useState(false);
+  const timeoutId = useRef<any>(null);
   const { colors } = useTheme();
   const arrColor = useMemo(() => {
     if (isString(colorVariant) && (colors as any)[colorVariant!]) {
@@ -66,13 +75,45 @@ const Tooltip: FC<TooltipProps> = props => {
     }
     return '#4d5665';
   }, [colorVariant, background, backgroundColor]);
+  const {
+    calculateTransformOrigin,
+    calcPosition,
+    addArrowStyles,
+    addElementStyles,
+  } = useCalculatePosition(
+    placement,
+    withArrow,
+    arrowSize,
+    spacing,
+    triggerRef.current as HTMLElement,
+    toolRef,
+    arrowRef,
+    arrColor
+  );
+
   const onMouseEnter = React.useCallback(() => {
-    setShow(true);
+    if (openDelay) {
+      timeoutId.current = setTimeout(() => {
+        setShow(true);
+        calcPosition();
+      }, openDelay);
+    } else {
+      setShow(true);
+      calcPosition();
+    }
   }, []);
   const onMouseLeave = React.useCallback(() => {
-    setShow(false);
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
+    if (closeDelay) {
+      setTimeout(() => {
+        setShow(false);
+      }, closeDelay);
+    } else {
+      setShow(false);
+    }
   }, []);
-
   return (
     <>
       {isString(children) ? (
@@ -100,28 +141,21 @@ const Tooltip: FC<TooltipProps> = props => {
           tabIndex: 0,
         })
       )}
-      <Floating
-        arrowColor={arrColor}
-        arrowSize={arrowSize}
-        closeDelay={closeDelay}
-        openDelay={openDelay}
-        isDisabled={isDisabled}
-        placement={placement}
-        show={show}
-        spacing={spacing}
-        triggerRef={triggerRef}
-        withArrow={withArrow}
-      >
-        <div
-          {...remainingProps}
-          {...addClasses()}
-          {...createInlineStyles()}
-          id={tooltipId}
-          role="tooltip"
-        >
-          {label}
+      <Portal isMounted={hasTransitionedIn || show}>
+        <div className="snui snui-floating" {...addElementStyles()}>
+          <div
+            {...remainingProps}
+            {...addClasses()}
+            {...createInlineStyles()}
+            {...calculateTransformOrigin()}
+            id={tooltipId}
+            role="tooltip"
+          >
+            {label}
+            {!isDisabled && withArrow && <div {...addArrowStyles()} />}
+          </div>
         </div>
-      </Floating>
+      </Portal>
     </>
   );
 };
