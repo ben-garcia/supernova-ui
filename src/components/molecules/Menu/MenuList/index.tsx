@@ -1,5 +1,4 @@
 import React, {
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -7,9 +6,9 @@ import React, {
   useState,
 } from 'react';
 
-import Floating from '@atoms/Floating';
 import { MenuListProvider } from '@contexts';
 import {
+  useCalculatePosition,
   useCreateClassString,
   useClassStyles,
   useMenu,
@@ -18,13 +17,12 @@ import {
 } from '@hooks';
 import { forwardRef, isString } from '@utils';
 
-import { FloatingProps, SupernovaProps } from '@types';
+import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface MenuListProps
   extends SupernovaProps,
-    Pick<FloatingProps, 'arrowSize' | 'spacing'> {
-  children: ReactNode;
+    Omit<SharedAnchorPositioningProps, 'withArrow' | 'placement'> {
   /**
    * Where the content of the Menu should be positioned
    * relative to the bottom of the trigger.
@@ -51,14 +49,14 @@ export interface MenuListProps
 // @ts-ignore
 const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   const {
-    arrowSize,
+    arrowSize = 15,
     backgroundColor,
     background,
     children,
     className,
-    placement = 'center',
-    spacing,
-    withArrow,
+    placement = 'start',
+    spacing = 5,
+    withArrow = false,
     ...rest
   } = props;
   const {
@@ -73,15 +71,17 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     isOpen,
     onClose,
     getMenuListProps,
-    // menuListRef,
-    focusedIndex,
+    menuListRef,
     menuButtonRef,
     setFocusedIndex,
   } = useMenu();
+  const toolRef = useRef<any>(null);
+  const arrowRef = useRef<HTMLDivElement | null>(null);
   const addClasses = useCreateClassString('snui snui-menu', {
     [`${className}`]: isString(className),
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
+    'snui-menu--show': isOpen,
   });
   const placementValue = useMemo(() => {
     if (placement === 'end') {
@@ -101,6 +101,21 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     }
     return 'var(--snui-color-white)';
   }, [background, backgroundColor]);
+  const {
+    calculateTransformOrigin,
+    calcPosition,
+    addArrowStyles,
+    addElementStyles,
+  } = useCalculatePosition(
+    placementValue,
+    withArrow,
+    arrowSize,
+    spacing,
+    menuButtonRef!.current as HTMLElement,
+    toolRef,
+    arrowRef,
+    arrColor
+  );
   const menuButtonItemsRef = useRef<HTMLButtonElement[]>([]);
   // obj that stores the first letters of menu items
   // and the array index of those that match.
@@ -115,66 +130,83 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     [menuButtonItemsRef, menuItemsContent]
   );
 
-  // manually interact with the DOM  rather than through React ref objects.
-  // my attempt at using refs didn't work.
-  // NOTE: just focused on it working for now
-  //       will refactor in the future.
+  /**
+   * set tabindex of each menu item to -1
+   * set focused index to -1
+   *
+   * run on unmount
+   */
+  const resetMenuItems = useCallback(() => {
+    menuButtonItemsRef?.current?.forEach(el => {
+      el.setAttribute('tabIndex', '-1');
+    });
+    setFocusedIndex(-1);
+  }, []);
+
+  // setup position
   useEffect(() => {
-    if (isOpen && menuId) {
-      const id = `${menuId}__list`;
-      setTimeout(() => {
-        const menuList = document.getElementById(id);
-        if (menuList) {
-          const items = menuList.querySelectorAll('button[role="menuitem"]');
-          const tempObj: any = {};
-          menuButtonItemsRef.current = items as any;
+    calcPosition();
+  }, [arrowSize, placementValue, spacing, withArrow]);
 
-          items.forEach((element, index) => {
-            element.setAttribute('data-snui-menu-item-index', `${index}`);
-            const firstLetter = element.textContent![0].toLowerCase();
-
-            if (tempObj[firstLetter]) {
-              tempObj[firstLetter].push(index);
-            } else {
-              tempObj[firstLetter] = [index];
-            }
-          });
-          setMenuItemsContent(tempObj);
-        }
-
-        menuButtonItemsRef.current[0].focus();
-      }, 30); // wait 10 ms longer the the Floating component takes to render.
-    }
-  }, [isOpen, menuId]);
-
-  // set focused index to 0 after rendering.
+  // set a reference to the list of button menu items
   useEffect(() => {
-    if (isOpen && menuButtonItemsRef?.current?.length) {
-      // NOTE: setTimeout solves the  problem with positioning
-      //       window.scrollY = 0 without setTimeout
-      setTimeout(() => {
-        // set the intial focus index ONLY if there is at least 1 menu item
-        setFocusedIndex(0);
-      }, 40); // 20 ms after Floating component take to render.
+    if (menuButtonRef?.current) {
+      (menuButtonItemsRef.current as any) = menuListRef?.current?.querySelectorAll(
+        'button[role="menuitem"]'
+      );
     }
-    return () => {
-      if (!isOpen && focusedIndex !== -1) {
-        // reset focused index when unmounting
-        // fix: all menu items would have focused backgroundColor
-        setFocusedIndex(-1);
+  }, [menuListRef?.current]);
+
+  //  add an index custom data prop to each menu item
+  useEffect(() => {
+    if (isOpen) {
+      if (menuButtonItemsRef?.current) {
+        menuButtonItemsRef.current.forEach((element, index) => {
+          element.setAttribute('data-snui-menu-item-index', `${index}`);
+        });
+
+        const tempObj: any = {};
+
+        menuButtonItemsRef.current.forEach((element, index) => {
+          const firstLetter = element.textContent![0].toLowerCase();
+
+          if (tempObj[firstLetter]) {
+            tempObj[firstLetter].push(index);
+          } else {
+            tempObj[firstLetter] = [index];
+          }
+        });
+
+        setMenuItemsContent(tempObj);
       }
-    };
-  }, [isOpen, menuButtonItemsRef?.current]);
 
-  // Return focus to the menu button that triggered the opening.
-  const returnFocus = useCallback(() => {
-    if (isOpen && menuButtonRef?.current) {
-      menuButtonRef?.current?.focus();
+      if (menuButtonItemsRef?.current?.length) {
+        // needed to correctly set focus
+        setTimeout(() => {
+          menuButtonItemsRef.current[0].focus();
+        }, 15);
+      }
     }
-  }, [isOpen, menuButtonRef?.current]);
+  }, [isOpen]);
 
-  // cleanup effect that returns focus to menu button
-  useEffect(() => () => returnFocus());
+  // set focused index to 0
+  useEffect(() => {
+    // set the intial focus index ONLY if there is at least 1 menu item
+    if (isOpen) {
+      setFocusedIndex(0);
+    }
+  }, [isOpen]);
+
+  // return focus to the menu button that tiggered the menu to open
+  useEffect(
+    () => () => {
+      if (isOpen && menuButtonRef?.current) {
+        resetMenuItems();
+        menuButtonRef?.current?.focus();
+      }
+    },
+    [isOpen, menuButtonRef?.current]
+  );
 
   // close menu when user clicks outside the menu list element
   // add/remove window click listeners
@@ -184,7 +216,6 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
 
       if (target?.parentElement?.id !== `${menuId}__list`) {
         onClose();
-        returnFocus();
       }
     };
 
@@ -200,21 +231,14 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   }, [isOpen]);
 
   return (
-    <Floating
-      arrowColor={arrColor}
-      arrowSize={arrowSize}
-      placement={placementValue}
-      show={isOpen}
-      spacing={spacing}
-      triggerRef={menuButtonRef as any}
-      withArrow={withArrow}
-    >
+    <div className="snui snui-floating" {...addElementStyles()}>
       <MenuListProvider value={contextValue as any}>
         <div
           {...getMenuListProps(
             { ...remainingProps, ...addClasses() },
             ref as any
           )}
+          {...calculateTransformOrigin()}
           id={`${menuId}__list`}
           role="menu"
           tabIndex={-1}
@@ -222,7 +246,8 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
           {children}
         </div>
       </MenuListProvider>
-    </Floating>
+      {withArrow && <div {...addArrowStyles()} />}
+    </div>
   );
 });
 
