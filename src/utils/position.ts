@@ -379,3 +379,40 @@ export function calculateArrowInlineStyles(
     borderBottomColor: arrowColor,
   };
 }
+
+export function calcTransformOrigin(pos: FloatingPlacement) {
+  if (pos === 'top') {
+    return 'center bottom';
+  }
+  if (pos === 'top-start') {
+    return 'left bottom';
+  }
+  if (pos === 'top-end') {
+    return 'right bottom';
+  }
+  if (pos === 'bottom-start') {
+    return 'left top';
+  }
+  if (pos === 'bottom-end') {
+    return 'right top';
+  }
+  if (pos === 'left') {
+    return 'right center';
+  }
+  if (pos === 'left-end') {
+    return 'right bottom';
+  }
+  if (pos === 'left-start') {
+    return 'right top';
+  }
+  if (pos === 'right-end') {
+    return 'left bottom';
+  }
+  if (pos === 'right') {
+    return 'left center';
+  }
+  if (pos === 'right-start') {
+    return 'right bottom';
+  }
+  return 'center top';
+}

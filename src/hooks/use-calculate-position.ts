@@ -5,6 +5,7 @@ import {
   addArrowClasses,
   calculateArrowInlineStyles,
   calculateArrowPosition,
+  calcTransformOrigin,
   handlePos,
 } from '@utils';
 
@@ -103,6 +104,17 @@ export function useCalculatePosition(
     }),
     [arrowPos, arrowSize, finalPos, arrowRef, arrowColor]
   );
+  const calculateTransformOrigin = useCallback(
+    () => ({
+      style: { transformOrigin: calcTransformOrigin(finalPos) },
+    }),
+    [finalPos]
+  );
 
-  return { calcPosition, addElementStyles, addArrowStyles };
+  return {
+    addElementStyles,
+    addArrowStyles,
+    calcPosition,
+    calculateTransformOrigin,
+  };
 }
