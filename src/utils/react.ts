@@ -5,6 +5,7 @@ import {
   ForwardRefRenderFunction,
   InputHTMLAttributes,
   MutableRefObject,
+  Children,
   createElement as rcreateElement,
   forwardRef as rforwardRef,
 } from 'react';
@@ -37,6 +38,11 @@ export function mergeRefs<T>(
     }
   };
 }
+
+/**
+ * Wrapper for React.Children.count
+ */
+export const getChildrenCount = (children: any) => Children.count(children);
 
 type Params = Parameters<typeof rcreateElement>;
 
