@@ -8,7 +8,7 @@ import {
   usePseudoClasses,
   useValidateProps,
 } from '@hooks';
-import { forwardRef, isObject, isString } from '@utils';
+import { getChildrenCount, forwardRef, isObject, isString } from '@utils';
 
 import { ButtonProps } from './types';
 import './styles.scss';
@@ -57,7 +57,7 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
       disabled={isDisabled || isLoading}
       ref={ref}
     >
-      {leftIcon && (
+      {leftIcon && isString(children) && (
         <span
           style={{
             display: isLoading && loadingText ? 'none' : undefined,
@@ -68,7 +68,7 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
         </span>
       )}
 
-      {(leftIcon || rightIcon) && (
+      {(leftIcon || rightIcon) && isString(children) && (
         <span
           style={{
             display: isLoading && loadingText ? 'none' : undefined,
@@ -81,7 +81,7 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
       )}
 
       {/* when rendering with icon */}
-      {!isObject(leftIcon) && !isObject(rightIcon) && (
+      {!isObject(leftIcon) && !isObject(rightIcon) && isString(children) && (
         <span
           style={{
             display: isLoading && loadingText ? 'none' : undefined,
@@ -91,6 +91,28 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
           {children}
         </span>
       )}
+
+      {/* when children is not a single parent component. */}
+      {/* NOTE: this means the content is always visible */}
+      {/*       even when in loading state. */}
+      {!isObject(leftIcon) &&
+        !isObject(rightIcon) &&
+        getChildrenCount(children) > 1 && <>{children}</>}
+
+      {/* when rendering with icon as React component */}
+      {!isObject(leftIcon) &&
+        !isObject(rightIcon) &&
+        !isString(children) &&
+        getChildrenCount(children) === 1 && (
+          <span
+            style={{
+              display: isLoading && loadingText ? 'none' : undefined,
+              visibility: isLoading ? 'hidden' : 'visible',
+            }}
+          >
+            {children}
+          </span>
+        )}
 
       {/* use default spinner */}
       {!spinner && isLoading && (
@@ -124,7 +146,7 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
         </span>
       )}
 
-      {rightIcon && (
+      {rightIcon && isString(children) && (
         <span
           style={{
             display: isLoading && loadingText ? 'none' : 'inline',
