@@ -368,8 +368,8 @@ describe('<AlertDialog />', () => {
         );
       };
 
-      const { getByText } = render(<ModalTest />);
-      const cancelButton = getByText('cancel');
+      const { getByTestId } = render(<ModalTest />);
+      const cancelButton = getByTestId('cancel-button');
 
       expect(cancelButton).toHaveFocus();
     });

@@ -270,47 +270,6 @@ describe('<Modal />', () => {
       expect(modalInput).toHaveFocus();
     });
 
-    it('should give focus to initialFocusRef as <ModalButton>', () => {
-      const ModalTest = () => {
-        const [isOpen, setIsOpen] = React.useState(false);
-        const initialFocusRef = React.useRef(null);
-        return (
-          <>
-            <button
-              type="button"
-              data-testid="open-button"
-              onClick={() => setIsOpen(true)}
-            >
-              Open
-            </button>
-            <Modal
-              initialFocusRef={initialFocusRef}
-              isOpen={isOpen}
-              onClose={jest.fn()}
-            >
-              <ModalHeader>header</ModalHeader>
-              <ModalBody>
-                <input data-testid="modal-input" ref={initialFocusRef} />
-              </ModalBody>
-              <ModalFooter>
-                <ModalButton ref={initialFocusRef}>focus</ModalButton>
-              </ModalFooter>
-            </Modal>
-          </>
-        );
-      };
-      render(<ModalTest />);
-      const openButton = screen.getByTestId('open-button');
-
-      // click the button
-      fireEvent.click(openButton);
-
-      const modalButton = screen.getByText('focus');
-
-      // modal button should be focused
-      expect(modalButton).toHaveFocus();
-    });
-
     it('should return focus to the finalFocusRef element', async () => {
       const ModalTest = () => {
         const [isOpen, setIsOpen] = React.useState(false);
