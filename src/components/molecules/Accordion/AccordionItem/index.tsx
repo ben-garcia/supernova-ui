@@ -62,7 +62,7 @@ const AccordionItem: FC<AccordionItemProps> = props => {
       <div
         {...remainingProps}
         {...addClasses()}
-        {...getAccordionItemProps(rest)}
+        {...getAccordionItemProps(remainingProps)}
       >
         {children}
       </div>

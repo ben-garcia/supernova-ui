@@ -44,7 +44,7 @@ const AccordionPanel: React.FC<AccordionPanelProps> = props => {
       <div
         {...remainingProps}
         {...addClasses()}
-        {...getAccordionPanelProps(rest)}
+        {...getAccordionPanelProps(remainingProps)}
         aria-labelledby={accordionButtonId}
         id={accordionPanelId}
         role="region"
