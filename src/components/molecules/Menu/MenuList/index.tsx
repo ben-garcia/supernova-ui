@@ -143,10 +143,14 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     setFocusedIndex(-1);
   }, []);
 
-  // setup position
+  // calculate position
   useEffect(() => {
-    calcPosition();
-  }, [arrowSize, placementValue, spacing, withArrow]);
+    // wait until menu button is clicked, so that
+    // especially for when the user has scrolled the document.
+    if (isOpen) {
+      calcPosition();
+    }
+  }, [isOpen, arrowSize, placementValue, spacing, withArrow]);
 
   // set a reference to the list of button menu items
   useEffect(() => {
