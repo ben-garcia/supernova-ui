@@ -84,8 +84,7 @@ export function useCalculatePosition(
     return {
       ref: tooltipRef,
       style: {
-        left: pos.left,
-        top: pos.top,
+        transform: `translate3d(${pos.left}px, ${pos.top}px, 0px)`,
       },
     };
   }, [pos, tooltipRef.current]);

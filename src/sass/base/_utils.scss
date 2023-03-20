@@ -979,6 +979,7 @@
 // floating
 // --------------------------------
 .snui-floating {
+  inset: 0 auto auto 0;
   position: absolute;
 
   &__arrow {
