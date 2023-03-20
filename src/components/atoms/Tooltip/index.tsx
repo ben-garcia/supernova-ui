@@ -146,8 +146,10 @@ const Tooltip: FC<TooltipProps> = props => {
           <div
             {...remainingProps}
             {...addClasses()}
-            {...createInlineStyles()}
-            {...calculateTransformOrigin()}
+            style={{
+              ...createInlineStyles().style,
+              ...calculateTransformOrigin().style,
+            }}
             id={tooltipId}
             role="tooltip"
           >
