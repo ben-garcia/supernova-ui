@@ -59,6 +59,7 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
         buttonRef.current.focus();
         buttonRef.current.setAttribute('tabIndex', '0');
       } else {
+        buttonRef.current.blur();
         buttonRef.current.setAttribute('tabIndex', '-1');
       }
     }
