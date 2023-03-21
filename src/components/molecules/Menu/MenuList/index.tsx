@@ -46,7 +46,6 @@ export interface MenuListProps
 /**
  * Wrapper for all MenuItem
  */
-// @ts-ignore
 const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   const {
     arrowSize = 15,
@@ -250,7 +249,23 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
           {children}
         </div>
       </MenuListProvider>
-      {withArrow && <div {...addArrowStyles()} />}
+      {withArrow && (
+        <div {...addArrowStyles()}>
+          <div
+            className={`snui snui-menu__arrow${
+              isOpen ? ' snui-menu__arrow--show' : ''
+            }`}
+            style={{
+              background: arrColor,
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              transform: 'rotate(45deg)',
+              zIndex: 'inherit',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 });
