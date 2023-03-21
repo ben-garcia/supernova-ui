@@ -323,26 +323,6 @@ export function handlePos(
   return positionValues;
 }
 
-export function addArrowClasses(pos: FloatingPlacement) {
-  let classes = 'snui snui-floating__arrow snui-floating__arrow--up';
-  if (pos === 'top' || pos === 'top-start' || pos === 'top-end') {
-    classes = 'snui snui-floating__arrow snui-floating__arrow--down';
-  } else if (pos === 'right' || pos === 'right-start' || pos === 'right-end') {
-    classes = 'snui snui-floating__arrow snui-floating__arrow--left';
-  } else if (pos === 'left' || pos === 'left-start' || pos === 'left-end') {
-    classes = 'snui snui-floating__arrow snui-floating__arrow--right';
-  }
-  return classes;
-}
-
-export function calculateArrowInlineStyles(arrowSize: number) {
-  return {
-    height: `${arrowSize}px`,
-    width: `${arrowSize}px`,
-    zIndex: -1,
-  };
-}
-
 export function calcTransformOrigin(pos: FloatingPlacement) {
   if (pos === 'top') {
     return 'center bottom';

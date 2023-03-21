@@ -1,13 +1,7 @@
 import { MutableRefObject, useCallback, useEffect, useState } from 'react';
 
 import { ArrowPosition, FloatingPlacement } from '@types';
-import {
-  addArrowClasses,
-  calculateArrowInlineStyles,
-  calculateArrowPosition,
-  calcTransformOrigin,
-  handlePos,
-} from '@utils';
+import { calculateArrowPosition, calcTransformOrigin, handlePos } from '@utils';
 
 /**
  * React hook that handles the logic to calculate the position
@@ -90,11 +84,12 @@ export function useCalculatePosition(
   }, [pos, tooltipRef.current]);
   const addArrowStyles = useCallback(
     () => ({
-      className: addArrowClasses(finalPos as FloatingPlacement),
+      className: 'snui snui-floating__arrow',
       ref: arrowRef,
       style: {
+        height: `${arrowSize}px`,
         transform: `translate3d(${arrowPos.left}px, ${arrowPos.top}px, 0px)`,
-        ...calculateArrowInlineStyles(arrowSize),
+        width: `${arrowSize}px`,
       },
     }),
     [arrowPos, arrowSize, finalPos, arrowRef, arrowColor]
