@@ -252,16 +252,11 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
       {withArrow && (
         <div {...addArrowStyles()}>
           <div
-            className={`snui snui-menu__arrow${
+            className={`snui snui-floating__inner snui-menu__arrow${
               isOpen ? ' snui-menu__arrow--show' : ''
             }`}
             style={{
               background: arrColor,
-              width: '100%',
-              height: '100%',
-              position: 'relative',
-              transform: 'rotate(45deg)',
-              zIndex: 'inherit',
             }}
           />
         </div>

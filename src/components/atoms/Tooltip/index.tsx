@@ -157,14 +157,9 @@ const Tooltip: FC<TooltipProps> = props => {
             {!isDisabled && withArrow && (
               <div {...addArrowStyles()}>
                 <div
+                  className="snui snui-floating__inner"
                   style={{
-                    // background: arrColor ? 'red' : undefined,
                     background: arrColor,
-                    width: '100%',
-                    height: '100%',
-                    position: 'relative',
-                    transform: 'rotate(45deg)',
-                    zIndex: 'inherit',
                   }}
                 />
               </div>
