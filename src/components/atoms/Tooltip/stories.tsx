@@ -23,7 +23,7 @@ const parameters = {
 
 export default {
   argTypes: {
-    arrowSize: { control: { type: 'number' }, defaultValue: 15 },
+    arrowSize: { control: { type: 'number' }, defaultValue: 10 },
     closeDelay: { control: { type: 'number' }, defaultValue: 0 },
     colorVariant: {
       control: 'select',
@@ -111,7 +111,7 @@ const PlacementsTemplate: ComponentStory<typeof Tooltip> = args => (
         'bottom',
         'bottom-end',
       ].map((p: any) => (
-        <Tooltip {...args} label={p} placement={p}>
+        <Tooltip {...args} key={p} label={p} placement={p}>
           <Button
             alignItems="center"
             display="flex"

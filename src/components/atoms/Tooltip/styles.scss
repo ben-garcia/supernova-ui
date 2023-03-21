@@ -3,12 +3,17 @@
   color: var(--snui-color-white);
   opacity: 0;
   padding: 0.3rem;
-  transform: scale(0.85);
+  position: relative;
+
+  /* NOTE: Keep scale this high so that position calculations
+           are not effected and maintain transition noticeable. */
+  transform: scale(0.95);
   transition: all 0.2s ease;
   visibility: hidden;
   width: max-content;
+  z-index: var(--snui-z-index-tooltip);
 
-  &--show.in {
+  &--show.visible {
     transform: scale(1);
     visibility: visible;
     opacity: 1;

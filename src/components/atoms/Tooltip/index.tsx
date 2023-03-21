@@ -25,7 +25,7 @@ import './styles.scss';
 
 const Tooltip: FC<TooltipProps> = props => {
   const {
-    arrowSize = 15,
+    arrowSize = 10,
     children,
     className,
     closeDelay = 0,
@@ -54,7 +54,7 @@ const Tooltip: FC<TooltipProps> = props => {
     [`${stylesClassName}`]: isString(stylesClassName),
     'snui-tooltip--show': show,
     'snui-tooltip--hide': !show,
-    in: hasTransitionedIn,
+    visible: hasTransitionedIn,
   });
   const createInlineStyles = useInlineStyles(colorVariant);
   const triggerRef = useRef<any>(null);
@@ -154,7 +154,21 @@ const Tooltip: FC<TooltipProps> = props => {
             role="tooltip"
           >
             {label}
-            {!isDisabled && withArrow && <div {...addArrowStyles()} />}
+            {!isDisabled && withArrow && (
+              <div {...addArrowStyles()}>
+                <div
+                  style={{
+                    // background: arrColor ? 'red' : undefined,
+                    background: arrColor,
+                    width: '100%',
+                    height: '100%',
+                    position: 'relative',
+                    transform: 'rotate(45deg)',
+                    zIndex: 'inherit',
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </Portal>
