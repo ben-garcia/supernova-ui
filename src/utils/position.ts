@@ -71,10 +71,6 @@ function calculatePosition(
   };
 }
 
-function isNumber(val: any) {
-  return Object.prototype.toString.call(val) === '[object Number]';
-}
-
 export function calculateArrowPosition(
   pos: FloatingPlacement,
   arrowEl: HTMLElement,
@@ -83,58 +79,55 @@ export function calculateArrowPosition(
   const arrowBox = arrowEl.getBoundingClientRect();
   const toolBox = toolEl.getBoundingClientRect();
   const arrowPos: ArrowPosition = {};
+  //  the center of the arrow starts at 0, 0.
+  const startLeftPos = -arrowBox.width / 2;
+  const startTopPos = -arrowBox.height / 2;
   if (pos === 'bottom-end') {
-    arrowPos.right = arrowBox.width / 2;
-    arrowPos.top = -arrowBox.height;
+    arrowPos.left =
+      startLeftPos + toolBox.width - (arrowBox.width + arrowBox.width / 2);
+    arrowPos.top = startTopPos;
   } else if (pos === 'bottom-start') {
-    arrowPos.left = arrowBox.width / 2;
-    arrowPos.top = -arrowBox.height;
+    arrowPos.left = startLeftPos + (arrowBox.width + arrowBox.width / 2);
+    arrowPos.top = startTopPos;
   } else if (pos === 'top') {
-    arrowPos.left = -arrowBox.width / 2 + toolBox.width / 2;
-    arrowPos.bottom = -arrowBox.height;
+    arrowPos.left = startLeftPos + toolBox.width / 2;
+    arrowPos.top = startTopPos + toolBox.height;
   } else if (pos === 'top-start') {
-    arrowPos.left = arrowBox.width / 2;
-    arrowPos.bottom = -arrowBox.height;
+    arrowPos.left = startLeftPos + (arrowBox.width + arrowBox.width / 2);
+    arrowPos.top = startTopPos + toolBox.height;
   } else if (pos === 'top-end') {
-    arrowPos.right = arrowBox.width / 2;
-    arrowPos.bottom = -arrowBox.height;
+    arrowPos.left =
+      startLeftPos + toolBox.width - (arrowBox.width + arrowBox.width / 2);
+    arrowPos.top = startTopPos + toolBox.height;
   } else if (pos === 'left') {
-    arrowPos.right = -arrowBox.width;
-    arrowPos.top = toolBox.height / 2 - arrowBox.height / 2;
+    arrowPos.left = startLeftPos + toolBox.width;
+    arrowPos.top = startTopPos + toolBox.height / 2;
   } else if (pos === 'left-end') {
-    arrowPos.right = -arrowBox.width;
-    arrowPos.bottom = arrowBox.height / 2;
+    arrowPos.left = startLeftPos + toolBox.width;
+    arrowPos.top =
+      startTopPos + toolBox.height - (arrowBox.height + arrowBox.height / 2);
   } else if (pos === 'left-start') {
-    arrowPos.right = -arrowBox.width;
-    arrowPos.top = arrowBox.height / 2;
+    arrowPos.left = startLeftPos + toolBox.width;
+    arrowPos.top = startTopPos + (arrowBox.height + arrowBox.height / 2);
   } else if (pos === 'right') {
-    arrowPos.left = -arrowBox.width;
-    arrowPos.top = toolBox.height / 2 - arrowBox.height / 2;
+    arrowPos.left = startLeftPos;
+    arrowPos.top = startTopPos + toolBox.height / 2;
   } else if (pos === 'right-start') {
-    arrowPos.left = -arrowBox.width;
-    arrowPos.top = arrowBox.height / 2;
+    arrowPos.left = startLeftPos;
+    arrowPos.top = startTopPos + arrowBox.height + arrowBox.height / 2;
   } else if (pos === 'right-end') {
-    arrowPos.left = -arrowBox.width;
-    arrowPos.bottom = arrowBox.height / 2;
+    arrowPos.left = startLeftPos;
+    arrowPos.top =
+      startTopPos + toolBox.height - (arrowBox.height + arrowBox.height / 2);
   } else {
-    arrowPos.left = -arrowBox.width / 2 + toolBox.width / 2;
-    arrowPos.top = -arrowBox.height;
+    arrowPos.left = startLeftPos + toolBox.width / 2;
+    arrowPos.top = startTopPos;
   }
 
   // return as numbers with 2 decimal places.
   return {
-    bottom: isNumber(arrowPos.bottom)
-      ? Number((arrowPos.bottom as number).toFixed(2))
-      : undefined,
-    left: isNumber(arrowPos.left)
-      ? Number((arrowPos.left as number).toFixed(2))
-      : undefined,
-    right: isNumber(arrowPos.right)
-      ? Number((arrowPos.right as number).toFixed(2))
-      : undefined,
-    top: isNumber(arrowPos.top)
-      ? Number((arrowPos.top as number).toFixed(2))
-      : undefined,
+    left: Number(arrowPos.left).toFixed(2),
+    top: Number(arrowPos.top).toFixed(2),
   };
 }
 
@@ -342,41 +335,11 @@ export function addArrowClasses(pos: FloatingPlacement) {
   return classes;
 }
 
-export function calculateArrowInlineStyles(
-  pos: FloatingPlacement,
-  arrowSize: number,
-  arrowColor: string
-) {
-  const size = (arrowSize / 2) * 1.4;
-  if (pos === 'top' || pos === 'top-start' || pos === 'top-end') {
-    return {
-      borderLeftWidth: size,
-      borderRightWidth: size,
-      borderTopWidth: size,
-      borderTopColor: arrowColor,
-    };
-  }
-  if (pos === 'right' || pos === 'right-start' || pos === 'right-end') {
-    return {
-      borderBottomWidth: size,
-      borderRightWidth: size,
-      borderTopWidth: size,
-      borderRightColor: arrowColor,
-    };
-  }
-  if (pos === 'left' || pos === 'left-start' || pos === 'left-end') {
-    return {
-      borderBottomWidth: size,
-      borderLeftWidth: size,
-      borderTopWidth: size,
-      borderLeftColor: arrowColor,
-    };
-  }
+export function calculateArrowInlineStyles(arrowSize: number) {
   return {
-    borderBottomWidth: size,
-    borderLeftWidth: size,
-    borderRightWidth: size,
-    borderBottomColor: arrowColor,
+    height: `${arrowSize}px`,
+    width: `${arrowSize}px`,
+    zIndex: -1,
   };
 }
 

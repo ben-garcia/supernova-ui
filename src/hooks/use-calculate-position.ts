@@ -49,7 +49,7 @@ export function useCalculatePosition(
         ) as any
       );
     }
-  }, [withArrow, arrowRef, finalPos, tooltipRef.current]);
+  }, [withArrow, arrowRef.current, finalPos, tooltipRef.current]);
   useEffect(() => {
     if (calcPos && tooltipRef.current && triggerElement) {
       const { finalPosition, tooltip } = handlePosition(
@@ -93,12 +93,8 @@ export function useCalculatePosition(
       className: addArrowClasses(finalPos as FloatingPlacement),
       ref: arrowRef,
       style: {
-        ...arrowPos,
-        ...calculateArrowInlineStyles(
-          finalPos as FloatingPlacement,
-          arrowSize,
-          arrowColor
-        ),
+        transform: `translate3d(${arrowPos.left}px, ${arrowPos.top}px, 0px)`,
+        ...calculateArrowInlineStyles(arrowSize),
       },
     }),
     [arrowPos, arrowSize, finalPos, arrowRef, arrowColor]

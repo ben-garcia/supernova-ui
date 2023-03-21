@@ -22,9 +22,7 @@ export interface AnyObject {
  * Represents values for the arrow element for the Floating component.
  */
 export interface ArrowPosition {
-  bottom?: number;
   left?: number;
-  right?: number;
   top?: number;
 }
 

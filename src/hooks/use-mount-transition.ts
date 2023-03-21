@@ -25,7 +25,7 @@ export const useMountTransition = (
       // when rendering inside a React Portal.
       // set timeout is required or the animation when mounting
       // isn't visible.
-      timeoutId = setTimeout(() => setHasTransitionedIn(true), 10);
+      timeoutId = setTimeout(() => setHasTransitionedIn(true), 20);
     } else if (!isMounted && hasTransitionedIn) {
       // after the transition has finished then unmount.
       timeoutId = setTimeout(() => setHasTransitionedIn(false), unmountDelay);

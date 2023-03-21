@@ -983,40 +983,7 @@
   position: absolute;
 
   &__arrow {
-    width: 0;
-    height: 0;
+    inset: 0 auto auto 0;
     position: absolute;
-
-    &--down {
-      border-left-color: transparent;
-      border-left-style: solid;
-      border-right-color: transparent;
-      border-right-style: solid;
-      border-top-style: solid;
-    }
-
-    &--left {
-      border-top-color: transparent;
-      border-top-style: solid;
-      border-bottom-color: transparent;
-      border-bottom-style: solid;
-      border-right-style: solid;
-    }
-
-    &--right {
-      border-top-color: transparent;
-      border-top-style: solid;
-      border-bottom-color: transparent;
-      border-bottom-style: solid;
-      border-left-style: solid;
-    }
-
-    &--up {
-      border-left-color: transparent;
-      border-left-style: solid;
-      border-right-color: transparent;
-      border-right-style: solid;
-      border-bottom-style: solid;
-    }
   }
 }
