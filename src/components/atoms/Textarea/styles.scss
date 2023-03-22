@@ -43,7 +43,7 @@
 }
 
 .snui-textarea-label {
-  background-color: var(--clr-bg);
+  background-color: var(--snui-color-white);
   color: var(--snui-color-black);
   cursor: text;
   font-size: 1.05rem;
@@ -57,6 +57,7 @@
 .snui-textarea:focus ~ .snui-textarea-label,
 .snui-textarea:not(:placeholder-shown).snui-textarea:not(:focus) ~ .snui-textarea-label {
   background-color: var(--snui-color-white);
+  color: var(--snui-color-primary);
   font-size: 0.7rem;
   transform: translate(-0.1rem, -1.1rem);
 }
