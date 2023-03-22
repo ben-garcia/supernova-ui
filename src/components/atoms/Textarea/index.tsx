@@ -123,7 +123,7 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
               props.onKeyUp!(e);
             }
           }}
-          placeholder={isString(placeholder) ? placeholder : ''}
+          placeholder={isString(placeholder) ? placeholder : ' '}
           ref={mergeRefs(textareaRef, ref)}
           style={
             isInvalid

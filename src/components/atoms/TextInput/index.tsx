@@ -114,7 +114,7 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
             setInputValue(e.target.value);
           }
         }}
-        placeholder={isString(placeholder) ? placeholder : ''}
+        placeholder={isString(placeholder) ? placeholder : ' '}
         ref={ref}
         style={
           isInvalid
