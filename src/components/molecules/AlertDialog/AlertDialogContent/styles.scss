@@ -1,0 +1,49 @@
+.snui-alert-dialog {
+  align-items: center;
+  animation: snui-scale-up 0.4s ease;
+  background: var(--snui-color-white);
+  border-radius: var(--snui-radii-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: calc(calc(var(--snui-size-xs) * -7) + 100vh);
+  position: relative;
+  z-index: var(--snui-z-index-modal);
+
+  &--exiting {
+    animation: snui-scale-down 0.4s ease;
+  }
+
+  &--sm {
+    width: 20rem;
+  }
+
+  &--md {
+    width: 24rem;
+  }
+
+  &--lg {
+    width: 28rem;
+  }
+
+  &--xl {
+    width: 36rem;
+  }
+
+  &--xxl {
+    width: 100vw;
+  }
+
+  &__close-button.snui-button {
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    right: var(--snui-space-sm);
+    top: var(--snui-space-sm);
+
+    &.snui-button:hover {
+      background: none;
+      box-shadow: none;
+    }
+  }
+}
