@@ -14,8 +14,11 @@ import {
   AlertDialog,
   AlertDialogBody,
   AlertDialogButton,
+  AlertDialogContent,
+  AlertDialogCloseButton,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogOverlay,
 } from '@molecules';
 
 describe('<AlertDialog />', () => {
@@ -29,14 +32,22 @@ describe('<AlertDialog />', () => {
           isOpen
           onClose={jest.fn()}
         >
-          <AlertDialogHeader>header</AlertDialogHeader>
-          <AlertDialogBody>body</AlertDialogBody>
-          <AlertDialogFooter>
-            <button data-testid="cancel-button" ref={leastDestructiveRef}>
-              cancel
-            </button>
-            <button data-testid="delete-button">delete</button>
-          </AlertDialogFooter>
+          <AlertDialogOverlay />
+
+          <AlertDialogContent>
+            <AlertDialogHeader>header</AlertDialogHeader>
+
+            <AlertDialogCloseButton />
+
+            <AlertDialogBody>body</AlertDialogBody>
+
+            <AlertDialogFooter>
+              <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                cancel
+              </button>
+              <button data-testid="delete-button">delete</button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
         </AlertDialog>
       );
     };
@@ -54,14 +65,22 @@ describe('<AlertDialog />', () => {
           isOpen
           onClose={jest.fn()}
         >
-          <AlertDialogHeader>header</AlertDialogHeader>
-          <AlertDialogBody>body</AlertDialogBody>
-          <AlertDialogFooter>
-            <button data-testid="cancel-button" ref={leastDestructiveRef}>
-              cancel
-            </button>
-            <button data-testid="delete-button">delete</button>
-          </AlertDialogFooter>
+          <AlertDialogOverlay />
+
+          <AlertDialogContent>
+            <AlertDialogHeader>header</AlertDialogHeader>
+
+            <AlertDialogCloseButton />
+
+            <AlertDialogBody>body</AlertDialogBody>
+
+            <AlertDialogFooter>
+              <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                cancel
+              </button>
+              <button data-testid="delete-button">delete</button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
         </AlertDialog>
       );
     };
@@ -95,15 +114,23 @@ describe('<AlertDialog />', () => {
           isOpen
           onClose={mockOnClose}
         >
-          <AlertDialogHeader>header</AlertDialogHeader>
-          <AlertDialogBody>body</AlertDialogBody>
-          <AlertDialogFooter>
-            <button data-testid="cancel-button" ref={leastDestructiveRef}>
-              cancel
-            </button>
+          <AlertDialogOverlay />
 
-            <button data-testid="delete-button">delete</button>
-          </AlertDialogFooter>
+          <AlertDialogContent>
+            <AlertDialogHeader>header</AlertDialogHeader>
+
+            <AlertDialogCloseButton />
+
+            <AlertDialogBody>body</AlertDialogBody>
+
+            <AlertDialogFooter>
+              <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                cancel
+              </button>
+
+              <button data-testid="delete-button">delete</button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
         </AlertDialog>
       );
     };
@@ -130,14 +157,22 @@ describe('<AlertDialog />', () => {
             onClose={mockOnClose}
             onClickOutside={mockOnClickOutside}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                cancel
-              </button>
-              <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -168,14 +203,22 @@ describe('<AlertDialog />', () => {
             onClose={mockOnClose}
             onClickOutside={mockOnClickOutside}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                cancel
-              </button>
-              <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -206,14 +249,22 @@ describe('<AlertDialog />', () => {
             onClose={mockOnClose}
             onClickOutside={mockOnClickOutside}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                cancel
-              </button>
-              <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -245,14 +296,22 @@ describe('<AlertDialog />', () => {
             onClose={mockOnClose}
             onEscPress={mockEscPress}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                cancel
-              </button>
-              <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -281,14 +340,22 @@ describe('<AlertDialog />', () => {
             onClose={mockOnClose}
             onEscPress={mockEscPress}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                cancel
-              </button>
-              <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                  cancel
+                </button>
+                <button data-testid="delete-button">delete</button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -317,13 +384,21 @@ describe('<AlertDialog />', () => {
             onClose={mockOnClose}
             onEscPress={mockOnEscPress}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>
-              <input />
-            </AlertDialogBody>
-            <AlertDialogFooter>
-              <button ref={leastDestructiveRef}>cancel</button>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>
+                <input />
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <button ref={leastDestructiveRef}>cancel</button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -350,20 +425,28 @@ describe('<AlertDialog />', () => {
             isOpen
             onClose={jest.fn()}
           >
-            <AlertDialogHeader>header</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <AlertDialogButton
-                data-testid="cancel-button"
-                ref={leastDestructiveRef}
-              >
-                cancel
-              </AlertDialogButton>
+            <AlertDialogOverlay />
 
-              <AlertDialogButton data-testid="delete-button">
-                delete
-              </AlertDialogButton>
-            </AlertDialogFooter>
+            <AlertDialogContent>
+              <AlertDialogHeader>header</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <AlertDialogButton
+                  data-testid="cancel-button"
+                  ref={leastDestructiveRef}
+                >
+                  cancel
+                </AlertDialogButton>
+
+                <AlertDialogButton data-testid="delete-button">
+                  delete
+                </AlertDialogButton>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -404,14 +487,22 @@ describe('<AlertDialog />', () => {
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <AlertDialogHeader>header</AlertDialogHeader>
-              <AlertDialogBody>body</AlertDialogBody>
-              <AlertDialogFooter>
-                <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                  cancel
-                </button>
-                <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
+              <AlertDialogOverlay />
+
+              <AlertDialogContent>
+                <AlertDialogHeader>header</AlertDialogHeader>
+
+                <AlertDialogCloseButton />
+
+                <AlertDialogBody>body</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                    cancel
+                  </button>
+                  <button data-testid="delete-button">delete</button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
             </AlertDialog>
           </>
         );
@@ -454,14 +545,22 @@ describe('<AlertDialog />', () => {
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <AlertDialogHeader>header</AlertDialogHeader>
-              <AlertDialogBody>body</AlertDialogBody>
-              <AlertDialogFooter>
-                <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                  cancel
-                </button>
-                <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
+              <AlertDialogOverlay />
+
+              <AlertDialogContent>
+                <AlertDialogHeader>header</AlertDialogHeader>
+
+                <AlertDialogCloseButton />
+
+                <AlertDialogBody>body</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                    cancel
+                  </button>
+                  <button data-testid="delete-button">delete</button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
             </AlertDialog>
           </>
         );
@@ -506,14 +605,22 @@ describe('<AlertDialog />', () => {
               isOpen
               onClose={jest.fn()}
             >
-              <AlertDialogHeader>header</AlertDialogHeader>
-              <AlertDialogBody>body</AlertDialogBody>
-              <AlertDialogFooter>
-                <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                  cancel
-                </button>
-                <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
+              <AlertDialogOverlay />
+
+              <AlertDialogContent>
+                <AlertDialogHeader>header</AlertDialogHeader>
+
+                <AlertDialogCloseButton />
+
+                <AlertDialogBody>body</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                    cancel
+                  </button>
+                  <button data-testid="delete-button">delete</button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
             </AlertDialog>
           );
         };
@@ -544,14 +651,22 @@ describe('<AlertDialog />', () => {
               onClose={jest.fn()}
               trapFocus={false}
             >
-              <AlertDialogHeader>header</AlertDialogHeader>
-              <AlertDialogBody>body</AlertDialogBody>
-              <AlertDialogFooter>
-                <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                  cancel
-                </button>
-                <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
+              <AlertDialogOverlay />
+
+              <AlertDialogContent>
+                <AlertDialogHeader>header</AlertDialogHeader>
+
+                <AlertDialogCloseButton />
+
+                <AlertDialogBody>body</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                    cancel
+                  </button>
+                  <button data-testid="delete-button">delete</button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
             </AlertDialog>
           );
         };
@@ -584,15 +699,23 @@ describe('<AlertDialog />', () => {
               isOpen
               onClose={jest.fn()}
             >
-              <AlertDialogHeader>header</AlertDialogHeader>
-              <AlertDialogBody>body</AlertDialogBody>
-              <AlertDialogFooter>
-                <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                  cancel
-                </button>
+              <AlertDialogOverlay />
 
-                <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
+              <AlertDialogContent>
+                <AlertDialogHeader>header</AlertDialogHeader>
+
+                <AlertDialogCloseButton />
+
+                <AlertDialogBody>body</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                    cancel
+                  </button>
+
+                  <button data-testid="delete-button">delete</button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
             </AlertDialog>
           );
         };
@@ -623,14 +746,22 @@ describe('<AlertDialog />', () => {
               onClose={jest.fn()}
               trapFocus={false}
             >
-              <AlertDialogHeader>header</AlertDialogHeader>
-              <AlertDialogBody>body</AlertDialogBody>
-              <AlertDialogFooter>
-                <button data-testid="cancel-button" ref={leastDestructiveRef}>
-                  cancel
-                </button>
-                <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
+              <AlertDialogOverlay />
+
+              <AlertDialogContent>
+                <AlertDialogHeader>header</AlertDialogHeader>
+
+                <AlertDialogCloseButton />
+
+                <AlertDialogBody>body</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <button data-testid="cancel-button" ref={leastDestructiveRef}>
+                    cancel
+                  </button>
+                  <button data-testid="delete-button">delete</button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
             </AlertDialog>
           );
         };
@@ -666,16 +797,23 @@ describe('<AlertDialog />', () => {
             isOpen
             onClose={() => {}}
           >
-            <AlertDialogHeader>Testing</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
-                Cancel
-              </AlertDialogButton>
-              <AlertDialogButton aria-label="save" onClick={mockSubmit}>
-                Save
-              </AlertDialogButton>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+            <AlertDialogContent>
+              <AlertDialogHeader>Testing</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
+                  Cancel
+                </AlertDialogButton>
+                <AlertDialogButton aria-label="save" onClick={mockSubmit}>
+                  Save
+                </AlertDialogButton>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
@@ -703,16 +841,24 @@ describe('<AlertDialog />', () => {
             isOpen
             onClose={mockClose}
           >
-            <AlertDialogHeader>Testing</AlertDialogHeader>
-            <AlertDialogBody>body</AlertDialogBody>
-            <AlertDialogFooter>
-              <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
-                Cancel
-              </AlertDialogButton>
-              <AlertDialogButton aria-label="save" onClick={mockSubmit}>
-                Save
-              </AlertDialogButton>
-            </AlertDialogFooter>
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>Testing</AlertDialogHeader>
+
+              <AlertDialogCloseButton />
+
+              <AlertDialogBody>body</AlertDialogBody>
+
+              <AlertDialogFooter>
+                <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
+                  Cancel
+                </AlertDialogButton>
+                <AlertDialogButton aria-label="save" onClick={mockSubmit}>
+                  Save
+                </AlertDialogButton>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         );
       };
