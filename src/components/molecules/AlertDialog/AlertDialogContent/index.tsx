@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
 
-import { Button, CloseIcon, Overlay, Portal } from '@atoms';
+import { Button, CloseIcon } from '@atoms';
 import FocusLock from '@atoms/FocusLock';
 import {
   useAlertDialog,
@@ -69,41 +69,42 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
   }, [isOpen]);
 
   return (
-    <Portal isMounted={isOpen}>
-      <FocusLock
-        closeOnEsc={closeOnEsc}
-        closeOnOverlayClick={closeOnOverlayClick}
-        enterExitMode={enterExitMode}
-        initialFocusRef={leastDestructiveRef as any}
-        leaveExitMode={leaveExitMode}
-        onClickOutside={onClickOutside}
-        onClose={onClose}
-        onEscPress={onEscPress}
-        trapFocus={trapFocus}
-      >
-        <Overlay>
-          <section
-            {...remainingProps}
-            {...addClasses()}
-            aria-labelledby={`${alertDialogId}__header`}
-            aria-describedby={`${alertDialogId}__body`}
-            aria-modal="true"
-            id={alertDialogId}
-            role="alertdialog"
+    <FocusLock
+      closeOnEsc={closeOnEsc}
+      closeOnOverlayClick={closeOnOverlayClick}
+      enterExitMode={enterExitMode}
+      initialFocusRef={leastDestructiveRef as any}
+      leaveExitMode={leaveExitMode}
+      onClickOutside={onClickOutside}
+      onClose={onClose}
+      onEscPress={onEscPress}
+      trapFocus={trapFocus}
+    >
+      {/* NOTE: When overlay contains AlertDialogContent there is no problem.
+                When overlay is a sibling element, then this div is responsible
+                for rendering correctly. */}
+      <div className="snui-alert-dialog-container">
+        <section
+          {...remainingProps}
+          {...addClasses()}
+          aria-labelledby={`${alertDialogId}__header`}
+          aria-describedby={`${alertDialogId}__body`}
+          aria-modal="true"
+          id={alertDialogId}
+          role="alertdialog"
+        >
+          <Button
+            aria-label="Close the alert dialog"
+            className="snui-alert-dialog__close-button"
+            onClick={onClose}
+            variant="outline"
           >
-            <Button
-              aria-label="Close the alert dialog"
-              className="snui-alert-dialog__close-button"
-              onClick={onClose}
-              variant="outline"
-            >
-              <CloseIcon color="black" size="xs" />
-            </Button>
-            {children}
-          </section>
-        </Overlay>
-      </FocusLock>
-    </Portal>
+            <CloseIcon color="black" size="xs" />
+          </Button>
+          {children}
+        </section>
+      </div>
+    </FocusLock>
   );
 };
 

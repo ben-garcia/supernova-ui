@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 
+import { Portal } from '@atoms';
 import { AlertDialogProvider } from '@contexts';
 import { useAlertDialogProvider } from '@hooks';
 
@@ -72,7 +73,9 @@ const AlertDialog: FC<AlertDialogProps> = props => {
   );
 
   return (
-    <AlertDialogProvider value={contextValue}>{children}</AlertDialogProvider>
+    <Portal isMounted={isOpen}>
+      <AlertDialogProvider value={contextValue}>{children}</AlertDialogProvider>
+    </Portal>
   );
 };
 
