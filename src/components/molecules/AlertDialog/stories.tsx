@@ -6,9 +6,11 @@ import {
   AlertDialog,
   AlertDialogBody,
   AlertDialogButton,
+  AlertDialogCloseButton,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogOverlay,
 } from '@molecules';
 
 import { AlertDialogProps } from './AlertDialog';
@@ -48,9 +50,15 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
         leastDestructiveRef={cancelButtonRef}
         onClose={() => setIsOpen(false)}
       >
+        <AlertDialogOverlay />
+
         <AlertDialogContent>
           <AlertDialogHeader>Delete your account</AlertDialogHeader>
+
+          <AlertDialogCloseButton />
+
           <AlertDialogBody>Are you sure?</AlertDialogBody>
+
           <AlertDialogFooter>
             <AlertDialogButton
               onClick={() => setIsOpen(false)}
@@ -103,21 +111,29 @@ const FinalFocusRefTemplate: Story<AlertDialogProps> = args => {
         leastDestructiveRef={cancelButtonRef}
         onClose={handleClose}
       >
-        <AlertDialogHeader>Delete your account</AlertDialogHeader>
-        <AlertDialogBody>Are you sure?</AlertDialogBody>
-        <AlertDialogFooter>
-          <AlertDialogButton
-            onClick={handleClose}
-            ref={cancelButtonRef}
-            variant="outline"
-          >
-            Cancel
-          </AlertDialogButton>
+        <AlertDialogOverlay />
 
-          <AlertDialogButton colorVariant="error700" onClick={handleClose}>
-            Delete
-          </AlertDialogButton>
-        </AlertDialogFooter>
+        <AlertDialogContent>
+          <AlertDialogHeader>Delete your account</AlertDialogHeader>
+
+          <AlertDialogCloseButton />
+
+          <AlertDialogBody>Are you sure?</AlertDialogBody>
+
+          <AlertDialogFooter>
+            <AlertDialogButton
+              onClick={handleClose}
+              ref={cancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
+
+            <AlertDialogButton colorVariant="error700" onClick={handleClose}>
+              Delete
+            </AlertDialogButton>
+          </AlertDialogFooter>
+        </AlertDialogContent>
       </AlertDialog>
     </>
   );
