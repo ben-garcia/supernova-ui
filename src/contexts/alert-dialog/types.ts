@@ -1,13 +1,16 @@
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, MutableRefObject } from 'react';
 
-import { AlertDialogBodyProps } from '../../components/molecules/AlertDialog/AlertDialogBody';
-import { AlertDialogFooterProps } from '../../components/molecules/AlertDialog/AlertDialogFooter';
-import { AlertDialogHeaderProps } from '../../components/molecules/AlertDialog/AlertDialogHeader';
+import { AlertDialogBodyProps } from '@molecules/AlertDialog/AlertDialogBody';
+import { AlertDialogFooterProps } from '@molecules/AlertDialog/AlertDialogFooter';
+import { AlertDialogHeaderProps } from '@molecules/AlertDialog/AlertDialogHeader';
+
+import { DialogLikeProps } from '@types';
 
 export interface AlertDialogContextProps {
+  closeOnEsc?: boolean;
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
-  finalFocusRef?: RefObject<HTMLElement> | null;
+  finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getAlertDialogBodyProps: (
     props: Omit<AlertDialogBodyProps, 'children'>
   ) => void;
@@ -18,12 +21,14 @@ export interface AlertDialogContextProps {
     props: Omit<AlertDialogHeaderProps, 'children'>
   ) => void;
   id?: string;
+  isExiting?: boolean;
   isOpen: boolean;
-  leastDestructiveRef?: RefObject<HTMLElement> | null;
+  leastDestructiveRef?: MutableRefObject<HTMLElement | null>;
   leaveExitMode?: () => void;
   onClickOutside?: () => void;
   onClose: () => void;
   onEscPress?: () => void;
+  size?: DialogLikeProps['size'];
   trapFocus?: boolean;
 }
 

@@ -10,11 +10,16 @@ import { AlertDialogProps } from '@molecules/AlertDialog/AlertDialog';
  */
 export const useAlertDialogProvider = (props: AlertDialogProps) => {
   const {
-    isOpen,
-    onClose,
     closeOnEsc,
+    closeOnOverlayClick,
     finalFocusRef,
+    isOpen,
     leastDestructiveRef,
+    onClickOutside,
+    onClose,
+    onEscPress,
+    size,
+    trapFocus,
   } = props;
 
   const id = useUniqueId('snui-dialog-alert');
@@ -65,6 +70,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
 
   return {
     closeOnEsc,
+    closeOnOverlayClick,
     finalFocusRef,
     getAlertDialogBodyProps,
     getAlertDialogHeaderProps,
@@ -72,7 +78,11 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
     id,
     isOpen,
     leastDestructiveRef,
+    onClickOutside,
     onClose,
+    onEscPress,
+    size,
+    trapFocus,
   };
 };
 

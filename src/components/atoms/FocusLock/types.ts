@@ -1,4 +1,4 @@
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, MutableRefObject } from 'react';
 
 export interface FocusLockProps {
   children: ReactNode;
@@ -21,11 +21,11 @@ export interface FocusLockProps {
   /**
    * The reference of element to receive focus when the Modal closes
    */
-  finalFocusRef?: RefObject<HTMLElement>;
+  finalFocusRef?: MutableRefObject<HTMLElement | null>;
   /**
    * The reference of element to receive focus when the Modal first opens
    */
-  initialFocusRef?: RefObject<HTMLElement>;
+  initialFocusRef?: MutableRefObject<HTMLElement | null>;
   /**
    * Function to trigger the exit animation.
    */

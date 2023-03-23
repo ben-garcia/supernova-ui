@@ -6,6 +6,7 @@ import {
   AlertDialog,
   AlertDialogBody,
   AlertDialogButton,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
 } from '@molecules';
@@ -47,24 +48,26 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
         leastDestructiveRef={cancelButtonRef}
         onClose={() => setIsOpen(false)}
       >
-        <AlertDialogHeader>Delete your account</AlertDialogHeader>
-        <AlertDialogBody>Are you sure?</AlertDialogBody>
-        <AlertDialogFooter>
-          <AlertDialogButton
-            onClick={() => setIsOpen(false)}
-            ref={cancelButtonRef}
-            variant="outline"
-          >
-            Cancel
-          </AlertDialogButton>
+        <AlertDialogContent>
+          <AlertDialogHeader>Delete your account</AlertDialogHeader>
+          <AlertDialogBody>Are you sure?</AlertDialogBody>
+          <AlertDialogFooter>
+            <AlertDialogButton
+              onClick={() => setIsOpen(false)}
+              ref={cancelButtonRef}
+              variant="outline"
+            >
+              Cancel
+            </AlertDialogButton>
 
-          <AlertDialogButton
-            colorVariant="error700"
-            onClick={() => setIsOpen(false)}
-          >
-            Delete
-          </AlertDialogButton>
-        </AlertDialogFooter>
+            <AlertDialogButton
+              colorVariant="error700"
+              onClick={() => setIsOpen(false)}
+            >
+              Delete
+            </AlertDialogButton>
+          </AlertDialogFooter>
+        </AlertDialogContent>
       </AlertDialog>
     </>
   );
