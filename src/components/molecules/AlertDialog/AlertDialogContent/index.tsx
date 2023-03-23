@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
 
-import { Button, CloseIcon } from '@atoms';
 import FocusLock from '@atoms/FocusLock';
 import {
   useAlertDialog,
@@ -93,14 +92,6 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
           id={alertDialogId}
           role="alertdialog"
         >
-          <Button
-            aria-label="Close the alert dialog"
-            className="snui-alert-dialog__close-button"
-            onClick={onClose}
-            variant="outline"
-          >
-            <CloseIcon color="black" size="xs" />
-          </Button>
           {children}
         </section>
       </div>
