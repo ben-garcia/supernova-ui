@@ -2,8 +2,8 @@ import React, { MouseEvent, useCallback } from 'react';
 
 import { Button } from '@atoms';
 import { ButtonProps } from '@atoms/Button/types';
-import { createClasses, forwardRef, isFunction, isString } from '@utils';
-import { useAlertDialog } from '@hooks';
+import { useAlertDialog, useCreateClassString } from '@hooks';
+import { forwardRef, isFunction, isString } from '@utils';
 
 type AlertDialogButtonProps = ButtonProps;
 
@@ -25,7 +25,7 @@ const AlertDialogButton = forwardRef<AlertDialogButtonProps, HTMLButtonElement>(
       }, 300);
     }, []);
 
-    const classes = createClasses('snui snui-alert-dialog__button', {
+    const addClasses = useCreateClassString('snui snui-alert-dialog__button', {
       [`${className}`]: isString(className),
     });
 
@@ -34,7 +34,7 @@ const AlertDialogButton = forwardRef<AlertDialogButtonProps, HTMLButtonElement>(
         onClick={handleClick}
         ref={ref as any}
         {...rest}
-        className={classes}
+        {...addClasses()}
       >
         {children}
       </Button>

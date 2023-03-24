@@ -66,7 +66,7 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
       {/* NOTE: When overlay contains AlertDialogContent there is no problem.
                 When overlay is a sibling element, then this div is responsible
                 for rendering correctly. */}
-      <div className="snui-alert-dialog-container">
+      <div className="snui snui-alert-dialog-container">
         <section
           {...remainingProps}
           {...addClasses()}
