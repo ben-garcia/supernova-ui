@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 
 import FocusLock from '@atoms/FocusLock';
 import {
@@ -27,7 +27,6 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
     enterExitMode = () => {},
     id: alertDialogId,
     isExiting,
-    isOpen,
     leastDestructiveRef,
     leaveExitMode = () => {},
     onClickOutside,
@@ -50,28 +49,13 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
-  const previousActiveElement = useRef<Element | null>(null);
-
-  // get a reference to the focused element that triggerd the Modal
-  useEffect(() => {
-    previousActiveElement.current = document.activeElement;
-
-    return () => {
-      if (!finalFocusRef?.current) {
-        // when Modal is closed, the focus should return to the element
-        // that triggered it as per the WAI-ARIA best practices guide
-        (previousActiveElement!.current! as HTMLElement).focus();
-      } else {
-        finalFocusRef.current.focus();
-      }
-    };
-  }, [isOpen]);
 
   return (
     <FocusLock
       closeOnEsc={closeOnEsc}
       closeOnOverlayClick={closeOnOverlayClick}
       enterExitMode={enterExitMode}
+      finalFocusRef={finalFocusRef}
       initialFocusRef={leastDestructiveRef as any}
       leaveExitMode={leaveExitMode}
       onClickOutside={onClickOutside}
