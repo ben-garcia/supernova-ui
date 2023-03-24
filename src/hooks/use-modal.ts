@@ -9,7 +9,18 @@ import { ModalProps } from '@molecules/Modal/Modal';
 /** Hooks that returns the Modal props
  */
 const useModalProvider = (props: ModalProps) => {
-  const { isOpen, onClose, closeOnEsc, finalFocusRef, initialFocusRef } = props;
+  const {
+    closeOnEsc,
+    closeOnOverlayClick,
+    finalFocusRef,
+    initialFocusRef,
+    isOpen,
+    onClickOutside,
+    onClose,
+    onEscPress,
+    size,
+    trapFocus,
+  } = props;
 
   const id = useUniqueId('snui-modal');
 
@@ -59,6 +70,7 @@ const useModalProvider = (props: ModalProps) => {
 
   return {
     closeOnEsc,
+    closeOnOverlayClick,
     finalFocusRef,
     getModalBodyProps,
     getModalHeaderProps,
@@ -66,7 +78,11 @@ const useModalProvider = (props: ModalProps) => {
     id,
     initialFocusRef,
     isOpen,
+    onClickOutside,
     onClose,
+    onEscPress,
+    size,
+    trapFocus,
   };
 };
 

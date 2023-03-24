@@ -1,23 +1,28 @@
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, MutableRefObject } from 'react';
 
-import { ModalBodyProps } from '../../components/molecules/Modal/ModalBody';
-import { ModalFooterProps } from '../../components/molecules/Modal/ModalFooter';
-import { ModalHeaderProps } from '../../components/molecules/Modal/ModalHeader';
+import { ModalBodyProps } from '@molecules/Modal/ModalBody';
+import { ModalFooterProps } from '@molecules/Modal/ModalFooter';
+import { ModalHeaderProps } from '@molecules/Modal/ModalHeader';
+
+import { DialogLikeProps } from '@types';
 
 export interface ModalContextProps {
+  closeOnEsc?: boolean;
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
-  finalFocusRef?: RefObject<HTMLElement> | null;
+  finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getModalBodyProps: (props: Omit<ModalBodyProps, 'children'>) => void;
   getModalHeaderProps: (props: Omit<ModalHeaderProps, 'children'>) => void;
   getModalFooterProps: (props: Omit<ModalFooterProps, 'children'>) => void;
   id?: string;
-  initialFocusRef?: RefObject<HTMLElement> | null;
+  initialFocusRef?: MutableRefObject<HTMLElement | null>;
+  isExiting?: boolean;
   isOpen: boolean;
   leaveExitMode?: () => void;
   onClickOutside?: () => void;
   onClose: () => void;
   onEscPress?: () => void;
+  size?: DialogLikeProps['size'];
   trapFocus?: boolean;
 }
 
