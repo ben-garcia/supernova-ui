@@ -1,10 +1,9 @@
 import React, { MouseEvent, useCallback } from 'react';
 
 import { Button } from '@atoms';
+import { ButtonProps } from '@atoms/Button/types';
 import { useCreateClassString, useModal } from '@hooks';
 import { forwardRef, isFunction, isString } from '@utils';
-
-import { ButtonProps } from '../../../atoms/Button/types';
 
 type ModalButtonProps = ButtonProps;
 

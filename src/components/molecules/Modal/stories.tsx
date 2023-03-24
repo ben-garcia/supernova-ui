@@ -5,9 +5,12 @@ import { Box, Button, TextInput } from '@atoms';
 import {
   Modal,
   ModalButton,
+  ModalCloseButton,
+  ModalContent,
   ModalFooter,
   ModalHeader,
   ModalBody,
+  ModalOverlay,
 } from '@molecules';
 
 import { ModalProps } from './Modal';
@@ -46,15 +49,24 @@ const BasicTemplate: Story<ModalProps> = args => {
           Trigger Modal
         </Button>
       </Box>
+
       <Modal {...args} onClose={handleClose} isOpen={isOpen}>
-        <ModalHeader>Modal Title</ModalHeader>
-        <ModalBody>This is a modal</ModalBody>
-        <ModalFooter>
-          <ModalButton onClick={() => setIsOpen(false)} variant="outline">
-            Cancel
-          </ModalButton>
-          <ModalButton onClick={() => setIsOpen(false)}>Save</ModalButton>
-        </ModalFooter>
+        <ModalOverlay />
+
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+
+          <ModalCloseButton />
+
+          <ModalBody>This is a modal</ModalBody>
+
+          <ModalFooter>
+            <ModalButton onClick={() => setIsOpen(false)} variant="outline">
+              Cancel
+            </ModalButton>
+            <ModalButton onClick={() => setIsOpen(false)}>Save</ModalButton>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </>
   );
@@ -88,19 +100,27 @@ const FinalFocusRefTemplate: Story<ModalProps> = args => {
         onClose={handleClose}
         isOpen={isOpen}
       >
-        <ModalHeader>Create an account</ModalHeader>
-        <ModalBody>
-          <form>
-            <TextInput label="Email" ref={initialFocusRef} type="email" />
-            <TextInput label="Password" type="password" />
-          </form>
-        </ModalBody>
-        <ModalFooter>
-          <ModalButton onClick={handleClose} variant="outline">
-            Cancel
-          </ModalButton>
-          <ModalButton onClick={handleClose}>Signup</ModalButton>
-        </ModalFooter>
+        <ModalOverlay />
+
+        <ModalContent>
+          <ModalHeader>Create an account</ModalHeader>
+
+          <ModalCloseButton />
+
+          <ModalBody>
+            <form>
+              <TextInput label="Email" ref={initialFocusRef} type="email" />
+              <TextInput label="Password" type="password" />
+            </form>
+          </ModalBody>
+
+          <ModalFooter>
+            <ModalButton onClick={handleClose} variant="outline">
+              Cancel
+            </ModalButton>
+            <ModalButton onClick={handleClose}>Signup</ModalButton>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </>
   );

@@ -1,34 +1,22 @@
 import React, {
   FC,
-  RefObject,
+  MutableRefObject,
   useCallback,
-  useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 
-import { Button, CloseIcon, Portal } from '@atoms';
-import FocusLock from '@atoms/FocusLock';
-import Overlay from '@atoms/Overlay';
+import { Portal } from '@atoms';
 import { ModalProvider } from '@contexts';
-import {
-  useClassStyles,
-  useCreateClassString,
-  useModalProvider,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
+import { useModalProvider } from '@hooks';
 
-import { DialogLikeProps, SupernovaProps } from '@types';
-import './styles.scss';
+import { DialogLikeProps } from '@types';
 
-export interface ModalProps extends SupernovaProps, DialogLikeProps {
+export interface ModalProps extends DialogLikeProps {
   /**
    * The reference element to receive focus when the Modal first opens
    */
-  initialFocusRef?: RefObject<HTMLElement>;
+  initialFocusRef?: MutableRefObject<HTMLElement | null>;
 }
 
 /**
@@ -38,7 +26,6 @@ export interface ModalProps extends SupernovaProps, DialogLikeProps {
 const Modal: FC<ModalProps> = props => {
   const {
     children,
-    className,
     closeOnEsc = true,
     closeOnOverlayClick = true,
     finalFocusRef,
@@ -49,23 +36,8 @@ const Modal: FC<ModalProps> = props => {
     onEscPress,
     size = 'md',
     trapFocus = true,
-    ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const [isExiting, setIsExiting] = useState(false);
-  const addClasses = useCreateClassString('snui snui-modal', {
-    [`${className}`]: isString(className),
-    'snui-modal--exiting': isExiting,
-    [`snui-modal--${size}`]: isString(size),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
   const enterExitMode = useCallback(() => setIsExiting(true), []);
   const leaveExitMode = useCallback(() => setIsExiting(false), []);
   const handleOnClose = useCallback(() => {
@@ -81,66 +53,26 @@ const Modal: FC<ModalProps> = props => {
   const contextValue = useMemo(
     () => ({
       ...restContext,
+      closeOnEsc,
+      closeOnOverlayClick,
       enterExitMode,
+      finalFocusRef,
       id: modalId,
+      initialFocusRef,
+      isExiting,
+      isOpen,
       leaveExitMode,
+      onClickOutside,
       onClose: handleOnClose,
+      onEscPress,
+      size,
+      trapFocus,
     }),
     [modalId, restContext]
   );
-  const previousActiveElement = useRef<Element | null>(null);
-
-  // get a reference to the focused element that triggerd the Modal
-  useEffect(() => {
-    previousActiveElement.current = document.activeElement;
-
-    return () => {
-      if (!finalFocusRef?.current) {
-        // when Modal is closed, the focus should return to the element
-        // that triggered it as per the WAI-ARIA best practices guide
-        (previousActiveElement!.current! as HTMLElement).focus();
-      } else {
-        finalFocusRef.current.focus();
-      }
-    };
-  }, [isOpen]);
-
   return (
     <Portal isMounted={isOpen}>
-      <ModalProvider value={contextValue}>
-        <FocusLock
-          closeOnEsc={closeOnEsc}
-          closeOnOverlayClick={closeOnOverlayClick}
-          enterExitMode={enterExitMode}
-          initialFocusRef={initialFocusRef}
-          leaveExitMode={leaveExitMode}
-          onClickOutside={onClickOutside}
-          onClose={handleOnClose}
-          onEscPress={onEscPress}
-          trapFocus={trapFocus}
-        >
-          <Overlay>
-            <section
-              {...remainingProps}
-              {...addClasses()}
-              aria-labelledby={`${modalId}__header`}
-              aria-describedby={`${modalId}__body`}
-              aria-modal="true"
-              role="dialog"
-            >
-              <Button
-                aria-label="Close the modal"
-                className="snui-modal__close-button"
-                onClick={handleOnClose}
-                variant="outline"
-              >
-                <CloseIcon color="black" size="xs" />
-              </Button>
-              {children}
-            </section>
-          </Overlay>
-        </FocusLock>
-      </ModalProvider>
+      <ModalProvider value={contextValue}>{children}</ModalProvider>
     </Portal>
   );
 };

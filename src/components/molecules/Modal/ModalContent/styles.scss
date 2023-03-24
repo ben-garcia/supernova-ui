@@ -1,3 +1,15 @@
+.snui-modal-container {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: var(--snui-z-index-overlay);
+}
+
 .snui-modal {
   align-items: center;
   animation: snui-scale-up 0.4s ease;
@@ -33,18 +45,5 @@
 
   &--xxl {
     width: 100vw;
-  }
-
-  &__close-button.snui-button {
-    border: none;
-    box-shadow: none;
-    position: absolute;
-    right: var(--snui-space-sm);
-    top: var(--snui-space-sm);
-
-    &.snui-button:hover {
-      background: none;
-      box-shadow: none;
-    }
   }
 }
