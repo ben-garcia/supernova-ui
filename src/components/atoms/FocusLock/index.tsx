@@ -5,12 +5,10 @@ import { isFunction } from '@utils';
 import { FocusLockProps } from './types';
 
 /**
- * Component that locks the focus to its children
- *
+ * Component that locks the focus to its children.
  * used for Modal, Drawer, Popover components
  *
- * credit
- * @see https://medium.com/tamman-inc/create-a-reusable-focus-lock-in-react-to-improve-user-experience-and-accessibility-90829426fae2
+ * NOTE: FOR INTERNAL USE
  */
 const FocusLock: FC<FocusLockProps> = props => {
   const {
@@ -18,6 +16,7 @@ const FocusLock: FC<FocusLockProps> = props => {
     closeOnEsc,
     closeOnOverlayClick,
     enterExitMode,
+    finalFocusRef,
     initialFocusRef,
     leaveExitMode,
     onClickOutside,
@@ -27,6 +26,9 @@ const FocusLock: FC<FocusLockProps> = props => {
   } = props;
   const rootNode = useRef<HTMLDivElement | null>(null);
   const focusableItems = useRef<HTMLElement[]>([]);
+  // The element that toggles the opening the child component.
+  const triggerElement = useRef<Element | null>(null);
+
   const triggerCloseAnimation = useCallback((isForEsc: boolean) => {
     enterExitMode();
 
@@ -65,6 +67,25 @@ const FocusLock: FC<FocusLockProps> = props => {
     }, 300);
   }, []);
 
+  // return focus to the correct element.
+  useEffect(() => {
+    // get a reference to the element that triggered the modal.
+    triggerElement.current = document.activeElement;
+
+    return () => {
+      if (!finalFocusRef?.current) {
+        // when Modal is closed, the focus should return to the element
+        // that triggered it as per the WAI-ARIA best practices guide
+        (triggerElement!.current! as HTMLElement).focus();
+      } else {
+        finalFocusRef.current.focus();
+      }
+    };
+  }, []);
+
+  // ============================================
+  // credit
+  // https://medium.com/tamman-inc/create-a-reusable-focus-lock-in-react-to-improve-user-experience-and-accessibility-90829426fae2
   useEffect(() => {
     // check for all the focusable children of the root node
     const updateFocusableItems = () => {
@@ -83,6 +104,7 @@ const FocusLock: FC<FocusLockProps> = props => {
       observer.disconnect();
     };
   }, [rootNode]);
+  // ============================================
 
   useEffect(() => {
     // when there is at least one focusable item inside the modal and
@@ -103,6 +125,8 @@ const FocusLock: FC<FocusLockProps> = props => {
           // make sure the initialFocusRef is focusable
           // and inside the Modal
           if (item === initialFocusRef.current) {
+            // give time to get the activeElement that triggered
+            // the modal.
             initialFocusRef!.current!.focus();
           }
         });
