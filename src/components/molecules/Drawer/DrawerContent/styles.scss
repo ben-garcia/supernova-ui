@@ -1,3 +1,15 @@
+.snui-drawer-container {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: var(--snui-z-index-overlay);
+}
+
 .snui-drawer {
   align-items: center;
   background: var(--snui-color-white);
