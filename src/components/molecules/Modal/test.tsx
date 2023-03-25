@@ -274,7 +274,6 @@ describe('<Modal />', () => {
     it.skip('should give focus back to the trigger element by default', async () => {
       const ModalTest = () => {
         const [isOpen, setIsOpen] = React.useState(false);
-        const finalFocusRef = React.useRef(null);
         return (
           <>
             <button
@@ -285,11 +284,7 @@ describe('<Modal />', () => {
               Open
             </button>
 
-            <Modal
-              finalFocusRef={finalFocusRef}
-              isOpen={isOpen}
-              onClose={() => setIsOpen(false)}
-            >
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
               <ModalOverlay />
 
               <ModalContent>
