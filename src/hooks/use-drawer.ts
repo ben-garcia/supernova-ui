@@ -9,7 +9,18 @@ import { DrawerProps } from '@molecules/Drawer/Drawer';
 /** Hooks that returns the Drawer props
  */
 const useDrawerProvider = (props: DrawerProps) => {
-  const { isOpen, onClose, closeOnEsc, finalFocusRef, initialFocusRef } = props;
+  const {
+    closeOnEsc,
+    closeOnOverlayClick,
+    finalFocusRef,
+    initialFocusRef,
+    isOpen,
+    onClickOutside,
+    onClose,
+    onEscPress,
+    size,
+    trapFocus,
+  } = props;
 
   const id = useUniqueId('snui-drawer');
 
@@ -59,6 +70,7 @@ const useDrawerProvider = (props: DrawerProps) => {
 
   return {
     closeOnEsc,
+    closeOnOverlayClick,
     finalFocusRef,
     getDrawerBodyProps,
     getDrawerHeaderProps,
@@ -66,7 +78,11 @@ const useDrawerProvider = (props: DrawerProps) => {
     id,
     initialFocusRef,
     isOpen,
+    onClickOutside,
     onClose,
+    onEscPress,
+    size,
+    trapFocus,
   };
 };
 

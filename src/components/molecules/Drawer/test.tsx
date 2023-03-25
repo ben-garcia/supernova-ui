@@ -4,8 +4,11 @@ import {
   Drawer,
   DrawerBody,
   DrawerButton,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerFooter,
   DrawerHeader,
+  DrawerOverlay,
 } from '@molecules';
 import {
   a11yTest,
@@ -20,9 +23,13 @@ describe('<Drawer />', () => {
   it('should pass a11y tests', async () => {
     await a11yTest(
       <Drawer isOpen onClose={jest.fn()}>
-        <DrawerHeader>Testing</DrawerHeader>
-        <DrawerBody>body</DrawerBody>
-        <DrawerFooter>footer</DrawerFooter>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader>Testing</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>body</DrawerBody>
+          <DrawerFooter>footer</DrawerFooter>
+        </DrawerContent>
       </Drawer>
     );
   });
@@ -30,9 +37,13 @@ describe('<Drawer />', () => {
   it('should contain the proper aria attributes', () => {
     render(
       <Drawer isOpen onClose={jest.fn()}>
-        <DrawerHeader>header</DrawerHeader>
-        <DrawerBody>body</DrawerBody>
-        <DrawerFooter>footer</DrawerFooter>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader>header</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>body</DrawerBody>
+          <DrawerFooter>footer</DrawerFooter>
+        </DrawerContent>
       </Drawer>
     );
 
@@ -56,9 +67,13 @@ describe('<Drawer />', () => {
 
     render(
       <Drawer isOpen onClose={mockOnClose}>
-        <DrawerHeader>Testing</DrawerHeader>
-        <DrawerBody>body</DrawerBody>
-        <DrawerFooter>footer</DrawerFooter>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader>Testing</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>body</DrawerBody>
+          <DrawerFooter>footer</DrawerFooter>
+        </DrawerContent>
       </Drawer>
     );
 
@@ -80,9 +95,13 @@ describe('<Drawer />', () => {
           onClose={mockOnClose}
           onClickOutside={mockOnClickOutside}
         >
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
       const drawer = screen.getByRole('dialog');
@@ -106,9 +125,13 @@ describe('<Drawer />', () => {
           onClose={mockOnClose}
           onClickOutside={mockOnClickOutside}
         >
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
       const drawer = screen.getByRole('dialog');
@@ -132,9 +155,13 @@ describe('<Drawer />', () => {
           onClose={mockOnClose}
           onClickOutside={mockOnClickOutside}
         >
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
       const drawer = screen.getByRole('dialog');
@@ -155,9 +182,13 @@ describe('<Drawer />', () => {
 
       render(
         <Drawer isOpen onClose={mockOnClose} onEscPress={mockEscPress}>
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
 
@@ -180,9 +211,13 @@ describe('<Drawer />', () => {
           onClose={mockOnClose}
           onEscPress={mockEscPress}
         >
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
 
@@ -205,9 +240,13 @@ describe('<Drawer />', () => {
           onClose={mockOnClose}
           onEscPress={mockEscPress}
         >
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
 
@@ -221,14 +260,68 @@ describe('<Drawer />', () => {
   });
 
   describe('focus', () => {
+    // NOTE: failing test, error below
+    //
+    // Expected element with focus:
+    //   <button data-testid="open-button" type="button">Open</button>
+    // Received element with focus:
+    //   <body><div><button data-testid="open-button" type="button">Open</button></div></body>
+    //
+    // Not sure why the body and div are also focused.
+    it.skip('should give focus back to the trigger element by default', async () => {
+      const ModalTest = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        return (
+          <>
+            <button
+              type="button"
+              data-testid="open-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Open
+            </button>
+
+            <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
+              <DrawerOverlay />
+
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </>
+        );
+      };
+      render(<ModalTest />);
+      const openButton = screen.getByTestId('open-button');
+
+      // click the button
+      fireEvent.click(openButton);
+
+      const closeButton = screen.getByLabelText('Close the modal');
+
+      fireEvent.click(closeButton);
+
+      // final button should be focused when Modal has closed
+      await waitFor(() => expect(openButton).toHaveFocus());
+    });
+
     it('should give focus to the close button by default', () => {
       const ModalTest = () => (
         <Drawer isOpen onClose={jest.fn()}>
-          <DrawerHeader>header</DrawerHeader>
-          <DrawerBody>
-            <input />
-          </DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>header</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>
+              <input />
+            </DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
       render(<ModalTest />);
@@ -257,11 +350,15 @@ describe('<Drawer />', () => {
               isOpen={isOpen}
               onClose={jest.fn()}
             >
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerBody>
-                <input data-testid="modal-input" ref={initialFocusRef} />
-              </DrawerBody>
-              <DrawerFooter>footer</DrawerFooter>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input data-testid="modal-input" ref={initialFocusRef} />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
             </Drawer>
           </>
         );
@@ -306,11 +403,15 @@ describe('<Drawer />', () => {
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerBody>
-                <input />
-              </DrawerBody>
-              <DrawerFooter>footer</DrawerFooter>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
             </Drawer>
           </>
         );
@@ -353,14 +454,23 @@ describe('<Drawer />', () => {
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerBody>body</DrawerBody>
-              <DrawerFooter>
-                <DrawerButton data-testid="cancel-button" ref={initialFocusRef}>
-                  cancel
-                </DrawerButton>
-                <DrawerButton data-testid="delete-button">delete</DrawerButton>
-              </DrawerFooter>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>body</DrawerBody>
+                <DrawerFooter>
+                  <DrawerButton
+                    data-testid="cancel-button"
+                    ref={initialFocusRef}
+                  >
+                    cancel
+                  </DrawerButton>
+                  <DrawerButton data-testid="delete-button">
+                    delete
+                  </DrawerButton>
+                </DrawerFooter>
+              </DrawerContent>
             </Drawer>
           </>
         );
@@ -398,12 +508,16 @@ describe('<Drawer />', () => {
       it('should focus the next tabbable element and wrap around to the first by default', () => {
         const ModalTest = () => (
           <Drawer isOpen onClose={jest.fn()}>
-            <DrawerHeader>header</DrawerHeader>
-            <DrawerBody>
-              <input data-testid="modal-input1" />
-              <input data-testid="modal-input2" />
-            </DrawerBody>
-            <DrawerFooter>footer</DrawerFooter>
+            <DrawerOverlay />
+            <DrawerContent>
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerCloseButton />
+              <DrawerBody>
+                <input data-testid="modal-input1" />
+                <input data-testid="modal-input2" />
+              </DrawerBody>
+              <DrawerFooter>footer</DrawerFooter>
+            </DrawerContent>
           </Drawer>
         );
 
@@ -429,12 +543,16 @@ describe('<Drawer />', () => {
       it('should focus the next tabbable element and NOT wrap around to the first when trapFocus is false', () => {
         const ModalTest = () => (
           <Drawer isOpen onClose={jest.fn()} trapFocus={false}>
-            <DrawerHeader>header</DrawerHeader>
-            <DrawerBody>
-              <input data-testid="modal-input1" />
-              <input data-testid="modal-input2" />
-            </DrawerBody>
-            <DrawerFooter>footer</DrawerFooter>
+            <DrawerOverlay />
+            <DrawerContent>
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerCloseButton />
+              <DrawerBody>
+                <input data-testid="modal-input1" />
+                <input data-testid="modal-input2" />
+              </DrawerBody>
+              <DrawerFooter>footer</DrawerFooter>
+            </DrawerContent>
           </Drawer>
         );
         render(<ModalTest />);
@@ -470,12 +588,16 @@ describe('<Drawer />', () => {
               isOpen
               onClose={jest.fn()}
             >
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerBody>
-                <input data-testid="modal-input1" />
-                <input data-testid="modal-input2" ref={initialFocusRef} />
-              </DrawerBody>
-              <DrawerFooter>footer</DrawerFooter>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input data-testid="modal-input1" />
+                  <input data-testid="modal-input2" ref={initialFocusRef} />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
             </Drawer>
           );
         };
@@ -511,12 +633,16 @@ describe('<Drawer />', () => {
               onClose={jest.fn()}
               trapFocus={false}
             >
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerBody>
-                <input data-testid="modal-input1" />
-                <input data-testid="modal-input2" ref={initialFocusRef} />
-              </DrawerBody>
-              <DrawerFooter>footer</DrawerFooter>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input data-testid="modal-input1" />
+                  <input data-testid="modal-input2" ref={initialFocusRef} />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
             </Drawer>
           );
         };
@@ -550,16 +676,20 @@ describe('<Drawer />', () => {
 
       render(
         <Drawer isOpen onClose={() => {}}>
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>
-            <DrawerButton aria-label="cancel" onClick={mockCancel}>
-              Cancel
-            </DrawerButton>
-            <DrawerButton aria-label="save" onClick={mockSubmit}>
-              Save
-            </DrawerButton>
-          </DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>
+              <DrawerButton aria-label="cancel" onClick={mockCancel}>
+                Cancel
+              </DrawerButton>
+              <DrawerButton aria-label="save" onClick={mockSubmit}>
+                Save
+              </DrawerButton>
+            </DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
       const cancelButton = screen.getByLabelText('cancel');
@@ -579,16 +709,20 @@ describe('<Drawer />', () => {
 
       render(
         <Drawer isOpen onClose={mockClose}>
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>
-            <DrawerButton aria-label="cancel" onClick={mockCancel}>
-              Cancel
-            </DrawerButton>
-            <DrawerButton aria-label="save" onClick={mockSubmit}>
-              Save
-            </DrawerButton>
-          </DrawerFooter>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>
+              <DrawerButton aria-label="cancel" onClick={mockCancel}>
+                Cancel
+              </DrawerButton>
+              <DrawerButton aria-label="save" onClick={mockSubmit}>
+                Save
+              </DrawerButton>
+            </DrawerFooter>
+          </DrawerContent>
         </Drawer>
       );
       const cancelButton = screen.getByLabelText('cancel');

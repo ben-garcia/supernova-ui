@@ -1,34 +1,21 @@
 import React, {
   FC,
-  RefObject,
+  MutableRefObject,
   useCallback,
-  useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 
-import { Button, CloseIcon, Portal } from '@atoms';
-import FocusLock from '@atoms/FocusLock';
-import Overlay from '@atoms/Overlay';
+import { Portal } from '@atoms';
 import { DrawerProvider } from '@contexts';
-import {
-  useClassStyles,
-  useCreateClassString,
-  useDrawerProvider,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
+import { useDrawerProvider } from '@hooks';
+import { DialogLikeProps } from '@types';
 
-import { DialogLikeProps, SupernovaProps } from '@types';
-import './styles.scss';
-
-export interface DrawerProps extends SupernovaProps, DialogLikeProps {
+export interface DrawerProps extends DialogLikeProps {
   /**
    * The reference element to receive focus when the Drawer first opens
    */
-  initialFocusRef?: RefObject<HTMLElement>;
+  initialFocusRef?: MutableRefObject<HTMLElement | null>;
   /**
    * The position relative to the viewport
    *
@@ -44,7 +31,6 @@ export interface DrawerProps extends SupernovaProps, DialogLikeProps {
 const Drawer: FC<DrawerProps> = props => {
   const {
     children,
-    className,
     closeOnEsc = true,
     closeOnOverlayClick = true,
     finalFocusRef,
@@ -56,24 +42,8 @@ const Drawer: FC<DrawerProps> = props => {
     placement = 'left',
     size = 'md',
     trapFocus = true,
-    ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const [isExiting, setIsExiting] = useState(false);
-  const addClasses = useCreateClassString('snui snui-drawer', {
-    [`${className}`]: isString(className),
-    [`snui-drawer--${placement}`]: true,
-    [`snui-drawer--${placement}--exiting`]: isExiting,
-    [`snui-drawer--${size}`]: isString(size),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
   const enterExitMode = useCallback(() => setIsExiting(true), []);
   const leaveExitMode = useCallback(() => setIsExiting(false), []);
   const handleOnClose = React.useCallback(() => {
@@ -89,66 +59,28 @@ const Drawer: FC<DrawerProps> = props => {
   const contextValue = useMemo(
     () => ({
       ...restContext,
+      closeOnEsc,
+      closeOnOverlayClick,
       enterExitMode,
+      finalFocusRef,
       id: drawerId,
+      initialFocusRef,
+      isExiting,
+      isOpen,
       leaveExitMode,
+      onClickOutside,
       onClose: handleOnClose,
+      onEscPress,
+      placement,
+      size,
+      trapFocus,
     }),
     [drawerId, restContext]
   );
-  const previousActiveElement = useRef<Element | null>(null);
-
-  // get a reference to the focused element that triggerd the Modal
-  useEffect(() => {
-    previousActiveElement.current = document.activeElement;
-
-    return () => {
-      if (!finalFocusRef?.current) {
-        // when Modal is closed, the focus should return to the element
-        // that triggered it as per the WAI-ARIA best practices guide
-        (previousActiveElement!.current! as HTMLElement).focus();
-      } else {
-        finalFocusRef.current.focus();
-      }
-    };
-  }, [isOpen]);
 
   return (
     <Portal isMounted={isOpen}>
-      <DrawerProvider value={contextValue}>
-        <FocusLock
-          closeOnEsc={closeOnEsc}
-          closeOnOverlayClick={closeOnOverlayClick}
-          enterExitMode={enterExitMode}
-          initialFocusRef={initialFocusRef}
-          leaveExitMode={leaveExitMode}
-          onClickOutside={onClickOutside}
-          onClose={handleOnClose}
-          onEscPress={onEscPress}
-          trapFocus={trapFocus}
-        >
-          <Overlay>
-            <section
-              {...remainingProps}
-              {...addClasses()}
-              aria-labelledby={`${drawerId}__header`}
-              aria-describedby={`${drawerId}__body`}
-              aria-modal="true"
-              role="dialog"
-            >
-              <Button
-                aria-label="Close the modal"
-                className="snui-drawer__close-button"
-                onClick={handleOnClose}
-                variant="outline"
-              >
-                <CloseIcon color="black" size="xs" />
-              </Button>
-              {children}
-            </section>
-          </Overlay>
-        </FocusLock>
-      </DrawerProvider>
+      <DrawerProvider value={contextValue}>{children}</DrawerProvider>
     </Portal>
   );
 };

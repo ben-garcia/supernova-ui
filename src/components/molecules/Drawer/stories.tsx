@@ -6,8 +6,11 @@ import {
   Drawer,
   DrawerBody,
   DrawerButton,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerFooter,
   DrawerHeader,
+  DrawerOverlay,
 } from '@molecules';
 
 import { DrawerProps } from './Drawer';
@@ -53,15 +56,19 @@ const BasicTemplate: Story<DrawerProps> = args => {
       </Box>
 
       <Drawer {...args} onClose={handleClose} isOpen={isOpen}>
-        <DrawerHeader>Drawer Title</DrawerHeader>
-        <DrawerBody>This is a drawer</DrawerBody>
-        <DrawerFooter>
-          <DrawerButton onClick={() => setIsOpen(false)} variant="outline">
-            Cancel
-          </DrawerButton>
+        <DrawerOverlay />
 
-          <DrawerButton onClick={() => setIsOpen(false)}>Save</DrawerButton>
-        </DrawerFooter>
+        <DrawerContent>
+          <DrawerHeader>Drawer Title</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>This is a drawer</DrawerBody>
+          <DrawerFooter>
+            <DrawerButton onClick={() => setIsOpen(false)} variant="outline">
+              Cancel
+            </DrawerButton>
+            <DrawerButton onClick={() => setIsOpen(false)}>Save</DrawerButton>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
     </>
   );
@@ -95,22 +102,25 @@ const FinalFocusRefTemplate: Story<DrawerProps> = args => {
         onClose={handleClose}
         isOpen={isOpen}
       >
-        <DrawerHeader>Create an account</DrawerHeader>
+        <DrawerOverlay />
 
-        <DrawerBody>
-          <form>
-            <TextInput label="Email" ref={initialFocusRef} type="email" />
-            <TextInput label="Password" type="password" />
-          </form>
-        </DrawerBody>
+        <DrawerContent>
+          <DrawerHeader>Create an account</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>
+            <form>
+              <TextInput label="Email" ref={initialFocusRef} type="email" />
+              <TextInput label="Password" type="password" />
+            </form>
+          </DrawerBody>
+          <DrawerFooter>
+            <DrawerButton onClick={handleClose} variant="outline">
+              Cancel
+            </DrawerButton>
 
-        <DrawerFooter>
-          <DrawerButton onClick={handleClose} variant="outline">
-            Cancel
-          </DrawerButton>
-
-          <DrawerButton onClick={handleClose}>Signup</DrawerButton>
-        </DrawerFooter>
+            <DrawerButton onClick={handleClose}>Signup</DrawerButton>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
     </>
   );

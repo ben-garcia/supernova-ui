@@ -1,23 +1,30 @@
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, MutableRefObject } from 'react';
 
-import { DrawerBodyProps } from '../../components/molecules/Drawer/DrawerBody';
-import { DrawerFooterProps } from '../../components/molecules/Drawer/DrawerFooter';
-import { DrawerHeaderProps } from '../../components/molecules/Drawer/DrawerHeader';
+import { DrawerProps } from '@molecules/Drawer/Drawer';
+import { DrawerBodyProps } from '@molecules/Drawer/DrawerBody';
+import { DrawerFooterProps } from '@molecules/Drawer/DrawerFooter';
+import { DrawerHeaderProps } from '@molecules/Drawer/DrawerHeader';
+
+import { DialogLikeProps } from '@types';
 
 export interface DrawerContextProps {
+  closeOnEsc?: boolean;
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
-  finalFocusRef?: RefObject<HTMLElement> | null;
+  finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getDrawerBodyProps: (props: Omit<DrawerBodyProps, 'children'>) => void;
   getDrawerFooterProps: (props: Omit<DrawerFooterProps, 'children'>) => void;
   getDrawerHeaderProps: (props: Omit<DrawerHeaderProps, 'children'>) => void;
   id?: string;
-  initialFocusRef?: RefObject<HTMLElement> | null;
+  initialFocusRef?: MutableRefObject<HTMLElement | null>;
+  isExiting?: boolean;
   isOpen: boolean;
   leaveExitMode?: () => void;
   onClickOutside?: () => void;
   onClose: () => void;
   onEscPress?: () => void;
+  placement?: DrawerProps['placement'];
+  size?: DialogLikeProps['size'];
   trapFocus?: boolean;
 }
 
