@@ -38,7 +38,7 @@ const useStyle = () => {
 };
 
 /**
- *  Hook that injects classes in the DOM based on _focus and _hover props.
+ *  Hook that injects classes in the DOM based on pseudo class/element props.
  *
  *  @param props pseudo classes object.
  *
@@ -112,14 +112,14 @@ export const usePseudoClasses = (props: Partial<PseudoProps>) => {
       Object.values(props).forEach((styles, index) => {
         if (styles?.content === '') {
           throw new Error(
-            "You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"\"'`"
+            "You seem to be using a value for 'content' without quotes, try replacing it with `content`"
           );
         }
         formattedStylesString.push(
           JSON.stringify(cssCamelCaseToHyphenated(styles as CSSProps))
         );
         formattedStylesString[index] = formattedStylesString[index].replace(
-          /,/g,
+          /",/g,
           ';'
         );
         formattedStylesString[index] = formattedStylesString[index].replace(
