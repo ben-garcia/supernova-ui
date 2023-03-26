@@ -10,12 +10,14 @@ import {
   Heading,
   Paragraph,
   Portal,
+  Radio,
+  RadioGroup,
   Text,
   Tooltip,
 } from '@atoms';
 import {
-  Basic as Radio,
-  WithRadioGroup as RadioGroup,
+  Basic as RadioExample,
+  WithRadioGroup as RadioGroupExample,
 } from '@atoms/Radio/stories';
 import { Basic as Slider } from '@atoms/Slider/stories';
 import { Basic as Spinner } from '@atoms/Spinner/stories';
@@ -23,6 +25,7 @@ import { Basic as Switch } from '@atoms/Switch/stories';
 import { FloatingLabel as Textarea } from '@atoms/Textarea/stories';
 import { Basic as TextInput } from '@atoms/TextInput/stories';
 import { useNotification } from '@hooks';
+import { FormControl, FormErrorMessage, FormHelperText } from '@molecules';
 import { Basic as Accordion } from '@molecules/Accordion/stories';
 import { Basic as AlertDialog } from '@molecules/AlertDialog/stories';
 import { Basic as Drawer } from '@molecules/Drawer/stories';
@@ -71,28 +74,28 @@ export const All = () => {
           </Box>
 
           <Box>
+            <FormControlExample />
+            <Paragraph>Form Control</Paragraph>
+          </Box>
+
+          <Box>
             <Editable />
             <Paragraph>Editable</Paragraph>
           </Box>
 
           <Box>
-            <Radio label={label} />
+            <RadioExample label={label} />
             <Paragraph>Radio</Paragraph>
           </Box>
 
           <Box>
-            <RadioGroup />
+            <RadioGroupExample />
             <Paragraph>RadioGroup</Paragraph>
           </Box>
 
           <Box>
             <Slider />
             <Paragraph>Slider</Paragraph>
-          </Box>
-
-          <Box>
-            <Switch label={label} />
-            <Paragraph>Switch</Paragraph>
           </Box>
 
           <Box>
@@ -103,6 +106,11 @@ export const All = () => {
           <Box>
             <TextInput label={label} />
             <Paragraph>TextInput</Paragraph>
+          </Box>
+
+          <Box>
+            <Switch label={label} />
+            <Paragraph>Switch</Paragraph>
           </Box>
         </Box>
       </Box>
@@ -257,6 +265,21 @@ export const All = () => {
         </Box>
       </Box>
     </Box>
+  );
+};
+
+const FormControlExample = () => {
+  const [answer, setAnswer] = React.useState('3.14159');
+  return (
+    <FormControl isInvalid={answer !== '3.14159'}>
+      <RadioGroup onChange={setAnswer} defaultValue={answer} name="answer">
+        <Radio label="3.14195" value="3.14195" />
+        <Radio label="3.15149" value="3.15249" />
+        <Radio label="3.14159" value="3.14159" />
+      </RadioGroup>
+      <FormHelperText>Choose the correct value of PI</FormHelperText>
+      <FormErrorMessage>error has been detected</FormErrorMessage>
+    </FormControl>
   );
 };
 

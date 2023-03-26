@@ -43,17 +43,20 @@ const WithCheckboxTemplate: ComponentStory<typeof FormControl> = args => (
 export const WithCheckbox = WithCheckboxTemplate.bind({});
 WithCheckbox.parameters = parameters;
 
-const WithRadioGroupTemplate: ComponentStory<typeof FormControl> = args => (
-  <FormControl {...args}>
-    <RadioGroup defaultValue="3.14159" name="answer">
-      <Radio label="3.14195" value="3.14195" />
-      <Radio label="3.15149" value="3.15249" />
-      <Radio label="3.14159" value="3.14159" />
-    </RadioGroup>
-    <FormHelperText>Choose the correct value of PI</FormHelperText>
-    <FormErrorMessage>error has been detected</FormErrorMessage>
-  </FormControl>
-);
+const WithRadioGroupTemplate: ComponentStory<typeof FormControl> = args => {
+  const [answer, setAnswer] = React.useState('3.14159');
+  return (
+    <FormControl {...args}>
+      <RadioGroup onChange={setAnswer} defaultValue={answer} name="answer">
+        <Radio label="3.14195" value="3.14195" />
+        <Radio label="3.15149" value="3.15249" />
+        <Radio label="3.14159" value="3.14159" />
+      </RadioGroup>
+      <FormHelperText>Choose the correct value of PI</FormHelperText>
+      <FormErrorMessage>error has been detected</FormErrorMessage>
+    </FormControl>
+  );
+};
 
 export const WithRadioGroup = WithRadioGroupTemplate.bind({});
 WithRadioGroup.parameters = parameters;
