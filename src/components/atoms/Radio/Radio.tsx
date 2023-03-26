@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   useClassStyles,
@@ -46,8 +46,7 @@ const Radio = forwardRef<RadioProps, HTMLInputElement>((props, ref) => {
   } = useFormControl();
   const { colors } = useTheme();
   const [radioIsChecked, setRadioIsChecked] = useState(isChecked);
-  const uniqueId = useUniqueId('snui-radio');
-  const radioId = useMemo(() => (isString(fieldId) ? fieldId : uniqueId), []);
+  const radioId = useUniqueId('snui-radio');
   const addControlClasses = useCreateClassString('snui snui-radio__control', {
     [`${className}`]: isString(className),
     [`snui-radio__control--${size}`]:
