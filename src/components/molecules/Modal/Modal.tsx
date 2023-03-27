@@ -47,7 +47,7 @@ const Modal: FC<ModalProps> = props => {
     setTimeout(() => {
       setIsExiting(false);
       onClose();
-    }, 300);
+    }, 100);
   }, []);
   const { id: modalId, ...restContext } = useModalProvider(props);
   const contextValue = useMemo(

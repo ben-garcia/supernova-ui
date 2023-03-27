@@ -12,7 +12,8 @@
 
 .snui-modal {
   align-items: center;
-  animation: snui-scale-up 0.4s ease;
+  animation: snui-scale-in var(--snui-transition-duration-faster)
+    var(--snui-transition-easing-ease-out);
   background: var(--snui-color-white);
   border-radius: var(--snui-radii-sm);
   display: flex;
@@ -25,7 +26,8 @@
   z-index: var(--snui-z-index-modal);
 
   &--exiting {
-    animation: snui-scale-down 0.4s ease;
+    animation: snui-scale-out var(--snui-transition-duration-faster)
+      var(--snui-transition-easing-ease-out);
   }
 
   &--sm {

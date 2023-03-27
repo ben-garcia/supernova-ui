@@ -47,7 +47,7 @@ const AlertDialog: FC<AlertDialogProps> = props => {
     setTimeout(() => {
       setIsExiting(false);
       onClose();
-    }, 300);
+    }, 100);
   }, []);
 
   const { id: alertDialogId, ...restContext } = useAlertDialogProvider(props);

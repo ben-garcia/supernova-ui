@@ -22,7 +22,7 @@ const ModalButton = forwardRef<ModalButtonProps, HTMLButtonElement>(
         if (isFunction(onClick)) {
           onClick!(e);
         }
-      }, 300);
+      }, 100);
     }, []);
 
     const addClasses = useCreateClassString('snui-modal__button', {

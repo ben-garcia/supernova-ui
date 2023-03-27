@@ -23,7 +23,7 @@ const DrawerButton = forwardRef<DrawerButtonProps, HTMLButtonElement>(
         if (isFunction(onClick)) {
           onClick!(e);
         }
-      }, 300);
+      }, 200);
     }, []);
 
     const addClasses = useCreateClassString('snui-drawer__button', {

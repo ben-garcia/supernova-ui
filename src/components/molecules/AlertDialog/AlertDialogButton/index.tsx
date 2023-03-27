@@ -22,7 +22,7 @@ const AlertDialogButton = forwardRef<AlertDialogButtonProps, HTMLButtonElement>(
         if (isFunction(onClick)) {
           onClick!(e);
         }
-      }, 300);
+      }, 100);
     }, []);
 
     const addClasses = useCreateClassString('snui snui-alert-dialog__button', {

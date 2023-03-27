@@ -53,7 +53,7 @@ const Drawer: FC<DrawerProps> = props => {
     setTimeout(() => {
       setIsExiting(false);
       onClose();
-    }, 300);
+    }, 200);
   }, []);
   const { id: drawerId, ...restContext } = useDrawerProvider(props);
   const contextValue = useMemo(
