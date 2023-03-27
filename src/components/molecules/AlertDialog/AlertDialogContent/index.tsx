@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import FocusLock from '@atoms/FocusLock';
 import {
@@ -6,6 +6,7 @@ import {
   useClassStyles,
   useCreateClassString,
   usePseudoClasses,
+  useScrollLock,
   useValidateProps,
 } from '@hooks';
 import { SupernovaProps } from '@types';
@@ -49,6 +50,14 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
+  const { lock, unlock } = useScrollLock();
+
+  useEffect(() => {
+    lock();
+    return () => {
+      unlock();
+    };
+  }, []);
 
   return (
     <FocusLock

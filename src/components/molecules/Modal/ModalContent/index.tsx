@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import FocusLock from '@atoms/FocusLock';
 import {
-  useModal,
   useClassStyles,
   useCreateClassString,
+  useModal,
+  useScrollLock,
   usePseudoClasses,
   useValidateProps,
 } from '@hooks';
@@ -49,6 +50,14 @@ const ModalContent: FC<ModalContentProps> = props => {
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
   });
+  const { lock, unlock } = useScrollLock();
+
+  useEffect(() => {
+    lock();
+    return () => {
+      unlock();
+    };
+  }, []);
 
   return (
     <FocusLock
