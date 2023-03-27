@@ -57,6 +57,27 @@ describe('<GroupRadio />', () => {
     expect(result).not.toBeChecked();
   });
 
+  it('should manage state for uncontrolled children', () => {
+    const RadioGroupTest = () => {
+      return (
+        <RadioGroup name="testing" defaultValue="two">
+          <Radio label="one" value="one" />
+          <Radio label="two" value="two" />
+          <Radio label="three" value="three" />
+        </RadioGroup>
+      );
+    };
+    const { getByLabelText } = render(<RadioGroupTest />);
+    const two = getByLabelText('two');
+    const three = getByLabelText('three');
+
+    expect(two).toBeChecked();
+
+    fireEvent.click(three, { target: { checked: true } });
+
+    expect(three).toBeChecked();
+  });
+
   it('should manage state for controlled children', () => {
     const mockHandler = jest.fn();
     const Test = () => {
@@ -110,11 +131,7 @@ describe('<GroupRadio />', () => {
             focus
           </button>
           <div data-testid="radiogroup-parent" ref={ref}>
-            <RadioGroup
-              onChange={() => {}}
-              name="testing"
-              defaultValue={defaultValue}
-            >
+            <RadioGroup name="testing" defaultValue={defaultValue}>
               <Radio label="one" isDisabled value="one" />
               <Radio label="two" value="two" />
               <Radio label="three" value="three" />

@@ -26,6 +26,9 @@ export interface RadioGroupProps extends SupernovaProps {
   name: string;
   /**
    * Function to be executed for onChange event
+   *
+   * when using as controlled component.
+   *
    */
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange?: Dispatch<SetStateAction<string>>;
 }
