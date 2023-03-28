@@ -1,8 +1,6 @@
 .snui-modal__footer {
-  align-self: flex-end;
   display: flex;
   gap: 0.5rem;
-  padding-bottom: var(--snui-size-sm);
-  padding-top: var(--snui-size-xs);
-  padding-right: var(--snui-size-sm);
+  justify-content: flex-end;
+  padding: var(--snui-size-xs);
 }

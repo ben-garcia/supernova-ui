@@ -1,8 +1,6 @@
 .snui-drawer__header {
-  align-self: flex-start;
   font-size: var(--snui-font-size-lg);
   font-weight: var(--snui-font-weight-lg);
-  padding-bottom: calc(var(--snui-size-xs) * 0.5);
-  padding-left: var(--snui-size-sm);
-  padding-top: var(--snui-size-sm);
+  padding: var(--snui-size-xs);
+  width: 100%;
 }
