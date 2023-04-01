@@ -5,4 +5,5 @@ export * from './Editable';
 export * from './FormControl';
 export * from './Menu';
 export * from './Modal';
+export * from './Popover';
 export * from './Tabs';

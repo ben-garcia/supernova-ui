@@ -7,6 +7,7 @@ export * from './form-control';
 export * from './menu';
 export * from './modal';
 export * from './notification';
+export * from './popover';
 export * from './slider';
 export * from './style';
 export * from './supernova';
