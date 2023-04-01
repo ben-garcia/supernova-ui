@@ -9,7 +9,7 @@ import { ButtonProps } from '@atoms/Button/types';
 interface MenuButtonProps extends ButtonProps {}
 
 /**
- * The trigger for the Menu.
+ * The trigger for the Menu component.
  */
 const MenuButton: FC<MenuButtonProps> = props => {
   const { children, className, ...rest } = props;

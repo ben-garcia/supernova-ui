@@ -2,8 +2,8 @@ import type {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   InputHTMLAttributes,
+  MutableRefObject,
   ReactNode,
-  RefObject,
   TextareaHTMLAttributes,
 } from 'react';
 
@@ -55,7 +55,7 @@ export interface DialogLikeProps {
   /**
    * The reference of element to receive focus when the Dialog closes
    */
-  finalFocusRef?: RefObject<HTMLElement>;
+  finalFocusRef?: MutableRefObject<HTMLElement | null>;
   /**
    * Flag that determines when to open the Dialog
    */

@@ -6,7 +6,8 @@ import { createClasses, isString } from '@utils';
 
 import { ModalProps } from '@molecules/Modal/Modal';
 
-/** Hooks that returns the Modal props
+/**
+ * React hook that returns the Modal props.
  */
 const useModalProvider = (props: ModalProps) => {
   const {
@@ -87,14 +88,14 @@ const useModalProvider = (props: ModalProps) => {
 };
 
 /**
- * Hooks that returns all modal props
+ * Hooks that returns Modal context.
  */
 const useModal = () => {
   const context = useContext(ModalContext);
 
   if (!context.id) {
     throw new Error(
-      'useModal: context is undefined, did you remember to wrap your component in a <Modal />'
+      'useModal: context is undefined, did you remember to wrap your component in a <Modal>'
     );
   }
   return context;

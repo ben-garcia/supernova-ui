@@ -4,12 +4,12 @@ import React, { useRef, useState } from 'react';
 import { Box, Button, TextInput } from '@atoms';
 import {
   Modal,
+  ModalBody,
   ModalButton,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalBody,
   ModalOverlay,
 } from '@molecules';
 

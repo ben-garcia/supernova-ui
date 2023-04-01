@@ -26,7 +26,7 @@ export interface ModalContextProps {
   trapFocus?: boolean;
 }
 
-export interface MenuProviderProps {
+export interface ModalProviderProps {
   children: ReactNode;
   value: ModalContextProps;
 }

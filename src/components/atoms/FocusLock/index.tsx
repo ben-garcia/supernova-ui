@@ -6,7 +6,7 @@ import { FocusLockProps } from './types';
 
 /**
  * Component that locks the focus to its children.
- * used for Modal, Drawer, Popover components
+ * used for AlertDialog, Drawer, Modal, and Popover components
  *
  * NOTE: FOR INTERNAL USE
  */
@@ -30,7 +30,9 @@ const FocusLock: FC<FocusLockProps> = props => {
   const triggerElement = useRef<Element | null>(null);
 
   const triggerCloseAnimation = useCallback((isForEsc: boolean) => {
-    enterExitMode();
+    if (isFunction(enterExitMode)) {
+      enterExitMode!();
+    }
 
     if (
       (!isFunction(onEscPress) &&
@@ -51,7 +53,10 @@ const FocusLock: FC<FocusLockProps> = props => {
     }
 
     setTimeout(() => {
-      leaveExitMode();
+      if (isFunction(leaveExitMode)) {
+        leaveExitMode!();
+      }
+
       if (isForEsc) {
         // invoke the 'onEscPress' prop passed in
         if (isFunction(onEscPress) && closeOnEsc) {

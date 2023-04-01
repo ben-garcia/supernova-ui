@@ -32,7 +32,7 @@ export interface AlertDialogContextProps {
   trapFocus?: boolean;
 }
 
-export interface MenuProviderProps {
+export interface AlertDialogProviderProps {
   children: ReactNode;
   value: AlertDialogContextProps;
 }

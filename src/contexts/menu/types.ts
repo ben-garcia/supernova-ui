@@ -1,8 +1,8 @@
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, MutableRefObject, RefObject } from 'react';
 
-import { ButtonProps } from '../../components/atoms/Button/types';
-import { MenuListProps } from '../../components/molecules/Menu/MenuList';
-import { MenuItemProps } from '../../components/molecules/Menu/MenuItem';
+import { ButtonProps } from '@atoms/Button/types';
+import { MenuListProps } from '@molecules/Menu/MenuList';
+import { MenuItemProps } from '@molecules/Menu/MenuItem';
 
 export interface Menu {
   closeOnEsc?: boolean;
@@ -20,9 +20,9 @@ export interface Menu {
     ref: RefObject<HTMLDivElement>
   ) => void;
   isOpen: boolean;
-  menuButtonRef: RefObject<HTMLButtonElement> | null;
+  menuButtonRef: MutableRefObject<HTMLButtonElement | null> | null;
   menuId: string;
-  menuListRef: RefObject<HTMLDivElement> | null;
+  menuListRef: MutableRefObject<HTMLDivElement | null> | null;
   onClose: () => void;
   setFocusedIndex: (newIndex: number) => void;
 }

@@ -77,10 +77,10 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   const toolRef = useRef<any>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
   const addClasses = useCreateClassString('snui snui-menu', {
+    'snui-menu--show': isOpen,
     [`${className}`]: isString(className),
     [`${pseudoClassName}`]: isString(pseudoClassName),
     [`${stylesClassName}`]: isString(stylesClassName),
-    'snui-menu--show': isOpen,
   });
   const placementValue = useMemo(() => {
     if (placement === 'end') {
