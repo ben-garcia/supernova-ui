@@ -35,8 +35,10 @@ const parameters = {
       'closeOnBlur',
       'closeOnEsc',
       'placement',
+      'shouldReturnFocusOnClose',
       'spacing',
       'withArrow',
+      'trapFocus',
     ],
   },
 };
@@ -57,7 +59,9 @@ export default {
       defaultValue: 'bottom',
       options: placementOptions,
     },
+    shouldReturnFocusOnClose: { control: 'boolean', defaultValue: true },
     spacing: { control: { type: 'number' }, defaultValue: 5 },
+    trapFocus: { control: 'boolean', defaultValue: false },
     withArrow: { control: 'boolean', defaultValue: true },
   },
   component: Popover,
@@ -65,7 +69,13 @@ export default {
 } as Meta;
 
 const BasicTemplate: Story<PopoverProps> = args => {
-  const { closeOnBlur, closeOnEsc, ...rest } = args;
+  const {
+    closeOnBlur,
+    closeOnEsc,
+    shouldReturnFocusOnClose,
+    trapFocus,
+    ...rest
+  } = args;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onToggle = () => setIsOpen(prev => !prev);
@@ -84,6 +94,8 @@ const BasicTemplate: Story<PopoverProps> = args => {
         onClose={onClose}
         isOpen={isOpen}
         onToggle={onToggle}
+        shouldReturnFocusOnClose={shouldReturnFocusOnClose}
+        trapFocus={trapFocus}
       >
         <PopoverTrigger>
           <Button>Trigger Popover</Button>
@@ -103,7 +115,13 @@ Basic.args = {};
 Basic.parameters = parameters;
 
 const FinalFocusRefTemplate: Story<PopoverProps> = args => {
-  const { closeOnBlur, closeOnEsc, ...rest } = args;
+  const {
+    closeOnBlur,
+    closeOnEsc,
+    shouldReturnFocusOnClose,
+    trapFocus,
+    ...rest
+  } = args;
   const [isOpen, setIsOpen] = useState(false);
   const initialFocusRef = useRef<HTMLInputElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
@@ -131,7 +149,8 @@ const FinalFocusRefTemplate: Story<PopoverProps> = args => {
         isOpen={isOpen}
         onClose={onClose}
         onToggle={onToggle}
-        trapFocus
+        shouldReturnFocusOnClose={shouldReturnFocusOnClose}
+        trapFocus={trapFocus}
       >
         <PopoverTrigger>
           <Button>Open</Button>
@@ -166,7 +185,7 @@ FinalFocusRef.args = {};
 FinalFocusRef.parameters = parameters;
 
 const ReferenceTemplate: Story<PopoverProps> = args => {
-  const { closeOnBlur, closeOnEsc, ...rest } = args;
+  const { closeOnBlur, closeOnEsc, trapFocus, ...rest } = args;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onToggle = () => setIsOpen(prev => !prev);
@@ -189,6 +208,7 @@ const ReferenceTemplate: Story<PopoverProps> = args => {
         onClose={onClose}
         isOpen={isOpen}
         shouldReturnFocusOnClose={false}
+        trapFocus={trapFocus}
       >
         <PopoverTrigger>
           <Button>Reference</Button>
@@ -205,4 +225,16 @@ const ReferenceTemplate: Story<PopoverProps> = args => {
 
 export const Reference = ReferenceTemplate.bind({});
 Reference.args = {};
-Reference.parameters = parameters;
+Reference.parameters = {
+  controls: {
+    include: [
+      'arrowSize',
+      'closeOnBlur',
+      'closeOnEsc',
+      'placement',
+      'spacing',
+      'withArrow',
+      'trapFocus',
+    ],
+  },
+};

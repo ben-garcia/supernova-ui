@@ -86,7 +86,6 @@ const PopoverContent: FC<PropoverContentProps> = props => {
     arrowRef,
     arrColor
   );
-  const hasBlurredOutOfContent = useRef(false);
   // flag used to set that the popover has been opened
   // otherwise, finalFocusRef get focus on initial render.
   const hasOpened = useRef(false);
@@ -128,11 +127,16 @@ const PopoverContent: FC<PropoverContentProps> = props => {
 
   // give focus to finalFocusRef
   useEffect(() => {
-    if (!isOpen && finalFocusRef?.current && hasOpened.current) {
+    if (
+      !isOpen &&
+      finalFocusRef?.current &&
+      hasOpened.current &&
+      shouldReturnFocusOnClose
+    ) {
       hasOpened.current = false;
       finalFocusRef.current.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, shouldReturnFocusOnClose]);
   // handles logic to close popover when clicking
   // outside the PopoverContent component.
   useEffect(() => {
@@ -141,6 +145,9 @@ const PopoverContent: FC<PropoverContentProps> = props => {
 
       // close Popover when user clicks outside the content element
       if (target?.parentElement?.id !== popoverId && closeOnBlur) {
+        if (isFunction(onBlur)) {
+          onBlur!();
+        }
         onClose();
       }
     };
@@ -183,13 +190,6 @@ const PopoverContent: FC<PropoverContentProps> = props => {
 
   useEffect(() => {
     if (isOpen) {
-      // when there is at least one focusable item inside the modal and
-      // initialFocusRef is not defined,
-      // focus the first item
-      if (focusableItems.current.length > 0 && !initialFocusRef) {
-        focusableItems.current[0].focus();
-      }
-
       // set the focus to the user defined element
       if (initialFocusRef && initialFocusRef.current) {
         // make sure that initialFocusRef is not disabled
@@ -208,10 +208,6 @@ const PopoverContent: FC<PropoverContentProps> = props => {
               }, 15);
             }
           });
-        } else {
-          // when the initialFocusRef prop is set to a disabled element
-          // focus should go to the first focusable element
-          focusableItems.current[0].focus();
         }
       }
     }
@@ -235,8 +231,6 @@ const PopoverContent: FC<PropoverContentProps> = props => {
         if (isFunction(onEscPress)) {
           onEscPress!();
         }
-        // reset value
-        hasBlurredOutOfContent.current = false;
         onClose();
         return;
       }
@@ -250,8 +244,6 @@ const PopoverContent: FC<PropoverContentProps> = props => {
         if (isFunction(onBlur)) {
           onBlur!();
         }
-        // reset value
-        hasBlurredOutOfContent.current = false;
         onClose();
       }
 
@@ -275,23 +267,29 @@ const PopoverContent: FC<PropoverContentProps> = props => {
           e.preventDefault();
           lastItem.focus();
         }
+      } else if (!trapFocus && key === 'Tab') {
+        // close popover when on the last focusable item and Tab is pressed.
+        if (!shiftKey && document.activeElement === lastItem && closeOnBlur) {
+          e.preventDefault();
+          if (isFunction(onBlur)) {
+            onBlur!();
+          }
+          onClose();
+          return;
+        }
+
+        // close popover when on the first focusable item and Shift+Tab pressed.
+        if (shiftKey && document.activeElement === firstItem && closeOnBlur) {
+          e.preventDefault();
+          if (isFunction(onBlur)) {
+            onBlur!();
+          }
+          onClose();
+        }
       }
     },
-    [closeOnBlur, closeOnEsc]
+    [closeOnBlur, closeOnEsc, trapFocus]
   );
-
-  const handleOnBlur = useCallback(() => {
-    if (!hasBlurredOutOfContent.current) {
-      hasBlurredOutOfContent.current = true;
-    } else if (hasBlurredOutOfContent.current && closeOnBlur && !trapFocus) {
-      if (isFunction(onBlur)) {
-        onBlur!();
-      }
-      // reset value
-      hasBlurredOutOfContent.current = false;
-      onClose();
-    }
-  }, [closeOnBlur]);
 
   return (
     <div className="snui snui-floating" {...addElementStyles()}>
@@ -299,7 +297,7 @@ const PopoverContent: FC<PropoverContentProps> = props => {
       <div
         data-focus-lock={trapFocus}
         ref={rootNode}
-        onKeyDown={isOpen ? handleKeyPress : undefined}
+        onKeyDown={handleKeyPress}
       >
         {/* eslint-disable-next-line */}
         <section
@@ -309,9 +307,13 @@ const PopoverContent: FC<PropoverContentProps> = props => {
           aria-labelledby={`${popoverId}__header`}
           aria-describedby={`${popoverId}__body`}
           id={popoverId}
-          onBlur={isOpen ? handleOnBlur : undefined}
           ref={popoverContentRef}
           role="dialog"
+          style={{
+            opacity: isOpen ? 1 : 0,
+            visibility: isOpen ? 'visible' : 'hidden',
+            transform: isOpen ? 'scale(1)' : 'scale(0.85)',
+          }}
           tabIndex={-1}
         >
           {children}
