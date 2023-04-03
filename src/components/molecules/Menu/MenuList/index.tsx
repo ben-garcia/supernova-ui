@@ -152,6 +152,10 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     }
   }, [isOpen, arrowSize, placementValue, spacing, withArrow]);
 
+  useEffect(() => {
+    calcPosition();
+  }, []);
+
   // calculate position on viewport resize.
   useResize(calcPosition);
 

@@ -467,7 +467,10 @@ export const useValidateProps = (props: any) => {
 
   Object.keys(props).forEach((key, index) => {
     if (key in validCSSProps) {
-      cssProps[key] = values[index];
+      // check or a valid value.
+      if (values[index]) {
+        cssProps[key] = values[index];
+      }
     } else if (key in validPseudoProps) {
       pseudoClassProps[key] = values[index];
     } else {
