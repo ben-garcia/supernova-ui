@@ -19,7 +19,15 @@ import './styles.scss';
  * that provides context to its children.
  */
 const FormControl: FC<FormControlProps> = props => {
-  const { children, className, tag = 'div', ...rest } = props;
+  const {
+    children,
+    className,
+    isInvalid = false,
+    isDisabled = false,
+    isRequired = false,
+    tag = 'div',
+    ...rest
+  } = props;
   const {
     remainingProps,
     validatedCSSProps,
@@ -39,7 +47,10 @@ const FormControl: FC<FormControlProps> = props => {
   );
   const id = useUniqueId('snui-form-control');
   const context = useFormControlProvider(props);
-  const contextValue = useMemo(() => ({ ...context, id }), [context]);
+  const contextValue = useMemo(
+    () => ({ ...context, id, isDisabled, isInvalid, isRequired }),
+    [context]
+  );
 
   return (
     <FormControlProvider value={contextValue as any}>
