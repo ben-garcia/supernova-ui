@@ -13,6 +13,7 @@ import {
   useClassStyles,
   useMenu,
   usePseudoClasses,
+  useResize,
   useValidateProps,
 } from '@hooks';
 import { forwardRef, isString } from '@utils';
@@ -150,6 +151,9 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
       calcPosition();
     }
   }, [isOpen, arrowSize, placementValue, spacing, withArrow]);
+
+  // calculate position on viewport resize.
+  useResize(calcPosition);
 
   // set a reference to the list of button menu items
   useEffect(() => {

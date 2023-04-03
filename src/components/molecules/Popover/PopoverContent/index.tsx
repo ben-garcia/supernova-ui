@@ -6,6 +6,7 @@ import {
   useCreateClassString,
   usePopover,
   usePseudoClasses,
+  useResize,
   useValidateProps,
 } from '@hooks';
 import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
@@ -99,9 +100,13 @@ const PopoverContent: FC<PropoverContentProps> = props => {
     }
   }, [isOpen, initialFocusRef?.current, popoverContentRef.current]);
 
+  // render correctly on mount.
   useEffect(() => {
     calcPosition();
   }, []);
+
+  // calculate position on viewport resize.
+  useResize(calcPosition);
 
   useEffect(() => {
     if (isOpen) {

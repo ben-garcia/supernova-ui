@@ -56,6 +56,9 @@ export function useCalculatePosition(
       );
       setPos(tooltip);
       setFinalPos(finalPosition);
+      // set to false so that calling 'calcPosition' will
+      // trigger a recalculation.
+      setCalcPos(false);
     }
     return () => {
       if (calcPos) {

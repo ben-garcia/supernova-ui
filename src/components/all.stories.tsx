@@ -25,13 +25,28 @@ import { Basic as Switch } from '@atoms/Switch/stories';
 import { FloatingLabel as Textarea } from '@atoms/Textarea/stories';
 import { Basic as TextInput } from '@atoms/TextInput/stories';
 import { useNotification } from '@hooks';
-import { FormControl, FormErrorMessage, FormHelperText } from '@molecules';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Popover,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverBody,
+  PopoverHeader,
+  PopoverTrigger,
+} from '@molecules';
 import { Basic as Accordion } from '@molecules/Accordion/stories';
 import { Basic as AlertDialog } from '@molecules/AlertDialog/stories';
 import { Basic as Drawer } from '@molecules/Drawer/stories';
 import { Basic as Modal } from '@molecules/Modal/stories';
 import { WithInput as Editable } from '@molecules/Editable/stories';
-import { Basic as Menu } from '@molecules/Menu/stories';
+// import { Basic as Menu } from '@molecules/Menu/stories';
+// import { Basic as Popover } from '@molecules/Popover/stories';
 import { Basic as Tabs } from '@molecules/Tabs/stories';
 
 export default {
@@ -209,8 +224,13 @@ export const All = () => {
           </Box>
 
           <Box>
-            <Menu />
+            <MenuExample />
             <Paragraph>Menu</Paragraph>
+          </Box>
+
+          <Box>
+            <PopoverExample />
+            <Paragraph>Popover</Paragraph>
           </Box>
         </Box>
       </Box>
@@ -283,6 +303,21 @@ const FormControlExample = () => {
   );
 };
 
+const MenuExample = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <Menu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <MenuButton onClick={() => setIsOpen(true)}>Trigger Menu</MenuButton>
+      <MenuList>
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>Settings</MenuItem>
+        <MenuItem>Night Mode</MenuItem>
+        <MenuItem>Sign Out</MenuItem>
+      </MenuList>
+    </Menu>
+  );
+};
+
 const Notification = () => {
   const notification = useNotification();
 
@@ -297,5 +332,23 @@ const Notification = () => {
     <Box position="relative">
       <Button onClick={handleClick}>Trigger notification</Button>
     </Box>
+  );
+};
+
+const PopoverExample = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const onToggle = () => setIsOpen(prev => !prev);
+  return (
+    <Popover onClose={onClose} isOpen={isOpen} onToggle={onToggle}>
+      <PopoverTrigger>
+        <Button>Trigger Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>Popover Header</PopoverHeader>
+        <PopoverCloseButton />
+        <PopoverBody>This is a popover</PopoverBody>
+      </PopoverContent>
+    </Popover>
   );
 };
