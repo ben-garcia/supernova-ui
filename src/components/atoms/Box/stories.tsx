@@ -3,12 +3,14 @@ import React from 'react';
 
 import Box from '.';
 
+const tagOptions = ['article', 'div', 'footer', 'header', 'section'];
+
 export default {
   argTypes: {
     tag: {
       control: 'select',
       defaultValue: 'div',
-      options: ['article', 'div', 'section'],
+      options: tagOptions,
     },
   },
   component: Box,

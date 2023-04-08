@@ -9,7 +9,7 @@ import {
 import { createElement, isString } from '@utils';
 import { SupernovaProps } from '@types';
 
-type Tag = 'article' | 'div' | 'section';
+type Tag = 'article' | 'div' | 'footer' | 'header' | 'section';
 export interface BoxProps extends SupernovaProps {
   tag?: Tag;
 }
