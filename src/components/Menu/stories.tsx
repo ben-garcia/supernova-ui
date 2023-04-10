@@ -27,7 +27,7 @@ export default {
     withArrow: { control: 'boolean', defaultValue: false },
   },
   component: Menu,
-  title: 'Supernova UI/Molecules/Menu',
+  title: 'Supernova UI/Overlay/Menu',
 } as ComponentMeta<typeof Menu>;
 
 const parameters = {

@@ -32,7 +32,7 @@ export default {
     },
   },
   component: AlertDialog,
-  title: 'Supernova UI/Molecules/AlertDialog',
+  title: 'Supernova UI/Overlay/AlertDialog',
 } as Meta;
 
 const BasicTemplate: Story<AlertDialogProps> = args => {

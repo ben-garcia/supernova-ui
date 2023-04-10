@@ -28,7 +28,7 @@ export default {
     },
   },
   component: Text,
-  title: 'Supernova UI/Atoms/Text',
+  title: 'Supernova UI/Typography/Text',
 } as ComponentMeta<typeof Text>;
 
 const Template: ComponentStory<typeof Text> = args => <Text {...args} />;

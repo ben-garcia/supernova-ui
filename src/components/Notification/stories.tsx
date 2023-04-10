@@ -29,7 +29,7 @@ export default {
     },
     title: { control: 'text', defaultValue: 'Title' },
   },
-  title: 'Supernova UI/Molecules/Notification',
+  title: 'Supernova UI/Feedback/Notification',
 } as Meta;
 
 const parameters = {

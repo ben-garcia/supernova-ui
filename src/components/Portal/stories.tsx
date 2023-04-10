@@ -11,7 +11,7 @@ export default {
     },
   },
   component: Portal,
-  title: 'Supernova UI/Atoms/Portal',
+  title: 'Supernova UI/Other/Portal',
 } as ComponentMeta<typeof Portal>;
 
 const Template: ComponentStory<typeof Portal> = args => (

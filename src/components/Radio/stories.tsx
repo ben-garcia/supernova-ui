@@ -27,7 +27,7 @@ export default {
     },
   },
   component: Radio,
-  title: 'Supernova UI/Atoms/Radio',
+  title: 'Supernova UI/Form/Radio',
 } as ComponentMeta<typeof Radio>;
 
 const parameters = {

@@ -33,7 +33,7 @@ export default {
     },
   },
   component: Modal,
-  title: 'Supernova UI/Molecules/Modal',
+  title: 'Supernova UI/Overlay/Modal',
 } as Meta;
 
 const BasicTemplate: Story<ModalProps> = args => {

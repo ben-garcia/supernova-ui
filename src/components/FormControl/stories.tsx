@@ -25,7 +25,7 @@ export default {
     },
   },
   component: FormControl,
-  title: 'Supernova UI/Molecules/FormControl',
+  title: 'Supernova UI/Form/FormControl',
 } as ComponentMeta<typeof FormControl>;
 
 const parameters = {

@@ -20,7 +20,7 @@ export default {
     submitOnBlur: { control: 'boolean', defaultValue: true },
   },
   component: Editable,
-  title: 'Supernova UI/molecules/Editable',
+  title: 'Supernova UI/Form/Editable',
 } as ComponentMeta<typeof Editable>;
 
 const parameters = {

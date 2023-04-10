@@ -12,7 +12,7 @@ export default {
     },
   },
   component: Paragraph,
-  title: 'Supernova UI/Atoms/Paragraph',
+  title: 'Supernova UI/Typography/Paragraph',
 } as ComponentMeta<typeof Paragraph>;
 
 const Template: ComponentStory<typeof Paragraph> = args => (

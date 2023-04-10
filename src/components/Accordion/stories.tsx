@@ -15,7 +15,7 @@ export default {
     defaultIndices: { control: 'object' },
   },
   component: Accordion,
-  title: 'Supernova UI/Molecules/Accordion',
+  title: 'Supernova UI/Disclosure/Accordion',
 } as ComponentMeta<typeof Accordion>;
 
 const parameters = {

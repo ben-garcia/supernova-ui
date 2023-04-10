@@ -17,7 +17,7 @@ export default {
     },
   },
   component: Heading,
-  title: 'Supernova UI/Atoms/Heading',
+  title: 'Supernova UI/Typography/Heading',
 } as ComponentMeta<typeof Heading>;
 
 const Template: ComponentStory<typeof Heading> = args => <Heading {...args} />;

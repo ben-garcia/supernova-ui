@@ -19,7 +19,7 @@ export default {
     },
   },
   component: TextInput,
-  title: 'Supernova UI/Atoms/TextInput',
+  title: 'Supernova UI/Form/TextInput',
 } as ComponentMeta<typeof TextInput>;
 
 const label = 'Reveal your secrets here';

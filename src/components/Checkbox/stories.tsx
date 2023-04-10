@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { Checkbox } from '@components';
 import { colors } from '@utils';
-import Checkbox from '.';
 
 export default {
   argTypes: {
@@ -22,7 +22,7 @@ export default {
     },
   },
   component: Checkbox,
-  title: 'Supernova UI/Atoms/Checkbox',
+  title: 'Supernova UI/Form/Checkbox',
 } as ComponentMeta<typeof Checkbox>;
 
 const parameters = {

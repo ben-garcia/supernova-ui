@@ -16,7 +16,7 @@ export default {
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'],
     },
   },
-  title: 'Supernova UI/Atoms/Spinner',
+  title: 'Supernova UI/Feedback/Spinner',
 } as ComponentMeta<typeof Spinner>;
 
 const Template: ComponentStory<typeof Spinner> = args => <Spinner {...args} />;

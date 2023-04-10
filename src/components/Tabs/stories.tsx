@@ -33,7 +33,7 @@ export default {
     },
   },
   component: Tabs,
-  title: 'Supernova UI/Molecules/Tabs',
+  title: 'Supernova UI/Disclosure/Tabs',
 } as ComponentMeta<typeof Tabs>;
 
 const parameters = {

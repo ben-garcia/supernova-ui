@@ -38,7 +38,7 @@ export default {
     },
   },
   component: Drawer,
-  title: 'Supernova UI/Molecules/Drawer',
+  title: 'Supernova UI/Overlay/Drawer',
 } as Meta;
 
 const parameters = {

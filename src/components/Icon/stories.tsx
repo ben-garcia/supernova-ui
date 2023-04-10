@@ -40,7 +40,7 @@ export default {
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'],
     },
   },
-  title: 'Supernova UI/Atoms/Icons',
+  title: 'Supernova UI/Media and icons/Icons',
 } as ComponentMeta<any>;
 
 export const All: ComponentStory<any> = args => (

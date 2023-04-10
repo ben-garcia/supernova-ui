@@ -4,7 +4,7 @@ import React from 'react';
 import colors from '../../theme/colors';
 
 export default {
-  title: 'Supernova UI/Atoms/Colors',
+  title: 'Supernova UI/Other/Colors',
 } as ComponentMeta<typeof Colors>;
 
 const Template: ComponentStory<typeof Colors> = () => <Colors />;

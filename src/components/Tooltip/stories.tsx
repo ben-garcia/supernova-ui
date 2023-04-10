@@ -53,7 +53,7 @@ export default {
     withArrow: { control: 'boolean', defaultValue: false },
   },
   component: Tooltip,
-  title: 'Supernova UI/Atoms/Tooltip',
+  title: 'Supernova UI/Overlay/Tooltip',
 } as ComponentMeta<typeof Tooltip>;
 
 const Template: ComponentStory<typeof Tooltip> = args => (

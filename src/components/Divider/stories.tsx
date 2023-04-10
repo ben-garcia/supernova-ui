@@ -22,7 +22,7 @@ export default {
     },
   },
   component: Divider,
-  title: 'Supernova UI/Atoms/Divider',
+  title: 'Supernova UI/Data display/Divider',
 } as ComponentMeta<typeof Divider>;
 
 // parent element must have a height for

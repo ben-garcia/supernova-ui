@@ -22,7 +22,7 @@ export default {
     },
   },
   component: Switch,
-  title: 'Supernova UI/Atoms/Switch',
+  title: 'Supernova UI/Form/Switch',
 } as ComponentMeta<typeof Switch>;
 
 const parameters = {

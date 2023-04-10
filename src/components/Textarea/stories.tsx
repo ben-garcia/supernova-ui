@@ -14,7 +14,7 @@ export default {
     },
   },
   component: Textarea,
-  title: 'Supernova UI/Atoms/Textarea',
+  title: 'Supernova UI/Form/Textarea',
 } as ComponentMeta<typeof Textarea>;
 
 const parameters = {

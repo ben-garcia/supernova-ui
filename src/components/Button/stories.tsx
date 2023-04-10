@@ -1,14 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { colors } from '@utils';
-import Button from '.';
+import { Button } from '@components';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   LinkIcon,
   UserIcon,
-} from '../Icon/Icons';
+} from '@components/Icon/Icons';
+import { colors } from '@utils';
 
 export default {
   argTypes: {
@@ -40,7 +40,7 @@ export default {
     },
   },
   component: Button,
-  title: 'Supernova UI/Atoms/Button',
+  title: 'Supernova UI/Form/Button',
 } as ComponentMeta<typeof Button>;
 
 const parameters = {

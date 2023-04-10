@@ -5,7 +5,7 @@ import { Box, Overlay } from '@components';
 
 export default {
   component: Overlay,
-  title: 'Supernova UI/Atoms/Overlay',
+  title: 'Supernova UI/Other/Overlay',
 } as ComponentMeta<typeof Overlay>;
 
 const Template: ComponentStory<typeof Overlay> = args => (

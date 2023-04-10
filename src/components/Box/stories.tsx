@@ -14,7 +14,7 @@ export default {
     },
   },
   component: Box,
-  title: 'Supernova UI/Atoms/Box',
+  title: 'Supernova UI/Layout/Box',
 } as ComponentMeta<typeof Box>;
 
 const Template: ComponentStory<typeof Box> = args => <Box {...args} />;

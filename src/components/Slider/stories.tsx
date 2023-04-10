@@ -40,7 +40,7 @@ export default {
     },
   },
   component: Slider,
-  title: 'Supernova UI/Atoms/Slider',
+  title: 'Supernova UI/Form/Slider',
 } as ComponentMeta<typeof Slider>;
 
 const Template: ComponentStory<typeof Slider> = args => {

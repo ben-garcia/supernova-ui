@@ -66,7 +66,7 @@ export default {
     withArrow: { control: 'boolean', defaultValue: true },
   },
   component: Popover,
-  title: 'Supernova UI/Molecules/Popover',
+  title: 'Supernova UI/Overlay/Popover',
 } as Meta;
 
 const BasicTemplate: Story<PopoverProps> = args => {

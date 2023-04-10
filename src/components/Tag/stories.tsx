@@ -22,7 +22,7 @@ export default {
     },
   },
   component: Tag,
-  title: 'Supernova UI/Atoms/Tag',
+  title: 'Supernova UI/Data display/Tag',
 } as ComponentMeta<typeof Tag>;
 
 const Template: ComponentStory<typeof Tag> = args => <Tag {...args} />;
