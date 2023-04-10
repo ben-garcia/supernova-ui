@@ -1,10 +1,9 @@
 import { useCallback, useContext } from 'react';
 
+import { ModalProps } from '@components/Modal/Modal';
 import { ModalContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString } from '@utils';
-
-import { ModalProps } from '@molecules/Modal/Modal';
 
 /**
  * React hook that returns the Modal props.

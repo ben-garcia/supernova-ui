@@ -1,10 +1,9 @@
 import { useCallback, useContext, useRef } from 'react';
 
+import { PopoverProps } from '@components/Popover/Popover';
 import { PopoverContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString, mergeRefs } from '@utils';
-
-import { PopoverProps } from '@molecules/Popover/Popover';
 
 /**
  * React hook that returns the Popover props.

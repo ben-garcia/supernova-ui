@@ -1,8 +1,8 @@
 import { ReactNode, MutableRefObject, RefObject } from 'react';
 
-import { ButtonProps } from '@atoms/Button/types';
-import { MenuListProps } from '@molecules/Menu/MenuList';
-import { MenuItemProps } from '@molecules/Menu/MenuItem';
+import { ButtonProps } from '@components/Button/types';
+import { MenuListProps } from '@components/Menu/MenuList';
+import { MenuItemProps } from '@components/Menu/MenuItem';
 
 export interface Menu {
   closeOnEsc?: boolean;

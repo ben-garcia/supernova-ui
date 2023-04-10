@@ -1,7 +1,7 @@
 import { ReactNode, ForwardedRef } from 'react';
 
-import { FormControlProps } from '../../components/molecules/FormControl/types';
-import { FormHelperTextProps } from '../../components/molecules/FormControl/FormHelperText';
+import { FormControlProps } from '@components/FormControl/types';
+import { FormHelperTextProps } from '@components/FormControl/FormHelperText';
 
 export interface FormControl
   extends Omit<FormControlProps, 'children' | 'id' | 'tag'> {

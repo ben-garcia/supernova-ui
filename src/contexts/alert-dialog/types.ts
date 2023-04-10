@@ -1,9 +1,8 @@
 import { ReactNode, MutableRefObject } from 'react';
 
-import { AlertDialogBodyProps } from '@molecules/AlertDialog/AlertDialogBody';
-import { AlertDialogFooterProps } from '@molecules/AlertDialog/AlertDialogFooter';
-import { AlertDialogHeaderProps } from '@molecules/AlertDialog/AlertDialogHeader';
-
+import { AlertDialogBodyProps } from '@components/AlertDialog/AlertDialogBody';
+import { AlertDialogFooterProps } from '@components/AlertDialog/AlertDialogFooter';
+import { AlertDialogHeaderProps } from '@components/AlertDialog/AlertDialogHeader';
 import { DialogLikeProps } from '@types';
 
 export interface AlertDialogContextProps {

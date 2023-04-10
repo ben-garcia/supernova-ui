@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from 'react';
 
+import { TabsProps } from '@components/Tabs/types';
 import { TabsContext, TabListContext } from '../contexts/tabs';
-import { TabsProps } from '../components/molecules/Tabs/types';
 
 /**
  * Hook that returns the Tabs props for <TabsProvider>

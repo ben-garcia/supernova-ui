@@ -1,10 +1,9 @@
 import { ReactNode, MutableRefObject } from 'react';
 
-import { DrawerProps } from '@molecules/Drawer/Drawer';
-import { DrawerBodyProps } from '@molecules/Drawer/DrawerBody';
-import { DrawerFooterProps } from '@molecules/Drawer/DrawerFooter';
-import { DrawerHeaderProps } from '@molecules/Drawer/DrawerHeader';
-
+import { DrawerProps } from '@components/Drawer/Drawer';
+import { DrawerBodyProps } from '@components/Drawer/DrawerBody';
+import { DrawerFooterProps } from '@components/Drawer/DrawerFooter';
+import { DrawerHeaderProps } from '@components/Drawer/DrawerHeader';
 import { DialogLikeProps } from '@types';
 
 export interface DrawerContextProps {

@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
+import { AccordionProps } from '@components/Accordion/types';
 import { AccordionContext, AccordionItemContext } from '@contexts';
-import { AccordionProps } from '@molecules/Accordion/types';
 
 /**
  * Hook that returns the Accordion props

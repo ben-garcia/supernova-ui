@@ -1,9 +1,8 @@
 import { useCallback, useContext, useState } from 'react';
 
+import EditableProps from '@components/Editable/types';
 import { EditableContext } from '@contexts';
 import { isFunction } from '@utils';
-
-import EditableProps from '@molecules/Editable/types';
 
 /**
  * Hook that returns the EditableProvider props

@@ -25,14 +25,12 @@
     "outDir": "dist",
     "paths": {
       "@types": ["types"],
-      "@atoms": ["components/atoms"],
-      "@atoms/*": ["components/atoms/*"],
-      "@molecules": ["components/molecules"],
-      "@molecules/*": ["components/molecules/*"],
+      "@components": ["components"],
+      "@components/*": ["components/*"],
       "@hooks": ["hooks"],
       "@contexts": ["contexts"],
       "@utils": ["utils"],
-      "@testUtils": ["test-utils"]
+      "@test-utils": ["test-utils"]
     },
     "removeComments": false,
     "resolveJsonModule": true,

@@ -1,5 +1,5 @@
 import { ReactNode, RefObject } from 'react';
-import EditableProps from '../../components/molecules/Editable/types';
+import EditableProps from '@components/Editable/types';
 
 export type Editable = Omit<EditableProps, 'defaultValue'> & {
   customEditableRef: RefObject<HTMLButtonElement | null>;

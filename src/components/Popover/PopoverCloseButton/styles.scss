@@ -1,0 +1,17 @@
+button.snui-popover__close-button {
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  right: var(--snui-space-xs);
+  top: var(--snui-space-sm);
+  padding-inline-end: unset;
+  padding-inline-start: unset;
+  padding: 0.1rem;
+  min-width: 15px;
+  height: 15px;
+
+  &.snui-button:hover {
+    background: var(--snui-color-gray100);
+    box-shadow: none;
+  }
+}

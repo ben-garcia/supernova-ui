@@ -1,9 +1,8 @@
 import React, { useCallback, useContext, useRef } from 'react';
 
+import { MenuProps } from '@components/Menu/types';
 import { MenuContext, MenuListContext } from '@contexts';
 import { isFunction } from '@utils';
-
-import { MenuProps } from '@molecules/Menu/types';
 /**
  * credit https://github.com/chakra-ui/chakra-ui/blob/53d0d0cfec7b4404fd2bc123991352f81bd39a82/packages/react-utils/src/refs.ts#L34
  */

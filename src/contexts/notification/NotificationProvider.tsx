@@ -1,8 +1,7 @@
 import React, { ReactNode, createContext, useMemo, useReducer } from 'react';
 
-import { Portal } from '@atoms/index';
-import Notification from '@molecules/Notification';
-
+import { Portal } from '@components';
+import Notification from '@components/Notification';
 import reducer from './reducer';
 import {
   Notification as NotificationType,

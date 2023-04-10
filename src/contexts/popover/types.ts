@@ -1,9 +1,9 @@
 import { ReactNode, MutableRefObject, RefObject } from 'react';
 
-import { ButtonProps } from '@atoms/Button/types';
-import { PopoverBodyProps } from '@molecules/Popover/PopoverBody';
-import { PopoverFooterProps } from '@molecules/Popover/PopoverFooter';
-import { PopoverHeaderProps } from '@molecules/Popover/PopoverHeader';
+import { ButtonProps } from '@components/Button/types';
+import { PopoverBodyProps } from '@components/Popover/PopoverBody';
+import { PopoverFooterProps } from '@components/Popover/PopoverFooter';
+import { PopoverHeaderProps } from '@components/Popover/PopoverHeader';
 
 export interface PopoverContextProps {
   closeOnBlur?: boolean;

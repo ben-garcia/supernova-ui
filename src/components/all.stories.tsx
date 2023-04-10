@@ -2,52 +2,48 @@
 import React from 'react';
 
 import {
-  Tag,
   Box,
   Button,
   Checkbox,
   Divider,
-  Heading,
-  Paragraph,
-  Portal,
-  Radio,
-  RadioGroup,
-  Text,
-  Tooltip,
-} from '@atoms';
-import {
-  Basic as RadioExample,
-  WithRadioGroup as RadioGroupExample,
-} from '@atoms/Radio/stories';
-import { Basic as Slider } from '@atoms/Slider/stories';
-import { Basic as Spinner } from '@atoms/Spinner/stories';
-import { Basic as Switch } from '@atoms/Switch/stories';
-import { FloatingLabel as Textarea } from '@atoms/Textarea/stories';
-import { Basic as TextInput } from '@atoms/TextInput/stories';
-import { useNotification } from '@hooks';
-import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
+  Heading,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
+  Paragraph,
   Popover,
   PopoverCloseButton,
   PopoverContent,
   PopoverBody,
   PopoverHeader,
   PopoverTrigger,
-} from '@molecules';
-import { Basic as Accordion } from '@molecules/Accordion/stories';
-import { Basic as AlertDialog } from '@molecules/AlertDialog/stories';
-import { Basic as Drawer } from '@molecules/Drawer/stories';
-import { Basic as Modal } from '@molecules/Modal/stories';
-import { WithInput as Editable } from '@molecules/Editable/stories';
-// import { Basic as Menu } from '@molecules/Menu/stories';
-// import { Basic as Popover } from '@molecules/Popover/stories';
-import { Basic as Tabs } from '@molecules/Tabs/stories';
+  Portal,
+  Radio,
+  RadioGroup,
+  Tag,
+  Text,
+  Tooltip,
+} from '@components';
+import {
+  Basic as RadioExample,
+  WithRadioGroup as RadioGroupExample,
+} from '@components/Radio/stories';
+import { Basic as Slider } from '@components/Slider/stories';
+import { Basic as Spinner } from '@components/Spinner/stories';
+import { Basic as Switch } from '@components/Switch/stories';
+import { FloatingLabel as Textarea } from '@components/Textarea/stories';
+import { Basic as TextInput } from '@components/TextInput/stories';
+import { Basic as Accordion } from '@components/Accordion/stories';
+import { Basic as AlertDialog } from '@components/AlertDialog/stories';
+import { Basic as Drawer } from '@components/Drawer/stories';
+import { Basic as Modal } from '@components/Modal/stories';
+import { WithInput as Editable } from '@components/Editable/stories';
+import { Basic as Tabs } from '@components/Tabs/stories';
+import { useNotification } from '@hooks';
 
 export default {
   title: 'Supernova UI/All',

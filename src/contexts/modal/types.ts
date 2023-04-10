@@ -1,9 +1,8 @@
 import { ReactNode, MutableRefObject } from 'react';
 
-import { ModalBodyProps } from '@molecules/Modal/ModalBody';
-import { ModalFooterProps } from '@molecules/Modal/ModalFooter';
-import { ModalHeaderProps } from '@molecules/Modal/ModalHeader';
-
+import { ModalBodyProps } from '@components/Modal/ModalBody';
+import { ModalFooterProps } from '@components/Modal/ModalFooter';
+import { ModalHeaderProps } from '@components/Modal/ModalHeader';
 import { DialogLikeProps } from '@types';
 
 export interface ModalContextProps {
