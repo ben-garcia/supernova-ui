@@ -2,16 +2,12 @@ import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import {
   useCalculatePosition,
-  useClassStyles,
-  useCreateClassString,
+  useCSSAndPseudoClassProps,
   usePopover,
-  usePseudoClasses,
   useResize,
-  useValidateProps,
 } from '@hooks';
 import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
 import { isFunction, isString } from '@utils';
-
 import './styles.scss';
 
 interface PropoverContentProps
@@ -27,19 +23,11 @@ const PopoverContent: FC<PropoverContentProps> = props => {
     background,
     backgroundColor,
     children,
-    className,
     placement = 'bottom',
     spacing = 5,
     withArrow = true,
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps({ ...rest, background, backgroundColor });
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     closeOnBlur,
     closeOnEsc,
@@ -57,12 +45,13 @@ const PopoverContent: FC<PropoverContentProps> = props => {
   const toolRef = useRef<any>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
   const popoverContentRef = useRef<HTMLDivElement | null>(null);
-  const addClasses = useCreateClassString('snui snui-popover', {
-    'snui-popover--show': isOpen,
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    { ...rest, background, backgroundColor },
+    'snui snui-popover',
+    {
+      'snui-popover--show': isOpen,
+    }
+  );
   const arrColor: any = useMemo(() => {
     if (isString(backgroundColor)) {
       return backgroundColor;
@@ -306,8 +295,7 @@ const PopoverContent: FC<PropoverContentProps> = props => {
       >
         {/* eslint-disable-next-line */}
         <section
-          {...remainingProps}
-          {...addClasses()}
+          {...addCSSClassesAndProps()}
           {...calculateTransformOrigin()}
           aria-labelledby={`${popoverId}__header`}
           aria-describedby={`${popoverId}__body`}

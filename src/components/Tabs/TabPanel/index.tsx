@@ -1,14 +1,6 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useTabs,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, useTabs } from '@hooks';
 import { SupernovaProps } from '@types';
 
 interface TabPanelProps extends SupernovaProps {}
@@ -17,19 +9,11 @@ interface TabPanelProps extends SupernovaProps {}
  * Wrapper that holds the content associated with a Tab.
  */
 const TabPanel: FC<TabPanelProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-tabs__tab-panel', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const { children, ...rest } = props;
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-tabs__tab-panel'
+  );
   const { activeIndex, tabsId } = useTabs();
   const tabPanelRef = useRef<HTMLDivElement | null>(null);
   const [isActive, setIsActive] = useState(false);
@@ -76,8 +60,7 @@ const TabPanel: FC<TabPanelProps> = props => {
 
   return (
     <div
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       aria-describedby={
         tabPanelId
           ? `${tabsId}__tab-${tabPanelId[tabPanelId.length - 1]}`

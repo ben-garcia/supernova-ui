@@ -1,13 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps } from '@hooks';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -17,20 +10,12 @@ interface TabPanelListProps extends SupernovaProps {}
  * The wrapper for all TabPanel components
  */
 const TabPanelList: FC<TabPanelListProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
+  const { children, ...rest } = props;
   const tabPanelListRef = useRef<HTMLDivElement | null>(null);
-  const addClasses = useCreateClassString('snui snui-tabs__tab-panel-list', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-tabs__tab-panel-list'
+  );
 
   useEffect(() => {
     let observer: MutationObserver;
@@ -62,7 +47,7 @@ const TabPanelList: FC<TabPanelListProps> = props => {
   }, [tabPanelListRef?.current]);
 
   return (
-    <div {...remainingProps} {...addClasses()} ref={tabPanelListRef}>
+    <div {...addCSSClassesAndProps()} ref={tabPanelListRef}>
       {children}
     </div>
   );

@@ -12,8 +12,8 @@ const PopoverCloseButton: FC<Parameters<typeof Button>[0]> = props => {
 
   return (
     <Button
-      {...props}
       aria-label="Close the Popover"
+      {...props}
       className="snui-popover__close-button"
       onClick={onClose}
       variant="outline"

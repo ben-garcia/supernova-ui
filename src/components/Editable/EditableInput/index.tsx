@@ -1,14 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useEditable,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useEditable } from '@hooks';
 import { isFunction, isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -18,19 +11,10 @@ interface EditableInputProps extends SupernovaProps<'input'> {}
  * The component used to edit the previewed text by an input.
  */
 const EditableInput: FC<EditableInputProps> = props => {
-  const { className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-editable__input', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    props,
+    'snui snui-editable__input'
+  );
   const {
     exitEditMode,
     isCustomEditable,
@@ -90,8 +74,7 @@ const EditableInput: FC<EditableInputProps> = props => {
 
   return (
     <input
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       aria-disabled={isDisabled}
       disabled={isDisabled}
       hidden={!isEditing || isDisabled}

@@ -10,24 +10,20 @@ import React, {
 import { Portal } from '@components';
 import {
   useCalculatePosition,
-  useClassStyles,
-  useCreateClassString,
+  useCSSAndPseudoClassProps,
   useInlineStyles,
   useMountTransition,
   useTheme,
   useUniqueId,
-  useValidateProps,
 } from '@hooks';
 import { isString } from '@utils';
 import { TooltipProps } from './types';
-
 import './styles.scss';
 
 const Tooltip: FC<TooltipProps> = props => {
   const {
     arrowSize = 10,
     children,
-    className,
     closeDelay = 0,
     colorVariant,
     id,
@@ -41,21 +37,17 @@ const Tooltip: FC<TooltipProps> = props => {
     backgroundColor,
     ...rest
   } = props;
-  const { remainingProps, validatedCSSProps } = useValidateProps({
-    ...rest,
-    background,
-    backgroundColor,
-  });
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const [show, setShow] = useState(false);
   const hasTransitionedIn = useMountTransition(show, 200);
-  const addClasses = useCreateClassString('snui snui-tooltip', {
-    [`${className}`]: isString(className),
-    [`${stylesClassName}`]: isString(stylesClassName),
-    'snui-tooltip--show': show,
-    'snui-tooltip--hide': !show,
-    visible: hasTransitionedIn,
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    { ...rest, background, backgroundColor },
+    'snui snui-tooltip',
+    {
+      'snui-tooltip--show': show,
+      'snui-tooltip--hide': !show,
+      visible: hasTransitionedIn,
+    }
+  );
   const createInlineStyles = useInlineStyles(colorVariant);
   const triggerRef = useRef<any>(null);
   const toolRef = React.useRef<any>(null);
@@ -144,8 +136,7 @@ const Tooltip: FC<TooltipProps> = props => {
       <Portal isMounted={hasTransitionedIn || show}>
         <div className="snui snui-floating" {...addElementStyles()}>
           <div
-            {...remainingProps}
-            {...addClasses()}
+            {...addCSSClassesAndProps()}
             style={{
               ...createInlineStyles().style,
               ...calculateTransformOrigin().style,

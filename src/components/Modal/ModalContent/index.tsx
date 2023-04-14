@@ -1,14 +1,7 @@
 import React, { FC, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
-import {
-  useClassStyles,
-  useCreateClassString,
-  useModal,
-  useScrollLock,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useModal, useScrollLock } from '@hooks';
 import { SupernovaProps } from '@types';
 import { isString } from '@utils';
 import './styles.scss';
@@ -19,7 +12,7 @@ type ModalContentProps = Omit<SupernovaProps, 'id'>;
  * The container for Modal related components.
  */
 const ModalContent: FC<ModalContentProps> = props => {
-  const { children, className, ...rest } = props;
+  const { children, ...rest } = props;
   const {
     closeOnEsc,
     closeOnOverlayClick,
@@ -35,20 +28,14 @@ const ModalContent: FC<ModalContentProps> = props => {
     size,
     trapFocus,
   } = useModal();
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-modal', {
-    [`${className}`]: isString(className),
-    'snui-modal--exiting': isExiting as boolean,
-    [`snui-modal--${size}`]: isString(size),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-modal',
+    {
+      'snui-modal--exiting': isExiting as boolean,
+      [`snui-modal--${size}`]: isString(size),
+    }
+  );
   const { lock, unlock } = useScrollLock();
 
   useEffect(() => {
@@ -76,8 +63,7 @@ const ModalContent: FC<ModalContentProps> = props => {
                 for rendering correctly. */}
       <div className="snui snui-modal-container">
         <section
-          {...remainingProps}
-          {...addClasses()}
+          {...addCSSClassesAndProps()}
           aria-labelledby={`${modalId}__header`}
           aria-describedby={`${modalId}__body`}
           aria-modal="true"

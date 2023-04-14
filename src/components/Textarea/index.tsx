@@ -6,14 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useFormControl,
-  usePseudoClasses,
-  useUniqueId,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useFormControl, useUniqueId } from '@hooks';
 import {
   createClasses,
   forwardRef,
@@ -21,7 +14,6 @@ import {
   isString,
   mergeRefs,
 } from '@utils';
-
 import { TextareaProps } from './types';
 import './styles.scss';
 
@@ -31,7 +23,6 @@ import './styles.scss';
 const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
   (props, ref) => {
     const {
-      className,
       isAutoResize = true,
       isDisabled = false,
       label,
@@ -40,13 +31,6 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
       variant = 'outline',
       ...rest
     } = props;
-    const {
-      remainingProps,
-      validatedCSSProps,
-      validatedPseudoClassProps,
-    } = useValidateProps(rest);
-    const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-    const stylesClassName = useClassStyles(validatedCSSProps);
     const {
       hasHelpText,
       hasFeedbackText,
@@ -65,15 +49,16 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
     const labelClasses = createClasses('snui-textarea-label', {
       'snui-disabled': isDisabled,
     });
-    const addTextareaClasses = useCreateClassString('snui snui-textarea', {
-      [`${className}`]: isString(className),
-      'snui-disabled': isDisabled,
-      [`snui-textarea--${variant}`]:
-        isString(variant) && !props.backgroundColor,
-      'snui-textarea--auto-resize': isAutoResize,
-      [`${pseudoClassName}`]: isString(pseudoClassName),
-      [`${stylesClassName}`]: isString(stylesClassName),
-    });
+    const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+      rest,
+      'snui snui-textarea',
+      {
+        'snui-disabled': isDisabled,
+        [`snui-textarea--${variant}`]:
+          isString(variant) && !props.backgroundColor,
+        'snui-textarea--auto-resize': isAutoResize,
+      }
+    );
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const handleKeyUp = useCallback((e: KeyboardEvent<HTMLTextAreaElement>) => {
       if (textareaRef?.current) {
@@ -99,8 +84,7 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
     return (
       <div className="snui-textarea-wrapper">
         <textarea
-          {...remainingProps}
-          {...addTextareaClasses()}
+          {...addCSSClassesAndProps()}
           aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
           aria-disabled={isDisabled || formControlIsDisabled}
           aria-invalid={isInvalid ?? undefined}

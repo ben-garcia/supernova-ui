@@ -4,14 +4,9 @@ import { AccordionItemProvider } from '@contexts';
 import {
   useAccordionItemProvider,
   useAccordion,
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
+  useCSSAndPseudoClassProps,
   useUniqueIds,
-  useValidateProps,
 } from '@hooks';
-import { isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 
 interface AccordionItemProps extends SupernovaProps {}
@@ -20,19 +15,11 @@ interface AccordionItemProps extends SupernovaProps {}
  * A single accordion that provides context to AccordionButton and AccordionPanel.
  */
 const AccordionItem: FC<AccordionItemProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-accordion__item', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const { children, ...rest } = props;
+  const addCSSClasses = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-accordion__item'
+  );
   const context = useAccordionItemProvider();
   const { getAccordionItemProps } = useAccordionItemProvider();
   const { accordionId } = useAccordion();
@@ -59,11 +46,7 @@ const AccordionItem: FC<AccordionItemProps> = props => {
 
   return (
     <AccordionItemProvider value={contextValue}>
-      <div
-        {...remainingProps}
-        {...addClasses()}
-        {...getAccordionItemProps(remainingProps)}
-      >
+      <div {...addCSSClasses()} {...getAccordionItemProps()}>
         {children}
       </div>
     </AccordionItemProvider>

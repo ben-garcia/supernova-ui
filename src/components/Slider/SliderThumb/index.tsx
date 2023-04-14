@@ -1,26 +1,11 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useSlider,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
 import { decreaseThumbFromValue, isString } from '@utils';
-
 import { SliderThumbProps } from './types';
 import './styles.scss';
 
 const SliderThumb: FC<SliderThumbProps> = props => {
-  const { className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     ariaDescribedBy,
     ariaLabel,
@@ -37,13 +22,14 @@ const SliderThumb: FC<SliderThumbProps> = props => {
   } = useSlider();
   const thumbRef = useRef<HTMLDivElement | null>(null);
   const railRef = useRef<HTMLElement | null>(null);
-  const addClasses = useCreateClassString('snui snui-slider__thumb', {
-    [`${className}`]: isString(className),
-    [`snui-slider__thumb--${size}`]: isString(size),
-    [`snui-slider__thumb--${orientation}`]: isString(orientation),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    props,
+    'snui snui-slider__thumb',
+    {
+      [`snui-slider__thumb--${size}`]: isString(size),
+      [`snui-slider__thumb--${orientation}`]: isString(orientation),
+    }
+  );
 
   useEffect(() => {
     railRef.current = document.getElementById(sliderId);
@@ -208,8 +194,7 @@ const SliderThumb: FC<SliderThumbProps> = props => {
 
   return (
     <div
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}

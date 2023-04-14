@@ -1,14 +1,6 @@
 import React, { FC } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePopover,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, usePopover } from '@hooks';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -18,23 +10,12 @@ export interface PopoverFooterProps extends SupernovaProps {}
  * The wrapper for the footer content of the Popover component.
  */
 const PopoverFooter: FC<PopoverFooterProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const { children, ...rest } = props;
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(rest, '');
   const { getPopoverFooterProps } = usePopover();
 
   return (
-    <footer {...getPopoverFooterProps({ ...remainingProps, ...addClasses() })}>
+    <footer {...getPopoverFooterProps({ ...addCSSClassesAndProps() })}>
       {children}
     </footer>
   );

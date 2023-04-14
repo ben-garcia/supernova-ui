@@ -9,15 +9,11 @@ import React, {
 import { MenuListProvider } from '@contexts';
 import {
   useCalculatePosition,
-  useCreateClassString,
-  useClassStyles,
+  useCSSAndPseudoClassProps,
   useMenu,
-  usePseudoClasses,
   useResize,
-  useValidateProps,
 } from '@hooks';
 import { forwardRef, isString } from '@utils';
-
 import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -53,19 +49,11 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     backgroundColor,
     background,
     children,
-    className,
     placement = 'start',
     spacing = 5,
     withArrow = false,
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps({ ...rest, background, backgroundColor });
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     menuId,
     isOpen,
@@ -77,12 +65,13 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   } = useMenu();
   const toolRef = useRef<any>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const addClasses = useCreateClassString('snui snui-menu', {
-    'snui-menu--show': isOpen,
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    { ...rest, background, backgroundColor },
+    'snui snui-menu',
+    {
+      'snui-menu--show': isOpen,
+    }
+  );
   const placementValue = useMemo(() => {
     if (placement === 'end') {
       return 'bottom-end';
@@ -245,10 +234,7 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
     <div className="snui snui-floating" {...addElementStyles()}>
       <MenuListProvider value={contextValue as any}>
         <div
-          {...getMenuListProps(
-            { ...remainingProps, ...addClasses() },
-            ref as any
-          )}
+          {...getMenuListProps({ ...addCSSClassesAndProps() }, ref as any)}
           {...calculateTransformOrigin()}
           id={`${menuId}__list`}
           role="menu"

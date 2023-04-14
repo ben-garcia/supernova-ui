@@ -2,16 +2,12 @@ import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import { TabsProvider } from '@contexts';
 import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
+  useCSSAndPseudoClassProps,
   useUniqueId,
   useTabsProvider,
   useTheme,
-  useValidateProps,
 } from '@hooks';
 import { isString } from '@utils';
-
 import { TabsProps } from './types';
 import './styles.scss';
 
@@ -24,7 +20,6 @@ const Tabs: FC<TabsProps> = props => {
     colorVariant,
     align = 'start',
     children,
-    className,
     defaultIndex = 0,
     isFitted = false,
     isManual = false,
@@ -32,19 +27,13 @@ const Tabs: FC<TabsProps> = props => {
     size = 'md',
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-tabs', {
-    [`${className}`]: isString(className),
-    [`snui-tabs--vertical`]: orientation === 'vertical',
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-tabs',
+    {
+      [`snui-tabs--vertical`]: orientation === 'vertical',
+    }
+  );
   const [activeIndex, setActiveIndexState] = useState(defaultIndex);
   const [focusedIndex, setFocusedIndexState] = useState(defaultIndex);
   const [numberOfTabs, setNumberOfTabsFunction] = useState(-1);
@@ -88,7 +77,7 @@ const Tabs: FC<TabsProps> = props => {
 
   return (
     <TabsProvider value={contextValue}>
-      <div {...remainingProps} {...addClasses()} id={tabsId}>
+      <div {...addCSSClassesAndProps()} id={tabsId}>
         {children}
       </div>
     </TabsProvider>

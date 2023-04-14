@@ -1,14 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useEditable,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useEditable } from '@hooks';
 import { isFunction, isNumber, isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -46,7 +39,6 @@ interface EditableTextareaProps extends SupernovaProps {
  */
 const EditableTextarea: FC<EditableTextareaProps> = props => {
   const {
-    className,
     cols,
     initialHeight,
     isAutoResize = false,
@@ -57,18 +49,10 @@ const EditableTextarea: FC<EditableTextareaProps> = props => {
     initialWidth,
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-editable__textarea', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-editable__textarea'
+  );
   const {
     exitEditMode,
     isCustomEditable,
@@ -149,8 +133,7 @@ const EditableTextarea: FC<EditableTextareaProps> = props => {
 
   return (
     <textarea
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       aria-disabled={isDisabled}
       cols={isNumber(cols) ? cols : undefined}
       disabled={isDisabled}

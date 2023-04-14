@@ -1,14 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useEditable,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useEditable } from '@hooks';
 import { isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 
 interface EditablePreviewProps extends SupernovaProps {}
@@ -16,20 +9,11 @@ interface EditablePreviewProps extends SupernovaProps {}
 /**
  * The component that holds the preview content to be editable.
  */
-const EditablePreview: React.FC<EditablePreviewProps> = props => {
-  const { className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-editable__preview', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+const EditablePreview: FC<EditablePreviewProps> = props => {
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    props,
+    'snui snui-editable__preview'
+  );
   const {
     enterEditMode,
     inputRef,
@@ -43,8 +27,7 @@ const EditablePreview: React.FC<EditablePreviewProps> = props => {
   return (
     // eslint-disable-next-line
     <span
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       aria-disabled={isDisabled ?? undefined}
       onFocus={() => {
         enterEditMode();

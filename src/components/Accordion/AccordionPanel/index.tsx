@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import {
   useAccordionItem,
   useAccordionProvider,
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useValidateProps,
+  useCSSAndPseudoClassProps,
 } from '@hooks';
-import { isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -18,20 +13,12 @@ interface AccordionPanelProps extends SupernovaProps {}
 /**
  * Holds the main content for each accordion.
  */
-const AccordionPanel: React.FC<AccordionPanelProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-accordion__panel', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+const AccordionPanel: FC<AccordionPanelProps> = props => {
+  const { children, ...rest } = props;
+  const addCSSClasses = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-accordion__panel'
+  );
   const { getAccordionPanelProps } = useAccordionProvider(rest);
   const { accordionButtonId, accordionPanelId, isOpen } = useAccordionItem();
 
@@ -42,9 +29,8 @@ const AccordionPanel: React.FC<AccordionPanelProps> = props => {
       }`}
     >
       <div
-        {...remainingProps}
-        {...addClasses()}
-        {...getAccordionPanelProps(remainingProps)}
+        {...addCSSClasses()}
+        {...getAccordionPanelProps()}
         aria-labelledby={accordionButtonId}
         id={accordionPanelId}
         role="region"

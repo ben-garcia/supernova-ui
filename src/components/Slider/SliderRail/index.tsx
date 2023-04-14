@@ -1,34 +1,20 @@
 import React, { FC, useRef } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useSlider,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
 import { SliderRailProps } from './types';
 import './styles.scss';
 
 const SliderRail: FC<SliderRailProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
+  const { children, ...rest } = props;
   const { max, min, onChange, orientation, sliderId, size, step } = useSlider();
-  const addClasses = useCreateClassString('snui snui-slider__rail', {
-    [`${className}`]: isString(className),
-    [`snui-slider__rail--${size}`]: true,
-    [`snui-slider__rail--${orientation}`]: true,
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-slider__rail',
+    {
+      [`snui-slider__rail--${size}`]: true,
+      [`snui-slider__rail--${orientation}`]: true,
+    }
+  );
   const sliderRailRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = React.useCallback(
@@ -124,8 +110,7 @@ const SliderRail: FC<SliderRailProps> = props => {
   return (
     // eslint-disable-next-line
     <div
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       id={`${sliderId}__rail`}
       onClick={handleClick}
       ref={sliderRailRef}

@@ -1,14 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useFormControl,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { forwardRef, isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, useFormControl } from '@hooks';
+import { forwardRef } from '@utils';
 import { SupernovaProps } from '@types';
 
 interface FormErrorMessageProps extends SupernovaProps {
@@ -20,28 +13,16 @@ interface FormErrorMessageProps extends SupernovaProps {
  */
 const FormErrorMessage = forwardRef<FormErrorMessageProps, HTMLDivElement>(
   (props, ref) => {
-    const { children, className, ...rest } = props;
-    const {
-      remainingProps,
-      validatedCSSProps,
-      validatedPseudoClassProps,
-    } = useValidateProps(rest);
-    const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-    const stylesClassName = useClassStyles(validatedCSSProps);
-    const addClasses = useCreateClassString(
-      'snui snui-form-error-message snui-error snui-font-body snui-margin-y-sm',
-      {
-        [`${className}`]: isString(className),
-        [`${pseudoClassName}`]: isString(pseudoClassName),
-        [`${stylesClassName}`]: isString(stylesClassName),
-      }
+    const { children, ...rest } = props;
+    const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+      rest,
+      'snui snui-form-error-message snui-error snui-font-body snui-margin-y-sm'
     );
     const { id, isInvalid, getErrorMessageProps } = useFormControl();
 
     return isInvalid ? (
       <div
-        {...getErrorMessageProps(remainingProps as any, ref)}
-        {...addClasses()}
+        {...getErrorMessageProps({ ...addCSSClassesAndProps() } as any, ref)}
         id={`${id}-feedback`}
       >
         {children}

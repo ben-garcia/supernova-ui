@@ -1,15 +1,7 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
 
-import {
-  useCreateClassString,
-  useClassStyles,
-  useMenu,
-  useMenuList,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { forwardRef, isFunction, isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, useMenu, useMenuList } from '@hooks';
+import { forwardRef, isFunction } from '@utils';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -22,14 +14,7 @@ export interface MenuItemProps extends SupernovaProps {
  * Menu option to select from.
  */
 const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
-  const { children, className, onClick, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
+  const { children, onClick, ...rest } = props;
   const {
     closeOnEsc,
     focusedIndex,
@@ -40,13 +25,9 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
   } = useMenu();
   const { menuButtonItemsRef, menuItemsContent } = useMenuList();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const addClasses = useCreateClassString(
-    'snui snui-menu__item snui-flex snui-items-center snui-padding-inline-left',
-    {
-      [`${className}`]: isString(className),
-      [`${pseudoClassName}`]: isString(pseudoClassName),
-      [`${stylesClassName}`]: isString(stylesClassName),
-    }
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-menu__item snui-flex snui-items-center snui-padding-inline-left'
   );
 
   useEffect(() => {
@@ -163,10 +144,7 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
 
   return (
     <button
-      {...getMenuItemProps(
-        { ...(remainingProps as any), ...addClasses() },
-        ref as any
-      )}
+      {...getMenuItemProps({ ...(addCSSClassesAndProps() as any) }, ref as any)}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       onMouseEnter={handleMouseEnter}

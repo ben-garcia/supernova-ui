@@ -1,13 +1,7 @@
 import React from 'react';
 
 import { Spinner } from '@components';
-import {
-  useClassStyles,
-  useCreateClassString,
-  useInlineStyles,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useInlineStyles } from '@hooks';
 import { getChildrenCount, forwardRef, isObject, isString } from '@utils';
 import { ButtonProps } from './types';
 import './styles.scss';
@@ -18,7 +12,6 @@ import './styles.scss';
 const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
   const {
     children,
-    className,
     colorVariant,
     isDisabled = false,
     isLoading = false,
@@ -30,31 +23,20 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
     variant = 'filled',
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const createInlineStyles = useInlineStyles(colorVariant);
-  const addClasses = useCreateClassString('snui snui-button', {
+  const addInlineStyles = useInlineStyles(colorVariant);
+  const addCSSClasses = useCSSAndPseudoClassProps(rest, 'snui snui-button', {
     [`snui-button--${variant}`]: isString(variant) && !props.backgroundColor,
     [`snui-button--${size}`]: isString(size) && !props.height && !props.width,
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
   });
 
-  /* eslint react/button-has-type: 0 */
   return (
     <button
-      {...remainingProps}
-      {...createInlineStyles()}
-      {...addClasses()}
+      {...addCSSClasses()}
+      {...addInlineStyles()}
       aria-disabled={isDisabled === true || isLoading === true || undefined}
       disabled={isDisabled || isLoading}
       ref={ref}
+      type="button"
     >
       {leftIcon && isString(children) && (
         <span

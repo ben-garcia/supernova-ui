@@ -3,11 +3,8 @@ import React, { FC, useEffect } from 'react';
 import FocusLock from '@components/FocusLock';
 import {
   useAlertDialog,
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
+  useCSSAndPseudoClassProps,
   useScrollLock,
-  useValidateProps,
 } from '@hooks';
 import { SupernovaProps } from '@types';
 import { isString } from '@utils';
@@ -19,7 +16,7 @@ type AlertDialogContentProps = Omit<SupernovaProps, 'id'>;
  * The container for AlertDialog related components.
  */
 const AlertDialogContent: FC<AlertDialogContentProps> = props => {
-  const { children, className, ...rest } = props;
+  const { children, ...rest } = props;
   const {
     closeOnEsc,
     closeOnOverlayClick,
@@ -35,20 +32,14 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
     size,
     trapFocus,
   } = useAlertDialog();
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-alert-dialog', {
-    [`${className}`]: isString(className),
-    'snui-alert-dialog--exiting': isExiting as boolean,
-    [`snui-alert-dialog--${size}`]: isString(size),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-alert-dialog',
+    {
+      'snui-alert-dialog--exiting': isExiting as boolean,
+      [`snui-alert-dialog--${size}`]: isString(size),
+    }
+  );
   const { lock, unlock } = useScrollLock();
 
   useEffect(() => {
@@ -76,8 +67,7 @@ const AlertDialogContent: FC<AlertDialogContentProps> = props => {
                 for rendering correctly. */}
       <div className="snui snui-alert-dialog-container">
         <section
-          {...remainingProps}
-          {...addClasses()}
+          {...addCSSClassesAndProps()}
           aria-labelledby={`${alertDialogId}__header`}
           aria-describedby={`${alertDialogId}__body`}
           aria-modal="true"

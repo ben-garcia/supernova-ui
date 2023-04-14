@@ -29,6 +29,13 @@ export const useClass = () => {
   return context;
 };
 
+/**
+ *  Hook that injects classes in the DOM based on CSS props.
+ *
+ *  @param mainProps CSS object.
+ *
+ *  @returns className/s with the corresponding styles.
+ */
 export const useClassStyles = (mainProps: any) => {
   if (!isObject(mainProps)) {
     return '';

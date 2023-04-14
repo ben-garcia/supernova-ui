@@ -3,6 +3,7 @@ export * from './use-alert-dialog';
 export * from './use-calculate-position';
 export * from './use-class';
 export * from './use-create-class';
+export * from './use-css-and-pseudo-class-props';
 export * from './use-drawer';
 export * from './use-editable';
 export * from './use-form-control';

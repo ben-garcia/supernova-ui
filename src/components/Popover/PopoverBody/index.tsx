@@ -1,14 +1,6 @@
 import React, { FC } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePopover,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, usePopover } from '@hooks';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -18,23 +10,12 @@ export interface PopoverBodyProps extends SupernovaProps {}
  * The wrapper for the main content of the Popover.
  */
 const ModalBody: FC<PopoverBodyProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const { children, ...rest } = props;
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(rest, '');
   const { getPopoverBodyProps } = usePopover();
 
   return (
-    <div {...getPopoverBodyProps({ ...remainingProps, ...addClasses() })}>
+    <div {...getPopoverBodyProps({ ...addCSSClassesAndProps() })}>
       {children}
     </div>
   );

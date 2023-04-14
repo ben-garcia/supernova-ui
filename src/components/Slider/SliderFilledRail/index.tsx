@@ -1,38 +1,23 @@
 import React, { FC } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useSlider,
-  useValidateProps,
-} from '@hooks';
-import { isString, valueToPercent } from '@utils';
-
+import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
+import { valueToPercent } from '@utils';
 import { SliderFilledRailProps } from './types';
 import './styles.scss';
 
 const SliderFilledRail: FC<SliderFilledRailProps> = props => {
-  const { className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const { orientation, min, max, value } = useSlider();
-  const addClasses = useCreateClassString('snui snui-slider__filled-rail', {
-    [`${className}`]: isString(className),
-    [`snui-slider__filled-rail--${orientation}`]: true,
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    props,
+    'snui snui-slider__filled-rail',
+    {
+      [`snui-slider__filled-rail--${orientation}`]: true,
+    }
+  );
 
   return (
     <div
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       style={{
         height:
           orientation === 'vertical'

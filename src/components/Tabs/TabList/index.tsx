@@ -1,15 +1,8 @@
 import React, { FC, useEffect, useMemo, useRef } from 'react';
 
 import { TabListProvider } from '@contexts';
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useTabs,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useTabs } from '@hooks';
 import { isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -19,23 +12,17 @@ interface TabListProps extends SupernovaProps {}
  * The wrapper for all Tab buttons
  */
 const TabList: FC<TabListProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
+  const { children, ...rest } = props;
   const { align, orientation, isFitted, setNumberOfTabs } = useTabs();
-  const addClasses = useCreateClassString('snui snui-tabs__tablist', {
-    [`${className}`]: isString(className),
-    [`snui-tabs__tablist--vertical`]: orientation === 'vertical',
-    [`snui-tabs__tablist--fitted`]: isFitted,
-    [`snui-tabs__tablist--${align}`]: isString(align),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-tabs__tablist',
+    {
+      [`snui-tabs__tablist--vertical`]: orientation === 'vertical',
+      [`snui-tabs__tablist--fitted`]: isFitted,
+      [`snui-tabs__tablist--${align}`]: isString(align),
+    }
+  );
   const tabListRef = useRef<HTMLDivElement | null>(null);
   const tabsRef = useRef<HTMLButtonElement[] | null>(null);
   const contextValue = useMemo(
@@ -81,8 +68,7 @@ const TabList: FC<TabListProps> = props => {
   return (
     <TabListProvider value={contextValue as any}>
       <div
-        {...remainingProps}
-        {...addClasses()}
+        {...addCSSClassesAndProps()}
         aria-orientation={orientation}
         ref={tabListRef}
         role="tablist"

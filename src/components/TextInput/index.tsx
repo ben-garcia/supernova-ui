@@ -1,13 +1,6 @@
 import React, { useState, useMemo } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useFormControl,
-  usePseudoClasses,
-  useUniqueId,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useFormControl, useUniqueId } from '@hooks';
 import {
   createClasses,
   forwardRef,
@@ -15,7 +8,6 @@ import {
   isObject,
   isString,
 } from '@utils';
-
 import { TextInputProps } from './types';
 import './styles.scss';
 
@@ -24,7 +16,6 @@ import './styles.scss';
  */
 const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
   const {
-    className,
     value,
     isDisabled = false,
     label,
@@ -35,13 +26,6 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
     variant = 'outline',
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const {
     hasHelpText,
     hasFeedbackText,
@@ -61,18 +45,19 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
     'snui-text-label--padding-left': isObject(leftIcon),
     'snui-disabled': isDisabled,
   });
-  const addInputClasses = useCreateClassString('snui snui-text-input', {
-    [`${className}`]: isString(className),
-    'snui-disabled': isDisabled,
-    [`snui-text-input--${variant}`]:
-      isString(variant) && !props.backgroundColor,
-    [`snui-text-input--${size}`]:
-      isString(size) && !props.height && !props.width,
-    'snui-text-input--default-padding': !leftIcon,
-    'snui-text-input--padding-left': isObject(leftIcon),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-text-input',
+    {
+      'snui-disabled': isDisabled,
+      [`snui-text-input--${variant}`]:
+        isString(variant) && !props.backgroundColor,
+      [`snui-text-input--${size}`]:
+        isString(size) && !props.height && !props.width,
+      'snui-text-input--default-padding': !leftIcon,
+      'snui-text-input--padding-left': isObject(leftIcon),
+    }
+  );
   const labelIds: string[] = [];
 
   if (hasFeedbackText && isInvalid) {
@@ -99,8 +84,7 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
       )}
 
       <input
-        {...remainingProps}
-        {...addInputClasses()}
+        {...addCSSClassesAndProps()}
         aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
         aria-disabled={isDisabled || formControlIsDisabled}
         aria-invalid={isInvalid ?? undefined}

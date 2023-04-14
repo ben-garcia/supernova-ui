@@ -1,14 +1,7 @@
 import React, { FC } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useInlineStyles,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useInlineStyles } from '@hooks';
 import { isString } from '@utils';
-
 import { TagProps } from './types';
 import './styles.scss';
 
@@ -19,29 +12,22 @@ const Tag: FC<TagProps> = props => {
   const {
     colorVariant,
     children,
-    className,
     size = 'md',
     variant = 'solid',
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const createInlineStyles = useInlineStyles(colorVariant);
-  const addClasses = useCreateClassString('snui snui-tag', {
-    [`${className}`]: isString(className),
-    [`snui-tag--${size}`]: isString(size),
-    [`snui-tag--${variant}`]: isString(variant),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-tag',
+    {
+      [`snui-tag--${size}`]: isString(size),
+      [`snui-tag--${variant}`]: isString(variant),
+    }
+  );
 
   return (
-    <span {...remainingProps} {...addClasses()} {...createInlineStyles()}>
+    <span {...addCSSClassesAndProps()} {...createInlineStyles()}>
       {children}
     </span>
   );

@@ -1,17 +1,8 @@
 import React, { useMemo } from 'react';
 
 import { SliderProvider } from '@contexts';
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useUniqueId,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, useUniqueId } from '@hooks';
 import { SliderProps } from './types';
-
 import './styles.scss';
 
 const Slider: React.FC<SliderProps> = props => {
@@ -21,7 +12,6 @@ const Slider: React.FC<SliderProps> = props => {
     ariaLabelledBy,
     ariaValueText,
     children,
-    className,
     max = 100,
     min = 0,
     onChange,
@@ -31,21 +21,15 @@ const Slider: React.FC<SliderProps> = props => {
     value,
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const sliderId = useUniqueId('snui-slider');
-  const addClasses = useCreateClassString('snui snui-slider', {
-    [`${className}`]: isString(className),
-    [`snui-slider--${size}`]: true,
-    [`snui-slider--${orientation}`]: true,
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-slider',
+    {
+      [`snui-slider--${size}`]: true,
+      [`snui-slider--${orientation}`]: true,
+    }
+  );
   const contextValue = useMemo(
     () => ({
       ariaDescribedBy,
@@ -66,7 +50,7 @@ const Slider: React.FC<SliderProps> = props => {
 
   return (
     <SliderProvider value={contextValue}>
-      <div {...remainingProps} {...addClasses()} id={sliderId}>
+      <div {...addCSSClassesAndProps()} id={sliderId}>
         {children}
       </div>
     </SliderProvider>

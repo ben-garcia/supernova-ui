@@ -1,13 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useFormControl,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { forwardRef, isString } from '@utils';
+import { useCSSAndPseudoClassProps, useFormControl } from '@hooks';
+import { forwardRef } from '@utils';
 import { SupernovaProps } from '@types';
 
 export interface FormHelperTextProps extends SupernovaProps {
@@ -19,25 +13,16 @@ export interface FormHelperTextProps extends SupernovaProps {
  */
 const FormHelperText = forwardRef<FormHelperTextProps, HTMLDivElement>(
   (props, ref) => {
-    const { children, className, ...rest } = props;
-    const {
-      remainingProps,
-      validatedCSSProps,
-      validatedPseudoClassProps,
-    } = useValidateProps(rest);
-    const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-    const stylesClassName = useClassStyles(validatedCSSProps);
-    const addClasses = useCreateClassString('snui snui-form-helper-text', {
-      [`${className}`]: isString(className),
-      [`${pseudoClassName}`]: isString(pseudoClassName),
-      [`${stylesClassName}`]: isString(stylesClassName),
-    });
+    const { children, ...rest } = props;
+    const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+      rest,
+      'snui snui-form-helper-text'
+    );
     const { id, getHelpTextProps } = useFormControl();
 
     return (
       <div
-        {...getHelpTextProps(remainingProps as any, ref)}
-        {...addClasses()}
+        {...getHelpTextProps({ ...addCSSClassesAndProps() } as any, ref)}
         id={`${id}-helper-text`}
       >
         {children}

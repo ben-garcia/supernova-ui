@@ -1,14 +1,7 @@
 import React, { FC } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useTheme,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useTheme } from '@hooks';
 import { isString } from '@utils';
-
 import { SpinnerProps } from './types';
 import './styles.scss';
 
@@ -18,32 +11,24 @@ import './styles.scss';
 const Spinner: FC<SpinnerProps> = props => {
   const {
     borderThickness,
-    className,
     duration,
     primaryColor,
     size = 'md',
     secondaryColor,
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
   const { colors } = useTheme();
-  const addClasses = useCreateClassString('snui snui-spinner', {
-    [`${className}`]: isString(className),
-    [`snui-spinner--${size}`]: isString(size),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-spinner',
+    {
+      [`snui-spinner--${size}`]: isString(size),
+    }
+  );
 
   return (
     <div
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       style={{
         animationDuration: isString(duration) ? duration : undefined,
         borderBottomColor: isString(primaryColor)

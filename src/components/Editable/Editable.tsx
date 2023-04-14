@@ -1,15 +1,7 @@
 import React, { FC, useMemo, useRef } from 'react';
 
 import { EditableProvider } from '@contexts';
-import {
-  useClassStyles,
-  useCreateClassString,
-  useEditableProvider,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
-
+import { useCSSAndPseudoClassProps, useEditableProvider } from '@hooks';
 import EditableProps from './types';
 import './styles.scss';
 
@@ -20,7 +12,6 @@ import './styles.scss';
 const Editable: FC<EditableProps> = props => {
   const {
     children,
-    className,
     isDisabled,
     onCancel,
     onChange,
@@ -32,18 +23,10 @@ const Editable: FC<EditableProps> = props => {
     value,
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-editable', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-editable'
+  );
   const context = useEditableProvider(props);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -68,9 +51,7 @@ const Editable: FC<EditableProps> = props => {
 
   return (
     <EditableProvider value={contextValue as any}>
-      <div {...remainingProps} {...addClasses()}>
-        {children}
-      </div>
+      <div {...addCSSClassesAndProps()}>{children}</div>
     </EditableProvider>
   );
 };

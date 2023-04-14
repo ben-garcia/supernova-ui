@@ -13,8 +13,8 @@ const AlertDialogCloseButton: FC<Parameters<typeof Button>[0]> = props => {
 
   return (
     <Button
-      {...props}
       aria-label="Close the alert dialog"
+      {...props}
       className="snui-alert-dialog__close-button"
       onClick={onClose}
       variant="outline"

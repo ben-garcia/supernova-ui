@@ -1,16 +1,12 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
+  useCSSAndPseudoClassProps,
   useTabList,
   useTabs,
   useTheme,
-  useValidateProps,
 } from '@hooks';
 import { isString } from '@utils';
-
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
@@ -20,14 +16,7 @@ interface TabProps extends SupernovaProps {}
  * Tab button used to activate a specific TabPanel
  */
 const Tab: FC<TabProps> = props => {
-  const { children, className, ...rest } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
+  const { children, ...rest } = props;
   const { tabsRef } = useTabList();
   const {
     activeColor,
@@ -42,14 +31,15 @@ const Tab: FC<TabProps> = props => {
     size,
     tabsId,
   } = useTabs();
-  const addClasses = useCreateClassString('snui snui-tabs__tab', {
-    [`${className}`]: isString(className),
-    [`snui-tabs__tab--${size}`]: true,
-    [`snui-tabs__tab--${orientation}`]: true,
-    'snui-tabs__tab--fitted': isFitted,
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-tabs__tab',
+    {
+      [`snui-tabs__tab--${size}`]: true,
+      [`snui-tabs__tab--${orientation}`]: true,
+      'snui-tabs__tab--fitted': isFitted,
+    }
+  );
   const tabRef = useRef<HTMLButtonElement | null>(null);
   const tabId = React.useMemo(() => {
     if (tabRef?.current) {
@@ -236,8 +226,7 @@ const Tab: FC<TabProps> = props => {
 
   return (
     <button
-      {...remainingProps}
-      {...addClasses()}
+      {...addCSSClassesAndProps()}
       aria-controls={
         tabId ? `${tabsId}__tab-panel-${tabId[tabId.length - 1]}` : undefined
       }

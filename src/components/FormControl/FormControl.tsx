@@ -2,15 +2,11 @@ import React, { FC, useMemo } from 'react';
 
 import { FormControlProvider } from '@contexts';
 import {
-  useClassStyles,
-  useCreateClassString,
+  useCSSAndPseudoClassProps,
   useFormControlProvider,
-  usePseudoClasses,
   useUniqueId,
-  useValidateProps,
 } from '@hooks';
-import { createElement, isString } from '@utils';
-
+import { createElement } from '@utils';
 import { FormControlProps } from './types';
 import './styles.scss';
 
@@ -21,28 +17,19 @@ import './styles.scss';
 const FormControl: FC<FormControlProps> = props => {
   const {
     children,
-    className,
     isInvalid = false,
     isDisabled = false,
     isRequired = false,
     tag = 'div',
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-form-control', {
-    [`${className}`]: isString(className),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-form-control'
+  );
   const elementToRender = createElement(
     tag,
-    { ...remainingProps, ...addClasses(), role: 'group' },
+    { ...addCSSClassesAndProps(), role: 'group' },
     children
   );
   const id = useUniqueId('snui-form-control');

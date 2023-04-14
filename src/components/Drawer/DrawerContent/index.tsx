@@ -1,14 +1,7 @@
 import React, { FC, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
-import {
-  useDrawer,
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useScrollLock,
-  useValidateProps,
-} from '@hooks';
+import { useCSSAndPseudoClassProps, useDrawer, useScrollLock } from '@hooks';
 import { SupernovaProps } from '@types';
 import { isString } from '@utils';
 import './styles.scss';
@@ -19,7 +12,7 @@ type DrawerContentProps = Omit<SupernovaProps, 'id'>;
  * The container for Drawer related components.
  */
 const DrawerContent: FC<DrawerContentProps> = props => {
-  const { children, className, ...rest } = props;
+  const { children, ...rest } = props;
   const {
     closeOnEsc,
     closeOnOverlayClick,
@@ -36,21 +29,15 @@ const DrawerContent: FC<DrawerContentProps> = props => {
     size,
     trapFocus,
   } = useDrawer();
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
-  const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
-  const stylesClassName = useClassStyles(validatedCSSProps);
-  const addClasses = useCreateClassString('snui snui-drawer', {
-    [`${className}`]: isString(className),
-    [`snui-drawer--${placement}`]: true,
-    [`snui-drawer--${placement}--exiting`]: isExiting as boolean,
-    [`snui-drawer--${size}`]: isString(size),
-    [`${pseudoClassName}`]: isString(pseudoClassName),
-    [`${stylesClassName}`]: isString(stylesClassName),
-  });
+  const addCSSClassesAndProps = useCSSAndPseudoClassProps(
+    rest,
+    'snui snui-drawer',
+    {
+      [`snui-drawer--${placement}`]: true,
+      [`snui-drawer--${placement}--exiting`]: isExiting as boolean,
+      [`snui-drawer--${size}`]: isString(size),
+    }
+  );
   const { lock, unlock } = useScrollLock();
 
   useEffect(() => {
@@ -78,8 +65,7 @@ const DrawerContent: FC<DrawerContentProps> = props => {
                 for rendering correctly. */}
       <div className="snui snui-modal-container">
         <section
-          {...remainingProps}
-          {...addClasses()}
+          {...addCSSClassesAndProps()}
           aria-labelledby={`${drawerId}__header`}
           aria-describedby={`${drawerId}__body`}
           aria-modal="true"
