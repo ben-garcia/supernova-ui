@@ -1,5 +1,4 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-
 module.exports = {
   addons: [
     '@storybook/addon-links',
@@ -27,5 +26,12 @@ module.exports = {
       }),
     ];
     return config;
+  },
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
+  docs: {
+    autodocs: true,
   },
 };
