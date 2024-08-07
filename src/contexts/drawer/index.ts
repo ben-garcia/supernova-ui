@@ -1,2 +1,2 @@
 export { DrawerContext, DrawerProvider } from './DrawerProvider';
-export { DrawerContextProps } from './types';
+export * from './types';

@@ -5,6 +5,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
     '@storybook/preset-scss',
+    '@storybook/addon-webpack5-compiler-swc'
   ],
   stories: ['../src/**/*.stories.tsx', '../src/**/stories.@(js|jsx|ts|tsx)'],
   typescript: {
@@ -30,8 +31,5 @@ module.exports = {
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
-  },
-  docs: {
-    autodocs: true,
   },
 };

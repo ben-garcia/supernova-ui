@@ -1,2 +1,2 @@
 export { FormControlContext, FormControlProvider } from './FormControlProvider';
-export { FormControlProviderProps } from './types';
+export * from './types';

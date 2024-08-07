@@ -1,2 +1,2 @@
 export { EditableContext, EditableProvider } from './EditableProvider';
-export { EditableProviderProps } from './types';
+export * from './types';
