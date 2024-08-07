@@ -85,7 +85,7 @@
     "react-dom": ">=16.8.0"
   },
   "scripts": {
-    "build": "yarn clean && yarn rollup",
+    "build": "npm clean && npm rollup",
     "build-storybook": "storybook build",
     "clean": "rm -rf dist",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
