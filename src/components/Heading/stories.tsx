@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Heading from '.';
@@ -18,15 +18,14 @@ export default {
   },
   component: Heading,
   title: 'Supernova UI/Typography/Heading',
-} as ComponentMeta<typeof Heading>;
+} as Meta<typeof Heading>;
 
-const Template: ComponentStory<typeof Heading> = args => <Heading {...args} />;
+export const Basic = {
+  args: {
+    children: 'Supernova UI',
+  },
 
-export const Basic = Template.bind({});
-
-Basic.args = {
-  children: 'Supernova UI',
-};
-Basic.parameters = {
-  controls: { include: ['level', 'size'] },
+  parameters: {
+    controls: { include: ['level', 'size'] },
+  },
 };

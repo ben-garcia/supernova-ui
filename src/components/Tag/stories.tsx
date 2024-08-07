@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { colors } from '@utils';
@@ -23,15 +23,14 @@ export default {
   },
   component: Tag,
   title: 'Supernova UI/Data display/Tag',
-} as ComponentMeta<typeof Tag>;
+} as Meta<typeof Tag>;
 
-const Template: ComponentStory<typeof Tag> = args => <Tag {...args} />;
+export const Basic = {
+  args: {
+    children: 'tag',
+  },
 
-export const Basic = Template.bind({});
-
-Basic.args = {
-  children: 'tag',
-};
-Basic.parameters = {
-  controls: { include: ['colorVariant', 'size', 'variant'] },
+  parameters: {
+    controls: { include: ['colorVariant', 'size', 'variant'] },
+  },
 };

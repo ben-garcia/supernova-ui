@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@components';
@@ -34,7 +34,7 @@ export default {
   },
   component: Tabs,
   title: 'Supernova UI/Disclosure/Tabs',
-} as ComponentMeta<typeof Tabs>;
+} as Meta<typeof Tabs>;
 
 const parameters = {
   controls: {
@@ -49,7 +49,7 @@ const parameters = {
   },
 };
 
-const Template: ComponentStory<typeof Tabs> = args => (
+const Template: StoryFn<typeof Tabs> = args => (
   <Tabs {...args}>
     <TabList>
       <Tab>one</Tab>
@@ -79,7 +79,8 @@ const Template: ComponentStory<typeof Tabs> = args => (
   </Tabs>
 );
 
-export const Basic = Template.bind({});
-
-Basic.args = {};
-Basic.parameters = parameters;
+export const Basic = {
+  render: Template,
+  args: {},
+  parameters: parameters,
+};

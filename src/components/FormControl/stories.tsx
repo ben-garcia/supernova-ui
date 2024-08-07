@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -26,7 +26,7 @@ export default {
   },
   component: FormControl,
   title: 'Supernova UI/Form/FormControl',
-} as ComponentMeta<typeof FormControl>;
+} as Meta<typeof FormControl>;
 
 const parameters = {
   controls: {
@@ -34,7 +34,7 @@ const parameters = {
   },
 };
 
-const WithCheckboxTemplate: ComponentStory<typeof FormControl> = args => (
+const WithCheckboxTemplate: StoryFn<typeof FormControl> = args => (
   <FormControl {...args}>
     <Checkbox label="react" />
     <FormHelperText>This is helper text</FormHelperText>
@@ -42,10 +42,12 @@ const WithCheckboxTemplate: ComponentStory<typeof FormControl> = args => (
   </FormControl>
 );
 
-export const WithCheckbox = WithCheckboxTemplate.bind({});
-WithCheckbox.parameters = parameters;
+export const WithCheckbox = {
+  render: WithCheckboxTemplate,
+  parameters: parameters,
+};
 
-const WithRadioGroupTemplate: ComponentStory<typeof FormControl> = args => {
+const WithRadioGroupTemplate: StoryFn<typeof FormControl> = args => {
   const [answer, setAnswer] = React.useState('3.14159');
   return (
     <FormControl {...args}>
@@ -60,10 +62,12 @@ const WithRadioGroupTemplate: ComponentStory<typeof FormControl> = args => {
   );
 };
 
-export const WithRadioGroup = WithRadioGroupTemplate.bind({});
-WithRadioGroup.parameters = parameters;
+export const WithRadioGroup = {
+  render: WithRadioGroupTemplate,
+  parameters: parameters,
+};
 
-const WithSwitchTemplate: ComponentStory<typeof FormControl> = args => (
+const WithSwitchTemplate: StoryFn<typeof FormControl> = args => (
   <FormControl {...args}>
     <Switch label="react" />
     <FormHelperText>This is helper text</FormHelperText>
@@ -71,10 +75,12 @@ const WithSwitchTemplate: ComponentStory<typeof FormControl> = args => (
   </FormControl>
 );
 
-export const WithSwitch = WithSwitchTemplate.bind({});
-WithSwitch.parameters = parameters;
+export const WithSwitch = {
+  render: WithSwitchTemplate,
+  parameters: parameters,
+};
 
-const WithTextareaTemplate: ComponentStory<typeof FormControl> = args => (
+const WithTextareaTemplate: StoryFn<typeof FormControl> = args => (
   <FormControl {...args}>
     <Textarea label="Content" />
     <FormHelperText>your content</FormHelperText>
@@ -84,10 +90,12 @@ const WithTextareaTemplate: ComponentStory<typeof FormControl> = args => (
   </FormControl>
 );
 
-export const WithTextarea = WithTextareaTemplate.bind({});
-WithTextarea.parameters = parameters;
+export const WithTextarea = {
+  render: WithTextareaTemplate,
+  parameters: parameters,
+};
 
-const WithTextInputTemplate: ComponentStory<typeof FormControl> = args => (
+const WithTextInputTemplate: StoryFn<typeof FormControl> = args => (
   <FormControl {...args}>
     <TextInput label="Username" />
     <FormHelperText>
@@ -99,5 +107,7 @@ const WithTextInputTemplate: ComponentStory<typeof FormControl> = args => (
   </FormControl>
 );
 
-export const WithTextInput = WithTextInputTemplate.bind({});
-WithTextInput.parameters = parameters;
+export const WithTextInput = {
+  render: WithTextInputTemplate,
+  parameters: parameters,
+};

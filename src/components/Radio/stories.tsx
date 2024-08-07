@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Box, Paragraph, Radio, RadioGroup, UserIcon } from '@components';
@@ -28,7 +28,7 @@ export default {
   },
   component: Radio,
   title: 'Supernova UI/Form/Radio',
-} as ComponentMeta<typeof Radio>;
+} as Meta<typeof Radio>;
 
 const parameters = {
   controls: {
@@ -37,7 +37,7 @@ const parameters = {
 };
 const label = 'Reveal your secrets?';
 
-const Template: ComponentStory<typeof Radio> = args => {
+const Template: StoryFn<typeof Radio> = args => {
   const [checked, setChecked] = React.useState(false);
   return (
     <Radio
@@ -48,11 +48,13 @@ const Template: ComponentStory<typeof Radio> = args => {
   );
 };
 
-export const Basic = Template.bind({});
-Basic.args = { label };
-Basic.parameters = parameters;
+export const Basic = {
+  render: Template,
+  args: { label },
+  parameters: parameters,
+};
 
-const RadioGroupTemplate: ComponentStory<any> = args => {
+const RadioGroupTemplate: StoryFn<any> = args => {
   const [framework, setFramework] = React.useState('react');
   return (
     <Box
@@ -83,11 +85,13 @@ const RadioGroupTemplate: ComponentStory<any> = args => {
   );
 };
 
-export const WithRadioGroup = RadioGroupTemplate.bind({});
-WithRadioGroup.args = {};
-WithRadioGroup.parameters = { controls: { include: ['direction'] } };
+export const WithRadioGroup = {
+  render: RadioGroupTemplate,
+  args: {},
+  parameters: { controls: { include: ['direction'] } },
+};
 
-const WithComponentAsLabelTemplate: ComponentStory<any> = args => {
+const WithComponentAsLabelTemplate: StoryFn<any> = args => {
   const [checked, setChecked] = React.useState(false);
   return (
     <Radio
@@ -104,10 +108,13 @@ const WithComponentAsLabelTemplate: ComponentStory<any> = args => {
   );
 };
 
-export const WithComponentAsLabel = WithComponentAsLabelTemplate.bind({});
-WithComponentAsLabel.args = {};
-WithComponentAsLabel.parameters = {
-  controls: {
-    include: ['colorVariant', 'isDisabled', 'size'],
+export const WithComponentAsLabel = {
+  render: WithComponentAsLabelTemplate,
+  args: {},
+
+  parameters: {
+    controls: {
+      include: ['colorVariant', 'isDisabled', 'size'],
+    },
   },
 };

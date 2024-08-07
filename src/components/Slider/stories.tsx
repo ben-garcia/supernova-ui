@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -41,9 +41,9 @@ export default {
   },
   component: Slider,
   title: 'Supernova UI/Form/Slider',
-} as ComponentMeta<typeof Slider>;
+} as Meta<typeof Slider>;
 
-const Template: ComponentStory<typeof Slider> = args => {
+const Template: StoryFn<typeof Slider> = args => {
   const [value, setValue] = React.useState(0);
 
   return (
@@ -58,10 +58,13 @@ const Template: ComponentStory<typeof Slider> = args => {
   );
 };
 
-export const Basic = Template.bind({});
-Basic.args = {};
-Basic.parameters = {
-  controls: {
-    include: ['activeColor', 'max', 'min', 'orientation', 'size', 'step'],
+export const Basic = {
+  render: Template,
+  args: {},
+
+  parameters: {
+    controls: {
+      include: ['activeColor', 'max', 'min', 'orientation', 'size', 'step'],
+    },
   },
 };

@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Paragraph, Switch } from '@components';
@@ -23,7 +23,7 @@ export default {
   },
   component: Switch,
   title: 'Supernova UI/Form/Switch',
-} as ComponentMeta<typeof Switch>;
+} as Meta<typeof Switch>;
 
 const parameters = {
   controls: {
@@ -32,13 +32,12 @@ const parameters = {
 };
 const label = 'Reveal your secrets?';
 
-const Template: ComponentStory<typeof Switch> = args => <Switch {...args} />;
+export const Basic = {
+  args: { label },
+  parameters: parameters,
+};
 
-export const Basic = Template.bind({});
-Basic.args = { label };
-Basic.parameters = parameters;
-
-const ControlledTemplate: ComponentStory<typeof Switch> = () => {
+const ControlledTemplate: StoryFn<typeof Switch> = () => {
   const [checked, setChecked] = React.useState(true);
 
   return (
@@ -53,6 +52,8 @@ const ControlledTemplate: ComponentStory<typeof Switch> = () => {
   );
 };
 
-export const Controlled = ControlledTemplate.bind({});
-Controlled.args = { label };
-Controlled.parameters = parameters;
+export const Controlled = {
+  render: ControlledTemplate,
+  args: { label },
+  parameters: parameters,
+};

@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Textarea from '.';
@@ -15,7 +15,7 @@ export default {
   },
   component: Textarea,
   title: 'Supernova UI/Form/Textarea',
-} as ComponentMeta<typeof Textarea>;
+} as Meta<typeof Textarea>;
 
 const parameters = {
   controls: {
@@ -24,18 +24,12 @@ const parameters = {
 };
 const label = 'Reveal your secrets';
 
-const Template: ComponentStory<typeof Textarea> = args => (
-  <Textarea {...args} />
-);
+export const Basic = {
+  args: { label },
+  parameters: parameters,
+};
 
-export const Basic = Template.bind({});
-Basic.args = { label };
-Basic.parameters = parameters;
-
-const FloatingLabelTemplate: ComponentStory<typeof Textarea> = args => (
-  <Textarea {...args} />
-);
-
-export const FloatingLabel = FloatingLabelTemplate.bind({});
-FloatingLabel.args = { label };
-FloatingLabel.parameters = parameters;
+export const FloatingLabel = {
+  args: { label },
+  parameters: parameters,
+};

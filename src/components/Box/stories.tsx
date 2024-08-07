@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Box from '.';
@@ -15,15 +15,14 @@ export default {
   },
   component: Box,
   title: 'Supernova UI/Layout/Box',
-} as ComponentMeta<typeof Box>;
+} as Meta<typeof Box>;
 
-const Template: ComponentStory<typeof Box> = args => <Box {...args} />;
+export const Basic = {
+  args: {
+    children: 'This is a box',
+  },
 
-export const Basic = Template.bind({});
-
-Basic.args = {
-  children: 'This is a box',
-};
-Basic.parameters = {
-  controls: { include: ['tag'] },
+  parameters: {
+    controls: { include: ['tag'] },
+  },
 };

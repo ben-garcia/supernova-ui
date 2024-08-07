@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { colors } from '@utils';
@@ -17,21 +17,23 @@ export default {
     },
   },
   title: 'Supernova UI/Feedback/Spinner',
-} as ComponentMeta<typeof Spinner>;
+} as Meta<typeof Spinner>;
 
-const Template: ComponentStory<typeof Spinner> = args => <Spinner {...args} />;
+const Template: StoryFn<typeof Spinner> = args => <Spinner {...args} />;
 
-export const Basic = Template.bind({});
+export const Basic = {
+  render: Template,
+  args: {},
 
-Basic.args = {};
-Basic.parameters = {
-  controls: {
-    include: [
-      'borderThickness',
-      'duration',
-      'primaryColor',
-      'secondaryColor',
-      'size',
-    ],
+  parameters: {
+    controls: {
+      include: [
+        'borderThickness',
+        'duration',
+        'primaryColor',
+        'secondaryColor',
+        'size',
+      ],
+    },
   },
 };

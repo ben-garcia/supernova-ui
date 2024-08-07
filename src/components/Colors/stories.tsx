@@ -1,17 +1,20 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import colors from '../../theme/colors';
 
 export default {
   title: 'Supernova UI/Other/Colors',
-} as ComponentMeta<typeof Colors>;
+} as Meta<typeof Colors>;
 
-const Template: ComponentStory<typeof Colors> = () => <Colors />;
+const Template: StoryFn<typeof Colors> = () => <Colors />;
 
-export const All = Template.bind({});
-All.parameters = {
-  controls: { hideNoControlsWarning: true },
+export const All = {
+  render: Template,
+
+  parameters: {
+    controls: { hideNoControlsWarning: true },
+  },
 };
 
 const Colors = () => (

@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Checkbox } from '@components';
@@ -23,7 +23,7 @@ export default {
   },
   component: Checkbox,
   title: 'Supernova UI/Form/Checkbox',
-} as ComponentMeta<typeof Checkbox>;
+} as Meta<typeof Checkbox>;
 
 const parameters = {
   controls: {
@@ -32,17 +32,15 @@ const parameters = {
 };
 const label = 'Reveal your secrets?';
 
-const Template: ComponentStory<typeof Checkbox> = args => (
-  <Checkbox {...args} />
-);
+export const Basic = {
+  args: {
+    label,
+  },
 
-export const Basic = Template.bind({});
-Basic.args = {
-  label,
+  parameters: parameters,
 };
-Basic.parameters = parameters;
 
-const ControlledTemplate: ComponentStory<typeof Checkbox> = args => {
+const ControlledTemplate: StoryFn<typeof Checkbox> = args => {
   const [checked, setChecked] = React.useState(true);
 
   return (
@@ -58,8 +56,12 @@ const ControlledTemplate: ComponentStory<typeof Checkbox> = args => {
   );
 };
 
-export const Controlled = ControlledTemplate.bind({});
-Controlled.args = {
-  label,
+export const Controlled = {
+  render: ControlledTemplate,
+
+  args: {
+    label,
+  },
+
+  parameters: parameters,
 };
-Controlled.parameters = parameters;

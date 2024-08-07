@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -28,7 +28,7 @@ export default {
   },
   component: Menu,
   title: 'Supernova UI/Overlay/Menu',
-} as ComponentMeta<typeof Menu>;
+} as Meta<typeof Menu>;
 
 const parameters = {
   controls: {
@@ -36,7 +36,7 @@ const parameters = {
   },
 };
 
-const Template: ComponentStory<typeof Menu> = args => {
+const Template: StoryFn<typeof Menu> = args => {
   const { closeOnEsc, ...rest } = args;
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -66,10 +66,12 @@ const Template: ComponentStory<typeof Menu> = args => {
   );
 };
 
-export const Basic = Template.bind({});
-Basic.parameters = parameters;
+export const Basic = {
+  render: Template,
+  parameters: parameters,
+};
 
-const WithGroupTemplate: ComponentStory<typeof Menu> = args => {
+const WithGroupTemplate: StoryFn<typeof Menu> = args => {
   const { closeOnEsc, ...rest } = args;
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -103,10 +105,12 @@ const WithGroupTemplate: ComponentStory<typeof Menu> = args => {
   );
 };
 
-export const WithGroup = WithGroupTemplate.bind({});
-WithGroup.parameters = parameters;
+export const WithGroup = {
+  render: WithGroupTemplate,
+  parameters: parameters,
+};
 
-const WithIconsTemplate: ComponentStory<typeof Menu> = args => {
+const WithIconsTemplate: StoryFn<typeof Menu> = args => {
   const { closeOnEsc, ...rest } = args;
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -152,5 +156,7 @@ const WithIconsTemplate: ComponentStory<typeof Menu> = args => {
   );
 };
 
-export const WithIcons = WithIconsTemplate.bind({});
-WithIcons.parameters = parameters;
+export const WithIcons = {
+  render: WithIconsTemplate,
+  parameters: parameters,
+};

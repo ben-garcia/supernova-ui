@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Box, Divider } from '@components';
@@ -23,19 +23,22 @@ export default {
   },
   component: Divider,
   title: 'Supernova UI/Data display/Divider',
-} as ComponentMeta<typeof Divider>;
+} as Meta<typeof Divider>;
 
 // parent element must have a height for
 // orientation of vertial to work correctly.
-const Template: ComponentStory<typeof Divider> = args => (
+const Template: StoryFn<typeof Divider> = args => (
   <Box height={args.orientation === 'vertical' ? '200px' : undefined}>
     <Divider {...args} />
   </Box>
 );
 
-export const Basic = Template.bind({});
-Basic.parameters = {
-  controls: {
-    include: ['colorVariant', 'orientation', 'size'],
+export const Basic = {
+  render: Template,
+
+  parameters: {
+    controls: {
+      include: ['colorVariant', 'orientation', 'size'],
+    },
   },
 };

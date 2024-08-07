@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
 import {
@@ -35,7 +35,7 @@ export default {
   title: 'Supernova UI/Overlay/AlertDialog',
 } as Meta;
 
-const BasicTemplate: Story<AlertDialogProps> = args => {
+const BasicTemplate: StoryFn<AlertDialogProps> = args => {
   const [isOpen, setIsOpen] = useState(false);
   const cancelButtonRef = useRef<HTMLButtonElement | null>(null);
   return (
@@ -81,13 +81,16 @@ const BasicTemplate: Story<AlertDialogProps> = args => {
   );
 };
 
-export const Basic = BasicTemplate.bind({});
-Basic.args = {};
-Basic.parameters = {
-  controls: { include: ['closeOnEsc', 'closeOnOverlayClick', 'size'] },
+export const Basic = {
+  render: BasicTemplate,
+  args: {},
+
+  parameters: {
+    controls: { include: ['closeOnEsc', 'closeOnOverlayClick', 'size'] },
+  },
 };
 
-const FinalFocusRefTemplate: Story<AlertDialogProps> = args => {
+const FinalFocusRefTemplate: StoryFn<AlertDialogProps> = args => {
   const [isOpen, setOpen] = useState(false);
   const cancelButtonRef = useRef<HTMLButtonElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
@@ -139,8 +142,11 @@ const FinalFocusRefTemplate: Story<AlertDialogProps> = args => {
   );
 };
 
-export const FinalFocusRef = FinalFocusRefTemplate.bind({});
-FinalFocusRef.args = {};
-FinalFocusRef.parameters = {
-  controls: { include: ['closeOnEsc', 'closeOnOverlayClick', 'size'] },
+export const FinalFocusRef = {
+  render: FinalFocusRefTemplate,
+  args: {},
+
+  parameters: {
+    controls: { include: ['closeOnEsc', 'closeOnOverlayClick', 'size'] },
+  },
 };

@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Portal from '.';
@@ -12,14 +12,17 @@ export default {
   },
   component: Portal,
   title: 'Supernova UI/Other/Portal',
-} as ComponentMeta<typeof Portal>;
+} as Meta<typeof Portal>;
 
-const Template: ComponentStory<typeof Portal> = args => (
+const Template: StoryFn<typeof Portal> = args => (
   <Portal {...args}>This text has been rendered in a React Portal.</Portal>
 );
 
-export const Basic = Template.bind({});
-Basic.args = {};
-Basic.parameters = {
-  controls: { exclude: ['id'] },
+export const Basic = {
+  render: Template,
+  args: {},
+
+  parameters: {
+    controls: { exclude: ['id'] },
+  },
 };

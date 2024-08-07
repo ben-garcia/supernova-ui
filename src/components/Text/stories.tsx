@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Text from '.';
@@ -29,15 +29,14 @@ export default {
   },
   component: Text,
   title: 'Supernova UI/Typography/Text',
-} as ComponentMeta<typeof Text>;
+} as Meta<typeof Text>;
 
-const Template: ComponentStory<typeof Text> = args => <Text {...args} />;
+export const Basic = {
+  args: {
+    children: 'text',
+  },
 
-export const Basic = Template.bind({});
-
-Basic.args = {
-  children: 'text',
-};
-Basic.parameters = {
-  controls: { include: ['tag'] },
+  parameters: {
+    controls: { include: ['tag'] },
+  },
 };

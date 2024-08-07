@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import TextInput from '.';
@@ -20,7 +20,7 @@ export default {
   },
   component: TextInput,
   title: 'Supernova UI/Form/TextInput',
-} as ComponentMeta<typeof TextInput>;
+} as Meta<typeof TextInput>;
 
 const label = 'Reveal your secrets here';
 const parameters = {
@@ -36,15 +36,12 @@ const parameters = {
   },
 };
 
-const Template: ComponentStory<typeof TextInput> = args => (
-  <TextInput {...args} />
-);
+export const Basic = {
+  args: { label },
+  parameters: parameters,
+};
 
-export const Basic = Template.bind({});
-Basic.args = { label };
-Basic.parameters = parameters;
-
-const WithIconsTemplate: ComponentStory<typeof TextInput> = args => (
+const WithIconsTemplate: StoryFn<typeof TextInput> = args => (
   <TextInput {...args} />
 );
 const WithIcons = WithIconsTemplate.bind({});
@@ -54,22 +51,20 @@ WithIcons.args = {
   rightIcon: <SearchIcon height="100%" width="100" />,
 };
 
-const WithLeftIconTemplate: ComponentStory<typeof TextInput> = args => (
-  <TextInput {...args} />
-);
-export const WithLeftIcon = WithLeftIconTemplate.bind({});
-WithLeftIcon.args = {
-  label,
-  leftIcon: <UserIcon height="100%" width="100" />,
-};
-WithLeftIcon.parameters = parameters;
+export const WithLeftIcon = {
+  args: {
+    label,
+    leftIcon: <UserIcon height="100%" width="100" />,
+  },
 
-const WithRightIconTemplate: ComponentStory<typeof TextInput> = args => (
-  <TextInput {...args} />
-);
-export const WithRightIcon = WithRightIconTemplate.bind({});
-WithRightIcon.args = {
-  label,
-  rightIcon: <SearchIcon height="100%" width="100" />,
+  parameters: parameters,
 };
-WithRightIcon.parameters = parameters;
+
+export const WithRightIcon = {
+  args: {
+    label,
+    rightIcon: <SearchIcon height="100%" width="100" />,
+  },
+
+  parameters: parameters,
+};

@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Button } from '@components';
@@ -41,7 +41,7 @@ export default {
   },
   component: Button,
   title: 'Supernova UI/Form/Button',
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
 const parameters = {
   controls: {
@@ -56,52 +56,56 @@ const parameters = {
   },
 };
 
-const Template: ComponentStory<typeof Button> = args => <Button {...args} />;
+export const Basic = {
+  args: {
+    children: 'Submit',
+  },
 
-export const Basic = Template.bind({});
-
-Basic.args = {
-  children: 'Submit',
+  parameters: parameters,
 };
-Basic.parameters = parameters;
 
-export const WithLeftIcon = Template.bind({});
+export const WithLeftIcon = {
+  args: {
+    children: 'Back',
+    leftIcon: <ArrowLeftIcon color="#fff" />,
+  },
 
-WithLeftIcon.args = {
-  children: 'Back',
-  leftIcon: <ArrowLeftIcon color="#fff" />,
+  parameters: parameters,
 };
-WithLeftIcon.parameters = parameters;
 
-export const WithIcons = Template.bind({});
+export const WithIcons = {
+  args: {
+    children: 'Submit',
+    leftIcon: <ArrowLeftIcon color="#fff" />,
+    rightIcon: <ArrowRightIcon color="#fff" />,
+  },
 
-WithIcons.args = {
-  children: 'Submit',
-  leftIcon: <ArrowLeftIcon color="#fff" />,
-  rightIcon: <ArrowRightIcon color="#fff" />,
+  parameters: parameters,
 };
-WithIcons.parameters = parameters;
 
-export const WithRightIcon = Template.bind({});
+export const WithRightIcon = {
+  args: {
+    children: 'SignIn',
+    rightIcon: <ArrowRightIcon color="#fff" />,
+  },
 
-WithRightIcon.args = {
-  children: 'SignIn',
-  rightIcon: <ArrowRightIcon color="#fff" />,
+  parameters: parameters,
 };
-WithRightIcon.parameters = parameters;
 
-export const AsIcon = Template.bind({});
+export const AsIcon = {
+  args: {
+    children: <UserIcon color="#000" />,
+    variant: 'outline',
+  },
 
-AsIcon.args = {
-  children: <UserIcon color="#000" />,
-  variant: 'outline',
+  parameters: parameters,
 };
-AsIcon.parameters = parameters;
 
-export const WithCustomSpinner = Template.bind({});
+export const WithCustomSpinner = {
+  args: {
+    children: 'Custom spinner',
+    spinner: <LinkIcon />,
+  },
 
-WithCustomSpinner.args = {
-  children: 'Custom spinner',
-  spinner: <LinkIcon />,
+  parameters: parameters,
 };
-WithCustomSpinner.parameters = parameters;

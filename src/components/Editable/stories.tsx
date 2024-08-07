@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
 import {
@@ -21,7 +21,7 @@ export default {
   },
   component: Editable,
   title: 'Supernova UI/Form/Editable',
-} as ComponentMeta<typeof Editable>;
+} as Meta<typeof Editable>;
 
 const parameters = {
   controls: {
@@ -35,7 +35,7 @@ const parameters = {
   },
 };
 
-const Template: ComponentStory<typeof Editable> = args => {
+const Template: StoryFn<typeof Editable> = args => {
   const [value, setValue] = useState('edit');
   return (
     <Box border="1px solid #ccc" padding="5px">
@@ -47,10 +47,12 @@ const Template: ComponentStory<typeof Editable> = args => {
   );
 };
 
-export const WithInput = Template.bind({});
-WithInput.parameters = parameters;
+export const WithInput = {
+  render: Template,
+  parameters: parameters,
+};
 
-const WithTextareaTemplate: ComponentStory<any> = args => {
+const WithTextareaTemplate: StoryFn<any> = args => {
   const [value, setValue] = useState('edit');
   return (
     <Box border="1px solid #ccc" padding="5px">
@@ -62,16 +64,15 @@ const WithTextareaTemplate: ComponentStory<any> = args => {
   );
 };
 
-export const WithTextarea = WithTextareaTemplate.bind({});
-WithTextarea.parameters = parameters;
+export const WithTextarea = {
+  render: WithTextareaTemplate,
+  parameters: parameters,
+};
 
 const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
   const { isAutoResize } = props;
-  const {
-    isEditing,
-    getCancelButtonProps,
-    getSubmitButtonProps,
-  } = useEditableControls();
+  const { isEditing, getCancelButtonProps, getSubmitButtonProps } =
+    useEditableControls();
 
   return (
     <Box border="1px solid #ccc" padding="5px" position="relative">
@@ -107,7 +108,7 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
   );
 };
 
-const WithCustomTextareaTemplate: ComponentStory<any> = args => {
+const WithCustomTextareaTemplate: StoryFn<any> = args => {
   const [value, setValue] = useState('Add description');
   return (
     <Editable {...args} onChange={val => setValue(val)} value={value}>
@@ -116,15 +117,14 @@ const WithCustomTextareaTemplate: ComponentStory<any> = args => {
   );
 };
 
-export const WithCustomTextarea = WithCustomTextareaTemplate.bind({});
-WithCustomTextarea.parameters = parameters;
+export const WithCustomTextarea = {
+  render: WithCustomTextareaTemplate,
+  parameters: parameters,
+};
 
 const CustomEditableInput = () => {
-  const {
-    isEditing,
-    getCancelButtonProps,
-    getSubmitButtonProps,
-  } = useEditableControls();
+  const { isEditing, getCancelButtonProps, getSubmitButtonProps } =
+    useEditableControls();
 
   return (
     <Box
@@ -150,7 +150,7 @@ const CustomEditableInput = () => {
   );
 };
 
-const WithCustomInput: ComponentStory<typeof Editable> = args => {
+const WithCustomInput: StoryFn<typeof Editable> = args => {
   const [value, setValue] = useState('Add description');
   return (
     <Editable {...args} onChange={val => setValue(val)} value={value}>
@@ -159,5 +159,7 @@ const WithCustomInput: ComponentStory<typeof Editable> = args => {
   );
 };
 
-export const CustomInput = WithCustomInput.bind({});
-CustomInput.parameters = parameters;
+export const CustomInput = {
+  render: WithCustomInput,
+  parameters: parameters,
+};

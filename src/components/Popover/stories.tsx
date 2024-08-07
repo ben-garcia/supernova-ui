@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
 import {
@@ -69,7 +69,7 @@ export default {
   title: 'Supernova UI/Overlay/Popover',
 } as Meta;
 
-const BasicTemplate: Story<PopoverProps> = args => {
+const BasicTemplate: StoryFn<PopoverProps> = args => {
   const {
     closeOnBlur,
     closeOnEsc,
@@ -111,11 +111,13 @@ const BasicTemplate: Story<PopoverProps> = args => {
   );
 };
 
-export const Basic = BasicTemplate.bind({});
-Basic.args = {};
-Basic.parameters = parameters;
+export const Basic = {
+  render: BasicTemplate,
+  args: {},
+  parameters: parameters,
+};
 
-const FinalFocusRefTemplate: Story<PopoverProps> = args => {
+const FinalFocusRefTemplate: StoryFn<PopoverProps> = args => {
   const {
     closeOnBlur,
     closeOnEsc,
@@ -181,11 +183,13 @@ const FinalFocusRefTemplate: Story<PopoverProps> = args => {
   );
 };
 
-export const FinalFocusRef = FinalFocusRefTemplate.bind({});
-FinalFocusRef.args = {};
-FinalFocusRef.parameters = parameters;
+export const FinalFocusRef = {
+  render: FinalFocusRefTemplate,
+  args: {},
+  parameters: parameters,
+};
 
-const ReferenceTemplate: Story<PopoverProps> = args => {
+const ReferenceTemplate: StoryFn<PopoverProps> = args => {
   const { closeOnBlur, closeOnEsc, trapFocus, ...rest } = args;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
@@ -224,18 +228,21 @@ const ReferenceTemplate: Story<PopoverProps> = args => {
   );
 };
 
-export const Reference = ReferenceTemplate.bind({});
-Reference.args = {};
-Reference.parameters = {
-  controls: {
-    include: [
-      'arrowSize',
-      'closeOnBlur',
-      'closeOnEsc',
-      'placement',
-      'spacing',
-      'withArrow',
-      'trapFocus',
-    ],
+export const Reference = {
+  render: ReferenceTemplate,
+  args: {},
+
+  parameters: {
+    controls: {
+      include: [
+        'arrowSize',
+        'closeOnBlur',
+        'closeOnEsc',
+        'placement',
+        'spacing',
+        'withArrow',
+        'trapFocus',
+      ],
+    },
   },
 };

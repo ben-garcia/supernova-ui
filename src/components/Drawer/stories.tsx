@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
 import {
@@ -47,7 +47,7 @@ const parameters = {
   },
 };
 
-const BasicTemplate: Story<DrawerProps> = args => {
+const BasicTemplate: StoryFn<DrawerProps> = args => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
   return (
@@ -75,11 +75,13 @@ const BasicTemplate: Story<DrawerProps> = args => {
   );
 };
 
-export const Basic = BasicTemplate.bind({});
-Basic.args = {};
-Basic.parameters = parameters;
+export const Basic = {
+  render: BasicTemplate,
+  args: {},
+  parameters: parameters,
+};
 
-const FinalFocusRefTemplate: Story<DrawerProps> = args => {
+const FinalFocusRefTemplate: StoryFn<DrawerProps> = args => {
   const [isOpen, setOpen] = useState(false);
   const initialFocusRef = useRef<HTMLInputElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
@@ -127,6 +129,8 @@ const FinalFocusRefTemplate: Story<DrawerProps> = args => {
   );
 };
 
-export const FinalFocusRef = FinalFocusRefTemplate.bind({});
-FinalFocusRef.args = {};
-FinalFocusRef.parameters = parameters;
+export const FinalFocusRef = {
+  render: FinalFocusRefTemplate,
+  args: {},
+  parameters: parameters,
+};

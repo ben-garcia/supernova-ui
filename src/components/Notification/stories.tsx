@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Box, Button, Paragraph } from '@components';
@@ -46,7 +46,7 @@ const parameters = {
   },
 };
 
-const Template: Story<any> = args => {
+const Template: StoryFn<any> = args => {
   const notification = useNotification();
 
   const handleClick = () => {
@@ -60,10 +60,12 @@ const Template: Story<any> = args => {
   );
 };
 
-export const Basic = Template.bind({});
-Basic.parameters = parameters;
+export const Basic = {
+  render: Template,
+  parameters: parameters,
+};
 
-const WithCustomTemplate: Story<any> = args => {
+const WithCustomTemplate: StoryFn<any> = args => {
   const notification = useNotification();
 
   const handleTemplate = () => {
@@ -88,5 +90,7 @@ const WithCustomTemplate: Story<any> = args => {
   return <Button onClick={handleTemplate}>Open</Button>;
 };
 
-export const WithCustom = WithCustomTemplate.bind({});
-WithCustom.parameters = parameters;
+export const WithCustom = {
+  render: WithCustomTemplate,
+  parameters: parameters,
+};

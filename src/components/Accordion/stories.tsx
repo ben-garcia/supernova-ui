@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -16,13 +16,13 @@ export default {
   },
   component: Accordion,
   title: 'Supernova UI/Disclosure/Accordion',
-} as ComponentMeta<typeof Accordion>;
+} as Meta<typeof Accordion>;
 
 const parameters = {
   controls: { include: ['allowMultiple', 'allowToggle', 'defaultIndices'] },
 };
 
-const Template: ComponentStory<typeof Accordion> = args => (
+const Template: StoryFn<typeof Accordion> = args => (
   <Accordion {...args}>
     <AccordionItem>
       <AccordionHeaderButton>Section 1</AccordionHeaderButton>
@@ -55,5 +55,7 @@ const Template: ComponentStory<typeof Accordion> = args => (
   </Accordion>
 );
 
-export const Basic = Template.bind({});
-Basic.parameters = parameters;
+export const Basic = {
+  render: Template,
+  parameters: parameters,
+};

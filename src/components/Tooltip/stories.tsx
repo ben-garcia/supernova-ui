@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Box, Button, Tooltip } from '@components';
@@ -54,32 +54,38 @@ export default {
   },
   component: Tooltip,
   title: 'Supernova UI/Overlay/Tooltip',
-} as ComponentMeta<typeof Tooltip>;
+} as Meta<typeof Tooltip>;
 
-const Template: ComponentStory<typeof Tooltip> = args => (
+const Template: StoryFn<typeof Tooltip> = args => (
   <Box>
     <Tooltip {...args} />
   </Box>
 );
 
-export const Basic = Template.bind({});
-Basic.args = {
-  children: 'Hover me',
-  label: 'this is the label',
-};
-Basic.parameters = parameters;
+export const Basic = {
+  render: Template,
 
-const WithButtonTemplate: ComponentStory<typeof Tooltip> = args => (
+  args: {
+    children: 'Hover me',
+    label: 'this is the label',
+  },
+
+  parameters: parameters,
+};
+
+const WithButtonTemplate: StoryFn<typeof Tooltip> = args => (
   <Tooltip {...args}>
     <Button>button</Button>
   </Tooltip>
 );
 
-export const WithButton = WithButtonTemplate.bind({});
-WithButton.args = { label: 'this is a Button' };
-WithButton.parameters = parameters;
+export const WithButton = {
+  render: WithButtonTemplate,
+  args: { label: 'this is a Button' },
+  parameters: parameters,
+};
 
-const PlacementsTemplate: ComponentStory<typeof Tooltip> = args => (
+const PlacementsTemplate: StoryFn<typeof Tooltip> = args => (
   <Box
     alignItems="center"
     display="flex"
@@ -126,18 +132,21 @@ const PlacementsTemplate: ComponentStory<typeof Tooltip> = args => (
   </Box>
 );
 
-export const Placements = PlacementsTemplate.bind({});
-Placements.args = {};
-Placements.parameters = {
-  controls: {
-    include: [
-      'arrowSize',
-      'closeDelay',
-      'colorVariant',
-      'isDisabled',
-      'openDelay',
-      'spacing',
-      'withArrow',
-    ],
+export const Placements = {
+  render: PlacementsTemplate,
+  args: {},
+
+  parameters: {
+    controls: {
+      include: [
+        'arrowSize',
+        'closeDelay',
+        'colorVariant',
+        'isDisabled',
+        'openDelay',
+        'spacing',
+        'withArrow',
+      ],
+    },
   },
 };
