@@ -38,12 +38,8 @@ const SliderThumb: FC<SliderThumbProps> = props => {
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       if (thumbRef?.current) {
-        const {
-          bottom,
-          height,
-          left,
-          width,
-        } = railRef.current!.getBoundingClientRect();
+        const { bottom, height, left, width } =
+          railRef.current!.getBoundingClientRect();
 
         if (step === 1) {
           const { pageX, pageY } = e;

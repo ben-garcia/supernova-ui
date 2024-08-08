@@ -57,5 +57,5 @@ const Template: StoryFn<typeof Accordion> = args => (
 
 export const Basic = {
   render: Template,
-  parameters: parameters,
+  parameters,
 };

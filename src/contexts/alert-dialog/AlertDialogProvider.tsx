@@ -10,7 +10,6 @@ const initialState: AlertDialogContextProps = {
   onClose: () => {},
 };
 
-export const AlertDialogContext = createContext<AlertDialogContextProps>(
-  initialState
-);
+export const AlertDialogContext =
+  createContext<AlertDialogContextProps>(initialState);
 export const AlertDialogProvider = AlertDialogContext.Provider;

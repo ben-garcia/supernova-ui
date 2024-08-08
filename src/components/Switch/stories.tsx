@@ -34,7 +34,7 @@ const label = 'Reveal your secrets?';
 
 export const Basic = {
   args: { label },
-  parameters: parameters,
+  parameters,
 };
 
 const ControlledTemplate: StoryFn<typeof Switch> = () => {
@@ -55,5 +55,5 @@ const ControlledTemplate: StoryFn<typeof Switch> = () => {
 export const Controlled = {
   render: ControlledTemplate,
   args: { label },
-  parameters: parameters,
+  parameters,
 };

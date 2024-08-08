@@ -117,9 +117,8 @@ const MenuItem = forwardRef<MenuItemProps, HTMLButtonElement>((props, ref) => {
           setFocusedIndex(menuItemsContent[lowerCaseKey][0]);
         } else {
           // the position of the focused index in the menuItemsContent[lowerCaseKey] array
-          const positionInTheArray = menuItemsContent[lowerCaseKey].indexOf(
-            focusedIndex
-          );
+          const positionInTheArray =
+            menuItemsContent[lowerCaseKey].indexOf(focusedIndex);
 
           // if it's the last index in the array
           if (

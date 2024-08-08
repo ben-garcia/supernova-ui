@@ -20,12 +20,8 @@ const SliderRail: FC<SliderRailProps> = props => {
   const handleClick = React.useCallback(
     (e: React.MouseEvent) => {
       if (sliderRailRef?.current) {
-        const {
-          bottom,
-          height,
-          left,
-          width,
-        } = sliderRailRef.current.getBoundingClientRect();
+        const { bottom, height, left, width } =
+          sliderRailRef.current.getBoundingClientRect();
 
         if (step === 1) {
           const { pageX, pageY } = e;

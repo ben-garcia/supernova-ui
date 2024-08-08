@@ -1,5 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react';
-import React from 'react';
+import { Meta } from '@storybook/react';
 
 import Textarea from '.';
 
@@ -26,10 +25,10 @@ const label = 'Reveal your secrets';
 
 export const Basic = {
   args: { label },
-  parameters: parameters,
+  parameters,
 };
 
 export const FloatingLabel = {
   args: { label },
-  parameters: parameters,
+  parameters,
 };

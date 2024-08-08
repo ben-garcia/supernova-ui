@@ -49,16 +49,17 @@ const Template: StoryFn<typeof Editable> = args => {
 
 export const WithInput = {
   render: Template,
-  parameters: parameters,
+  parameters,
 };
 
 const WithTextareaTemplate: StoryFn<any> = args => {
   const [value, setValue] = useState('edit');
+  const { isAutoResize, ...rest } = args;
   return (
     <Box border="1px solid #ccc" padding="5px">
-      <Editable {...args} onChange={val => setValue(val)} value={value}>
+      <Editable {...rest} onChange={val => setValue(val)} value={value}>
         <EditablePreview />
-        <EditableTextarea isAutoResize={args.isAutoResize} />
+        <EditableTextarea isAutoResize={isAutoResize} />
       </Editable>
     </Box>
   );
@@ -66,7 +67,7 @@ const WithTextareaTemplate: StoryFn<any> = args => {
 
 export const WithTextarea = {
   render: WithTextareaTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
@@ -110,16 +111,17 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
 
 const WithCustomTextareaTemplate: StoryFn<any> = args => {
   const [value, setValue] = useState('Add description');
+  const { isAutoResize, ...rest } = args;
   return (
-    <Editable {...args} onChange={val => setValue(val)} value={value}>
-      <CustomEditableTextarea isAutoResize={args.isAutoResize} />
+    <Editable {...rest} onChange={val => setValue(val)} value={value}>
+      <CustomEditableTextarea isAutoResize={isAutoResize} />
     </Editable>
   );
 };
 
 export const WithCustomTextarea = {
   render: WithCustomTextareaTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const CustomEditableInput = () => {
@@ -161,5 +163,5 @@ const WithCustomInput: StoryFn<typeof Editable> = args => {
 
 export const CustomInput = {
   render: WithCustomInput,
-  parameters: parameters,
+  parameters,
 };

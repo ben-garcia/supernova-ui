@@ -28,8 +28,8 @@ export const useCreateClassString = (
   );
 
   // combine all the classes into a single string
-  return useCallback(() => ({ className: classes.join(' ') }), [
-    initialClass,
-    classesToAdd,
-  ]);
+  return useCallback(
+    () => ({ className: classes.join(' ') }),
+    [initialClass, classesToAdd]
+  );
 };

@@ -44,7 +44,7 @@ const WithCheckboxTemplate: StoryFn<typeof FormControl> = args => (
 
 export const WithCheckbox = {
   render: WithCheckboxTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const WithRadioGroupTemplate: StoryFn<typeof FormControl> = args => {
@@ -64,7 +64,7 @@ const WithRadioGroupTemplate: StoryFn<typeof FormControl> = args => {
 
 export const WithRadioGroup = {
   render: WithRadioGroupTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const WithSwitchTemplate: StoryFn<typeof FormControl> = args => (
@@ -77,7 +77,7 @@ const WithSwitchTemplate: StoryFn<typeof FormControl> = args => (
 
 export const WithSwitch = {
   render: WithSwitchTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const WithTextareaTemplate: StoryFn<typeof FormControl> = args => (
@@ -92,7 +92,7 @@ const WithTextareaTemplate: StoryFn<typeof FormControl> = args => (
 
 export const WithTextarea = {
   render: WithTextareaTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const WithTextInputTemplate: StoryFn<typeof FormControl> = args => (
@@ -109,5 +109,5 @@ const WithTextInputTemplate: StoryFn<typeof FormControl> = args => (
 
 export const WithTextInput = {
   render: WithTextInputTemplate,
-  parameters: parameters,
+  parameters,
 };

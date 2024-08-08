@@ -27,11 +27,14 @@ export default {
 
 // parent element must have a height for
 // orientation of vertial to work correctly.
-const Template: StoryFn<typeof Divider> = args => (
-  <Box height={args.orientation === 'vertical' ? '200px' : undefined}>
-    <Divider {...args} />
-  </Box>
-);
+const Template: StoryFn<typeof Divider> = args => {
+  const { orientation, ...rest } = args;
+  return (
+    <Box height={orientation === 'vertical' ? '200px' : undefined}>
+      <Divider {...rest} />
+    </Box>
+  );
+};
 
 export const Basic = {
   render: Template,

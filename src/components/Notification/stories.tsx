@@ -62,7 +62,7 @@ const Template: StoryFn<any> = args => {
 
 export const Basic = {
   render: Template,
-  parameters: parameters,
+  parameters,
 };
 
 const WithCustomTemplate: StoryFn<any> = args => {
@@ -92,5 +92,5 @@ const WithCustomTemplate: StoryFn<any> = args => {
 
 export const WithCustom = {
   render: WithCustomTemplate,
-  parameters: parameters,
+  parameters,
 };

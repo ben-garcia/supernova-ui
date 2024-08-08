@@ -29,11 +29,8 @@ const Radio = forwardRef<RadioProps, HTMLInputElement>((props, ref) => {
     size = 'md',
     ...rest
   } = props;
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(rest);
+  const { remainingProps, validatedCSSProps, validatedPseudoClassProps } =
+    useValidateProps(rest);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const {

@@ -78,7 +78,7 @@ const BasicTemplate: StoryFn<DrawerProps> = args => {
 export const Basic = {
   render: BasicTemplate,
   args: {},
-  parameters: parameters,
+  parameters,
 };
 
 const FinalFocusRefTemplate: StoryFn<DrawerProps> = args => {
@@ -132,5 +132,5 @@ const FinalFocusRefTemplate: StoryFn<DrawerProps> = args => {
 export const FinalFocusRef = {
   render: FinalFocusRefTemplate,
   args: {},
-  parameters: parameters,
+  parameters,
 };

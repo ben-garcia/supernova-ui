@@ -63,9 +63,8 @@ describe('<FormControl />', () => {
     const errorMessageElement = getByTestId('error-message');
 
     helperTextId = getByTestId('helper-text').getAttribute('id');
-    inputElementIds = getByTestId('text-input').getAttribute(
-      'aria-describedby'
-    );
+    inputElementIds =
+      getByTestId('text-input').getAttribute('aria-describedby');
 
     expect(inputElementIds).toBe(
       `${errorMessageElement.getAttribute('id')} ${helperTextId}`

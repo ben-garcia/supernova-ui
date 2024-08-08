@@ -151,9 +151,8 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   // set a reference to the list of button menu items
   useEffect(() => {
     if (menuButtonRef?.current) {
-      (menuButtonItemsRef.current as any) = menuListRef?.current?.querySelectorAll(
-        'button[role="menuitem"]'
-      );
+      (menuButtonItemsRef.current as any) =
+        menuListRef?.current?.querySelectorAll('button[role="menuitem"]');
     }
   }, [menuListRef?.current]);
 

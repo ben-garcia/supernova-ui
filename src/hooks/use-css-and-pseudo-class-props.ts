@@ -20,11 +20,8 @@ export const useCSSAndPseudoClassProps = (
   initialClass: string,
   classesToAdd?: ClassesToAdd
 ) => {
-  const {
-    remainingProps,
-    validatedCSSProps,
-    validatedPseudoClassProps,
-  } = useValidateProps(props);
+  const { remainingProps, validatedCSSProps, validatedPseudoClassProps } =
+    useValidateProps(props);
   const pseudoClassName = usePseudoClasses(validatedPseudoClassProps);
   const stylesClassName = useClassStyles(validatedCSSProps);
   const addClasses = useCreateClassString(initialClass, {

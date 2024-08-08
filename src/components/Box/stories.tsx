@@ -1,5 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react';
-import React from 'react';
+import { Meta } from '@storybook/react';
 
 import Box from '.';
 
@@ -21,7 +20,6 @@ export const Basic = {
   args: {
     children: 'This is a box',
   },
-
   parameters: {
     controls: { include: ['tag'] },
   },

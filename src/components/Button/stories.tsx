@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import React from 'react';
 
 import { Button } from '@components';
@@ -61,7 +61,7 @@ export const Basic = {
     children: 'Submit',
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 export const WithLeftIcon = {
@@ -70,7 +70,7 @@ export const WithLeftIcon = {
     leftIcon: <ArrowLeftIcon color="#fff" />,
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 export const WithIcons = {
@@ -80,7 +80,7 @@ export const WithIcons = {
     rightIcon: <ArrowRightIcon color="#fff" />,
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 export const WithRightIcon = {
@@ -89,7 +89,7 @@ export const WithRightIcon = {
     rightIcon: <ArrowRightIcon color="#fff" />,
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 export const AsIcon = {
@@ -98,7 +98,7 @@ export const AsIcon = {
     variant: 'outline',
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 export const WithCustomSpinner = {
@@ -107,5 +107,5 @@ export const WithCustomSpinner = {
     spinner: <LinkIcon />,
   },
 
-  parameters: parameters,
+  parameters,
 };

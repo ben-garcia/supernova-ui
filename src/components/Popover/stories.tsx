@@ -114,7 +114,7 @@ const BasicTemplate: StoryFn<PopoverProps> = args => {
 export const Basic = {
   render: BasicTemplate,
   args: {},
-  parameters: parameters,
+  parameters,
 };
 
 const FinalFocusRefTemplate: StoryFn<PopoverProps> = args => {
@@ -186,7 +186,7 @@ const FinalFocusRefTemplate: StoryFn<PopoverProps> = args => {
 export const FinalFocusRef = {
   render: FinalFocusRefTemplate,
   args: {},
-  parameters: parameters,
+  parameters,
 };
 
 const ReferenceTemplate: StoryFn<PopoverProps> = args => {

@@ -68,7 +68,7 @@ const Template: StoryFn<typeof Menu> = args => {
 
 export const Basic = {
   render: Template,
-  parameters: parameters,
+  parameters,
 };
 
 const WithGroupTemplate: StoryFn<typeof Menu> = args => {
@@ -107,7 +107,7 @@ const WithGroupTemplate: StoryFn<typeof Menu> = args => {
 
 export const WithGroup = {
   render: WithGroupTemplate,
-  parameters: parameters,
+  parameters,
 };
 
 const WithIconsTemplate: StoryFn<typeof Menu> = args => {
@@ -158,5 +158,5 @@ const WithIconsTemplate: StoryFn<typeof Menu> = args => {
 
 export const WithIcons = {
   render: WithIconsTemplate,
-  parameters: parameters,
+  parameters,
 };

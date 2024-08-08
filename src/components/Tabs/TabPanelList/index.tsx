@@ -23,9 +23,8 @@ const TabPanelList: FC<TabPanelListProps> = props => {
     if (tabPanelListRef?.current) {
       // check for all the focusable buttons(not disabled) of the tab list node
       const updateFocusableItems = () => {
-        const tabPanels = tabPanelListRef.current!.querySelectorAll(
-          '[role="tabpanel"]'
-        );
+        const tabPanels =
+          tabPanelListRef.current!.querySelectorAll('[role="tabpanel"]');
 
         tabPanels.forEach((element, index) => {
           element.setAttribute('data-snui-tab-panel-index', `${index}`);

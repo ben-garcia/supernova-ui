@@ -12,9 +12,8 @@ export const useAccordionProvider = (
   const { defaultIndices = [] } = props;
 
   const id = useMemo(() => `snui-accordion-${Math.random()}`, []);
-  const [activeIndices, setActiveIndicesFunction] = useState<number[]>(
-    defaultIndices
-  );
+  const [activeIndices, setActiveIndicesFunction] =
+    useState<number[]>(defaultIndices);
 
   const getAccordionPanelProps = useCallback(
     (accordionItemProps = {}) => ({

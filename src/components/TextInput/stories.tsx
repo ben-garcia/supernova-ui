@@ -38,7 +38,7 @@ const parameters = {
 
 export const Basic = {
   args: { label },
-  parameters: parameters,
+  parameters,
 };
 
 const WithIconsTemplate: StoryFn<typeof TextInput> = args => (
@@ -57,7 +57,7 @@ export const WithLeftIcon = {
     leftIcon: <UserIcon height="100%" width="100" />,
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 export const WithRightIcon = {
@@ -66,5 +66,5 @@ export const WithRightIcon = {
     rightIcon: <SearchIcon height="100%" width="100" />,
   },
 
-  parameters: parameters,
+  parameters,
 };

@@ -42,13 +42,8 @@ const AccordionHeaderButton: FC<AccordionHeaderButtonProps> = props => {
     setActiveIndices,
     setFocusedIndex,
   } = useAccordion();
-  const {
-    accordionButtonId,
-    accordionPanelId,
-    isOpen,
-    onOpen,
-    onClose,
-  } = useAccordionItem();
+  const { accordionButtonId, accordionPanelId, isOpen, onOpen, onClose } =
+    useAccordionItem();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const buttonIndexRef = useRef<number>();
   const classes = createClasses('snui snui-accordion__button', {

@@ -51,11 +51,12 @@ const Template: StoryFn<typeof Radio> = args => {
 export const Basic = {
   render: Template,
   args: { label },
-  parameters: parameters,
+  parameters,
 };
 
 const RadioGroupTemplate: StoryFn<any> = args => {
   const [framework, setFramework] = React.useState('react');
+  const { direction } = args;
   return (
     <Box
       display="flex"
@@ -72,7 +73,7 @@ const RadioGroupTemplate: StoryFn<any> = args => {
         </Paragraph>
         <RadioGroup
           defaultValue={framework}
-          direction={args.direction}
+          direction={direction}
           name="frameworks"
           onChange={setFramework}
         >

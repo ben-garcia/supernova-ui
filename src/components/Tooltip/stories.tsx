@@ -70,7 +70,7 @@ export const Basic = {
     label: 'this is the label',
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 const WithButtonTemplate: StoryFn<typeof Tooltip> = args => (
@@ -82,7 +82,7 @@ const WithButtonTemplate: StoryFn<typeof Tooltip> = args => (
 export const WithButton = {
   render: WithButtonTemplate,
   args: { label: 'this is a Button' },
-  parameters: parameters,
+  parameters,
 };
 
 const PlacementsTemplate: StoryFn<typeof Tooltip> = args => (

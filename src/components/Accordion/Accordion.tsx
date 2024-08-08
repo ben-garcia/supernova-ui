@@ -48,9 +48,8 @@ const Accordion: FC<AccordionProps> = props => {
     const updateFocusableButtons = () => {
       setUpdatedButtonsRef(true);
 
-      (buttonsRef as any).current = accordionRef!.current!.querySelectorAll(
-        'button'
-      );
+      (buttonsRef as any).current =
+        accordionRef!.current!.querySelectorAll('button');
     };
     const observer = new MutationObserver(() => {
       updateFocusableButtons();

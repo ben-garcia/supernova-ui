@@ -37,7 +37,7 @@ export const Basic = {
     label,
   },
 
-  parameters: parameters,
+  parameters,
 };
 
 const ControlledTemplate: StoryFn<typeof Checkbox> = args => {
@@ -63,5 +63,5 @@ export const Controlled = {
     label,
   },
 
-  parameters: parameters,
+  parameters,
 };

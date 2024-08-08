@@ -1,5 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react';
-import React from 'react';
+import { Meta } from '@storybook/react';
 
 import { colors } from '@utils';
 import Tag from '.';

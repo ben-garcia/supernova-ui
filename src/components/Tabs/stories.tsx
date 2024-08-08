@@ -82,5 +82,5 @@ const Template: StoryFn<typeof Tabs> = args => (
 export const Basic = {
   render: Template,
   args: {},
-  parameters: parameters,
+  parameters,
 };
