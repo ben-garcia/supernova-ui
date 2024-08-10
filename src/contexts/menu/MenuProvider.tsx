@@ -6,14 +6,17 @@ const initialState: Menu = {
   focusedIndex: -1,
   closeOnEsc: false,
   isOpen: false,
-  onClose: () => {},
-  getMenuItemProps: () => {},
-  getMenuListProps: () => {},
-  getMenuButtonProps: () => {},
+  onClose: () => { },
+  // @ts-expect-error
+  getMenuItemProps: () => { },
+  // @ts-expect-error
+  getMenuListProps: () => { },
+  // @ts-expect-error
+  getMenuButtonProps: () => { },
   menuListRef: null,
   menuButtonRef: null,
   menuId: '',
-  setFocusedIndex: () => {},
+  setFocusedIndex: () => { },
 };
 
 export const MenuContext = createContext<Menu>(initialState);

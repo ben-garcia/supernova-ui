@@ -1,4 +1,4 @@
-import { ReactNode, MutableRefObject } from 'react';
+import { FC, ReactNode, MutableRefObject } from 'react';
 
 import { DrawerProps } from '@components/Drawer/Drawer';
 import { DrawerBodyProps } from '@components/Drawer/DrawerBody';
@@ -11,9 +11,12 @@ export interface DrawerContextProps {
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
-  getDrawerBodyProps: (props: Omit<DrawerBodyProps, 'children'>) => void;
-  getDrawerFooterProps: (props: Omit<DrawerFooterProps, 'children'>) => void;
-  getDrawerHeaderProps: (props: Omit<DrawerHeaderProps, 'children'>) => void;
+  getDrawerBodyProps: (props: Omit<DrawerBodyProps, 'children'>) =>
+    FC<Omit<DrawerBodyProps, 'children'>>;
+  getDrawerFooterProps: (props: Omit<DrawerFooterProps, 'children'>) =>
+    FC<Omit<DrawerFooterProps, 'children'>>;
+  getDrawerHeaderProps: (props: Omit<DrawerHeaderProps, 'children'>) =>
+    FC<Omit<DrawerHeaderProps, 'children'>>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isExiting?: boolean;

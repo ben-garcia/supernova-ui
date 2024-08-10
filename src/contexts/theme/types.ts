@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { Theme } from '../../theme';
 
-interface ThemeProviderProps {
+export default interface ThemeProviderProps {
   children: ReactNode;
   /**
    * the theme object which will determine the look of the components.
@@ -22,5 +22,3 @@ interface ThemeProviderProps {
    */
   value: Theme;
 }
-
-export default ThemeProviderProps;

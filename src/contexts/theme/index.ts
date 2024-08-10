@@ -1,2 +1,2 @@
 export { ThemeContext, ThemeProvider } from './ThemeProvider';
-export * from './types';
+export { default as ThemeProviderProps } from './types';

@@ -4,7 +4,7 @@ import { useAlertDialog, useCSSAndPseudoClassProps } from '@hooks';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-export interface AlertDialogBodyProps extends SupernovaProps {}
+export interface AlertDialogBodyProps extends SupernovaProps { }
 
 /**
  * The wrapper for the header content of the AlertDialog.

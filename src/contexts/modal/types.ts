@@ -1,4 +1,4 @@
-import { ReactNode, MutableRefObject } from 'react';
+import { FC, ReactNode, MutableRefObject } from 'react';
 
 import { ModalBodyProps } from '@components/Modal/ModalBody';
 import { ModalFooterProps } from '@components/Modal/ModalFooter';
@@ -10,9 +10,12 @@ export interface ModalContextProps {
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
-  getModalBodyProps: (props: Omit<ModalBodyProps, 'children'>) => void;
-  getModalHeaderProps: (props: Omit<ModalHeaderProps, 'children'>) => void;
-  getModalFooterProps: (props: Omit<ModalFooterProps, 'children'>) => void;
+  getModalBodyProps: (props: Omit<ModalBodyProps, 'children'>) =>
+    FC<Omit<ModalBodyProps, 'children'>>;
+  getModalHeaderProps: (props: Omit<ModalHeaderProps, 'children'>) =>
+    FC<Omit<ModalHeaderProps, 'children'>>;
+  getModalFooterProps: (props: Omit<ModalFooterProps, 'children'>) =>
+    FC<Omit<ModalFooterProps, 'children'>>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isExiting?: boolean;

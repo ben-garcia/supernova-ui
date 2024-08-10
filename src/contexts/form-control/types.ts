@@ -1,4 +1,4 @@
-import { ReactNode, ForwardedRef } from 'react';
+import { FC, ReactNode, ForwardedRef } from 'react';
 
 import { FormControlProps } from '@components/FormControl/types';
 import { FormHelperTextProps } from '@components/FormControl/FormHelperText';
@@ -8,11 +8,11 @@ export interface FormControl
   getErrorMessageProps: (
     props: FormHelperTextProps,
     ref: ForwardedRef<HTMLDivElement>
-  ) => void;
+  ) => FC<Omit<FormHelperTextProps, 'children'>>;
   getHelpTextProps: (
     props: FormHelperTextProps,
     ref: ForwardedRef<HTMLDivElement>
-  ) => void;
+  ) => FC<Omit<FormHelperTextProps, 'children'>>;
   hasFeedbackText: boolean;
   hasHelpText: boolean;
   /**

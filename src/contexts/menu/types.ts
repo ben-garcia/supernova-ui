@@ -1,4 +1,4 @@
-import { ReactNode, MutableRefObject, RefObject } from 'react';
+import { FC, ReactNode, MutableRefObject, RefObject } from 'react';
 
 import { ButtonProps } from '@components/Button/types';
 import { MenuListProps } from '@components/Menu/MenuList';
@@ -10,15 +10,15 @@ export interface Menu {
   getMenuButtonProps: (
     props: ButtonProps,
     ref: RefObject<HTMLButtonElement>
-  ) => void;
+    ) => FC<Omit<ButtonProps, 'children'>>;
   getMenuItemProps: (
     props: MenuItemProps,
     ref: RefObject<HTMLButtonElement>
-  ) => void;
+    ) => FC<Omit<MenuItemProps, 'children'>>;
   getMenuListProps: (
     props: Omit<MenuListProps, 'children'>,
     ref: RefObject<HTMLDivElement>
-  ) => void;
+  ) => FC<Omit<MenuListProps, 'children'>>;
   isOpen: boolean;
   menuButtonRef: MutableRefObject<HTMLButtonElement | null> | null;
   menuId: string;

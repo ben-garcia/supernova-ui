@@ -1,4 +1,4 @@
-import { ReactNode, MutableRefObject, RefObject } from 'react';
+import { FC, ReactNode, MutableRefObject, RefObject } from 'react';
 
 import { ButtonProps } from '@components/Button/types';
 import { PopoverBodyProps } from '@components/Popover/PopoverBody';
@@ -9,13 +9,16 @@ export interface PopoverContextProps {
   closeOnBlur?: boolean;
   closeOnEsc?: boolean;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
-  getPopoverBodyProps: (props: Omit<PopoverBodyProps, 'children'>) => void;
+  getPopoverBodyProps: (props: Omit<PopoverBodyProps, 'children'>) =>
+    FC<Omit<PopoverBodyProps, 'children'>>;
   getPopoverButtonProps: (
     props: ButtonProps,
     ref: RefObject<HTMLButtonElement>
   ) => void;
-  getPopoverHeaderProps: (props: Omit<PopoverHeaderProps, 'children'>) => void;
-  getPopoverFooterProps: (props: Omit<PopoverFooterProps, 'children'>) => void;
+  getPopoverFooterProps: (props: Omit<PopoverFooterProps, 'children'>) =>
+    FC<Omit<PopoverFooterProps, 'children'>>;
+  getPopoverHeaderProps: (props: Omit<PopoverHeaderProps, 'children'>) =>
+    FC<Omit<PopoverHeaderProps, 'children'>>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isOpen: boolean;
