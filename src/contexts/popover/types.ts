@@ -9,16 +9,19 @@ export interface PopoverContextProps {
   closeOnBlur?: boolean;
   closeOnEsc?: boolean;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
-  getPopoverBodyProps: (props: Omit<PopoverBodyProps, 'children'>) =>
-    FC<Omit<PopoverBodyProps, 'children'>>;
+  getPopoverBodyProps: (
+    props: Omit<PopoverBodyProps, 'children'>
+  ) => FC<Omit<PopoverBodyProps, 'children'>>;
   getPopoverButtonProps: (
     props: ButtonProps,
     ref: RefObject<HTMLButtonElement>
   ) => void;
-  getPopoverFooterProps: (props: Omit<PopoverFooterProps, 'children'>) =>
-    FC<Omit<PopoverFooterProps, 'children'>>;
-  getPopoverHeaderProps: (props: Omit<PopoverHeaderProps, 'children'>) =>
-    FC<Omit<PopoverHeaderProps, 'children'>>;
+  getPopoverFooterProps: (
+    props: Omit<PopoverFooterProps, 'children'>
+  ) => FC<Omit<PopoverFooterProps, 'children'>>;
+  getPopoverHeaderProps: (
+    props: Omit<PopoverHeaderProps, 'children'>
+  ) => FC<Omit<PopoverHeaderProps, 'children'>>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isOpen: boolean;

@@ -10,11 +10,11 @@ export interface Menu {
   getMenuButtonProps: (
     props: ButtonProps,
     ref: RefObject<HTMLButtonElement>
-    ) => FC<Omit<ButtonProps, 'children'>>;
+  ) => FC<Omit<ButtonProps, 'children'>>;
   getMenuItemProps: (
     props: MenuItemProps,
     ref: RefObject<HTMLButtonElement>
-    ) => FC<Omit<MenuItemProps, 'children'>>;
+  ) => FC<Omit<MenuItemProps, 'children'>>;
   getMenuListProps: (
     props: Omit<MenuListProps, 'children'>,
     ref: RefObject<HTMLDivElement>

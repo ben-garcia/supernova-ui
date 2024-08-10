@@ -10,12 +10,15 @@ export interface ModalContextProps {
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
-  getModalBodyProps: (props: Omit<ModalBodyProps, 'children'>) =>
-    FC<Omit<ModalBodyProps, 'children'>>;
-  getModalHeaderProps: (props: Omit<ModalHeaderProps, 'children'>) =>
-    FC<Omit<ModalHeaderProps, 'children'>>;
-  getModalFooterProps: (props: Omit<ModalFooterProps, 'children'>) =>
-    FC<Omit<ModalFooterProps, 'children'>>;
+  getModalBodyProps: (
+    props: Omit<ModalBodyProps, 'children'>
+  ) => FC<Omit<ModalBodyProps, 'children'>>;
+  getModalHeaderProps: (
+    props: Omit<ModalHeaderProps, 'children'>
+  ) => FC<Omit<ModalHeaderProps, 'children'>>;
+  getModalFooterProps: (
+    props: Omit<ModalFooterProps, 'children'>
+  ) => FC<Omit<ModalFooterProps, 'children'>>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isExiting?: boolean;

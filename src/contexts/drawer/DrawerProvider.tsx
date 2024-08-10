@@ -4,13 +4,13 @@ import { DrawerContextProps } from './types';
 
 const initialState: DrawerContextProps = {
   // @ts-expect-error
-  getDrawerBodyProps: () => { },
+  getDrawerBodyProps: () => {},
   // @ts-expect-error
-  getDrawerHeaderProps: () => { },
+  getDrawerHeaderProps: () => {},
   // @ts-expect-error
-  getDrawerFooterProps: () => { },
+  getDrawerFooterProps: () => {},
   isOpen: false,
-  onClose: () => { },
+  onClose: () => {},
 };
 
 export const DrawerContext = createContext<DrawerContextProps>(initialState);

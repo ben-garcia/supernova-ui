@@ -8,13 +8,13 @@ const initialState: FormControl = {
   isInvalid: false,
   isRequired: false,
   hasHelpText: false,
-  setHasHelpText: () => { },
+  setHasHelpText: () => {},
   hasFeedbackText: false,
   // @ts-expect-error
-  getHelpTextProps: () => { },
-  setHasFeedbackText: () => { },
+  getHelpTextProps: () => {},
+  setHasFeedbackText: () => {},
   // @ts-expect-error
-  getErrorMessageProps: () => { },
+  getErrorMessageProps: () => {},
 };
 
 export const FormControlContext = createContext<FormControl>(initialState);

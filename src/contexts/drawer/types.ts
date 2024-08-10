@@ -11,12 +11,15 @@ export interface DrawerContextProps {
   closeOnOverlayClick?: boolean;
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
-  getDrawerBodyProps: (props: Omit<DrawerBodyProps, 'children'>) =>
-    FC<Omit<DrawerBodyProps, 'children'>>;
-  getDrawerFooterProps: (props: Omit<DrawerFooterProps, 'children'>) =>
-    FC<Omit<DrawerFooterProps, 'children'>>;
-  getDrawerHeaderProps: (props: Omit<DrawerHeaderProps, 'children'>) =>
-    FC<Omit<DrawerHeaderProps, 'children'>>;
+  getDrawerBodyProps: (
+    props: Omit<DrawerBodyProps, 'children'>
+  ) => FC<Omit<DrawerBodyProps, 'children'>>;
+  getDrawerFooterProps: (
+    props: Omit<DrawerFooterProps, 'children'>
+  ) => FC<Omit<DrawerFooterProps, 'children'>>;
+  getDrawerHeaderProps: (
+    props: Omit<DrawerHeaderProps, 'children'>
+  ) => FC<Omit<DrawerHeaderProps, 'children'>>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isExiting?: boolean;
