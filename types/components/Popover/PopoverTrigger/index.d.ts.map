@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/Popover/PopoverTrigger/index.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,EAAE,EAAE,MAAM,OAAO,CAAC;AAKlC,UAAU,mBAAmB;IAC3B,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;CAC3B;AAED;;GAEG;AACH,QAAA,MAAM,cAAc,EAAE,EAAE,CAAC,mBAAmB,CAY3C,CAAC;AAEF,eAAe,cAAc,CAAC"}

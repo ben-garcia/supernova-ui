@@ -1,0 +1,1 @@
+{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../../src/contexts/supernova/types.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,OAAO,CAAC;AAElC;;;;GAIG;AACH,aAAK,SAAS,GAAG,MAAM,CAAC,MAAM,EAAE,GAAG,CAAC,CAAC;AAErC,MAAM,WAAW,sBAAsB;IACrC,QAAQ,EAAE,SAAS,CAAC;IACpB;;;;OAIG;IACH,KAAK,CAAC,EAAE,SAAS,CAAC;CACnB"}
