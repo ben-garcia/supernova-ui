@@ -222,6 +222,7 @@
 .snui-margin-bottom-xxl {
   margin-bottom: var(--snui-space-xxl);
 }
+
 // css property: margin-right
 .snui-margin-right-xs {
   margin-right: var(--snui-space-xs);
@@ -777,7 +778,7 @@
   box-shadow: var(
     --snui-shadow-xs,
     rgba(8, 11, 14, 0.06) 0 0 1px 0,
-    rgba(8, 11, 14, 0.1) 0 1px 1px 0px
+    rgba(8, 11, 14, 0.1) 0 1px 1px 0
   ) !important;
 }
 
