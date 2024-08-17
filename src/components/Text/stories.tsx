@@ -19,10 +19,10 @@ const tags = [
   'u',
 ];
 export default {
+  args: { tag: 'span' },
   argTypes: {
     tag: {
       control: { type: 'select' },
-      defaultValue: 'span',
       options: tags,
     },
   },

@@ -32,11 +32,14 @@ import {
 } from './Icons';
 
 export default {
+  args: {
+    color: '#000',
+    size: 'sm',
+  },
   argTypes: {
-    color: { control: 'color', defaultValue: '#000' },
+    color: { control: 'color' },
     size: {
       control: 'select',
-      defaultValue: 'xs',
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'],
     },
   },

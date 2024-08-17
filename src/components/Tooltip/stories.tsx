@@ -21,19 +21,28 @@ const parameters = {
 };
 
 export default {
+  args: {
+    arrowSize: 10,
+    closeDelay: 0,
+    colorVariant: 'primary',
+    isDisabled: false,
+    placement: 'bottom',
+    openDelay: 0,
+    spacing: 5,
+    withArrow: false,
+  },
   argTypes: {
-    arrowSize: { control: { type: 'number' }, defaultValue: 10 },
-    closeDelay: { control: { type: 'number' }, defaultValue: 0 },
+    arrowSize: { control: { type: 'number' } },
+    closeDelay: { control: { type: 'number' } },
     colorVariant: {
       control: 'select',
       options: colors,
     },
-    isDisabled: { control: 'boolean', defaultValue: false },
+    isDisabled: { control: 'boolean' },
     label: { control: 'text' },
-    openDelay: { control: { type: 'number' }, defaultValue: 0 },
+    openDelay: { control: { type: 'number' } },
     placement: {
       control: 'select',
-      defaultValue: 'bottom',
       options: [
         'bottom',
         'bottom-end',
@@ -49,8 +58,8 @@ export default {
         'top-start',
       ],
     },
-    spacing: { control: { type: 'number' }, defaultValue: 5 },
-    withArrow: { control: 'boolean', defaultValue: false },
+    spacing: { control: { type: 'number' } },
+    withArrow: { control: 'boolean' },
   },
   component: Tooltip,
   title: 'Supernova UI/Overlay/Tooltip',

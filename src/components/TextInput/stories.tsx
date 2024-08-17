@@ -5,16 +5,19 @@ import TextInput from '.';
 import { UserIcon, SearchIcon } from '../Icon/Icons';
 
 export default {
+  args: {
+    isDisabled: false,
+    size: 'md',
+    variant: 'outline',
+  },
   argTypes: {
     isDisabled: { control: 'boolean', defaultValue: false },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: { type: 'radio' },
-      defaultValue: 'outline',
       options: ['filled', 'flushed', 'outline'],
     },
   },

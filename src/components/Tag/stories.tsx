@@ -4,6 +4,7 @@ import { colors } from '@utils';
 import Tag from '.';
 
 export default {
+  args: { colorVariant: 'primary', size: 'md', variant: 'solid'},
   argTypes: {
     colorVariant: {
       control: 'select',
@@ -11,12 +12,10 @@ export default {
     },
     size: {
       control: { type: 'select' },
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: { type: 'radio' },
-      defaultValue: 'solid',
       options: ['outline', 'solid'],
     },
   },

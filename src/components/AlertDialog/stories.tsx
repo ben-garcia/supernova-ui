@@ -16,18 +16,20 @@ import {
 import { AlertDialogProps } from '@components/AlertDialog/AlertDialog';
 
 export default {
+  args: {
+    closeOnEsc: true,
+    closeOnOverlayClick: true,
+    size: 'md',
+  },
   argTypes: {
     closeOnEsc: {
       control: 'boolean',
-      defaultValue: true,
     },
     closeOnOverlayClick: {
       control: 'boolean',
-      defaultValue: true,
     },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },

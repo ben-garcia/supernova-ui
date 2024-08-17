@@ -45,25 +45,32 @@ const parameters = {
 };
 
 export default {
+  args: {
+    arrowSize: 15,
+    closeOnEsc: true,
+    closeOnBlur: true,
+    placement: 'bottom',
+    shouldReturnFocusOnClose: true,
+    spacing: 5,
+    trapFocus: false,
+    withArrow: true,
+  },
   argTypes: {
-    arrowSize: { control: { type: 'number' }, defaultValue: 15 },
+    arrowSize: { control: { type: 'number' } },
     closeOnEsc: {
       control: 'boolean',
-      defaultValue: true,
     },
     closeOnBlur: {
       control: 'boolean',
-      defaultValue: true,
     },
     placement: {
       control: 'select',
-      defaultValue: 'bottom',
       options: placementOptions,
     },
-    shouldReturnFocusOnClose: { control: 'boolean', defaultValue: true },
-    spacing: { control: { type: 'number' }, defaultValue: 5 },
-    trapFocus: { control: 'boolean', defaultValue: false },
-    withArrow: { control: 'boolean', defaultValue: true },
+    shouldReturnFocusOnClose: { control: 'boolean' },
+    spacing: { control: { type: 'number' } },
+    trapFocus: { control: 'boolean' },
+    withArrow: { control: 'boolean' },
   },
   component: Popover,
   title: 'Supernova UI/Overlay/Popover',

@@ -3,10 +3,12 @@ import { Meta } from '@storybook/react';
 import Paragraph from '.';
 
 export default {
+  args: {
+    size: 'xl',
+    },
   argTypes: {
     size: {
       control: 'select',
-      defaultValue: 'xl',
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxl', 'xxxl'],
     },
   },

@@ -9,9 +9,13 @@ import {
 } from '@components';
 
 export default {
+  args: {
+    allowMultiple: false,
+    allowToggle: false,
+  },
   argTypes: {
-    allowMultiple: { control: 'boolean', defaultValue: false },
-    allowToggle: { control: 'boolean', defaultValue: false },
+    allowMultiple: { control: 'boolean' },
+    allowToggle: { control: 'boolean' },
     defaultIndices: { control: 'object' },
   },
   component: Accordion,

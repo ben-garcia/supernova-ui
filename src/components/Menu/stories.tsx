@@ -15,16 +15,22 @@ import {
 } from '@components';
 
 export default {
+  args: {
+    arrowSize: 15,
+    closeOnEsc: true,
+    placement: 'start',
+    spacing: 5,
+    withArrow: false,
+  },
   argTypes: {
-    arrowSize: { control: { type: 'number' }, defaultValue: 15 },
-    closeOnEsc: { control: 'boolean', defaultValue: true },
+    arrowSize: { control: { type: 'number' } },
+    closeOnEsc: { control: 'boolean' },
     placement: {
       control: 'select',
-      defaultValue: 'start',
       options: ['start', 'center', 'end'],
     },
-    spacing: { control: { type: 'number' }, defaultValue: 5 },
-    withArrow: { control: 'boolean', defaultValue: false },
+    spacing: { control: { type: 'number' } },
+    withArrow: { control: 'boolean' },
   },
   component: Menu,
   title: 'Supernova UI/Overlay/Menu',

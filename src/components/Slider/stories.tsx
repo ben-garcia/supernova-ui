@@ -10,6 +10,14 @@ import {
 } from '@components';
 
 export default {
+  args: {
+    activeColor: 'primary',
+    max: 100,
+    min: 0,
+    orientation: 'horizontal',
+    size: 'md',
+    step: 1,
+    },
   argTypes: {
     activeColor: {
       control: {
@@ -18,25 +26,20 @@ export default {
     },
     max: {
       control: { type: 'number', min: 1 },
-      defaultValue: 100,
     },
     min: {
       control: { type: 'number', min: 1 },
-      defaultValue: 0,
     },
     orientation: {
       control: { type: 'select' },
       options: ['horizontal', 'vertical'],
-      defaultValue: 'horizontal',
     },
     size: {
       control: { type: 'select' },
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
     step: {
       control: { type: 'number', min: 1 },
-      defaultValue: 1,
     },
   },
   component: Slider,

@@ -4,10 +4,12 @@ import React from 'react';
 import Portal from '.';
 
 export default {
+  args: {
+    isMounted: true,
+    },
   argTypes: {
     isMounted: {
       control: 'boolean',
-      defaultValue: true,
     },
   },
   component: Portal,
@@ -20,8 +22,6 @@ const Template: StoryFn<typeof Portal> = args => (
 
 export const Basic = {
   render: Template,
-  args: {},
-
   parameters: {
     controls: { exclude: ['id'] },
   },

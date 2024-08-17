@@ -11,6 +11,14 @@ import {
 import { colors } from '@utils';
 
 export default {
+  args: {
+    colorVariant: 'primary',
+    isDisabled: false,
+    isLoading: false,
+    loadingText: '',
+    size: 'md',
+    variant: 'filled',
+    },
   argTypes: {
     colorVariant: {
       control: 'select',
@@ -18,24 +26,19 @@ export default {
     },
     isDisabled: {
       control: 'boolean',
-      defaultValue: false,
     },
     isLoading: {
       control: 'boolean',
-      defaultValue: false,
     },
     loadingText: {
       control: 'text',
-      defaultValue: '',
     },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: { type: 'radio' },
-      defaultValue: 'filled',
       options: ['filled', 'outline'],
     },
   },

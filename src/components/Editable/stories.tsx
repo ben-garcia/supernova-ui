@@ -12,12 +12,18 @@ import {
 import { useEditableControls } from '@hooks';
 
 export default {
+  args: {
+    isAutoResize: true,
+    isDisabled: false,
+    selectAllOnFocus: true,
+    submitOnBlur: true,
+  },
   argTypes: {
-    isAutoResize: { control: 'boolean', defaultValue: true },
-    isDisabled: { control: 'boolean', defaultValue: false },
+    isAutoResize: { control: 'boolean' },
+    isDisabled: { control: 'boolean' },
     placeholder: { control: 'text' },
-    selectAllOnFocus: { control: 'boolean', defaultValue: true },
-    submitOnBlur: { control: 'boolean', defaultValue: true },
+    selectAllOnFocus: { control: 'boolean' },
+    submitOnBlur: { control: 'boolean' },
   },
   component: Editable,
   title: 'Supernova UI/Form/Editable',

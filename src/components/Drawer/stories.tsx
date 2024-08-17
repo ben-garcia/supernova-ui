@@ -17,23 +17,25 @@ import {
 import { DrawerProps } from '@components/Drawer/Drawer';
 
 export default {
+  args: {
+    closeOnEsc: true,
+    closeOnOverlayClick: true,
+    placement: 'left',
+    size: 'md',
+  },
   argTypes: {
     closeOnEsc: {
       control: 'boolean',
-      defaultValue: true,
     },
     closeOnOverlayClick: {
       control: 'boolean',
-      defaultValue: true,
     },
     placement: {
       control: 'select',
-      defaultValue: 'left',
       options: ['bottom', 'left', 'right', 'top'],
     },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },

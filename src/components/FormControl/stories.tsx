@@ -14,13 +14,18 @@ import {
 } from '@components';
 
 export default {
+  args: {
+    isDisabled: false,
+    isInvalid: false,
+    isRequired: false,
+    tag: 'div',
+  },
   argTypes: {
-    isDisabled: { control: 'boolean', defaultValue: false },
-    isInvalid: { control: 'boolean', defaultValue: false },
-    isRequired: { control: 'boolean', defaultValue: false },
+    isDisabled: { control: 'boolean' },
+    isInvalid: { control: 'boolean' },
+    isRequired: { control: 'boolean' },
     tag: {
       control: 'select',
-      defaultValue: 'div',
       options: ['div', 'fieldset'],
     },
   },

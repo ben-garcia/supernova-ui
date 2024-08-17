@@ -5,10 +5,12 @@ import Box from '.';
 const tagOptions = ['article', 'div', 'footer', 'header', 'section'];
 
 export default {
+  args: {
+    tag: 'div',
+    },
   argTypes: {
     tag: {
       control: 'select',
-      defaultValue: 'div',
       options: tagOptions,
     },
   },

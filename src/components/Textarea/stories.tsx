@@ -3,12 +3,16 @@ import { Meta } from '@storybook/react';
 import Textarea from '.';
 
 export default {
+  args: {
+    isAutoResize: true,
+    isDiabled: false,
+    variant: 'outline',
+  },
   argTypes: {
-    isAutoResize: { control: 'boolean', defaultValue: true },
-    isDisabled: { control: 'boolean', defaultValue: false },
+    isAutoResize: { control: 'boolean' },
+    isDisabled: { control: 'boolean' },
     variant: {
       control: { type: 'radio' },
-      defaultValue: 'outline',
       options: ['filled', 'flushed', 'outline'],
     },
   },

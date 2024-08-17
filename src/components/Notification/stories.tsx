@@ -5,14 +5,18 @@ import { Box, Button, Paragraph } from '@components';
 import { useNotification } from '@hooks';
 
 export default {
+  args: {
+    duration: 5000,
+    isCloseable: true,
+    isPauseable: true,
+    message: 'Test message',
+    position: 'top-right',
+    status: 'info',
+    title: 'Test title',
+  },
   argTypes: {
-    duration: { control: 'number', defaultValue: 5000 },
-    isCloseable: { control: 'boolean', defaultValue: true },
-    isPausable: { control: 'boolean', defaultValue: true },
-    message: { control: 'text', defaultValue: 'message' },
     position: {
       control: 'select',
-      defaultValue: 'top-right',
       options: [
         'bottom',
         'bottom-left',
@@ -24,27 +28,11 @@ export default {
     },
     status: {
       control: 'select',
-      defaultValue: 'info',
       options: ['error', 'info', 'success', 'warning'],
     },
-    title: { control: 'text', defaultValue: 'Title' },
   },
   title: 'Supernova UI/Feedback/Notification',
 } as Meta;
-
-const parameters = {
-  controls: {
-    include: [
-      'duration',
-      'isCloseable',
-      'isPausable',
-      'message',
-      'position',
-      'status',
-      'title',
-    ],
-  },
-};
 
 const Template: StoryFn<any> = args => {
   const notification = useNotification();
@@ -62,7 +50,6 @@ const Template: StoryFn<any> = args => {
 
 export const Basic = {
   render: Template,
-  parameters,
 };
 
 const WithCustomTemplate: StoryFn<any> = args => {
@@ -92,5 +79,7 @@ const WithCustomTemplate: StoryFn<any> = args => {
 
 export const WithCustom = {
   render: WithCustomTemplate,
-  parameters,
+  parameters: {
+    controls: { exclude: ['message', 'title'] },
+  },
 };

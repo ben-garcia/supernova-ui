@@ -17,18 +17,20 @@ import {
 import { ModalProps } from '@components/Modal/Modal';
 
 export default {
+  args: {
+    closeOnEsc: true,
+    closeOnOverlayClick: true,
+    size: 'md',
+  },
   argTypes: {
     closeOnEsc: {
       control: 'boolean',
-      defaultValue: true,
     },
     closeOnOverlayClick: {
       control: 'boolean',
-      defaultValue: true,
     },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },

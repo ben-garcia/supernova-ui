@@ -5,6 +5,11 @@ import { Box, Paragraph, Radio, RadioGroup, UserIcon } from '@components';
 import { colors } from '@utils';
 
 export default {
+  args: {
+    colorVariant: 'primary',
+    isDiabled: false,
+    size: 'md',
+  },
   argTypes: {
     colorVariant: {
       control: 'select',
@@ -18,7 +23,6 @@ export default {
     label: { control: 'text' },
     isDisabled: {
       control: 'boolean',
-      defaultValue: false,
     },
     size: {
       control: { type: 'select' },

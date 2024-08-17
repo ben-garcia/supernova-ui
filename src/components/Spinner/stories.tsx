@@ -5,6 +5,9 @@ import { colors } from '@utils';
 import Spinner from '.';
 
 export default {
+  args: {
+    size: 'md',
+  },
   argTypes: {
     borderThickness: { control: 'text' },
     duration: { control: 'text' },
@@ -12,7 +15,6 @@ export default {
     secondaryColor: { control: 'select', options: colors },
     size: {
       control: 'select',
-      defaultValue: 'lg',
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'],
     },
   },

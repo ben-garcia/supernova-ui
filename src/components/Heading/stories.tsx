@@ -3,15 +3,17 @@ import { Meta } from '@storybook/react';
 import Heading from '.';
 
 export default {
+  args: {
+    level: 1,
+    size: 'xl',
+  },
   argTypes: {
     level: {
       control: 'select',
-      defaultValue: 1,
       options: [1, 2, 3, 4, 5, 6],
     },
     size: {
       control: 'select',
-      defaultValue: 'xl',
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxl', 'xxxl'],
     },
   },

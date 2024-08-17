@@ -5,6 +5,13 @@ import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@components';
 import { colors } from '@utils';
 
 export default {
+  args: {
+    colorVariant: 'primary',
+    orientation: 'horizontal',
+    isFitted: false,
+    isManual: false,
+    size: 'md',
+  },
   argTypes: {
     colorVariant: {
       control: 'select',
@@ -15,20 +22,16 @@ export default {
     },
     orientation: {
       control: 'select',
-      defaultValue: 'horizontal',
       options: ['horizontal', 'vertical'],
     },
     isFitted: {
       control: 'boolean',
-      defaultValue: false,
     },
     isManual: {
       control: 'boolean',
-      defaultValue: false,
     },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
   },

@@ -5,6 +5,11 @@ import { Checkbox } from '@components';
 import { colors } from '@utils';
 
 export default {
+  args: {
+    colorVariant: 'primary',
+    isDisabled: false,
+    size: 'md',
+  },
   argTypes: {
     colorVariant: {
       control: 'select',
@@ -13,11 +18,9 @@ export default {
     label: { control: 'text' },
     isDisabled: {
       control: 'boolean',
-      defaultValue: false,
     },
     size: {
       control: 'select',
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
   },
@@ -36,7 +39,6 @@ export const Basic = {
   args: {
     label,
   },
-
   parameters,
 };
 

@@ -5,6 +5,12 @@ import { Box, Divider } from '@components';
 import { colors } from '@utils';
 
 export default {
+  args: {
+    colorVariant: 'gray300',
+    orientation: 'horizontal',
+    size: 'md',
+
+  },
   argTypes: {
     colorVariant: {
       control: 'select',
@@ -12,12 +18,10 @@ export default {
     },
     orientation: {
       control: { type: 'radio' },
-      defaultValue: 'horizontal',
       options: ['horizontal', 'vertical'],
     },
     size: {
       control: { type: 'select' },
-      defaultValue: 'md',
       options: ['sm', 'md', 'lg'],
     },
   },
