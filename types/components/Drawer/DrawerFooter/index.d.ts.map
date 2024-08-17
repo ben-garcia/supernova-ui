@@ -1,1 +1,0 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/Drawer/DrawerFooter/index.tsx"],"names":[],"mappings":"AAAA,OAAc,EAAE,EAAE,EAAE,MAAM,OAAO,CAAC;AAGlC,OAAO,EAAE,cAAc,EAAE,MAAM,QAAQ,CAAC;AACxC,OAAO,eAAe,CAAC;AAEvB,MAAM,WAAW,iBAAkB,SAAQ,cAAc;CAAG;AAE5D;;GAEG;AACH,QAAA,MAAM,YAAY,EAAE,EAAE,CAAC,iBAAiB,CAUvC,CAAC;AAEF,eAAe,YAAY,CAAC"}

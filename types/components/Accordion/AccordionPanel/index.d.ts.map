@@ -1,1 +1,0 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/Accordion/AccordionPanel/index.tsx"],"names":[],"mappings":"AAAA,OAAc,EAAE,EAAE,EAAE,MAAM,OAAO,CAAC;AAOlC,OAAO,EAAE,cAAc,EAAE,MAAM,QAAQ,CAAC;AACxC,OAAO,eAAe,CAAC;AAEvB,UAAU,mBAAoB,SAAQ,cAAc;CAAG;AAEvD;;GAEG;AACH,QAAA,MAAM,cAAc,EAAE,EAAE,CAAC,mBAAmB,CA0B3C,CAAC;AAEF,eAAe,cAAc,CAAC"}

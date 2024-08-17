@@ -1,1 +1,0 @@
-{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../../src/components/Divider/types.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,cAAc,EAAE,MAAM,QAAQ,CAAC;AAE1D,MAAM,WAAW,YACf,SAAQ,cAAc,EACpB,IAAI,CAAC,gBAAgB,EAAE,cAAc,GAAG,MAAM,CAAC;IACjD;;OAEG;IACH,WAAW,CAAC,EAAE,YAAY,GAAG,UAAU,CAAC;CACzC"}

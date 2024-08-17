@@ -1,1 +1,0 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/Popover/PopoverHeader/index.tsx"],"names":[],"mappings":"AAAA,OAAc,EAAE,EAAE,EAAE,MAAM,OAAO,CAAC;AAGlC,OAAO,EAAE,cAAc,EAAE,MAAM,QAAQ,CAAC;AACxC,OAAO,eAAe,CAAC;AAEvB,MAAM,WAAW,kBAAmB,SAAQ,cAAc;CAAG;AAE7D;;GAEG;AACH,QAAA,MAAM,aAAa,EAAE,EAAE,CAAC,kBAAkB,CAUzC,CAAC;AAEF,eAAe,aAAa,CAAC"}
