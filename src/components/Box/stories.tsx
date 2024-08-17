@@ -7,7 +7,7 @@ const tagOptions = ['article', 'div', 'footer', 'header', 'section'];
 export default {
   args: {
     tag: 'div',
-    },
+  },
   argTypes: {
     tag: {
       control: 'select',

@@ -5,7 +5,7 @@ import Paragraph from '.';
 export default {
   args: {
     size: 'xl',
-    },
+  },
   argTypes: {
     size: {
       control: 'select',

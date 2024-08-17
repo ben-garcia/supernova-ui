@@ -18,7 +18,7 @@ export default {
     loadingText: '',
     size: 'md',
     variant: 'filled',
-    },
+  },
   argTypes: {
     colorVariant: {
       control: 'select',

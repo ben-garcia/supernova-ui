@@ -6,7 +6,7 @@ import Portal from '.';
 export default {
   args: {
     isMounted: true,
-    },
+  },
   argTypes: {
     isMounted: {
       control: 'boolean',

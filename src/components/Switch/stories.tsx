@@ -9,7 +9,7 @@ export default {
     colorVariant: 'primary',
     isDisabled: false,
     size: 'md',
-    },
+  },
   argTypes: {
     colorVariant: {
       control: 'select',

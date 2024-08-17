@@ -17,7 +17,7 @@ export default {
     orientation: 'horizontal',
     size: 'md',
     step: 1,
-    },
+  },
   argTypes: {
     activeColor: {
       control: {

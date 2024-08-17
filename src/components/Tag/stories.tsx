@@ -4,7 +4,7 @@ import { colors } from '@utils';
 import Tag from '.';
 
 export default {
-  args: { colorVariant: 'primary', size: 'md', variant: 'solid'},
+  args: { colorVariant: 'primary', size: 'md', variant: 'solid' },
   argTypes: {
     colorVariant: {
       control: 'select',

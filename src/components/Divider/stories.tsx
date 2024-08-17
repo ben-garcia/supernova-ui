@@ -9,7 +9,6 @@ export default {
     colorVariant: 'gray300',
     orientation: 'horizontal',
     size: 'md',
-
   },
   argTypes: {
     colorVariant: {
