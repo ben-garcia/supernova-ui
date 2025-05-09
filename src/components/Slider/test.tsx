@@ -6,7 +6,7 @@ import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
 import { SliderProps } from './types';
 
 describe('<Slider />', () => {
-  const SliderTest = (props: Partial<SliderProps>) => {
+  function SliderTest(props: Partial<SliderProps>) {
     const { value: valueProp } = props;
     const [value, setValue] = React.useState(valueProp || 0);
 
@@ -23,7 +23,7 @@ describe('<Slider />', () => {
         <SliderThumb />
       </Slider>
     );
-  };
+  }
 
   it('should pass a11y tests', async () => {
     await a11yTest(<SliderTest />);

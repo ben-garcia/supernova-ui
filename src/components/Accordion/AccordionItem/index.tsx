@@ -43,6 +43,7 @@ const AccordionItem: FC<AccordionItemProps> = props => {
     }),
     [context]
   );
+  console.log(children);
 
   return (
     <AccordionItemProvider value={contextValue}>

@@ -76,7 +76,7 @@ export const WithTextarea = {
   parameters,
 };
 
-const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
+function CustomEditableTextarea(props: { isAutoResize: boolean }) {
   const { isAutoResize } = props;
   const { isEditing, getCancelButtonProps, getSubmitButtonProps } =
     useEditableControls();
@@ -113,7 +113,7 @@ const CustomEditableTextarea = (props: { isAutoResize: boolean }) => {
       <EditablePreview />
     </Box>
   );
-};
+}
 
 const WithCustomTextareaTemplate: StoryFn<any> = args => {
   const [value, setValue] = useState('Add description');
@@ -130,7 +130,7 @@ export const WithCustomTextarea = {
   parameters,
 };
 
-const CustomEditableInput = () => {
+function CustomEditableInput() {
   const { isEditing, getCancelButtonProps, getSubmitButtonProps } =
     useEditableControls();
 
@@ -156,7 +156,7 @@ const CustomEditableInput = () => {
       <EditablePreview />
     </Box>
   );
-};
+}
 
 const WithCustomInput: StoryFn<typeof Editable> = args => {
   const [value, setValue] = useState('Add description');

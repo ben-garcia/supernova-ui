@@ -23,7 +23,7 @@ import {
 
 describe('<AlertDialog />', () => {
   it('should pass a11y tests', async () => {
-    const ModalTest = () => {
+    function ModalTest() {
       const leastDestructiveRef = React.useRef(null);
 
       return (
@@ -50,13 +50,13 @@ describe('<AlertDialog />', () => {
           </AlertDialogContent>
         </AlertDialog>
       );
-    };
+    }
 
     await a11yTest(<ModalTest />);
   });
 
   it('should contain the proper aria attributes', () => {
-    const ModalTest = () => {
+    function ModalTest() {
       const leastDestructiveRef = React.useRef(null);
 
       return (
@@ -83,7 +83,7 @@ describe('<AlertDialog />', () => {
           </AlertDialogContent>
         </AlertDialog>
       );
-    };
+    }
 
     const { getByText, getByRole } = render(<ModalTest />);
 
@@ -105,7 +105,7 @@ describe('<AlertDialog />', () => {
 
   it('should call the onClose function when the close button is clicked', async () => {
     const mockOnClose = jest.fn();
-    const ModalTest = () => {
+    function ModalTest() {
       const leastDestructiveRef = React.useRef(null);
 
       return (
@@ -133,7 +133,7 @@ describe('<AlertDialog />', () => {
           </AlertDialogContent>
         </AlertDialog>
       );
-    };
+    }
 
     const { getByLabelText } = render(<ModalTest />);
     const closeButton = getByLabelText('Close the alert dialog');
@@ -147,7 +147,7 @@ describe('<AlertDialog />', () => {
     it('should call onClickOutside and not onClose when closeOnOverlayClick is true and onClickOutside is a function', async () => {
       const mockOnClickOutside = jest.fn();
       const mockOnClose = jest.fn();
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -175,7 +175,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       const { getByRole } = render(<ModalTest />);
 
@@ -192,7 +192,7 @@ describe('<AlertDialog />', () => {
     it('should call onClickOutside and not onClose when closeOnOverlayClick is true, onClickOutside is a function and closeOnEsc is false', async () => {
       const mockOnClickOutside = jest.fn();
       const mockOnClose = jest.fn();
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -221,7 +221,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       const { getByRole } = render(<ModalTest />);
 
@@ -238,7 +238,7 @@ describe('<AlertDialog />', () => {
     it('should not call onClose nor onClickOutside when closeOnOverlayClick is false', async () => {
       const mockOnClose = jest.fn();
       const mockOnClickOutside = jest.fn();
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -267,7 +267,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       const { getByRole } = render(<ModalTest />);
 
@@ -286,7 +286,7 @@ describe('<AlertDialog />', () => {
     it('should call onEscPress and not onClose when closeOnEsc is true and onEscPress is a function', async () => {
       const mockOnClose = jest.fn();
       const mockEscPress = jest.fn();
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -314,7 +314,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       render(<ModalTest />);
 
@@ -329,7 +329,7 @@ describe('<AlertDialog />', () => {
     it('should call onEscPress and not onClose when closeOnEsc is true and onEscPress is a function and closeOnOverlayClick is false', async () => {
       const mockOnClose = jest.fn();
       const mockEscPress = jest.fn();
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -358,7 +358,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       render(<ModalTest />);
 
@@ -373,7 +373,7 @@ describe('<AlertDialog />', () => {
     it('should not call onClose nor onEscPress when closeOnEsc is false', async () => {
       const mockOnClose = jest.fn();
       const mockOnEscPress = jest.fn();
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -401,7 +401,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       render(<ModalTest />);
 
@@ -424,7 +424,7 @@ describe('<AlertDialog />', () => {
     //
     // Not sure why the body and div are also focused.
     it.skip('should give focus back to the trigger element by default', async () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const leastDestructiveRef = React.useRef(null);
 
@@ -462,7 +462,7 @@ describe('<AlertDialog />', () => {
             </AlertDialog>
           </>
         );
-      };
+      }
 
       const { getByLabelText, getByTestId } = render(<ModalTest />);
       const openButton = getByTestId('open-button');
@@ -480,7 +480,7 @@ describe('<AlertDialog />', () => {
     });
 
     it('should give focus to the leastDestructiveRef by default', () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const leastDestructiveRef = React.useRef(null);
 
         return (
@@ -513,7 +513,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       const { getByTestId } = render(<ModalTest />);
       const cancelButton = getByTestId('cancel-button');
@@ -522,7 +522,7 @@ describe('<AlertDialog />', () => {
     });
 
     it('should return focus to the finalFocusRef element', async () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const finalFocusRef = React.useRef(null);
         const leastDestructiveRef = React.useRef(null);
@@ -570,7 +570,7 @@ describe('<AlertDialog />', () => {
             </AlertDialog>
           </>
         );
-      };
+      }
 
       const { getByLabelText, getByTestId } = render(<ModalTest />);
       const openButton = getByTestId('open-button');
@@ -588,7 +588,7 @@ describe('<AlertDialog />', () => {
     });
 
     it('should keep the active element focused when closeOnOverlayClick is false', async () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const leastDestructiveRef = React.useRef(null);
 
@@ -627,7 +627,7 @@ describe('<AlertDialog />', () => {
             </AlertDialog>
           </>
         );
-      };
+      }
 
       const { getByRole, getByTestId, getByText } = render(<ModalTest />);
       const openButton = getByTestId('open-button');
@@ -659,7 +659,7 @@ describe('<AlertDialog />', () => {
   describe('keyboard navigation', () => {
     describe('Tab', () => {
       it('should focus the next tabbable element and wrap around to the first by default', () => {
-        const ModalTest = () => {
+        function ModalTest() {
           const leastDestructiveRef = React.useRef(null);
 
           return (
@@ -686,7 +686,7 @@ describe('<AlertDialog />', () => {
               </AlertDialogContent>
             </AlertDialog>
           );
-        };
+        }
 
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
@@ -704,7 +704,7 @@ describe('<AlertDialog />', () => {
       });
 
       it('should focus the next tabbable element and NOT wrap around to the first when trapFocus is false', () => {
-        const ModalTest = () => {
+        function ModalTest() {
           const leastDestructiveRef = React.useRef(null);
 
           return (
@@ -732,7 +732,7 @@ describe('<AlertDialog />', () => {
               </AlertDialogContent>
             </AlertDialog>
           );
-        };
+        }
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
@@ -753,7 +753,7 @@ describe('<AlertDialog />', () => {
 
     describe('Shift+Tab', () => {
       it('should focus the previous tabbable element and wrap around to the last by default', () => {
-        const ModalTest = () => {
+        function ModalTest() {
           const leastDestructiveRef = React.useRef(null);
 
           return (
@@ -781,7 +781,7 @@ describe('<AlertDialog />', () => {
               </AlertDialogContent>
             </AlertDialog>
           );
-        };
+        }
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
@@ -799,7 +799,7 @@ describe('<AlertDialog />', () => {
       });
 
       it('should focus the previous tabbable element and NOT wrap around to the last when trapFocus is false', () => {
-        const ModalTest = () => {
+        function ModalTest() {
           const leastDestructiveRef = React.useRef(null);
 
           return (
@@ -827,7 +827,7 @@ describe('<AlertDialog />', () => {
               </AlertDialogContent>
             </AlertDialog>
           );
-        };
+        }
         const { getByLabelText, getByTestId } = render(<ModalTest />);
         const cancelButton = getByTestId('cancel-button');
         const deleteButton = getByTestId('delete-button');
@@ -852,7 +852,7 @@ describe('<AlertDialog />', () => {
     it('should call modal button onclick functions', async () => {
       const mockCancel = jest.fn();
       const mockSubmit = jest.fn();
-      const Test = () => {
+      function Test() {
         const leastDestructiveRef = React.useRef(null);
         return (
           <AlertDialog
@@ -879,7 +879,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       const { getByText } = render(<Test />);
       const cancelButton = getByText('Cancel');
@@ -896,7 +896,7 @@ describe('<AlertDialog />', () => {
       const mockClose = jest.fn();
       const mockCancel = jest.fn();
       const mockSubmit = jest.fn();
-      const Test = () => {
+      function Test() {
         const leastDestructiveRef = React.useRef(null);
         return (
           <AlertDialog
@@ -924,7 +924,7 @@ describe('<AlertDialog />', () => {
             </AlertDialogContent>
           </AlertDialog>
         );
-      };
+      }
 
       const { getByText } = render(<Test />);
 

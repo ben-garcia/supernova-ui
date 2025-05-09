@@ -7,7 +7,7 @@ import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
 import { MenuProps } from './types';
 
 describe('<Menu />', () => {
-  const MenuTest = (props: Omit<MenuProps, 'children'>) => {
+  function MenuTest(props: Omit<MenuProps, 'children'>) {
     return (
       <Menu {...props}>
         <MenuButton>open</MenuButton>
@@ -23,7 +23,7 @@ describe('<Menu />', () => {
         </MenuList>
       </Menu>
     );
-  };
+  }
 
   it.skip('should pass a11y tests', async () => {
     await a11yTest(<MenuTest isOpen onClose={() => {}} />);

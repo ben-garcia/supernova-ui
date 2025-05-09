@@ -5,9 +5,9 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
     '@storybook/preset-scss',
-    '@storybook/addon-webpack5-compiler-swc'
+    '@storybook/addon-webpack5-compiler-swc',
   ],
-  stories: ['../src/**/*.stories.tsx', '../src/**/stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/stories.@(js|jsx|ts|tsx)'],
   typescript: {
     check: false,
     checkOptions: {},
@@ -20,12 +20,14 @@ module.exports = {
   },
   // modify webpack to allow absolute paths.
   webpackFinal: async config => {
-    config.resolve.plugins = [
-      ...(config.resolve.plugins || []),
-      new TsconfigPathsPlugin({
-        extensions: config.resolve.extensions,
-      }),
-    ];
+    if (config.resolve) {
+      config.resolve.plugins = [
+        ...(config.resolve.plugins || []),
+        new TsconfigPathsPlugin({
+          extensions: config.resolve.extensions,
+        }),
+      ];
+    }
     return config;
   },
   framework: {

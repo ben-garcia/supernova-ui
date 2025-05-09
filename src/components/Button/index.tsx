@@ -78,7 +78,7 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
       {/*       even when in loading state. */}
       {!isObject(leftIcon) &&
         !isObject(rightIcon) &&
-        getChildrenCount(children) > 1 && <>{children}</>}
+        getChildrenCount(children) > 1 && { children }}
 
       {/* when rendering with icon as React component */}
       {!isObject(leftIcon) &&

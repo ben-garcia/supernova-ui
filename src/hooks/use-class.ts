@@ -148,14 +148,12 @@ export const useClassStyles = (mainProps: any) => {
                     arrKeys[i]
                   }:${Math.floor(arr[idx] * 100)}%;`;
                 } else {
-                  styles.current[
-                    idx
-                  ] = `${styles.current[idx]}${arrKeys[i]}:${arr[idx]}px;`;
+                  styles.current[idx] =
+                    `${styles.current[idx]}${arrKeys[i]}:${arr[idx]}px;`;
                 }
               } else if (isString(arr[idx])) {
-                styles.current[
-                  idx
-                ] = `${styles.current[idx]}${arrKeys[i]}:${arr[idx]};`;
+                styles.current[idx] =
+                  `${styles.current[idx]}${arrKeys[i]}:${arr[idx]};`;
               }
             }
           }

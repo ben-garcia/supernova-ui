@@ -52,7 +52,7 @@ describe('<Radio />', () => {
   });
 
   it('should not change state when disabled', () => {
-    const TestRadio = () => {
+    function TestRadio() {
       const [check, setCheck] = React.useState(false);
       const changeHandler = () => setCheck(true);
       return (
@@ -63,7 +63,7 @@ describe('<Radio />', () => {
           onChange={changeHandler}
         />
       );
-    };
+    }
     const { getByLabelText } = render(<TestRadio />);
     const result = getByLabelText(label);
 
@@ -77,11 +77,11 @@ describe('<Radio />', () => {
   });
 
   it('should change state when clicked', () => {
-    const TestRadio = () => {
+    function TestRadio() {
       const [check, setCheck] = React.useState(false);
       const changeHandler = () => setCheck(true);
       return <Radio label={label} isChecked={check} onChange={changeHandler} />;
-    };
+    }
     const { getByLabelText } = render(<TestRadio />);
     const result = getByLabelText(label);
 

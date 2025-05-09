@@ -155,13 +155,11 @@ export const usePseudoClasses = (props: Partial<PseudoProps>) => {
           ];
           // add '::' before pseudo-elements.
           if (pseudoElements.includes(keys[index])) {
-            formattedStylesString[
-              index
-            ] = `.snui.${classNames.current[index]}::${keys[index]}{${formattedStylesString[index]};}`;
+            formattedStylesString[index] =
+              `.snui.${classNames.current[index]}::${keys[index]}{${formattedStylesString[index]};}`;
           } else {
-            formattedStylesString[
-              index
-            ] = `.snui.${classNames.current[index]}:${keys[index]}{${formattedStylesString[index]};}`;
+            formattedStylesString[index] =
+              `.snui.${classNames.current[index]}:${keys[index]}{${formattedStylesString[index]};}`;
           }
           styleElements.push(
             addStyleToDOM(

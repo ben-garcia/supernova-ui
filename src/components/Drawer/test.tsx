@@ -269,7 +269,7 @@ describe('<Drawer />', () => {
     //
     // Not sure why the body and div are also focused.
     it.skip('should give focus back to the trigger element by default', async () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
           <>
@@ -295,7 +295,7 @@ describe('<Drawer />', () => {
             </Drawer>
           </>
         );
-      };
+      }
       render(<ModalTest />);
       const openButton = screen.getByTestId('open-button');
 
@@ -311,19 +311,21 @@ describe('<Drawer />', () => {
     });
 
     it('should give focus to the close button by default', () => {
-      const ModalTest = () => (
-        <Drawer isOpen onClose={jest.fn()}>
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHeader>header</DrawerHeader>
-            <DrawerCloseButton />
-            <DrawerBody>
-              <input />
-            </DrawerBody>
-            <DrawerFooter>footer</DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      );
+      function ModalTest() {
+        return (
+          <Drawer isOpen onClose={jest.fn()}>
+            <DrawerOverlay />
+            <DrawerContent>
+              <DrawerHeader>header</DrawerHeader>
+              <DrawerCloseButton />
+              <DrawerBody>
+                <input />
+              </DrawerBody>
+              <DrawerFooter>footer</DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        );
+      }
       render(<ModalTest />);
 
       const closeButton = screen.getByRole('button');
@@ -332,7 +334,7 @@ describe('<Drawer />', () => {
     });
 
     it('should give focus to the initialFocusRef element', () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const initialFocusRef = React.useRef(null);
         return (
@@ -362,7 +364,7 @@ describe('<Drawer />', () => {
             </Drawer>
           </>
         );
-      };
+      }
       render(<ModalTest />);
 
       const openButton = screen.getByTestId('open-button');
@@ -377,7 +379,7 @@ describe('<Drawer />', () => {
     });
 
     it('should return focus to the finalFocusRef element', async () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const finalFocusRef = React.useRef(null);
         return (
@@ -415,7 +417,7 @@ describe('<Drawer />', () => {
             </Drawer>
           </>
         );
-      };
+      }
 
       render(<ModalTest />);
 
@@ -434,7 +436,7 @@ describe('<Drawer />', () => {
     });
 
     it('should keep the active element focused when closeOnOverlayClick is false', async () => {
-      const ModalTest = () => {
+      function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const initialFocusRef = React.useRef(null);
 
@@ -474,7 +476,7 @@ describe('<Drawer />', () => {
             </Drawer>
           </>
         );
-      };
+      }
 
       const { getByRole, getByTestId, getByText } = render(<ModalTest />);
       const openButton = getByTestId('open-button');
@@ -506,20 +508,22 @@ describe('<Drawer />', () => {
   describe('keyboard navigation', () => {
     describe('Tab', () => {
       it('should focus the next tabbable element and wrap around to the first by default', () => {
-        const ModalTest = () => (
-          <Drawer isOpen onClose={jest.fn()}>
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerCloseButton />
-              <DrawerBody>
-                <input data-testid="modal-input1" />
-                <input data-testid="modal-input2" />
-              </DrawerBody>
-              <DrawerFooter>footer</DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        );
+        function ModalTest() {
+          return (
+            <Drawer isOpen onClose={jest.fn()}>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input data-testid="modal-input1" />
+                  <input data-testid="modal-input2" />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          );
+        }
 
         render(<ModalTest />);
         const closeButton = screen.getByRole('button');
@@ -541,20 +545,22 @@ describe('<Drawer />', () => {
       });
 
       it('should focus the next tabbable element and NOT wrap around to the first when trapFocus is false', () => {
-        const ModalTest = () => (
-          <Drawer isOpen onClose={jest.fn()} trapFocus={false}>
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerHeader>header</DrawerHeader>
-              <DrawerCloseButton />
-              <DrawerBody>
-                <input data-testid="modal-input1" />
-                <input data-testid="modal-input2" />
-              </DrawerBody>
-              <DrawerFooter>footer</DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        );
+        function ModalTest() {
+          return (
+            <Drawer isOpen onClose={jest.fn()} trapFocus={false}>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader>header</DrawerHeader>
+                <DrawerCloseButton />
+                <DrawerBody>
+                  <input data-testid="modal-input1" />
+                  <input data-testid="modal-input2" />
+                </DrawerBody>
+                <DrawerFooter>footer</DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          );
+        }
         render(<ModalTest />);
         const closeButton = screen.getByRole('button');
         const modalInput1 = screen.getByTestId('modal-input1');
@@ -579,7 +585,7 @@ describe('<Drawer />', () => {
 
     describe('Shift+Tab', () => {
       it('should focus the previous tabbable element and wrap around to the last by default', () => {
-        const ModalTest = () => {
+        function ModalTest() {
           const initialFocusRef = React.useRef(null);
 
           return (
@@ -600,7 +606,7 @@ describe('<Drawer />', () => {
               </DrawerContent>
             </Drawer>
           );
-        };
+        }
 
         render(<ModalTest />);
         const closeButton = screen.getByRole('button');
@@ -623,7 +629,7 @@ describe('<Drawer />', () => {
       });
 
       it('should focus the previous tabbable element and NOT wrap around to the last when trapFocus is false', () => {
-        const ModalTest = () => {
+        function ModalTest() {
           const initialFocusRef = React.useRef(null);
 
           return (
@@ -645,7 +651,7 @@ describe('<Drawer />', () => {
               </DrawerContent>
             </Drawer>
           );
-        };
+        }
 
         render(<ModalTest />);
         const closeButton = screen.getByRole('button');

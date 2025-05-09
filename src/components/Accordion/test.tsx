@@ -18,7 +18,7 @@ describe('<Accordion />', () => {
   const buttonThreeContent = 'Section 3';
   const panelThreeContent = 'section 3 panel';
 
-  const AccordionTest = (props: Omit<AccordionProps, 'children'>) => {
+  function AccordionTest(props: Omit<AccordionProps, 'children'>) {
     return (
       <Accordion data-testid="accordion" {...props}>
         <AccordionItem>
@@ -37,7 +37,7 @@ describe('<Accordion />', () => {
         </AccordionItem>
       </Accordion>
     );
-  };
+  }
 
   it('should pass a11y tests', async () => {
     await a11yTest(<AccordionTest />);

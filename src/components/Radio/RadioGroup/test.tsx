@@ -4,7 +4,7 @@ import { Radio, RadioGroup } from '@components';
 import { a11yTest, fireEvent, render } from '@test-utils';
 
 describe('<GroupRadio />', () => {
-  const TestRadioGroup = () => {
+  function TestRadioGroup() {
     const [value, setValue] = React.useState('one');
     return (
       <RadioGroup
@@ -16,7 +16,7 @@ describe('<GroupRadio />', () => {
         <Radio label="one" value="one" />
       </RadioGroup>
     );
-  };
+  }
 
   it('should pass a11y tests', async () => {
     await a11yTest(<TestRadioGroup />);
@@ -41,7 +41,7 @@ describe('<GroupRadio />', () => {
   });
 
   it('should render with no Radio checked when omitting defaultValue prop', () => {
-    const RadioGroupTest = () => {
+    function RadioGroupTest() {
       // @ts-ignore
       // eslint-disable-next-line
       const [_, setValue] = React.useState('one');
@@ -50,14 +50,14 @@ describe('<GroupRadio />', () => {
           <Radio label="one" value="one" />
         </RadioGroup>
       );
-    };
+    }
     const { getByLabelText } = render(<RadioGroupTest />);
     const result = getByLabelText('one');
     expect(result).not.toBeChecked();
   });
 
   it('should manage state for uncontrolled children', () => {
-    const RadioGroupTest = () => {
+    function RadioGroupTest() {
       return (
         <RadioGroup name="testing" defaultValue="two">
           <Radio label="one" value="one" />
@@ -65,7 +65,7 @@ describe('<GroupRadio />', () => {
           <Radio label="three" value="three" />
         </RadioGroup>
       );
-    };
+    }
     const { getByLabelText } = render(<RadioGroupTest />);
     const two = getByLabelText('two');
     const three = getByLabelText('three');
@@ -79,7 +79,7 @@ describe('<GroupRadio />', () => {
 
   it('should manage state for controlled children', () => {
     const mockHandler = jest.fn();
-    const Test = () => {
+    function Test() {
       return (
         <RadioGroup defaultValue="one" name="testing" onChange={mockHandler}>
           <Radio label="one" value="one" />
@@ -87,7 +87,7 @@ describe('<GroupRadio />', () => {
           <Radio label="three" value="three" />
         </RadioGroup>
       );
-    };
+    }
     const { getByLabelText } = render(<Test />);
     const one = getByLabelText('one');
     const two = getByLabelText('two');
@@ -101,7 +101,7 @@ describe('<GroupRadio />', () => {
   });
 
   describe('focus', () => {
-    const RadioGroupTest = ({ defaultValue }: any) => {
+    function RadioGroupTest({ defaultValue }: any) {
       const ref = React.useRef<any>(null);
       const setFocus = () => {
         const rootNode = ref.current;
@@ -138,7 +138,7 @@ describe('<GroupRadio />', () => {
           </div>
         </>
       );
-    };
+    }
 
     it('should give focus to the checked Radio', () => {
       const { getByText, getByLabelText } = render(

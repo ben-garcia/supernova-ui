@@ -7,9 +7,9 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
-    'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:storybook/recommended',
+    'prettier',
   ],
   ignorePatterns: ['node_modules/*'],
   overrides: [
@@ -67,6 +67,7 @@ module.exports = {
     // There is no need to import React when using Next.js
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 0,
+    'react/function-component-definition': 0,
   },
   settings: {
     'import/resolver': {

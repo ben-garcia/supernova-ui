@@ -14,7 +14,7 @@ describe('<Tabs />', () => {
   const tabThreeContent = 'Tab 3';
   const panelThreeContent = 'panel 3';
 
-  const TabsTest = (props: Omit<TabsProps, 'children'>) => {
+  function TabsTest(props: Omit<TabsProps, 'children'>) {
     return (
       <Tabs {...props}>
         <TabList>
@@ -30,7 +30,7 @@ describe('<Tabs />', () => {
         </TabPanelList>
       </Tabs>
     );
-  };
+  }
 
   it('should pass a11y tests', async () => {
     await a11yTest(<TabsTest />);

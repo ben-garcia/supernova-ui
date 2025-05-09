@@ -16,7 +16,7 @@ import { SupernovaProviderProps } from './types';
  * The top level provider that contains all other providers
  * needed for the components to function properly.
  */
-export const SupernovaProvider = (props: SupernovaProviderProps) => {
+export function SupernovaProvider(props: SupernovaProviderProps) {
   const { theme, children } = props;
   const themeToUse = useMemo(
     () => (theme ? deepMergify(defaultTheme, theme) : defaultTheme),
@@ -39,4 +39,4 @@ export const SupernovaProvider = (props: SupernovaProviderProps) => {
       </IdProvider>
     </ThemeProvider>
   );
-};
+}

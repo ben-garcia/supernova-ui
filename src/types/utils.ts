@@ -10,7 +10,7 @@ type NullableTuple<Type> = [
   Type | number | null,
   Type | number | null,
   Type | number | null,
-  Type | number | null
+  Type | number | null,
 ];
 /**
  * Add a 'NullableTuple' that accepts

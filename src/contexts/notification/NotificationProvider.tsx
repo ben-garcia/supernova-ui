@@ -32,7 +32,7 @@ interface NotificationProviderProps {
   children: ReactNode;
 }
 
-export const NotificationProvider = (props: NotificationProviderProps) => {
+export function NotificationProvider(props: NotificationProviderProps) {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
   const contextValue = useMemo(() => ({ state, dispatch }), [dispatch]);
@@ -92,4 +92,4 @@ export const NotificationProvider = (props: NotificationProviderProps) => {
       {children}
     </NotificationContext.Provider>
   );
-};
+}

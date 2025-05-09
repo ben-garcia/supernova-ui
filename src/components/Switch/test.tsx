@@ -52,7 +52,7 @@ describe('<Switch />', () => {
   });
 
   it('should not change state when disabled', () => {
-    const TestSwitch = () => {
+    function TestSwitch() {
       const [check, setCheck] = React.useState(false);
       const changeHandler = () => setCheck(true);
       return (
@@ -63,7 +63,7 @@ describe('<Switch />', () => {
           onChange={changeHandler}
         />
       );
-    };
+    }
     const { getByLabelText } = render(<TestSwitch />);
     const result = getByLabelText(label);
 
@@ -77,13 +77,13 @@ describe('<Switch />', () => {
   });
 
   it('should change state when clicked', () => {
-    const TestSwitch = () => {
+    function TestSwitch() {
       const [check, setCheck] = React.useState(false);
       const changeHandler = () => setCheck(true);
       return (
         <Switch label={label} isChecked={check} onChange={changeHandler} />
       );
-    };
+    }
     const { getByLabelText } = render(<TestSwitch />);
     const result = getByLabelText(label);
 

@@ -9,11 +9,13 @@ describe('<Tooltip />', () => {
   // for css transitions
   const closeDelayAnimation = 200;
   const openDelayAnimation = 0;
-  const TooltipTest = (props: any) => (
-    <Tooltip label={tooltipLabel} {...props}>
-      <button type="button">{buttonLabel}</button>
-    </Tooltip>
-  );
+  function TooltipTest(props: any) {
+    return (
+      <Tooltip label={tooltipLabel} {...props}>
+        <button type="button">{buttonLabel}</button>
+      </Tooltip>
+    );
+  }
 
   beforeAll(() => {
     jest.useFakeTimers();

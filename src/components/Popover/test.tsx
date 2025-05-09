@@ -14,20 +14,22 @@ import { PopoverProps } from '@components/Popover/Popover';
 import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
 
 describe('<Popover />', () => {
-  const PopoverTest = (props: PopoverProps) => (
-    <Popover {...props}>
-      <PopoverTrigger>
-        <Button>trigger</Button>
-      </PopoverTrigger>
-      <PopoverContent data-testid="popover">
-        <PopoverHeader>header</PopoverHeader>
-        <PopoverCloseButton />
-        <PopoverBody>body</PopoverBody>
-        <PopoverFooter>footer</PopoverFooter>
-      </PopoverContent>
-    </Popover>
-  );
-  const VisibleTest = (props: Partial<PopoverProps>) => {
+  function PopoverTest(props: PopoverProps) {
+    return (
+      <Popover {...props}>
+        <PopoverTrigger>
+          <Button>trigger</Button>
+        </PopoverTrigger>
+        <PopoverContent data-testid="popover">
+          <PopoverHeader>header</PopoverHeader>
+          <PopoverCloseButton />
+          <PopoverBody>body</PopoverBody>
+          <PopoverFooter>footer</PopoverFooter>
+        </PopoverContent>
+      </Popover>
+    );
+  }
+  function VisibleTest(props: Partial<PopoverProps>) {
     const [isOpen, setIsOpen] = React.useState(false);
     const onClose = () => setIsOpen(false);
     const onToggle = () => setIsOpen(prev => !prev);
@@ -39,7 +41,7 @@ describe('<Popover />', () => {
         onToggle={onToggle}
       />
     );
-  };
+  }
 
   it.skip('should pass a11y tests', async () => {
     await a11yTest(<PopoverTest isOpen onClose={() => {}} />);
@@ -199,7 +201,7 @@ describe('<Popover />', () => {
       });
 
       it('should trap focus', () => {
-        const TrapFocusTest = () => {
+        function TrapFocusTest() {
           const [isOpen, setIsOpen] = React.useState(false);
           const onClose = () => setIsOpen(false);
           const onToggle = () => setIsOpen(prev => !prev);
@@ -223,7 +225,7 @@ describe('<Popover />', () => {
               </PopoverContent>
             </Popover>
           );
-        };
+        }
 
         render(<TrapFocusTest />);
 
@@ -243,7 +245,7 @@ describe('<Popover />', () => {
       });
 
       describe('closeOnBlur', () => {
-        const TabTest = (props: Pick<PopoverProps, 'closeOnBlur'>) => {
+        function TabTest(props: Pick<PopoverProps, 'closeOnBlur'>) {
           const { closeOnBlur = true } = props;
           const [isOpen, setIsOpen] = React.useState(false);
           const onClose = () => setIsOpen(false);
@@ -268,7 +270,7 @@ describe('<Popover />', () => {
               </PopoverContent>
             </Popover>
           );
-        };
+        }
 
         it('should close when tabbing out of focus by default', () => {
           render(<TabTest />);
@@ -330,7 +332,7 @@ describe('<Popover />', () => {
       });
 
       describe('initialFocusRef', () => {
-        const InitialFocusRefTest = () => {
+        function InitialFocusRefTest() {
           const [isOpen, setIsOpen] = React.useState(false);
           const onClose = () => setIsOpen(false);
           const onToggle = () => setIsOpen(prev => !prev);
@@ -355,7 +357,7 @@ describe('<Popover />', () => {
               </PopoverContent>
             </Popover>
           );
-        };
+        }
 
         it('should focus initialFocusRef', () => {
           jest.useFakeTimers();
@@ -374,9 +376,9 @@ describe('<Popover />', () => {
       });
 
       describe('finalFocusRef', () => {
-        const FinalFocusRefTest = (
+        function FinalFocusRefTest(
           props: Pick<PopoverProps, 'shouldReturnFocusOnClose'>
-        ) => {
+        ) {
           const { shouldReturnFocusOnClose = true } = props;
           const finalFocusRef = React.useRef<HTMLButtonElement | null>(null);
           return (
@@ -388,7 +390,7 @@ describe('<Popover />', () => {
               />
             </>
           );
-        };
+        }
 
         it('should return focus by default', () => {
           render(<FinalFocusRefTest />);

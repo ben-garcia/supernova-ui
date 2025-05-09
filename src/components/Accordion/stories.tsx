@@ -60,6 +60,9 @@ const Template: StoryFn<typeof Accordion> = args => (
 );
 
 export const Basic = {
+  args: {
+    defaultIndices: [1],
+  },
   render: Template,
   parameters,
 };

@@ -15,7 +15,7 @@ describe('<FormControl />', () => {
   const errorMessage = 'error message';
   const helperText = 'helper text';
   const label = 'testing label';
-  const FormControlTest = (props: Omit<FormControlProps, 'children'>) => {
+  function FormControlTest(props: Omit<FormControlProps, 'children'>) {
     return (
       <FormControl {...props}>
         <TextInput data-testid="text-input" label={label} />
@@ -25,7 +25,7 @@ describe('<FormControl />', () => {
         </FormErrorMessage>
       </FormControl>
     );
-  };
+  }
 
   it('should pass a11y tests', async () => {
     await a11yTest(<FormControlTest />);

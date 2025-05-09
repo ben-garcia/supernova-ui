@@ -19,7 +19,7 @@ import EditableProps from './types';
 
 describe('<Editable>', () => {
   describe('with <EditableInput>', () => {
-    const EditableInputTest = (props: Partial<EditableProps>) => {
+    function EditableInputTest(props: Partial<EditableProps>) {
       const [value, setValue] = useState('test');
       return (
         <div>
@@ -34,7 +34,7 @@ describe('<Editable>', () => {
           </Editable>
         </div>
       );
-    };
+    }
 
     it('passes a11y tests', async () => {
       await a11yTest(<EditableInputTest />);
@@ -57,7 +57,7 @@ describe('<Editable>', () => {
       const mockEdit = jest.fn();
       const mockCancel = jest.fn();
 
-      const Test = () => {
+      function Test() {
         const [value, setValue] = React.useState('');
         return (
           <Editable
@@ -74,7 +74,7 @@ describe('<Editable>', () => {
             <EditableInput data-testid="input" />
           </Editable>
         );
-      };
+      }
 
       render(<Test />);
 
@@ -137,7 +137,7 @@ describe('<Editable>', () => {
   });
 
   describe('with <EditableTextarea>', () => {
-    const EditableTextareaTest = (props: Partial<EditableProps>) => {
+    function EditableTextareaTest(props: Partial<EditableProps>) {
       const [value, setValue] = useState('test');
       return (
         <div>
@@ -152,7 +152,7 @@ describe('<Editable>', () => {
           </Editable>
         </div>
       );
-    };
+    }
 
     it('should pass a11y tests', async () => {
       await a11yTest(<EditableTextareaTest />);
@@ -175,7 +175,7 @@ describe('<Editable>', () => {
       const mockEdit = jest.fn();
       const mockCancel = jest.fn();
 
-      const Test = () => {
+      function Test() {
         const [value, setValue] = React.useState('');
         return (
           <Editable
@@ -192,7 +192,7 @@ describe('<Editable>', () => {
             <EditableTextarea data-testid="textarea" />
           </Editable>
         );
-      };
+      }
 
       render(<Test />);
 

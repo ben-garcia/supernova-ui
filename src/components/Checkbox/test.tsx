@@ -52,7 +52,7 @@ describe('<Checkbox />', () => {
   });
 
   it('should not change state when disabled', () => {
-    const TestCheckbox = () => {
+    function TestCheckbox() {
       const [check, setCheck] = React.useState(false);
       const changeHandler = () => setCheck(true);
       return (
@@ -63,7 +63,7 @@ describe('<Checkbox />', () => {
           onChange={changeHandler}
         />
       );
-    };
+    }
     const { getByLabelText } = render(<TestCheckbox />);
     const result = getByLabelText(label);
 
@@ -77,13 +77,13 @@ describe('<Checkbox />', () => {
   });
 
   it('should change state when clicked', () => {
-    const TestCheckbox = () => {
+    function TestCheckbox() {
       const [check, setCheck] = React.useState(false);
       const changeHandler = () => setCheck(true);
       return (
         <Checkbox label={label} isChecked={check} onChange={changeHandler} />
       );
-    };
+    }
     const { getByLabelText } = render(<TestCheckbox />);
     const result = getByLabelText(label);
 
