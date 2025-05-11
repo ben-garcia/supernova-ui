@@ -73,12 +73,14 @@ const Button = forwardRef<ButtonProps, HTMLButtonElement>((props, ref) => {
         </span>
       )}
 
-      {/* when children is not a single parent component. */}
+      {/* when children is not a single component. */}
       {/* NOTE: this means the content is always visible */}
       {/*       even when in loading state. */}
       {!isObject(leftIcon) &&
         !isObject(rightIcon) &&
-        getChildrenCount(children) > 1 && { children }}
+        getChildrenCount(children) > 1 && (
+          <div style={{ all: 'inherit' }}>{children}</div>
+        )}
 
       {/* when rendering with icon as React component */}
       {!isObject(leftIcon) &&
