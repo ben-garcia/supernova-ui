@@ -12,6 +12,7 @@ import { ThemeProvider, ThemeProviderProps } from '../theme';
 import { theme as defaultTheme } from '../../theme';
 
 import { SupernovaProviderProps } from './types';
+
 /**
  * The top level provider that contains all other providers
  * needed for the components to function properly.

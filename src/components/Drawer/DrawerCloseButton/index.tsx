@@ -14,7 +14,7 @@ const DrawerCloseButton: FC<Parameters<typeof Button>[0]> = props => {
     <Button
       aria-label="Close the modal"
       {...props}
-      className="snui-modal__close-button"
+      className="snui-drawer__close-button"
       onClick={onClose}
       variant="outline"
     >
