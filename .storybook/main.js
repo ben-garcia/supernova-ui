@@ -7,6 +7,13 @@ module.exports = {
     '@storybook/preset-scss',
     '@storybook/addon-webpack5-compiler-swc',
   ],
+  core: {
+    disableTelemetry: true,
+  },
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
   stories: ['../src/**/stories.@(js|jsx|ts|tsx)'],
   typescript: {
     check: false,
@@ -29,9 +36,5 @@ module.exports = {
       ];
     }
     return config;
-  },
-  framework: {
-    name: '@storybook/react-webpack5',
-    options: {},
   },
 };
