@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 
 import { SupernovaProvider } from '@contexts';
@@ -8,8 +9,8 @@ describe('<Notification />', () => {
   const title = 'notification title';
   const message = 'notification message';
 
-  it('should add a new notification', () => {
-    act(async () => {
+  it('should add a new notification', async () => {
+    await act(async () => {
       const { result } = renderHook(() => useNotification(), {
         wrapper: ({ children }) => (
           <SupernovaProvider>{children}</SupernovaProvider>

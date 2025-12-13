@@ -1,6 +1,6 @@
-const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const { pathsToModuleNameMapper } = require('ts-jest');
 
-const { compilerOptions } = require('./tsconfig.json');
+const { compilerOptions } = require('./tsconfig');
 
 module.exports = {
   // what files to include or exclude in the coverage report(regardless of test files)
@@ -34,7 +34,9 @@ module.exports = {
   // optional, you don't need it in case you use babel preset typescript
   // preset: 'ts-jest',
   roots: ['<rootDir>/src'],
+  setupFiles: ['jest-canvas-mock'],
   setupFilesAfterEnv: ['<rootDir>/setup-tests.js'],
+  testEnvironment: 'jsdom',
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/.storybook'],
   transform: {

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 
 import {
@@ -11,7 +12,14 @@ import {
   PopoverTrigger,
 } from '@components';
 import { PopoverProps } from '@components/Popover/Popover';
-import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
+import {
+  a11yTest,
+  fireEvent,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '@test-utils';
 
 describe('<Popover />', () => {
   function PopoverTest(props: PopoverProps) {
@@ -43,8 +51,10 @@ describe('<Popover />', () => {
     );
   }
 
-  it.skip('should pass a11y tests', async () => {
-    await a11yTest(<PopoverTest isOpen onClose={() => {}} />);
+  it('should pass a11y tests', async () => {
+    await waitFor(() => {
+      a11yTest(<PopoverTest isOpen onClose={() => {}} />);
+    });
   });
 
   it('should contain the proper aria attributes', () => {

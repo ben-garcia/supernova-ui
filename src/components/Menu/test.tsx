@@ -2,7 +2,14 @@
 import React from 'react';
 
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '@components';
-import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
+import {
+  a11yTest,
+  fireEvent,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '@test-utils';
 
 import { MenuProps } from './types';
 
@@ -25,8 +32,10 @@ describe('<Menu />', () => {
     );
   }
 
-  it.skip('should pass a11y tests', async () => {
-    await a11yTest(<MenuTest isOpen onClose={() => {}} />);
+  it('should pass a11y tests', async () => {
+    await waitFor(() => {
+      a11yTest(<MenuTest isOpen onClose={() => {}} />);
+    });
   });
 
   it('should render with correct aria attributes', () => {

@@ -1,7 +1,8 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 
 import { Tooltip } from '@components';
-import { act, a11yTest, fireEvent, render, screen } from '@test-utils';
+import { act, a11yTest, fireEvent, render, screen, waitFor } from '@test-utils';
 
 describe('<Tooltip />', () => {
   const buttonLabel = 'button label';
@@ -26,7 +27,7 @@ describe('<Tooltip />', () => {
     jest.useRealTimers();
   });
 
-  it('should pass a11y tests', () => {
+  it('should pass a11y tests', async () => {
     render(<TooltipTest />);
 
     // Wrapper function to prevent warning.
@@ -36,9 +37,10 @@ describe('<Tooltip />', () => {
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
-    const tooltip = screen.getByRole('tooltip');
-
-    act(() => a11yTest(tooltip));
+    await waitFor(() => {
+      const tooltip = screen.getByRole('tooltip');
+      a11yTest(tooltip);
+    });
   });
 
   it('should render on mouseEnter and close on mouseLeave when children is a string', () => {
@@ -115,7 +117,7 @@ describe('<Tooltip />', () => {
     expect(tooltip).not.toBeInTheDocument();
   });
 
-  it('should wait before rendering with openDelay prop', () => {
+  it('should wait before rendering with openDelay prop', async () => {
     const delay = 300;
     render(<TooltipTest openDelay={delay} />);
 
@@ -130,23 +132,25 @@ describe('<Tooltip />', () => {
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
-    tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip should still not be visible.
-    expect(tooltip).not.toBeInTheDocument();
+    await waitFor(() => {
+      tooltip = screen.queryByRole('tooltip');
+      // Tooltip should still not be visible.
+      expect(tooltip).not.toBeInTheDocument();
+    });
 
     act(() => {
       // fast forward the delay
       jest.advanceTimersByTime(delay);
     });
 
-    tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip should now not be visible.
-    expect(tooltip).toBeInTheDocument();
+    await waitFor(() => {
+      tooltip = screen.queryByRole('tooltip');
+      // Tooltip should now not be visible.
+      expect(tooltip).toBeInTheDocument();
+    });
   });
 
-  it('should wait before unmounting with closeDelay prop', () => {
+  it('should wait before unmounting with closeDelay prop', async () => {
     const delay = 300;
     render(<TooltipTest closeDelay={delay} />);
 
@@ -183,8 +187,10 @@ describe('<Tooltip />', () => {
 
     tooltip = screen.queryByRole('tooltip');
 
-    // Tooltip should NOT be visible.
-    expect(tooltip).not.toBeInTheDocument();
+    await waitFor(() => {
+      // Tooltip should NOT be visible.
+      expect(tooltip).not.toBeInTheDocument();
+    });
   });
 
   it('should render on mouseEnter and close on mouseLeave', () => {

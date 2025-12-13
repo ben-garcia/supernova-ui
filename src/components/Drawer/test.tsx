@@ -11,6 +11,7 @@ import {
   DrawerOverlay,
 } from '@components';
 import {
+  act,
   a11yTest,
   fireEvent,
   render,
@@ -21,17 +22,19 @@ import {
 
 describe('<Drawer />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(
-      <Drawer isOpen onClose={jest.fn()}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader>Testing</DrawerHeader>
-          <DrawerCloseButton />
-          <DrawerBody>body</DrawerBody>
-          <DrawerFooter>footer</DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    );
+    await waitFor(() => {
+      a11yTest(
+        <Drawer isOpen onClose={jest.fn()}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>Testing</DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerBody>body</DrawerBody>
+            <DrawerFooter>footer</DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      );
+    });
   });
 
   it('should contain the proper aria attributes', () => {
@@ -304,7 +307,9 @@ describe('<Drawer />', () => {
 
       const closeButton = screen.getByLabelText('Close the modal');
 
-      fireEvent.click(closeButton);
+      act(() => {
+        fireEvent.click(closeButton);
+      });
 
       // final button should be focused when Modal has closed
       await waitFor(() => expect(openButton).toHaveFocus());

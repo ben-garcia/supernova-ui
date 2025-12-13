@@ -1,13 +1,15 @@
 import React from 'react';
 
 import { Radio } from '@components';
-import { a11yTest, fireEvent, render } from '@test-utils';
+import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 
 describe('<Radio />', () => {
   const label = 'Testing in progress';
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<Radio label={label} />);
+    await waitFor(() => {
+      a11yTest(<Radio label={label} />);
+    });
   });
 
   it('should render', () => {

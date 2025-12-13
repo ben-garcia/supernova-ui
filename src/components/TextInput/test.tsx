@@ -3,6 +3,12 @@ import React from 'react';
 import { TextInput, UserIcon } from '@components';
 import { a11yTest, fireEvent, render } from '@test-utils';
 
+beforeAll(() => {
+  window.getComputedStyle = jest.fn().mockReturnValue({
+    getPropertyValue: jest.fn().mockReturnValue('value'),
+  });
+});
+
 describe('<TextInput />', () => {
   const label = 'Testing in progress';
 

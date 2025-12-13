@@ -1,4 +1,3 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
 import {
@@ -10,6 +9,12 @@ import {
 import { a11yTest, render } from '@test-utils';
 
 import { FormControlProps } from './types';
+
+beforeAll(() => {
+  window.getComputedStyle = jest.fn().mockReturnValue({
+    getPropertyValue: jest.fn().mockReturnValue('value'),
+  });
+});
 
 describe('<FormControl />', () => {
   const errorMessage = 'error message';
