@@ -6,6 +6,7 @@ import {
   a11yTest,
   fireEvent,
   render,
+  screen,
   userEvent,
   waitFor, // wait for the set timeout function to be called
 } from '@test-utils';
@@ -415,15 +416,7 @@ describe('<AlertDialog />', () => {
   });
 
   describe('focus', () => {
-    // NOTE: failing test, error below
-    //
-    // Expected element with focus:
-    //   <button data-testid="open-button" type="button">Open</button>
-    // Received element with focus:
-    //   <body><div><button data-testid="open-button" type="button">Open</button></div></body>
-    //
-    // Not sure why the body and div are also focused.
-    it.skip('should give focus back to the trigger element by default', async () => {
+    it('should give focus back to the trigger element by default', async () => {
       function ModalTest() {
         const [isOpen, setIsOpen] = React.useState(false);
         const leastDestructiveRef = React.useRef(null);
@@ -464,16 +457,18 @@ describe('<AlertDialog />', () => {
         );
       }
 
-      const { getByLabelText, getByTestId } = render(<ModalTest />);
-      const openButton = getByTestId('open-button');
+      render(<ModalTest />);
+      const openButton = screen.getByTestId('open-button');
 
       // open modal
-      fireEvent.click(openButton);
+      userEvent.click(openButton);
 
-      const closeButton = getByLabelText('Close the alert dialog');
+      const closeButton = await screen.findByLabelText(
+        'Close the alert dialog'
+      );
 
       // close modal
-      fireEvent.click(closeButton);
+      userEvent.click(closeButton);
 
       // open button should be focused when Modal has closed
       await waitFor(() => expect(openButton).toHaveFocus());
