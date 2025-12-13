@@ -11,7 +11,8 @@ import { isFunction, isString } from '@utils';
 import './styles.scss';
 
 interface PropoverContentProps
-  extends Omit<SupernovaProps, 'id'>,
+  extends
+    Omit<SupernovaProps, 'id'>,
     Omit<SharedAnchorPositioningProps, 'children'> {}
 
 /**

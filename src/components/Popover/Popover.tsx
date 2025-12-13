@@ -5,11 +5,10 @@ import { usePopoverProvider } from '@hooks';
 
 import { DialogLikeProps } from '@types';
 
-export interface PopoverProps
-  extends Omit<
-    DialogLikeProps,
-    'closeOnOverlayClick' | 'onClickOutside' | 'size'
-  > {
+export interface PopoverProps extends Omit<
+  DialogLikeProps,
+  'closeOnOverlayClick' | 'onClickOutside' | 'size'
+> {
   closeOnBlur?: boolean;
   /**
    * The reference element to receive focus when the Modal first opens

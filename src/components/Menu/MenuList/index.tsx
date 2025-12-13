@@ -18,7 +18,8 @@ import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface MenuListProps
-  extends SupernovaProps,
+  extends
+    SupernovaProps,
     Omit<SharedAnchorPositioningProps, 'withArrow' | 'placement'> {
   /**
    * Where the content of the Menu should be positioned
