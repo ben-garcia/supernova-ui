@@ -2,10 +2,10 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 module.exports = {
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
     '@storybook/addon-a11y',
     '@storybook/preset-scss',
     '@storybook/addon-webpack5-compiler-swc',
+    '@storybook/addon-docs',
   ],
   core: {
     disableTelemetry: true,

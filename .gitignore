@@ -2,4 +2,4 @@ dist/
 node_modules/
 coverage/
 storybook-static/
-yarn-error.log
+*.log
