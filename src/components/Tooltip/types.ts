@@ -6,7 +6,8 @@ import {
 } from '@types';
 
 export interface TooltipProps
-  extends SharedAnchorPositioningProps,
+  extends
+    SharedAnchorPositioningProps,
     Omit<SupernovaProps, keyof PseudoProps>,
     Pick<FormControlProps, 'colorVariant'> {
   /**

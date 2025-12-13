@@ -6,8 +6,7 @@ import { FormControlProps, SupernovaProps } from '@types';
  * Props for the TextInput component
  */
 export interface TextInputProps
-  extends SupernovaProps<'input'>,
-    FormControlProps {
+  extends SupernovaProps<'input'>, FormControlProps {
   /**
    * The HTML label to be associated with the input.
    */

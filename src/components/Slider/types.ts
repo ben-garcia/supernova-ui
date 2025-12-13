@@ -1,8 +1,7 @@
 import { FormControlProps, SupernovaProps } from '@types';
 
 export interface SliderProps
-  extends SupernovaProps,
-    Pick<FormControlProps, 'size'> {
+  extends SupernovaProps, Pick<FormControlProps, 'size'> {
   ariaLabel?: string;
   ariaDescribedBy?: string;
   ariaLabelledBy?: string;

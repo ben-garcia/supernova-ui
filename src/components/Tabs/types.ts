@@ -1,8 +1,7 @@
 import { FormControlProps, SupernovaProps } from '@types';
 
 export interface TabsProps
-  extends SupernovaProps,
-    Pick<FormControlProps, 'colorVariant' | 'size'> {
+  extends SupernovaProps, Pick<FormControlProps, 'colorVariant' | 'size'> {
   /**
    * How the tabs should be alinged
    *

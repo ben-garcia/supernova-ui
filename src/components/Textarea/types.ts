@@ -4,8 +4,7 @@ import { FormControlProps, SupernovaProps } from '@types';
  * Props for the Textarea component
  */
 export interface TextareaProps
-  extends SupernovaProps<'textarea'>,
-    Omit<FormControlProps, 'size'> {
+  extends SupernovaProps<'textarea'>, Omit<FormControlProps, 'size'> {
   /**
    * The HTML label to be associated with the textarea.
    */

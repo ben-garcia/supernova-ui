@@ -6,8 +6,7 @@ import { FormControlProps, SupernovaProps } from '@types';
  * Props for the Button component
  */
 export interface ButtonProps
-  extends SupernovaProps<'button'>,
-    Omit<FormControlProps, 'variant'> {
+  extends SupernovaProps<'button'>, Omit<FormControlProps, 'variant'> {
   /**
    * Disable interactivity
    */
