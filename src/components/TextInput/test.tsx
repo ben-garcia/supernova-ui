@@ -1,7 +1,6 @@
 import React from 'react';
-
 import { TextInput, UserIcon } from '@components';
-import { a11yTest, fireEvent, render } from '@test-utils';
+import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 
 beforeAll(() => {
   window.getComputedStyle = jest.fn().mockReturnValue({
@@ -13,11 +12,15 @@ describe('<TextInput />', () => {
   const label = 'Testing in progress';
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<TextInput label={label} />);
+    await waitFor(async () => {
+      await a11yTest(<TextInput label={label} />);
+    });
   });
 
   it('should pass a11y tests when floating label', async () => {
-    await a11yTest(<TextInput label={label} />);
+    await waitFor(async () => {
+      await a11yTest(<TextInput label={label} />);
+    });
   });
 
   it('should render', () => {
