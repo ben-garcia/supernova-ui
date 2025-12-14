@@ -1,13 +1,15 @@
 import React from 'react';
 
 import { Switch } from '@components';
-import { a11yTest, fireEvent, render } from '@test-utils';
+import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 
 describe('<Switch />', () => {
   const label = 'Testing in progress';
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<Switch label={label} />);
+    await waitFor(() => {
+      a11yTest(<Switch label={label} />);
+    });
   });
 
   it('should render', () => {

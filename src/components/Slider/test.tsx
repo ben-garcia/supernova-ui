@@ -1,7 +1,14 @@
 import React from 'react';
 
 import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '@components';
-import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
+import {
+  a11yTest,
+  fireEvent,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '@test-utils';
 
 import { SliderProps } from './types';
 
@@ -26,7 +33,9 @@ describe('<Slider />', () => {
   }
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<SliderTest />);
+    await waitFor(() => {
+      a11yTest(<SliderTest />);
+    });
   });
 
   it('should contain the proper aria attributes', () => {

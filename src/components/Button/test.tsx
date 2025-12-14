@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, render } from '@test-utils';
+import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 import { Button } from '@components';
 
 describe('<Button />', () => {
   const buttonText = 'Submit';
   it('should pass a11y tests', async () => {
-    await a11yTest(<Button>Submit</Button>);
+    await waitFor(() => {
+      a11yTest(<Button>Submit</Button>);
+    });
   });
 
   it('should render', () => {

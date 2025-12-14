@@ -6,7 +6,7 @@ import {
   FormHelperText,
   TextInput,
 } from '@components';
-import { a11yTest, render } from '@test-utils';
+import { a11yTest, render, waitFor } from '@test-utils';
 
 import { FormControlProps } from './types';
 
@@ -33,7 +33,9 @@ describe('<FormControl />', () => {
   }
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<FormControlTest />);
+    await waitFor(() => {
+      a11yTest(<FormControlTest />);
+    });
   });
 
   it('should render as fieldset when passing tag prop', () => {

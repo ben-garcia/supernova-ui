@@ -37,7 +37,9 @@ describe('<Editable>', () => {
     }
 
     it('passes a11y tests', async () => {
-      await a11yTest(<EditableInputTest />);
+      await waitFor(() => {
+        a11yTest(<EditableInputTest />);
+      });
     });
 
     it('should have correct default attributes', () => {
@@ -155,7 +157,9 @@ describe('<Editable>', () => {
     }
 
     it('should pass a11y tests', async () => {
-      await a11yTest(<EditableTextareaTest />);
+      await waitFor(() => {
+        a11yTest(<EditableTextareaTest />);
+      });
     });
 
     it('should have correct default attributes', () => {

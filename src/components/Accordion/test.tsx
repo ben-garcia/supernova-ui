@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, render, screen, userEvent } from '@test-utils';
+import {
+  a11yTest,
+  fireEvent,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '@test-utils';
 import {
   Accordion,
   AccordionHeaderButton,
@@ -40,7 +47,9 @@ describe('<Accordion />', () => {
   }
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<AccordionTest />);
+    await waitFor(() => {
+      a11yTest(<AccordionTest />);
+    });
   });
 
   it('should wrap header button in an h2 by default', () => {

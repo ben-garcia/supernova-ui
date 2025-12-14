@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Tag } from '@components';
-import { a11yTest, render } from '@test-utils';
+import { a11yTest, render, waitFor } from '@test-utils';
 
 describe('<Tag />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(<Tag>tag</Tag>);
+    await waitFor(() => {
+      a11yTest(<Tag>tag</Tag>);
+    });
   });
 
   it('should render', () => {

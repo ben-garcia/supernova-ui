@@ -53,7 +53,9 @@ describe('<AlertDialog />', () => {
       );
     }
 
-    await a11yTest(<ModalTest />);
+    await waitFor(() => {
+      a11yTest(<ModalTest />);
+    });
   });
 
   it('should contain the proper aria attributes', () => {

@@ -21,18 +21,20 @@ import {
 
 describe('<Modal />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(
-      <Modal isOpen onClose={jest.fn()}>
-        <ModalOverlay />
+    await waitFor(() => {
+      a11yTest(
+        <Modal isOpen onClose={jest.fn()}>
+          <ModalOverlay />
 
-        <ModalContent>
-          <ModalHeader>Testing</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>body</ModalBody>
-          <ModalFooter>footer</ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
+          <ModalContent>
+            <ModalHeader>Testing</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>body</ModalBody>
+            <ModalFooter>footer</ModalFooter>
+          </ModalContent>
+        </Modal>
+      );
+    });
   });
 
   it('should contain the proper aria attributes', () => {

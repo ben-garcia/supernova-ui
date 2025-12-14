@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { a11yTest, fireEvent, render } from '@test-utils';
+import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 import { Checkbox } from '@components';
 
 describe('<Checkbox />', () => {
   const label = 'Testing in progress';
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<Checkbox label={label} />);
+    await waitFor(() => {
+      a11yTest(<Checkbox label={label} />);
+    });
   });
 
   it('should render', () => {

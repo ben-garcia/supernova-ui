@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Radio, RadioGroup } from '@components';
-import { a11yTest, fireEvent, render } from '@test-utils';
+import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 
 describe('<GroupRadio />', () => {
   function TestRadioGroup() {
@@ -19,7 +19,9 @@ describe('<GroupRadio />', () => {
   }
 
   it('should pass a11y tests', async () => {
-    await a11yTest(<TestRadioGroup />);
+    await waitFor(() => {
+      a11yTest(<TestRadioGroup />);
+    });
   });
 
   it('should render', () => {

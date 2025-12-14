@@ -1,13 +1,17 @@
 import React from 'react';
 
 import { Paragraph } from '@components';
-import { a11yTest, render } from '@test-utils';
+import { a11yTest, render, waitFor } from '@test-utils';
 
 describe('<Paragraph />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(
-      <Paragraph>this paragraph contain the secrets of the universe.</Paragraph>
-    );
+    await waitFor(() => {
+      a11yTest(
+        <Paragraph>
+          this paragraph contain the secrets of the universe.
+        </Paragraph>
+      );
+    });
   });
 
   it('should render', () => {

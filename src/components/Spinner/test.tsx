@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Spinner } from '@components';
-import { a11yTest, render } from '@test-utils';
+import { a11yTest, render, waitFor } from '@test-utils';
 
 describe('<Spinner />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(<Spinner />);
+    await waitFor(() => {
+      a11yTest(<Spinner />);
+    });
   });
 
   it('should render', () => {

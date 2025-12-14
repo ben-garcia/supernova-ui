@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Heading } from '@components';
-import { a11yTest, render } from '@test-utils';
+import { a11yTest, render, waitFor } from '@test-utils';
 
 describe('<Heading />', () => {
   it('should pass a11y tests', async () => {
-    await a11yTest(<Heading>Heading</Heading>);
+    await waitFor(() => {
+      a11yTest(<Heading>Heading</Heading>);
+    });
   });
 
   it('should render', () => {
