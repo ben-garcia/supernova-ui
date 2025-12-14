@@ -41,7 +41,8 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "es5"
+    "target": "es5",
+    "types": ["jest", "@testing-library/jest-dom"]
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"]
