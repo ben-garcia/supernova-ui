@@ -31,6 +31,7 @@ function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
     // @ts-ignore
     // eslint-disable-next-line
     ref.current = value;
+    // eslint-disable-next-line
   } catch (error) {
     throw new Error(`Cannot assign value '${value}' to ref '${ref}'`);
   }

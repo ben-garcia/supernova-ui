@@ -7,8 +7,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
-const packageJson = require('./package.json');
-const tsConfig = require('./tsconfig.json');
+const packageJson = require('./package');
+const tsConfig = require('./tsconfig');
 
 export default [
   {
