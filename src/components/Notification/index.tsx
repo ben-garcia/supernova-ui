@@ -144,13 +144,6 @@ const Notification: React.FC<NotificationProps> = props => {
     }, 400);
   };
 
-  useEffect(() => () => {
-    // cleanup function that prevents state update on an unmounted component
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-  });
-
   useEffect(() => {
     if (progressbarWidth === 0) {
       handleCloseNotification();
