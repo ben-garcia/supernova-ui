@@ -4,11 +4,13 @@ import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
-const packageJson = require('./package');
-const tsConfig = require('./tsconfig');
+// eslint-disable-next-line
+import packageJson from './package.json' with { type: 'json' };
+// eslint-disable-next-line
+import tsConfig from './tsconfig.json' with { type: 'json' };
 
 export default [
   {

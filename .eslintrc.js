@@ -38,7 +38,7 @@ module.exports = {
     'import/extensions': [
       'error',
       {
-        extensions: ['.tsx'],
+        extensions: ['.tsx', 'json'],
       },
     ],
     // @testing-library/react @testing-library/js-dom as devDependencies
