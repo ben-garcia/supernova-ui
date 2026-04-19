@@ -1,11 +1,11 @@
-import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
-import dts from 'rollup-plugin-dts';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
+import autoprefixer from 'autoprefixer';
+import dts from 'rollup-plugin-dts';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import postcss from 'rollup-plugin-postcss';
 
 // eslint-disable-next-line
 import packageJson from './package.json' with { type: 'json' };
@@ -14,52 +14,42 @@ import tsConfig from './tsconfig.json' with { type: 'json' };
 
 export default [
   {
+    // Pass 1: JS/CSS Bundle
     input: 'src/index.ts',
     output: [
-      {
-        file: packageJson.main,
-        format: 'cjs',
-        sourcemap: true,
-      },
-      {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: true,
-      },
+      { file: packageJson.main, format: 'cjs', sourcemap: true },
+      { file: packageJson.module, format: 'esm', sourcemap: true },
     ],
     plugins: [
-      // Prevent bundling peerDependencies
       peerDepsExternal(),
-      // Resolve third party dependencies in node_modules
       resolve(),
-      // Convert commonjs modules into ES6
       commonjs(),
-      // Transpile Typescript code to JS
-      typescript({ tsconfig: './tsconfig.json' }),
-      // Merge our scss files into a single css file
+      typescript({
+        tsconfig: './tsconfig.build.json',
+      }),
       postcss({
         extract: 'css/supernova-ui.min.css',
         plugins: [autoprefixer()],
         minimize: true,
       }),
-      // Minify bundle
       terser(),
     ],
   },
   {
-    input: 'dist/esm/types/index.d.ts',
+    // Pass 2: Type Bundling
+    // CHANGE THIS: Point directly to src/index.ts
+    input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    // create single d.ts
     plugins: [
       dts({
-        // use paths from tsconfig file
+        // This ensures the plugin respects your path aliases (@components, etc.)
         compilerOptions: {
-          baseUrl: tsConfig.compilerOptions.baseUrl,
+          baseUrl: 'src',
           paths: tsConfig.compilerOptions.paths,
         },
       }),
     ],
     // ignore styles
-    external: [/\.scss$/],
+    external: [/\.scss$/, /\.css$/],
   },
 ];

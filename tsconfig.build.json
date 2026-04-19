@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "declaration": false,
+  "declarationMap": false,
+  "declarationDir": null,
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*test.tsx",
+    "src/**/*test.ts",
+    "src/**/*stories.tsx"
+  ]
+}

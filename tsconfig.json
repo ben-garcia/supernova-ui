@@ -28,8 +28,11 @@
       "@components": ["components"],
       "@components/*": ["components/*"],
       "@hooks": ["hooks"],
+      "@hooks/*": ["hooks/*"],
       "@contexts": ["contexts"],
+      "@contexts/*": ["contexts/*"],
       "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
       "@test-utils": ["test-utils"]
     },
     "removeComments": false,
@@ -44,6 +47,6 @@
     "target": "es5",
     "types": ["jest", "@testing-library/jest-dom"]
   },
-  "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

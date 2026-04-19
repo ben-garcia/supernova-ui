@@ -69,8 +69,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-sass": "^1.15.3",
-    "sass": "^1.97.3",
-    "sass-loader": "^10.5.2",
+    "sass": "^1.99.0",
     "storybook": "^10.2.3",
     "style-loader": "^2.0.0",
     "stylelint": "^13.11.0",
@@ -84,7 +83,7 @@
     "react-dom": ">=16.8.0"
   },
   "scripts": {
-    "build": "npm clean && npm rollup",
+    "build": "npm run clean && npm run rollup",
     "build-storybook": "storybook build",
     "clean": "rm -rf dist",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
