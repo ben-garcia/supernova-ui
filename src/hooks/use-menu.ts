@@ -3,10 +3,10 @@ import React, { useCallback, useContext, useRef } from 'react';
 import { MenuProps } from '@components/Menu/types';
 import { MenuContext, MenuListContext } from '@contexts';
 import { isFunction } from '@utils';
+
 /**
  * credit https://github.com/chakra-ui/chakra-ui/blob/53d0d0cfec7b4404fd2bc123991352f81bd39a82/packages/react-utils/src/refs.ts#L34
  */
-
 type ReactRef<T> =
   | React.Ref<T>
   | React.RefObject<T>
@@ -103,12 +103,12 @@ export const useMenuProvider = (props: MenuProps) => {
  */
 export const useMenu = () => {
   const context = useContext(MenuContext);
-
-  if (!context.menuId) {
+  if (!context) {
     throw new Error(
       'useMenu: context is undefined, did you remember to wrap your app in a <Menu />'
     );
   }
+
   return context;
 };
 
@@ -117,11 +117,11 @@ export const useMenu = () => {
  */
 export const useMenuList = () => {
   const context = useContext(MenuListContext);
-
   if (!context) {
     throw new Error(
       'useMenuList: context is undefined, did you remember to wrap your app in a pair of <MenuList>'
     );
   }
+
   return context;
 };

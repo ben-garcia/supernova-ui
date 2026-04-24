@@ -212,11 +212,13 @@ const MenuList = forwardRef<MenuListProps, HTMLDivElement>((props, ref) => {
   // add/remove window click listeners
   useEffect(() => {
     const handleClick = (e: any) => {
-      const { target } = e;
-
-      if (target?.parentElement?.id !== `${menuId}__list`) {
+      // const { target } = e;
+      if (toolRef.current && !toolRef.current.contains(e.target as Node)) {
         onClose();
       }
+      // if (target?.parentElement?.id !== `${menuId}__list`) {
+      //   onClose();
+      // }
     };
 
     if (isOpen) {

@@ -3,6 +3,7 @@ import React, { ReactNode, useEffect, useRef } from 'react';
 import { useCSSAndPseudoClassProps, useMenu, useMenuList } from '@hooks';
 import { forwardRef, isFunction } from '@utils';
 import { SupernovaProps } from '@types';
+
 import './styles.scss';
 
 export interface MenuItemProps extends SupernovaProps {

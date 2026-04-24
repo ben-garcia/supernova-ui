@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import {
   useCSSAndPseudoClassProps,
@@ -22,7 +22,7 @@ interface MenuGroupProps extends SupernovaProps {
 /**
  * Wrapper to group relatved MenuItem
  */
-const MenuGroup: FC<MenuGroupProps> = props => {
+const MenuGroup: FC<PropsWithChildren<MenuGroupProps>> = props => {
   const { children, title, titleClassName, ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     rest,
