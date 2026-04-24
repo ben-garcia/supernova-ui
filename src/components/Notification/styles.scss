@@ -7,63 +7,64 @@
   position: relative;
   z-index: var(--snui-z-index-notification);
 
+  // Base transition for React's onTransitionEnd
+  opacity: 1;
+  transition: opacity 0.4s ease;
+
+  // Position-based logic: Entry and Exit
   &--bottom {
-    animation: slide-in-bottom 0.4s ease;
+    animation: slide-in-bottom 0.4s ease forwards;
 
-    &--exiting {
-      animation: slide-out-bottom 0.4s ease;
+    &.snui-notification--exiting {
+      animation: slide-out-bottom 0.4s ease forwards;
+      opacity: 0;
     }
   }
 
-  &--bottom-left {
-    animation: slide-in-left 0.4s ease;
+  &--bottom-left,
+  &--top-left {
+    animation: slide-in-left 0.4s ease forwards;
 
-    &--exiting {
-      animation: slide-out-left 0.4s ease;
+    &.snui-notification--exiting {
+      animation: slide-out-left 0.4s ease forwards;
+      opacity: 0;
     }
   }
 
-  &--bottom-right {
-    animation: slide-in-right 0.4s ease;
+  &--bottom-right,
+  &--top-right {
+    animation: slide-in-right 0.4s ease forwards;
 
-    &--exiting {
-      animation: slide-out-right 0.4s ease;
+    &.snui-notification--exiting {
+      animation: slide-out-right 0.4s ease forwards;
+      opacity: 0;
     }
   }
 
   &--top {
-    animation: slide-in-top 0.4s ease;
+    animation: slide-in-top 0.4s ease forwards;
 
-    &--exiting {
-      animation: slide-out-top 0.4s ease;
+    &.snui-notification--exiting {
+      animation: slide-out-top 0.4s ease forwards;
+      opacity: 0;
     }
   }
 
-  &--top-left {
-    animation: slide-in-left 0.4s ease;
-
-    &--exiting {
-      animation: slide-out-left 0.4s ease;
-    }
-  }
-
-  &--top-right {
-    animation: slide-in-right 0.4s ease;
-
-    &--exiting {
-      animation: slide-out-right 0.4s ease;
-    }
+  &--exiting {
+    pointer-events: none; // Prevent interaction during exit
   }
 
   &__title {
     font-family: var(--snui-font-heading);
     font-size: var(--snui-font-size-md);
     font-weight: var(--snui-font-weight-xl);
+    margin: 0; // Ensure no default p margins break layout
   }
 
   &__message {
     font-family: var(--snui-font-body);
     font-size: var(--snui-font-size-sm);
+    margin: 0;
   }
 
   &__close-button.snui-button {
@@ -74,100 +75,108 @@
     padding-inline-start: 0;
     position: absolute;
     right: 1rem;
+    top: 0.5rem; // Adjusted for better centering
     width: auto;
 
     &:hover {
       background: none;
       box-shadow: none;
+      opacity: 0.8;
     }
   }
 
   &__progressbar {
     background-color: rgba(0, 0, 0, 0.3);
     bottom: 0;
-    height: 0.5rem;
+    height: 0.3rem;
     left: 0;
     position: absolute;
+    transition: width 0.1s linear;
+
+    // Stop progress bar movement once we start exiting
+    .snui-notification--exiting & {
+      transition: none;
+    }
   }
 }
 
-// animations
+// Animations with explicit 'forwards' behavior via keyframes
 @keyframes slide-in-bottom {
-  0% {
+  from {
     transform: translateY(120%);
   }
 
-  100% {
+  to {
     transform: translateY(0);
   }
 }
 
 @keyframes slide-out-bottom {
-  0% {
+  from {
     transform: translateY(0);
   }
 
-  100% {
+  to {
     transform: translateY(120%);
   }
 }
 
 @keyframes slide-in-top {
-  0% {
+  from {
     transform: translateY(-120%);
   }
 
-  100% {
+  to {
     transform: translateY(0);
   }
 }
 
 @keyframes slide-out-top {
-  0% {
+  from {
     transform: translateY(0);
   }
 
-  100% {
+  to {
     transform: translateY(-120%);
   }
 }
 
 @keyframes slide-in-left {
-  0% {
+  from {
     transform: translateX(-120%);
   }
 
-  100% {
+  to {
     transform: translateX(0);
   }
 }
 
 @keyframes slide-out-left {
-  0% {
+  from {
     transform: translateX(0);
   }
 
-  100% {
+  to {
     transform: translateX(-120%);
   }
 }
 
 @keyframes slide-in-right {
-  0% {
+  from {
     transform: translateX(120%);
   }
 
-  100% {
+  to {
     transform: translateX(0);
   }
 }
 
 @keyframes slide-out-right {
-  0% {
+  from {
     transform: translateX(0);
   }
 
-  100% {
+  to {
     transform: translateX(120%);
   }
 }

@@ -1,5 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import {
   Button,
   CheckmarkIcon,
@@ -9,213 +8,161 @@ import {
 } from '@components';
 import { NotificationContext } from '@contexts';
 import { useTheme } from '@hooks';
-import { isFunction, isString } from '@utils';
+import { isFunction } from '@utils';
 import { NotificationProps } from '@components/Notification/types';
 
 import './styles.scss';
 
-/**
- * Alert that usually last a few seconds.
- *
- * NOTE: internal use
- */
-const Notification: React.FC<NotificationProps> = props => {
-  const {
-    backgroundColor,
-    duration = 5000,
-    id,
-    isCloseable = true,
-    isPausable = true,
-    message,
-    position = 'top-right',
-    render,
-    status = 'info',
-    title,
-  } = props;
+// Configuration mapping to keep the component body clean
+const STATUS_MAP = {
+  error: { icon: CloseIcon, colorKey: 'error600' },
+  success: { icon: CheckmarkIcon, colorKey: 'success600' },
+  warning: { icon: HelpIcon, colorKey: 'warning600' },
+  info: { icon: InfoIcon, colorKey: 'info600' },
+};
 
+const Notification: React.FC<NotificationProps> = ({
+  duration = 5000,
+  id,
+  isCloseable = true,
+  isPausable = true,
+  message,
+  position = 'top-right',
+  render,
+  status = 'info',
+  title,
+  backgroundColor,
+}) => {
   const theme = useTheme();
   const { dispatch } = React.useContext(NotificationContext);
+
   const [progressbarWidth, setProgressbarWidth] = useState(100);
-  const [intervalId, setIntervalId] = useState(null);
   const [isExiting, setIsExiting] = useState(false);
 
-  let backgroundColorToUse: string = '';
-  let icon: ReactNode;
-  let actionType: string;
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  switch (status) {
-    case 'error':
-      backgroundColorToUse = theme.colors.error600;
-      icon = (
-        <CloseIcon
-          color="var(--snui-color-white)"
-          height="0.7rem"
-          margin="0 0.7rem 0 0"
-          width="0.7rem"
-        />
-      );
-      break;
-    case 'success':
-      backgroundColorToUse = theme.colors.success600;
-      icon = (
-        <CheckmarkIcon
-          color="var(--snui-color-white)"
-          height="0.7rem"
-          margin="0 0.7rem 0 0"
-          width="0.7rem"
-        />
-      );
-      break;
-    case 'warning':
-      backgroundColorToUse = theme.colors.warning600;
-      icon = (
-        <HelpIcon
-          color="var(--snui-color-white)"
-          margin="0 0.7rem 0 0"
-          size="xs"
-        />
-      );
-      break;
-    default:
-      backgroundColorToUse = theme.colors.info600;
-      icon = (
-        <InfoIcon
-          color="var(--snui-color-white)"
-          margin="0 0.7rem 0 0"
-          size="xs"
-        />
-      );
-  }
+  // Derive styles based on status
+  const config = STATUS_MAP[status] || STATUS_MAP.info;
+  const backgroundColorToUse =
+    backgroundColor ||
+    theme.colors[config.colorKey as keyof typeof theme.colors];
+  const StatusIcon = config.icon;
 
-  switch (position) {
-    case 'bottom':
-      actionType = 'REMOVE_BOTTOM_NOTIFICATION';
-      break;
-    case 'bottom-left':
-      actionType = 'REMOVE_BOTTOM_LEFT_NOTIFICATION';
-      break;
-    case 'bottom-right':
-      actionType = 'REMOVE_BOTTOM_RIGHT_NOTIFICATION';
-      break;
-    case 'top':
-      actionType = 'REMOVE_TOP_NOTIFICATION';
-      break;
-    case 'top-left':
-      actionType = 'REMOVE_TOP_LEFT_NOTIFICATION';
-      break;
-    default:
-      actionType = 'REMOVE_TOP_RIGHT_NOTIFICATION';
-  }
-
-  if (isFunction(render) && isString(backgroundColor)) {
-    backgroundColorToUse = backgroundColor as string;
-  }
+  // Map position to Reducer Action Type
+  const actionType = useMemo(
+    () => `REMOVE_${position.replace('-', '_').toUpperCase()}_NOTIFICATION`,
+    [position]
+  );
 
   const handleStartTimer = () => {
-    const timerId = setInterval(() => {
+    if (!isPausable || isExiting) return;
+
+    // Ensure the interval is at least 10ms to prevent browser throttling issues
+    const tickRate = Math.max(duration / 100, 10);
+
+    timerRef.current = setInterval(() => {
       setProgressbarWidth(prev => {
-        if (prev > 0) {
-          return prev - 0.5;
-        }
-
-        clearInterval(timerId);
-
-        return prev;
+        if (prev <= 0) return 0;
+        return prev - 1; // Decrement by 1% per tick
       });
-    }, duration / 200);
-
-    setIntervalId(timerId as any);
+    }, tickRate);
   };
 
   const handlePauseTimer = () => {
-    clearInterval(intervalId as any);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
   };
 
-  const handleCloseNotification = () => {
+  const handleManualClose = () => {
     handlePauseTimer();
-
     setIsExiting(true);
+  };
 
-    setTimeout(() => {
+  // Clean up timer on unmount
+  useEffect(() => {
+    handleStartTimer();
+    return () => handlePauseTimer();
+  }, []);
+
+  // Close when progress hits 0
+  useEffect(() => {
+    if (progressbarWidth === 0 && !isExiting) {
+      handleManualClose();
+    }
+  }, [progressbarWidth, isExiting]);
+
+  // Final removal after CSS transition ends
+  const handleTransitionEnd = (e: React.TransitionEvent) => {
+    // Only trigger if the exiting opacity/transform transition finishes
+    if (isExiting && e.propertyName === 'opacity') {
       dispatch({
         type: actionType as any,
         payload: id as string,
       });
-    }, 400);
+    }
   };
 
-  useEffect(() => {
-    if (progressbarWidth === 0) {
-      handleCloseNotification();
-    }
-  }, [progressbarWidth]);
-
-  useEffect(() => {
-    handleStartTimer();
-  }, []);
-
-  return isFunction(render) ? (
+  return (
     <div
-      className={`snui-flex snui-notification snui-notification--${position} ${
-        isExiting ? `snui-notification--${position}--exiting` : ''
-      }`}
       id={id}
-      onMouseEnter={isPausable ? handlePauseTimer : undefined}
-      onMouseLeave={isPausable ? handleStartTimer : undefined}
       role="alert"
-      style={{ backgroundColor: backgroundColorToUse }}
-    >
-      {render!(isCloseable ? handleCloseNotification : () => {})}
-      {isPausable && (
-        <div
-          aria-valuemax={100}
-          aria-valuemin={0}
-          aria-valuenow={progressbarWidth}
-          className="snui-notification__progressbar"
-          style={{ width: `${progressbarWidth}%` }}
-        />
-      )}
-    </div>
-  ) : (
-    <div
-      className={`snui-flex snui-notification snui-notification--${position} ${
-        isExiting ? `snui-notification--${position}--exiting` : ''
+      aria-live="polite"
+      onTransitionEnd={handleTransitionEnd}
+      onMouseEnter={handlePauseTimer}
+      onMouseLeave={handleStartTimer}
+      className={`snui-notification snui-notification--${position} ${
+        isExiting ? 'snui-notification--exiting' : ''
       }`}
-      id={id}
-      onMouseEnter={isPausable ? handlePauseTimer : undefined}
-      onMouseLeave={isPausable ? handleStartTimer : undefined}
-      role="alert"
       style={{
         backgroundColor: backgroundColorToUse,
-        padding: theme.sizes.xs,
+        padding: !isFunction(render) ? theme.sizes.xs : undefined,
       }}
     >
-      <div>{icon}</div>
-      <div className="snui-flex snui-flex-column snui-margin-right-sm">
-        <p className="snui-notification__title">{title}</p>
-        <p className="snui-notification__message">{message}</p>
-      </div>
-      {isCloseable && (
-        <Button
-          aria-label="Close the notification"
-          className="snui-notification__close-button"
-          onClick={() => setProgressbarWidth(0)}
-          variant="outline"
-        >
-          <CloseIcon
-            color="var(--snui-color-white)"
-            height="0.7rem"
-            width="0.7rem"
-          />
-        </Button>
+      {isFunction(render) ? (
+        render!(isCloseable ? handleManualClose : () => {})
+      ) : (
+        <div className="snui-notification__inner snui-flex">
+          <div className="snui-notification__icon-container">
+            <StatusIcon
+              color="var(--snui-color-white)"
+              size={
+                status === 'warning' || status === 'info' ? 'xs' : undefined
+              }
+            />
+          </div>
+
+          <div className="snui-flex snui-flex-column snui-margin-right-sm">
+            <strong className="snui-notification__title">{title}</strong>
+            <p className="snui-notification__message">{message}</p>
+          </div>
+
+          {isCloseable && (
+            <Button
+              aria-label="Close notification"
+              className="snui-notification__close-button"
+              onClick={handleManualClose}
+              variant="outline"
+            >
+              <CloseIcon
+                color="var(--snui-color-white)"
+                height="0.7rem"
+                width="0.7rem"
+              />
+            </Button>
+          )}
+        </div>
       )}
+
       {isPausable && (
         <div
-          aria-valuemax={100}
-          aria-valuemin={0}
-          aria-valuenow={progressbarWidth}
+          aria-hidden="true"
           className="snui-notification__progressbar"
-          style={{ width: `${progressbarWidth}%` }}
+          style={{
+            width: `${progressbarWidth}%`,
+            transition: isExiting ? 'none' : 'width 0.1s linear',
+          }}
         />
       )}
     </div>

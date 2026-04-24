@@ -5,37 +5,32 @@ import { SupernovaProvider } from '@contexts';
 import { useNotification } from '@hooks';
 import { act, renderHook, screen } from '@test-utils';
 
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+  <SupernovaProvider>{children}</SupernovaProvider>
+);
+
 describe('<Notification />', () => {
   const title = 'notification title';
   const message = 'notification message';
 
   it('should add a new notification', async () => {
-    await act(async () => {
-      const { result } = renderHook(() => useNotification(), {
-        wrapper: ({ children }) => (
-          <SupernovaProvider>{children}</SupernovaProvider>
-        ),
-      });
+    const { result } = renderHook(() => useNotification(), { wrapper });
 
+    await act(async () => {
       result.current({
         title,
         message,
       });
-
-      const titleNodes = await screen.findAllByText(title);
-      const messageNodes = await screen.findAllByText(message);
-
-      expect(titleNodes).toHaveLength(1);
-      expect(messageNodes).toHaveLength(1);
     });
+    const titleNodes = await screen.findAllByText(title);
+    const messageNodes = await screen.findAllByText(message);
+
+    expect(titleNodes).toHaveLength(1);
+    expect(messageNodes).toHaveLength(1);
   });
 
   it('should contain the proper aria roles and attributes', async () => {
-    const { result } = renderHook(() => useNotification(), {
-      wrapper: ({ children }) => (
-        <SupernovaProvider>{children}</SupernovaProvider>
-      ),
-    });
+    const { result } = renderHook(() => useNotification(), { wrapper });
 
     act(() => {
       result.current({
@@ -50,15 +45,11 @@ describe('<Notification />', () => {
   });
 
   it('should remove notification after 5 seconds', async () => {
+    const { result } = renderHook(() => useNotification(), { wrapper });
+
+    jest.useFakeTimers();
+
     act(() => {
-      jest.useFakeTimers();
-
-      const { result } = renderHook(() => useNotification(), {
-        wrapper: ({ children }) => (
-          <SupernovaProvider>{children}</SupernovaProvider>
-        ),
-      });
-
       result.current({
         title,
         message,
@@ -75,13 +66,9 @@ describe('<Notification />', () => {
   });
 
   it('should not render progressbar when isPausable is false', async () => {
-    act(() => {
-      const { result } = renderHook(() => useNotification(), {
-        wrapper: ({ children }) => (
-          <SupernovaProvider>{children}</SupernovaProvider>
-        ),
-      });
+    const { result } = renderHook(() => useNotification(), { wrapper });
 
+    act(() => {
       result.current({
         title,
         message,
@@ -95,11 +82,7 @@ describe('<Notification />', () => {
   });
 
   it('should add a custom notification component', async () => {
-    const { result } = renderHook(() => useNotification(), {
-      wrapper: ({ children }) => (
-        <SupernovaProvider>{children}</SupernovaProvider>
-      ),
-    });
+    const { result } = renderHook(() => useNotification(), { wrapper });
 
     act(() => {
       result.current({
