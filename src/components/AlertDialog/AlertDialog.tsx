@@ -1,6 +1,7 @@
 import React, {
   FC,
   MutableRefObject,
+  PropsWithChildren,
   useCallback,
   useMemo,
   useState,
@@ -22,7 +23,7 @@ export interface AlertDialogProps extends DialogLikeProps {
  * The container for all AlertDialog related components
  * that provides context to its children.
  */
-const AlertDialog: FC<AlertDialogProps> = props => {
+const AlertDialog: FC<PropsWithChildren<AlertDialogProps>> = props => {
   const {
     children,
     closeOnEsc = true,
@@ -50,9 +51,19 @@ const AlertDialog: FC<AlertDialogProps> = props => {
   }, []);
 
   const { id: alertDialogId, ...restContext } = useAlertDialogProvider(props);
-  const contextValue = useMemo(
-    () => ({
-      ...restContext,
+  const contextValue = useMemo(() => {
+    const {
+      getAlertDialogBodyProps,
+      getAlertDialogFooterProps,
+      getAlertDialogHeaderProps,
+      ...rest
+    } = restContext;
+
+    return {
+      ...rest,
+      getAlertDialogBodyProps,
+      getAlertDialogFooterProps,
+      getAlertDialogHeaderProps,
       closeOnEsc,
       closeOnOverlayClick,
       enterExitMode,
@@ -67,9 +78,8 @@ const AlertDialog: FC<AlertDialogProps> = props => {
       onEscPress,
       size,
       trapFocus,
-    }),
-    [alertDialogId, restContext]
-  );
+    };
+  }, [alertDialogId, restContext]);
 
   return (
     <Portal isMounted={isOpen}>

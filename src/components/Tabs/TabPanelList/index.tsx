@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks';
 import { SupernovaProps } from '@types';
@@ -9,7 +9,7 @@ interface TabPanelListProps extends SupernovaProps {}
 /**
  * The wrapper for all TabPanel components
  */
-const TabPanelList: FC<TabPanelListProps> = props => {
+const TabPanelList: FC<PropsWithChildren<TabPanelListProps>> = props => {
   const { children, ...rest } = props;
   const tabPanelListRef = useRef<HTMLDivElement | null>(null);
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(

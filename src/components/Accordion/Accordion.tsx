@@ -1,5 +1,6 @@
 import React, {
   FC,
+  PropsWithChildren,
   useCallback,
   useEffect,
   useMemo,
@@ -20,7 +21,7 @@ import { AccordionProps } from './types';
  * The container for all Accordion related components
  * that provides context for all AccordionItem.
  */
-const Accordion: FC<AccordionProps> = props => {
+const Accordion: FC<PropsWithChildren<AccordionProps>> = props => {
   const {
     allowMultiple = false,
     allowToggle = false,

@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 
 import { IconBaseProps } from './types';
 
 /**
  * The base Icon component
  */
-const Icon: FC<IconBaseProps> = props => {
+const Icon: FC<PropsWithChildren<IconBaseProps>> = props => {
   const {
     children,
     className,

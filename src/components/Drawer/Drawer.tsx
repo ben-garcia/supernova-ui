@@ -1,6 +1,7 @@
 import React, {
   FC,
   MutableRefObject,
+  PropsWithChildren,
   useCallback,
   useMemo,
   useState,
@@ -28,7 +29,7 @@ export interface DrawerProps extends DialogLikeProps {
  * The container for all Drawer related components
  * that provides context to its children.
  */
-const Drawer: FC<DrawerProps> = props => {
+const Drawer: FC<PropsWithChildren<DrawerProps>> = props => {
   const {
     children,
     closeOnEsc = true,

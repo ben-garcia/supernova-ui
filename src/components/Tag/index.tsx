@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps, useInlineStyles } from '@hooks';
 import { isString } from '@utils';
@@ -8,7 +8,7 @@ import './styles.scss';
 /**
  * UI component to display an item's summary information.
  */
-const Tag: FC<TagProps> = props => {
+const Tag: FC<PropsWithChildren<TagProps>> = props => {
   const {
     colorVariant,
     children,

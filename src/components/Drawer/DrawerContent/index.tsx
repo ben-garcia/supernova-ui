@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, PropsWithChildren, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
 import { useCSSAndPseudoClassProps, useDrawer, useScrollLock } from '@hooks';
@@ -11,7 +11,7 @@ type DrawerContentProps = Omit<SupernovaProps, 'id'>;
 /**
  * The container for Drawer related components.
  */
-const DrawerContent: FC<DrawerContentProps> = props => {
+const DrawerContent: FC<PropsWithChildren<DrawerContentProps>> = props => {
   const { children, ...rest } = props;
   const {
     closeOnEsc,

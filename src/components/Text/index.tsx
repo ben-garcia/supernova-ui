@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks';
 import { createElement } from '@utils';
@@ -8,7 +8,7 @@ import './styles.scss';
 /**
  * UI component to display individual pieces of text
  */
-const Text: FC<TextProps> = props => {
+const Text: FC<PropsWithChildren<TextProps>> = props => {
   const { children, tag = 'span', ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     rest,

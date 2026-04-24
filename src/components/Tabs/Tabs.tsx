@@ -1,4 +1,10 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, {
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 
 import { TabsProvider } from '@contexts';
 import {
@@ -15,7 +21,7 @@ import './styles.scss';
  * The container for all Tabs related components
  * that provides context to its children.
  */
-const Tabs: FC<TabsProps> = props => {
+const Tabs: FC<PropsWithChildren<TabsProps>> = props => {
   const {
     colorVariant,
     align = 'start',

@@ -1,4 +1,10 @@
-import React, { FC, useEffect, useMemo, useRef } from 'react';
+import React, {
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
 import { TabListProvider } from '@contexts';
 import { useCSSAndPseudoClassProps, useTabs } from '@hooks';
@@ -11,7 +17,7 @@ interface TabListProps extends SupernovaProps {}
 /**
  * The wrapper for all Tab buttons
  */
-const TabList: FC<TabListProps> = props => {
+const TabList: FC<PropsWithChildren<TabListProps>> = props => {
   const { children, ...rest } = props;
   const { align, orientation, isFitted, setNumberOfTabs } = useTabs();
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(

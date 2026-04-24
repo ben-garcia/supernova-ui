@@ -1,6 +1,7 @@
 import React, {
   FC,
   MutableRefObject,
+  PropsWithChildren,
   useCallback,
   useMemo,
   useState,
@@ -22,7 +23,7 @@ export interface ModalProps extends DialogLikeProps {
  * The container for all Modal related components
  * that provides context to its children.
  */
-const Modal: FC<ModalProps> = props => {
+const Modal: FC<PropsWithChildren<ModalProps>> = props => {
   const {
     children,
     closeOnEsc = true,
@@ -49,9 +50,19 @@ const Modal: FC<ModalProps> = props => {
     }, 100);
   }, []);
   const { id: modalId, ...restContext } = useModalProvider(props);
-  const contextValue = useMemo(
-    () => ({
-      ...restContext,
+  const contextValue = useMemo(() => {
+    const {
+      getModalBodyProps,
+      getModalFooterProps,
+      getModalHeaderProps,
+      ...rest
+    } = restContext;
+
+    return {
+      ...rest,
+      getModalBodyProps,
+      getModalFooterProps,
+      getModalHeaderProps,
       closeOnEsc,
       closeOnOverlayClick,
       enterExitMode,
@@ -66,9 +77,8 @@ const Modal: FC<ModalProps> = props => {
       onEscPress,
       size,
       trapFocus,
-    }),
-    [modalId, restContext]
-  );
+    };
+  }, [modalId, restContext]);
   return (
     <Portal isMounted={isOpen}>
       <ModalProvider value={contextValue}>{children}</ModalProvider>

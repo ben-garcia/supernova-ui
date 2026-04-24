@@ -1,11 +1,12 @@
 // Helper functions involving React.
 import {
+  Children,
   ClassAttributes,
   ForwardedRef,
   ForwardRefRenderFunction,
   InputHTMLAttributes,
   MutableRefObject,
-  Children,
+  PropsWithoutRef,
   createElement as rcreateElement,
   forwardRef as rforwardRef,
 } from 'react';
@@ -13,7 +14,7 @@ import {
 export { createPortal } from 'react-dom';
 
 export function forwardRef<TProps, TElement>(
-  render: ForwardRefRenderFunction<TElement, TProps>
+  render: ForwardRefRenderFunction<TElement, PropsWithoutRef<TProps>>
 ) {
   return rforwardRef<TElement, TProps>(render);
 }

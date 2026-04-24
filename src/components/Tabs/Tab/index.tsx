@@ -1,4 +1,11 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   useCSSAndPseudoClassProps,
@@ -15,7 +22,7 @@ interface TabProps extends SupernovaProps {}
 /**
  * Tab button used to activate a specific TabPanel
  */
-const Tab: FC<TabProps> = props => {
+const Tab: FC<PropsWithChildren<TabProps>> = props => {
   const { children, ...rest } = props;
   const { tabsRef } = useTabList();
   const {

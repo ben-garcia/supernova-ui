@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps, useModal } from '@hooks';
 import { SupernovaProps } from '@types';
@@ -9,7 +9,7 @@ export interface ModalBodyProps extends SupernovaProps {}
 /**
  * The wrapper for the main content of the Modal.
  */
-const ModalBody: FC<ModalBodyProps> = props => {
+const ModalBody: FC<PropsWithChildren<ModalBodyProps>> = props => {
   const { children, ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(rest, '');
   const { getModalBodyProps } = useModal();

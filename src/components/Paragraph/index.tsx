@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks';
 import { isString } from '@utils';
@@ -8,7 +8,7 @@ import './styles.scss';
 /**
  * UI component to display a paragraph
  */
-const Paragraph: FC<ParagraphProps> = props => {
+const Paragraph: FC<PropsWithChildren<ParagraphProps>> = props => {
   const { children, size = 'xl', ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     rest,

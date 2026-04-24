@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useRef } from 'react';
+import React, { FC, PropsWithChildren, useMemo, useRef } from 'react';
 
 import { EditableProvider } from '@contexts';
 import { useCSSAndPseudoClassProps, useEditableProvider } from '@hooks';
@@ -9,7 +9,7 @@ import './styles.scss';
  * The container for all Editable related components
  * that provides context for all subcomponents.
  */
-const Editable: FC<EditableProps> = props => {
+const Editable: FC<PropsWithChildren<EditableProps>> = props => {
   const {
     children,
     isDisabled,

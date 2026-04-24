@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks';
 import { createElement, isString } from '@utils';
@@ -8,7 +8,7 @@ import './styles.scss';
 /**
  * Ui component to display headings
  */
-const Heading: FC<HeadingProps> = props => {
+const Heading: FC<PropsWithChildren<HeadingProps>> = props => {
   const { children, level = 1, size = 'xl', ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     rest,

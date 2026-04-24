@@ -149,7 +149,7 @@ const AccordionHeaderButton: FC<AccordionHeaderButtonProps> = props => {
   );
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLDivElement>) => {
+    (e: KeyboardEvent<HTMLButtonElement>) => {
       const { key } = e;
       if (buttonsRef) {
         if (key === 'ArrowUp') {
@@ -195,7 +195,7 @@ const AccordionHeaderButton: FC<AccordionHeaderButtonProps> = props => {
         id={accordionButtonId}
         onClick={handleClick}
         onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
+        onKeyDown={e => handleKeyDown(e)}
         ref={buttonRef}
       >
         <div className="snui-accordion__text">{children}</div>

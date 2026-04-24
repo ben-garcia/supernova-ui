@@ -1,10 +1,10 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, PropsWithChildren, useRef } from 'react';
 
 import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
 import { SliderRailProps } from './types';
 import './styles.scss';
 
-const SliderRail: FC<SliderRailProps> = props => {
+const SliderRail: FC<PropsWithChildren<SliderRailProps>> = props => {
   const { children, ...rest } = props;
   const { max, min, onChange, orientation, sliderId, size, step } = useSlider();
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(

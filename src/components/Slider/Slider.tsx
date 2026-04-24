@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { FC, PropsWithChildren, useMemo } from 'react';
 
 import { SliderProvider } from '@contexts';
 import { useCSSAndPseudoClassProps, useUniqueId } from '@hooks';
 import { SliderProps } from './types';
 import './styles.scss';
 
-const Slider: React.FC<SliderProps> = props => {
+const Slider: FC<PropsWithChildren<SliderProps>> = props => {
   const {
     ariaDescribedBy,
     ariaLabel,

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, PropsWithChildren, useMemo } from 'react';
 
 import { AccordionItemProvider } from '@contexts';
 import {
@@ -14,7 +14,7 @@ interface AccordionItemProps extends SupernovaProps {}
 /**
  * A single accordion that provides context to AccordionButton and AccordionPanel.
  */
-const AccordionItem: FC<AccordionItemProps> = props => {
+const AccordionItem: FC<PropsWithChildren<AccordionItemProps>> = props => {
   const { children, ...rest } = props;
   const addCSSClasses = useCSSAndPseudoClassProps(
     rest,

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks';
 import { createElement } from '@utils';
@@ -12,7 +12,7 @@ export interface BoxProps extends SupernovaProps {
 /**
  * Container component used as a wrapper for other components.
  */
-const Box: FC<BoxProps> = props => {
+const Box: FC<PropsWithChildren<BoxProps>> = props => {
   const { children, tag = 'div', ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     rest,

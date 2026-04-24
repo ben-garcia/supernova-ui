@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps, useDrawer } from '@hooks';
 import { SupernovaProps } from '@types';
@@ -9,7 +9,7 @@ export interface DrawerFooterProps extends SupernovaProps {}
 /**
  * The wrapper for the footer content of the Drawer.
  */
-const DrawerFooter: FC<DrawerFooterProps> = props => {
+const DrawerFooter: FC<PropsWithChildren<DrawerFooterProps>> = props => {
   const { children, ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(rest, '');
   const { getDrawerFooterProps } = useDrawer();

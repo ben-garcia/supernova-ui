@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, PropsWithChildren, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
 import {
@@ -15,7 +15,9 @@ type AlertDialogContentProps = Omit<SupernovaProps, 'id'>;
 /**
  * The container for AlertDialog related components.
  */
-const AlertDialogContent: FC<AlertDialogContentProps> = props => {
+const AlertDialogContent: FC<
+  PropsWithChildren<AlertDialogContentProps>
+> = props => {
   const { children, ...rest } = props;
   const {
     closeOnEsc,

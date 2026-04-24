@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, PropsWithChildren, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
 import { useCSSAndPseudoClassProps, useModal, useScrollLock } from '@hooks';
@@ -11,7 +11,7 @@ type ModalContentProps = Omit<SupernovaProps, 'id'>;
 /**
  * The container for Modal related components.
  */
-const ModalContent: FC<ModalContentProps> = props => {
+const ModalContent: FC<PropsWithChildren<ModalContentProps>> = props => {
   const { children, ...rest } = props;
   const {
     closeOnEsc,

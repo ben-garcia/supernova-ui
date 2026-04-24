@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, PropsWithChildren, useMemo } from 'react';
 
 import { FormControlProvider } from '@contexts';
 import {
@@ -14,7 +14,7 @@ import './styles.scss';
  * The container for all FormControl related components
  * that provides context to its children.
  */
-const FormControl: FC<FormControlProps> = props => {
+const FormControl: FC<PropsWithChildren<FormControlProps>> = props => {
   const {
     children,
     isInvalid = false,
