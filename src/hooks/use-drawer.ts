@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react';
+import { HTMLAttributes, useCallback, useContext } from 'react';
 
 import { DrawerProps } from '@components/Drawer/Drawer';
 import { DrawerContext } from '@contexts';
@@ -24,7 +24,7 @@ const useDrawerProvider = (props: DrawerProps) => {
   const id = useUniqueId('snui-drawer');
 
   const getDrawerBodyProps = useCallback(
-    (drawerBodyProps = {}) => {
+    (drawerBodyProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = drawerBodyProps;
       const classes = createClasses('snui snui-drawer__body', {
         [`${className}`]: isString(className),
@@ -38,7 +38,7 @@ const useDrawerProvider = (props: DrawerProps) => {
     [id]
   );
   const getDrawerHeaderProps = useCallback(
-    (drawerHeaderProps = {}) => {
+    (drawerHeaderProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = drawerHeaderProps;
       const classes = createClasses('snui snui-drawer__header', {
         [`${className}`]: isString(className),
@@ -52,7 +52,7 @@ const useDrawerProvider = (props: DrawerProps) => {
     [id]
   );
   const getDrawerFooterProps = useCallback(
-    (drawerFooterProps = {}) => {
+    (drawerFooterProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = drawerFooterProps;
       const classes = createClasses('snui snui-drawer__footer', {
         [`${className}`]: isString(className),

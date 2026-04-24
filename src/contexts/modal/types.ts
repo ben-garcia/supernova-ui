@@ -1,8 +1,5 @@
-import { FC, ReactNode, MutableRefObject } from 'react';
+import { HTMLAttributes, ReactNode, MutableRefObject } from 'react';
 
-import { ModalBodyProps } from '@components/Modal/ModalBody';
-import { ModalFooterProps } from '@components/Modal/ModalFooter';
-import { ModalHeaderProps } from '@components/Modal/ModalHeader';
 import { DialogLikeProps } from '@types';
 
 export interface ModalContextProps {
@@ -11,14 +8,14 @@ export interface ModalContextProps {
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getModalBodyProps: (
-    props: Omit<ModalBodyProps, 'children'>
-  ) => FC<Omit<ModalBodyProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getModalHeaderProps: (
-    props: Omit<ModalHeaderProps, 'children'>
-  ) => FC<Omit<ModalHeaderProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getModalFooterProps: (
-    props: Omit<ModalFooterProps, 'children'>
-  ) => FC<Omit<ModalFooterProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isExiting?: boolean;

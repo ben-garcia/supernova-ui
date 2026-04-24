@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react';
+import { HTMLAttributes, useCallback, useContext } from 'react';
 
 import { ModalProps } from '@components/Modal/Modal';
 import { ModalContext } from '@contexts';
@@ -25,7 +25,7 @@ const useModalProvider = (props: ModalProps) => {
   const id = useUniqueId('snui-modal');
 
   const getModalBodyProps = useCallback(
-    (modalBodyProps = {}) => {
+    (modalBodyProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = modalBodyProps;
       const classes = createClasses('snui snui-modal__body', {
         [`${className}`]: isString(className),
@@ -39,7 +39,7 @@ const useModalProvider = (props: ModalProps) => {
     [id]
   );
   const getModalHeaderProps = useCallback(
-    (modalHeaderProps = {}) => {
+    (modalHeaderProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = modalHeaderProps;
       const classes = createClasses('snui snui-modal__header', {
         [`${className}`]: isString(className),
@@ -53,7 +53,7 @@ const useModalProvider = (props: ModalProps) => {
     [id]
   );
   const getModalFooterProps = useCallback(
-    (modalFooterProps = {}) => {
+    (modalFooterProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = modalFooterProps;
       const classes = createClasses('snui snui-modal__footer', {
         [`${className}`]: isString(className),

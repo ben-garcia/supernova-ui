@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react';
+import { HTMLAttributes, useCallback, useContext } from 'react';
 
 import { AlertDialogProps } from '@components/AlertDialog/AlertDialog';
 import { AlertDialogContext } from '@contexts';
@@ -24,7 +24,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
   const id = useUniqueId('snui-dialog-alert');
 
   const getAlertDialogBodyProps = useCallback(
-    (alertDialogBodyProps = {}) => {
+    (alertDialogBodyProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className, ...rest } = alertDialogBodyProps;
       const classes = createClasses('snui snui-alert-dialog__body', {
         [`${className}`]: isString(className),
@@ -38,7 +38,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
     [id]
   );
   const getAlertDialogHeaderProps = useCallback(
-    (alertDialogHeaderProps = {}) => {
+    (alertDialogHeaderProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className, ...rest } = alertDialogHeaderProps;
       const classes = createClasses('snui snui-alert-dialog__header', {
         [`${className}`]: isString(className),
@@ -52,7 +52,7 @@ export const useAlertDialogProvider = (props: AlertDialogProps) => {
     [id]
   );
   const getAlertDialogFooterProps = useCallback(
-    (alertDialogFooterProps = {}) => {
+    (alertDialogFooterProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className, ...rest } = alertDialogFooterProps;
       const classes = createClasses('snui snui-alert-dialog__footer', {
         [`${className}`]: isString(className),

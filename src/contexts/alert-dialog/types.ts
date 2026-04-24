@@ -1,8 +1,5 @@
-import { FC, ReactNode, MutableRefObject } from 'react';
+import { HTMLAttributes, ReactNode, MutableRefObject } from 'react';
 
-import { AlertDialogBodyProps } from '@components/AlertDialog/AlertDialogBody';
-import { AlertDialogFooterProps } from '@components/AlertDialog/AlertDialogFooter';
-import { AlertDialogHeaderProps } from '@components/AlertDialog/AlertDialogHeader';
 import { DialogLikeProps } from '@types';
 
 export interface AlertDialogContextProps {
@@ -11,14 +8,14 @@ export interface AlertDialogContextProps {
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getAlertDialogBodyProps: (
-    props: Omit<AlertDialogBodyProps, 'children'>
-  ) => FC<Omit<AlertDialogBodyProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getAlertDialogFooterProps: (
-    props: Omit<AlertDialogFooterProps, 'children'>
-  ) => FC<Omit<AlertDialogFooterProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getAlertDialogHeaderProps: (
-    props: Omit<AlertDialogHeaderProps, 'children'>
-  ) => FC<Omit<AlertDialogHeaderProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   id?: string;
   isExiting?: boolean;
   isOpen: boolean;

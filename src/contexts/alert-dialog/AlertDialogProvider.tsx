@@ -3,12 +3,9 @@ import { createContext } from 'react';
 import { AlertDialogContextProps } from './types';
 
 const initialState: AlertDialogContextProps = {
-  // @ts-expect-error
-  getAlertDialogBodyProps: () => {},
-  // @ts-expect-error
-  getAlertDialogFooterProps: () => {},
-  // @ts-expect-error
-  getAlertDialogHeaderProps: () => {},
+  getAlertDialogBodyProps: (props = {}) => ({ ...props }),
+  getAlertDialogFooterProps: (props = {}) => ({ ...props }),
+  getAlertDialogHeaderProps: (props = {}) => ({ ...props }),
   isOpen: false,
   onClose: () => {},
 };

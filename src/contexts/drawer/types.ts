@@ -1,9 +1,6 @@
-import { FC, ReactNode, MutableRefObject } from 'react';
+import { HTMLAttributes, ReactNode, MutableRefObject } from 'react';
 
 import { DrawerProps } from '@components/Drawer/Drawer';
-import { DrawerBodyProps } from '@components/Drawer/DrawerBody';
-import { DrawerFooterProps } from '@components/Drawer/DrawerFooter';
-import { DrawerHeaderProps } from '@components/Drawer/DrawerHeader';
 import { DialogLikeProps } from '@types';
 
 export interface DrawerContextProps {
@@ -12,14 +9,14 @@ export interface DrawerContextProps {
   enterExitMode?: () => void;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getDrawerBodyProps: (
-    props: Omit<DrawerBodyProps, 'children'>
-  ) => FC<Omit<DrawerBodyProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getDrawerFooterProps: (
-    props: Omit<DrawerFooterProps, 'children'>
-  ) => FC<Omit<DrawerFooterProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getDrawerHeaderProps: (
-    props: Omit<DrawerHeaderProps, 'children'>
-  ) => FC<Omit<DrawerHeaderProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isExiting?: boolean;

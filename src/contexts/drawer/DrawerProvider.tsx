@@ -3,12 +3,9 @@ import { createContext } from 'react';
 import { DrawerContextProps } from './types';
 
 const initialState: DrawerContextProps = {
-  // @ts-expect-error
-  getDrawerBodyProps: () => {},
-  // @ts-expect-error
-  getDrawerHeaderProps: () => {},
-  // @ts-expect-error
-  getDrawerFooterProps: () => {},
+  getDrawerBodyProps: (props = {}) => ({ ...props }),
+  getDrawerHeaderProps: (props = {}) => ({ ...props }),
+  getDrawerFooterProps: (props = {}) => ({ ...props }),
   isOpen: false,
   onClose: () => {},
 };
