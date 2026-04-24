@@ -1,4 +1,11 @@
-import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
 import {
   useCalculatePosition,
@@ -18,7 +25,7 @@ interface PropoverContentProps
 /**
  * The container for Popover related components.
  */
-const PopoverContent: FC<PropoverContentProps> = props => {
+const PopoverContent: FC<PropsWithChildren<PropoverContentProps>> = props => {
   const {
     arrowSize = 15,
     background,
@@ -156,7 +163,7 @@ const PopoverContent: FC<PropoverContentProps> = props => {
         window.removeEventListener('click', handleClick);
       }
     };
-  }, [isOpen]);
+  }, [isOpen, popoverId, closeOnBlur, onBlur, onClose]);
 
   const rootNode = useRef<HTMLDivElement | null>(null);
   const focusableItems = useRef<HTMLElement[]>([]);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { useCSSAndPseudoClassProps, usePopover } from '@hooks';
 import { SupernovaProps } from '@types';
@@ -9,7 +9,7 @@ export interface PopoverBodyProps extends SupernovaProps {}
 /**
  * The wrapper for the main content of the Popover.
  */
-const ModalBody: FC<PopoverBodyProps> = props => {
+const ModalBody: FC<PropsWithChildren<PopoverBodyProps>> = props => {
   const { children, ...rest } = props;
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(rest, '');
   const { getPopoverBodyProps } = usePopover();

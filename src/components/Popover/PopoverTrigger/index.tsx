@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 
 import { usePopover } from '@hooks';
 import { isFunction } from '@utils';
@@ -19,7 +19,12 @@ const PopoverTrigger: FC<PopoverTriggerProps> = props => {
     'aria-expanded': isOpen,
     'aria-haspopup': 'dialog',
     id: `${popoverId}__button`,
-    onClick: isFunction(onToggle) ? () => onToggle!() : undefined,
+    onClick: isFunction(onToggle)
+      ? (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          e.stopPropagation();
+          onToggle!();
+        }
+      : undefined,
     ref: popoverButtonRef,
   });
 };

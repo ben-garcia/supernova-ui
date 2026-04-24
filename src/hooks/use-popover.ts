@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef } from 'react';
+import { HTMLAttributes, useCallback, useContext, useRef } from 'react';
 
 import { PopoverProps } from '@components/Popover/Popover';
 import { PopoverContext } from '@contexts';
@@ -34,7 +34,7 @@ const usePopoverProvider = (props: PopoverProps) => {
     []
   );
   const getPopoverBodyProps = useCallback(
-    (popoverBodyProps = {}) => {
+    (popoverBodyProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = popoverBodyProps;
       const classes = createClasses('snui snui-popover__body', {
         [`${className}`]: isString(className),
@@ -48,7 +48,7 @@ const usePopoverProvider = (props: PopoverProps) => {
     [id]
   );
   const getPopoverHeaderProps = useCallback(
-    (popoverHeaderProps = {}) => {
+    (popoverHeaderProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = popoverHeaderProps;
       const classes = createClasses('snui snui-popover__header', {
         [`${className}`]: isString(className),
@@ -62,7 +62,7 @@ const usePopoverProvider = (props: PopoverProps) => {
     [id]
   );
   const getPopoverFooterProps = useCallback(
-    (popoverFooterProps = {}) => {
+    (popoverFooterProps: HTMLAttributes<HTMLElement> = {}) => {
       const { className } = popoverFooterProps;
       const classes = createClasses('snui snui-popover__footer', {
         [`${className}`]: isString(className),

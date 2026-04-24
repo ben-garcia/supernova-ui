@@ -1,27 +1,24 @@
-import { FC, ReactNode, MutableRefObject, RefObject } from 'react';
-
-import { ButtonProps } from '@components/Button/types';
-import { PopoverBodyProps } from '@components/Popover/PopoverBody';
-import { PopoverFooterProps } from '@components/Popover/PopoverFooter';
-import { PopoverHeaderProps } from '@components/Popover/PopoverHeader';
+import { HTMLAttributes, ReactNode, MutableRefObject } from 'react';
 
 export interface PopoverContextProps {
   closeOnBlur?: boolean;
   closeOnEsc?: boolean;
   finalFocusRef?: MutableRefObject<HTMLElement | null>;
   getPopoverBodyProps: (
-    props: Omit<PopoverBodyProps, 'children'>
-  ) => FC<Omit<PopoverBodyProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getPopoverButtonProps: (
-    props: ButtonProps,
-    ref: RefObject<HTMLButtonElement>
-  ) => void;
+    // props: ButtonProps,
+    // ref: RefObject<HTMLButtonElement>
+    props: any,
+    ref: any
+  ) => any;
   getPopoverFooterProps: (
-    props: Omit<PopoverFooterProps, 'children'>
-  ) => FC<Omit<PopoverFooterProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   getPopoverHeaderProps: (
-    props: Omit<PopoverHeaderProps, 'children'>
-  ) => FC<Omit<PopoverHeaderProps, 'children'>>;
+    props?: HTMLAttributes<HTMLElement>
+  ) => HTMLAttributes<HTMLElement>;
   id?: string;
   initialFocusRef?: MutableRefObject<HTMLElement | null>;
   isOpen: boolean;

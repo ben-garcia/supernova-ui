@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, useMemo } from 'react';
+import React, { FC, MutableRefObject, PropsWithChildren, useMemo } from 'react';
 
 import { PopoverProvider } from '@contexts';
 import { usePopoverProvider } from '@hooks';
@@ -42,7 +42,7 @@ export interface PopoverProps extends Omit<
  * The container for all Popover related components
  * that provides context to its children.
  */
-const Popover: FC<PopoverProps> = props => {
+const Popover: FC<PropsWithChildren<PopoverProps>> = props => {
   const {
     children,
     closeOnBlur = true,
@@ -59,9 +59,19 @@ const Popover: FC<PopoverProps> = props => {
   } = props;
   const { id: popoverId, ...restContext } = usePopoverProvider(props);
 
-  const contextValue = useMemo(
-    () => ({
-      ...restContext,
+  const contextValue = useMemo(() => {
+    const {
+      getPopoverBodyProps,
+      getPopoverFooterProps,
+      getPopoverHeaderProps,
+      ...rest
+    } = restContext;
+
+    return {
+      ...rest,
+      getPopoverBodyProps,
+      getPopoverFooterProps,
+      getPopoverHeaderProps,
       closeOnEsc,
       closeOnBlur,
       finalFocusRef,
@@ -74,9 +84,22 @@ const Popover: FC<PopoverProps> = props => {
       onToggle,
       trapFocus,
       shouldReturnFocusOnClose,
-    }),
-    [popoverId, restContext]
-  );
+    };
+  }, [
+    popoverId,
+    restContext,
+    closeOnEsc,
+    closeOnBlur,
+    finalFocusRef,
+    initialFocusRef,
+    isOpen,
+    onBlur,
+    onClose,
+    onEscPress,
+    onToggle,
+    trapFocus,
+    shouldReturnFocusOnClose,
+  ]);
   return <PopoverProvider value={contextValue}>{children}</PopoverProvider>;
 };
 
