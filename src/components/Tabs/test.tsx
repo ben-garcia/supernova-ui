@@ -1,4 +1,3 @@
-/* eslint react/jsx-wrap-multilines: 0 */
 import { jest } from '@jest/globals';
 import React from 'react';
 
@@ -78,18 +77,27 @@ describe('<Tabs />', () => {
         'aria-controls',
         tabPanels[0].getAttribute('id')
       );
+    });
 
+    // events that trigger React state change need to be wrapped in 'act'
+    act(() => {
       userEvent.tab();
       fireEvent.keyDown(tabs[0], { key: 'ArrowRight' });
       jest.advanceTimersByTime(5);
+    });
 
+    await waitFor(() => {
       expect(tabs[0]).toHaveAttribute('aria-selected', 'false');
       expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
       expect(tabs[2]).toHaveAttribute('aria-selected', 'false');
+    });
 
+    act(() => {
       fireEvent.keyDown(tabs[1], { key: 'ArrowRight' });
       jest.advanceTimersByTime(5);
+    });
 
+    await waitFor(() => {
       expect(tabs[0]).toHaveAttribute('aria-selected', 'false');
       expect(tabs[1]).toHaveAttribute('aria-selected', 'false');
       expect(tabs[2]).toHaveAttribute('aria-selected', 'true');

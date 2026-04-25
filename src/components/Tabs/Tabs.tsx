@@ -78,7 +78,24 @@ const Tabs: FC<PropsWithChildren<TabsProps>> = props => {
       size,
       tabsId,
     }),
-    [context]
+    [
+      context,
+      activeIndex,
+      focusedIndex,
+      numberOfTabs,
+      colors,
+      colorVariant,
+      align,
+      defaultIndex,
+      isFitted,
+      isManual,
+      orientation,
+      size,
+      tabsId,
+      setActiveIndex,
+      setFocusedIndex,
+      setNumberOfTabs,
+    ]
   );
 
   return (
