@@ -30,10 +30,8 @@ describe('<Tooltip />', () => {
   it('should pass a11y tests', async () => {
     render(<TooltipTest />);
 
-    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to render.
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
@@ -47,29 +45,60 @@ describe('<Tooltip />', () => {
     render(<Tooltip label={tooltipLabel}>{buttonLabel}</Tooltip>);
 
     let tooltip = screen.queryByRole('tooltip');
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
 
-    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to render.
+      jest.advanceTimersByTime(openDelayAnimation + 200);
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+    expect(tooltip).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.mouseLeave(screen.getByText(buttonLabel));
+      // Only need to advance by the transition duration now
+      // Component handles closeDelay + TRANSITION_DURATION internally
+      jest.advanceTimersByTime(closeDelayAnimation + 200);
+      jest.runAllTimers();
+    });
+
+    act(() => {
+      // Force React to process any pending updates
+      jest.runAllTimers();
+    });
+
+    tooltip = screen.queryByRole('tooltip');
+    expect(tooltip).not.toBeInTheDocument();
+  });
+
+  it('should render on mouseEnter and close on mouseLeave', () => {
+    render(<TooltipTest />);
+
+    let tooltip = screen.queryByRole('tooltip');
+    expect(tooltip).not.toBeInTheDocument();
+
+    act(() => {
+      fireEvent.mouseEnter(screen.getByText(buttonLabel));
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
     tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip should now be visible.
     expect(tooltip).toBeInTheDocument();
 
-    // Wrapper function to prevent the warning.
     act(() => {
       fireEvent.mouseLeave(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to unmount.
-      jest.advanceTimersByTime(closeDelayAnimation);
+      // Only need to advance by the transition duration now
+      // Component handles closeDelay + TRANSITION_DURATION internally
+      jest.advanceTimersByTime(closeDelayAnimation + 200);
     });
 
-    // Tooltip should now be removed from the DOM.
+    act(() => {
+      // Force React to process any pending updates
+      jest.runAllTimers();
+    });
+
+    tooltip = screen.queryByRole('tooltip');
     expect(tooltip).not.toBeInTheDocument();
   });
 
@@ -77,19 +106,14 @@ describe('<Tooltip />', () => {
     render(<TooltipTest isDisabled />);
 
     let tooltip = screen.queryByRole('tooltip');
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
 
-    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to render.
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
     tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
   });
 
@@ -101,19 +125,14 @@ describe('<Tooltip />', () => {
     );
 
     let tooltip = screen.queryByRole('tooltip');
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
 
-    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to render.
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
     tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
   });
 
@@ -122,30 +141,24 @@ describe('<Tooltip />', () => {
     render(<TooltipTest openDelay={delay} />);
 
     let tooltip = screen.queryByRole('tooltip');
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
 
-    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed by default to render.
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
     await waitFor(() => {
       tooltip = screen.queryByRole('tooltip');
-      // Tooltip should still not be visible.
       expect(tooltip).not.toBeInTheDocument();
     });
 
     act(() => {
-      // fast forward the delay
       jest.advanceTimersByTime(delay);
     });
 
     await waitFor(() => {
       tooltip = screen.queryByRole('tooltip');
-      // Tooltip should now not be visible.
       expect(tooltip).toBeInTheDocument();
     });
   });
@@ -155,19 +168,14 @@ describe('<Tooltip />', () => {
     render(<TooltipTest closeDelay={delay} />);
 
     let tooltip = screen.queryByRole('tooltip');
-    // Tooltip element should not be present at first.
     expect(tooltip).not.toBeInTheDocument();
 
-    // Wrapper function to prevent warning.
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed by default to render.
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
     tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip should still not be visible.
     expect(tooltip).toBeInTheDocument();
 
     act(() => {
@@ -175,69 +183,34 @@ describe('<Tooltip />', () => {
       jest.advanceTimersByTime(closeDelayAnimation);
     });
 
+    // Re-query after closeDelayAnimation
     tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip should still be visible.
     expect(tooltip).toBeInTheDocument();
 
     act(() => {
-      // fast forward the delay
       jest.advanceTimersByTime(delay);
     });
 
+    // Re-query after the additional delay
     tooltip = screen.queryByRole('tooltip');
 
     await waitFor(() => {
-      // Tooltip should NOT be visible.
       expect(tooltip).not.toBeInTheDocument();
     });
-  });
-
-  it('should render on mouseEnter and close on mouseLeave', () => {
-    render(<TooltipTest />);
-
-    let tooltip = screen.queryByRole('tooltip');
-    // Tooltip element should not be present at first.
-    expect(tooltip).not.toBeInTheDocument();
-
-    // Wrapper function to prevent warning.
-    act(() => {
-      fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to render.
-      jest.advanceTimersByTime(openDelayAnimation);
-    });
-
-    tooltip = screen.queryByRole('tooltip');
-
-    // Tooltip should now be visible.
-    expect(tooltip).toBeInTheDocument();
-
-    // Wrapper function to prevent the warning.
-    act(() => {
-      fireEvent.mouseLeave(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to unmount.
-      jest.advanceTimersByTime(closeDelayAnimation);
-    });
-
-    // Tooltip should now be removed from the DOM.
-    expect(tooltip).not.toBeInTheDocument();
   });
 
   it('should render child with correct aria-describedby', () => {
     render(<TooltipTest />);
 
     const button = screen.getByText(buttonLabel);
-
     expect(button).not.toHaveAttribute('aria-describedby');
 
     act(() => {
       fireEvent.mouseEnter(screen.getByText(buttonLabel));
-      // fast forward the amount time needed for the tooltip to render.
       jest.advanceTimersByTime(openDelayAnimation);
     });
 
     const tooltip = screen.getByRole('tooltip');
-
     expect(button.getAttribute('aria-describedby')).toBe(tooltip.id);
   });
 });

@@ -2,9 +2,11 @@ import React, {
   FC,
   Children,
   cloneElement,
+  useEffect,
   useMemo,
   useState,
   useRef,
+  useCallback,
 } from 'react';
 
 import { Portal } from '@components';
@@ -19,6 +21,9 @@ import {
 import { isString } from '@utils';
 import { TooltipProps } from './types';
 import './styles.scss';
+
+// CSS transition duration in milliseconds - must match the transition time in styles.scss
+const TRANSITION_DURATION = 200;
 
 const Tooltip: FC<TooltipProps> = props => {
   const {
@@ -38,7 +43,9 @@ const Tooltip: FC<TooltipProps> = props => {
     ...rest
   } = props;
   const [show, setShow] = useState(false);
-  const hasTransitionedIn = useMountTransition(show, 200);
+  // Calculate the total unmount delay ONCE
+  const totalUnmountDelay = closeDelay + TRANSITION_DURATION;
+  const hasTransitionedIn = useMountTransition(show, totalUnmountDelay);
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     { ...rest, background, backgroundColor },
     'snui snui-tooltip',
@@ -67,6 +74,7 @@ const Tooltip: FC<TooltipProps> = props => {
     }
     return '#4d5665';
   }, [colorVariant, background, backgroundColor]);
+
   const {
     calculateTransformOrigin,
     calcPosition,
@@ -83,7 +91,10 @@ const Tooltip: FC<TooltipProps> = props => {
     arrColor
   );
 
-  const onMouseEnter = React.useCallback(() => {
+  const onMouseEnter = useCallback(() => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
     if (openDelay) {
       timeoutId.current = setTimeout(() => {
         setShow(true);
@@ -93,19 +104,23 @@ const Tooltip: FC<TooltipProps> = props => {
       setShow(true);
       calcPosition();
     }
-  }, []);
-  const onMouseLeave = React.useCallback(() => {
+  }, [openDelay, calcPosition]);
+
+  const onMouseLeave = useCallback(() => {
     if (timeoutId.current) {
       clearTimeout(timeoutId.current);
     }
-    if (closeDelay) {
-      setTimeout(() => {
-        setShow(false);
-      }, closeDelay);
-    } else {
-      setShow(false);
-    }
+    setShow(false);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       {isString(children) ? (
@@ -116,7 +131,6 @@ const Tooltip: FC<TooltipProps> = props => {
           onMouseEnter={isDisabled ? undefined : onMouseEnter}
           onMouseLeave={isDisabled ? undefined : onMouseLeave}
           ref={isDisabled ? undefined : triggerRef}
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={isDisabled ? undefined : 0}
         >
           {children}
@@ -129,7 +143,6 @@ const Tooltip: FC<TooltipProps> = props => {
           onMouseEnter: isDisabled ? undefined : onMouseEnter,
           onMouseLeave: isDisabled ? undefined : onMouseLeave,
           ref: isDisabled ? undefined : triggerRef,
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex: 0,
         })
       )}
