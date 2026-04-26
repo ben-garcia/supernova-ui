@@ -5,7 +5,7 @@ import { ButtonProps } from '@components/Button/types';
 import { useCreateClassString, useModal } from '@hooks';
 import { forwardRef, isFunction, isString } from '@utils';
 
-type ModalButtonProps = ButtonProps;
+export type ModalButtonProps = ButtonProps;
 
 /**
  * The button for the Modal component.

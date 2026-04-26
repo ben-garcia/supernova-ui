@@ -1,20 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React, { useRef, useState } from 'react';
 
-import {
-  Box,
-  Button,
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  TextInput,
-} from '@components';
-import { ModalProps } from '@components/Modal/Modal';
+import { Box, Button, Modal, TextInput } from '@components';
+import { ModalRootProps } from '@components/Modal/ModalRoot';
 
 export default {
   args: {
@@ -34,11 +22,11 @@ export default {
       options: ['sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },
-  component: Modal,
+  component: Modal.Root,
   title: 'Supernova UI/Overlay/Modal',
-} as Meta;
+} as Meta<typeof Modal.Root>;
 
-const BasicTemplate: StoryFn<ModalProps> = args => {
+const BasicTemplate: StoryFn<ModalRootProps> = args => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
   return (
@@ -53,24 +41,24 @@ const BasicTemplate: StoryFn<ModalProps> = args => {
         </Button>
       </Box>
 
-      <Modal {...args} onClose={handleClose} isOpen={isOpen}>
-        <ModalOverlay />
+      <Modal.Root {...args} onClose={handleClose} isOpen={isOpen}>
+        <Modal.Overlay />
 
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+        <Modal.Content>
+          <Modal.Header>Modal Title</Modal.Header>
 
-          <ModalCloseButton />
+          <Modal.CloseButton />
 
-          <ModalBody>This is a modal</ModalBody>
+          <Modal.Body>This is a modal</Modal.Body>
 
-          <ModalFooter>
-            <ModalButton onClick={() => setIsOpen(false)} variant="outline">
+          <Modal.Footer>
+            <Modal.Button onClick={() => setIsOpen(false)} variant="outline">
               Cancel
-            </ModalButton>
-            <ModalButton onClick={() => setIsOpen(false)}>Save</ModalButton>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            </Modal.Button>
+            <Modal.Button onClick={() => setIsOpen(false)}>Save</Modal.Button>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal.Root>
     </>
   );
 };
@@ -84,7 +72,7 @@ export const Basic = {
   },
 };
 
-const FinalFocusRefTemplate: StoryFn<ModalProps> = args => {
+const FinalFocusRefTemplate: StoryFn<ModalRootProps> = args => {
   const [isOpen, setOpen] = useState(false);
   const initialFocusRef = useRef<HTMLInputElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
@@ -99,35 +87,35 @@ const FinalFocusRefTemplate: StoryFn<ModalProps> = args => {
           finalFocusRef
         </Button>
       </Box>
-      <Modal
+      <Modal.Root
         {...args}
         finalFocusRef={finalFocusRef}
         initialFocusRef={initialFocusRef}
         onClose={handleClose}
         isOpen={isOpen}
       >
-        <ModalOverlay />
+        <Modal.Overlay />
 
-        <ModalContent>
-          <ModalHeader>Create an account</ModalHeader>
+        <Modal.Content>
+          <Modal.Header>Create an account</Modal.Header>
 
-          <ModalCloseButton />
+          <Modal.CloseButton />
 
-          <ModalBody>
+          <Modal.Body>
             <form>
               <TextInput label="Email" ref={initialFocusRef} type="email" />
               <TextInput label="Password" type="password" />
             </form>
-          </ModalBody>
+          </Modal.Body>
 
-          <ModalFooter>
-            <ModalButton onClick={handleClose} variant="outline">
+          <Modal.Footer>
+            <Modal.Button onClick={handleClose} variant="outline">
               Cancel
-            </ModalButton>
-            <ModalButton onClick={handleClose}>Signup</ModalButton>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            </Modal.Button>
+            <Modal.Button onClick={handleClose}>Signup</Modal.Button>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal.Root>
     </>
   );
 };

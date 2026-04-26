@@ -12,7 +12,7 @@ import { ModalProvider } from '@contexts';
 import { useModalProvider } from '@hooks';
 import { DialogLikeProps } from '@types';
 
-export interface ModalProps extends DialogLikeProps {
+export interface ModalRootProps extends DialogLikeProps {
   /**
    * The reference element to receive focus when the Modal first opens
    */
@@ -23,7 +23,7 @@ export interface ModalProps extends DialogLikeProps {
  * The container for all Modal related components
  * that provides context to its children.
  */
-const Modal: FC<PropsWithChildren<ModalProps>> = props => {
+const ModalRoot: FC<PropsWithChildren<ModalRootProps>> = props => {
   const {
     children,
     closeOnEsc = true,
@@ -86,4 +86,4 @@ const Modal: FC<PropsWithChildren<ModalProps>> = props => {
   );
 };
 
-export default Modal;
+export default ModalRoot;

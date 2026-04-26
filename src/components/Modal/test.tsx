@@ -1,15 +1,6 @@
 import React from 'react';
 
-import {
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-} from '@components';
+import { Modal } from '@components';
 import {
   a11yTest,
   fireEvent,
@@ -23,32 +14,32 @@ describe('<Modal />', () => {
   it('should pass a11y tests', async () => {
     await waitFor(() => {
       a11yTest(
-        <Modal isOpen onClose={jest.fn()}>
-          <ModalOverlay />
+        <Modal.Root isOpen onClose={jest.fn()}>
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
     });
   });
 
   it('should contain the proper aria attributes', () => {
     render(
-      <Modal isOpen onClose={jest.fn()}>
-        <ModalOverlay />
+      <Modal.Root isOpen onClose={jest.fn()}>
+        <Modal.Overlay />
 
-        <ModalContent>
-          <ModalHeader>header</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>body</ModalBody>
-          <ModalFooter>footer</ModalFooter>
-        </ModalContent>
-      </Modal>
+        <Modal.Content>
+          <Modal.Header>header</Modal.Header>
+          <Modal.CloseButton />
+          <Modal.Body>body</Modal.Body>
+          <Modal.Footer>footer</Modal.Footer>
+        </Modal.Content>
+      </Modal.Root>
     );
 
     const modal = screen.getByRole('dialog');
@@ -70,16 +61,16 @@ describe('<Modal />', () => {
   it('should call the onClose function when the close button is clicked', async () => {
     const mockOnClose = jest.fn();
     render(
-      <Modal isOpen onClose={mockOnClose}>
-        <ModalOverlay />
+      <Modal.Root isOpen onClose={mockOnClose}>
+        <Modal.Overlay />
 
-        <ModalContent>
-          <ModalHeader>Testing</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>body</ModalBody>
-          <ModalFooter>footer</ModalFooter>
-        </ModalContent>
-      </Modal>
+        <Modal.Content>
+          <Modal.Header>Testing</Modal.Header>
+          <Modal.CloseButton />
+          <Modal.Body>body</Modal.Body>
+          <Modal.Footer>footer</Modal.Footer>
+        </Modal.Content>
+      </Modal.Root>
     );
     const closeButton = screen.getByLabelText('Close the modal');
 
@@ -94,16 +85,20 @@ describe('<Modal />', () => {
       const mockOnClose = jest.fn();
 
       render(
-        <Modal isOpen onClose={mockOnClose} onClickOutside={mockOnClickOutside}>
-          <ModalOverlay />
+        <Modal.Root
+          isOpen
+          onClose={mockOnClose}
+          onClickOutside={mockOnClickOutside}
+        >
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
       const modal = screen.getByRole('dialog');
 
@@ -120,21 +115,21 @@ describe('<Modal />', () => {
       const mockOnClose = jest.fn();
 
       render(
-        <Modal
+        <Modal.Root
           closeOnEsc={false}
           isOpen
           onClose={mockOnClose}
           onClickOutside={mockOnClickOutside}
         >
-          <ModalOverlay />
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
       const modal = screen.getByRole('dialog');
 
@@ -151,21 +146,21 @@ describe('<Modal />', () => {
       const mockOnClickOutside = jest.fn();
 
       render(
-        <Modal
+        <Modal.Root
           closeOnOverlayClick={false}
           isOpen
           onClose={mockOnClose}
           onClickOutside={mockOnClickOutside}
         >
-          <ModalOverlay />
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
       const modal = screen.getByRole('dialog');
 
@@ -183,16 +178,16 @@ describe('<Modal />', () => {
       const mockOnClose = jest.fn();
       const mockEscPress = jest.fn();
       render(
-        <Modal isOpen onClose={mockOnClose} onEscPress={mockEscPress}>
-          <ModalOverlay />
+        <Modal.Root isOpen onClose={mockOnClose} onEscPress={mockEscPress}>
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
 
       fireEvent.keyDown(window, { key: 'Escape' });
@@ -208,21 +203,21 @@ describe('<Modal />', () => {
       const mockEscPress = jest.fn();
 
       render(
-        <Modal
+        <Modal.Root
           closeOnOverlayClick={false}
           isOpen
           onClose={mockOnClose}
           onEscPress={mockEscPress}
         >
-          <ModalOverlay />
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
 
       fireEvent.keyDown(window, { key: 'Escape' });
@@ -238,21 +233,21 @@ describe('<Modal />', () => {
       const mockOnEscPress = jest.fn();
 
       render(
-        <Modal
+        <Modal.Root
           closeOnEsc={false}
           isOpen
           onClose={mockOnClose}
           onEscPress={mockOnEscPress}
         >
-          <ModalOverlay />
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>footer</ModalFooter>
-          </ModalContent>
-        </Modal>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
 
       fireEvent.keyDown(window, { key: 'Escape' });
@@ -278,19 +273,19 @@ describe('<Modal />', () => {
               Open
             </button>
 
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-              <ModalOverlay />
+            <Modal.Root isOpen={isOpen} onClose={() => setIsOpen(false)}>
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-              <ModalHeader>header</ModalHeader>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+              <Modal.Header>header</Modal.Header>
+            </Modal.Root>
           </>
         );
       }
@@ -311,18 +306,18 @@ describe('<Modal />', () => {
     it('should give focus to the close button by default', () => {
       function ModalTest() {
         return (
-          <Modal isOpen onClose={jest.fn()}>
-            <ModalOverlay />
+          <Modal.Root isOpen onClose={jest.fn()}>
+            <Modal.Overlay />
 
-            <ModalContent>
-              <ModalHeader>header</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
+            <Modal.Content>
+              <Modal.Header>header</Modal.Header>
+              <Modal.CloseButton />
+              <Modal.Body>
                 <input />
-              </ModalBody>
-              <ModalFooter>footer</ModalFooter>
-            </ModalContent>
-          </Modal>
+              </Modal.Body>
+              <Modal.Footer>footer</Modal.Footer>
+            </Modal.Content>
+          </Modal.Root>
         );
       }
       render(<ModalTest />);
@@ -344,22 +339,22 @@ describe('<Modal />', () => {
             >
               Open
             </button>
-            <Modal
+            <Modal.Root
               initialFocusRef={initialFocusRef}
               isOpen={isOpen}
               onClose={jest.fn()}
             >
-              <ModalOverlay />
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input data-testid="modal-input" ref={initialFocusRef} />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+            </Modal.Root>
           </>
         );
       }
@@ -395,23 +390,23 @@ describe('<Modal />', () => {
             >
               Receive focus
             </button>
-            <Modal
+            <Modal.Root
               finalFocusRef={finalFocusRef}
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <ModalOverlay />
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-              <ModalHeader>header</ModalHeader>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+              <Modal.Header>header</Modal.Header>
+            </Modal.Root>
           </>
         );
       }
@@ -445,29 +440,31 @@ describe('<Modal />', () => {
               Open
             </button>
 
-            <Modal
+            <Modal.Root
               closeOnOverlayClick={false}
               initialFocusRef={initialFocusRef}
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <ModalOverlay />
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>body</ModalBody>
-                <ModalFooter>
-                  <ModalButton
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>body</Modal.Body>
+                <Modal.Footer>
+                  <Modal.Button
                     data-testid="cancel-button"
                     ref={initialFocusRef}
                   >
                     cancel
-                  </ModalButton>
-                  <ModalButton data-testid="delete-button">delete</ModalButton>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
+                  </Modal.Button>
+                  <Modal.Button data-testid="delete-button">
+                    delete
+                  </Modal.Button>
+                </Modal.Footer>
+              </Modal.Content>
+            </Modal.Root>
           </>
         );
       }
@@ -504,19 +501,19 @@ describe('<Modal />', () => {
       it('should focus the next tabbable element and wrap around to the first by default', () => {
         function ModalTest() {
           return (
-            <Modal isOpen onClose={jest.fn()}>
-              <ModalOverlay />
+            <Modal.Root isOpen onClose={jest.fn()}>
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input data-testid="modal-input1" />
                   <input data-testid="modal-input2" />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+            </Modal.Root>
           );
         }
 
@@ -542,19 +539,19 @@ describe('<Modal />', () => {
       it('should focus the next tabbable element and NOT wrap around to the first when trapFocus is false', () => {
         function ModalTest() {
           return (
-            <Modal isOpen onClose={jest.fn()} trapFocus={false}>
-              <ModalOverlay />
+            <Modal.Root isOpen onClose={jest.fn()} trapFocus={false}>
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input data-testid="modal-input1" />
                   <input data-testid="modal-input2" />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+            </Modal.Root>
           );
         }
         render(<ModalTest />);
@@ -585,19 +582,23 @@ describe('<Modal />', () => {
           const initialFocusRef = React.useRef(null);
 
           return (
-            <Modal initialFocusRef={initialFocusRef} isOpen onClose={jest.fn()}>
-              <ModalOverlay />
+            <Modal.Root
+              initialFocusRef={initialFocusRef}
+              isOpen
+              onClose={jest.fn()}
+            >
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input data-testid="modal-input1" />
                   <input data-testid="modal-input2" ref={initialFocusRef} />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+            </Modal.Root>
           );
         }
 
@@ -626,24 +627,24 @@ describe('<Modal />', () => {
           const initialFocusRef = React.useRef(null);
 
           return (
-            <Modal
+            <Modal.Root
               initialFocusRef={initialFocusRef}
               isOpen
               onClose={jest.fn()}
               trapFocus={false}
             >
-              <ModalOverlay />
+              <Modal.Overlay />
 
-              <ModalContent>
-                <ModalHeader>header</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+              <Modal.Content>
+                <Modal.Header>header</Modal.Header>
+                <Modal.CloseButton />
+                <Modal.Body>
                   <input data-testid="modal-input1" />
                   <input data-testid="modal-input2" ref={initialFocusRef} />
-                </ModalBody>
-                <ModalFooter>footer</ModalFooter>
-              </ModalContent>
-            </Modal>
+                </Modal.Body>
+                <Modal.Footer>footer</Modal.Footer>
+              </Modal.Content>
+            </Modal.Root>
           );
         }
 
@@ -675,23 +676,23 @@ describe('<Modal />', () => {
       const mockSubmit = jest.fn();
 
       render(
-        <Modal isOpen onClose={() => {}}>
-          <ModalOverlay />
+        <Modal.Root isOpen onClose={() => {}}>
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>
-              <ModalButton aria-label="cancel" onClick={mockCancel}>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>
+              <Modal.Button aria-label="cancel" onClick={mockCancel}>
                 Cancel
-              </ModalButton>
-              <ModalButton aria-label="save" onClick={mockSubmit}>
+              </Modal.Button>
+              <Modal.Button aria-label="save" onClick={mockSubmit}>
                 Save
-              </ModalButton>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+              </Modal.Button>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
       const cancelButton = screen.getByLabelText('cancel');
       const saveButton = screen.getByLabelText('save');
@@ -709,23 +710,23 @@ describe('<Modal />', () => {
       const mockSubmit = jest.fn();
 
       render(
-        <Modal isOpen onClose={mockClose}>
-          <ModalOverlay />
+        <Modal.Root isOpen onClose={mockClose}>
+          <Modal.Overlay />
 
-          <ModalContent>
-            <ModalHeader>Testing</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>body</ModalBody>
-            <ModalFooter>
-              <ModalButton aria-label="cancel" onClick={mockCancel}>
+          <Modal.Content>
+            <Modal.Header>Testing</Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>
+              <Modal.Button aria-label="cancel" onClick={mockCancel}>
                 Cancel
-              </ModalButton>
-              <ModalButton aria-label="save" onClick={mockSubmit}>
+              </Modal.Button>
+              <Modal.Button aria-label="save" onClick={mockSubmit}>
                 Save
-              </ModalButton>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+              </Modal.Button>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal.Root>
       );
       const cancelButton = screen.getByLabelText('cancel');
       const saveButton = screen.getByLabelText('save');

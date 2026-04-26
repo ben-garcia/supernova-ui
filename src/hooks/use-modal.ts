@@ -1,6 +1,6 @@
 import { HTMLAttributes, useCallback, useContext } from 'react';
 
-import { ModalProps } from '@components/Modal/Modal';
+import { ModalRootProps } from '@components/Modal/ModalRoot';
 import { ModalContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString } from '@utils';
@@ -8,7 +8,7 @@ import { createClasses, isString } from '@utils';
 /**
  * React hook that returns the Modal props.
  */
-const useModalProvider = (props: ModalProps) => {
+const useModalProvider = (props: ModalRootProps) => {
   const {
     closeOnEsc,
     closeOnOverlayClick,

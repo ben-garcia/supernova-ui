@@ -6,7 +6,7 @@ import { SupernovaProps } from '@types';
 import { isString } from '@utils';
 import './styles.scss';
 
-type ModalContentProps = Omit<SupernovaProps, 'id'>;
+export type ModalContentProps = Omit<SupernovaProps, 'id'>;
 
 /**
  * The container for Modal related components.

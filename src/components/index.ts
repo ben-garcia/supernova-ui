@@ -11,7 +11,7 @@ export * from './FormControl';
 export { default as Heading } from './Heading';
 export * from './Icon/Icons';
 export * from './Menu';
-export * from './Modal';
+export { default as Modal } from './Modal';
 export { default as Overlay } from './Overlay';
 export { default as Paragraph } from './Paragraph';
 export { default as Portal } from './Portal';
