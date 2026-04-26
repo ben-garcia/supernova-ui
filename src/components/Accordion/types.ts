@@ -1,6 +1,6 @@
 import { SupernovaProps } from '@types';
 
-export interface AccordionProps extends SupernovaProps {
+export interface AccordionRootProps extends SupernovaProps {
   /**
    * Configure whether more than one item can be expanded.
    *

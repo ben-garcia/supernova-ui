@@ -15,13 +15,13 @@ import {
   useUniqueId,
 } from '@hooks';
 import { isArray } from '@utils';
-import { AccordionProps } from './types';
+import { AccordionRootProps } from './types';
 
 /**
  * The container for all Accordion related components
  * that provides context for all AccordionItem.
  */
-const Accordion: FC<PropsWithChildren<AccordionProps>> = props => {
+const AccordionRoot: FC<PropsWithChildren<AccordionRootProps>> = props => {
   const {
     allowMultiple = false,
     allowToggle = false,
@@ -127,4 +127,4 @@ const Accordion: FC<PropsWithChildren<AccordionProps>> = props => {
   );
 };
 
-export default Accordion;
+export default AccordionRoot;

@@ -8,12 +8,13 @@ import {
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface AccordionPanelProps extends SupernovaProps {}
+export interface AccordionPanelProps
+  extends FC<PropsWithChildren>, SupernovaProps {}
 
 /**
  * Holds the main content for each accordion.
  */
-const AccordionPanel: FC<PropsWithChildren<AccordionPanelProps>> = props => {
+const AccordionPanel: AccordionPanelProps = props => {
   const { children, ...rest } = props;
   const addCSSClasses = useCSSAndPseudoClassProps(
     rest,

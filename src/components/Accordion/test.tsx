@@ -8,14 +8,9 @@ import {
   userEvent,
   waitFor,
 } from '@test-utils';
-import {
-  Accordion,
-  AccordionHeaderButton,
-  AccordionItem,
-  AccordionPanel,
-} from '@components';
+import { Accordion } from '@components';
 
-import { AccordionProps } from './types';
+import { AccordionRootProps } from './types';
 
 describe('<Accordion />', () => {
   const buttonOneContent = 'Section 1';
@@ -25,24 +20,24 @@ describe('<Accordion />', () => {
   const buttonThreeContent = 'Section 3';
   const panelThreeContent = 'section 3 panel';
 
-  function AccordionTest(props: Omit<AccordionProps, 'children'>) {
+  function AccordionTest(props: Omit<AccordionRootProps, 'children'>) {
     return (
-      <Accordion data-testid="accordion" {...props}>
-        <AccordionItem>
-          <AccordionHeaderButton>{buttonOneContent}</AccordionHeaderButton>
-          <AccordionPanel>{panelOneContent}</AccordionPanel>
-        </AccordionItem>
+      <Accordion.Root data-testid="accordion" {...props}>
+        <Accordion.Item>
+          <Accordion.HeaderButton>{buttonOneContent}</Accordion.HeaderButton>
+          <Accordion.Panel>{panelOneContent}</Accordion.Panel>
+        </Accordion.Item>
 
-        <AccordionItem>
-          <AccordionHeaderButton>{buttonTwoContent}</AccordionHeaderButton>
-          <AccordionPanel>{panelTwoContent}</AccordionPanel>
-        </AccordionItem>
+        <Accordion.Item>
+          <Accordion.HeaderButton>{buttonTwoContent}</Accordion.HeaderButton>
+          <Accordion.Panel>{panelTwoContent}</Accordion.Panel>
+        </Accordion.Item>
 
-        <AccordionItem>
-          <AccordionHeaderButton>{buttonThreeContent}</AccordionHeaderButton>
-          <AccordionPanel>{panelThreeContent}</AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+        <Accordion.Item>
+          <Accordion.HeaderButton>{buttonThreeContent}</Accordion.HeaderButton>
+          <Accordion.Panel>{panelThreeContent}</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>
     );
   }
 
@@ -54,11 +49,11 @@ describe('<Accordion />', () => {
 
   it('should wrap header button in an h2 by default', () => {
     render(
-      <Accordion>
-        <AccordionItem>
-          <AccordionHeaderButton>button</AccordionHeaderButton>
-        </AccordionItem>
-      </Accordion>
+      <Accordion.Root>
+        <Accordion.Item>
+          <Accordion.HeaderButton>button</Accordion.HeaderButton>
+        </Accordion.Item>
+      </Accordion.Root>
     );
     const headerButton = screen.getByRole('button');
 
@@ -67,12 +62,12 @@ describe('<Accordion />', () => {
 
   it('should contain the proper aria attributes', () => {
     render(
-      <Accordion>
-        <AccordionItem>
-          <AccordionHeaderButton>Section 1</AccordionHeaderButton>
-          <AccordionPanel>section 1 panel</AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+      <Accordion.Root>
+        <Accordion.Item>
+          <Accordion.HeaderButton>Section 1</Accordion.HeaderButton>
+          <Accordion.Panel>section 1 panel</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>
     );
 
     const headerButton = screen.getByRole('button');

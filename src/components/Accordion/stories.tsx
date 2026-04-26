@@ -1,12 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
 
-import {
-  Accordion,
-  AccordionHeaderButton,
-  AccordionItem,
-  AccordionPanel,
-} from '@components';
+import { Accordion } from '@components';
 
 export default {
   args: {
@@ -18,45 +13,45 @@ export default {
     allowToggle: { control: 'boolean' },
     defaultIndices: { control: 'object' },
   },
-  component: Accordion,
+  component: Accordion.Root,
   title: 'Supernova UI/Disclosure/Accordion',
-} as Meta<typeof Accordion>;
+} as Meta<typeof Accordion.Root>;
 
 const parameters = {
   controls: { include: ['allowMultiple', 'allowToggle', 'defaultIndices'] },
 };
 
-const Template: StoryFn<typeof Accordion> = args => (
-  <Accordion {...args}>
-    <AccordionItem>
-      <AccordionHeaderButton>Section 1</AccordionHeaderButton>
-      <AccordionPanel>
+const Template: StoryFn<typeof Accordion.Root> = args => (
+  <Accordion.Root {...args}>
+    <Accordion.Item>
+      <Accordion.HeaderButton>Section 1</Accordion.HeaderButton>
+      <Accordion.Panel>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Tellus in hac
         habitasse platea dictumst vestibulum. Bibendum est ultricies integer
         quis auctor elit sed.
-      </AccordionPanel>
-    </AccordionItem>
+      </Accordion.Panel>
+    </Accordion.Item>
 
-    <AccordionItem>
-      <AccordionHeaderButton>Section 2</AccordionHeaderButton>
-      <AccordionPanel>
+    <Accordion.Item>
+      <Accordion.HeaderButton>Section 2</Accordion.HeaderButton>
+      <Accordion.Panel>
         Velit egestas dui id ornare. Vulputate mi sit amet mauris commodo quis
         imperdiet. In fermentum posuere urna nec. Proin nibh nisl condimentum id
         venenatis a condimentum vitae sapien. Gravida quis blandit turpis
         cursus.
-      </AccordionPanel>
-    </AccordionItem>
+      </Accordion.Panel>
+    </Accordion.Item>
 
-    <AccordionItem>
-      <AccordionHeaderButton>Section 3</AccordionHeaderButton>
-      <AccordionPanel>
+    <Accordion.Item>
+      <Accordion.HeaderButton>Section 3</Accordion.HeaderButton>
+      <Accordion.Panel>
         met cursus sit amet dictum sit amet justo donec enim. Sapien eget mi
         proin sed libero enim sed faucibus turpis. Feugiat sed lectus vestibulum
         mattis.
-      </AccordionPanel>
-    </AccordionItem>
-  </Accordion>
+      </Accordion.Panel>
+    </Accordion.Item>
+  </Accordion.Root>
 );
 
 export const Basic = {

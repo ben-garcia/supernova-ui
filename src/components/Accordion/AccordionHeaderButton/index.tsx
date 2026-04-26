@@ -17,7 +17,7 @@ import {
 import { createClasses, isString } from '@utils';
 import './styles.scss';
 
-interface AccordionHeaderButtonProps extends ButtonProps {
+export interface AccordionHeaderButtonProps extends ButtonProps {
   /**
    * Configure the header level
    *

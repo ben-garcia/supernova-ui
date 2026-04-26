@@ -1,13 +1,13 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
-import { AccordionProps } from '@components/Accordion/types';
+import { AccordionRootProps } from '@components/Accordion/types';
 import { AccordionContext, AccordionItemContext } from '@contexts';
 
 /**
  * Hook that returns the Accordion props
  */
 export const useAccordionProvider = (
-  props: Omit<AccordionProps, 'children'>
+  props: Omit<AccordionRootProps, 'children'>
 ) => {
   const { defaultIndices = [] } = props;
 

@@ -9,12 +9,13 @@ import {
 } from '@hooks';
 import { SupernovaProps } from '@types';
 
-interface AccordionItemProps extends SupernovaProps {}
+export interface AccordionItemProps
+  extends FC<PropsWithChildren>, SupernovaProps {}
 
 /**
  * A single accordion that provides context to AccordionButton and AccordionPanel.
  */
-const AccordionItem: FC<PropsWithChildren<AccordionItemProps>> = props => {
+const AccordionItem: AccordionItemProps = props => {
   const { children, ...rest } = props;
   const addCSSClasses = useCSSAndPseudoClassProps(
     rest,
