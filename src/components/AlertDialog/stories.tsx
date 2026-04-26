@@ -1,19 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React, { useRef, useState } from 'react';
 
-import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogButton,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Button,
-} from '@components';
+import { AlertDialog, Button } from '@components';
 
-import { AlertDialogProps } from '@components/AlertDialog/AlertDialog';
+import { AlertDialogRootProps } from '@components/AlertDialog/AlertDialogRoot';
 
 export default {
   args: {
@@ -33,11 +23,11 @@ export default {
       options: ['sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },
-  component: AlertDialog,
+  component: AlertDialog.Root,
   title: 'Supernova UI/Overlay/AlertDialog',
-} as Meta;
+} as Meta<typeof AlertDialog.Root>;
 
-const BasicTemplate: StoryFn<AlertDialogProps> = args => {
+const BasicTemplate: StoryFn<AlertDialogRootProps> = args => {
   const [isOpen, setIsOpen] = useState(false);
   const cancelButtonRef = useRef<HTMLButtonElement | null>(null);
   return (
@@ -46,39 +36,39 @@ const BasicTemplate: StoryFn<AlertDialogProps> = args => {
         <Button onClick={() => setIsOpen(true)}>Trigger AlertDialog</Button>
       </div>
 
-      <AlertDialog
+      <AlertDialog.Root
         {...args}
         isOpen={isOpen}
         leastDestructiveRef={cancelButtonRef}
         onClose={() => setIsOpen(false)}
       >
-        <AlertDialogOverlay />
+        <AlertDialog.Overlay />
 
-        <AlertDialogContent>
-          <AlertDialogHeader>Delete your account</AlertDialogHeader>
+        <AlertDialog.Content>
+          <AlertDialog.Header>Delete your account</AlertDialog.Header>
 
-          <AlertDialogCloseButton />
+          <AlertDialog.CloseButton />
 
-          <AlertDialogBody>Are you sure?</AlertDialogBody>
+          <AlertDialog.Body>Are you sure?</AlertDialog.Body>
 
-          <AlertDialogFooter>
-            <AlertDialogButton
+          <AlertDialog.Footer>
+            <AlertDialog.Button
               onClick={() => setIsOpen(false)}
               ref={cancelButtonRef}
               variant="outline"
             >
               Cancel
-            </AlertDialogButton>
+            </AlertDialog.Button>
 
-            <AlertDialogButton
+            <AlertDialog.Button
               colorVariant="error700"
               onClick={() => setIsOpen(false)}
             >
               Delete
-            </AlertDialogButton>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </AlertDialog.Button>
+          </AlertDialog.Footer>
+        </AlertDialog.Content>
+      </AlertDialog.Root>
     </>
   );
 };
@@ -92,7 +82,7 @@ export const Basic = {
   },
 };
 
-const FinalFocusRefTemplate: StoryFn<AlertDialogProps> = args => {
+const FinalFocusRefTemplate: StoryFn<AlertDialogRootProps> = args => {
   const [isOpen, setOpen] = useState(false);
   const cancelButtonRef = useRef<HTMLButtonElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
@@ -109,37 +99,37 @@ const FinalFocusRefTemplate: StoryFn<AlertDialogProps> = args => {
         </Button>
       </div>
 
-      <AlertDialog
+      <AlertDialog.Root
         {...args}
         finalFocusRef={finalFocusRef}
         isOpen={isOpen}
         leastDestructiveRef={cancelButtonRef}
         onClose={handleClose}
       >
-        <AlertDialogOverlay />
+        <AlertDialog.Overlay />
 
-        <AlertDialogContent>
-          <AlertDialogHeader>Delete your account</AlertDialogHeader>
+        <AlertDialog.Content>
+          <AlertDialog.Header>Delete your account</AlertDialog.Header>
 
-          <AlertDialogCloseButton />
+          <AlertDialog.CloseButton />
 
-          <AlertDialogBody>Are you sure?</AlertDialogBody>
+          <AlertDialog.Body>Are you sure?</AlertDialog.Body>
 
-          <AlertDialogFooter>
-            <AlertDialogButton
+          <AlertDialog.Footer>
+            <AlertDialog.Button
               onClick={handleClose}
               ref={cancelButtonRef}
               variant="outline"
             >
               Cancel
-            </AlertDialogButton>
+            </AlertDialog.Button>
 
-            <AlertDialogButton colorVariant="error700" onClick={handleClose}>
+            <AlertDialog.Button colorVariant="error700" onClick={handleClose}>
               Delete
-            </AlertDialogButton>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </AlertDialog.Button>
+          </AlertDialog.Footer>
+        </AlertDialog.Content>
+      </AlertDialog.Root>
     </>
   );
 };

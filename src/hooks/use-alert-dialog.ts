@@ -1,13 +1,13 @@
 import { HTMLAttributes, useCallback, useContext } from 'react';
 
-import { AlertDialogProps } from '@components/AlertDialog/AlertDialog';
+import { AlertDialogRootProps } from '@components/AlertDialog/AlertDialogRoot';
 import { AlertDialogContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString } from '@utils';
 
 /** Hooks that returns the AlertDialog props
  */
-export const useAlertDialogProvider = (props: AlertDialogProps) => {
+export const useAlertDialogProvider = (props: AlertDialogRootProps) => {
   const {
     closeOnEsc,
     closeOnOverlayClick,

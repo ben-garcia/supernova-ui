@@ -1,5 +1,6 @@
-export * from './Accordion';
-export * from './AlertDialog';
+export { default as Accordion } from './Accordion';
+export { default as AlertDialog } from './AlertDialog';
+
 export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';

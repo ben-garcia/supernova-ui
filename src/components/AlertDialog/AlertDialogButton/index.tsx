@@ -5,7 +5,7 @@ import { ButtonProps } from '@components/Button/types';
 import { useAlertDialog, useCreateClassString } from '@hooks';
 import { forwardRef, isFunction, isString } from '@utils';
 
-type AlertDialogButtonProps = ButtonProps;
+export type AlertDialogButtonProps = ButtonProps;
 
 /**
  * The button for the AlertDialog component.

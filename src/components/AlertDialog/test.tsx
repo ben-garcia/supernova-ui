@@ -11,16 +11,7 @@ import {
   waitFor, // wait for the set timeout function to be called
 } from '@test-utils';
 
-import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogButton,
-  AlertDialogContent,
-  AlertDialogCloseButton,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-} from '@components';
+import { AlertDialog } from '@components';
 
 describe('<AlertDialog />', () => {
   it('should pass a11y tests', async () => {
@@ -28,28 +19,28 @@ describe('<AlertDialog />', () => {
       const leastDestructiveRef = React.useRef(null);
 
       return (
-        <AlertDialog
+        <AlertDialog.Root
           leastDestructiveRef={leastDestructiveRef}
           isOpen
           onClose={jest.fn()}
         >
-          <AlertDialogOverlay />
+          <AlertDialog.Overlay />
 
-          <AlertDialogContent>
-            <AlertDialogHeader>header</AlertDialogHeader>
+          <AlertDialog.Content>
+            <AlertDialog.Header>header</AlertDialog.Header>
 
-            <AlertDialogCloseButton />
+            <AlertDialog.CloseButton />
 
-            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialog.Body>body</AlertDialog.Body>
 
-            <AlertDialogFooter>
+            <AlertDialog.Footer>
               <button data-testid="cancel-button" ref={leastDestructiveRef}>
                 cancel
               </button>
               <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog.Root>
       );
     }
 
@@ -63,28 +54,28 @@ describe('<AlertDialog />', () => {
       const leastDestructiveRef = React.useRef(null);
 
       return (
-        <AlertDialog
+        <AlertDialog.Root
           leastDestructiveRef={leastDestructiveRef}
           isOpen
           onClose={jest.fn()}
         >
-          <AlertDialogOverlay />
+          <AlertDialog.Overlay />
 
-          <AlertDialogContent>
-            <AlertDialogHeader>header</AlertDialogHeader>
+          <AlertDialog.Content>
+            <AlertDialog.Header>header</AlertDialog.Header>
 
-            <AlertDialogCloseButton />
+            <AlertDialog.CloseButton />
 
-            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialog.Body>body</AlertDialog.Body>
 
-            <AlertDialogFooter>
+            <AlertDialog.Footer>
               <button data-testid="cancel-button" ref={leastDestructiveRef}>
                 cancel
               </button>
               <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog.Root>
       );
     }
 
@@ -112,29 +103,29 @@ describe('<AlertDialog />', () => {
       const leastDestructiveRef = React.useRef(null);
 
       return (
-        <AlertDialog
+        <AlertDialog.Root
           leastDestructiveRef={leastDestructiveRef}
           isOpen
           onClose={mockOnClose}
         >
-          <AlertDialogOverlay />
+          <AlertDialog.Overlay />
 
-          <AlertDialogContent>
-            <AlertDialogHeader>header</AlertDialogHeader>
+          <AlertDialog.Content>
+            <AlertDialog.Header>header</AlertDialog.Header>
 
-            <AlertDialogCloseButton />
+            <AlertDialog.CloseButton />
 
-            <AlertDialogBody>body</AlertDialogBody>
+            <AlertDialog.Body>body</AlertDialog.Body>
 
-            <AlertDialogFooter>
+            <AlertDialog.Footer>
               <button data-testid="cancel-button" ref={leastDestructiveRef}>
                 cancel
               </button>
 
               <button data-testid="delete-button">delete</button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog.Root>
       );
     }
 
@@ -154,29 +145,29 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}
             onClickOutside={mockOnClickOutside}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
+              <AlertDialog.Footer>
                 <button data-testid="cancel-button" ref={leastDestructiveRef}>
                   cancel
                 </button>
                 <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -199,30 +190,30 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             closeOnEsc={false}
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}
             onClickOutside={mockOnClickOutside}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
+              <AlertDialog.Footer>
                 <button data-testid="cancel-button" ref={leastDestructiveRef}>
                   cancel
                 </button>
                 <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -245,30 +236,30 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             closeOnOverlayClick={false}
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}
             onClickOutside={mockOnClickOutside}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
+              <AlertDialog.Footer>
                 <button data-testid="cancel-button" ref={leastDestructiveRef}>
                   cancel
                 </button>
                 <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -293,29 +284,29 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}
             onEscPress={mockEscPress}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
+              <AlertDialog.Footer>
                 <button data-testid="cancel-button" ref={leastDestructiveRef}>
                   cancel
                 </button>
                 <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -336,30 +327,30 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             closeOnOverlayClick={false}
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}
             onEscPress={mockEscPress}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
+              <AlertDialog.Footer>
                 <button data-testid="cancel-button" ref={leastDestructiveRef}>
                   cancel
                 </button>
                 <button data-testid="delete-button">delete</button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -380,29 +371,29 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             closeOnEsc={false}
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockOnClose}
             onEscPress={mockOnEscPress}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>
+              <AlertDialog.Body>
                 <input />
-              </AlertDialogBody>
+              </AlertDialog.Body>
 
-              <AlertDialogFooter>
+              <AlertDialog.Footer>
                 <button ref={leastDestructiveRef}>cancel</button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -433,28 +424,28 @@ describe('<AlertDialog />', () => {
               Open
             </button>
 
-            <AlertDialog
+            <AlertDialog.Root
               leastDestructiveRef={leastDestructiveRef}
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           </>
         );
       }
@@ -481,34 +472,34 @@ describe('<AlertDialog />', () => {
         const leastDestructiveRef = React.useRef(null);
 
         return (
-          <AlertDialog
+          <AlertDialog.Root
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={jest.fn()}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>header</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>header</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
-                <AlertDialogButton
+              <AlertDialog.Footer>
+                <AlertDialog.Button
                   data-testid="cancel-button"
                   ref={leastDestructiveRef}
                 >
                   cancel
-                </AlertDialogButton>
+                </AlertDialog.Button>
 
-                <AlertDialogButton data-testid="delete-button">
+                <AlertDialog.Button data-testid="delete-button">
                   delete
-                </AlertDialogButton>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                </AlertDialog.Button>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -542,29 +533,29 @@ describe('<AlertDialog />', () => {
               Receive focus
             </button>
 
-            <AlertDialog
+            <AlertDialog.Root
               leastDestructiveRef={leastDestructiveRef}
               finalFocusRef={finalFocusRef}
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           </>
         );
       }
@@ -599,29 +590,29 @@ describe('<AlertDialog />', () => {
               Open
             </button>
 
-            <AlertDialog
+            <AlertDialog.Root
               closeOnOverlayClick={false}
               leastDestructiveRef={leastDestructiveRef}
               isOpen={isOpen}
               onClose={() => setIsOpen(false)}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           </>
         );
       }
@@ -660,28 +651,28 @@ describe('<AlertDialog />', () => {
           const leastDestructiveRef = React.useRef(null);
 
           return (
-            <AlertDialog
+            <AlertDialog.Root
               leastDestructiveRef={leastDestructiveRef}
               isOpen
               onClose={jest.fn()}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           );
         }
 
@@ -705,29 +696,29 @@ describe('<AlertDialog />', () => {
           const leastDestructiveRef = React.useRef(null);
 
           return (
-            <AlertDialog
+            <AlertDialog.Root
               leastDestructiveRef={leastDestructiveRef}
               isOpen
               onClose={jest.fn()}
               trapFocus={false}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           );
         }
         const { getByLabelText, getByTestId } = render(<ModalTest />);
@@ -754,29 +745,29 @@ describe('<AlertDialog />', () => {
           const leastDestructiveRef = React.useRef(null);
 
           return (
-            <AlertDialog
+            <AlertDialog.Root
               leastDestructiveRef={leastDestructiveRef}
               isOpen
               onClose={jest.fn()}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
 
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           );
         }
         const { getByLabelText, getByTestId } = render(<ModalTest />);
@@ -800,29 +791,29 @@ describe('<AlertDialog />', () => {
           const leastDestructiveRef = React.useRef(null);
 
           return (
-            <AlertDialog
+            <AlertDialog.Root
               leastDestructiveRef={leastDestructiveRef}
               isOpen
               onClose={jest.fn()}
               trapFocus={false}
             >
-              <AlertDialogOverlay />
+              <AlertDialog.Overlay />
 
-              <AlertDialogContent>
-                <AlertDialogHeader>header</AlertDialogHeader>
+              <AlertDialog.Content>
+                <AlertDialog.Header>header</AlertDialog.Header>
 
-                <AlertDialogCloseButton />
+                <AlertDialog.CloseButton />
 
-                <AlertDialogBody>body</AlertDialogBody>
+                <AlertDialog.Body>body</AlertDialog.Body>
 
-                <AlertDialogFooter>
+                <AlertDialog.Footer>
                   <button data-testid="cancel-button" ref={leastDestructiveRef}>
                     cancel
                   </button>
                   <button data-testid="delete-button">delete</button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                </AlertDialog.Footer>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
           );
         }
         const { getByLabelText, getByTestId } = render(<ModalTest />);
@@ -852,29 +843,29 @@ describe('<AlertDialog />', () => {
       function Test() {
         const leastDestructiveRef = React.useRef(null);
         return (
-          <AlertDialog
+          <AlertDialog.Root
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={() => {}}
           >
-            <AlertDialogOverlay />
-            <AlertDialogContent>
-              <AlertDialogHeader>Testing</AlertDialogHeader>
+            <AlertDialog.Overlay />
+            <AlertDialog.Content>
+              <AlertDialog.Header>Testing</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
-                <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
+              <AlertDialog.Footer>
+                <AlertDialog.Button aria-label="cancel" onClick={mockCancel}>
                   Cancel
-                </AlertDialogButton>
-                <AlertDialogButton aria-label="save" onClick={mockSubmit}>
+                </AlertDialog.Button>
+                <AlertDialog.Button aria-label="save" onClick={mockSubmit}>
                   Save
-                </AlertDialogButton>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                </AlertDialog.Button>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 
@@ -896,30 +887,30 @@ describe('<AlertDialog />', () => {
       function Test() {
         const leastDestructiveRef = React.useRef(null);
         return (
-          <AlertDialog
+          <AlertDialog.Root
             leastDestructiveRef={leastDestructiveRef}
             isOpen
             onClose={mockClose}
           >
-            <AlertDialogOverlay />
+            <AlertDialog.Overlay />
 
-            <AlertDialogContent>
-              <AlertDialogHeader>Testing</AlertDialogHeader>
+            <AlertDialog.Content>
+              <AlertDialog.Header>Testing</AlertDialog.Header>
 
-              <AlertDialogCloseButton />
+              <AlertDialog.CloseButton />
 
-              <AlertDialogBody>body</AlertDialogBody>
+              <AlertDialog.Body>body</AlertDialog.Body>
 
-              <AlertDialogFooter>
-                <AlertDialogButton aria-label="cancel" onClick={mockCancel}>
+              <AlertDialog.Footer>
+                <AlertDialog.Button aria-label="cancel" onClick={mockCancel}>
                   Cancel
-                </AlertDialogButton>
-                <AlertDialogButton aria-label="save" onClick={mockSubmit}>
+                </AlertDialog.Button>
+                <AlertDialog.Button aria-label="save" onClick={mockSubmit}>
                   Save
-                </AlertDialogButton>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                </AlertDialog.Button>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
         );
       }
 

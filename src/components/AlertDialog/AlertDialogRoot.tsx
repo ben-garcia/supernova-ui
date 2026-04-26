@@ -12,7 +12,7 @@ import { AlertDialogProvider } from '@contexts';
 import { useAlertDialogProvider } from '@hooks';
 import { DialogLikeProps } from '@types';
 
-export interface AlertDialogProps extends DialogLikeProps {
+export interface AlertDialogRootProps extends DialogLikeProps {
   /**
    * The reference element to receive focus after the AlertDialog opens
    */
@@ -23,7 +23,7 @@ export interface AlertDialogProps extends DialogLikeProps {
  * The container for all AlertDialog related components
  * that provides context to its children.
  */
-const AlertDialog: FC<PropsWithChildren<AlertDialogProps>> = props => {
+const AlertDialogRoot: FC<PropsWithChildren<AlertDialogRootProps>> = props => {
   const {
     children,
     closeOnEsc = true,
@@ -88,4 +88,4 @@ const AlertDialog: FC<PropsWithChildren<AlertDialogProps>> = props => {
   );
 };
 
-export default AlertDialog;
+export default AlertDialogRoot;

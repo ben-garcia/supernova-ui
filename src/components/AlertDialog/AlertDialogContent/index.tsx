@@ -10,7 +10,7 @@ import { SupernovaProps } from '@types';
 import { isString } from '@utils';
 import './styles.scss';
 
-type AlertDialogContentProps = Omit<SupernovaProps, 'id'>;
+export type AlertDialogContentProps = Omit<SupernovaProps, 'id'>;
 
 /**
  * The container for AlertDialog related components.
