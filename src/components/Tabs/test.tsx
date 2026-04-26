@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import React from 'react';
 
-import { Tab, Tabs, TabList, TabPanel, TabPanelList } from '@components';
+import { Tabs } from '@components';
 import {
   act,
   a11yTest,
@@ -12,7 +12,7 @@ import {
   waitFor,
 } from '@test-utils';
 
-import { TabsProps } from './types';
+import { TabsRootProps } from './types';
 
 describe('<Tabs />', () => {
   const tabOneContent = 'Tab 1';
@@ -22,21 +22,21 @@ describe('<Tabs />', () => {
   const tabThreeContent = 'Tab 3';
   const panelThreeContent = 'panel 3';
 
-  function TabsTest(props: Omit<TabsProps, 'children'>) {
+  function TabsTest(props: Omit<TabsRootProps, 'children'>) {
     return (
-      <Tabs {...props}>
-        <TabList>
-          <Tab>{tabOneContent}</Tab>
-          <Tab>{tabTwoContent}</Tab>
-          <Tab>{tabThreeContent}</Tab>
-        </TabList>
+      <Tabs.Root {...props}>
+        <Tabs.ItemList>
+          <Tabs.Item>{tabOneContent}</Tabs.Item>
+          <Tabs.Item>{tabTwoContent}</Tabs.Item>
+          <Tabs.Item>{tabThreeContent}</Tabs.Item>
+        </Tabs.ItemList>
 
-        <TabPanelList>
-          <TabPanel>{panelOneContent}</TabPanel>
-          <TabPanel>{panelTwoContent}</TabPanel>
-          <TabPanel>{panelThreeContent}</TabPanel>
-        </TabPanelList>
-      </Tabs>
+        <Tabs.PanelList>
+          <Tabs.Panel>{panelOneContent}</Tabs.Panel>
+          <Tabs.Panel>{panelTwoContent}</Tabs.Panel>
+          <Tabs.Panel>{panelThreeContent}</Tabs.Panel>
+        </Tabs.PanelList>
+      </Tabs.Root>
     );
   }
 

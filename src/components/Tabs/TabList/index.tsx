@@ -12,7 +12,7 @@ import { isString } from '@utils';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface TabListProps extends SupernovaProps {}
+export interface TabListProps extends SupernovaProps {}
 
 /**
  * The wrapper for all Tab buttons

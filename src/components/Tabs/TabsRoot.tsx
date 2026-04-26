@@ -14,14 +14,14 @@ import {
   useTheme,
 } from '@hooks';
 import { isString } from '@utils';
-import { TabsProps } from './types';
+import { TabsRootProps } from './types';
 import './styles.scss';
 
 /**
  * The container for all Tabs related components
  * that provides context to its children.
  */
-const Tabs: FC<PropsWithChildren<TabsProps>> = props => {
+const TabsRoot: FC<PropsWithChildren<TabsRootProps>> = props => {
   const {
     colorVariant,
     align = 'start',
@@ -107,4 +107,4 @@ const Tabs: FC<PropsWithChildren<TabsProps>> = props => {
   );
 };
 
-export default Tabs;
+export default TabsRoot;

@@ -1,6 +1,6 @@
 import { ReactNode, MutableRefObject } from 'react';
 
-export interface Tabs {
+export interface TabsRootProps {
   activeColor: string | undefined;
   activeIndex: number;
   align: 'end' | 'center' | 'start';
@@ -23,7 +23,7 @@ export interface TabList {
 
 export interface TabsProviderProps {
   children: ReactNode;
-  value: Tabs;
+  value: TabsRootProps;
 }
 
 export interface TabListProviderProps {

@@ -17,7 +17,7 @@ import { isString } from '@utils';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface TabProps extends SupernovaProps {}
+export interface TabProps extends SupernovaProps {}
 
 /**
  * Tab button used to activate a specific TabPanel

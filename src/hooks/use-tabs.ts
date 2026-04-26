@@ -1,12 +1,12 @@
 import { useCallback, useContext, useState } from 'react';
 
-import { TabsProps } from '@components/Tabs/types';
+import { TabsRootProps } from '@components/Tabs/types';
 import { TabsContext, TabListContext } from '../contexts/tabs';
 
 /**
  * Hook that returns the Tabs props for <TabsProvider>
  */
-const useTabsProvider = (props: Omit<TabsProps, 'children'>) => {
+const useTabsProvider = (props: Omit<TabsRootProps, 'children'>) => {
   const { defaultIndex = 0 } = props;
 
   const [activeIndex, setActiveIndexFunction] = useState<number>(defaultIndex);

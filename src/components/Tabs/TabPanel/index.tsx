@@ -10,7 +10,7 @@ import React, {
 import { useCSSAndPseudoClassProps, useTabs } from '@hooks';
 import { SupernovaProps } from '@types';
 
-interface TabPanelProps extends SupernovaProps {}
+export interface TabPanelProps extends SupernovaProps {}
 
 /**
  * Wrapper that holds the content associated with a Tab.

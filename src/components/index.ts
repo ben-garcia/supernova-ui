@@ -25,7 +25,7 @@ export * from './Radio';
 export * from './Slider';
 export { default as Spinner } from './Spinner';
 export { default as Switch } from './Switch';
-export * from './Tabs';
+export { default as Tabs } from './Tabs';
 export { default as Tag } from './Tag';
 export { default as Text } from './Text';
 export { default as Textarea } from './Textarea';

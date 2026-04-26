@@ -4,7 +4,7 @@ import { useCSSAndPseudoClassProps } from '@hooks';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface TabPanelListProps extends SupernovaProps {}
+export interface TabPanelListProps extends SupernovaProps {}
 
 /**
  * The wrapper for all TabPanel components

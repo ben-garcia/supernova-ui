@@ -1,6 +1,6 @@
 import { FormControlProps, SupernovaProps } from '@types';
 
-export interface TabsProps
+export interface TabsRootProps
   extends SupernovaProps, Pick<FormControlProps, 'colorVariant' | 'size'> {
   /**
    * How the tabs should be alinged
