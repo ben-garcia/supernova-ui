@@ -5,7 +5,7 @@ import { usePopoverProvider } from '@hooks';
 
 import { DialogLikeProps } from '@types';
 
-export interface PopoverProps extends Omit<
+export interface PopoverRootProps extends Omit<
   DialogLikeProps,
   'closeOnOverlayClick' | 'onClickOutside' | 'size'
 > {
@@ -42,7 +42,7 @@ export interface PopoverProps extends Omit<
  * The container for all Popover related components
  * that provides context to its children.
  */
-const Popover: FC<PropsWithChildren<PopoverProps>> = props => {
+const PopoverRoot: FC<PropsWithChildren<PopoverRootProps>> = props => {
   const {
     children,
     closeOnBlur = true,
@@ -103,4 +103,4 @@ const Popover: FC<PropsWithChildren<PopoverProps>> = props => {
   return <PopoverProvider value={contextValue}>{children}</PopoverProvider>;
 };
 
-export default Popover;
+export default PopoverRoot;

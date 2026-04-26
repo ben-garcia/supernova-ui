@@ -15,7 +15,9 @@ export * from './Modal';
 export { default as Overlay } from './Overlay';
 export { default as Paragraph } from './Paragraph';
 export { default as Portal } from './Portal';
-export * from './Popover';
+
+export { default as Popover } from './Popover';
+
 export * from './Radio';
 export * from './Slider';
 export { default as Spinner } from './Spinner';

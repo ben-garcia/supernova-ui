@@ -17,7 +17,7 @@ import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
 import { isFunction, isString } from '@utils';
 import './styles.scss';
 
-interface PropoverContentProps
+export interface PopoverContentProps
   extends
     Omit<SupernovaProps, 'id'>,
     Omit<SharedAnchorPositioningProps, 'children'> {}
@@ -25,7 +25,7 @@ interface PropoverContentProps
 /**
  * The container for Popover related components.
  */
-const PopoverContent: FC<PropsWithChildren<PropoverContentProps>> = props => {
+const PopoverContent: FC<PropsWithChildren<PopoverContentProps>> = props => {
   const {
     arrowSize = 15,
     background,

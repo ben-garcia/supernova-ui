@@ -1,17 +1,8 @@
 import { jest } from '@jest/globals';
 import React from 'react';
 
-import {
-  Button,
-  Popover,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-} from '@components';
-import { PopoverProps } from '@components/Popover/Popover';
+import { Button, Popover } from '@components';
+import { PopoverRootProps } from '@components/Popover/PopoverRoot';
 import {
   a11yTest,
   fireEvent,
@@ -21,23 +12,23 @@ import {
   waitFor,
 } from '@test-utils';
 
-describe('<Popover />', () => {
-  function PopoverTest(props: PopoverProps) {
+describe('<Popover. />', () => {
+  function PopoverTest(props: PopoverRootProps) {
     return (
-      <Popover {...props}>
-        <PopoverTrigger>
+      <Popover.Root {...props}>
+        <Popover.Trigger>
           <Button>trigger</Button>
-        </PopoverTrigger>
-        <PopoverContent data-testid="popover">
-          <PopoverHeader>header</PopoverHeader>
-          <PopoverCloseButton />
-          <PopoverBody>body</PopoverBody>
-          <PopoverFooter>footer</PopoverFooter>
-        </PopoverContent>
-      </Popover>
+        </Popover.Trigger>
+        <Popover.Content data-testid="popover">
+          <Popover.Header>header</Popover.Header>
+          <Popover.CloseButton />
+          <Popover.Body>body</Popover.Body>
+          <Popover.Footer>footer</Popover.Footer>
+        </Popover.Content>
+      </Popover.Root>
     );
   }
-  function VisibleTest(props: Partial<PopoverProps>) {
+  function VisibleTest(props: Partial<PopoverRootProps>) {
     const [isOpen, setIsOpen] = React.useState(false);
     const onClose = () => setIsOpen(false);
     const onToggle = () => setIsOpen(prev => !prev);
@@ -216,24 +207,24 @@ describe('<Popover />', () => {
           const onClose = () => setIsOpen(false);
           const onToggle = () => setIsOpen(prev => !prev);
           return (
-            <Popover
+            <Popover.Root
               isOpen={isOpen}
               onToggle={onToggle}
               onClose={onClose}
               trapFocus
             >
-              <PopoverTrigger>
+              <Popover.Trigger>
                 <Button>trigger</Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <PopoverHeader>header</PopoverHeader>
-                <PopoverCloseButton />
-                <PopoverBody>body</PopoverBody>
-                <PopoverFooter>
+              </Popover.Trigger>
+              <Popover.Content>
+                <Popover.Header>header</Popover.Header>
+                <Popover.CloseButton />
+                <Popover.Body>body</Popover.Body>
+                <Popover.Footer>
                   <Button data-testid="save">save</Button>
-                </PopoverFooter>
-              </PopoverContent>
-            </Popover>
+                </Popover.Footer>
+              </Popover.Content>
+            </Popover.Root>
           );
         }
 
@@ -255,30 +246,30 @@ describe('<Popover />', () => {
       });
 
       describe('closeOnBlur', () => {
-        function TabTest(props: Pick<PopoverProps, 'closeOnBlur'>) {
+        function TabTest(props: Pick<PopoverRootProps, 'closeOnBlur'>) {
           const { closeOnBlur = true } = props;
           const [isOpen, setIsOpen] = React.useState(false);
           const onClose = () => setIsOpen(false);
           const onToggle = () => setIsOpen(prev => !prev);
           return (
-            <Popover
+            <Popover.Root
               closeOnBlur={closeOnBlur}
               isOpen={isOpen}
               onToggle={onToggle}
               onClose={onClose}
             >
-              <PopoverTrigger>
+              <Popover.Trigger>
                 <Button>trigger</Button>
-              </PopoverTrigger>
-              <PopoverContent data-testid="popover">
-                <PopoverHeader>header</PopoverHeader>
-                <PopoverCloseButton />
-                <PopoverBody>
+              </Popover.Trigger>
+              <Popover.Content data-testid="popover">
+                <Popover.Header>header</Popover.Header>
+                <Popover.CloseButton />
+                <Popover.Body>
                   <input data-testid="input" />
-                </PopoverBody>
-                <PopoverFooter>footer</PopoverFooter>
-              </PopoverContent>
-            </Popover>
+                </Popover.Body>
+                <Popover.Footer>footer</Popover.Footer>
+              </Popover.Content>
+            </Popover.Root>
           );
         }
 
@@ -348,24 +339,24 @@ describe('<Popover />', () => {
           const onToggle = () => setIsOpen(prev => !prev);
           const initialFocusRef = React.useRef<HTMLInputElement | null>(null);
           return (
-            <Popover
+            <Popover.Root
               initialFocusRef={initialFocusRef}
               isOpen={isOpen}
               onToggle={onToggle}
               onClose={onClose}
             >
-              <PopoverTrigger>
+              <Popover.Trigger>
                 <Button>trigger</Button>
-              </PopoverTrigger>
-              <PopoverContent data-testid="popover">
-                <PopoverHeader>header</PopoverHeader>
-                <PopoverCloseButton />
-                <PopoverBody>
+              </Popover.Trigger>
+              <Popover.Content data-testid="popover">
+                <Popover.Header>header</Popover.Header>
+                <Popover.CloseButton />
+                <Popover.Body>
                   <input data-testid="input" ref={initialFocusRef} />
-                </PopoverBody>
-                <PopoverFooter>footer</PopoverFooter>
-              </PopoverContent>
-            </Popover>
+                </Popover.Body>
+                <Popover.Footer>footer</Popover.Footer>
+              </Popover.Content>
+            </Popover.Root>
           );
         }
 
@@ -387,7 +378,7 @@ describe('<Popover />', () => {
 
       describe('finalFocusRef', () => {
         function FinalFocusRefTest(
-          props: Pick<PopoverProps, 'shouldReturnFocusOnClose'>
+          props: Pick<PopoverRootProps, 'shouldReturnFocusOnClose'>
         ) {
           const { shouldReturnFocusOnClose = true } = props;
           const finalFocusRef = React.useRef<HTMLButtonElement | null>(null);

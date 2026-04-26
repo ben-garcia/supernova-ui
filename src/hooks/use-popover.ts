@@ -1,6 +1,6 @@
 import { HTMLAttributes, useCallback, useContext, useRef } from 'react';
 
-import { PopoverProps } from '@components/Popover/Popover';
+import { PopoverRootProps } from '@components/Popover/PopoverRoot';
 import { PopoverContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString, mergeRefs } from '@utils';
@@ -8,7 +8,7 @@ import { createClasses, isString, mergeRefs } from '@utils';
 /**
  * React hook that returns the Popover props.
  */
-const usePopoverProvider = (props: PopoverProps) => {
+const usePopoverProvider = (props: PopoverRootProps) => {
   const {
     closeOnBlur,
     closeOnEsc,

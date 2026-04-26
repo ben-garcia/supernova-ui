@@ -1,19 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React, { useRef, useState } from 'react';
 
-import {
-  Box,
-  Button,
-  TextInput,
-  Popover,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-} from '@components';
-import { PopoverProps } from '@components/Popover/Popover';
+import { Box, Button, TextInput, Popover } from '@components';
+import { PopoverRootProps } from '@components/Popover/PopoverRoot';
 
 const placementOptions = [
   'bottom',
@@ -72,11 +61,11 @@ export default {
     trapFocus: { control: 'boolean' },
     withArrow: { control: 'boolean' },
   },
-  component: Popover,
+  component: Popover.Root,
   title: 'Supernova UI/Overlay/Popover',
-} as Meta;
+} as Meta<typeof Popover.Root>;
 
-const BasicTemplate: StoryFn<PopoverProps> = args => {
+const BasicTemplate: StoryFn<PopoverRootProps> = args => {
   const {
     closeOnBlur,
     closeOnEsc,
@@ -96,7 +85,7 @@ const BasicTemplate: StoryFn<PopoverProps> = args => {
       width="100vw"
       height="100vh"
     >
-      <Popover
+      <Popover.Root
         closeOnBlur={closeOnBlur}
         closeOnEsc={closeOnEsc}
         onClose={onClose}
@@ -105,15 +94,15 @@ const BasicTemplate: StoryFn<PopoverProps> = args => {
         shouldReturnFocusOnClose={shouldReturnFocusOnClose}
         trapFocus={trapFocus}
       >
-        <PopoverTrigger>
+        <Popover.Trigger>
           <Button>Trigger Popover</Button>
-        </PopoverTrigger>
-        <PopoverContent {...rest}>
-          <PopoverHeader>Popover Header</PopoverHeader>
-          <PopoverCloseButton />
-          <PopoverBody>This is a popover</PopoverBody>
-        </PopoverContent>
-      </Popover>
+        </Popover.Trigger>
+        <Popover.Content {...rest}>
+          <Popover.Header>Popover Header</Popover.Header>
+          <Popover.CloseButton />
+          <Popover.Body>This is a popover</Popover.Body>
+        </Popover.Content>
+      </Popover.Root>
     </Box>
   );
 };
@@ -124,7 +113,7 @@ export const Basic = {
   parameters,
 };
 
-const FinalFocusRefTemplate: StoryFn<PopoverProps> = args => {
+const FinalFocusRefTemplate: StoryFn<PopoverRootProps> = args => {
   const {
     closeOnBlur,
     closeOnEsc,
@@ -151,7 +140,7 @@ const FinalFocusRefTemplate: StoryFn<PopoverProps> = args => {
       <Button ref={finalFocusRef} variant="outline">
         finalFocusRef
       </Button>
-      <Popover
+      <Popover.Root
         closeOnBlur={closeOnBlur}
         closeOnEsc={closeOnEsc}
         finalFocusRef={finalFocusRef}
@@ -162,30 +151,30 @@ const FinalFocusRefTemplate: StoryFn<PopoverProps> = args => {
         shouldReturnFocusOnClose={shouldReturnFocusOnClose}
         trapFocus={trapFocus}
       >
-        <PopoverTrigger>
+        <Popover.Trigger>
           <Button>Open</Button>
-        </PopoverTrigger>
+        </Popover.Trigger>
 
-        <PopoverContent {...rest}>
-          <PopoverHeader>Create an account</PopoverHeader>
+        <Popover.Content {...rest}>
+          <Popover.Header>Create an account</Popover.Header>
 
-          <PopoverCloseButton />
+          <Popover.CloseButton />
 
-          <PopoverBody>
+          <Popover.Body>
             <form>
               <TextInput label="Email" ref={initialFocusRef} type="email" />
               <TextInput label="Password" type="password" />
             </form>
-          </PopoverBody>
+          </Popover.Body>
 
-          <PopoverFooter>
+          <Popover.Footer>
             <Button onClick={onClose} variant="outline">
               Cancel
             </Button>
             <Button onClick={onClose}>Signup</Button>
-          </PopoverFooter>
-        </PopoverContent>
-      </Popover>
+          </Popover.Footer>
+        </Popover.Content>
+      </Popover.Root>
     </Box>
   );
 };
@@ -196,7 +185,7 @@ export const FinalFocusRef = {
   parameters,
 };
 
-const ReferenceTemplate: StoryFn<PopoverProps> = args => {
+const ReferenceTemplate: StoryFn<PopoverRootProps> = args => {
   const { closeOnBlur, closeOnEsc, trapFocus, ...rest } = args;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
@@ -214,7 +203,7 @@ const ReferenceTemplate: StoryFn<PopoverProps> = args => {
       <Button colorVariant="cyan400" onClick={onToggle}>
         Trigger
       </Button>
-      <Popover
+      <Popover.Root
         closeOnBlur={closeOnBlur}
         closeOnEsc={closeOnEsc}
         onClose={onClose}
@@ -222,15 +211,15 @@ const ReferenceTemplate: StoryFn<PopoverProps> = args => {
         shouldReturnFocusOnClose={false}
         trapFocus={trapFocus}
       >
-        <PopoverTrigger>
+        <Popover.Trigger>
           <Button>Reference</Button>
-        </PopoverTrigger>
-        <PopoverContent {...rest}>
-          <PopoverHeader>Popover Header</PopoverHeader>
-          <PopoverCloseButton />
-          <PopoverBody>This is a popover</PopoverBody>
-        </PopoverContent>
-      </Popover>
+        </Popover.Trigger>
+        <Popover.Content {...rest}>
+          <Popover.Header>Popover Header</Popover.Header>
+          <Popover.CloseButton />
+          <Popover.Body>This is a popover</Popover.Body>
+        </Popover.Content>
+      </Popover.Root>
     </Box>
   );
 };
