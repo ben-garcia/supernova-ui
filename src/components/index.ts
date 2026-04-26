@@ -5,17 +5,20 @@ export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as Divider } from './Divider';
-export * from './Drawer';
+export { default as Drawer } from './Drawer';
+
 export * from './Editable';
 export * from './FormControl';
+
 export { default as Heading } from './Heading';
+
 export * from './Icon/Icons';
 export * from './Menu';
+
 export { default as Modal } from './Modal';
 export { default as Overlay } from './Overlay';
 export { default as Paragraph } from './Paragraph';
 export { default as Portal } from './Portal';
-
 export { default as Popover } from './Popover';
 
 export * from './Radio';

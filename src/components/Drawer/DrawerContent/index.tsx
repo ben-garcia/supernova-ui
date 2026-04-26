@@ -6,7 +6,7 @@ import { SupernovaProps } from '@types';
 import { isString } from '@utils';
 import './styles.scss';
 
-type DrawerContentProps = Omit<SupernovaProps, 'id'>;
+export type DrawerContentProps = Omit<SupernovaProps, 'id'>;
 
 /**
  * The container for Drawer related components.

@@ -12,7 +12,7 @@ import { DrawerProvider } from '@contexts';
 import { useDrawerProvider } from '@hooks';
 import { DialogLikeProps } from '@types';
 
-export interface DrawerProps extends DialogLikeProps {
+export interface DrawerRootProps extends DialogLikeProps {
   /**
    * The reference element to receive focus when the Drawer first opens
    */
@@ -29,7 +29,7 @@ export interface DrawerProps extends DialogLikeProps {
  * The container for all Drawer related components
  * that provides context to its children.
  */
-const Drawer: FC<PropsWithChildren<DrawerProps>> = props => {
+const DrawerRoot: FC<PropsWithChildren<DrawerRootProps>> = props => {
   const {
     children,
     closeOnEsc = true,
@@ -86,4 +86,4 @@ const Drawer: FC<PropsWithChildren<DrawerProps>> = props => {
   );
 };
 
-export default Drawer;
+export default DrawerRoot;

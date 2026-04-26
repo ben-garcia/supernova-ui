@@ -1,13 +1,13 @@
 import { HTMLAttributes, useCallback, useContext } from 'react';
 
-import { DrawerProps } from '@components/Drawer/Drawer';
+import { DrawerRootProps } from '@components/Drawer/DrawerRoot';
 import { DrawerContext } from '@contexts';
 import { useUniqueId } from '@hooks';
 import { createClasses, isString } from '@utils';
 
-/** Hooks that returns the Drawer props
+/** Hooks that returns the Drawer state
  */
-const useDrawerProvider = (props: DrawerProps) => {
+const useDrawerProvider = (props: DrawerRootProps) => {
   const {
     closeOnEsc,
     closeOnOverlayClick,

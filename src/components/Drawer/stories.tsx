@@ -1,20 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React, { useRef, useState } from 'react';
 
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerButton,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  TextInput,
-} from '@components';
-import { DrawerProps } from '@components/Drawer/Drawer';
+import { Box, Button, Drawer, TextInput } from '@components';
+import { DrawerRootProps } from '@components/Drawer/DrawerRoot';
 
 export default {
   args: {
@@ -39,9 +27,9 @@ export default {
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },
-  component: Drawer,
+  component: Drawer.Root,
   title: 'Supernova UI/Overlay/Drawer',
-} as Meta;
+} as Meta<typeof Drawer.Root>;
 
 const parameters = {
   controls: {
@@ -49,7 +37,7 @@ const parameters = {
   },
 };
 
-const BasicTemplate: StoryFn<DrawerProps> = args => {
+const BasicTemplate: StoryFn<DrawerRootProps> = args => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
   return (
@@ -58,21 +46,21 @@ const BasicTemplate: StoryFn<DrawerProps> = args => {
         <Button onClick={() => setIsOpen(true)}>Trigger Drawer</Button>
       </Box>
 
-      <Drawer {...args} onClose={handleClose} isOpen={isOpen}>
-        <DrawerOverlay />
+      <Drawer.Root {...args} onClose={handleClose} isOpen={isOpen}>
+        <Drawer.Overlay />
 
-        <DrawerContent>
-          <DrawerHeader>Drawer Title</DrawerHeader>
-          <DrawerCloseButton />
-          <DrawerBody>This is a drawer</DrawerBody>
-          <DrawerFooter>
-            <DrawerButton onClick={() => setIsOpen(false)} variant="outline">
+        <Drawer.Content>
+          <Drawer.Header>Drawer Title</Drawer.Header>
+          <Drawer.CloseButton />
+          <Drawer.Body>This is a drawer</Drawer.Body>
+          <Drawer.Footer>
+            <Drawer.Button onClick={() => setIsOpen(false)} variant="outline">
               Cancel
-            </DrawerButton>
-            <DrawerButton onClick={() => setIsOpen(false)}>Save</DrawerButton>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+            </Drawer.Button>
+            <Drawer.Button onClick={() => setIsOpen(false)}>Save</Drawer.Button>
+          </Drawer.Footer>
+        </Drawer.Content>
+      </Drawer.Root>
     </>
   );
 };
@@ -83,7 +71,7 @@ export const Basic = {
   parameters,
 };
 
-const FinalFocusRefTemplate: StoryFn<DrawerProps> = args => {
+const FinalFocusRefTemplate: StoryFn<DrawerRootProps> = args => {
   const [isOpen, setOpen] = useState(false);
   const initialFocusRef = useRef<HTMLInputElement | null>(null);
   const finalFocusRef = useRef<HTMLButtonElement | null>(null);
@@ -100,33 +88,33 @@ const FinalFocusRefTemplate: StoryFn<DrawerProps> = args => {
         </Button>
       </Box>
 
-      <Drawer
+      <Drawer.Root
         {...args}
         finalFocusRef={finalFocusRef}
         initialFocusRef={initialFocusRef}
         onClose={handleClose}
         isOpen={isOpen}
       >
-        <DrawerOverlay />
+        <Drawer.Overlay />
 
-        <DrawerContent>
-          <DrawerHeader>Create an account</DrawerHeader>
-          <DrawerCloseButton />
-          <DrawerBody>
+        <Drawer.Content>
+          <Drawer.Header>Create an account</Drawer.Header>
+          <Drawer.CloseButton />
+          <Drawer.Body>
             <form>
               <TextInput label="Email" ref={initialFocusRef} type="email" />
               <TextInput label="Password" type="password" />
             </form>
-          </DrawerBody>
-          <DrawerFooter>
-            <DrawerButton onClick={handleClose} variant="outline">
+          </Drawer.Body>
+          <Drawer.Footer>
+            <Drawer.Button onClick={handleClose} variant="outline">
               Cancel
-            </DrawerButton>
+            </Drawer.Button>
 
-            <DrawerButton onClick={handleClose}>Signup</DrawerButton>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+            <Drawer.Button onClick={handleClose}>Signup</Drawer.Button>
+          </Drawer.Footer>
+        </Drawer.Content>
+      </Drawer.Root>
     </>
   );
 };

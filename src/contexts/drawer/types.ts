@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode, MutableRefObject } from 'react';
 
-import { DrawerProps } from '@components/Drawer/Drawer';
+import { DrawerRootProps } from '@components/Drawer/DrawerRoot';
 import { DialogLikeProps } from '@types';
 
 export interface DrawerContextProps {
@@ -25,7 +25,7 @@ export interface DrawerContextProps {
   onClickOutside?: () => void;
   onClose: () => void;
   onEscPress?: () => void;
-  placement?: DrawerProps['placement'];
+  placement?: DrawerRootProps['placement'];
   size?: DialogLikeProps['size'];
   trapFocus?: boolean;
 }

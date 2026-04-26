@@ -5,7 +5,7 @@ import { ButtonProps } from '@components/Button/types';
 import { useCreateClassString, useDrawer } from '@hooks';
 import { forwardRef, isFunction, isString } from '@utils';
 
-type DrawerButtonProps = ButtonProps;
+export type DrawerButtonProps = ButtonProps;
 
 /**
  * The button for the Drawer component.
