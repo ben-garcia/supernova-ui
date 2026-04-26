@@ -13,13 +13,38 @@ import AlertDialogHeader, { AlertDialogHeaderProps } from './AlertDialogHeader';
 import AlertDialogOverlay from './AlertDialogOverlay';
 
 interface AlertDialogComponent {
+  /**
+   * The container for all AlertDialog related components
+   * that provides context to its children.
+   */
   Root: FC<PropsWithChildren<AlertDialogRootProps>>;
+  /**
+   * The wrapper for the header content of the AlertDialog.
+   */
   Body: FC<PropsWithChildren<AlertDialogBodyProps>>;
+  /**
+   * The button for the AlertDialog component.
+   */
   Button: ForwardRefExoticComponent<AlertDialogButtonProps>;
+  /**
+   * The close button for the Popover component.
+   */
   CloseButton: FC<Parameters<typeof Button>[0]>;
+  /**
+   * The container for AlertDialog related components.
+   */
   Content: FC<PropsWithChildren<AlertDialogContentProps>>;
+  /**
+   * The wrapper for the footer content of the AlertDialog.
+   */
   Footer: FC<PropsWithChildren<AlertDialogFooterProps>>;
+  /**
+   * The wrapper for the header content of the AlertDialog.
+   */
   Header: FC<PropsWithChildren<AlertDialogHeaderProps>>;
+  /**
+   * The overlay for the AlertDialog component.
+   */
   Overlay: FC<Parameters<typeof Overlay>[0]>;
 }
 

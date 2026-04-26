@@ -5,7 +5,7 @@ import { usePopover } from '@hooks';
 import './styles.scss';
 
 /**
- * The close button for the Modal component.
+ * The close button for the Popover component.
  */
 const PopoverCloseButton: FC<Parameters<typeof Button>[0]> = props => {
   const { onClose } = usePopover();
