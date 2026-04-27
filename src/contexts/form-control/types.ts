@@ -1,10 +1,10 @@
 import { FC, ReactNode, ForwardedRef } from 'react';
 
-import { FormControlProps } from '@components/FormControl/types';
+import { FormControlRootProps } from '@components/FormControl/types';
 import { FormHelperTextProps } from '@components/FormControl/FormHelperText';
 
 export interface FormControl extends Omit<
-  FormControlProps,
+  FormControlRootProps,
   'children' | 'id' | 'tag'
 > {
   getErrorMessageProps: (

@@ -7,14 +7,14 @@ import {
   useUniqueId,
 } from '@hooks';
 import { createElement } from '@utils';
-import { FormControlProps } from './types';
+import { FormControlRootProps } from './types';
 import './styles.scss';
 
 /**
  * The container for all FormControl related components
  * that provides context to its children.
  */
-const FormControl: FC<PropsWithChildren<FormControlProps>> = props => {
+const FormControlRoot: FC<PropsWithChildren<FormControlRootProps>> = props => {
   const {
     children,
     isInvalid = false,
@@ -46,4 +46,4 @@ const FormControl: FC<PropsWithChildren<FormControlProps>> = props => {
   );
 };
 
-export default FormControl;
+export default FormControlRoot;

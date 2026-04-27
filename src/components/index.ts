@@ -8,12 +8,12 @@ export { default as Divider } from './Divider';
 export { default as Drawer } from './Drawer';
 
 export { default as Editable } from './Editable';
-export * from './FormControl';
+export { default as FormControl } from './FormControl';
 
 export { default as Heading } from './Heading';
 
 export * from './Icon/Icons';
-export * from './Menu';
+export { default as Menu } from './Menu';
 
 export { default as Modal } from './Modal';
 export { default as Overlay } from './Overlay';

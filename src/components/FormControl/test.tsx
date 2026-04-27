@@ -1,14 +1,9 @@
 import React from 'react';
 
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  TextInput,
-} from '@components';
+import { FormControl, TextInput } from '@components';
 import { a11yTest, render, waitFor } from '@test-utils';
 
-import { FormControlProps } from './types';
+import { FormControlRootProps } from './types';
 
 beforeAll(() => {
   window.getComputedStyle = jest.fn().mockReturnValue({
@@ -20,15 +15,17 @@ describe('<FormControl />', () => {
   const errorMessage = 'error message';
   const helperText = 'helper text';
   const label = 'testing label';
-  function FormControlTest(props: Omit<FormControlProps, 'children'>) {
+  function FormControlTest(props: Omit<FormControlRootProps, 'children'>) {
     return (
-      <FormControl {...props}>
+      <FormControl.Root {...props}>
         <TextInput data-testid="text-input" label={label} />
-        <FormHelperText data-testid="helper-text">{helperText}</FormHelperText>
-        <FormErrorMessage data-testid="error-message">
+        <FormControl.HelperText data-testid="helper-text">
+          {helperText}
+        </FormControl.HelperText>
+        <FormControl.ErrorMessage data-testid="error-message">
           {errorMessage}
-        </FormErrorMessage>
-      </FormControl>
+        </FormControl.ErrorMessage>
+      </FormControl.Root>
     );
   }
 

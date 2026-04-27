@@ -9,8 +9,6 @@ import {
   Textarea,
   TextInput,
   FormControl,
-  FormHelperText,
-  FormErrorMessage,
 } from '@components';
 
 export default {
@@ -29,9 +27,9 @@ export default {
       options: ['div', 'fieldset'],
     },
   },
-  component: FormControl,
+  component: FormControl.Root,
   title: 'Supernova UI/Form/FormControl',
-} as Meta<typeof FormControl>;
+} as Meta<typeof FormControl.Root>;
 
 const parameters = {
   controls: {
@@ -39,12 +37,12 @@ const parameters = {
   },
 };
 
-const WithCheckboxTemplate: StoryFn<typeof FormControl> = args => (
-  <FormControl {...args}>
+const WithCheckboxTemplate: StoryFn<typeof FormControl.Root> = args => (
+  <FormControl.Root {...args}>
     <Checkbox label="react" />
-    <FormHelperText>This is helper text</FormHelperText>
-    <FormErrorMessage>error has been detected</FormErrorMessage>
-  </FormControl>
+    <FormControl.HelperText>This is helper text</FormControl.HelperText>
+    <FormControl.ErrorMessage>error has been detected</FormControl.ErrorMessage>
+  </FormControl.Root>
 );
 
 export const WithCheckbox = {
@@ -52,18 +50,22 @@ export const WithCheckbox = {
   parameters,
 };
 
-const WithRadioGroupTemplate: StoryFn<typeof FormControl> = args => {
+const WithRadioGroupTemplate: StoryFn<typeof FormControl.Root> = args => {
   const [answer, setAnswer] = React.useState('3.14159');
   return (
-    <FormControl {...args}>
+    <FormControl.Root {...args}>
       <RadioGroup onChange={setAnswer} defaultValue={answer} name="answer">
         <Radio label="3.14195" value="3.14195" />
         <Radio label="3.15149" value="3.15249" />
         <Radio label="3.14159" value="3.14159" />
       </RadioGroup>
-      <FormHelperText>Choose the correct value of PI</FormHelperText>
-      <FormErrorMessage>error has been detected</FormErrorMessage>
-    </FormControl>
+      <FormControl.HelperText>
+        Choose the correct value of PI
+      </FormControl.HelperText>
+      <FormControl.ErrorMessage>
+        error has been detected
+      </FormControl.ErrorMessage>
+    </FormControl.Root>
   );
 };
 
@@ -72,12 +74,12 @@ export const WithRadioGroup = {
   parameters,
 };
 
-const WithSwitchTemplate: StoryFn<typeof FormControl> = args => (
-  <FormControl {...args}>
+const WithSwitchTemplate: StoryFn<typeof FormControl.Root> = args => (
+  <FormControl.Root {...args}>
     <Switch label="react" />
-    <FormHelperText>This is helper text</FormHelperText>
-    <FormErrorMessage>error has been detected</FormErrorMessage>
-  </FormControl>
+    <FormControl.HelperText>This is helper text</FormControl.HelperText>
+    <FormControl.ErrorMessage>error has been detected</FormControl.ErrorMessage>
+  </FormControl.Root>
 );
 
 export const WithSwitch = {
@@ -85,14 +87,14 @@ export const WithSwitch = {
   parameters,
 };
 
-const WithTextareaTemplate: StoryFn<typeof FormControl> = args => (
-  <FormControl {...args}>
+const WithTextareaTemplate: StoryFn<typeof FormControl.Root> = args => (
+  <FormControl.Root {...args}>
     <Textarea label="Content" />
-    <FormHelperText>your content</FormHelperText>
-    <FormErrorMessage>
+    <FormControl.HelperText>your content</FormControl.HelperText>
+    <FormControl.ErrorMessage>
       this text will not render until isInvalid prop is true
-    </FormErrorMessage>
-  </FormControl>
+    </FormControl.ErrorMessage>
+  </FormControl.Root>
 );
 
 export const WithTextarea = {
@@ -100,16 +102,16 @@ export const WithTextarea = {
   parameters,
 };
 
-const WithTextInputTemplate: StoryFn<typeof FormControl> = args => (
-  <FormControl {...args}>
+const WithTextInputTemplate: StoryFn<typeof FormControl.Root> = args => (
+  <FormControl.Root {...args}>
     <TextInput label="Username" />
-    <FormHelperText>
+    <FormControl.HelperText>
       your name will be how other users notice you
-    </FormHelperText>
-    <FormErrorMessage>
+    </FormControl.HelperText>
+    <FormControl.ErrorMessage>
       this text will not render until isInvalid prop is true
-    </FormErrorMessage>
-  </FormControl>
+    </FormControl.ErrorMessage>
+  </FormControl.Root>
 );
 
 export const WithTextInput = {

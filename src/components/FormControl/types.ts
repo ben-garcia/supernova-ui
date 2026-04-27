@@ -3,7 +3,7 @@ import { SupernovaProps } from '@types';
 /**
  * Props fro the FormControl component
  */
-export interface FormControlProps extends SupernovaProps {
+export interface FormControlRootProps extends SupernovaProps {
   /**
    * Whether the form field is disabled
    *
