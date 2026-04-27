@@ -5,7 +5,7 @@ import { ButtonProps } from '@components/Button/types';
 import { useMenu } from '@hooks';
 import { createClasses, isString } from '@utils';
 
-interface MenuButtonProps extends ButtonProps {}
+export interface MenuButtonProps extends ButtonProps {}
 
 /**
  * The trigger for the Menu component.

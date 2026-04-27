@@ -6,10 +6,6 @@ import {
   HalfMoonIcon,
   LogoutIcon,
   Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuGroup,
   SettingsIcon,
   UserIcon,
 } from '@components';
@@ -32,9 +28,9 @@ export default {
     spacing: { control: { type: 'number' } },
     withArrow: { control: 'boolean' },
   },
-  component: Menu,
+  component: Menu.Root,
   title: 'Supernova UI/Overlay/Menu',
-} as Meta<typeof Menu>;
+} as Meta<typeof Menu.Root>;
 
 const parameters = {
   controls: {
@@ -42,7 +38,7 @@ const parameters = {
   },
 };
 
-const Template: StoryFn<typeof Menu> = args => {
+const Template: StoryFn<typeof Menu.Root> = args => {
   const { closeOnEsc, ...rest } = args;
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -55,19 +51,19 @@ const Template: StoryFn<typeof Menu> = args => {
       width="100vw"
       height="100vh"
     >
-      <Menu
+      <Menu.Root
         closeOnEsc={closeOnEsc}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <MenuButton onClick={() => setIsOpen(true)}>Trigger Menu</MenuButton>
-        <MenuList {...rest}>
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>Settings</MenuItem>
-          <MenuItem>Night Mode</MenuItem>
-          <MenuItem>Sign Out</MenuItem>
-        </MenuList>
-      </Menu>
+        <Menu.Button onClick={() => setIsOpen(true)}>Trigger Menu</Menu.Button>
+        <Menu.List {...rest}>
+          <Menu.Item>Profile</Menu.Item>
+          <Menu.Item>Settings</Menu.Item>
+          <Menu.Item>Night Mode</Menu.Item>
+          <Menu.Item>Sign Out</Menu.Item>
+        </Menu.List>
+      </Menu.Root>
     </Box>
   );
 };
@@ -77,7 +73,7 @@ export const Basic = {
   parameters,
 };
 
-const WithGroupTemplate: StoryFn<typeof Menu> = args => {
+const WithGroupTemplate: StoryFn<typeof Menu.Root> = args => {
   const { closeOnEsc, ...rest } = args;
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -90,23 +86,23 @@ const WithGroupTemplate: StoryFn<typeof Menu> = args => {
       width="100vw"
       height="100vh"
     >
-      <Menu
+      <Menu.Root
         closeOnEsc={closeOnEsc}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
-        <MenuList {...rest}>
-          <MenuGroup title="My Stuff">
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>Settings</MenuItem>
-          </MenuGroup>
-          <MenuGroup title="Other">
-            <MenuItem>Night Mode</MenuItem>
-            <MenuItem>Sign Out</MenuItem>
-          </MenuGroup>
-        </MenuList>
-      </Menu>
+        <Menu.Button onClick={() => setIsOpen(true)}>menu</Menu.Button>
+        <Menu.List {...rest}>
+          <Menu.Group title="My Stuff">
+            <Menu.Item>Profile</Menu.Item>
+            <Menu.Item>Settings</Menu.Item>
+          </Menu.Group>
+          <Menu.Group title="Other">
+            <Menu.Item>Night Mode</Menu.Item>
+            <Menu.Item>Sign Out</Menu.Item>
+          </Menu.Group>
+        </Menu.List>
+      </Menu.Root>
     </Box>
   );
 };
@@ -116,7 +112,7 @@ export const WithGroup = {
   parameters,
 };
 
-const WithIconsTemplate: StoryFn<typeof Menu> = args => {
+const WithIconsTemplate: StoryFn<typeof Menu.Root> = args => {
   const { closeOnEsc, ...rest } = args;
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -129,35 +125,35 @@ const WithIconsTemplate: StoryFn<typeof Menu> = args => {
       width="100vw"
       height="100vh"
     >
-      <Menu
+      <Menu.Root
         closeOnEsc={closeOnEsc}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <MenuButton onClick={() => setIsOpen(true)}>menu</MenuButton>
-        <MenuList {...rest}>
-          <MenuGroup title="My Stuff">
-            <MenuItem>
+        <Menu.Button onClick={() => setIsOpen(true)}>menu</Menu.Button>
+        <Menu.List {...rest}>
+          <Menu.Group title="My Stuff">
+            <Menu.Item>
               <UserIcon margin="0 10px 0 0" size="xs" />
               Profile
-            </MenuItem>
-            <MenuItem>
+            </Menu.Item>
+            <Menu.Item>
               <SettingsIcon margin="0 10px 0 0" size="xs" />
               Settings
-            </MenuItem>
-          </MenuGroup>
-          <MenuGroup title="Other">
-            <MenuItem>
+            </Menu.Item>
+          </Menu.Group>
+          <Menu.Group title="Other">
+            <Menu.Item>
               <HalfMoonIcon margin="0 10px 0 0" size="xs" />
               Night Mode
-            </MenuItem>
-            <MenuItem>
+            </Menu.Item>
+            <Menu.Item>
               <LogoutIcon margin="0 10px 0 0" size="xs" />
               Sign Out
-            </MenuItem>
-          </MenuGroup>
-        </MenuList>
-      </Menu>
+            </Menu.Item>
+          </Menu.Group>
+        </Menu.List>
+      </Menu.Root>
     </Box>
   );
 };

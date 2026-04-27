@@ -8,7 +8,7 @@ import {
 import { isString } from '@utils';
 import { SupernovaProps } from '@types';
 
-interface MenuGroupProps extends SupernovaProps {
+export interface MenuGroupProps extends SupernovaProps {
   /*
    * the header that describes how items are grouped
    */

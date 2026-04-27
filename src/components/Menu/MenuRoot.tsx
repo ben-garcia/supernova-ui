@@ -9,13 +9,13 @@ import React, {
 import { MenuProvider } from '@contexts';
 import { useMenuProvider, useUniqueId } from '@hooks';
 
-import { MenuProps } from './types';
+import { MenuRootProps } from './types';
 
 /**
  * The container for all Menu related components
  * that provides context to its children.
  */
-const Menu: FC<PropsWithChildren<MenuProps>> = props => {
+const Menu: FC<PropsWithChildren<MenuRootProps>> = props => {
   const { children, closeOnEsc = true, isOpen, onClose } = props;
 
   const menuId = useUniqueId('snui-menu');

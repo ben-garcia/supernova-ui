@@ -1,7 +1,7 @@
 /* eslint react/jsx-wrap-multilines: 0 */
 import React from 'react';
 
-import { Menu, MenuButton, MenuList, MenuItem, MenuGroup } from '@components';
+import { Menu } from '@components';
 import {
   a11yTest,
   fireEvent,
@@ -11,24 +11,24 @@ import {
   waitFor,
 } from '@test-utils';
 
-import { MenuProps } from './types';
+import { MenuRootProps } from './types';
 
 describe('<Menu />', () => {
-  function MenuTest(props: Omit<MenuProps, 'children'>) {
+  function MenuTest(props: Omit<MenuRootProps, 'children'>) {
     return (
-      <Menu {...props}>
-        <MenuButton>open</MenuButton>
-        <MenuList>
-          <MenuGroup title="main">
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>Settings</MenuItem>
-          </MenuGroup>
-          <MenuGroup title="secondary">
-            <MenuItem>Night Mode</MenuItem>
-            <MenuItem>Signout</MenuItem>
-          </MenuGroup>
-        </MenuList>
-      </Menu>
+      <Menu.Root {...props}>
+        <Menu.Button>open</Menu.Button>
+        <Menu.List>
+          <Menu.Group title="main">
+            <Menu.Item>Profile</Menu.Item>
+            <Menu.Item>Settings</Menu.Item>
+          </Menu.Group>
+          <Menu.Group title="secondary">
+            <Menu.Item>Night Mode</Menu.Item>
+            <Menu.Item>Signout</Menu.Item>
+          </Menu.Group>
+        </Menu.List>
+      </Menu.Root>
     );
   }
 
@@ -66,12 +66,12 @@ describe('<Menu />', () => {
   it('should call the onClick function', () => {
     const mockFunction = jest.fn();
     render(
-      <Menu isOpen onClose={() => {}}>
-        <MenuButton>open</MenuButton>
-        <MenuList>
-          <MenuItem onClick={mockFunction}>Profile</MenuItem>
-        </MenuList>
-      </Menu>
+      <Menu.Root isOpen onClose={() => {}}>
+        <Menu.Button>open</Menu.Button>
+        <Menu.List>
+          <Menu.Item onClick={mockFunction}>Profile</Menu.Item>
+        </Menu.List>
+      </Menu.Root>
     );
 
     const item = screen.getByText('Profile');
@@ -82,25 +82,29 @@ describe('<Menu />', () => {
   });
 
   describe('keyboard navigation', () => {
-    let Test: React.FC<Partial<MenuProps>>;
+    let Test: React.FC<Partial<MenuRootProps>>;
 
     beforeAll(() => {
       Test = props => {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
-          <Menu {...props} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-            <MenuButton onClick={() => setIsOpen(true)}>Open</MenuButton>
-            <MenuList>
-              <MenuGroup title="main">
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>Settings</MenuItem>
-              </MenuGroup>
-              <MenuGroup title="secondary">
-                <MenuItem>Night Mode</MenuItem>
-                <MenuItem>Signout</MenuItem>
-              </MenuGroup>
-            </MenuList>
-          </Menu>
+          <Menu.Root
+            {...props}
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+          >
+            <Menu.Button onClick={() => setIsOpen(true)}>Open</Menu.Button>
+            <Menu.List>
+              <Menu.Group title="main">
+                <Menu.Item>Profile</Menu.Item>
+                <Menu.Item>Settings</Menu.Item>
+              </Menu.Group>
+              <Menu.Group title="secondary">
+                <Menu.Item>Night Mode</Menu.Item>
+                <Menu.Item>Signout</Menu.Item>
+              </Menu.Group>
+            </Menu.List>
+          </Menu.Root>
         );
       };
     });

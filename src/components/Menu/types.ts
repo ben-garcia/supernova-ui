@@ -1,4 +1,4 @@
-export interface MenuProps {
+export interface MenuRootProps {
   /**
    * Configure whether the Menu should close when Esc key is pressed
    *

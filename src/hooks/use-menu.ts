@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useRef } from 'react';
 
-import { MenuProps } from '@components/Menu/types';
+import { MenuRootProps } from '@components/Menu/types';
 import { MenuContext, MenuListContext } from '@contexts';
 import { isFunction } from '@utils';
 
@@ -53,7 +53,7 @@ function mergeRefs<T>(...refs: (ReactRef<T> | undefined)[]) {
 /**
  * Hooks that returns the Menu props
  */
-export const useMenuProvider = (props: MenuProps) => {
+export const useMenuProvider = (props: MenuRootProps) => {
   const { isOpen, onClose, closeOnEsc } = props;
 
   const menuButtonRef = useRef<HTMLButtonElement>(null);
