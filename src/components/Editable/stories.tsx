@@ -1,14 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React, { useState } from 'react';
 
-import {
-  Box,
-  Button,
-  Editable,
-  EditablePreview,
-  EditableInput,
-  EditableTextarea,
-} from '@components';
+import { Box, Button, Editable } from '@components';
 import { useEditableControls } from '@hooks';
 
 export default {
@@ -25,9 +18,9 @@ export default {
     selectAllOnFocus: { control: 'boolean' },
     submitOnBlur: { control: 'boolean' },
   },
-  component: Editable,
+  component: Editable.Root,
   title: 'Supernova UI/Form/Editable',
-} as Meta<typeof Editable>;
+} as Meta<typeof Editable.Root>;
 
 const parameters = {
   controls: {
@@ -41,14 +34,14 @@ const parameters = {
   },
 };
 
-const Template: StoryFn<typeof Editable> = args => {
+const Template: StoryFn<typeof Editable.Root> = args => {
   const [value, setValue] = useState('edit');
   return (
     <Box border="1px solid #ccc" padding="5px">
-      <Editable {...args} onChange={val => setValue(val)} value={value}>
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+      <Editable.Root {...args} onChange={val => setValue(val)} value={value}>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
     </Box>
   );
 };
@@ -63,10 +56,10 @@ const WithTextareaTemplate: StoryFn<any> = args => {
   const { isAutoResize, ...rest } = args;
   return (
     <Box border="1px solid #ccc" padding="5px">
-      <Editable {...rest} onChange={val => setValue(val)} value={value}>
-        <EditablePreview />
-        <EditableTextarea isAutoResize={isAutoResize} />
-      </Editable>
+      <Editable.Root {...rest} onChange={val => setValue(val)} value={value}>
+        <Editable.Preview />
+        <Editable.Textarea isAutoResize={isAutoResize} />
+      </Editable.Root>
     </Box>
   );
 };
@@ -83,7 +76,7 @@ function CustomEditableTextarea(props: { isAutoResize: boolean }) {
 
   return (
     <Box border="1px solid #ccc" padding="5px" position="relative">
-      <EditableTextarea isAutoResize={isAutoResize} />
+      <Editable.Textarea isAutoResize={isAutoResize} />
       {isEditing ? (
         <Box
           display="flex"
@@ -110,7 +103,7 @@ function CustomEditableTextarea(props: { isAutoResize: boolean }) {
           </Button>
         </Box>
       ) : null}
-      <EditablePreview />
+      <Editable.Preview />
     </Box>
   );
 }
@@ -119,9 +112,9 @@ const WithCustomTextareaTemplate: StoryFn<any> = args => {
   const [value, setValue] = useState('Add description');
   const { isAutoResize, ...rest } = args;
   return (
-    <Editable {...rest} onChange={val => setValue(val)} value={value}>
+    <Editable.Root {...rest} onChange={val => setValue(val)} value={value}>
       <CustomEditableTextarea isAutoResize={isAutoResize} />
-    </Editable>
+    </Editable.Root>
   );
 };
 
@@ -141,7 +134,7 @@ function CustomEditableInput() {
       position="relative"
       display="flex"
     >
-      <EditableInput />
+      <Editable.Input />
       {isEditing ? (
         <Box display="flex" margin="0 10px">
           <Button colorVariant="error700" {...getCancelButtonProps()}>
@@ -153,17 +146,17 @@ function CustomEditableInput() {
           </Button>
         </Box>
       ) : null}
-      <EditablePreview />
+      <Editable.Preview />
     </Box>
   );
 }
 
-const WithCustomInput: StoryFn<typeof Editable> = args => {
+const WithCustomInput: StoryFn<any> = args => {
   const [value, setValue] = useState('Add description');
   return (
-    <Editable {...args} onChange={val => setValue(val)} value={value}>
+    <Editable.Root {...args} onChange={val => setValue(val)} value={value}>
       <CustomEditableInput />
-    </Editable>
+    </Editable.Root>
   );
 };
 

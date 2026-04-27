@@ -1,13 +1,15 @@
 import { useCallback, useContext, useState } from 'react';
 
-import EditableProps from '@components/Editable/types';
+import EditableRootProps from '@components/Editable/types';
 import { EditableContext } from '@contexts';
 import { isFunction } from '@utils';
 
 /**
  * Hook that returns the EditableProvider props
  */
-export const useEditableProvider = (props: Omit<EditableProps, 'children'>) => {
+export const useEditableProvider = (
+  props: Omit<EditableRootProps, 'children'>
+) => {
   const { value, ...rest } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [isCustomEditable, setIsCustomEditableFunc] = useState(false);

@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-  EditableTextarea,
-} from '@components';
+import { Editable } from '@components';
 import {
   a11yTest,
   fireEvent,
@@ -15,23 +10,23 @@ import {
   waitFor,
 } from '@test-utils';
 
-import EditableProps from './types';
+import EditableRootProps from './types';
 
 describe('<Editable>', () => {
   describe('with <EditableInput>', () => {
-    function EditableInputTest(props: Partial<EditableProps>) {
+    function EditableInputTest(props: Partial<EditableRootProps>) {
       const [value, setValue] = useState('test');
       return (
         <div>
-          <Editable
+          <Editable.Root
             onChange={val => setValue(val)}
             placeholder="placeholder"
             value={value}
             {...props}
           >
-            <EditablePreview data-testid="preview" />
-            <EditableInput data-testid="input" />
-          </Editable>
+            <Editable.Preview data-testid="preview" />
+            <Editable.Input data-testid="input" />
+          </Editable.Root>
         </div>
       );
     }
@@ -62,7 +57,7 @@ describe('<Editable>', () => {
       function Test() {
         const [value, setValue] = React.useState('');
         return (
-          <Editable
+          <Editable.Root
             onChange={val => {
               setValue(val);
               mockChange(val);
@@ -72,9 +67,9 @@ describe('<Editable>', () => {
             onEdit={mockEdit}
             value={value}
           >
-            <EditablePreview data-testid="preview" />
-            <EditableInput data-testid="input" />
-          </Editable>
+            <Editable.Preview data-testid="preview" />
+            <Editable.Input data-testid="input" />
+          </Editable.Root>
         );
       }
 
@@ -84,7 +79,7 @@ describe('<Editable>', () => {
       const input = screen.getByTestId('input');
 
       // call 'onEdit' when the preview receives focused, which triggers
-      // the '<EditableInput>' component to receive focus
+      // the '<Editable.Input>' component to receive focus
       fireEvent.focus(preview);
       await waitFor(() => expect(mockEdit).toHaveBeenCalledWith());
 
@@ -138,20 +133,20 @@ describe('<Editable>', () => {
     });
   });
 
-  describe('with <EditableTextarea>', () => {
-    function EditableTextareaTest(props: Partial<EditableProps>) {
+  describe('with <Editable.Textarea>', () => {
+    function EditableTextareaTest(props: Partial<EditableRootProps>) {
       const [value, setValue] = useState('test');
       return (
         <div>
-          <Editable
+          <Editable.Root
             onChange={val => setValue(val)}
             value={value}
             placeholder="placeholder"
             {...props}
           >
-            <EditablePreview data-testid="preview" />
-            <EditableTextarea data-testid="textarea" />
-          </Editable>
+            <Editable.Preview data-testid="preview" />
+            <Editable.Textarea data-testid="textarea" />
+          </Editable.Root>
         </div>
       );
     }
@@ -182,7 +177,7 @@ describe('<Editable>', () => {
       function Test() {
         const [value, setValue] = React.useState('');
         return (
-          <Editable
+          <Editable.Root
             onChange={val => {
               setValue(val);
               mockChange(val);
@@ -192,9 +187,9 @@ describe('<Editable>', () => {
             onEdit={mockEdit}
             value={value}
           >
-            <EditablePreview data-testid="preview" />
-            <EditableTextarea data-testid="textarea" />
-          </Editable>
+            <Editable.Preview data-testid="preview" />
+            <Editable.Textarea data-testid="textarea" />
+          </Editable.Root>
         );
       }
 
@@ -204,7 +199,7 @@ describe('<Editable>', () => {
       const textarea = screen.getByTestId('textarea');
 
       // call 'onEdit' when the preview receives focused, which triggers
-      // the '<EditableTextarea>' component to receive focus
+      // the '<Editable.Textarea>' component to receive focus
       fireEvent.focus(preview);
       await waitFor(() => expect(mockEdit).toHaveBeenCalledWith());
 

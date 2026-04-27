@@ -5,7 +5,7 @@ import { isFunction, isNumber, isString } from '@utils';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface EditableTextareaProps extends SupernovaProps {
+export interface EditableTextareaProps extends SupernovaProps {
   /**
    * textarea cols attribue.
    */

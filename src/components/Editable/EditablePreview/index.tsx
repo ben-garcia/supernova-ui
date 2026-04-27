@@ -4,7 +4,7 @@ import { useCSSAndPseudoClassProps, useEditable } from '@hooks';
 import { isString } from '@utils';
 import { SupernovaProps } from '@types';
 
-interface EditablePreviewProps extends SupernovaProps {}
+export interface EditablePreviewProps extends SupernovaProps {}
 
 /**
  * The component that holds the preview content to be editable.

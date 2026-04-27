@@ -2,14 +2,14 @@ import React, { FC, PropsWithChildren, useMemo, useRef } from 'react';
 
 import { EditableProvider } from '@contexts';
 import { useCSSAndPseudoClassProps, useEditableProvider } from '@hooks';
-import EditableProps from './types';
+import EditableRootProps from './types';
 import './styles.scss';
 
 /**
  * The container for all Editable related components
  * that provides context for all subcomponents.
  */
-const Editable: FC<PropsWithChildren<EditableProps>> = props => {
+const EditableRoot: FC<PropsWithChildren<EditableRootProps>> = props => {
   const {
     children,
     isDisabled,
@@ -56,4 +56,4 @@ const Editable: FC<PropsWithChildren<EditableProps>> = props => {
   );
 };
 
-export default Editable;
+export default EditableRoot;

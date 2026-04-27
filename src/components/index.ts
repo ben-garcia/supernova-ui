@@ -7,7 +7,7 @@ export { default as Checkbox } from './Checkbox';
 export { default as Divider } from './Divider';
 export { default as Drawer } from './Drawer';
 
-export * from './Editable';
+export { default as Editable } from './Editable';
 export * from './FormControl';
 
 export { default as Heading } from './Heading';

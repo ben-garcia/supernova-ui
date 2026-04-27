@@ -5,7 +5,7 @@ import { isFunction, isString } from '@utils';
 import { SupernovaProps } from '@types';
 import './styles.scss';
 
-interface EditableInputProps extends SupernovaProps<'input'> {}
+export interface EditableInputProps extends SupernovaProps<'input'> {}
 
 /**
  * The component used to edit the previewed text by an input.
