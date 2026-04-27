@@ -5,6 +5,9 @@ import { decreaseThumbFromValue, isString } from '@utils';
 import { SliderThumbProps } from './types';
 import './styles.scss';
 
+/**
+ *  Component is the draggable handle that the user interacts.
+ */
 const SliderThumb: FC<SliderThumbProps> = props => {
   const {
     ariaDescribedBy,

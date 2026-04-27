@@ -1,13 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
-import React from 'react';
+import React, { useState } from 'react';
 
-import {
-  Box,
-  Slider,
-  SliderRail,
-  SliderFilledRail,
-  SliderThumb,
-} from '@components';
+import { Box, Slider } from '@components';
 
 export default {
   args: {
@@ -42,21 +36,21 @@ export default {
       control: { type: 'number', min: 1 },
     },
   },
-  component: Slider,
+  component: Slider.Root,
   title: 'Supernova UI/Form/Slider',
-} as Meta<typeof Slider>;
+} as Meta<typeof Slider.Root>;
 
-const Template: StoryFn<typeof Slider> = args => {
-  const [value, setValue] = React.useState(0);
+const Template: StoryFn<typeof Slider.Root> = args => {
+  const [value, setValue] = useState(0);
 
   return (
     <Box display="flex" justifyContent="center" width="150px" height="150px">
-      <Slider {...args} onChange={setValue} value={value}>
-        <SliderRail>
-          <SliderFilledRail />
-        </SliderRail>
-        <SliderThumb />
-      </Slider>
+      <Slider.Root {...args} onChange={setValue} value={value}>
+        <Slider.Rail>
+          <Slider.FilledRail />
+        </Slider.Rail>
+        <Slider.Thumb />
+      </Slider.Root>
     </Box>
   );
 };

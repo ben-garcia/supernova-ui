@@ -6,15 +6,13 @@ export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as Divider } from './Divider';
 export { default as Drawer } from './Drawer';
-
 export { default as Editable } from './Editable';
 export { default as FormControl } from './FormControl';
-
 export { default as Heading } from './Heading';
 
 export * from './Icon/Icons';
-export { default as Menu } from './Menu';
 
+export { default as Menu } from './Menu';
 export { default as Modal } from './Modal';
 export { default as Overlay } from './Overlay';
 export { default as Paragraph } from './Paragraph';
@@ -22,7 +20,8 @@ export { default as Portal } from './Portal';
 export { default as Popover } from './Popover';
 
 export * from './Radio';
-export * from './Slider';
+
+export { default as Slider } from './Slider';
 export { default as Spinner } from './Spinner';
 export { default as Switch } from './Switch';
 export { default as Tabs } from './Tabs';

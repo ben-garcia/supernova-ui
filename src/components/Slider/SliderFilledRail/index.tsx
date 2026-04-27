@@ -5,6 +5,10 @@ import { valueToPercent } from '@utils';
 import { SliderFilledRailProps } from './types';
 import './styles.scss';
 
+/**
+ * Component that represents the active or completed portion of the slider
+ * track.
+ */
 const SliderFilledRail: FC<SliderFilledRailProps> = props => {
   const { orientation, min, max, value } = useSlider();
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(

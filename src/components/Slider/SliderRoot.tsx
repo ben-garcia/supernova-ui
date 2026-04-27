@@ -2,10 +2,14 @@ import React, { FC, PropsWithChildren, useMemo } from 'react';
 
 import { SliderProvider } from '@contexts';
 import { useCSSAndPseudoClassProps, useUniqueId } from '@hooks';
-import { SliderProps } from './types';
+import { SliderRootProps } from './types';
 import './styles.scss';
 
-const Slider: FC<PropsWithChildren<SliderProps>> = props => {
+/**
+ * The container for all Slider related components
+ * that provides context to its children.
+ */
+const SliderRoot: FC<PropsWithChildren<SliderRootProps>> = props => {
   const {
     ariaDescribedBy,
     ariaLabel,
@@ -57,4 +61,4 @@ const Slider: FC<PropsWithChildren<SliderProps>> = props => {
   );
 };
 
-export default Slider;
+export default SliderRoot;

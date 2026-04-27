@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Slider, SliderRail, SliderFilledRail, SliderThumb } from '@components';
+import { Slider } from '@components';
 import {
   a11yTest,
   fireEvent,
@@ -10,25 +10,25 @@ import {
   waitFor,
 } from '@test-utils';
 
-import { SliderProps } from './types';
+import { SliderRootProps } from './types';
 
 describe('<Slider />', () => {
-  function SliderTest(props: Partial<SliderProps>) {
+  function SliderTest(props: Partial<SliderRootProps>) {
     const { value: valueProp } = props;
     const [value, setValue] = React.useState(valueProp || 0);
 
     return (
-      <Slider
+      <Slider.Root
         ariaLabel="This is a test"
         value={value}
         onChange={setValue}
         {...props}
       >
-        <SliderRail>
-          <SliderFilledRail />
-        </SliderRail>
-        <SliderThumb />
-      </Slider>
+        <Slider.Rail>
+          <Slider.FilledRail />
+        </Slider.Rail>
+        <Slider.Thumb />
+      </Slider.Root>
     );
   }
 

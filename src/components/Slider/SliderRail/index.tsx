@@ -4,6 +4,9 @@ import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
 import { SliderRailProps } from './types';
 import './styles.scss';
 
+/**
+ * Visual background track on which the slider operates.
+ */
 const SliderRail: FC<PropsWithChildren<SliderRailProps>> = props => {
   const { children, ...rest } = props;
   const { max, min, onChange, orientation, sliderId, size, step } = useSlider();
