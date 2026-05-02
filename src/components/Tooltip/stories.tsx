@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
 
-import { Box, Button, Tooltip } from '@components';
+import { Box, Button, Tooltip, AddIcon } from '@components';
 import { colors } from '@utils';
 
 const parameters = {
@@ -91,6 +91,20 @@ const WithButtonTemplate: StoryFn<typeof Tooltip> = args => (
 export const WithButton = {
   render: WithButtonTemplate,
   args: { label: 'this is a Button' },
+  parameters,
+};
+
+const WithIconTemplate: StoryFn<typeof Tooltip> = args => (
+  <Box>
+    <Tooltip {...args}>
+      <AddIcon />
+    </Tooltip>
+  </Box>
+);
+
+export const WithIcon = {
+  render: WithIconTemplate,
+  args: { label: 'this is an Icon' },
   parameters,
 };
 

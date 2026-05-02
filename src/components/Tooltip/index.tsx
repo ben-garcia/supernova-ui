@@ -9,17 +9,15 @@ import React, {
   useCallback,
 } from 'react';
 
-import { Portal } from '@components';
-import {
-  useCalculatePosition,
-  useCSSAndPseudoClassProps,
-  useInlineStyles,
-  useMountTransition,
-  useTheme,
-  useUniqueId,
-} from '@hooks';
-import { isString } from '@utils';
-import { TooltipProps } from './types';
+import Portal from '@components/Portal';
+import { useCalculatePosition } from '@hooks/use-calculate-position';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useInlineStyles } from '@hooks/use-inline-styles';
+import { useMountTransition } from '@hooks/use-mount-transition';
+import { useTheme } from '@hooks/use-theme';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isString } from '@utils/assertions';
+import type { TooltipProps } from './types';
 import './styles.scss';
 
 // CSS transition duration in milliseconds - must match the transition time in styles.scss
