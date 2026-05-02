@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 
-import { Button, CloseIcon } from '@components';
-import { useModal } from '@hooks';
+import Button from '@components/Button';
+import CloseIcon from '@components/Icon/Icons/CloseIcon';
+import { useModal } from '@hooks/use-modal';
 import './styles.scss';
 
 /**

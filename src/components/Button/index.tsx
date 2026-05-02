@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Spinner } from '@components';
-import { useCSSAndPseudoClassProps, useInlineStyles } from '@hooks';
-import { getChildrenCount, forwardRef, isObject, isString } from '@utils';
-import { ButtonProps } from './types';
+import Spinner from '@components/Spinner';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useInlineStyles } from '@hooks/use-inline-styles';
+import { isObject, isString } from '@utils/assertions';
+import { getChildrenCount, forwardRef } from '@utils/react';
+import type { ButtonProps } from './types';
 import './styles.scss';
 
 /**

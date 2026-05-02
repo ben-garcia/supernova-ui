@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { isFunction } from '@utils';
+import { isFunction } from '@utils/assertions';
 
 /**
  * React hook that calls a function on 'resize' event.

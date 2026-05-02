@@ -1,9 +1,10 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
 
-import { useCSSAndPseudoClassProps, useMenu, useMenuList } from '@hooks';
-import { forwardRef, isFunction } from '@utils';
-import { SupernovaProps } from '@types';
-
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useMenu, useMenuList } from '@hooks/use-menu';
+import { isFunction } from '@utils/assertions';
+import { forwardRef } from '@utils/react';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface MenuItemProps extends SupernovaProps {

@@ -6,10 +6,11 @@ import React, {
   useRef,
 } from 'react';
 
-import { TabListProvider } from '@contexts';
-import { useCSSAndPseudoClassProps, useTabs } from '@hooks';
-import { isString } from '@utils';
-import { SupernovaProps } from '@types';
+import { TabListProvider } from '@contexts/tabs/TabListProvider';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useTabs } from '@hooks/use-tabs';
+import { isString } from '@utils/assertions';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface TabListProps extends SupernovaProps {}

@@ -1,19 +1,13 @@
 import { useCallback, useContext, useMemo, useRef } from 'react';
 
-import { ClassContext } from '@contexts';
-import { useSafeEffect, useTheme, useUniqueStringId } from '@hooks';
-import {
-  addCSSPrefixes,
-  addStyleToDOM,
-  cssCamelCaseToHyphenated,
-  isArray,
-  isElementInDOM,
-  isNumber,
-  isObject,
-  isString,
-  removeStyleFromDOM,
-} from '@utils';
-import { CSSProps, CSSPropsHyphen } from '@types';
+import { ClassContext } from '@contexts/class/ClassProvider';
+import { useTheme } from '@hooks/use-theme';
+import { useUniqueStringId } from '@hooks/use-unique-id';
+import { useSafeEffect } from '@hooks/use-safe-effect';
+import { isArray, isNumber, isObject, isString } from '@utils/assertions';
+import { addStyleToDOM, isElementInDOM, removeStyleFromDOM } from '@utils/dom';
+import { addCSSPrefixes, cssCamelCaseToHyphenated } from '@utils/conversions';
+import type { CSSProps, CSSPropsHyphen } from '@types';
 
 /**
  * Hook that returns the ClassProvider context.

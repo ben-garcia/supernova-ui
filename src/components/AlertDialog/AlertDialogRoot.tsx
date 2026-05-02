@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react';
 
-import { Portal } from '@components';
-import { AlertDialogProvider } from '@contexts';
-import { useAlertDialogProvider } from '@hooks';
-import { DialogLikeProps } from '@types';
+import Portal from '@components/Portal';
+import { AlertDialogProvider } from '@contexts/alert-dialog/AlertDialogProvider';
+import { useAlertDialogProvider } from '@hooks/use-alert-dialog';
+import type { DialogLikeProps } from '@types';
 
 export interface AlertDialogRootProps extends DialogLikeProps {
   /**

@@ -1,12 +1,10 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import {
-  useCSSAndPseudoClassProps,
-  useMenu,
-  useCreateClassString,
-} from '@hooks';
-import { isString } from '@utils';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useMenu } from '@hooks/use-menu';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { isString } from '@utils/assertions';
+import type { SupernovaProps } from '@types';
 
 export interface MenuGroupProps extends SupernovaProps {
   /*

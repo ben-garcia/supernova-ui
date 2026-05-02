@@ -1,18 +1,16 @@
 import React, { useMemo, useState } from 'react';
 
-import { CheckmarkIcon } from '@components';
-import {
-  useClassStyles,
-  useCreateClassString,
-  useFormControl,
-  usePseudoClasses,
-  useTheme,
-  useUniqueId,
-  useValidateProps,
-} from '@hooks';
-import { forwardRef, isFunction, isString } from '@utils';
-
-import { CheckboxProps } from './types';
+import CheckmarkIcon from '@components/Icon/Icons/CheckmarkIcon';
+import { useClassStyles } from '@hooks/use-class';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useFormControl } from '@hooks/use-form-control';
+import { usePseudoClasses } from '@hooks/use-style';
+import { useTheme } from '@hooks/use-theme';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { useValidateProps } from '@hooks/use-validate-props';
+import { isFunction, isString } from '@utils/assertions';
+import { forwardRef } from '@utils/react';
+import type { CheckboxProps } from './types';
 import './styles.scss';
 
 /**

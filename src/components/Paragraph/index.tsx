@@ -1,8 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-import { isString } from '@utils';
-import { ParagraphProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { isString } from '@utils/assertions';
+import type { ParagraphProps } from './types';
 import './styles.scss';
 
 /**

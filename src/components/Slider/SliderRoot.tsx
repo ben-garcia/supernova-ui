@@ -1,8 +1,9 @@
 import React, { FC, PropsWithChildren, useMemo } from 'react';
 
-import { SliderProvider } from '@contexts';
-import { useCSSAndPseudoClassProps, useUniqueId } from '@hooks';
-import { SliderRootProps } from './types';
+import { SliderProvider } from '@contexts/slider/SliderProvider';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useUniqueId } from '@hooks/use-unique-id';
+import type { SliderRootProps } from './types';
 import './styles.scss';
 
 /**

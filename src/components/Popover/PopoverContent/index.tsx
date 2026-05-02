@@ -7,14 +7,12 @@ import React, {
   useRef,
 } from 'react';
 
-import {
-  useCalculatePosition,
-  useCSSAndPseudoClassProps,
-  usePopover,
-  useResize,
-} from '@hooks';
-import { SharedAnchorPositioningProps, SupernovaProps } from '@types';
-import { isFunction, isString } from '@utils';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useCalculatePosition } from '@hooks/use-calculate-position';
+import { usePopover } from '@hooks/use-popover';
+import { useResize } from '@hooks/use-resize';
+import { isFunction, isString } from '@utils/assertions';
+import type { SharedAnchorPositioningProps, SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface PopoverContentProps

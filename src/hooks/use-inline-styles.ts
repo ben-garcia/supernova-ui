@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { useTheme } from '@hooks';
-import { isDarkColor } from '@utils';
+import { useTheme } from '@hooks/use-theme';
+import { isDarkColor } from '@utils/colors';
 
 import { ColorVariant } from '@types';
 

@@ -1,8 +1,8 @@
 import React, { FC, PropsWithChildren, Children } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-import { isString } from '@utils';
-import { RadioGroupProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { isString } from '@utils/assertions';
+import type { RadioGroupProps } from './types';
 
 /**
  * UI component used as a wrapper for Radio components

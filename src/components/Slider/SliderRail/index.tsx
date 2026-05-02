@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren, useRef } from 'react';
 
-import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
-import { SliderRailProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useSlider } from '@hooks/use-slider';
+import type { SliderRailProps } from './types';
 import './styles.scss';
 
 /**

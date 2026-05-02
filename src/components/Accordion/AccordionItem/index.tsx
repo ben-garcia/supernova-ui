@@ -1,13 +1,10 @@
 import React, { FC, PropsWithChildren, useMemo } from 'react';
 
-import { AccordionItemProvider } from '@contexts';
-import {
-  useAccordionItemProvider,
-  useAccordion,
-  useCSSAndPseudoClassProps,
-  useUniqueIds,
-} from '@hooks';
-import { SupernovaProps } from '@types';
+import { AccordionItemProvider } from '@contexts/accordion/AccordionItemProvider';
+import { useAccordionItemProvider, useAccordion } from '@hooks/use-accordion';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useUniqueIds } from '@hooks/use-unique-id';
+import type { SupernovaProps } from '@types';
 
 export interface AccordionItemProps
   extends FC<PropsWithChildren>, SupernovaProps {}

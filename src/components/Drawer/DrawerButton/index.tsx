@@ -1,9 +1,11 @@
 import React, { MouseEvent, useCallback } from 'react';
 
-import { Button } from '@components';
-import { ButtonProps } from '@components/Button/types';
-import { useCreateClassString, useDrawer } from '@hooks';
-import { forwardRef, isFunction, isString } from '@utils';
+import Button from '@components/Button';
+import type { ButtonProps } from '@components/Button/types';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useDrawer } from '@hooks/use-drawer';
+import { isFunction, isString } from '@utils/assertions';
+import { forwardRef } from '@utils/react';
 
 export type DrawerButtonProps = ButtonProps;
 

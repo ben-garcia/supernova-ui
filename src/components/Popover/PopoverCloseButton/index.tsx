@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 
-import { Button, CloseIcon } from '@components';
-import { usePopover } from '@hooks';
+import Button from '@components/Button';
+import CloseIcon from '@components/Icon/Icons/CloseIcon';
+import { usePopover } from '@hooks/use-popover';
 import './styles.scss';
 
 /**

@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 
-import { isFunction } from '@utils';
+import { isFunction } from '@utils/assertions';
 
-import { FocusLockProps } from './types';
+import type { FocusLockProps } from './types';
 
 /**
  * Component that locks the focus to its children.

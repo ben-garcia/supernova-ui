@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import { Button, CloseIcon } from '@components';
-import { useAlertDialog } from '@hooks';
-
+import Button from '@components/Button';
+import CloseIcon from '@components/Icon/Icons/CloseIcon';
+import { useAlertDialog } from '@hooks/use-alert-dialog';
 import './styles.scss';
 
 /**

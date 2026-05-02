@@ -8,14 +8,12 @@ import React, {
   useState,
 } from 'react';
 
-import { AccordionProvider } from '@contexts';
-import {
-  useAccordionProvider,
-  useCSSAndPseudoClassProps,
-  useUniqueId,
-} from '@hooks';
-import { isArray } from '@utils';
-import { AccordionRootProps } from './types';
+import { AccordionProvider } from '@contexts/accordion/AccordionProvider';
+import { useAccordionProvider } from '@hooks/use-accordion';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isArray } from '@utils/assertions';
+import type { AccordionRootProps } from './types';
 
 /**
  * The container for all Accordion related components

@@ -1,9 +1,10 @@
 import { HTMLAttributes, useCallback, useContext } from 'react';
 
 import { AlertDialogRootProps } from '@components/AlertDialog/AlertDialogRoot';
-import { AlertDialogContext } from '@contexts';
-import { useUniqueId } from '@hooks';
-import { createClasses, isString } from '@utils';
+import { AlertDialogContext } from '@contexts/alert-dialog/AlertDialogProvider';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isString } from '@utils/assertions';
+import { createClasses } from '@utils/create-classes';
 
 /** Hooks that returns the AlertDialog props
  */

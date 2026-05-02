@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { Overlay } from '@components';
-import { useModal } from '@hooks';
+import Overlay from '@components/Overlay';
+import { useModal } from '@hooks/use-modal';
 
 /**
  * The overlay for the Modal component.

@@ -1,9 +1,9 @@
 import React, { FC, MutableRefObject, PropsWithChildren, useMemo } from 'react';
 
-import { PopoverProvider } from '@contexts';
-import { usePopoverProvider } from '@hooks';
+import { PopoverProvider } from '@contexts/popover/PopoverProvider';
+import { usePopoverProvider } from '@hooks/use-popover';
 
-import { DialogLikeProps } from '@types';
+import type { DialogLikeProps } from '@types';
 
 export interface PopoverRootProps extends Omit<
   DialogLikeProps,

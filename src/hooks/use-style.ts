@@ -1,15 +1,14 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
-import { useUniqueStringId } from '@hooks';
-import { PseudoClassesAndElements, StyleClass, StyleContext } from '@contexts';
-import {
-  addStyleToDOM,
-  addCSSPrefixes,
-  cssCamelCaseToHyphenated,
-  isObject,
-  isString,
-  removeStyleFromDOM,
-} from '@utils';
+import { useUniqueStringId } from '@hooks/use-unique-id';
+import { StyleContext } from '@contexts/style/StyleProvider';
+import type {
+  StyleClass,
+  PseudoClassesAndElements,
+} from '@contexts/style/types';
+import { isObject, isString } from '@utils/assertions';
+import { addStyleToDOM, removeStyleFromDOM } from '@utils/dom';
+import { addCSSPrefixes, cssCamelCaseToHyphenated } from '@utils/conversions';
 
 import type { CSSProps, PseudoProps } from '@types';
 

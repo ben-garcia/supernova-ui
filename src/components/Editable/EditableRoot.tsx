@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren, useMemo, useRef } from 'react';
 
-import { EditableProvider } from '@contexts';
-import { useCSSAndPseudoClassProps, useEditableProvider } from '@hooks';
+import { EditableProvider } from '@contexts/editable/EditableProvider';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useEditableProvider } from '@hooks/use-editable';
 import EditableRootProps from './types';
 import './styles.scss';
 

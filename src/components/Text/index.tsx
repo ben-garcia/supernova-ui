@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-import { createElement } from '@utils';
-import { TextProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { createElement } from '@utils/react';
+import type { TextProps } from './types';
 import './styles.scss';
 
 /**

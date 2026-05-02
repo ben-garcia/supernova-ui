@@ -1,8 +1,9 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 
-import { useCSSAndPseudoClassProps, useEditable } from '@hooks';
-import { isFunction, isString } from '@utils';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useEditable } from '@hooks/use-editable';
+import { isFunction, isString } from '@utils/assertions';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface EditableInputProps extends SupernovaProps<'input'> {}

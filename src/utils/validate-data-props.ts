@@ -1,4 +1,4 @@
-import { isFunction } from '@utils';
+import { isFunction } from '@utils/assertions';
 
 /**
  * Filter for data and aria attributes.

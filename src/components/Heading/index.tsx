@@ -1,8 +1,9 @@
 import type { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-import { createElement, isString } from '@utils';
-import { HeadingProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { isString } from '@utils/assertions';
+import { createElement } from '@utils/react';
+import type { HeadingProps } from './types';
 import './styles.scss';
 
 /**

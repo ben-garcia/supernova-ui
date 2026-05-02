@@ -1,8 +1,10 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 
-import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
-import { decreaseThumbFromValue, isString } from '@utils';
-import { SliderThumbProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useSlider } from '@hooks/use-slider';
+import { isString } from '@utils/assertions';
+import { decreaseThumbFromValue } from '@utils/conversions';
+import type { SliderThumbProps } from './types';
 import './styles.scss';
 
 /**

@@ -1,9 +1,9 @@
 import React, { ReactNode, createContext, useMemo, useReducer } from 'react';
 
-import { Portal } from '@components';
+import Portal from '@components/Portal';
 import Notification from '@components/Notification';
 import reducer from './reducer';
-import {
+import type {
   Notification as NotificationType,
   NotificationAction,
   NotificationState,

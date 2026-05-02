@@ -1,14 +1,12 @@
 import React, { useState, useMemo } from 'react';
 
-import { useCSSAndPseudoClassProps, useFormControl, useUniqueId } from '@hooks';
-import {
-  createClasses,
-  forwardRef,
-  isFunction,
-  isObject,
-  isString,
-} from '@utils';
-import { TextInputProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useFormControl } from '@hooks/use-form-control';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isFunction, isObject, isString } from '@utils/assertions';
+import { forwardRef } from '@utils/react';
+import { createClasses } from '@utils/create-classes';
+import type { TextInputProps } from './types';
 import './styles.scss';
 
 /**

@@ -1,6 +1,7 @@
 import { FC, ForwardRefExoticComponent, PropsWithChildren } from 'react';
 
-import { Button, Overlay } from '@components';
+import Button from '@components/Button';
+import Overlay from '@components/Overlay';
 import DrawerRoot, { DrawerRootProps } from './DrawerRoot';
 import DrawerBody, { DrawerBodyProps } from './DrawerBody';
 import DrawerButton, { DrawerButtonProps } from './DrawerButton';

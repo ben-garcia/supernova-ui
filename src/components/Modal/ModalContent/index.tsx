@@ -1,9 +1,11 @@
 import React, { FC, PropsWithChildren, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
-import { useCSSAndPseudoClassProps, useModal, useScrollLock } from '@hooks';
-import { SupernovaProps } from '@types';
-import { isString } from '@utils';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useModal } from '@hooks/use-modal';
+import { useScrollLock } from '@hooks/use-scroll-lock';
+import { isString } from '@utils/assertions';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export type ModalContentProps = Omit<SupernovaProps, 'id'>;

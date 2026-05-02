@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react';
 
-import { Portal } from '@components';
-import { ModalProvider } from '@contexts';
-import { useModalProvider } from '@hooks';
-import { DialogLikeProps } from '@types';
+import Portal from '@components/Portal';
+import { ModalProvider } from '@contexts/modal/ModalProvider';
+import { useModalProvider } from '@hooks/use-modal';
+import type { DialogLikeProps } from '@types';
 
 export interface ModalRootProps extends DialogLikeProps {
   /**

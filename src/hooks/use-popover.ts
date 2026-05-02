@@ -1,9 +1,11 @@
 import { HTMLAttributes, useCallback, useContext, useRef } from 'react';
 
-import { PopoverRootProps } from '@components/Popover/PopoverRoot';
-import { PopoverContext } from '@contexts';
-import { useUniqueId } from '@hooks';
-import { createClasses, isString, mergeRefs } from '@utils';
+import { PopoverContext } from '@contexts/popover/PopoverProvider';
+import type { PopoverRootProps } from '@components/Popover/PopoverRoot';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isString } from '@utils/assertions';
+import { mergeRefs } from '@utils/react';
+import { createClasses } from '@utils/create-classes';
 
 /**
  * React hook that returns the Popover props.

@@ -1,17 +1,15 @@
 import React, { useMemo, useState } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  useFormControl,
-  usePseudoClasses,
-  useTheme,
-  useUniqueId,
-  useValidateProps,
-} from '@hooks';
-import { forwardRef, isFunction, isString } from '@utils';
-
-import { SwitchProps } from './types';
+import { useValidateProps } from '@hooks/use-validate-props';
+import { useTheme } from '@hooks/use-theme';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useFormControl } from '@hooks/use-form-control';
+import { useClassStyles } from '@hooks/use-class';
+import { usePseudoClasses } from '@hooks/use-style';
+import { isFunction, isString } from '@utils/assertions';
+import { forwardRef } from '@utils/react';
+import type { SwitchProps } from './types';
 import './styles.scss';
 
 /**

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { Overlay } from '@components';
-import { useAlertDialog } from '@hooks';
+import Overlay from '@components/Overlay';
+import { useAlertDialog } from '@hooks/use-alert-dialog';
 
 /**
  * The overlay for the AlertDialog component.

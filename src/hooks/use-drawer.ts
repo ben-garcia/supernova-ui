@@ -1,9 +1,10 @@
 import { HTMLAttributes, useCallback, useContext } from 'react';
 
 import { DrawerRootProps } from '@components/Drawer/DrawerRoot';
-import { DrawerContext } from '@contexts';
-import { useUniqueId } from '@hooks';
-import { createClasses, isString } from '@utils';
+import { DrawerContext } from '@contexts/drawer/DrawerProvider';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isString } from '@utils/assertions';
+import { createClasses } from '@utils/create-classes';
 
 /** Hooks that returns the Drawer state
  */

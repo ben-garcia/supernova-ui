@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps, useModal } from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useModal } from '@hooks/use-modal';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface ModalBodyProps extends SupernovaProps {}

@@ -1,11 +1,11 @@
 import { useCallback, useContext } from 'react';
 
-import { isFunction } from '@utils';
-import { NotificationContext } from '../contexts/notification/NotificationProvider';
-import {
+import { isFunction } from '@utils/assertions';
+import { NotificationContext } from '@contexts/notification/NotificationProvider';
+import type {
   AddNotificationProps,
   NotificationActionTypes,
-} from '../contexts/notification/types';
+} from '@contexts/notification/types';
 
 export const useNotification = () => {
   const { dispatch } = useContext(NotificationContext);

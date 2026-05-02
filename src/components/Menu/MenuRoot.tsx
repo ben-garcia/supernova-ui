@@ -6,10 +6,10 @@ import React, {
   useState,
 } from 'react';
 
-import { MenuProvider } from '@contexts';
-import { useMenuProvider, useUniqueId } from '@hooks';
-
-import { MenuRootProps } from './types';
+import { MenuProvider } from '@contexts/menu/MenuProvider';
+import { useMenuProvider } from '@hooks/use-menu';
+import { useUniqueId } from '@hooks/use-unique-id';
+import type { MenuRootProps } from './types';
 
 /**
  * The container for all Menu related components

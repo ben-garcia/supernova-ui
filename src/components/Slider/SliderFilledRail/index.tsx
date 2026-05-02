@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 
-import { useCSSAndPseudoClassProps, useSlider } from '@hooks';
-import { valueToPercent } from '@utils';
-import { SliderFilledRailProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useSlider } from '@hooks/use-slider';
+import { valueToPercent } from '@utils/conversions';
+import type { SliderFilledRailProps } from './types';
 import './styles.scss';
 
 /**

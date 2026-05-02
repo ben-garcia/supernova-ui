@@ -6,15 +6,13 @@ import React, {
   useMemo,
 } from 'react';
 
-import { useCSSAndPseudoClassProps, useFormControl, useUniqueId } from '@hooks';
-import {
-  createClasses,
-  forwardRef,
-  isFunction,
-  isString,
-  mergeRefs,
-} from '@utils';
-import { TextareaProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useFormControl } from '@hooks/use-form-control';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { isFunction, isString } from '@utils/assertions';
+import { forwardRef, mergeRefs } from '@utils/react';
+import { createClasses } from '@utils/create-classes';
+import type { TextareaProps } from './types';
 import './styles.scss';
 
 /**

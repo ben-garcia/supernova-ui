@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface TabPanelListProps extends SupernovaProps {}

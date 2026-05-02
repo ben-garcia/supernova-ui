@@ -7,14 +7,17 @@ import React, {
   useRef,
 } from 'react';
 
-import { Button, ChevronDownIcon, Heading } from '@components';
-import { ButtonProps } from '@components/Button/types';
+import Button from '@components/Button';
+import ChevronDownIcon from '@components/Icon/Icons/ChevronDownIcon';
+import Heading from '@components/Heading';
+import type { ButtonProps } from '@components/Button/types';
 import {
   useAccordionItemProvider,
   useAccordion,
   useAccordionItem,
-} from '@hooks';
-import { createClasses, isString } from '@utils';
+} from '@hooks/use-accordion';
+import { createClasses } from '@utils/create-classes';
+import { isString } from '@utils/assertions';
 import './styles.scss';
 
 export interface AccordionHeaderButtonProps extends ButtonProps {

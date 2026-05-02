@@ -1,9 +1,11 @@
 import React, { MouseEvent, useCallback } from 'react';
 
-import { Button } from '@components';
-import { ButtonProps } from '@components/Button/types';
-import { useCreateClassString, useModal } from '@hooks';
-import { forwardRef, isFunction, isString } from '@utils';
+import Button from '@components/Button';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useModal } from '@hooks/use-modal';
+import { isFunction, isString } from '@utils/assertions';
+import { forwardRef } from '@utils/react';
+import type { ButtonProps } from '@components/Button/types';
 
 export type ModalButtonProps = ButtonProps;
 

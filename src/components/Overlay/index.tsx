@@ -1,8 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-
-import { OverlayProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import type { OverlayProps } from './types';
 import './styles.scss';
 
 /**

@@ -1,12 +1,10 @@
 import { useCallback } from 'react';
 
-import {
-  useClassStyles,
-  useCreateClassString,
-  usePseudoClasses,
-  useValidateProps,
-} from '@hooks';
-import { isString } from '@utils';
+import { useClassStyles } from '@hooks/use-class';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useValidateProps } from '@hooks/use-validate-props';
+import { usePseudoClasses } from '@hooks/use-style';
+import { isString } from '@utils/assertions';
 
 interface ClassesToAdd {
   [k: string]: boolean;

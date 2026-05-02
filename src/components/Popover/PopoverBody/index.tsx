@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps, usePopover } from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { usePopover } from '@hooks/use-popover';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface PopoverBodyProps extends SupernovaProps {}

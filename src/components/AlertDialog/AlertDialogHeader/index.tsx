@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useAlertDialog, useCSSAndPseudoClassProps } from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useAlertDialog } from '@hooks/use-alert-dialog';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface AlertDialogHeaderProps extends SupernovaProps {}

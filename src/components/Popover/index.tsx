@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Button } from '@components';
+import Button from '@components/Button';
 import PopoverRoot, { PopoverRootProps } from './PopoverRoot';
 import PopoverBody, { PopoverBodyProps } from './PopoverBody';
 import PopoverCloseButton from './PopoverCloseButton';

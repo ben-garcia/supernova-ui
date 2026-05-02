@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 
-import { IdContext } from '../contexts';
+import { IdContext } from '@contexts/unique-id/IdProvider';
 
 /**
  * React hooks that generates a unique string id.

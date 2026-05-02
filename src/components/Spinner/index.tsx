@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 
-import { useCSSAndPseudoClassProps, useTheme } from '@hooks';
-import { isString } from '@utils';
-import { SpinnerProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useTheme } from '@hooks/use-theme';
+import { isString } from '@utils/assertions';
+import type { SpinnerProps } from './types';
 import './styles.scss';
 
 /**

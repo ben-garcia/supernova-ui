@@ -1,6 +1,7 @@
 import { FC, ForwardRefExoticComponent, PropsWithChildren } from 'react';
 
-import { Button, Overlay } from '@components';
+import Button from '@components/Button';
+import Overlay from '@components/Overlay';
 import AlertDialogRoot, { AlertDialogRootProps } from './AlertDialogRoot';
 import AlertDialogBody, { AlertDialogBodyProps } from './AlertDialogBody';
 import AlertDialogButton, { AlertDialogButtonProps } from './AlertDialogButton';

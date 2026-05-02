@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps, useDrawer } from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useDrawer } from '@hooks/use-drawer';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface DrawerHeaderProps extends SupernovaProps {}

@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps } from '@hooks';
-import { createElement } from '@utils';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { createElement } from '@utils/react';
+import type { SupernovaProps } from '@types';
 
 type Tag = 'article' | 'div' | 'footer' | 'header' | 'section';
 export interface BoxProps extends SupernovaProps {

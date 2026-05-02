@@ -1,6 +1,7 @@
 import { FC, ForwardRefExoticComponent, PropsWithChildren } from 'react';
 
-import { Button, Overlay } from '@components';
+import Button from '@components/Button';
+import Overlay from '@components/Overlay';
 import ModalRoot, { ModalRootProps } from './ModalRoot';
 import ModalBody, { ModalBodyProps } from './ModalBody';
 import ModalButton, { ModalButtonProps } from './ModalButton';

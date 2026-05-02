@@ -1,21 +1,16 @@
 import React, { useMemo, useRef } from 'react';
 
-import {
-  ClassProvider,
-  IdProvider,
-  NotificationProvider,
-  StyleProvider,
-} from '@contexts';
-import { deepMergify } from '@utils';
-
+import { ClassProvider } from '@contexts/class/ClassProvider';
+import { StyleProvider } from '@contexts/style/StyleProvider';
+import { NotificationProvider } from '@contexts/notification/NotificationProvider';
+import { IdProvider } from '@contexts/unique-id/IdProvider';
+import { deepMergify } from '@utils/deep-mergify';
 import { ThemeProvider, ThemeProviderProps } from '../theme';
 import { theme as defaultTheme } from '../../theme';
+import type { SupernovaProviderProps } from './types';
 
-import { SupernovaProviderProps } from './types';
-
-/**
- * The top level provider that contains all other providers
- * needed for the components to function properly.
+/** The top level provider that contains all other providers needed for the
+ * components to function properly.
  */
 export function SupernovaProvider(props: SupernovaProviderProps) {
   const { theme, children } = props;
@@ -23,9 +18,7 @@ export function SupernovaProvider(props: SupernovaProviderProps) {
     () => (theme ? deepMergify(defaultTheme, theme) : defaultTheme),
     [theme]
   );
-  const countRef = useRef({
-    count: 0,
-  });
+  const countRef = useRef({ count: 0 });
   const classesRef = useRef([]);
   const styleClassesRef = useRef([]);
 

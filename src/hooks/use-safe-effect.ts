@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect } from 'react';
 
-import { isBrowser } from '@utils';
+import { isBrowser } from '@utils/dom';
 
 /**
  * React hooks that returns 'useLayoutEffet' when running in a browser

@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react';
 
-import { Portal } from '@components';
-import { DrawerProvider } from '@contexts';
-import { useDrawerProvider } from '@hooks';
-import { DialogLikeProps } from '@types';
+import Portal from '@components/Portal';
+import { DrawerProvider } from '@contexts/drawer/DrawerProvider';
+import { useDrawerProvider } from '@hooks/use-drawer';
+import type { DialogLikeProps } from '@types';
 
 export interface DrawerRootProps extends DialogLikeProps {
   /**

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { Overlay } from '@components';
-import { useDrawer } from '@hooks';
+import Overlay from '@components/Overlay';
+import { useDrawer } from '@hooks/use-drawer';
 
 /**
  * The overlay for the Drawer component.

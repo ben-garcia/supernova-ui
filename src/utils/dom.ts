@@ -1,6 +1,6 @@
 // helper functions to interact with the DOM.
 
-import { isArray, isString } from '@utils';
+import { isArray, isString } from '@utils/assertions';
 
 /**
  * Add a <style> element to the end of the <head> element.

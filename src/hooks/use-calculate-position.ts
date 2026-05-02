@@ -1,7 +1,11 @@
 import { MutableRefObject, useCallback, useEffect, useState } from 'react';
 
-import { ArrowPosition, FloatingPlacement } from '@types';
-import { calculateArrowPosition, calcTransformOrigin, handlePos } from '@utils';
+import {
+  calculateArrowPosition,
+  calcTransformOrigin,
+  handlePos,
+} from '@utils/position';
+import type { ArrowPosition, FloatingPlacement } from '@types';
 
 /**
  * React hook that handles the logic to calculate the position

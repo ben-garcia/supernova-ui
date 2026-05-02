@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
 
-import { usePopover } from '@hooks';
-import { isFunction } from '@utils';
+import { usePopover } from '@hooks/use-popover';
+import { isFunction } from '@utils/assertions';
 
 export interface PopoverTriggerProps {
   children: React.ReactNode;

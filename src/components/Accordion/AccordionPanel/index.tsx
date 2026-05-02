@@ -1,11 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import {
-  useAccordionItem,
-  useAccordionProvider,
-  useCSSAndPseudoClassProps,
-} from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useAccordionItem, useAccordionProvider } from '@hooks/use-accordion';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface AccordionPanelProps

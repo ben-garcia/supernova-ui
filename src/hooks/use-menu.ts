@@ -1,8 +1,9 @@
 import React, { useCallback, useContext, useRef } from 'react';
 
 import { MenuRootProps } from '@components/Menu/types';
-import { MenuContext, MenuListContext } from '@contexts';
-import { isFunction } from '@utils';
+import { MenuContext } from '@contexts/menu/MenuProvider';
+import { MenuListContext } from '@contexts/menu/MenuListProvider';
+import { isFunction } from '@utils/assertions';
 
 /**
  * credit https://github.com/chakra-ui/chakra-ui/blob/53d0d0cfec7b4404fd2bc123991352f81bd39a82/packages/react-utils/src/refs.ts#L34

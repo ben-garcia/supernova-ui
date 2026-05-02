@@ -1,8 +1,9 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { useCSSAndPseudoClassProps, useInlineStyles } from '@hooks';
-import { isString } from '@utils';
-import { TagProps } from './types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useInlineStyles } from '@hooks/use-inline-styles';
+import { isString } from '@utils/assertions';
+import type { TagProps } from './types';
 import './styles.scss';
 
 /**

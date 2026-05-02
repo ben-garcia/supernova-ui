@@ -1,9 +1,10 @@
 import React, { useCallback, FC } from 'react';
 
-import { Button } from '@components';
-import { ButtonProps } from '@components/Button/types';
-import { useMenu } from '@hooks';
-import { createClasses, isString } from '@utils';
+import Button from '@components/Button';
+import type { ButtonProps } from '@components/Button/types';
+import { useMenu } from '@hooks/use-menu';
+import { isString } from '@utils/assertions';
+import { createClasses } from '@utils/create-classes';
 
 export interface MenuButtonProps extends ButtonProps {}
 

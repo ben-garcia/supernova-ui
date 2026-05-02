@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { SliderContext } from '@contexts';
+import { SliderContext } from '@contexts/slider/SliderProvider';
 
 /**
  * Hooks that returns all Slider props

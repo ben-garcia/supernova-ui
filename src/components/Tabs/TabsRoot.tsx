@@ -6,15 +6,13 @@ import React, {
   useState,
 } from 'react';
 
-import { TabsProvider } from '@contexts';
-import {
-  useCSSAndPseudoClassProps,
-  useUniqueId,
-  useTabsProvider,
-  useTheme,
-} from '@hooks';
-import { isString } from '@utils';
-import { TabsRootProps } from './types';
+import { TabsProvider } from '@contexts/tabs/TabsProvider';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { useTheme } from '@hooks/use-theme';
+import { useTabsProvider } from '@hooks/use-tabs';
+import { isString } from '@utils/assertions';
+import type { TabsRootProps } from './types';
 import './styles.scss';
 
 /**

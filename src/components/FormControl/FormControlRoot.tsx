@@ -1,13 +1,11 @@
 import React, { FC, PropsWithChildren, useMemo } from 'react';
 
-import { FormControlProvider } from '@contexts';
-import {
-  useCSSAndPseudoClassProps,
-  useFormControlProvider,
-  useUniqueId,
-} from '@hooks';
-import { createElement } from '@utils';
-import { FormControlRootProps } from './types';
+import { FormControlProvider } from '@contexts/form-control/FormControlProvider';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useFormControlProvider } from '@hooks/use-form-control';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { createElement } from '@utils/react';
+import type { FormControlRootProps } from './types';
 import './styles.scss';
 
 /**

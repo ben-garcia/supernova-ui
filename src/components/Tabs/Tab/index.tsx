@@ -7,14 +7,11 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  useCSSAndPseudoClassProps,
-  useTabList,
-  useTabs,
-  useTheme,
-} from '@hooks';
-import { isString } from '@utils';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useTheme } from '@hooks/use-theme';
+import { useTabList, useTabs } from '@hooks/use-tabs';
+import { isString } from '@utils/assertions';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export interface TabProps extends SupernovaProps {}

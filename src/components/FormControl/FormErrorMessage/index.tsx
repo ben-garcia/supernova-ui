@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
 
-import { useCSSAndPseudoClassProps, useFormControl } from '@hooks';
-import { forwardRef } from '@utils';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useFormControl } from '@hooks/use-form-control';
+import { forwardRef } from '@utils/react';
+import type { SupernovaProps } from '@types';
 
 export interface FormErrorMessageProps extends SupernovaProps {
   children: ReactNode;

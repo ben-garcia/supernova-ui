@@ -1,13 +1,11 @@
 import React, { FC, PropsWithChildren, useEffect } from 'react';
 
 import FocusLock from '@components/FocusLock';
-import {
-  useAlertDialog,
-  useCSSAndPseudoClassProps,
-  useScrollLock,
-} from '@hooks';
-import { SupernovaProps } from '@types';
-import { isString } from '@utils';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useAlertDialog } from '@hooks/use-alert-dialog';
+import { useScrollLock } from '@hooks/use-scroll-lock';
+import { isString } from '@utils/assertions';
+import type { SupernovaProps } from '@types';
 import './styles.scss';
 
 export type AlertDialogContentProps = Omit<SupernovaProps, 'id'>;

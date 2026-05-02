@@ -7,8 +7,9 @@ import React, {
   useState,
 } from 'react';
 
-import { useCSSAndPseudoClassProps, useTabs } from '@hooks';
-import { SupernovaProps } from '@types';
+import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useTabs } from '@hooks/use-tabs';
+import type { SupernovaProps } from '@types';
 
 export interface TabPanelProps extends SupernovaProps {}
 
