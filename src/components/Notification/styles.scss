@@ -54,6 +54,17 @@
     pointer-events: none; // Prevent interaction during exit
   }
 
+  &__icon-container {
+    margin-top: 0.3rem;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    margin: 0 var(--snui-space-sm);
+  }
+
   &__title {
     font-family: var(--snui-font-heading);
     font-size: var(--snui-font-size-md);
@@ -70,13 +81,9 @@
   &__close-button.snui-button {
     border: none;
     box-shadow: none;
-    height: auto;
     padding-inline-end: 0;
     padding-inline-start: 0;
-    position: absolute;
-    right: 1rem;
-    top: 0.5rem; // Adjusted for better centering
-    width: auto;
+    margin-top: -0.3rem;
 
     &:hover {
       background: none;

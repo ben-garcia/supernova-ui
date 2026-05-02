@@ -1,16 +1,21 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
-import {
-  Button,
-  CheckmarkIcon,
-  CloseIcon,
-  HelpIcon,
-  InfoIcon,
-} from '@components';
-import { NotificationContext } from '@contexts';
-import { useTheme } from '@hooks';
-import { isFunction } from '@utils';
-import { NotificationProps } from '@components/Notification/types';
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+} from 'react';
 
+import Button from '@components/Button';
+import CheckmarkIcon from '@components/Icon/Icons/CheckmarkIcon';
+import CloseIcon from '@components/Icon/Icons/CloseIcon';
+import HelpIcon from '@components/Icon/Icons/HelpIcon';
+import InfoIcon from '@components/Icon/Icons/InfoIcon';
+import type { NotificationProps } from '@components/Notification/types';
+import { NotificationContext } from '@contexts/notification/NotificationProvider';
+import { useTheme } from '@hooks/use-theme';
+import { isFunction } from '@utils/assertions';
 import './styles.scss';
 
 // Configuration mapping to keep the component body clean
@@ -21,7 +26,7 @@ const STATUS_MAP = {
   info: { icon: InfoIcon, colorKey: 'info600' },
 };
 
-const Notification: React.FC<NotificationProps> = ({
+const Notification: FC<NotificationProps> = ({
   duration = 5000,
   id,
   isCloseable = true,
@@ -34,7 +39,7 @@ const Notification: React.FC<NotificationProps> = ({
   backgroundColor,
 }) => {
   const theme = useTheme();
-  const { dispatch } = React.useContext(NotificationContext);
+  const { dispatch } = useContext(NotificationContext);
 
   const [progressbarWidth, setProgressbarWidth] = useState(100);
   const [isExiting, setIsExiting] = useState(false);
@@ -123,7 +128,7 @@ const Notification: React.FC<NotificationProps> = ({
       {isFunction(render) ? (
         render!(isCloseable ? handleManualClose : () => {})
       ) : (
-        <div className="snui-notification__inner snui-flex">
+        <div className="snui-flex">
           <div className="snui-notification__icon-container">
             <StatusIcon
               color="var(--snui-color-white)"
@@ -133,7 +138,7 @@ const Notification: React.FC<NotificationProps> = ({
             />
           </div>
 
-          <div className="snui-flex snui-flex-column snui-margin-right-sm">
+          <div className="snui-notification__inner">
             <strong className="snui-notification__title">{title}</strong>
             <p className="snui-notification__message">{message}</p>
           </div>
