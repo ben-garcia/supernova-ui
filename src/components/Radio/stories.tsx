@@ -41,20 +41,32 @@ const parameters = {
 };
 const label = 'Reveal your secrets?';
 
-const Template: StoryFn<typeof Radio> = args => {
+export const Basic = {
+  args: { label },
+  parameters,
+};
+
+const ControlledTemplate: StoryFn<typeof Radio> = args => {
   const [checked, setChecked] = React.useState(false);
   return (
-    <Radio
-      onChange={e => setChecked(e.target.checked)}
-      isChecked={checked}
-      {...args}
-    />
+    <>
+      <Radio
+        {...args}
+        isChecked={checked}
+        onChange={e => setChecked(e.target.checked)}
+        label={label}
+      />
+      <Paragraph>{`checked: ${JSON.stringify(checked)}`}</Paragraph>
+    </>
   );
 };
 
-export const Basic = {
-  render: Template,
-  args: { label },
+export const Controlled = {
+  render: ControlledTemplate,
+  args: {
+    label,
+  },
+
   parameters,
 };
 
@@ -86,6 +98,7 @@ const RadioGroupTemplate: StoryFn<any> = args => {
           <Radio label="vue" value="vue" />
         </RadioGroup>
       </Box>
+      <Paragraph>{`checked: ${JSON.stringify(framework)}`}</Paragraph>
     </Box>
   );
 };

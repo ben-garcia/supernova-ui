@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { useUniqueId } from '@hooks/use-unique-id';
 import { useValidateProps } from '@hooks/use-validate-props';
@@ -39,7 +39,6 @@ const Radio = forwardRef<RadioProps, HTMLInputElement>((props, ref) => {
     isRequired,
   } = useFormControl();
   const { colors } = useTheme();
-  const [radioIsChecked, setRadioIsChecked] = useState(isChecked);
   const radioId = useUniqueId('snui-radio');
   const addControlClasses = useCreateClassString('snui snui-radio__control', {
     [`${className}`]: isString(className),
@@ -67,27 +66,22 @@ const Radio = forwardRef<RadioProps, HTMLInputElement>((props, ref) => {
     labelIds.push(`${fieldId}-helper-text`);
   }
 
-  useEffect(() => {
-    setRadioIsChecked(isChecked);
-  }, [isChecked]);
-
   return (
     // eslint-disable-next-line
     <label {...addLabelClasses()}>
       <input
         {...remainingProps}
-        aria-checked={radioIsChecked || formControlIsDisabled}
+        aria-checked={isChecked || formControlIsDisabled}
         aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
-        checked={radioIsChecked || formControlIsDisabled}
+        checked={isChecked || formControlIsDisabled}
         className="snui-hidden-radio snui-visually-hidden"
         disabled={isDisabled}
         id={radioId}
         onChange={e => {
-          if (!isDisabled) {
-            if (isFunction(props?.onChange)) {
-              props.onChange!(e);
-            }
-            setRadioIsChecked(e.target.checked);
+          if (isDisabled) return;
+
+          if (isFunction(props?.onChange)) {
+            props.onChange!(e);
           }
         }}
         ref={ref}
@@ -98,7 +92,7 @@ const Radio = forwardRef<RadioProps, HTMLInputElement>((props, ref) => {
       <span
         {...addControlClasses()}
         style={
-          radioIsChecked && isString(colorVariant)
+          isChecked && isString(colorVariant)
             ? { backgroundColor: colors[colorVariant!] }
             : undefined
         }
