@@ -60,7 +60,6 @@ const ControlledTemplate: StoryFn<typeof Checkbox> = args => {
 
 export const Controlled = {
   render: ControlledTemplate,
-
   args: {
     label,
   },

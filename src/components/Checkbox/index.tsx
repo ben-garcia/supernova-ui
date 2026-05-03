@@ -61,10 +61,13 @@ const Checkbox = forwardRef<CheckboxProps, HTMLInputElement>((props, ref) => {
       isString(size) && !props.height && !props.width,
     'snui-disabled': isDisabled,
   });
-  const handleToggleCheck = () => {
-    if (!isDisabled) {
-      setCheckboxIsChecked(!checkboxIsChecked);
+  const handleToggleCheck = (e: any) => {
+    if (isDisabled) return;
+
+    if (isFunction(props?.onChange)) {
+      props.onChange!(e);
     }
+    setCheckboxIsChecked(!checkboxIsChecked);
   };
   const labelIds: string[] = [];
 
@@ -88,12 +91,12 @@ const Checkbox = forwardRef<CheckboxProps, HTMLInputElement>((props, ref) => {
         disabled={isDisabled}
         id={checkboxId}
         onChange={e => {
-          if (!isDisabled) {
-            if (isFunction(props?.onChange)) {
-              props.onChange!(e);
-            }
-            setCheckboxIsChecked(e.target.checked);
+          if (isDisabled) return;
+
+          if (isFunction(props?.onChange)) {
+            props.onChange!(e);
           }
+          setCheckboxIsChecked(e.target.checked);
         }}
         ref={ref}
         type="checkbox"
@@ -122,11 +125,7 @@ const Checkbox = forwardRef<CheckboxProps, HTMLInputElement>((props, ref) => {
 
       {isString(label) && (
         // eslint-disable-next-line
-        <label
-          {...addLabelClasses()}
-          htmlFor={checkboxId}
-          onClick={handleToggleCheck}
-        >
+        <label {...addLabelClasses()} htmlFor={checkboxId}>
           {label}
           {isRequired && isString(label) && (
             <span aria-hidden="true" className="snui-error" role="presentation">
