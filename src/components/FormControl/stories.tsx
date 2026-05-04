@@ -4,7 +4,6 @@ import React from 'react';
 import {
   Checkbox,
   RadioGroup,
-  Radio,
   Switch,
   Textarea,
   TextInput,
@@ -54,11 +53,11 @@ const WithRadioGroupTemplate: StoryFn<typeof FormControl.Root> = args => {
   const [answer, setAnswer] = React.useState('3.14159');
   return (
     <FormControl.Root {...args}>
-      <RadioGroup onChange={setAnswer} defaultValue={answer} name="answer">
-        <Radio label="3.14195" value="3.14195" />
-        <Radio label="3.15149" value="3.15249" />
-        <Radio label="3.14159" value="3.14159" />
-      </RadioGroup>
+      <RadioGroup.Root onChange={setAnswer} value={answer} name="answer">
+        <RadioGroup.Item label="3.14195" value="3.14195" />
+        <RadioGroup.Item label="3.15149" value="3.15249" />
+        <RadioGroup.Item label="3.14159" value="3.14159" />
+      </RadioGroup.Root>
       <FormControl.HelperText>
         Choose the correct value of PI
       </FormControl.HelperText>

@@ -7,7 +7,7 @@ import { useFormControl } from '@hooks/use-form-control';
 import { useCreateClassString } from '@hooks/use-create-class';
 import { usePseudoClasses } from '@hooks/use-style';
 import { useClassStyles } from '@hooks/use-class';
-import { isFunction, isString } from '@utils/assertions';
+import { isString } from '@utils/assertions';
 import { forwardRef } from '@utils/react';
 import type { RadioGroupItemProps } from './types';
 import './styles.scss';
@@ -78,13 +78,6 @@ const RadioGroupItem = forwardRef<RadioGroupItemProps, HTMLInputElement>(
           className="snui-hidden-radio snui-visually-hidden"
           disabled={isDisabled}
           id={radioId}
-          onChange={e => {
-            if (isDisabled) return;
-
-            if (isFunction(props?.onChange)) {
-              props.onChange!(e);
-            }
-          }}
           ref={ref}
           type="radio"
         />

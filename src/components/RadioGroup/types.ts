@@ -7,7 +7,7 @@ import { SupernovaProps } from '@types';
  */
 export interface RadioGroupRootProps extends SupernovaProps {
   /**
-   * Configure the default Radio component to be checked by matching
+   * Configure the defaultValue Radio component to be checked by matching
    * this value to the value prop of one of it's children
    */
   defaultValue?: string;
@@ -31,4 +31,9 @@ export interface RadioGroupRootProps extends SupernovaProps {
    *
    */
   onChange?: Dispatch<SetStateAction<string>>;
+  /**
+   * A string specifying the default value of the <input> element.
+   * use when using controlled component.
+   */
+  value?: string;
 }
