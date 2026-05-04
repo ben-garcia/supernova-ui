@@ -3,9 +3,9 @@ import { Dispatch, SetStateAction } from 'react';
 import { SupernovaProps } from '@types';
 
 /**
- * Props for the RadioGroup component
+ * Props for the RadioGroupRoot component
  */
-export interface RadioGroupProps extends SupernovaProps {
+export interface RadioGroupRootProps extends SupernovaProps {
   /**
    * Configure the default Radio component to be checked by matching
    * this value to the value prop of one of it's children

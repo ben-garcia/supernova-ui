@@ -18,9 +18,7 @@ export { default as Overlay } from './Overlay';
 export { default as Paragraph } from './Paragraph';
 export { default as Portal } from './Portal';
 export { default as Popover } from './Popover';
-
-export * from './Radio';
-
+export { default as RadioGroup } from './RadioGroup';
 export { default as Slider } from './Slider';
 export { default as Spinner } from './Spinner';
 export { default as Switch } from './Switch';

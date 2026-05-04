@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { Radio, RadioGroup } from '@components';
+import { RadioGroup } from '@components';
 import { a11yTest, fireEvent, render, waitFor } from '@test-utils';
 
-describe('<GroupRadio />', () => {
+describe('<RadioGroup />', () => {
   function TestRadioGroup() {
     const [value, setValue] = React.useState('one');
     return (
-      <RadioGroup
+      <RadioGroup.Root
         data-testid="radiogroup"
         defaultValue={value}
         name="testing"
         onChange={setValue}
       >
-        <Radio label="one" value="one" />
-      </RadioGroup>
+        <RadioGroup.Item label="one" value="one" />
+      </RadioGroup.Root>
     );
   }
 
@@ -48,9 +48,9 @@ describe('<GroupRadio />', () => {
       // eslint-disable-next-line
       const [_, setValue] = React.useState('one');
       return (
-        <RadioGroup name="testing" onChange={setValue}>
-          <Radio label="one" value="one" />
-        </RadioGroup>
+        <RadioGroup.Root name="testing" onChange={setValue}>
+          <RadioGroup.Item label="one" value="one" />
+        </RadioGroup.Root>
       );
     }
     const { getByLabelText } = render(<RadioGroupTest />);
@@ -61,11 +61,11 @@ describe('<GroupRadio />', () => {
   it('should manage state for uncontrolled children', () => {
     function RadioGroupTest() {
       return (
-        <RadioGroup name="testing" defaultValue="two">
-          <Radio label="one" value="one" />
-          <Radio label="two" value="two" />
-          <Radio label="three" value="three" />
-        </RadioGroup>
+        <RadioGroup.Root name="testing" defaultValue="two">
+          <RadioGroup.Item label="one" value="one" />
+          <RadioGroup.Item label="two" value="two" />
+          <RadioGroup.Item label="three" value="three" />
+        </RadioGroup.Root>
       );
     }
     const { getByLabelText } = render(<RadioGroupTest />);
@@ -83,11 +83,15 @@ describe('<GroupRadio />', () => {
     const mockHandler = jest.fn();
     function Test() {
       return (
-        <RadioGroup defaultValue="one" name="testing" onChange={mockHandler}>
-          <Radio label="one" value="one" />
-          <Radio label="two" value="two" />
-          <Radio label="three" value="three" />
-        </RadioGroup>
+        <RadioGroup.Root
+          defaultValue="one"
+          name="testing"
+          onChange={mockHandler}
+        >
+          <RadioGroup.Item label="one" value="one" />
+          <RadioGroup.Item label="two" value="two" />
+          <RadioGroup.Item label="three" value="three" />
+        </RadioGroup.Root>
       );
     }
     const { getByLabelText } = render(<Test />);
@@ -111,8 +115,7 @@ describe('<GroupRadio />', () => {
         let input = rootNode.querySelector('input:not(:disabled):checked');
 
         if (input) {
-          // if one is found,
-          // set focus to that input
+          // if one is found, set focus to that input
           input.focus();
           return;
         }
@@ -132,11 +135,11 @@ describe('<GroupRadio />', () => {
             focus
           </button>
           <div data-testid="radiogroup-parent" ref={ref}>
-            <RadioGroup name="testing" defaultValue={defaultValue}>
-              <Radio label="one" isDisabled value="one" />
-              <Radio label="two" value="two" />
-              <Radio label="three" value="three" />
-            </RadioGroup>
+            <RadioGroup.Root name="testing" defaultValue={defaultValue}>
+              <RadioGroup.Item label="one" isDisabled value="one" />
+              <RadioGroup.Item label="two" value="two" />
+              <RadioGroup.Item label="three" value="three" />
+            </RadioGroup.Root>
           </div>
         </>
       );

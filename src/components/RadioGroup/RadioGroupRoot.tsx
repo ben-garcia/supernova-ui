@@ -2,14 +2,12 @@ import React, { FC, PropsWithChildren, Children } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
 import { isString } from '@utils/assertions';
-import type { RadioGroupProps } from './types';
+import type { RadioGroupRootProps } from './types';
 
 /**
  * UI component used as a wrapper for Radio components
- *
- * injects 'name', 'onChange' handler, and 'isChecked' props to its children
  */
-const RadioGroup: FC<PropsWithChildren<RadioGroupProps>> = props => {
+const RadioGroupRoot: FC<PropsWithChildren<RadioGroupRootProps>> = props => {
   const {
     children,
     defaultValue,
@@ -47,4 +45,4 @@ const RadioGroup: FC<PropsWithChildren<RadioGroupProps>> = props => {
   );
 };
 
-export default RadioGroup;
+export default RadioGroupRoot;
