@@ -55,7 +55,7 @@ describe('<TextInput />', () => {
   it('should call the onChange handler', () => {
     const mockOnClickHandler = jest.fn();
     const { getByLabelText } = render(
-      <TextInput label={label} onChange={mockOnClickHandler} />
+      <TextInput label={label} value="value" onChange={mockOnClickHandler} />
     );
     const result = getByLabelText(label);
 
