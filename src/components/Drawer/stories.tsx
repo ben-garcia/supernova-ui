@@ -102,7 +102,7 @@ const FinalFocusRefTemplate: StoryFn<DrawerRootProps> = args => {
           <Drawer.CloseButton />
           <Drawer.Body>
             <form>
-              <TextInput label="Email" ref={initialFocusRef} type="email" />
+              <TextInput label="Username" ref={initialFocusRef} />
               <TextInput label="Password" type="password" />
             </form>
           </Drawer.Body>

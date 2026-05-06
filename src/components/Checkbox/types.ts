@@ -6,7 +6,9 @@ import type { FormControlProps, SupernovaProps } from '@types';
  * Props for the Checkbox component
  */
 export interface CheckboxProps
-  extends SupernovaProps<'input'>, Omit<FormControlProps, 'variant'> {
+  extends
+    Omit<SupernovaProps<'input'>, 'type'>,
+    Omit<FormControlProps, 'variant'> {
   /**
    * The visible helper text that describes the radio input option
    *

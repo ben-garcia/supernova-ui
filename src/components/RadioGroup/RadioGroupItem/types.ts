@@ -6,7 +6,9 @@ import { FormControlProps, SupernovaProps } from '@types';
  * Props for the Radio component
  */
 export interface RadioGroupItemProps
-  extends SupernovaProps<'input'>, Omit<FormControlProps, 'variant'> {
+  extends
+    Omit<SupernovaProps<'input'>, 'type'>,
+    Omit<FormControlProps, 'variant'> {
   /**
    * The visible helper text that describes the radio input option
    */

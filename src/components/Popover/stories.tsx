@@ -162,7 +162,7 @@ const FinalFocusRefTemplate: StoryFn<PopoverRootProps> = args => {
 
           <Popover.Body>
             <form>
-              <TextInput label="Email" ref={initialFocusRef} type="email" />
+              <TextInput label="Email" ref={initialFocusRef} />
               <TextInput label="Password" type="password" />
             </form>
           </Popover.Body>

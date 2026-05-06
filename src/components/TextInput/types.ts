@@ -6,7 +6,7 @@ import { FormControlProps, SupernovaProps } from '@types';
  * Props for the TextInput component
  */
 export interface TextInputProps
-  extends SupernovaProps<'input'>, FormControlProps {
+  extends Omit<SupernovaProps<'input'>, 'type'>, FormControlProps {
   /**
    * The HTML label to be associated with the input.
    */
@@ -19,4 +19,10 @@ export interface TextInputProps
    * Icon to the right of the Button text
    */
   rightIcon?: ReactNode;
+  /**
+   * HTML input type attribute
+   *
+   * @default 'text'
+   */
+  type?: 'email' | 'password' | 'text';
 }
