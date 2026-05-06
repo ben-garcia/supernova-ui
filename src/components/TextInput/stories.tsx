@@ -1,8 +1,14 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
-import TextInput from '.';
-import { UserIcon, SearchIcon } from '../Icon/Icons';
+import {
+  Box,
+  Button,
+  Paragraph,
+  SearchIcon,
+  TextInput,
+  UserIcon,
+} from '@components';
 
 export default {
   args: {
@@ -39,35 +45,74 @@ const parameters = {
   },
 };
 
-export const Basic = {
-  args: { label },
+const ControlledTemplate: StoryFn<typeof TextInput> = args => {
+  const [value, setValue] = useState('');
+  return (
+    <Box width="250px">
+      <TextInput
+        {...args}
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        label={label}
+      />
+      <Paragraph>{`value: ${JSON.stringify(value)}`}</Paragraph>
+    </Box>
+  );
+};
+
+export const Controlled = {
+  render: ControlledTemplate,
+  args: {
+    label,
+  },
   parameters,
 };
 
-const WithIconsTemplate: StoryFn<typeof TextInput> = args => (
-  <TextInput {...args} />
-);
-const WithIcons = WithIconsTemplate.bind({});
-WithIcons.args = {
-  label,
-  leftIcon: <UserIcon height="100%" width="100" />,
-  rightIcon: <SearchIcon height="100%" width="100" />,
+const UncontrolledTemplate: StoryFn<typeof TextInput> = args => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [value, setValue] = useState('');
+  const handleClick = () => setValue(inputRef.current!.value);
+  return (
+    <Box width="250px">
+      <TextInput {...args} ref={inputRef} defaultValue="val" label={label} />
+      <Button onClick={handleClick}>Get Value</Button>
+      <Paragraph>{`value: ${value}`}</Paragraph>
+    </Box>
+  );
+};
+
+export const Uncontrolled = {
+  render: UncontrolledTemplate,
+  args: {
+    label,
+  },
+  parameters,
+};
+
+export const WithIcons = {
+  render: ControlledTemplate,
+  args: {
+    label,
+    leftIcon: <UserIcon height="100%" width="100" />,
+    rightIcon: <SearchIcon height="100%" width="100" />,
+  },
+  parameters,
 };
 
 export const WithLeftIcon = {
+  render: ControlledTemplate,
   args: {
     label,
     leftIcon: <UserIcon height="100%" width="100" />,
   },
-
   parameters,
 };
 
 export const WithRightIcon = {
+  render: ControlledTemplate,
   args: {
     label,
     rightIcon: <SearchIcon height="100%" width="100" />,
   },
-
   parameters,
 };

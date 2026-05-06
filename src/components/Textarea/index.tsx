@@ -1,12 +1,7 @@
-import React, {
-  KeyboardEvent,
-  useCallback,
-  useRef,
-  useState,
-  useMemo,
-} from 'react';
+import React, { KeyboardEvent, useCallback, useRef, useMemo } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useDualModeInput } from '@hooks/use-dual-mode-input';
 import { useFormControl } from '@hooks/use-form-control';
 import { useUniqueId } from '@hooks/use-unique-id';
 import { isFunction, isString } from '@utils/assertions';
@@ -21,11 +16,12 @@ import './styles.scss';
 const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
   (props, ref) => {
     const {
+      defaultValue,
       isAutoResize = true,
       isDisabled = false,
       label,
-      placeholder,
-      value,
+      placeholder, // required for label animation
+      value: valueProp,
       variant = 'outline',
       ...rest
     } = props;
@@ -38,7 +34,11 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
       isRequired,
     } = useFormControl();
 
-    const [textareaValue, setTextareaValue] = useState(value || '');
+    const { value, setInternalValue, isControlled } = useDualModeInput({
+      defaultValue,
+      name: 'Textarea',
+      value: valueProp,
+    });
     const uniqueId = useUniqueId('snui-text-input');
     const textareaId = useMemo(
       () => (isString(fieldId) ? fieldId : uniqueId),
@@ -89,11 +89,14 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
           disabled={isDisabled || formControlIsDisabled}
           id={textareaId}
           onChange={e => {
-            if (!isDisabled) {
-              if (isFunction(props.onChange)) {
-                props.onChange!(e);
-              }
-              setTextareaValue(e.target.value);
+            if (isDisabled) return;
+            // Update internal state if uncontrolled
+            if (!isControlled) {
+              setInternalValue(e.target.value);
+            }
+
+            if (isFunction(props?.onChange)) {
+              props.onChange!(e);
             }
           }}
           onKeyUp={e => {
@@ -105,6 +108,7 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
               props.onKeyUp!(e);
             }
           }}
+          // Label animation relies on placeholder not being empty
           placeholder={isString(placeholder) ? placeholder : ' '}
           ref={mergeRefs(textareaRef, ref)}
           style={
@@ -112,7 +116,7 @@ const Textarea = forwardRef<TextareaProps, HTMLTextAreaElement>(
               ? { border: '2px solid var(--snui-color-error500)' }
               : undefined
           }
-          value={textareaValue}
+          value={value as string}
         />
 
         {isString(label) && (

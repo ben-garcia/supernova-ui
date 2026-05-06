@@ -4,11 +4,10 @@ import React, {
   Children,
   ReactNode,
   cloneElement,
-  useEffect,
-  useState,
 } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useDualModeInput } from '@hooks/use-dual-mode-input';
 import { isString } from '@utils/assertions';
 import type { RadioGroupRootProps } from './types';
 
@@ -20,32 +19,18 @@ const RadioGroupRoot: FC<PropsWithChildren<RadioGroupRootProps>> = props => {
   const {
     children,
     defaultValue,
-    value,
+    value: valueProp,
     orientation = 'row',
     name,
     onChange = () => {},
     ...rest
   } = props;
 
-  // Determine if this is controlled or uncontrolled mode
-  const isControlled = value !== undefined;
-  // Internal state for uncontrolled mode
-  const [internalValue, setInternalValue] = useState<string | undefined>(
-    defaultValue
-  );
-  // Use value if controlled, otherwise use internal state
-  const currentValue = isControlled ? value : internalValue;
-
-  // Validate against using both controlled and uncontrolled modes.
-  useEffect(() => {
-    if (value !== undefined && defaultValue !== undefined) {
-      // eslint-disable-next-line
-      console.warn(
-        '<RadioGroup>: Do not specify both "value" and "defaultValue". ' +
-          'Use "value" for controlled mode or "defaultValue" for uncontrolled mode.'
-      );
-    }
-  }, [value, defaultValue]);
+  const { value, setInternalValue, isControlled } = useDualModeInput({
+    defaultValue,
+    name: 'RadioGroup',
+    value: valueProp,
+  });
 
   // children with the added props to be rendered
   const enhancedChildren: ReactNode[] = [];
@@ -59,7 +44,7 @@ const RadioGroupRoot: FC<PropsWithChildren<RadioGroupRootProps>> = props => {
       return;
     }
     const newChild = cloneElement(child, {
-      isChecked: currentValue === childValue,
+      isChecked: value === childValue,
       name,
       onChange: () => {
         // Update internal state if uncontrolled

@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
+import { useDualModeInput } from '@hooks/use-dual-mode-input';
 import { useFormControl } from '@hooks/use-form-control';
 import { useUniqueId } from '@hooks/use-unique-id';
 import { isFunction, isObject, isString } from '@utils/assertions';
@@ -14,13 +15,14 @@ import './styles.scss';
  */
 const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
   const {
-    value,
+    defaultValue,
     isDisabled = false,
     label,
     leftIcon,
-    placeholder,
+    placeholder, // required for label animation
     rightIcon,
     size = 'md',
+    value: valueProp,
     variant = 'outline',
     ...rest
   } = props;
@@ -33,7 +35,11 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
     isRequired,
   } = useFormControl();
   const uniqueId = useUniqueId('snui-text-input');
-  const [inputValue, setInputValue] = useState(value || '');
+  const { value, setInternalValue, isControlled } = useDualModeInput({
+    defaultValue,
+    name: 'TextInput',
+    value: valueProp,
+  });
   const inputId = useMemo(() => (isString(fieldId) ? fieldId : uniqueId), []);
   const wrapperClasses = createClasses('snui-text-input-wrapper', {
     [`snui-text-input-wrapper--${size}`]: isString(size),
@@ -89,13 +95,17 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
         disabled={isDisabled || formControlIsDisabled}
         id={inputId}
         onChange={e => {
-          if (!isDisabled) {
-            if (isFunction(props?.onChange)) {
-              props.onChange!(e);
-            }
-            setInputValue(e.target.value);
+          if (isDisabled) return;
+          // Update internal state if uncontrolled
+          if (!isControlled) {
+            setInternalValue(e.target.value);
+          }
+
+          if (isFunction(props?.onChange)) {
+            props.onChange!(e);
           }
         }}
+        // Label animation relies on placeholder not being empty
         placeholder={isString(placeholder) ? placeholder : ' '}
         ref={ref}
         style={
@@ -103,7 +113,7 @@ const TextInput = forwardRef<TextInputProps, HTMLInputElement>((props, ref) => {
             ? { border: '2px solid var(--snui-color-error500)' }
             : undefined
         }
-        value={inputValue}
+        value={value as string}
       />
       {isObject(rightIcon) && (
         <div

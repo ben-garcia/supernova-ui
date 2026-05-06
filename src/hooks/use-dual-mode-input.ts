@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 
-interface UseDualModeProps {
+interface UseDualModeInputProps {
   /**
    * The current value of state. Indicates controlled mode.
    */
-  value?: boolean;
+  value?: boolean | string | number | readonly string[];
   /**
    * The initial value of the input. Indicates uncontrolled mode.
    */
-  defaultValue?: string;
+  defaultValue?: boolean | string | number | readonly string[];
   /**
    * Name of the input component.
    */
@@ -19,17 +19,17 @@ interface UseDualModeProps {
  * Hook that detects whether form input fields are used in controlled or
  * uncontrolled mode.
  */
-function useDualMode({
+export function useDualModeInput({
   value: controlled,
   defaultValue,
   name,
-}: UseDualModeProps) {
+}: UseDualModeInputProps) {
   // Determine if this is controlled or uncontrolled mode
   const isControlled = controlled !== undefined;
   // Internal state for uncontrolled mode
-  const [internalValue, setInternalValue] = useState<string | undefined>(
-    defaultValue
-  );
+  const [internalValue, setInternalValue] = useState<
+    boolean | string | number | readonly string[] | undefined
+  >(defaultValue);
   // Use value if controlled, otherwise use internal state
   const currentValue = isControlled ? controlled : internalValue;
   // Move this to the top level
@@ -40,8 +40,8 @@ function useDualMode({
     if (controlled !== undefined && defaultValue !== undefined) {
       // eslint-disable-next-line
       console.warn(
-        `<${name}>: Do not specify both "value" and "defaultValue".
-          Use "value" for controlled mode or "defaultValue" for uncontrolled mode.`
+        `<${name}>: Do not specify both "value/checked" and "defaultChecked/defaultValue".
+          Use "value/checked" for controlled mode or "defaultChecked/defaultValue" for uncontrolled mode.`
       );
     }
   }, [controlled, defaultValue]);
@@ -57,7 +57,5 @@ function useDualMode({
     wasControlledRef.current = isControlled;
   }, [isControlled]);
 
-  return [currentValue, setInternalValue, isControlled];
+  return { value: currentValue, setInternalValue, isControlled };
 }
-
-export default useDualMode;

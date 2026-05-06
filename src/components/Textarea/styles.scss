@@ -54,6 +54,7 @@
   transition: transform 150ms ease-in, font-size 150ms ease-in;
 }
 
+// Floating label magic
 .snui-textarea:focus ~ .snui-textarea-label,
 .snui-textarea:not(:placeholder-shown).snui-textarea:not(:focus) ~ .snui-textarea-label {
   background-color: var(--snui-color-white);

@@ -1,12 +1,13 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
-import { useValidateProps } from '@hooks/use-validate-props';
-import { useTheme } from '@hooks/use-theme';
-import { useUniqueId } from '@hooks/use-unique-id';
-import { useCreateClassString } from '@hooks/use-create-class';
-import { useFormControl } from '@hooks/use-form-control';
 import { useClassStyles } from '@hooks/use-class';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useDualModeInput } from '@hooks/use-dual-mode-input';
+import { useFormControl } from '@hooks/use-form-control';
 import { usePseudoClasses } from '@hooks/use-style';
+import { useUniqueId } from '@hooks/use-unique-id';
+import { useTheme } from '@hooks/use-theme';
+import { useValidateProps } from '@hooks/use-validate-props';
 import { isFunction, isString } from '@utils/assertions';
 import { forwardRef } from '@utils/react';
 import type { SwitchProps } from './types';
@@ -17,9 +18,11 @@ import './styles.scss';
  * */
 const Switch = forwardRef<SwitchProps, HTMLInputElement>((props, ref) => {
   const {
+    checked,
     className,
     colorVariant,
-    isChecked = false,
+    defaultChecked,
+    isChecked,
     isDisabled = false,
     label,
     size = 'md',
@@ -38,7 +41,11 @@ const Switch = forwardRef<SwitchProps, HTMLInputElement>((props, ref) => {
     isRequired,
   } = useFormControl();
   const { colors } = useTheme();
-  const [switchIsChecked, setSwitchIsChecked] = useState(isChecked);
+  const { value, setInternalValue, isControlled } = useDualModeInput({
+    defaultValue: defaultChecked,
+    name: 'Switch',
+    value: checked || isChecked,
+  });
   const uniqueId = useUniqueId('snui-checkbox');
   const switchId = useMemo(() => (isString(fieldId) ? fieldId : uniqueId), []);
   const addControlClasses = useCreateClassString('snui snui-switch__control', {
@@ -80,19 +87,23 @@ const Switch = forwardRef<SwitchProps, HTMLInputElement>((props, ref) => {
 
       <input
         {...remainingProps}
-        aria-checked={switchIsChecked || formControlIsDisabled}
+        aria-checked={(value as boolean) || formControlIsDisabled}
         aria-describedby={labelIds.length ? labelIds.join(' ') : undefined}
         aria-invalid={isInvalid ?? undefined}
-        checked={switchIsChecked || formControlIsDisabled}
+        checked={(value as boolean) || formControlIsDisabled}
         className="snui-hidden-switch snui-visually-hidden"
         disabled={isDisabled}
         id={switchId}
         onChange={e => {
-          if (!isDisabled) {
-            if (isFunction(props?.onChange)) {
-              props.onChange!(e);
-            }
-            setSwitchIsChecked(e.target.checked);
+          if (isDisabled) return;
+
+          // Update internal state if uncontrolled
+          if (!isControlled) {
+            setInternalValue(e.target.checked);
+          }
+
+          if (isFunction(props?.onChange)) {
+            props.onChange!(e);
           }
         }}
         ref={ref}
@@ -103,7 +114,7 @@ const Switch = forwardRef<SwitchProps, HTMLInputElement>((props, ref) => {
       <span
         {...addControlClasses()}
         style={
-          switchIsChecked && isString(colorVariant)
+          value && isString(colorVariant)
             ? { backgroundColor: colors[colorVariant!] }
             : undefined
         }

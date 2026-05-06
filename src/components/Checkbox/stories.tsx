@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react-webpack5';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
-import { Checkbox } from '@components';
+import { Box, Button, Checkbox, Paragraph } from '@components';
 import { colors } from '@utils';
 
 export default {
@@ -35,18 +35,11 @@ const parameters = {
 };
 const label = 'Reveal your secrets?';
 
-export const Basic = {
-  args: {
-    label,
-  },
-  parameters,
-};
-
 const ControlledTemplate: StoryFn<typeof Checkbox> = args => {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState(true);
 
   return (
-    <>
+    <Box>
       <Checkbox
         {...args}
         isChecked={checked}
@@ -54,12 +47,34 @@ const ControlledTemplate: StoryFn<typeof Checkbox> = args => {
         label={label}
       />
       <p>{`checked: ${JSON.stringify(checked)}`}</p>
-    </>
+    </Box>
   );
 };
 
 export const Controlled = {
   render: ControlledTemplate,
+  args: {
+    label,
+  },
+
+  parameters,
+};
+
+const UncontrolledTemplate: StoryFn<typeof Checkbox> = args => {
+  const ref = useRef<HTMLInputElement | null>(null);
+  const [value, setValue] = useState(false);
+  const handleClick = () => setValue(ref.current!.checked);
+  return (
+    <Box width="250px">
+      <Checkbox {...args} defaultChecked label={label} />
+      <Button onClick={handleClick}>Get Value</Button>
+      <Paragraph>{`value: ${value ? 'checked' : 'no checked'}`}</Paragraph>
+    </Box>
+  );
+};
+
+export const Uncontrolled = {
+  render: UncontrolledTemplate,
   args: {
     label,
   },

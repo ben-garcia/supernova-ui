@@ -61,7 +61,7 @@ const ControlledTemplate: StoryFn<typeof RadioGroup.Root> = args => {
         <RadioGroup.Root
           value={framework}
           direction={direction}
-          name="frameworks"
+          name="framework"
           onChange={setFramework}
         >
           <RadioGroup.Item label="angular" value="angular" />
@@ -81,18 +81,20 @@ export const Controlled = {
 };
 
 const UncontrolledTemplate: StoryFn<typeof RadioGroup.Root> = args => {
+  const [framework, setFramework] = useState('react');
   return (
     <>
       <RadioGroup.Root
         {...args}
         defaultValue="react"
-        onChange={value => console.log('Selected:', value)}
+        onChange={value => setFramework(value)}
+        name="framework"
       >
         <RadioGroup.Item label="Angular" value="angular" />
         <RadioGroup.Item label="React" value="react" />
         <RadioGroup.Item label="Vue" value="vue" />
       </RadioGroup.Root>
-      <Paragraph>{}</Paragraph>
+      <Paragraph>framework: {JSON.stringify(framework)}</Paragraph>
     </>
   );
 };

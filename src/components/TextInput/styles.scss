@@ -110,6 +110,7 @@
   }
 }
 
+// Floating label magic
 .snui-text-input:focus ~ .snui-text-label,
 .snui-text-input:not(:placeholder-shown).snui-text-input:not(:focus) ~ .snui-text-label {
   background-color: var(--snui-color-white);
@@ -117,6 +118,7 @@
   transform: translate(-0.1rem, -0.55rem);
 }
 
+// Floating label magic for md size
 .snui-text-input--md:focus ~ .snui-text-label--md,
 .snui-text-input--md:not(:placeholder-shown).snui-text-input--md:not(:focus) ~ .snui-text-label--md {
   background-color: var(--snui-color-white);
