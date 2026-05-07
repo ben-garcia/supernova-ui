@@ -34,7 +34,7 @@ const FormControlRoot: FC<PropsWithChildren<FormControlRootProps>> = props => {
   const context = useFormControlProvider(props);
   const contextValue = useMemo(
     () => ({ ...context, id, isDisabled, isInvalid, isRequired }),
-    [context]
+    [context, id, isDisabled, isInvalid, isRequired]
   );
 
   return (
