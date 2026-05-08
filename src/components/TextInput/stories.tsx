@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 import {
   Box,
   Button,
+  Heading,
   Paragraph,
   SearchIcon,
   TextInput,
@@ -13,19 +14,9 @@ import {
 export default {
   args: {
     isDisabled: false,
-    size: 'md',
-    variant: 'outline',
   },
   argTypes: {
     isDisabled: { control: 'boolean', defaultValue: false },
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-    },
-    variant: {
-      control: { type: 'radio' },
-      options: ['filled', 'flushed', 'outline'],
-    },
   },
   component: TextInput,
   title: 'Supernova UI/Form/TextInput',
@@ -34,14 +25,7 @@ export default {
 const label = 'Reveal your secrets here';
 const parameters = {
   controls: {
-    include: [
-      'finalLabelTransform',
-      'floatLabel',
-      'initialLabelTransform',
-      'isDisabled',
-      'size',
-      'variant',
-    ],
+    include: ['isDisabled'],
   },
 };
 
@@ -89,12 +73,46 @@ export const Uncontrolled = {
   parameters,
 };
 
-export const WithIcons = {
-  render: ControlledTemplate,
+const SizesAndVariantsTemplate: StoryFn<typeof TextInput> = args => {
+  return (
+    <Box display="flex" flexWrap="wrap" gap="10px">
+      <Box display="flex" flexDirection="column" gap="10px">
+        <Heading level={1} size="md">
+          Outline
+        </Heading>
+        <TextInput {...args} label="sm" size="sm" variant="outline" />
+        <TextInput {...args} label="md" size="md" variant="outline" />
+        <TextInput {...args} label="lg" size="lg" variant="outline" />
+      </Box>
+      <Box display="flex" flexDirection="column" gap="10px">
+        <Heading level={1} size="md">
+          Filled
+        </Heading>
+        <TextInput {...args} label="sm" size="sm" variant="filled" />
+        <TextInput {...args} label="md" size="md" variant="filled" />
+        <TextInput {...args} label="lg" size="lg" variant="filled" />
+      </Box>
+      <Box display="flex" flexDirection="column" gap="10px">
+        <Heading level={1} size="md">
+          Flushed
+        </Heading>
+        <TextInput {...args} label="sm" size="sm" variant="flushed" />
+        <TextInput {...args} label="md" size="md" variant="flushed" />
+        <TextInput {...args} label="lg" size="lg" variant="flushed" />
+      </Box>
+    </Box>
+  );
+};
+
+export const SizesAndVariants = {
+  render: SizesAndVariantsTemplate,
+  parameters,
+};
+
+export const Disabled = {
+  render: SizesAndVariantsTemplate,
   args: {
-    label,
-    leftIcon: <UserIcon height="100%" width="100" />,
-    rightIcon: <SearchIcon height="100%" width="100" />,
+    isDisabled: true,
   },
   parameters,
 };
