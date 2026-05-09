@@ -56,17 +56,16 @@ export const Controlled = {
   args: {
     label,
   },
-
   parameters,
 };
 
 const UncontrolledTemplate: StoryFn<typeof Checkbox> = args => {
   const ref = useRef<HTMLInputElement | null>(null);
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState(true);
   const handleClick = () => setValue(ref.current!.checked);
   return (
     <Box width="250px">
-      <Checkbox {...args} defaultChecked label={label} />
+      <Checkbox {...args} ref={ref} defaultChecked label={label} />
       <Button onClick={handleClick}>Get Value</Button>
       <Paragraph>{`value: ${value ? 'checked' : 'no checked'}`}</Paragraph>
     </Box>
@@ -78,6 +77,5 @@ export const Uncontrolled = {
   args: {
     label,
   },
-
   parameters,
 };
