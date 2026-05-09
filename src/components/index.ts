@@ -4,6 +4,7 @@ export { default as AlertDialog } from './AlertDialog';
 export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
+export { default as CheckboxGroup } from './CheckboxGroup';
 export { default as Divider } from './Divider';
 export { default as Drawer } from './Drawer';
 export { default as Editable } from './Editable';
