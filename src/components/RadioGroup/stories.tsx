@@ -8,6 +8,7 @@ export default {
   args: {
     colorVariant: 'primary',
     isDiabled: false,
+    orientation: 'row',
     size: 'md',
   },
   argTypes: {
@@ -15,7 +16,7 @@ export default {
       control: 'select',
       options: colors,
     },
-    direction: {
+    orientation: {
       control: { type: 'radio' },
       defaultValue: 'row',
       options: ['column', 'row'],
@@ -36,39 +37,26 @@ export default {
 
 const parameters = {
   controls: {
-    include: ['colorVariant', 'label', 'isDisabled', 'size'],
+    include: ['colorVariant', 'orientation', 'size'],
   },
 };
 const label = 'Reveal your secrets?';
 
 const ControlledTemplate: StoryFn<typeof RadioGroup.Root> = args => {
   const [framework, setFramework] = useState('react');
-  const { direction } = args;
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Box marginTop="var(--snui-space-md)" marginBottom="var(--snui-space-md)">
-        <Paragraph
-          marginTop="var(--snui-space-sm)"
-          marginBottom="var(--snui-space-sm)"
-        >
-          Favorite framework/library
-        </Paragraph>
-        <RadioGroup.Root
-          value={framework}
-          direction={direction}
-          name="framework"
-          onChange={setFramework}
-        >
-          <RadioGroup.Item label="angular" value="angular" />
-          <RadioGroup.Item label="react" value="react" />
-          <RadioGroup.Item label="vue" value="vue" />
-        </RadioGroup.Root>
-      </Box>
+    <Box>
+      <Paragraph>Favorite framework/library</Paragraph>
+      <RadioGroup.Root
+        {...args}
+        value={framework}
+        name="framework"
+        onChange={setFramework}
+      >
+        <RadioGroup.Item label="angular" value="angular" />
+        <RadioGroup.Item label="react" value="react" />
+        <RadioGroup.Item label="vue" value="vue" />
+      </RadioGroup.Root>
       <Paragraph>{`value: ${JSON.stringify(framework)}`}</Paragraph>
     </Box>
   );
@@ -77,7 +65,7 @@ const ControlledTemplate: StoryFn<typeof RadioGroup.Root> = args => {
 export const Controlled = {
   render: ControlledTemplate,
   args: {},
-  parameters: { controls: { include: ['direction'] } },
+  parameters,
 };
 
 const UncontrolledTemplate: StoryFn<typeof RadioGroup.Root> = args => {
@@ -126,11 +114,5 @@ const WithComponentAsLabelTemplate: StoryFn<typeof RadioGroup.Root> = args => {
 
 export const WithComponentAsLabel = {
   render: WithComponentAsLabelTemplate,
-  args: {},
-
-  parameters: {
-    controls: {
-      include: ['colorVariant', 'isDisabled', 'size'],
-    },
-  },
+  parameters,
 };
