@@ -382,35 +382,35 @@ interface PseudoElementProps {
    * It is often used to add cosmetic content to an element with
    * the content property. It is inline by default.
    */
-  _after?: CSSProps;
+  __after?: CSSProps;
   /**
    * The ::before CSS pseudo-element creates a pseudo-element that is the
    * first child of the selected element.
    * It is often used to add cosmetic content to an element with
    * the content property. It is inline by default.
    */
-  _before?: CSSProps;
+  __before?: CSSProps;
   /**
    * The ::first-letter CSS pseudo-element applies styles to the first letter
    * of the first line
    * of a block-level element, but only when not preceded by other content *
    * (such as images or inline tables).
    */
-  _firstLetter?: CSSProps;
+  __firstLetter?: CSSProps;
   /**
    * The ::first-line CSS pseudo-element applies styles to the first line
    * of a block-level element.
    */
-  _firstLine?: CSSProps;
+  __firstLine?: CSSProps;
   /**
    * The ::placeholder CSS pseudo-element represents the placeholder text in
    * an <input> or <textarea> element.
    */
-  _placeholder?: CSSProps;
+  __placeholder?: CSSProps;
   /**
    * The ::selection CSS pseudo-element applies styles to the part of a
    * document that has been highlighted by the user (such as clicking and
    * dragging the mouse across text).
    */
-  _selection?: CSSProps;
+  __selection?: CSSProps;
 }
