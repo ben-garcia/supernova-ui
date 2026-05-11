@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
+import { useClassStyles } from '@hooks/use-class';
+import { useCreateClassString } from '@hooks/use-create-class';
+import { useFormControl } from '@hooks/use-form-control';
+import { useRadioGroup } from '@hooks/use-radio-group';
+import { useTheme } from '@hooks/use-theme';
+import { usePseudoClasses } from '@hooks/use-style';
 import { useUniqueId } from '@hooks/use-unique-id';
 import { useValidateProps } from '@hooks/use-validate-props';
-import { useTheme } from '@hooks/use-theme';
-import { useFormControl } from '@hooks/use-form-control';
-import { useCreateClassString } from '@hooks/use-create-class';
-import { usePseudoClasses } from '@hooks/use-style';
-import { useClassStyles } from '@hooks/use-class';
 import { isString } from '@utils/assertions';
 import { forwardRef } from '@utils/react';
 import type { RadioGroupItemProps } from './types';
@@ -20,11 +21,9 @@ const RadioGroupItem = forwardRef<RadioGroupItemProps, HTMLInputElement>(
   (props, ref) => {
     const {
       className,
-      colorVariant,
-      isChecked = false,
       isDisabled = false,
       label,
-      size = 'md',
+      value: valueProp,
       ...rest
     } = props;
     const { remainingProps, validatedCSSProps, validatedPseudoClassProps } =
@@ -41,6 +40,8 @@ const RadioGroupItem = forwardRef<RadioGroupItemProps, HTMLInputElement>(
     } = useFormControl();
     const { colors } = useTheme();
     const radioId = useUniqueId('snui-radio');
+    const { colorVariant, name, onChange, size, value } = useRadioGroup();
+    const isChecked = useMemo(() => value === valueProp, [value]);
     const addControlClasses = useCreateClassString('snui snui-radio__control', {
       [`${className}`]: isString(className),
       [`snui-radio__control--${size}`]:
@@ -78,8 +79,11 @@ const RadioGroupItem = forwardRef<RadioGroupItemProps, HTMLInputElement>(
           className="snui-hidden-radio snui-visually-hidden"
           disabled={isDisabled}
           id={radioId}
+          name={name}
+          onChange={onChange}
           ref={ref}
           type="radio"
+          value={valueProp}
         />
 
         {/* eslint-disable-next-line */}
@@ -87,7 +91,7 @@ const RadioGroupItem = forwardRef<RadioGroupItemProps, HTMLInputElement>(
           {...addControlClasses()}
           style={
             isChecked && isString(colorVariant)
-              ? { backgroundColor: colors[colorVariant!] }
+              ? { backgroundColor: (colors as any)[colorVariant] }
               : undefined
           }
         >

@@ -7,14 +7,10 @@ import { FormControlProps, SupernovaProps } from '@types';
  */
 export interface RadioGroupItemProps
   extends
-    Omit<SupernovaProps<'input'>, 'type'>,
-    Omit<FormControlProps, 'variant'> {
+    Omit<SupernovaProps<'input'>, 'type' | 'onChange'>,
+    Omit<FormControlProps, 'colorVariant' | 'size' | 'variant'> {
   /**
    * The visible helper text that describes the radio input option
    */
   label: string | ReactNode;
-  /**
-   * Configure the checked state of the checkbox.
-   */
-  isChecked?: boolean;
 }

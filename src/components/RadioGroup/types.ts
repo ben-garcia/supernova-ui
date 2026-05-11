@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { SupernovaProps } from '@types';
+import { FormControlProps, SupernovaProps } from '@types';
 
 /**
  * Props for the RadioGroupRoot component
  */
-export interface RadioGroupRootProps extends SupernovaProps {
+export interface RadioGroupRootProps
+  extends SupernovaProps, Pick<FormControlProps, 'colorVariant' | 'size'> {
   /**
    * Configure the defaultValue Radio component to be checked by matching
    * this value to the value prop of one of it's children

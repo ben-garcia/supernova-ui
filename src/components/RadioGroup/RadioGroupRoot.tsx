@@ -1,11 +1,12 @@
 import React, {
+  ChangeEvent,
   FC,
   PropsWithChildren,
-  Children,
-  ReactNode,
-  cloneElement,
+  useCallback,
+  useMemo,
 } from 'react';
 
+import { RadioGroupProvider } from '@contexts/radio-group/RadioGroupProvider';
 import { useCSSAndPseudoClassProps } from '@hooks/use-css-and-pseudo-class-props';
 import { useDualModeInput } from '@hooks/use-dual-mode-input';
 import { isString } from '@utils/assertions';
@@ -17,12 +18,14 @@ import type { RadioGroupRootProps } from './types';
  */
 const RadioGroupRoot: FC<PropsWithChildren<RadioGroupRootProps>> = props => {
   const {
+    colorVariant = 'primary',
     children,
     defaultValue,
-    value: valueProp,
     orientation = 'row',
     name,
-    onChange = () => {},
+    onChange = null,
+    value: valueProp,
+    size = 'md',
     ...rest
   } = props;
 
@@ -32,31 +35,17 @@ const RadioGroupRoot: FC<PropsWithChildren<RadioGroupRootProps>> = props => {
     value: valueProp,
   });
 
-  // children with the added props to be rendered
-  const enhancedChildren: ReactNode[] = [];
-  Children.toArray(children).forEach(child => {
-    if (!React.isValidElement(child)) return;
-
-    const childValue = child.props.value as string;
-    if (!childValue) {
-      // eslint-disable-next-line
-      console.warn('<RadioGroupItem /> missing "value" prop');
-      return;
-    }
-    const newChild = cloneElement(child, {
-      isChecked: value === childValue,
-      name,
-      onChange: () => {
-        // Update internal state if uncontrolled
-        if (!isControlled) {
-          setInternalValue(childValue);
-        }
-        // Always call parent's onChange callback
-        onChange!(childValue);
-      },
-    });
-    enhancedChildren.push(newChild);
-  });
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      // Update internal state if uncontrolled
+      if (!isControlled) {
+        setInternalValue(e.target.value);
+      }
+      // Always call parent's onChange callback
+      onChange!(e.target.value);
+    },
+    [isControlled]
+  );
 
   const addCSSClassesAndProps = useCSSAndPseudoClassProps(
     rest,
@@ -69,10 +58,23 @@ const RadioGroupRoot: FC<PropsWithChildren<RadioGroupRootProps>> = props => {
     }
   );
 
+  const context = useMemo(
+    () => ({
+      colorVariant,
+      name,
+      size,
+      onChange: handleChange,
+      value,
+    }),
+    [colorVariant, name, size, value]
+  );
+
   return (
-    <div {...addCSSClassesAndProps()} role="radiogroup">
-      {enhancedChildren}
-    </div>
+    <RadioGroupProvider value={context}>
+      <div {...addCSSClassesAndProps()} role="radiogroup">
+        {children}
+      </div>
+    </RadioGroupProvider>
   );
 };
 

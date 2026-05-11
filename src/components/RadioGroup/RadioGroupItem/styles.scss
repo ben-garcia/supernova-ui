@@ -43,12 +43,8 @@
   }
 
   &__circle {
-    align-items: center;
     background-color: var(--snui-color-white);
     border-radius: var(--snui-radii-xxl);
-    cursor: pointer;
-    display: inline-flex;
-    padding: var(--snui-space-xs);
     transition: background-color 0.4s ease;
 
     &--sm {
@@ -74,6 +70,11 @@
   border: none;
   outline: 3px solid var(--snui-color-focus-ring);
   outline-offset: 2px;
+  // border: none;
+  // box-shadow: 0 0 0 2px var(--snui-color-white),
+  //   0 0 0 4px var(--snui-color-focus-ring);
+  // box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.5), /* Outer blue ring */
+  //   0 0 0 5px rgba(255, 0, 0, 0.5); /* Inner red ring */
 }
 
 .snui-hidden-radio:checked ~ .snui-radio__control {
